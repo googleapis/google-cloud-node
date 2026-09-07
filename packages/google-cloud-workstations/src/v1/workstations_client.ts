@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class WorkstationsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('workstations');
@@ -70,12 +70,12 @@ export class WorkstationsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  workstationsStub?: Promise<{ [name: string]: Function }>;
+  workstationsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of WorkstationsClient.
@@ -151,7 +151,7 @@ export class WorkstationsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -483,7 +483,7 @@ export class WorkstationsClient {
       'google.cloud.workstations.v1.Workstations',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -523,7 +523,7 @@ export class WorkstationsClient {
           (this._protos as any).google.cloud.workstations.v1.Workstations,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -551,7 +551,7 @@ export class WorkstationsClient {
     ];
     for (const methodName of workstationsStubMethods) {
       const callPromise = this.workstationsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -758,7 +758,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkstationCluster request %j', request);
@@ -901,7 +901,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkstationConfig request %j', request);
@@ -1038,7 +1038,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkstation request %j', request);
@@ -1200,7 +1200,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         workstation: request.workstation ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateAccessToken request %j', request);
@@ -1357,7 +1357,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1414,7 +1414,7 @@ export class WorkstationsClient {
     this._log.info('createWorkstationCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1536,7 +1536,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         'workstation_cluster.name': request.workstationCluster!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1593,7 +1593,7 @@ export class WorkstationsClient {
     this._log.info('updateWorkstationCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1715,7 +1715,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1772,7 +1772,7 @@ export class WorkstationsClient {
     this._log.info('deleteWorkstationCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1891,7 +1891,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1948,7 +1948,7 @@ export class WorkstationsClient {
     this._log.info('createWorkstationConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2070,7 +2070,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         'workstation_config.name': request.workstationConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2127,7 +2127,7 @@ export class WorkstationsClient {
     this._log.info('updateWorkstationConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2249,7 +2249,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2306,7 +2306,7 @@ export class WorkstationsClient {
     this._log.info('deleteWorkstationConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2429,7 +2429,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2486,7 +2486,7 @@ export class WorkstationsClient {
     this._log.info('createWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2607,7 +2607,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         'workstation.name': request.workstation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2664,7 +2664,7 @@ export class WorkstationsClient {
     this._log.info('updateWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2782,7 +2782,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2839,7 +2839,7 @@ export class WorkstationsClient {
     this._log.info('deleteWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2960,7 +2960,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3017,7 +3017,7 @@ export class WorkstationsClient {
     this._log.info('startWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3135,7 +3135,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3192,7 +3192,7 @@ export class WorkstationsClient {
     this._log.info('stopWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3303,7 +3303,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3374,7 +3374,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstationClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkstationClusters stream %j', request);
@@ -3427,7 +3427,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstationClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkstationClusters iterate %j', request);
@@ -3535,7 +3535,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3606,7 +3606,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkstationConfigs stream %j', request);
@@ -3659,7 +3659,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkstationConfigs iterate %j', request);
@@ -3765,7 +3765,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3833,7 +3833,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listUsableWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUsableWorkstationConfigs stream %j', request);
@@ -3883,7 +3883,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listUsableWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUsableWorkstationConfigs iterate %j', request);
@@ -3991,7 +3991,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4062,7 +4062,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkstations stream %j', request);
@@ -4115,7 +4115,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkstations iterate %j', request);
@@ -4221,7 +4221,7 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4289,7 +4289,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listUsableWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUsableWorkstations stream %j', request);
@@ -4339,7 +4339,7 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listUsableWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUsableWorkstations iterate %j', request);
@@ -5084,14 +5084,14 @@ export class WorkstationsClient {
    */
   close(): Promise<void> {
     if (this.workstationsStub && !this._terminated) {
-      return this.workstationsStub.then((stub) => {
+      return this.workstationsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

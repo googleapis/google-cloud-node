@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { ContactCenterInsightsClient } from '@google-cloud/contact-center-insights';
+import {ContactCenterInsightsClient} from '@google-cloud/contact-center-insights';
 
 // check that the client class type name can be used
 function doStuffWithContactCenterInsightsClient(

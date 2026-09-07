@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as orgpolicyModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.orgPolicyStub, undefined);
@@ -245,12 +245,12 @@ describe('v2.OrgPolicyClient', () => {
       assert(client.orgPolicyStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.orgPolicyStub);
@@ -259,14 +259,14 @@ describe('v2.OrgPolicyClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.orgPolicyStub, undefined);
@@ -275,7 +275,7 @@ describe('v2.OrgPolicyClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v2.OrgPolicyClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v2.OrgPolicyClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('getPolicy', () => {
     it('invokes getPolicy without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getPolicy without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getPolicy with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getPolicy with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPolicy(request), expectedError);
@@ -447,7 +447,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('getEffectivePolicy', () => {
     it('invokes getEffectivePolicy without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getEffectivePolicy without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -526,7 +526,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getEffectivePolicy with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getEffectivePolicy with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEffectivePolicy(request), expectedError);
@@ -580,7 +580,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('createPolicy', () => {
     it('invokes createPolicy without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes createPolicy without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes createPolicy with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -689,7 +689,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes createPolicy with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPolicy(request), expectedError);
@@ -712,7 +712,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('updatePolicy', () => {
     it('invokes updatePolicy without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -744,7 +744,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes updatePolicy without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -792,7 +792,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes updatePolicy with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -824,7 +824,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes updatePolicy with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePolicy(request), expectedError);
@@ -848,7 +848,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('deletePolicy', () => {
     it('invokes deletePolicy without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -879,7 +879,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes deletePolicy without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes deletePolicy with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +957,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes deletePolicy with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -970,7 +970,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePolicy(request), expectedError);
@@ -980,7 +980,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('createCustomConstraint', () => {
     it('invokes createCustomConstraint without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1012,7 +1012,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes createCustomConstraint without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes createCustomConstraint with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes createCustomConstraint with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1119,7 +1119,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('updateCustomConstraint', () => {
     it('invokes updateCustomConstraint without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes updateCustomConstraint without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1200,7 +1200,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes updateCustomConstraint with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes updateCustomConstraint with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1249,7 +1249,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.customConstraint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1262,7 +1262,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('getCustomConstraint', () => {
     it('invokes getCustomConstraint without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getCustomConstraint without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1341,7 +1341,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getCustomConstraint with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes getCustomConstraint with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1385,7 +1385,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomConstraint(request), expectedError);
@@ -1395,7 +1395,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('deleteCustomConstraint', () => {
     it('invokes deleteCustomConstraint without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1427,7 +1427,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes deleteCustomConstraint without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1474,7 +1474,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes deleteCustomConstraint with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes deleteCustomConstraint with closed client', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1521,7 +1521,7 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1534,7 +1534,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('listConstraints', () => {
     it('invokes listConstraints without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1573,7 +1573,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listConstraints without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1628,7 +1628,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listConstraints with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1659,7 +1659,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listConstraintsStream without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1711,15 +1711,15 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listConstraints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConstraintsStream with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1760,15 +1760,15 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listConstraints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConstraints without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1809,15 +1809,15 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listConstraints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConstraints with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1849,9 +1849,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listConstraints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1859,7 +1859,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('listPolicies', () => {
     it('invokes listPolicies without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1892,7 +1892,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listPolicies without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1941,7 +1941,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listPolicies with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1972,7 +1972,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listPoliciesStream without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2018,15 +2018,15 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPoliciesStream with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2069,15 +2069,15 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPolicies without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2112,15 +2112,15 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPolicies with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2152,9 +2152,9 @@ describe('v2.OrgPolicyClient', () => {
       assert(
         (client.descriptors.page.listPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2162,7 +2162,7 @@ describe('v2.OrgPolicyClient', () => {
   describe('listCustomConstraints', () => {
     it('invokes listCustomConstraints without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2202,7 +2202,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listCustomConstraints without error using callback', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2234,8 +2234,7 @@ describe('v2.OrgPolicyClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.orgpolicy.v2.ICustomConstraint[]
-              | null,
+              protos.google.cloud.orgpolicy.v2.ICustomConstraint[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2259,7 +2258,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listCustomConstraints with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2293,7 +2292,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listCustomConstraintsStream without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2360,7 +2359,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('invokes listCustomConstraintsStream with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2415,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('uses async iteration with listCustomConstraints without error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2470,7 +2469,7 @@ describe('v2.OrgPolicyClient', () => {
 
     it('uses async iteration with listCustomConstraints with error', async () => {
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2522,7 +2521,7 @@ describe('v2.OrgPolicyClient', () => {
         custom_constraint: 'customConstraintValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2579,7 +2578,7 @@ describe('v2.OrgPolicyClient', () => {
         constraint: 'constraintValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2634,7 +2633,7 @@ describe('v2.OrgPolicyClient', () => {
         policy: 'policyValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2682,7 +2681,7 @@ describe('v2.OrgPolicyClient', () => {
         organization: 'organizationValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2721,7 +2720,7 @@ describe('v2.OrgPolicyClient', () => {
         constraint: 'constraintValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2784,7 +2783,7 @@ describe('v2.OrgPolicyClient', () => {
         policy: 'policyValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2845,7 +2844,7 @@ describe('v2.OrgPolicyClient', () => {
         project: 'projectValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2884,7 +2883,7 @@ describe('v2.OrgPolicyClient', () => {
         constraint: 'constraintValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2946,7 +2945,7 @@ describe('v2.OrgPolicyClient', () => {
         policy: 'policyValue',
       };
       const client = new orgpolicyModule.v2.OrgPolicyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

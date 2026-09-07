@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class ConversationsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dialogflow');
@@ -67,10 +67,10 @@ export class ConversationsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  conversationsStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  conversationsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ConversationsClient.
@@ -146,7 +146,7 @@ export class ConversationsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -392,7 +392,7 @@ export class ConversationsClient {
       'google.cloud.dialogflow.v2.Conversations',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -432,7 +432,7 @@ export class ConversationsClient {
           (this._protos as any).google.cloud.dialogflow.v2.Conversations,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -451,7 +451,7 @@ export class ConversationsClient {
     ];
     for (const methodName of conversationsStubMethods) {
       const callPromise = this.conversationsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -686,7 +686,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createConversation request %j', request);
@@ -825,7 +825,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getConversation request %j', request);
@@ -968,7 +968,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('completeConversation request %j', request);
@@ -1119,7 +1119,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         conversation: request.conversation ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('ingestContextReferences request %j', request);
@@ -1280,7 +1280,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         conversation: request.conversation ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('suggestConversationSummary request %j', request);
@@ -1439,7 +1439,7 @@ export class ConversationsClient {
         'stateless_conversation.parent':
           request.statelessConversation!.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateStatelessSummary request %j', request);
@@ -1609,7 +1609,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateStatelessSuggestion request %j', request);
@@ -1796,7 +1796,7 @@ export class ConversationsClient {
         parent: request.parent ?? '',
         conversation: request.conversation ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchKnowledge request %j', request);
@@ -1944,7 +1944,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         conversation: request.conversation ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateSuggestions request %j', request);
@@ -2100,7 +2100,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2178,7 +2178,7 @@ export class ConversationsClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConversations stream %j', request);
@@ -2238,7 +2238,7 @@ export class ConversationsClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConversations iterate %j', request);
@@ -2358,7 +2358,7 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2437,7 +2437,7 @@ export class ConversationsClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMessages stream %j', request);
@@ -2498,7 +2498,7 @@ export class ConversationsClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMessages iterate %j', request);
@@ -5447,11 +5447,11 @@ export class ConversationsClient {
    */
   close(): Promise<void> {
     if (this.conversationsStub && !this._terminated) {
-      return this.conversationsStub.then((stub) => {
+      return this.conversationsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

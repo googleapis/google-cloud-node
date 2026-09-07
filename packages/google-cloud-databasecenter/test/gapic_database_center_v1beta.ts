@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as databasecenterModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.databaseCenterStub, undefined);
@@ -250,12 +250,12 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(client.databaseCenterStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.databaseCenterStub);
@@ -264,14 +264,14 @@ describe('v1beta.DatabaseCenterClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.databaseCenterStub, undefined);
@@ -280,7 +280,7 @@ describe('v1beta.DatabaseCenterClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1beta.DatabaseCenterClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1beta.DatabaseCenterClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1beta.DatabaseCenterClient', () => {
   describe('aggregateIssueStats', () => {
     it('invokes aggregateIssueStats without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -341,7 +341,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateIssueStats without error using callback', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -374,7 +374,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateIssueStats with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateIssueStats with closed client', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1beta.DatabaseCenterClient', () => {
         new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.aggregateIssueStats(request), expectedError);
@@ -409,7 +409,7 @@ describe('v1beta.DatabaseCenterClient', () => {
   describe('queryProducts', () => {
     it('invokes queryProducts without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryProducts without error using callback', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -460,8 +460,7 @@ describe('v1beta.DatabaseCenterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.databasecenter.v1beta.IProduct[]
-              | null,
+              protos.google.cloud.databasecenter.v1beta.IProduct[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -477,7 +476,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryProducts with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -494,7 +493,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryProductsStream without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -542,7 +541,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryProductsStream with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -579,7 +578,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('uses async iteration with queryProducts without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +615,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('uses async iteration with queryProducts with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +645,7 @@ describe('v1beta.DatabaseCenterClient', () => {
   describe('aggregateFleet', () => {
     it('invokes aggregateFleet without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -671,7 +670,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateFleet without error using callback', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -714,7 +713,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateFleet with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -731,7 +730,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateFleetStream without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +780,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateFleetStream with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -820,7 +819,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('uses async iteration with aggregateFleet without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -857,7 +856,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('uses async iteration with aggregateFleet with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +886,7 @@ describe('v1beta.DatabaseCenterClient', () => {
   describe('queryDatabaseResourceGroups', () => {
     it('invokes queryDatabaseResourceGroups without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -913,7 +912,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryDatabaseResourceGroups without error using callback', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -956,7 +955,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryDatabaseResourceGroups with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -976,7 +975,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryDatabaseResourceGroupsStream without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1032,7 +1031,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryDatabaseResourceGroupsStream with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1076,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('uses async iteration with queryDatabaseResourceGroups without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1115,7 +1114,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('uses async iteration with queryDatabaseResourceGroups with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1146,7 +1145,7 @@ describe('v1beta.DatabaseCenterClient', () => {
   describe('aggregateQueryStats', () => {
     it('invokes aggregateQueryStats without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1186,7 +1185,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateQueryStats without error using callback', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1243,7 +1242,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateQueryStats with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1274,7 +1273,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes aggregateQueryStatsStream without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1329,15 +1328,15 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(
         (client.descriptors.page.aggregateQueryStats.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes aggregateQueryStatsStream with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1381,15 +1380,15 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(
         (client.descriptors.page.aggregateQueryStats.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with aggregateQueryStats without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,15 +1430,15 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(
         (client.descriptors.page.aggregateQueryStats.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with aggregateQueryStats with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1472,9 +1471,9 @@ describe('v1beta.DatabaseCenterClient', () => {
       assert(
         (client.descriptors.page.aggregateQueryStats.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1482,7 +1481,7 @@ describe('v1beta.DatabaseCenterClient', () => {
   describe('queryIssues', () => {
     it('invokes queryIssues without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1507,7 +1506,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryIssues without error using callback', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1550,7 +1549,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryIssues with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,7 +1566,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryIssuesStream without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1617,7 +1616,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('invokes queryIssuesStream with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,7 +1657,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('uses async iteration with queryIssues without error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1695,7 +1694,7 @@ describe('v1beta.DatabaseCenterClient', () => {
 
     it('uses async iteration with queryIssues with error', async () => {
       const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

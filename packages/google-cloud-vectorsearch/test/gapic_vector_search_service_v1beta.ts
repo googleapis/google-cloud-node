@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as vectorsearchserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -291,7 +291,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.vectorSearchServiceStub, undefined);
@@ -299,13 +299,13 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(client.vectorSearchServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.vectorSearchServiceStub);
@@ -314,15 +314,15 @@ describe('v1beta.VectorSearchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.vectorSearchServiceStub, undefined);
@@ -331,7 +331,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -353,7 +353,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -377,7 +377,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getCollection without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getCollection without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -457,7 +457,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getCollection with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getCollection with closed client', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCollection(request), expectedError);
@@ -513,7 +513,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getIndex without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getIndex without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getIndex with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -622,7 +622,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getIndex with closed client', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -635,7 +635,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIndex(request), expectedError);
@@ -646,7 +646,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes createCollection without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -680,7 +680,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes createCollection without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes createCollection with call error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes createCollection with LRO error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkCreateCollectionProgress without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -809,8 +809,8 @@ describe('v1beta.VectorSearchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCollectionProgress(
@@ -824,7 +824,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkCreateCollectionProgress with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes updateCollection without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes updateCollection without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -937,7 +937,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes updateCollection with call error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -970,7 +970,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes updateCollection with LRO error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkUpdateCollectionProgress without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1013,8 +1013,8 @@ describe('v1beta.VectorSearchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateCollectionProgress(
@@ -1028,7 +1028,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkUpdateCollectionProgress with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteCollection without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteCollection without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteCollection with call error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1171,7 +1171,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteCollection with LRO error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1205,7 +1205,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkDeleteCollectionProgress without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1213,8 +1213,8 @@ describe('v1beta.VectorSearchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCollectionProgress(
@@ -1228,7 +1228,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkDeleteCollectionProgress with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes createIndex without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes createIndex without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1338,7 +1338,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes createIndex with call error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1370,7 +1370,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes createIndex with LRO error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1404,7 +1404,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkCreateIndexProgress without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1412,8 +1412,8 @@ describe('v1beta.VectorSearchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIndexProgress(
@@ -1427,7 +1427,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkCreateIndexProgress with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1446,7 +1446,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes updateIndex without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1480,7 +1480,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes updateIndex without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1536,7 +1536,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes updateIndex with call error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1569,7 +1569,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes updateIndex with LRO error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1604,7 +1604,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkUpdateIndexProgress without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1612,8 +1612,8 @@ describe('v1beta.VectorSearchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateIndexProgress(
@@ -1627,7 +1627,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkUpdateIndexProgress with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1646,7 +1646,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteIndex without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteIndex without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1734,7 +1734,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteIndex with call error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1766,7 +1766,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteIndex with LRO error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkDeleteIndexProgress without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1808,8 +1808,8 @@ describe('v1beta.VectorSearchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteIndexProgress(
@@ -1823,7 +1823,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkDeleteIndexProgress with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1842,7 +1842,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes importDataObjects without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes importDataObjects without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1931,7 +1931,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes importDataObjects with call error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1963,7 +1963,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes importDataObjects with LRO error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1997,7 +1997,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkImportDataObjectsProgress without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2005,8 +2005,8 @@ describe('v1beta.VectorSearchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDataObjectsProgress(
@@ -2020,7 +2020,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkImportDataObjectsProgress with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2042,7 +2042,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes exportDataObjects without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2076,7 +2076,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes exportDataObjects without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2131,7 +2131,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes exportDataObjects with call error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2163,7 +2163,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes exportDataObjects with LRO error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2197,7 +2197,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkExportDataObjectsProgress without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2205,8 +2205,8 @@ describe('v1beta.VectorSearchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportDataObjectsProgress(
@@ -2220,7 +2220,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes checkExportDataObjectsProgress with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2242,7 +2242,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes listCollections without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2282,7 +2282,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes listCollections without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2314,8 +2314,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vectorsearch.v1beta.ICollection[]
-              | null,
+              protos.google.cloud.vectorsearch.v1beta.ICollection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2340,7 +2339,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes listCollections with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2372,7 +2371,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes listCollectionsStream without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2425,16 +2424,16 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listCollections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCollectionsStream with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2476,16 +2475,16 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listCollections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCollections without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2527,16 +2526,16 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listCollections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCollections with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2569,9 +2568,9 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listCollections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2580,7 +2579,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes listIndexes without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2620,7 +2619,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes listIndexes without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2676,7 +2675,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes listIndexes with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2708,7 +2707,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes listIndexesStream without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2760,16 +2759,16 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIndexesStream with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2812,16 +2811,16 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexes without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2862,16 +2861,16 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexes with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2905,9 +2904,9 @@ describe('v1beta.VectorSearchServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2915,7 +2914,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2946,7 +2945,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2991,7 +2990,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3027,7 +3026,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3076,7 +3075,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3118,7 +3117,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3140,7 +3139,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3168,7 +3167,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3179,7 +3178,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3204,7 +3203,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3227,7 +3226,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3255,7 +3254,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3266,7 +3265,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3291,7 +3290,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3314,7 +3313,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3342,7 +3341,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3353,7 +3352,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3378,7 +3377,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3414,7 +3413,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3451,7 +3450,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       };
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3517,7 +3516,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       };
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3594,7 +3593,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       };
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3669,7 +3668,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       };
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3718,7 +3717,7 @@ describe('v1beta.VectorSearchServiceClient', () => {
       };
       const client =
         new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as reasoningengineruntimerevisionserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -208,7 +208,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
@@ -217,7 +217,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
@@ -244,7 +244,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -259,7 +259,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -292,7 +292,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -304,15 +304,15 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       assert(client.reasoningEngineRuntimeRevisionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.reasoningEngineRuntimeRevisionServiceStub);
@@ -321,16 +321,16 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -343,7 +343,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -353,7 +353,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -368,7 +368,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -394,7 +394,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -430,7 +430,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -480,7 +480,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -517,7 +517,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -531,7 +531,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -546,7 +546,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -583,7 +583,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -640,7 +640,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -675,7 +675,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -709,7 +709,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -718,8 +718,8 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -735,7 +735,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -759,7 +759,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -803,7 +803,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -863,7 +863,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -900,7 +900,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -975,7 +975,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1039,7 +1039,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1096,7 +1096,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1145,7 +1145,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1178,7 +1178,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1217,7 +1217,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1229,7 +1229,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1264,7 +1264,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1297,7 +1297,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1336,7 +1336,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1348,7 +1348,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1383,7 +1383,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1419,7 +1419,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1458,7 +1458,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1470,7 +1470,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1508,7 +1508,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1541,7 +1541,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1588,7 +1588,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1626,7 +1626,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1677,7 +1677,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1721,7 +1721,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1745,7 +1745,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1774,7 +1774,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1786,7 +1786,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1813,7 +1813,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1838,7 +1838,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1867,7 +1867,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1879,7 +1879,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1906,7 +1906,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1931,7 +1931,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1960,7 +1960,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1972,7 +1972,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1999,7 +1999,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2037,7 +2037,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2078,7 +2078,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2168,7 +2168,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2248,7 +2248,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2326,7 +2326,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2406,7 +2406,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2474,7 +2474,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2552,7 +2552,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2620,7 +2620,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2698,7 +2698,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2766,7 +2766,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2834,7 +2834,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2913,7 +2913,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2998,7 +2998,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3076,7 +3076,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3144,7 +3144,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3222,7 +3222,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3289,7 +3289,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3357,7 +3357,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3438,7 +3438,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3548,7 +3548,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3629,7 +3629,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3709,7 +3709,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3788,7 +3788,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3855,7 +3855,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3939,7 +3939,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4006,7 +4006,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4074,7 +4074,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4153,7 +4153,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4233,7 +4233,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4300,7 +4300,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4367,7 +4367,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4450,7 +4450,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4530,7 +4530,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4640,7 +4640,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4708,7 +4708,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4803,7 +4803,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4871,7 +4871,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4950,7 +4950,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5034,7 +5034,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5102,7 +5102,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5186,7 +5186,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5254,7 +5254,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5334,7 +5334,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5401,7 +5401,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5484,7 +5484,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5590,7 +5590,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5717,7 +5717,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5811,7 +5811,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5867,7 +5867,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5935,7 +5935,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6012,7 +6012,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6069,7 +6069,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6149,7 +6149,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6238,7 +6238,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6307,7 +6307,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6407,7 +6407,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6485,7 +6485,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6553,7 +6553,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6633,7 +6633,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6723,7 +6723,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6791,7 +6791,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6858,7 +6858,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6926,7 +6926,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7025,7 +7025,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7117,7 +7117,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7243,7 +7243,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7315,7 +7315,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -7393,7 +7393,7 @@ describe('v1beta1.ReasoningEngineRuntimeRevisionServiceClient', () => {
       const client =
         new reasoningengineruntimerevisionserviceModule.v1beta1.ReasoningEngineRuntimeRevisionServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

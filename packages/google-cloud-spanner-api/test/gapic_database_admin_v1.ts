@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as databaseadminModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.databaseAdminStub, undefined);
@@ -279,12 +279,12 @@ describe('v1.DatabaseAdminClient', () => {
       assert(client.databaseAdminStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.databaseAdminStub);
@@ -293,14 +293,14 @@ describe('v1.DatabaseAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.databaseAdminStub, undefined);
@@ -309,7 +309,7 @@ describe('v1.DatabaseAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v1.DatabaseAdminClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v1.DatabaseAdminClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('getDatabase', () => {
     it('invokes getDatabase without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getDatabase without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getDatabase with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getDatabase with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDatabase(request), expectedError);
@@ -484,7 +484,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('dropDatabase', () => {
     it('invokes dropDatabase without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes dropDatabase without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes dropDatabase with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes dropDatabase with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.dropDatabase(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('getDatabaseDdl', () => {
     it('invokes getDatabaseDdl without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -647,7 +647,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getDatabaseDdl without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getDatabaseDdl with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getDatabaseDdl with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDatabaseDdl(request), expectedError);
@@ -748,7 +748,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -779,7 +779,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -857,7 +857,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -870,7 +870,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -880,7 +880,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -911,7 +911,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -958,7 +958,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1012,7 +1012,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1044,7 +1044,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1122,7 +1122,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1145,7 +1145,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getBackup without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1223,7 +1223,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getBackup with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1251,7 +1251,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getBackup with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1264,7 +1264,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -1274,7 +1274,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('updateBackup', () => {
     it('invokes updateBackup without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1306,7 +1306,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateBackup without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1354,7 +1354,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateBackup with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1386,7 +1386,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateBackup with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1400,7 +1400,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.backup.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBackup(request), expectedError);
@@ -1410,7 +1410,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('deleteBackup', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes deleteBackup without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1488,7 +1488,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes deleteBackup with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1519,7 +1519,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes deleteBackup with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1532,7 +1532,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBackup(request), expectedError);
@@ -1542,7 +1542,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('addSplitPoints', () => {
     it('invokes addSplitPoints without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1573,7 +1573,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes addSplitPoints without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1620,7 +1620,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes addSplitPoints with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1651,7 +1651,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes addSplitPoints with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1664,7 +1664,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addSplitPoints(request), expectedError);
@@ -1674,7 +1674,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('createBackupSchedule', () => {
     it('invokes createBackupSchedule without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1706,7 +1706,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createBackupSchedule without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1753,7 +1753,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createBackupSchedule with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1784,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createBackupSchedule with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1797,7 +1797,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createBackupSchedule(request), expectedError);
@@ -1807,7 +1807,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('getBackupSchedule', () => {
     it('invokes getBackupSchedule without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1838,7 +1838,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getBackupSchedule without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1885,7 +1885,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getBackupSchedule with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1916,7 +1916,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes getBackupSchedule with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1929,7 +1929,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupSchedule(request), expectedError);
@@ -1939,7 +1939,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('updateBackupSchedule', () => {
     it('invokes updateBackupSchedule without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1972,7 +1972,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateBackupSchedule without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2020,7 +2020,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateBackupSchedule with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2052,7 +2052,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateBackupSchedule with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.backupSchedule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBackupSchedule(request), expectedError);
@@ -2076,7 +2076,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('deleteBackupSchedule', () => {
     it('invokes deleteBackupSchedule without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2108,7 +2108,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes deleteBackupSchedule without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2155,7 +2155,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes deleteBackupSchedule with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2186,7 +2186,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes deleteBackupSchedule with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2199,7 +2199,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBackupSchedule(request), expectedError);
@@ -2209,7 +2209,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('internalUpdateGraphOperation', () => {
     it('invokes internalUpdateGraphOperation without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2227,7 +2227,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes internalUpdateGraphOperation without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2260,7 +2260,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes internalUpdateGraphOperation with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2280,7 +2280,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes internalUpdateGraphOperation with closed client', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2288,7 +2288,7 @@ describe('v1.DatabaseAdminClient', () => {
         new protos.google.spanner.admin.database.v1.InternalUpdateGraphOperationRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2301,7 +2301,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('createDatabase', () => {
     it('invokes createDatabase without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2334,7 +2334,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createDatabase without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2388,7 +2388,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createDatabase with call error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2419,7 +2419,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createDatabase with LRO error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2452,7 +2452,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkCreateDatabaseProgress without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2460,8 +2460,8 @@ describe('v1.DatabaseAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatabaseProgress(
@@ -2474,7 +2474,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkCreateDatabaseProgress with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2495,7 +2495,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('updateDatabase', () => {
     it('invokes updateDatabase without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2529,7 +2529,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateDatabase without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2584,7 +2584,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateDatabase with call error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2616,7 +2616,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateDatabase with LRO error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2650,7 +2650,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkUpdateDatabaseProgress without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2658,8 +2658,8 @@ describe('v1.DatabaseAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDatabaseProgress(
@@ -2672,7 +2672,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkUpdateDatabaseProgress with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2693,7 +2693,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('updateDatabaseDdl', () => {
     it('invokes updateDatabaseDdl without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2726,7 +2726,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateDatabaseDdl without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2780,7 +2780,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateDatabaseDdl with call error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2811,7 +2811,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes updateDatabaseDdl with LRO error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2844,7 +2844,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkUpdateDatabaseDdlProgress without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2852,8 +2852,8 @@ describe('v1.DatabaseAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDatabaseDdlProgress(
@@ -2866,7 +2866,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkUpdateDatabaseDdlProgress with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2887,7 +2887,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('createBackup', () => {
     it('invokes createBackup without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2919,7 +2919,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createBackup without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createBackup with call error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3004,7 +3004,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes createBackup with LRO error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3037,7 +3037,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkCreateBackupProgress without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3045,8 +3045,8 @@ describe('v1.DatabaseAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupProgress(
@@ -3059,7 +3059,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkCreateBackupProgress with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3077,7 +3077,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('copyBackup', () => {
     it('invokes copyBackup without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3109,7 +3109,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes copyBackup without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3163,7 +3163,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes copyBackup with call error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3194,7 +3194,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes copyBackup with LRO error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3227,7 +3227,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkCopyBackupProgress without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3235,8 +3235,8 @@ describe('v1.DatabaseAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCopyBackupProgress(
@@ -3249,7 +3249,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkCopyBackupProgress with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3267,7 +3267,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('restoreDatabase', () => {
     it('invokes restoreDatabase without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3300,7 +3300,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes restoreDatabase without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3354,7 +3354,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes restoreDatabase with call error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3385,7 +3385,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes restoreDatabase with LRO error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3418,7 +3418,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkRestoreDatabaseProgress without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3426,8 +3426,8 @@ describe('v1.DatabaseAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreDatabaseProgress(
@@ -3440,7 +3440,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes checkRestoreDatabaseProgress with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3461,7 +3461,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('listDatabases', () => {
     it('invokes listDatabases without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3500,7 +3500,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabases without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3555,7 +3555,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabases with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3586,7 +3586,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabasesStream without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3639,15 +3639,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatabasesStream with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3689,15 +3689,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatabases without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3738,15 +3738,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatabases with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3779,9 +3779,9 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3789,7 +3789,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3828,7 +3828,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackups without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3883,7 +3883,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackups with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3914,7 +3914,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackupsStream without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3966,15 +3966,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4017,15 +4017,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4066,15 +4066,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4108,9 +4108,9 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4118,7 +4118,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('listDatabaseOperations', () => {
     it('invokes listDatabaseOperations without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4152,7 +4152,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabaseOperations without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4201,7 +4201,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabaseOperations with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4235,7 +4235,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabaseOperationsStream without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4292,7 +4292,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabaseOperationsStream with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4344,7 +4344,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('uses async iteration with listDatabaseOperations without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4391,7 +4391,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('uses async iteration with listDatabaseOperations with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4437,7 +4437,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('listBackupOperations', () => {
     it('invokes listBackupOperations without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4471,7 +4471,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackupOperations without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4520,7 +4520,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackupOperations with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4551,7 +4551,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackupOperationsStream without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4594,15 +4594,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackupOperations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupOperationsStream with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4640,15 +4640,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackupOperations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupOperations without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4683,15 +4683,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackupOperations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupOperations with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4723,9 +4723,9 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackupOperations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4733,7 +4733,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('listDatabaseRoles', () => {
     it('invokes listDatabaseRoles without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4772,7 +4772,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabaseRoles without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4804,8 +4804,7 @@ describe('v1.DatabaseAdminClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.spanner.admin.database.v1.IDatabaseRole[]
-              | null,
+              protos.google.spanner.admin.database.v1.IDatabaseRole[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4829,7 +4828,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabaseRoles with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4860,7 +4859,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listDatabaseRolesStream without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4913,15 +4912,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabaseRoles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatabaseRolesStream with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4963,15 +4962,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabaseRoles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatabaseRoles without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5013,15 +5012,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabaseRoles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatabaseRoles with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5054,9 +5053,9 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabaseRoles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5064,7 +5063,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('listBackupSchedules', () => {
     it('invokes listBackupSchedules without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5104,7 +5103,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackupSchedules without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5136,8 +5135,7 @@ describe('v1.DatabaseAdminClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.spanner.admin.database.v1.IBackupSchedule[]
-              | null,
+              protos.google.spanner.admin.database.v1.IBackupSchedule[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5161,7 +5159,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackupSchedules with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5192,7 +5190,7 @@ describe('v1.DatabaseAdminClient', () => {
 
     it('invokes listBackupSchedulesStream without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5247,15 +5245,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackupSchedules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupSchedulesStream with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5299,15 +5297,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackupSchedules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupSchedules without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5349,15 +5347,15 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackupSchedules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupSchedules with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5390,16 +5388,16 @@ describe('v1.DatabaseAdminClient', () => {
       assert(
         (client.descriptors.page.listBackupSchedules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5420,7 +5418,7 @@ describe('v1.DatabaseAdminClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5448,7 +5446,7 @@ describe('v1.DatabaseAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5458,7 +5456,7 @@ describe('v1.DatabaseAdminClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5482,7 +5480,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5504,7 +5502,7 @@ describe('v1.DatabaseAdminClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5532,7 +5530,7 @@ describe('v1.DatabaseAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5542,7 +5540,7 @@ describe('v1.DatabaseAdminClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5566,7 +5564,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5588,7 +5586,7 @@ describe('v1.DatabaseAdminClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5616,7 +5614,7 @@ describe('v1.DatabaseAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5626,7 +5624,7 @@ describe('v1.DatabaseAdminClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5650,7 +5648,7 @@ describe('v1.DatabaseAdminClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5685,7 +5683,7 @@ describe('v1.DatabaseAdminClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5721,7 +5719,7 @@ describe('v1.DatabaseAdminClient', () => {
         backup: 'backupValue',
       };
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5786,7 +5784,7 @@ describe('v1.DatabaseAdminClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5862,7 +5860,7 @@ describe('v1.DatabaseAdminClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5937,7 +5935,7 @@ describe('v1.DatabaseAdminClient', () => {
         database: 'databaseValue',
       };
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6002,7 +6000,7 @@ describe('v1.DatabaseAdminClient', () => {
         role: 'roleValue',
       };
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6076,7 +6074,7 @@ describe('v1.DatabaseAdminClient', () => {
         instance: 'instanceValue',
       };
       const client = new databaseadminModule.v1.DatabaseAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

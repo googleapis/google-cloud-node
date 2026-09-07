@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { AppTopologyClient } from '@google-cloud/apptopology';
+import {AppTopologyClient} from '@google-cloud/apptopology';
 
 // check that the client class type name can be used
 function doStuffWithAppTopologyClient(client: AppTopologyClient) {

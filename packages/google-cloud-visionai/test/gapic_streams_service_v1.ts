@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as streamsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -280,7 +280,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.streamsServiceStub, undefined);
@@ -288,12 +288,12 @@ describe('v1.StreamsServiceClient', () => {
       assert(client.streamsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.streamsServiceStub);
@@ -302,14 +302,14 @@ describe('v1.StreamsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.streamsServiceStub, undefined);
@@ -318,7 +318,7 @@ describe('v1.StreamsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -326,7 +326,7 @@ describe('v1.StreamsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -338,7 +338,7 @@ describe('v1.StreamsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -361,7 +361,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('getCluster', () => {
     it('invokes getCluster without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getCluster without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getCluster with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -470,7 +470,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getCluster with closed client', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.StreamsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -493,7 +493,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('getStream', () => {
     it('invokes getStream without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getStream without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getStream with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getStream with closed client', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v1.StreamsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStream(request), expectedError);
@@ -622,7 +622,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('generateStreamHlsToken', () => {
     it('invokes generateStreamHlsToken without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes generateStreamHlsToken without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes generateStreamHlsToken with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes generateStreamHlsToken with closed client', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1.StreamsServiceClient', () => {
       );
       request.stream = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -761,7 +761,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('getEvent', () => {
     it('invokes getEvent without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -792,7 +792,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getEvent without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getEvent with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getEvent with closed client', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.StreamsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvent(request), expectedError);
@@ -890,7 +890,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('getSeries', () => {
     it('invokes getSeries without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -921,7 +921,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getSeries without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getSeries with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -996,7 +996,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getSeries with closed client', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1009,7 +1009,7 @@ describe('v1.StreamsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSeries(request), expectedError);
@@ -1019,7 +1019,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1052,7 +1052,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createCluster without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createCluster with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1137,7 +1137,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createCluster with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1170,7 +1170,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkCreateClusterProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1178,8 +1178,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClusterProgress(
@@ -1192,7 +1192,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkCreateClusterProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1213,7 +1213,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1247,7 +1247,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateCluster without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1302,7 +1302,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateCluster with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1334,7 +1334,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateCluster with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1368,7 +1368,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkUpdateClusterProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1376,8 +1376,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateClusterProgress(
@@ -1390,7 +1390,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkUpdateClusterProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1411,7 +1411,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1444,7 +1444,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteCluster without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1498,7 +1498,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteCluster with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1529,7 +1529,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteCluster with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1562,7 +1562,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkDeleteClusterProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1570,8 +1570,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClusterProgress(
@@ -1584,7 +1584,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkDeleteClusterProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1605,7 +1605,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('createStream', () => {
     it('invokes createStream without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,7 +1637,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createStream without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1691,7 +1691,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createStream with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1722,7 +1722,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createStream with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1755,7 +1755,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkCreateStreamProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,8 +1763,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateStreamProgress(
@@ -1777,7 +1777,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkCreateStreamProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1795,7 +1795,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('updateStream', () => {
     it('invokes updateStream without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1828,7 +1828,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateStream without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1883,7 +1883,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateStream with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateStream with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1949,7 +1949,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkUpdateStreamProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1957,8 +1957,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateStreamProgress(
@@ -1971,7 +1971,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkUpdateStreamProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1989,7 +1989,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('deleteStream', () => {
     it('invokes deleteStream without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteStream without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteStream with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2106,7 +2106,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteStream with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2139,7 +2139,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkDeleteStreamProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2147,8 +2147,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteStreamProgress(
@@ -2161,7 +2161,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkDeleteStreamProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2179,7 +2179,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('getStreamThumbnail', () => {
     it('invokes getStreamThumbnail without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2212,7 +2212,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getStreamThumbnail without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2266,7 +2266,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getStreamThumbnail with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2297,7 +2297,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes getStreamThumbnail with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2330,7 +2330,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkGetStreamThumbnailProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2338,8 +2338,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkGetStreamThumbnailProgress(
@@ -2352,7 +2352,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkGetStreamThumbnailProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2373,7 +2373,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('createEvent', () => {
     it('invokes createEvent without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2405,7 +2405,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createEvent without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2459,7 +2459,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createEvent with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2490,7 +2490,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createEvent with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2523,7 +2523,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkCreateEventProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,8 +2531,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEventProgress(
@@ -2545,7 +2545,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkCreateEventProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2563,7 +2563,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('updateEvent', () => {
     it('invokes updateEvent without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2596,7 +2596,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateEvent without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2651,7 +2651,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateEvent with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2683,7 +2683,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateEvent with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2717,7 +2717,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkUpdateEventProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2725,8 +2725,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEventProgress(
@@ -2739,7 +2739,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkUpdateEventProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2757,7 +2757,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('deleteEvent', () => {
     it('invokes deleteEvent without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2789,7 +2789,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteEvent without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2843,7 +2843,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteEvent with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2874,7 +2874,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteEvent with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2907,7 +2907,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkDeleteEventProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2915,8 +2915,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEventProgress(
@@ -2929,7 +2929,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkDeleteEventProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2947,7 +2947,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('createSeries', () => {
     it('invokes createSeries without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2979,7 +2979,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createSeries without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3033,7 +3033,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createSeries with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3064,7 +3064,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes createSeries with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3097,7 +3097,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkCreateSeriesProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3105,8 +3105,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSeriesProgress(
@@ -3119,7 +3119,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkCreateSeriesProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3137,7 +3137,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('updateSeries', () => {
     it('invokes updateSeries without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3170,7 +3170,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateSeries without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3225,7 +3225,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateSeries with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3257,7 +3257,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes updateSeries with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3291,7 +3291,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkUpdateSeriesProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3299,8 +3299,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSeriesProgress(
@@ -3313,7 +3313,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkUpdateSeriesProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3331,7 +3331,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('deleteSeries', () => {
     it('invokes deleteSeries without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3363,7 +3363,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteSeries without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3417,7 +3417,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteSeries with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3448,7 +3448,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes deleteSeries with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3481,7 +3481,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkDeleteSeriesProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3489,8 +3489,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSeriesProgress(
@@ -3503,7 +3503,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkDeleteSeriesProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3521,7 +3521,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('materializeChannel', () => {
     it('invokes materializeChannel without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3554,7 +3554,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes materializeChannel without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3608,7 +3608,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes materializeChannel with call error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3639,7 +3639,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes materializeChannel with LRO error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3672,7 +3672,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkMaterializeChannelProgress without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3680,8 +3680,8 @@ describe('v1.StreamsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMaterializeChannelProgress(
@@ -3694,7 +3694,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes checkMaterializeChannelProgress with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3715,7 +3715,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3748,7 +3748,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listClusters without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3797,7 +3797,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listClusters with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3828,7 +3828,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listClustersStream without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3874,15 +3874,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listClustersStream with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3925,15 +3925,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3968,15 +3968,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4008,9 +4008,9 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4018,7 +4018,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('listStreams', () => {
     it('invokes listStreams without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4051,7 +4051,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listStreams without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4100,7 +4100,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listStreams with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4131,7 +4131,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listStreamsStream without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4177,15 +4177,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listStreamsStream with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4228,15 +4228,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStreams without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4271,15 +4271,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStreams with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4313,9 +4313,9 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4323,7 +4323,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('listEvents', () => {
     it('invokes listEvents without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4356,7 +4356,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listEvents without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4405,7 +4405,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listEvents with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4436,7 +4436,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listEventsStream without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4479,15 +4479,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEventsStream with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4527,15 +4527,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvents without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4570,15 +4570,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvents with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4612,9 +4612,9 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4622,7 +4622,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('listSeries', () => {
     it('invokes listSeries without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4655,7 +4655,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listSeries without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4704,7 +4704,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listSeries with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4735,7 +4735,7 @@ describe('v1.StreamsServiceClient', () => {
 
     it('invokes listSeriesStream without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4781,15 +4781,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listSeries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSeriesStream with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4832,15 +4832,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listSeries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSeries without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4875,15 +4875,15 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listSeries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSeries with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4917,16 +4917,16 @@ describe('v1.StreamsServiceClient', () => {
       assert(
         (client.descriptors.page.listSeries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4956,7 +4956,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4994,7 +4994,7 @@ describe('v1.StreamsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5004,7 +5004,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5036,7 +5036,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5066,7 +5066,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5104,7 +5104,7 @@ describe('v1.StreamsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5114,7 +5114,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5146,7 +5146,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5179,7 +5179,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5217,7 +5217,7 @@ describe('v1.StreamsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5227,7 +5227,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5262,7 +5262,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5292,7 +5292,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5336,7 +5336,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5371,7 +5371,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5419,7 +5419,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5460,7 +5460,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5481,7 +5481,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5509,7 +5509,7 @@ describe('v1.StreamsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5519,7 +5519,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5543,7 +5543,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5565,7 +5565,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5593,7 +5593,7 @@ describe('v1.StreamsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5603,7 +5603,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5627,7 +5627,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5649,7 +5649,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5677,7 +5677,7 @@ describe('v1.StreamsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5687,7 +5687,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5711,7 +5711,7 @@ describe('v1.StreamsServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5746,7 +5746,7 @@ describe('v1.StreamsServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5783,7 +5783,7 @@ describe('v1.StreamsServiceClient', () => {
         analysis: 'analysisValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5860,7 +5860,7 @@ describe('v1.StreamsServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5946,7 +5946,7 @@ describe('v1.StreamsServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6011,7 +6011,7 @@ describe('v1.StreamsServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6087,7 +6087,7 @@ describe('v1.StreamsServiceClient', () => {
         channel: 'channelValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6162,7 +6162,7 @@ describe('v1.StreamsServiceClient', () => {
         cluster: 'clusterValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6227,7 +6227,7 @@ describe('v1.StreamsServiceClient', () => {
         collection: 'collectionValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6302,7 +6302,7 @@ describe('v1.StreamsServiceClient', () => {
         corpus: 'corpusValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6367,7 +6367,7 @@ describe('v1.StreamsServiceClient', () => {
         data_schema: 'dataSchemaValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6443,7 +6443,7 @@ describe('v1.StreamsServiceClient', () => {
         draft: 'draftValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6519,7 +6519,7 @@ describe('v1.StreamsServiceClient', () => {
         event: 'eventValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6595,7 +6595,7 @@ describe('v1.StreamsServiceClient', () => {
         index: 'indexValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6670,7 +6670,7 @@ describe('v1.StreamsServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6735,7 +6735,7 @@ describe('v1.StreamsServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6809,7 +6809,7 @@ describe('v1.StreamsServiceClient', () => {
         location: 'locationValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6859,7 +6859,7 @@ describe('v1.StreamsServiceClient', () => {
         operator: 'operatorValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6924,7 +6924,7 @@ describe('v1.StreamsServiceClient', () => {
         process: 'processValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6999,7 +6999,7 @@ describe('v1.StreamsServiceClient', () => {
         processor: 'processorValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7061,7 +7061,7 @@ describe('v1.StreamsServiceClient', () => {
         project: 'projectValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7102,7 +7102,7 @@ describe('v1.StreamsServiceClient', () => {
         search_config: 'searchConfigValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7178,7 +7178,7 @@ describe('v1.StreamsServiceClient', () => {
         search_hypernym: 'searchHypernymValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7256,7 +7256,7 @@ describe('v1.StreamsServiceClient', () => {
         series: 'seriesValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7332,7 +7332,7 @@ describe('v1.StreamsServiceClient', () => {
         stream: 'streamValue',
       };
       const client = new streamsserviceModule.v1.StreamsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

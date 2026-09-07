@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as migrationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -247,7 +247,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.migrationServiceStub, undefined);
@@ -255,12 +255,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       assert(client.migrationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.migrationServiceStub);
@@ -269,14 +269,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.migrationServiceStub, undefined);
@@ -285,7 +285,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -293,7 +293,7 @@ describe('v2alpha.MigrationServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -305,7 +305,7 @@ describe('v2alpha.MigrationServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -328,7 +328,7 @@ describe('v2alpha.MigrationServiceClient', () => {
   describe('createMigrationWorkflow', () => {
     it('invokes createMigrationWorkflow without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -360,7 +360,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes createMigrationWorkflow without error using callback', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes createMigrationWorkflow with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -441,7 +441,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes createMigrationWorkflow with closed client', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -454,7 +454,7 @@ describe('v2alpha.MigrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -467,7 +467,7 @@ describe('v2alpha.MigrationServiceClient', () => {
   describe('getMigrationWorkflow', () => {
     it('invokes getMigrationWorkflow without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -499,7 +499,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes getMigrationWorkflow without error using callback', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -546,7 +546,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes getMigrationWorkflow with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes getMigrationWorkflow with closed client', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -590,7 +590,7 @@ describe('v2alpha.MigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMigrationWorkflow(request), expectedError);
@@ -600,7 +600,7 @@ describe('v2alpha.MigrationServiceClient', () => {
   describe('deleteMigrationWorkflow', () => {
     it('invokes deleteMigrationWorkflow without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes deleteMigrationWorkflow without error using callback', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes deleteMigrationWorkflow with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes deleteMigrationWorkflow with closed client', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v2alpha.MigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -739,7 +739,7 @@ describe('v2alpha.MigrationServiceClient', () => {
   describe('startMigrationWorkflow', () => {
     it('invokes startMigrationWorkflow without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -771,7 +771,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes startMigrationWorkflow without error using callback', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -818,7 +818,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes startMigrationWorkflow with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -852,7 +852,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes startMigrationWorkflow with closed client', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v2alpha.MigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -878,7 +878,7 @@ describe('v2alpha.MigrationServiceClient', () => {
   describe('getMigrationSubtask', () => {
     it('invokes getMigrationSubtask without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -910,7 +910,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes getMigrationSubtask without error using callback', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +957,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes getMigrationSubtask with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -988,7 +988,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes getMigrationSubtask with closed client', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v2alpha.MigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMigrationSubtask(request), expectedError);
@@ -1011,7 +1011,7 @@ describe('v2alpha.MigrationServiceClient', () => {
   describe('listMigrationWorkflows', () => {
     it('invokes listMigrationWorkflows without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes listMigrationWorkflows without error using callback', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes listMigrationWorkflows with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes listMigrationWorkflowsStream without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1211,7 +1211,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes listMigrationWorkflowsStream with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1269,7 +1269,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('uses async iteration with listMigrationWorkflows without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1323,7 +1323,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('uses async iteration with listMigrationWorkflows with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1370,7 +1370,7 @@ describe('v2alpha.MigrationServiceClient', () => {
   describe('listMigrationSubtasks', () => {
     it('invokes listMigrationSubtasks without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1410,7 +1410,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes listMigrationSubtasks without error using callback', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1467,7 +1467,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes listMigrationSubtasks with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,7 +1501,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes listMigrationSubtasksStream without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1570,7 +1570,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('invokes listMigrationSubtasksStream with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1628,7 +1628,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('uses async iteration with listMigrationSubtasks without error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1682,7 +1682,7 @@ describe('v2alpha.MigrationServiceClient', () => {
 
     it('uses async iteration with listMigrationSubtasks with error', async () => {
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1734,7 +1734,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         location: 'locationValue',
       };
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1785,7 +1785,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         subtask: 'subtaskValue',
       };
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1863,7 +1863,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         workflow: 'workflowValue',
       };
       const client = new migrationserviceModule.v2alpha.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

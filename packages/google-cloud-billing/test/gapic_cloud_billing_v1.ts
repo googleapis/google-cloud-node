@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudbillingModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudBillingStub, undefined);
@@ -250,12 +250,12 @@ describe('v1.CloudBillingClient', () => {
       assert(client.cloudBillingStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudBillingStub);
@@ -264,14 +264,14 @@ describe('v1.CloudBillingClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudBillingStub, undefined);
@@ -280,7 +280,7 @@ describe('v1.CloudBillingClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1.CloudBillingClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1.CloudBillingClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1.CloudBillingClient', () => {
   describe('getBillingAccount', () => {
     it('invokes getBillingAccount without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getBillingAccount without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getBillingAccount with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getBillingAccount with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBillingAccount(request), expectedError);
@@ -455,7 +455,7 @@ describe('v1.CloudBillingClient', () => {
   describe('updateBillingAccount', () => {
     it('invokes updateBillingAccount without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes updateBillingAccount without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes updateBillingAccount with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -565,7 +565,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes updateBillingAccount with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -578,7 +578,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBillingAccount(request), expectedError);
@@ -588,7 +588,7 @@ describe('v1.CloudBillingClient', () => {
   describe('createBillingAccount', () => {
     it('invokes createBillingAccount without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -620,7 +620,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes createBillingAccount without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes createBillingAccount with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes createBillingAccount with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createBillingAccount(request), expectedError);
@@ -721,7 +721,7 @@ describe('v1.CloudBillingClient', () => {
   describe('getProjectBillingInfo', () => {
     it('invokes getProjectBillingInfo without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getProjectBillingInfo without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getProjectBillingInfo with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getProjectBillingInfo with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -860,7 +860,7 @@ describe('v1.CloudBillingClient', () => {
   describe('updateProjectBillingInfo', () => {
     it('invokes updateProjectBillingInfo without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -892,7 +892,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes updateProjectBillingInfo without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -939,7 +939,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes updateProjectBillingInfo with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes updateProjectBillingInfo with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -999,7 +999,7 @@ describe('v1.CloudBillingClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,7 +1030,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1121,7 +1121,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1131,7 +1131,7 @@ describe('v1.CloudBillingClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1162,7 +1162,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1253,7 +1253,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1263,7 +1263,7 @@ describe('v1.CloudBillingClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1295,7 +1295,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1373,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1386,7 +1386,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1396,7 +1396,7 @@ describe('v1.CloudBillingClient', () => {
   describe('moveBillingAccount', () => {
     it('invokes moveBillingAccount without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1433,7 +1433,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes moveBillingAccount without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1485,7 +1485,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes moveBillingAccount with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1521,7 +1521,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes moveBillingAccount with closed client', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,7 +1539,7 @@ describe('v1.CloudBillingClient', () => {
       );
       request.destinationParent = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.moveBillingAccount(request), expectedError);
@@ -1549,7 +1549,7 @@ describe('v1.CloudBillingClient', () => {
   describe('listBillingAccounts', () => {
     it('invokes listBillingAccounts without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1589,7 +1589,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes listBillingAccounts without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1644,7 +1644,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes listBillingAccounts with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +1675,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes listBillingAccountsStream without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1727,15 +1727,15 @@ describe('v1.CloudBillingClient', () => {
       assert(
         (client.descriptors.page.listBillingAccounts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBillingAccountsStream with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1776,15 +1776,15 @@ describe('v1.CloudBillingClient', () => {
       assert(
         (client.descriptors.page.listBillingAccounts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBillingAccounts without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1825,15 +1825,15 @@ describe('v1.CloudBillingClient', () => {
       assert(
         (client.descriptors.page.listBillingAccounts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBillingAccounts with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1865,9 +1865,9 @@ describe('v1.CloudBillingClient', () => {
       assert(
         (client.descriptors.page.listBillingAccounts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1875,7 +1875,7 @@ describe('v1.CloudBillingClient', () => {
   describe('listProjectBillingInfo', () => {
     it('invokes listProjectBillingInfo without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes listProjectBillingInfo without error using callback', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1947,8 +1947,7 @@ describe('v1.CloudBillingClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.billing.v1.IProjectBillingInfo[]
-              | null,
+              protos.google.cloud.billing.v1.IProjectBillingInfo[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1972,7 +1971,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes listProjectBillingInfo with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2006,7 +2005,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes listProjectBillingInfoStream without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2073,7 +2072,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('invokes listProjectBillingInfoStream with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2129,7 +2128,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('uses async iteration with listProjectBillingInfo without error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2183,7 +2182,7 @@ describe('v1.CloudBillingClient', () => {
 
     it('uses async iteration with listProjectBillingInfo with error', async () => {
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2234,7 +2233,7 @@ describe('v1.CloudBillingClient', () => {
         billing_account: 'billingAccountValue',
       };
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2273,7 +2272,7 @@ describe('v1.CloudBillingClient', () => {
         organization: 'organizationValue',
       };
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2312,7 +2311,7 @@ describe('v1.CloudBillingClient', () => {
         billing_account: 'billingAccountValue',
       };
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2375,7 +2374,7 @@ describe('v1.CloudBillingClient', () => {
         project: 'projectValue',
       };
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2413,7 +2412,7 @@ describe('v1.CloudBillingClient', () => {
         project: 'projectValue',
       };
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2457,7 +2456,7 @@ describe('v1.CloudBillingClient', () => {
         service: 'serviceValue',
       };
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2496,7 +2495,7 @@ describe('v1.CloudBillingClient', () => {
         sku: 'skuValue',
       };
       const client = new cloudbillingModule.v1.CloudBillingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

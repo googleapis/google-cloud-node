@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class AdaptationClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('speech');
@@ -64,9 +64,9 @@ export class AdaptationClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  adaptationStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  adaptationStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AdaptationClient.
@@ -142,7 +142,7 @@ export class AdaptationClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -237,7 +237,7 @@ export class AdaptationClient {
       'google.cloud.speech.v1.Adaptation',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -277,7 +277,7 @@ export class AdaptationClient {
           (this._protos as any).google.cloud.speech.v1.Adaptation,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -295,7 +295,7 @@ export class AdaptationClient {
     ];
     for (const methodName of adaptationStubMethods) {
       const callPromise = this.adaptationStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -506,7 +506,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createPhraseSet request %j', request);
@@ -640,7 +640,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPhraseSet request %j', request);
@@ -779,7 +779,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         'phrase_set.name': request.phraseSet!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updatePhraseSet request %j', request);
@@ -909,7 +909,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deletePhraseSet request %j', request);
@@ -1060,7 +1060,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCustomClass request %j', request);
@@ -1190,7 +1190,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCustomClass request %j', request);
@@ -1337,7 +1337,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_class.name': request.customClass!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCustomClass request %j', request);
@@ -1479,7 +1479,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteCustomClass request %j', request);
@@ -1630,7 +1630,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1712,7 +1712,7 @@ export class AdaptationClient {
       });
     const defaultCallSettings = this._defaults['listPhraseSet'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPhraseSet stream %j', request);
@@ -1776,7 +1776,7 @@ export class AdaptationClient {
       });
     const defaultCallSettings = this._defaults['listPhraseSet'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPhraseSet iterate %j', request);
@@ -1895,7 +1895,7 @@ export class AdaptationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1977,7 +1977,7 @@ export class AdaptationClient {
       });
     const defaultCallSettings = this._defaults['listCustomClasses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomClasses stream %j', request);
@@ -2041,7 +2041,7 @@ export class AdaptationClient {
       });
     const defaultCallSettings = this._defaults['listCustomClasses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomClasses iterate %j', request);
@@ -2226,7 +2226,7 @@ export class AdaptationClient {
    */
   close(): Promise<void> {
     if (this.adaptationStub && !this._terminated) {
-      return this.adaptationStub.then((stub) => {
+      return this.adaptationStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

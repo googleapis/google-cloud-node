@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sitesearchengineserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -291,7 +291,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.siteSearchEngineServiceStub, undefined);
@@ -299,13 +299,13 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       assert(client.siteSearchEngineServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.siteSearchEngineServiceStub);
@@ -314,15 +314,15 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.siteSearchEngineServiceStub, undefined);
@@ -331,7 +331,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -353,7 +353,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -377,7 +377,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getSiteSearchEngine without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -410,7 +410,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getSiteSearchEngine without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -458,7 +458,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getSiteSearchEngine with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -490,7 +490,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getSiteSearchEngine with closed client', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -503,7 +503,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSiteSearchEngine(request), expectedError);
@@ -514,7 +514,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getTargetSite without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -546,7 +546,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getTargetSite without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getTargetSite with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -626,7 +626,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getTargetSite with closed client', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -639,7 +639,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTargetSite(request), expectedError);
@@ -650,7 +650,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchSitemaps without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -682,7 +682,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchSitemaps without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchSitemaps with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -762,7 +762,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchSitemaps with closed client', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -775,7 +775,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchSitemaps(request), expectedError);
@@ -786,7 +786,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes createTargetSite without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -820,7 +820,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes createTargetSite without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes createTargetSite with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -907,7 +907,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes createTargetSite with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -941,7 +941,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkCreateTargetSiteProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -949,8 +949,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTargetSiteProgress(
@@ -964,7 +964,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkCreateTargetSiteProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes batchCreateTargetSites without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes batchCreateTargetSites without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes batchCreateTargetSites with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1110,7 +1110,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes batchCreateTargetSites with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1144,7 +1144,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkBatchCreateTargetSitesProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1152,8 +1152,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchCreateTargetSitesProgress(
@@ -1167,7 +1167,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkBatchCreateTargetSitesProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1189,7 +1189,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes updateTargetSite without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1224,7 +1224,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes updateTargetSite without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1280,7 +1280,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes updateTargetSite with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1313,7 +1313,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes updateTargetSite with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1348,7 +1348,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkUpdateTargetSiteProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1356,8 +1356,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateTargetSiteProgress(
@@ -1371,7 +1371,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkUpdateTargetSiteProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1393,7 +1393,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteTargetSite without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1427,7 +1427,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteTargetSite without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1482,7 +1482,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteTargetSite with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1514,7 +1514,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteTargetSite with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1548,7 +1548,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkDeleteTargetSiteProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1556,8 +1556,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTargetSiteProgress(
@@ -1571,7 +1571,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkDeleteTargetSiteProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1593,7 +1593,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes createSitemap without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1627,7 +1627,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes createSitemap without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1682,7 +1682,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes createSitemap with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1714,7 +1714,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes createSitemap with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1748,7 +1748,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkCreateSitemapProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1756,8 +1756,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSitemapProgress(
@@ -1771,7 +1771,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkCreateSitemapProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1793,7 +1793,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteSitemap without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1827,7 +1827,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteSitemap without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1882,7 +1882,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteSitemap with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1914,7 +1914,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteSitemap with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1948,7 +1948,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkDeleteSitemapProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1956,8 +1956,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSitemapProgress(
@@ -1971,7 +1971,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkDeleteSitemapProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1993,7 +1993,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes enableAdvancedSiteSearch without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2027,7 +2027,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes enableAdvancedSiteSearch without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes enableAdvancedSiteSearch with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2117,7 +2117,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes enableAdvancedSiteSearch with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkEnableAdvancedSiteSearchProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2159,8 +2159,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2175,7 +2175,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkEnableAdvancedSiteSearchProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2197,7 +2197,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes disableAdvancedSiteSearch without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2231,7 +2231,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes disableAdvancedSiteSearch without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2286,7 +2286,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes disableAdvancedSiteSearch with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2321,7 +2321,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes disableAdvancedSiteSearch with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2355,7 +2355,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkDisableAdvancedSiteSearchProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2363,8 +2363,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2379,7 +2379,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkDisableAdvancedSiteSearchProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2401,7 +2401,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes recrawlUris without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2434,7 +2434,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes recrawlUris without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2489,7 +2489,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes recrawlUris with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2521,7 +2521,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes recrawlUris with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2555,7 +2555,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkRecrawlUrisProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2563,8 +2563,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRecrawlUrisProgress(
@@ -2578,7 +2578,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkRecrawlUrisProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2597,7 +2597,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes batchVerifyTargetSites without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2631,7 +2631,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes batchVerifyTargetSites without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2686,7 +2686,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes batchVerifyTargetSites with call error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2721,7 +2721,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes batchVerifyTargetSites with LRO error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2755,7 +2755,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkBatchVerifyTargetSitesProgress without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2763,8 +2763,8 @@ describe('v1.SiteSearchEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchVerifyTargetSitesProgress(
@@ -2778,7 +2778,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes checkBatchVerifyTargetSitesProgress with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2800,7 +2800,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes listTargetSites without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2840,7 +2840,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes listTargetSites without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2872,8 +2872,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1.ITargetSite[]
-              | null,
+              protos.google.cloud.discoveryengine.v1.ITargetSite[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2898,7 +2897,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes listTargetSites with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2930,7 +2929,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes listTargetSitesStream without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2983,16 +2982,16 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listTargetSites.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTargetSitesStream with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3034,16 +3033,16 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listTargetSites.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTargetSites without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3085,16 +3084,16 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listTargetSites.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTargetSites with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3127,9 +3126,9 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listTargetSites.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3138,7 +3137,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchDomainVerificationStatus without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3179,7 +3178,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchDomainVerificationStatus without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3211,8 +3210,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1.ITargetSite[]
-              | null,
+              protos.google.cloud.discoveryengine.v1.ITargetSite[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3237,7 +3235,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchDomainVerificationStatus with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3272,7 +3270,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchDomainVerificationStatusStream without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3343,7 +3341,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes fetchDomainVerificationStatusStream with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3403,7 +3401,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('uses async iteration with fetchDomainVerificationStatus without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3458,7 +3456,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('uses async iteration with fetchDomainVerificationStatus with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3505,7 +3503,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3536,7 +3534,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3581,7 +3579,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3617,7 +3615,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3666,7 +3664,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3708,7 +3706,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3730,7 +3728,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3758,7 +3756,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3769,7 +3767,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3794,7 +3792,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3817,7 +3815,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3845,7 +3843,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3856,7 +3854,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3881,7 +3879,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3904,7 +3902,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3932,7 +3930,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3943,7 +3941,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3968,7 +3966,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -4004,7 +4002,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4044,7 +4042,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4144,7 +4142,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4232,7 +4230,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4308,7 +4306,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4388,7 +4386,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4428,7 +4426,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4493,7 +4491,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4574,7 +4572,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4679,7 +4677,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4827,7 +4825,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4991,7 +4989,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5118,7 +5116,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5246,7 +5244,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5373,7 +5371,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5483,7 +5481,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5610,7 +5608,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5739,7 +5737,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5885,7 +5883,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6011,7 +6009,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6121,7 +6119,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6249,7 +6247,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6376,7 +6374,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6503,7 +6501,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6630,7 +6628,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6758,7 +6756,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6902,7 +6900,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7026,7 +7024,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7108,7 +7106,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7236,7 +7234,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7379,7 +7377,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7475,7 +7473,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7583,7 +7581,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7690,7 +7688,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7780,7 +7778,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7874,7 +7872,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7982,7 +7980,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8107,7 +8105,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8205,7 +8203,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8295,7 +8293,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8404,7 +8402,7 @@ describe('v1.SiteSearchEngineServiceClient', () => {
       };
       const client =
         new sitesearchengineserviceModule.v1.SiteSearchEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

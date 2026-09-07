@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class FeatureOnlineStoreServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -66,11 +66,11 @@ export class FeatureOnlineStoreServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  featureOnlineStoreServiceStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  featureOnlineStoreServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of FeatureOnlineStoreServiceClient.
@@ -147,7 +147,7 @@ export class FeatureOnlineStoreServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -405,7 +405,7 @@ export class FeatureOnlineStoreServiceClient {
       'google.cloud.aiplatform.v1.FeatureOnlineStoreService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -446,7 +446,7 @@ export class FeatureOnlineStoreServiceClient {
             .FeatureOnlineStoreService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -458,11 +458,11 @@ export class FeatureOnlineStoreServiceClient {
     ];
     for (const methodName of featureOnlineStoreServiceStubMethods) {
       const callPromise = this.featureOnlineStoreServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -675,7 +675,7 @@ export class FeatureOnlineStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         feature_view: request.featureView ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchFeatureValues request %j', request);
@@ -828,7 +828,7 @@ export class FeatureOnlineStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         feature_view: request.featureView ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchNearestEntities request %j', request);
@@ -973,7 +973,7 @@ export class FeatureOnlineStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         feature_view: request.featureView ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateFetchAccessToken request %j', request);
@@ -1041,7 +1041,7 @@ export class FeatureOnlineStoreServiceClient {
    * region_tag:aiplatform_v1_generated_FeatureOnlineStoreService_FeatureViewDirectWrite_async
    */
   featureViewDirectWrite(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('featureViewDirectWrite stream %j', options);
@@ -4991,14 +4991,14 @@ export class FeatureOnlineStoreServiceClient {
    */
   close(): Promise<void> {
     if (this.featureOnlineStoreServiceStub && !this._terminated) {
-      return this.featureOnlineStoreServiceStub.then((stub) => {
+      return this.featureOnlineStoreServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

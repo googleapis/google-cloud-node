@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as warehouseModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -169,9 +169,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -292,7 +292,7 @@ describe('v1.WarehouseClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.warehouseStub, undefined);
@@ -300,12 +300,12 @@ describe('v1.WarehouseClient', () => {
       assert(client.warehouseStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.warehouseStub);
@@ -314,14 +314,14 @@ describe('v1.WarehouseClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.warehouseStub, undefined);
@@ -330,7 +330,7 @@ describe('v1.WarehouseClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1.WarehouseClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -350,7 +350,7 @@ describe('v1.WarehouseClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -373,7 +373,7 @@ describe('v1.WarehouseClient', () => {
   describe('createAsset', () => {
     it('invokes createAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -404,7 +404,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -451,7 +451,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createAsset with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createAsset with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -495,7 +495,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAsset(request), expectedError);
@@ -505,7 +505,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateAsset', () => {
     it('invokes updateAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -537,7 +537,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -585,7 +585,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateAsset with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateAsset with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.asset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAsset(request), expectedError);
@@ -641,7 +641,7 @@ describe('v1.WarehouseClient', () => {
   describe('getAsset', () => {
     it('invokes getAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -672,7 +672,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -719,7 +719,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getAsset with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getAsset with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -760,7 +760,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAsset(request), expectedError);
@@ -770,7 +770,7 @@ describe('v1.WarehouseClient', () => {
   describe('generateRetrievalUrl', () => {
     it('invokes generateRetrievalUrl without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes generateRetrievalUrl without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -849,7 +849,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes generateRetrievalUrl with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes generateRetrievalUrl with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -893,7 +893,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateRetrievalUrl(request), expectedError);
@@ -903,7 +903,7 @@ describe('v1.WarehouseClient', () => {
   describe('getIndex', () => {
     it('invokes getIndex without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getIndex without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -981,7 +981,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getIndex with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1009,7 +1009,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getIndex with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1022,7 +1022,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIndex(request), expectedError);
@@ -1032,7 +1032,7 @@ describe('v1.WarehouseClient', () => {
   describe('getCorpus', () => {
     it('invokes getCorpus without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getCorpus without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1110,7 +1110,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getCorpus with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getCorpus with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCorpus(request), expectedError);
@@ -1161,7 +1161,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateCorpus', () => {
     it('invokes updateCorpus without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1193,7 +1193,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateCorpus without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1241,7 +1241,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateCorpus with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,7 +1273,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateCorpus with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1287,7 +1287,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.corpus.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCorpus(request), expectedError);
@@ -1297,7 +1297,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteCorpus', () => {
     it('invokes deleteCorpus without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1328,7 +1328,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteCorpus without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteCorpus with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteCorpus with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1419,7 +1419,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCorpus(request), expectedError);
@@ -1429,7 +1429,7 @@ describe('v1.WarehouseClient', () => {
   describe('createDataSchema', () => {
     it('invokes createDataSchema without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1460,7 +1460,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createDataSchema without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1507,7 +1507,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createDataSchema with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1538,7 +1538,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createDataSchema with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1551,7 +1551,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataSchema(request), expectedError);
@@ -1561,7 +1561,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateDataSchema', () => {
     it('invokes updateDataSchema without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1593,7 +1593,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateDataSchema without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1641,7 +1641,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateDataSchema with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1673,7 +1673,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateDataSchema with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.dataSchema.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataSchema(request), expectedError);
@@ -1697,7 +1697,7 @@ describe('v1.WarehouseClient', () => {
   describe('getDataSchema', () => {
     it('invokes getDataSchema without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1728,7 +1728,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getDataSchema without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1775,7 +1775,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getDataSchema with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1806,7 +1806,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getDataSchema with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1819,7 +1819,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataSchema(request), expectedError);
@@ -1829,7 +1829,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteDataSchema', () => {
     it('invokes deleteDataSchema without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1860,7 +1860,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteDataSchema without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1907,7 +1907,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteDataSchema with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1938,7 +1938,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteDataSchema with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1951,7 +1951,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataSchema(request), expectedError);
@@ -1961,7 +1961,7 @@ describe('v1.WarehouseClient', () => {
   describe('createAnnotation', () => {
     it('invokes createAnnotation without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1992,7 +1992,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createAnnotation without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2039,7 +2039,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createAnnotation with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2070,7 +2070,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createAnnotation with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2083,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAnnotation(request), expectedError);
@@ -2093,7 +2093,7 @@ describe('v1.WarehouseClient', () => {
   describe('getAnnotation', () => {
     it('invokes getAnnotation without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2124,7 +2124,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getAnnotation without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2171,7 +2171,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getAnnotation with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2202,7 +2202,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getAnnotation with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2215,7 +2215,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnnotation(request), expectedError);
@@ -2225,7 +2225,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateAnnotation', () => {
     it('invokes updateAnnotation without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2257,7 +2257,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateAnnotation without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2305,7 +2305,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateAnnotation with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2337,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateAnnotation with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2351,7 +2351,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.annotation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAnnotation(request), expectedError);
@@ -2361,7 +2361,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteAnnotation', () => {
     it('invokes deleteAnnotation without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2392,7 +2392,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteAnnotation without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2439,7 +2439,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteAnnotation with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2470,7 +2470,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteAnnotation with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2483,7 +2483,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAnnotation(request), expectedError);
@@ -2493,7 +2493,7 @@ describe('v1.WarehouseClient', () => {
   describe('clipAsset', () => {
     it('invokes clipAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2524,7 +2524,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes clipAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2571,7 +2571,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes clipAsset with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2599,7 +2599,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes clipAsset with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,7 +2612,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.clipAsset(request), expectedError);
@@ -2622,7 +2622,7 @@ describe('v1.WarehouseClient', () => {
   describe('generateHlsUri', () => {
     it('invokes generateHlsUri without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2653,7 +2653,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes generateHlsUri without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2700,7 +2700,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes generateHlsUri with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2731,7 +2731,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes generateHlsUri with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2744,7 +2744,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateHlsUri(request), expectedError);
@@ -2754,7 +2754,7 @@ describe('v1.WarehouseClient', () => {
   describe('createSearchConfig', () => {
     it('invokes createSearchConfig without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2786,7 +2786,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createSearchConfig without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2833,7 +2833,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createSearchConfig with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2864,7 +2864,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createSearchConfig with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2877,7 +2877,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSearchConfig(request), expectedError);
@@ -2887,7 +2887,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateSearchConfig', () => {
     it('invokes updateSearchConfig without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2920,7 +2920,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateSearchConfig without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2968,7 +2968,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateSearchConfig with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3000,7 +3000,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateSearchConfig with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,7 +3014,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.searchConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSearchConfig(request), expectedError);
@@ -3024,7 +3024,7 @@ describe('v1.WarehouseClient', () => {
   describe('getSearchConfig', () => {
     it('invokes getSearchConfig without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3055,7 +3055,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getSearchConfig without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3102,7 +3102,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getSearchConfig with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3133,7 +3133,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getSearchConfig with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3146,7 +3146,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSearchConfig(request), expectedError);
@@ -3156,7 +3156,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteSearchConfig', () => {
     it('invokes deleteSearchConfig without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3188,7 +3188,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteSearchConfig without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3235,7 +3235,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteSearchConfig with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3266,7 +3266,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteSearchConfig with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3279,7 +3279,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSearchConfig(request), expectedError);
@@ -3289,7 +3289,7 @@ describe('v1.WarehouseClient', () => {
   describe('createSearchHypernym', () => {
     it('invokes createSearchHypernym without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3321,7 +3321,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createSearchHypernym without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3368,7 +3368,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createSearchHypernym with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3399,7 +3399,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createSearchHypernym with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3412,7 +3412,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSearchHypernym(request), expectedError);
@@ -3422,7 +3422,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateSearchHypernym', () => {
     it('invokes updateSearchHypernym without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3455,7 +3455,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateSearchHypernym without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3503,7 +3503,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateSearchHypernym with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3535,7 +3535,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateSearchHypernym with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3549,7 +3549,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.searchHypernym.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSearchHypernym(request), expectedError);
@@ -3559,7 +3559,7 @@ describe('v1.WarehouseClient', () => {
   describe('getSearchHypernym', () => {
     it('invokes getSearchHypernym without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3590,7 +3590,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getSearchHypernym without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3637,7 +3637,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getSearchHypernym with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3668,7 +3668,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getSearchHypernym with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3681,7 +3681,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSearchHypernym(request), expectedError);
@@ -3691,7 +3691,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteSearchHypernym', () => {
     it('invokes deleteSearchHypernym without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3723,7 +3723,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteSearchHypernym without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3770,7 +3770,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteSearchHypernym with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3801,7 +3801,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteSearchHypernym with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3814,7 +3814,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSearchHypernym(request), expectedError);
@@ -3824,7 +3824,7 @@ describe('v1.WarehouseClient', () => {
   describe('getIndexEndpoint', () => {
     it('invokes getIndexEndpoint without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3855,7 +3855,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getIndexEndpoint without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3902,7 +3902,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getIndexEndpoint with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3933,7 +3933,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getIndexEndpoint with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3946,7 +3946,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIndexEndpoint(request), expectedError);
@@ -3956,7 +3956,7 @@ describe('v1.WarehouseClient', () => {
   describe('getCollection', () => {
     it('invokes getCollection without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3987,7 +3987,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getCollection without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4034,7 +4034,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getCollection with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4065,7 +4065,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes getCollection with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4078,7 +4078,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCollection(request), expectedError);
@@ -4088,7 +4088,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateCollection', () => {
     it('invokes updateCollection without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4120,7 +4120,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateCollection without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4168,7 +4168,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateCollection with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4200,7 +4200,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateCollection with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4214,7 +4214,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.collection.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCollection(request), expectedError);
@@ -4224,7 +4224,7 @@ describe('v1.WarehouseClient', () => {
   describe('addCollectionItem', () => {
     it('invokes addCollectionItem without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4256,7 +4256,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes addCollectionItem without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4304,7 +4304,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes addCollectionItem with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4336,7 +4336,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes addCollectionItem with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4350,7 +4350,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.item.collection = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addCollectionItem(request), expectedError);
@@ -4360,7 +4360,7 @@ describe('v1.WarehouseClient', () => {
   describe('removeCollectionItem', () => {
     it('invokes removeCollectionItem without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4393,7 +4393,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes removeCollectionItem without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4441,7 +4441,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes removeCollectionItem with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4473,7 +4473,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes removeCollectionItem with closed client', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4487,7 +4487,7 @@ describe('v1.WarehouseClient', () => {
       );
       request.item.collection = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeCollectionItem(request), expectedError);
@@ -4497,7 +4497,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteAsset', () => {
     it('invokes deleteAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4529,7 +4529,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4583,7 +4583,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteAsset with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4614,7 +4614,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteAsset with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4647,7 +4647,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeleteAssetProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4655,8 +4655,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAssetProgress(
@@ -4669,7 +4669,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeleteAssetProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4687,7 +4687,7 @@ describe('v1.WarehouseClient', () => {
   describe('uploadAsset', () => {
     it('invokes uploadAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4719,7 +4719,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes uploadAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4773,7 +4773,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes uploadAsset with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4804,7 +4804,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes uploadAsset with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4837,7 +4837,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkUploadAssetProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4845,8 +4845,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUploadAssetProgress(
@@ -4859,7 +4859,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkUploadAssetProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4877,7 +4877,7 @@ describe('v1.WarehouseClient', () => {
   describe('analyzeAsset', () => {
     it('invokes analyzeAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4909,7 +4909,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes analyzeAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4963,7 +4963,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes analyzeAsset with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4994,7 +4994,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes analyzeAsset with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5027,7 +5027,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkAnalyzeAssetProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5035,8 +5035,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAnalyzeAssetProgress(
@@ -5049,7 +5049,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkAnalyzeAssetProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5067,7 +5067,7 @@ describe('v1.WarehouseClient', () => {
   describe('indexAsset', () => {
     it('invokes indexAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5099,7 +5099,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes indexAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5153,7 +5153,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes indexAsset with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5184,7 +5184,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes indexAsset with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5217,7 +5217,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkIndexAssetProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5225,8 +5225,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkIndexAssetProgress(
@@ -5239,7 +5239,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkIndexAssetProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5257,7 +5257,7 @@ describe('v1.WarehouseClient', () => {
   describe('removeIndexAsset', () => {
     it('invokes removeIndexAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5290,7 +5290,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes removeIndexAsset without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5344,7 +5344,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes removeIndexAsset with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5375,7 +5375,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes removeIndexAsset with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5408,7 +5408,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkRemoveIndexAssetProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5416,8 +5416,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRemoveIndexAssetProgress(
@@ -5430,7 +5430,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkRemoveIndexAssetProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5451,7 +5451,7 @@ describe('v1.WarehouseClient', () => {
   describe('createIndex', () => {
     it('invokes createIndex without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5483,7 +5483,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createIndex without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5537,7 +5537,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createIndex with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5568,7 +5568,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createIndex with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5601,7 +5601,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkCreateIndexProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5609,8 +5609,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIndexProgress(
@@ -5623,7 +5623,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkCreateIndexProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5641,7 +5641,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateIndex', () => {
     it('invokes updateIndex without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5674,7 +5674,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateIndex without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5729,7 +5729,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateIndex with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5761,7 +5761,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateIndex with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5795,7 +5795,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkUpdateIndexProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5803,8 +5803,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateIndexProgress(
@@ -5817,7 +5817,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkUpdateIndexProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5835,7 +5835,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteIndex', () => {
     it('invokes deleteIndex without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5867,7 +5867,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteIndex without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5921,7 +5921,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteIndex with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5952,7 +5952,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteIndex with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5985,7 +5985,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeleteIndexProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5993,8 +5993,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteIndexProgress(
@@ -6007,7 +6007,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeleteIndexProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6025,7 +6025,7 @@ describe('v1.WarehouseClient', () => {
   describe('createCorpus', () => {
     it('invokes createCorpus without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6057,7 +6057,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createCorpus without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6111,7 +6111,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createCorpus with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6142,7 +6142,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createCorpus with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6175,7 +6175,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkCreateCorpusProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6183,8 +6183,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCorpusProgress(
@@ -6197,7 +6197,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkCreateCorpusProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6215,7 +6215,7 @@ describe('v1.WarehouseClient', () => {
   describe('analyzeCorpus', () => {
     it('invokes analyzeCorpus without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6248,7 +6248,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes analyzeCorpus without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6302,7 +6302,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes analyzeCorpus with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6333,7 +6333,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes analyzeCorpus with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6366,7 +6366,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkAnalyzeCorpusProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6374,8 +6374,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAnalyzeCorpusProgress(
@@ -6388,7 +6388,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkAnalyzeCorpusProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6409,7 +6409,7 @@ describe('v1.WarehouseClient', () => {
   describe('importAssets', () => {
     it('invokes importAssets without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6441,7 +6441,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes importAssets without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6495,7 +6495,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes importAssets with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6526,7 +6526,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes importAssets with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6559,7 +6559,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkImportAssetsProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6567,8 +6567,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportAssetsProgress(
@@ -6581,7 +6581,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkImportAssetsProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6599,7 +6599,7 @@ describe('v1.WarehouseClient', () => {
   describe('createIndexEndpoint', () => {
     it('invokes createIndexEndpoint without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6632,7 +6632,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createIndexEndpoint without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6686,7 +6686,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createIndexEndpoint with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6717,7 +6717,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createIndexEndpoint with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6750,7 +6750,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkCreateIndexEndpointProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6758,8 +6758,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIndexEndpointProgress(
@@ -6772,7 +6772,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkCreateIndexEndpointProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6793,7 +6793,7 @@ describe('v1.WarehouseClient', () => {
   describe('updateIndexEndpoint', () => {
     it('invokes updateIndexEndpoint without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6827,7 +6827,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateIndexEndpoint without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6882,7 +6882,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateIndexEndpoint with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6914,7 +6914,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes updateIndexEndpoint with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6948,7 +6948,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkUpdateIndexEndpointProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6956,8 +6956,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateIndexEndpointProgress(
@@ -6970,7 +6970,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkUpdateIndexEndpointProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6991,7 +6991,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteIndexEndpoint', () => {
     it('invokes deleteIndexEndpoint without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7024,7 +7024,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteIndexEndpoint without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7078,7 +7078,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteIndexEndpoint with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7109,7 +7109,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteIndexEndpoint with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7142,7 +7142,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeleteIndexEndpointProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7150,8 +7150,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteIndexEndpointProgress(
@@ -7164,7 +7164,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeleteIndexEndpointProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7185,7 +7185,7 @@ describe('v1.WarehouseClient', () => {
   describe('deployIndex', () => {
     it('invokes deployIndex without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7217,7 +7217,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deployIndex without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7271,7 +7271,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deployIndex with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7302,7 +7302,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deployIndex with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7335,7 +7335,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeployIndexProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7343,8 +7343,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeployIndexProgress(
@@ -7357,7 +7357,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeployIndexProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7375,7 +7375,7 @@ describe('v1.WarehouseClient', () => {
   describe('undeployIndex', () => {
     it('invokes undeployIndex without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7408,7 +7408,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes undeployIndex without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7462,7 +7462,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes undeployIndex with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7493,7 +7493,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes undeployIndex with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7526,7 +7526,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkUndeployIndexProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7534,8 +7534,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeployIndexProgress(
@@ -7548,7 +7548,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkUndeployIndexProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7569,7 +7569,7 @@ describe('v1.WarehouseClient', () => {
   describe('createCollection', () => {
     it('invokes createCollection without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7602,7 +7602,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createCollection without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7656,7 +7656,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createCollection with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7687,7 +7687,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes createCollection with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7720,7 +7720,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkCreateCollectionProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7728,8 +7728,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCollectionProgress(
@@ -7742,7 +7742,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkCreateCollectionProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7763,7 +7763,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteCollection', () => {
     it('invokes deleteCollection without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7796,7 +7796,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteCollection without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7850,7 +7850,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteCollection with call error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7881,7 +7881,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes deleteCollection with LRO error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7914,7 +7914,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeleteCollectionProgress without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7922,8 +7922,8 @@ describe('v1.WarehouseClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCollectionProgress(
@@ -7936,7 +7936,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes checkDeleteCollectionProgress with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7957,7 +7957,7 @@ describe('v1.WarehouseClient', () => {
   describe('ingestAsset', () => {
     it('invokes ingestAsset without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8000,7 +8000,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes ingestAsset with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8043,7 +8043,7 @@ describe('v1.WarehouseClient', () => {
   describe('listAssets', () => {
     it('invokes listAssets without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8076,7 +8076,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listAssets without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8125,7 +8125,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listAssets with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8156,7 +8156,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listAssetsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8199,15 +8199,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssetsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8247,15 +8247,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8290,15 +8290,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8332,9 +8332,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8342,7 +8342,7 @@ describe('v1.WarehouseClient', () => {
   describe('viewIndexedAssets', () => {
     it('invokes viewIndexedAssets without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8381,7 +8381,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes viewIndexedAssets without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8436,7 +8436,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes viewIndexedAssets with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8467,7 +8467,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes viewIndexedAssetsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8519,15 +8519,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.viewIndexedAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes viewIndexedAssetsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8568,15 +8568,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.viewIndexedAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with viewIndexedAssets without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8617,15 +8617,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.viewIndexedAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with viewIndexedAssets with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8657,9 +8657,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.viewIndexedAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8667,7 +8667,7 @@ describe('v1.WarehouseClient', () => {
   describe('listIndexes', () => {
     it('invokes listIndexes without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8700,7 +8700,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listIndexes without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8749,7 +8749,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listIndexes with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8780,7 +8780,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listIndexesStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8823,15 +8823,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listIndexes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIndexesStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8871,15 +8871,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listIndexes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexes without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8914,15 +8914,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexes with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8956,9 +8956,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8966,7 +8966,7 @@ describe('v1.WarehouseClient', () => {
   describe('listCorpora', () => {
     it('invokes listCorpora without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8999,7 +8999,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listCorpora without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9048,7 +9048,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listCorpora with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9079,7 +9079,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listCorporaStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9125,15 +9125,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listCorpora.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCorporaStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9176,15 +9176,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listCorpora.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCorpora without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9219,15 +9219,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listCorpora.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCorpora with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9261,9 +9261,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listCorpora.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9271,7 +9271,7 @@ describe('v1.WarehouseClient', () => {
   describe('listDataSchemas', () => {
     it('invokes listDataSchemas without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9304,7 +9304,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listDataSchemas without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9353,7 +9353,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listDataSchemas with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9384,7 +9384,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listDataSchemasStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9430,15 +9430,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listDataSchemas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataSchemasStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9479,15 +9479,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listDataSchemas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataSchemas without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9522,15 +9522,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listDataSchemas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataSchemas with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9562,9 +9562,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listDataSchemas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9572,7 +9572,7 @@ describe('v1.WarehouseClient', () => {
   describe('listAnnotations', () => {
     it('invokes listAnnotations without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9605,7 +9605,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listAnnotations without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9654,7 +9654,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listAnnotations with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9685,7 +9685,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listAnnotationsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9731,15 +9731,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAnnotationsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9780,15 +9780,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnnotations without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9823,15 +9823,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnnotations with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9863,9 +9863,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9873,7 +9873,7 @@ describe('v1.WarehouseClient', () => {
   describe('listSearchConfigs', () => {
     it('invokes listSearchConfigs without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9912,7 +9912,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listSearchConfigs without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9967,7 +9967,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listSearchConfigs with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9998,7 +9998,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listSearchConfigsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10050,15 +10050,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listSearchConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSearchConfigsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10099,15 +10099,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listSearchConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSearchConfigs without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10148,15 +10148,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listSearchConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSearchConfigs with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10188,9 +10188,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listSearchConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10198,7 +10198,7 @@ describe('v1.WarehouseClient', () => {
   describe('listSearchHypernyms', () => {
     it('invokes listSearchHypernyms without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10238,7 +10238,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listSearchHypernyms without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10293,7 +10293,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listSearchHypernyms with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10324,7 +10324,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listSearchHypernymsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10376,15 +10376,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listSearchHypernyms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSearchHypernymsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10425,15 +10425,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listSearchHypernyms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSearchHypernyms without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10474,15 +10474,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listSearchHypernyms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSearchHypernyms with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10514,9 +10514,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listSearchHypernyms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10524,7 +10524,7 @@ describe('v1.WarehouseClient', () => {
   describe('searchAssets', () => {
     it('invokes searchAssets without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10563,7 +10563,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes searchAssets without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10618,7 +10618,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes searchAssets with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10649,7 +10649,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes searchAssetsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10702,15 +10702,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.searchAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchAssetsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10754,15 +10754,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.searchAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAssets without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10803,15 +10803,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.searchAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAssets with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10844,9 +10844,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.searchAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10854,7 +10854,7 @@ describe('v1.WarehouseClient', () => {
   describe('searchIndexEndpoint', () => {
     it('invokes searchIndexEndpoint without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10894,7 +10894,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes searchIndexEndpoint without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10949,7 +10949,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes searchIndexEndpoint with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10980,7 +10980,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes searchIndexEndpointStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11033,15 +11033,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.searchIndexEndpoint.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchIndexEndpointStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11083,15 +11083,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.searchIndexEndpoint.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchIndexEndpoint without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11132,15 +11132,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.searchIndexEndpoint.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchIndexEndpoint with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11173,9 +11173,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.searchIndexEndpoint.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11183,7 +11183,7 @@ describe('v1.WarehouseClient', () => {
   describe('listIndexEndpoints', () => {
     it('invokes listIndexEndpoints without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11223,7 +11223,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listIndexEndpoints without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11278,7 +11278,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listIndexEndpoints with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11309,7 +11309,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listIndexEndpointsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11361,15 +11361,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listIndexEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIndexEndpointsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11410,15 +11410,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listIndexEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexEndpoints without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11459,15 +11459,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIndexEndpoints with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11499,9 +11499,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11509,7 +11509,7 @@ describe('v1.WarehouseClient', () => {
   describe('listCollections', () => {
     it('invokes listCollections without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11542,7 +11542,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listCollections without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11591,7 +11591,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listCollections with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11622,7 +11622,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes listCollectionsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11668,15 +11668,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listCollections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCollectionsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11717,15 +11717,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listCollections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCollections without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11760,15 +11760,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listCollections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCollections with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11800,9 +11800,9 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.listCollections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11810,7 +11810,7 @@ describe('v1.WarehouseClient', () => {
   describe('viewCollectionItems', () => {
     it('invokes viewCollectionItems without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11850,7 +11850,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes viewCollectionItems without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11905,7 +11905,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes viewCollectionItems with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11936,7 +11936,7 @@ describe('v1.WarehouseClient', () => {
 
     it('invokes viewCollectionItemsStream without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11988,15 +11988,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.viewCollectionItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes viewCollectionItemsStream with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12037,15 +12037,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.viewCollectionItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with viewCollectionItems without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12086,15 +12086,15 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.viewCollectionItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with viewCollectionItems with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12126,16 +12126,16 @@ describe('v1.WarehouseClient', () => {
       assert(
         (client.descriptors.page.viewCollectionItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12165,7 +12165,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12203,7 +12203,7 @@ describe('v1.WarehouseClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12213,7 +12213,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12245,7 +12245,7 @@ describe('v1.WarehouseClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12275,7 +12275,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12313,7 +12313,7 @@ describe('v1.WarehouseClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12323,7 +12323,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12355,7 +12355,7 @@ describe('v1.WarehouseClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12388,7 +12388,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12426,7 +12426,7 @@ describe('v1.WarehouseClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12436,7 +12436,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12471,7 +12471,7 @@ describe('v1.WarehouseClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12501,7 +12501,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12545,7 +12545,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12580,7 +12580,7 @@ describe('v1.WarehouseClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12628,7 +12628,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12669,7 +12669,7 @@ describe('v1.WarehouseClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12690,7 +12690,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -12718,7 +12718,7 @@ describe('v1.WarehouseClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12728,7 +12728,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -12752,7 +12752,7 @@ describe('v1.WarehouseClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12774,7 +12774,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -12802,7 +12802,7 @@ describe('v1.WarehouseClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12812,7 +12812,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -12836,7 +12836,7 @@ describe('v1.WarehouseClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12858,7 +12858,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -12886,7 +12886,7 @@ describe('v1.WarehouseClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12896,7 +12896,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -12920,7 +12920,7 @@ describe('v1.WarehouseClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -12955,7 +12955,7 @@ describe('v1.WarehouseClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12992,7 +12992,7 @@ describe('v1.WarehouseClient', () => {
         analysis: 'analysisValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13069,7 +13069,7 @@ describe('v1.WarehouseClient', () => {
         annotation: 'annotationValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13155,7 +13155,7 @@ describe('v1.WarehouseClient', () => {
         application: 'applicationValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13220,7 +13220,7 @@ describe('v1.WarehouseClient', () => {
         asset: 'assetValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13296,7 +13296,7 @@ describe('v1.WarehouseClient', () => {
         channel: 'channelValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13371,7 +13371,7 @@ describe('v1.WarehouseClient', () => {
         cluster: 'clusterValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13436,7 +13436,7 @@ describe('v1.WarehouseClient', () => {
         collection: 'collectionValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13511,7 +13511,7 @@ describe('v1.WarehouseClient', () => {
         corpus: 'corpusValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13576,7 +13576,7 @@ describe('v1.WarehouseClient', () => {
         data_schema: 'dataSchemaValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13652,7 +13652,7 @@ describe('v1.WarehouseClient', () => {
         draft: 'draftValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13728,7 +13728,7 @@ describe('v1.WarehouseClient', () => {
         event: 'eventValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13804,7 +13804,7 @@ describe('v1.WarehouseClient', () => {
         index: 'indexValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13879,7 +13879,7 @@ describe('v1.WarehouseClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13944,7 +13944,7 @@ describe('v1.WarehouseClient', () => {
         instance: 'instanceValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14018,7 +14018,7 @@ describe('v1.WarehouseClient', () => {
         location: 'locationValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14068,7 +14068,7 @@ describe('v1.WarehouseClient', () => {
         operator: 'operatorValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14133,7 +14133,7 @@ describe('v1.WarehouseClient', () => {
         process: 'processValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14208,7 +14208,7 @@ describe('v1.WarehouseClient', () => {
         processor: 'processorValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14273,7 +14273,7 @@ describe('v1.WarehouseClient', () => {
         search_config: 'searchConfigValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14349,7 +14349,7 @@ describe('v1.WarehouseClient', () => {
         search_hypernym: 'searchHypernymValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14427,7 +14427,7 @@ describe('v1.WarehouseClient', () => {
         series: 'seriesValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14503,7 +14503,7 @@ describe('v1.WarehouseClient', () => {
         stream: 'streamValue',
       };
       const client = new warehouseModule.v1.WarehouseClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

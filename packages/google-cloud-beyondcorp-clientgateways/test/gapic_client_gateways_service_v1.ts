@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as clientgatewaysserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -289,7 +289,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.clientGatewaysServiceStub, undefined);
@@ -297,13 +297,13 @@ describe('v1.ClientGatewaysServiceClient', () => {
       assert(client.clientGatewaysServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.clientGatewaysServiceStub);
@@ -312,15 +312,15 @@ describe('v1.ClientGatewaysServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.clientGatewaysServiceStub, undefined);
@@ -329,7 +329,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +351,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -375,7 +375,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getClientGateway without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getClientGateway without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getClientGateway with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getClientGateway with closed client', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getClientGateway(request), expectedError);
@@ -511,7 +511,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes createClientGateway without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes createClientGateway without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes createClientGateway with call error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes createClientGateway with LRO error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes checkCreateClientGatewayProgress without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -674,8 +674,8 @@ describe('v1.ClientGatewaysServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClientGatewayProgress(
@@ -689,7 +689,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes checkCreateClientGatewayProgress with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes deleteClientGateway without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes deleteClientGateway without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes deleteClientGateway with call error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes deleteClientGateway with LRO error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes checkDeleteClientGatewayProgress without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -874,8 +874,8 @@ describe('v1.ClientGatewaysServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClientGatewayProgress(
@@ -889,7 +889,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes checkDeleteClientGatewayProgress with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -911,7 +911,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes listClientGateways without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -952,7 +952,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes listClientGateways without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes listClientGateways with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes listClientGatewaysStream without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1097,16 +1097,16 @@ describe('v1.ClientGatewaysServiceClient', () => {
       assert(
         (client.descriptors.page.listClientGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listClientGatewaysStream with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1150,16 +1150,16 @@ describe('v1.ClientGatewaysServiceClient', () => {
       assert(
         (client.descriptors.page.listClientGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClientGateways without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1201,16 +1201,16 @@ describe('v1.ClientGatewaysServiceClient', () => {
       assert(
         (client.descriptors.page.listClientGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClientGateways with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1243,9 +1243,9 @@ describe('v1.ClientGatewaysServiceClient', () => {
       assert(
         (client.descriptors.page.listClientGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1253,7 +1253,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1284,7 +1284,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1333,7 +1333,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1366,7 +1366,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1397,7 +1397,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1435,7 +1435,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1446,7 +1446,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1479,7 +1479,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1513,7 +1513,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1551,7 +1551,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1562,7 +1562,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1598,7 +1598,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1674,7 +1674,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1710,7 +1710,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1759,7 +1759,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1801,7 +1801,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1823,7 +1823,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1851,7 +1851,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1862,7 +1862,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1887,7 +1887,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1938,7 +1938,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1949,7 +1949,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1974,7 +1974,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1997,7 +1997,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2025,7 +2025,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2036,7 +2036,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2061,7 +2061,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2097,7 +2097,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2134,7 +2134,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
       };
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2198,7 +2198,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
       };
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2247,7 +2247,7 @@ describe('v1.ClientGatewaysServiceClient', () => {
       };
       const client =
         new clientgatewaysserviceModule.v1.ClientGatewaysServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

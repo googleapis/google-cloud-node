@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as batchserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.batchServiceStub, undefined);
@@ -284,12 +284,12 @@ describe('v1.BatchServiceClient', () => {
       assert(client.batchServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.batchServiceStub);
@@ -298,14 +298,14 @@ describe('v1.BatchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.batchServiceStub, undefined);
@@ -314,7 +314,7 @@ describe('v1.BatchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1.BatchServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1.BatchServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1.BatchServiceClient', () => {
   describe('createJob', () => {
     it('invokes createJob without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes createJob without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes createJob with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes createJob with closed client', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -476,7 +476,7 @@ describe('v1.BatchServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createJob(request), expectedError);
@@ -486,7 +486,7 @@ describe('v1.BatchServiceClient', () => {
   describe('getJob', () => {
     it('invokes getJob without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes getJob without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes getJob with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -592,7 +592,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes getJob with closed client', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.BatchServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getJob(request), expectedError);
@@ -615,7 +615,7 @@ describe('v1.BatchServiceClient', () => {
   describe('getTask', () => {
     it('invokes getTask without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes getTask without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes getTask with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -721,7 +721,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes getTask with closed client', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1.BatchServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTask(request), expectedError);
@@ -744,7 +744,7 @@ describe('v1.BatchServiceClient', () => {
   describe('deleteJob', () => {
     it('invokes deleteJob without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -776,7 +776,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes deleteJob without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes deleteJob with call error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes deleteJob with LRO error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes checkDeleteJobProgress without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -902,8 +902,8 @@ describe('v1.BatchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteJobProgress(
@@ -916,7 +916,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes checkDeleteJobProgress with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.BatchServiceClient', () => {
   describe('cancelJob', () => {
     it('invokes cancelJob without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes cancelJob without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes cancelJob with call error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes cancelJob with LRO error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes checkCancelJobProgress without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1092,8 +1092,8 @@ describe('v1.BatchServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCancelJobProgress(
@@ -1106,7 +1106,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes checkCancelJobProgress with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1124,7 +1124,7 @@ describe('v1.BatchServiceClient', () => {
   describe('listJobs', () => {
     it('invokes listJobs without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1157,7 +1157,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes listJobs without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes listJobs with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1234,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes listJobsStream without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1277,15 +1277,15 @@ describe('v1.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listJobsStream with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,15 +1325,15 @@ describe('v1.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobs without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1367,15 +1367,15 @@ describe('v1.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobs with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1408,9 +1408,9 @@ describe('v1.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1418,7 +1418,7 @@ describe('v1.BatchServiceClient', () => {
   describe('listTasks', () => {
     it('invokes listTasks without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,7 +1451,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes listTasks without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,7 +1500,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes listTasks with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1528,7 +1528,7 @@ describe('v1.BatchServiceClient', () => {
 
     it('invokes listTasksStream without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1571,15 +1571,15 @@ describe('v1.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTasksStream with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1619,15 +1619,15 @@ describe('v1.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTasks without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,15 +1661,15 @@ describe('v1.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTasks with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1702,16 +1702,16 @@ describe('v1.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1741,7 +1741,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1785,7 +1785,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1.BatchServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1868,7 +1868,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1.BatchServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1930,7 +1930,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1958,7 +1958,7 @@ describe('v1.BatchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1968,7 +1968,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1992,7 +1992,7 @@ describe('v1.BatchServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2014,7 +2014,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2042,7 +2042,7 @@ describe('v1.BatchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2052,7 +2052,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2076,7 +2076,7 @@ describe('v1.BatchServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2098,7 +2098,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2126,7 +2126,7 @@ describe('v1.BatchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2136,7 +2136,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2160,7 +2160,7 @@ describe('v1.BatchServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2195,7 +2195,7 @@ describe('v1.BatchServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,7 +2231,7 @@ describe('v1.BatchServiceClient', () => {
         job: 'jobValue',
       };
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2294,7 +2294,7 @@ describe('v1.BatchServiceClient', () => {
         location: 'locationValue',
       };
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2342,7 +2342,7 @@ describe('v1.BatchServiceClient', () => {
         project: 'projectValue',
       };
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2384,7 +2384,7 @@ describe('v1.BatchServiceClient', () => {
         task: 'taskValue',
       };
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2471,7 @@ describe('v1.BatchServiceClient', () => {
         task_group: 'taskGroupValue',
       };
       const client = new batchserviceModule.v1.BatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

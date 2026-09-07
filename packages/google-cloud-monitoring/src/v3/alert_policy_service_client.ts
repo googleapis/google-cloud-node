@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class AlertPolicyServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('monitoring');
@@ -72,9 +72,9 @@ export class AlertPolicyServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  alertPolicyServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  alertPolicyServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AlertPolicyServiceClient.
@@ -150,7 +150,7 @@ export class AlertPolicyServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -313,7 +313,7 @@ export class AlertPolicyServiceClient {
       'google.monitoring.v3.AlertPolicyService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -353,7 +353,7 @@ export class AlertPolicyServiceClient {
           (this._protos as any).google.monitoring.v3.AlertPolicyService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -366,7 +366,7 @@ export class AlertPolicyServiceClient {
     ];
     for (const methodName of alertPolicyServiceStubMethods) {
       const callPromise = this.alertPolicyServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -562,7 +562,7 @@ export class AlertPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAlertPolicy request %j', request);
@@ -708,7 +708,7 @@ export class AlertPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAlertPolicy request %j', request);
@@ -844,7 +844,7 @@ export class AlertPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAlertPolicy request %j', request);
@@ -1004,7 +1004,7 @@ export class AlertPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'alert_policy.name': request.alertPolicy!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAlertPolicy request %j', request);
@@ -1166,7 +1166,7 @@ export class AlertPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1259,7 +1259,7 @@ export class AlertPolicyServiceClient {
       });
     const defaultCallSettings = this._defaults['listAlertPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAlertPolicies stream %j', request);
@@ -1334,7 +1334,7 @@ export class AlertPolicyServiceClient {
       });
     const defaultCallSettings = this._defaults['listAlertPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAlertPolicies iterate %j', request);
@@ -2580,7 +2580,7 @@ export class AlertPolicyServiceClient {
    */
   close(): Promise<void> {
     if (this.alertPolicyServiceStub && !this._terminated) {
-      return this.alertPolicyServiceStub.then((stub) => {
+      return this.alertPolicyServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

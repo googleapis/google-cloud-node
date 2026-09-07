@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as tablesserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tablesServiceStub, undefined);
@@ -250,12 +250,12 @@ describe('v1alpha1.TablesServiceClient', () => {
       assert(client.tablesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.tablesServiceStub);
@@ -264,14 +264,14 @@ describe('v1alpha1.TablesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tablesServiceStub, undefined);
@@ -280,7 +280,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1alpha1.TablesServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1alpha1.TablesServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('getTable', () => {
     it('invokes getTable without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getTable without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getTable with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getTable with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTable(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('getWorkspace', () => {
     it('invokes getWorkspace without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getWorkspace without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getWorkspace with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getWorkspace with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkspace(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('getRow', () => {
     it('invokes getRow without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getRow without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getRow with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -690,7 +690,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes getRow with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -703,7 +703,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRow(request), expectedError);
@@ -713,7 +713,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('createRow', () => {
     it('invokes createRow without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -744,7 +744,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes createRow without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes createRow with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -819,7 +819,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes createRow with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRow(request), expectedError);
@@ -842,7 +842,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('batchCreateRows', () => {
     it('invokes batchCreateRows without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchCreateRows without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchCreateRows with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -951,7 +951,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchCreateRows with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateRows(request), expectedError);
@@ -974,7 +974,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('updateRow', () => {
     it('invokes updateRow without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes updateRow without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes updateRow with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1083,7 +1083,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes updateRow with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1097,7 +1097,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.row.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRow(request), expectedError);
@@ -1107,7 +1107,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('batchUpdateRows', () => {
     it('invokes batchUpdateRows without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchUpdateRows without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchUpdateRows with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1216,7 +1216,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchUpdateRows with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateRows(request), expectedError);
@@ -1239,7 +1239,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('deleteRow', () => {
     it('invokes deleteRow without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes deleteRow without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1317,7 +1317,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes deleteRow with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes deleteRow with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRow(request), expectedError);
@@ -1368,7 +1368,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('batchDeleteRows', () => {
     it('invokes batchDeleteRows without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1399,7 +1399,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchDeleteRows without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1446,7 +1446,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchDeleteRows with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes batchDeleteRows with closed client', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchDeleteRows(request), expectedError);
@@ -1500,7 +1500,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('listTables', () => {
     it('invokes listTables without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1525,7 +1525,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listTables without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listTables with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1583,7 +1583,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listTablesStream without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1630,7 +1630,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listTablesStream with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1668,7 +1668,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('uses async iteration with listTables without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1704,7 +1704,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('uses async iteration with listTables with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1735,7 +1735,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('listWorkspaces', () => {
     it('invokes listWorkspaces without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1760,7 +1760,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listWorkspaces without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1801,7 +1801,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listWorkspaces with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1818,7 +1818,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listWorkspacesStream without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1865,7 +1865,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listWorkspacesStream with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1901,7 +1901,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('uses async iteration with listWorkspaces without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1937,7 +1937,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('uses async iteration with listWorkspaces with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1967,7 +1967,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   describe('listRows', () => {
     it('invokes listRows without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2000,7 +2000,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listRows without error using callback', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2049,7 +2049,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listRows with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2077,7 +2077,7 @@ describe('v1alpha1.TablesServiceClient', () => {
 
     it('invokes listRowsStream without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2123,15 +2123,15 @@ describe('v1alpha1.TablesServiceClient', () => {
       assert(
         (client.descriptors.page.listRows.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRowsStream with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2174,15 +2174,15 @@ describe('v1alpha1.TablesServiceClient', () => {
       assert(
         (client.descriptors.page.listRows.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRows without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2216,15 +2216,15 @@ describe('v1alpha1.TablesServiceClient', () => {
       assert(
         (client.descriptors.page.listRows.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRows with error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2257,9 +2257,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       assert(
         (client.descriptors.page.listRows.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2272,7 +2272,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         row: 'rowValue',
       };
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2320,7 +2320,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         table: 'tableValue',
       };
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2358,7 +2358,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         workspace: 'workspaceValue',
       };
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

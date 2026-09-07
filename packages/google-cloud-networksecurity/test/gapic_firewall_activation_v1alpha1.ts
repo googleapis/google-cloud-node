@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as firewallactivationModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -292,7 +292,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.firewallActivationStub, undefined);
@@ -300,13 +300,13 @@ describe('v1alpha1.FirewallActivationClient', () => {
       assert(client.firewallActivationStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.firewallActivationStub);
@@ -315,15 +315,15 @@ describe('v1alpha1.FirewallActivationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.firewallActivationStub, undefined);
@@ -332,7 +332,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -341,7 +341,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -354,7 +354,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -378,7 +378,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getFirewallEndpoint without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -411,7 +411,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getFirewallEndpoint without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getFirewallEndpoint with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getFirewallEndpoint with closed client', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -504,7 +504,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFirewallEndpoint(request), expectedError);
@@ -515,7 +515,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getFirewallEndpointAssociation without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -548,7 +548,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getFirewallEndpointAssociation without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getFirewallEndpointAssociation with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getFirewallEndpointAssociation with closed client', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -644,7 +644,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -658,7 +658,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes createFirewallEndpoint without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes createFirewallEndpoint without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes createFirewallEndpoint with call error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes createFirewallEndpoint with LRO error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -816,7 +816,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkCreateFirewallEndpointProgress without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -824,8 +824,8 @@ describe('v1alpha1.FirewallActivationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFirewallEndpointProgress(
@@ -839,7 +839,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkCreateFirewallEndpointProgress with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteFirewallEndpoint without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteFirewallEndpoint without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -950,7 +950,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteFirewallEndpoint with call error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -985,7 +985,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteFirewallEndpoint with LRO error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1019,7 +1019,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkDeleteFirewallEndpointProgress without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1027,8 +1027,8 @@ describe('v1alpha1.FirewallActivationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFirewallEndpointProgress(
@@ -1042,7 +1042,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkDeleteFirewallEndpointProgress with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1064,7 +1064,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes updateFirewallEndpoint without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes updateFirewallEndpoint without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1155,7 +1155,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes updateFirewallEndpoint with call error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes updateFirewallEndpoint with LRO error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1226,7 +1226,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkUpdateFirewallEndpointProgress without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1234,8 +1234,8 @@ describe('v1alpha1.FirewallActivationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFirewallEndpointProgress(
@@ -1249,7 +1249,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkUpdateFirewallEndpointProgress with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes createFirewallEndpointAssociation without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1306,7 +1306,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes createFirewallEndpointAssociation without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes createFirewallEndpointAssociation with call error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1394,7 +1394,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes createFirewallEndpointAssociation with LRO error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1426,7 +1426,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkCreateFirewallEndpointAssociationProgress without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1434,8 +1434,8 @@ describe('v1alpha1.FirewallActivationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1450,7 +1450,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkCreateFirewallEndpointAssociationProgress with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1472,7 +1472,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteFirewallEndpointAssociation without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1507,7 +1507,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteFirewallEndpointAssociation without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1562,7 +1562,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteFirewallEndpointAssociation with call error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1595,7 +1595,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteFirewallEndpointAssociation with LRO error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1627,7 +1627,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkDeleteFirewallEndpointAssociationProgress without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1635,8 +1635,8 @@ describe('v1alpha1.FirewallActivationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1651,7 +1651,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkDeleteFirewallEndpointAssociationProgress with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1673,7 +1673,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes updateFirewallEndpointAssociation without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1709,7 +1709,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes updateFirewallEndpointAssociation without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1765,7 +1765,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes updateFirewallEndpointAssociation with call error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1799,7 +1799,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes updateFirewallEndpointAssociation with LRO error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1832,7 +1832,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkUpdateFirewallEndpointAssociationProgress without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1840,8 +1840,8 @@ describe('v1alpha1.FirewallActivationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1856,7 +1856,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes checkUpdateFirewallEndpointAssociationProgress with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1878,7 +1878,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpoints without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1919,7 +1919,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpoints without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1977,7 +1977,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpoints with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2012,7 +2012,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpointsStream without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpointsStream with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2141,7 +2141,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('uses async iteration with listFirewallEndpoints without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2196,7 +2196,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('uses async iteration with listFirewallEndpoints with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2244,7 +2244,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpointAssociations without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2285,7 +2285,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpointAssociations without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2343,7 +2343,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpointAssociations with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2378,7 +2378,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpointAssociationsStream without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2451,7 +2451,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes listFirewallEndpointAssociationsStream with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2513,7 +2513,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('uses async iteration with listFirewallEndpointAssociations without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2568,7 +2568,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('uses async iteration with listFirewallEndpointAssociations with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2615,7 +2615,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2646,7 +2646,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2684,7 +2684,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2695,7 +2695,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2728,7 +2728,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2759,7 +2759,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2797,7 +2797,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2808,7 +2808,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2841,7 +2841,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2875,7 +2875,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2913,7 +2913,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2924,7 +2924,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2960,7 +2960,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2991,7 +2991,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3036,7 +3036,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3072,7 +3072,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3121,7 +3121,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3163,7 +3163,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3185,7 +3185,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3213,7 +3213,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3224,7 +3224,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3249,7 +3249,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3272,7 +3272,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3300,7 +3300,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3311,7 +3311,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3336,7 +3336,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3359,7 +3359,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3387,7 +3387,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3398,7 +3398,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3423,7 +3423,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3459,7 +3459,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3496,7 +3496,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3575,7 +3575,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3640,7 +3640,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3721,7 +3721,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3787,7 +3787,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3865,7 +3865,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3946,7 +3946,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4029,7 +4029,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4126,7 +4126,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4205,7 +4205,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4287,7 +4287,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4370,7 +4370,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4453,7 +4453,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4504,7 +4504,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4583,7 +4583,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4665,7 +4665,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4748,7 +4748,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4830,7 +4830,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4870,7 +4870,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4935,7 +4935,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5023,7 +5023,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5108,7 +5108,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5196,7 +5196,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5274,7 +5274,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5338,7 +5338,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5379,7 +5379,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5461,7 +5461,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5541,7 +5541,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5625,7 +5625,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5690,7 +5690,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5755,7 +5755,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5834,7 +5834,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5900,7 +5900,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5979,7 +5979,7 @@ describe('v1alpha1.FirewallActivationClient', () => {
       };
       const client =
         new firewallactivationModule.v1alpha1.FirewallActivationClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

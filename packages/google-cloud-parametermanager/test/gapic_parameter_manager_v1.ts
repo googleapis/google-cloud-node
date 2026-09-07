@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as parametermanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.parameterManagerStub, undefined);
@@ -250,12 +250,12 @@ describe('v1.ParameterManagerClient', () => {
       assert(client.parameterManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.parameterManagerStub);
@@ -264,14 +264,14 @@ describe('v1.ParameterManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.parameterManagerStub, undefined);
@@ -280,7 +280,7 @@ describe('v1.ParameterManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1.ParameterManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1.ParameterManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('getParameter', () => {
     it('invokes getParameter without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameter without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameter with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameter with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getParameter(request), expectedError);
@@ -455,7 +455,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('createParameter', () => {
     it('invokes createParameter without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameter without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameter with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameter with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createParameter(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('updateParameter', () => {
     it('invokes updateParameter without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameter without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameter with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameter with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parameter.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateParameter(request), expectedError);
@@ -723,7 +723,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('deleteParameter', () => {
     it('invokes deleteParameter without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameter without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameter with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameter with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteParameter(request), expectedError);
@@ -855,7 +855,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('getParameterVersion', () => {
     it('invokes getParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes getParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getParameterVersion(request), expectedError);
@@ -988,7 +988,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('renderParameterVersion', () => {
     it('invokes renderParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes renderParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes renderParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1101,7 +1101,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes renderParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1127,7 +1127,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('createParameterVersion', () => {
     it('invokes createParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes createParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1253,7 +1253,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1266,7 +1266,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('updateParameterVersion', () => {
     it('invokes updateParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1299,7 +1299,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1347,7 +1347,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1382,7 +1382,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes updateParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parameterVersion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1409,7 +1409,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('deleteParameterVersion', () => {
     it('invokes deleteParameterVersion without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameterVersion without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1488,7 +1488,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameterVersion with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1522,7 +1522,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes deleteParameterVersion with closed client', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1548,7 +1548,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('listParameters', () => {
     it('invokes listParameters without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +1587,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameters without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1619,8 +1619,7 @@ describe('v1.ParameterManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.parametermanager.v1.IParameter[]
-              | null,
+              protos.google.cloud.parametermanager.v1.IParameter[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1644,7 +1643,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameters with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +1674,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParametersStream without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1728,15 +1727,15 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listParametersStream with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1778,15 +1777,15 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listParameters without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1828,15 +1827,15 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listParameters with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1869,9 +1868,9 @@ describe('v1.ParameterManagerClient', () => {
       assert(
         (client.descriptors.page.listParameters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1879,7 +1878,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('listParameterVersions', () => {
     it('invokes listParameterVersions without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1918,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameterVersions without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1976,7 +1975,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameterVersions with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2010,7 +2009,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameterVersionsStream without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2079,7 +2078,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('invokes listParameterVersionsStream with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2137,7 +2136,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('uses async iteration with listParameterVersions without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2191,7 +2190,7 @@ describe('v1.ParameterManagerClient', () => {
 
     it('uses async iteration with listParameterVersions with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2237,7 +2236,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2267,7 +2266,7 @@ describe('v1.ParameterManagerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2310,7 @@ describe('v1.ParameterManagerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2346,7 +2345,7 @@ describe('v1.ParameterManagerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2394,7 +2393,7 @@ describe('v1.ParameterManagerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2443,7 +2442,7 @@ describe('v1.ParameterManagerClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2517,7 +2516,7 @@ describe('v1.ParameterManagerClient', () => {
         location: 'locationValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2567,7 +2566,7 @@ describe('v1.ParameterManagerClient', () => {
         parameter: 'parameterValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2632,7 +2631,7 @@ describe('v1.ParameterManagerClient', () => {
         parameter_version: 'parameterVersionValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2709,7 +2708,7 @@ describe('v1.ParameterManagerClient', () => {
         project: 'projectValue',
       };
       const client = new parametermanagerModule.v1.ParameterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

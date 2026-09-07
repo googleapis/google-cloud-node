@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,7 +58,7 @@ export class InterceptClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-security');
@@ -71,12 +71,12 @@ export class InterceptClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  interceptStub?: Promise<{ [name: string]: Function }>;
+  interceptStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of InterceptClient.
@@ -152,7 +152,7 @@ export class InterceptClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -370,15 +370,13 @@ export class InterceptClient {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/v1/{name=projects/*/locations/*}',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*}' },
+            {get: '/v1/{name=organizations/*/locations/*}'},
           ],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/v1/{name=projects/*}/locations',
-          additional_bindings: [
-            { get: '/v1/{name=organizations/*}/locations' },
-          ],
+          additional_bindings: [{get: '/v1/{name=organizations/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
@@ -463,21 +461,21 @@ export class InterceptClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+            {get: '/v1/{name=organizations/*/locations/*}/operations'},
           ],
         },
       ];
@@ -681,7 +679,7 @@ export class InterceptClient {
       'google.cloud.networksecurity.v1.Intercept',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -721,7 +719,7 @@ export class InterceptClient {
           (this._protos as any).google.cloud.networksecurity.v1.Intercept,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -749,7 +747,7 @@ export class InterceptClient {
     ];
     for (const methodName of interceptStubMethods) {
       const callPromise = this.interceptStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -959,7 +957,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInterceptEndpointGroup request %j', request);
@@ -1105,7 +1103,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInterceptEndpointGroupAssociation request %j', request);
@@ -1257,7 +1255,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInterceptDeploymentGroup request %j', request);
@@ -1403,7 +1401,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInterceptDeployment request %j', request);
@@ -1564,7 +1562,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1627,7 +1625,7 @@ export class InterceptClient {
     this._log.info('createInterceptEndpointGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1750,7 +1748,7 @@ export class InterceptClient {
         'intercept_endpoint_group.name':
           request.interceptEndpointGroup!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1813,7 +1811,7 @@ export class InterceptClient {
     this._log.info('updateInterceptEndpointGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1930,7 +1928,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1993,7 +1991,7 @@ export class InterceptClient {
     this._log.info('deleteInterceptEndpointGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2117,7 +2115,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2187,7 +2185,7 @@ export class InterceptClient {
     this._log.info('createInterceptEndpointGroupAssociation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2311,7 +2309,7 @@ export class InterceptClient {
         'intercept_endpoint_group_association.name':
           request.interceptEndpointGroupAssociation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2381,7 +2379,7 @@ export class InterceptClient {
     this._log.info('updateInterceptEndpointGroupAssociation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2498,7 +2496,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2568,7 +2566,7 @@ export class InterceptClient {
     this._log.info('deleteInterceptEndpointGroupAssociation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2691,7 +2689,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2754,7 +2752,7 @@ export class InterceptClient {
     this._log.info('createInterceptDeploymentGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2878,7 +2876,7 @@ export class InterceptClient {
         'intercept_deployment_group.name':
           request.interceptDeploymentGroup!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2941,7 +2939,7 @@ export class InterceptClient {
     this._log.info('updateInterceptDeploymentGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3058,7 +3056,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3121,7 +3119,7 @@ export class InterceptClient {
     this._log.info('deleteInterceptDeploymentGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3244,7 +3242,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3301,7 +3299,7 @@ export class InterceptClient {
     this._log.info('createInterceptDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3423,7 +3421,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         'intercept_deployment.name': request.interceptDeployment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3480,7 +3478,7 @@ export class InterceptClient {
     this._log.info('updateInterceptDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3597,7 +3595,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3654,7 +3652,7 @@ export class InterceptClient {
     this._log.info('deleteInterceptDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3777,7 +3775,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3859,7 +3857,7 @@ export class InterceptClient {
       });
     const defaultCallSettings = this._defaults['listInterceptEndpointGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterceptEndpointGroups stream %j', request);
@@ -3923,7 +3921,7 @@ export class InterceptClient {
       });
     const defaultCallSettings = this._defaults['listInterceptEndpointGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterceptEndpointGroups iterate %j', request);
@@ -4042,7 +4040,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4133,7 +4131,7 @@ export class InterceptClient {
     const defaultCallSettings =
       this._defaults['listInterceptEndpointGroupAssociations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterceptEndpointGroupAssociations stream %j', request);
@@ -4197,7 +4195,7 @@ export class InterceptClient {
     const defaultCallSettings =
       this._defaults['listInterceptEndpointGroupAssociations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info(
@@ -4319,7 +4317,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4400,7 +4398,7 @@ export class InterceptClient {
       });
     const defaultCallSettings = this._defaults['listInterceptDeploymentGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterceptDeploymentGroups stream %j', request);
@@ -4463,7 +4461,7 @@ export class InterceptClient {
       });
     const defaultCallSettings = this._defaults['listInterceptDeploymentGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterceptDeploymentGroups iterate %j', request);
@@ -4582,7 +4580,7 @@ export class InterceptClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4663,7 +4661,7 @@ export class InterceptClient {
       });
     const defaultCallSettings = this._defaults['listInterceptDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterceptDeployments stream %j', request);
@@ -4726,7 +4724,7 @@ export class InterceptClient {
       });
     const defaultCallSettings = this._defaults['listInterceptDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterceptDeployments iterate %j', request);
@@ -7151,14 +7149,14 @@ export class InterceptClient {
    */
   close(): Promise<void> {
     if (this.interceptStub && !this._terminated) {
-      return this.interceptStub.then((stub) => {
+      return this.interceptStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as conversationmodelsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -278,7 +278,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.conversationModelsStub, undefined);
@@ -286,12 +286,12 @@ describe('v2.ConversationModelsClient', () => {
       assert(client.conversationModelsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.conversationModelsStub);
@@ -300,14 +300,14 @@ describe('v2.ConversationModelsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.conversationModelsStub, undefined);
@@ -316,7 +316,7 @@ describe('v2.ConversationModelsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -324,7 +324,7 @@ describe('v2.ConversationModelsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -336,7 +336,7 @@ describe('v2.ConversationModelsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -359,7 +359,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('getConversationModel', () => {
     it('invokes getConversationModel without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes getConversationModel without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes getConversationModel with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes getConversationModel with closed client', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v2.ConversationModelsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConversationModel(request), expectedError);
@@ -492,7 +492,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('getConversationModelEvaluation', () => {
     it('invokes getConversationModelEvaluation without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes getConversationModelEvaluation without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes getConversationModelEvaluation with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes getConversationModelEvaluation with closed client', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v2.ConversationModelsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -631,7 +631,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('createConversationModel', () => {
     it('invokes createConversationModel without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes createConversationModel without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -718,7 +718,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes createConversationModel with call error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes createConversationModel with LRO error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -785,7 +785,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkCreateConversationModelProgress without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -793,8 +793,8 @@ describe('v2.ConversationModelsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -808,7 +808,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkCreateConversationModelProgress with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('deleteConversationModel', () => {
     it('invokes deleteConversationModel without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes deleteConversationModel without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes deleteConversationModel with call error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -950,7 +950,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes deleteConversationModel with LRO error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -983,7 +983,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkDeleteConversationModelProgress without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -991,8 +991,8 @@ describe('v2.ConversationModelsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1006,7 +1006,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkDeleteConversationModelProgress with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,7 +1027,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('deployConversationModel', () => {
     it('invokes deployConversationModel without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,7 +1060,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes deployConversationModel without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes deployConversationModel with call error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes deployConversationModel with LRO error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkDeployConversationModelProgress without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1189,8 +1189,8 @@ describe('v2.ConversationModelsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1204,7 +1204,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkDeployConversationModelProgress with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('undeployConversationModel', () => {
     it('invokes undeployConversationModel without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1258,7 +1258,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes undeployConversationModel without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes undeployConversationModel with call error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1346,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes undeployConversationModel with LRO error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkUndeployConversationModelProgress without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,8 +1387,8 @@ describe('v2.ConversationModelsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1402,7 +1402,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkUndeployConversationModelProgress with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('createConversationModelEvaluation', () => {
     it('invokes createConversationModelEvaluation without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1457,7 +1457,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes createConversationModelEvaluation without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes createConversationModelEvaluation with call error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes createConversationModelEvaluation with LRO error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1574,7 +1574,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkCreateConversationModelEvaluationProgress without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1582,8 +1582,8 @@ describe('v2.ConversationModelsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1597,7 +1597,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes checkCreateConversationModelEvaluationProgress with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1618,7 +1618,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('listConversationModels', () => {
     it('invokes listConversationModels without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,7 +1658,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes listConversationModels without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1690,8 +1690,7 @@ describe('v2.ConversationModelsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2.IConversationModel[]
-              | null,
+              protos.google.cloud.dialogflow.v2.IConversationModel[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1715,7 +1714,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes listConversationModels with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1748,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes listConversationModelsStream without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1816,7 +1815,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes listConversationModelsStream with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1872,7 +1871,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('uses async iteration with listConversationModels without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1926,7 +1925,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('uses async iteration with listConversationModels with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1973,7 +1972,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('listConversationModelEvaluations', () => {
     it('invokes listConversationModelEvaluations without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2013,7 +2012,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes listConversationModelEvaluations without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2070,7 +2069,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes listConversationModelEvaluations with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2104,7 +2103,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes listConversationModelEvaluationsStream without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2176,7 +2175,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('invokes listConversationModelEvaluationsStream with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2237,7 +2236,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('uses async iteration with listConversationModelEvaluations without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2291,7 +2290,7 @@ describe('v2.ConversationModelsClient', () => {
 
     it('uses async iteration with listConversationModelEvaluations with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2336,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2367,7 +2366,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2411,7 +2410,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2446,7 +2445,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2494,7 +2493,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2535,7 +2534,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2556,7 +2555,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2584,7 +2583,7 @@ describe('v2.ConversationModelsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2594,7 +2593,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2618,7 +2617,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2640,7 +2639,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2668,7 +2667,7 @@ describe('v2.ConversationModelsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2678,7 +2677,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2702,7 +2701,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2724,7 +2723,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2752,7 +2751,7 @@ describe('v2.ConversationModelsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2762,7 +2761,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2786,7 +2785,7 @@ describe('v2.ConversationModelsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2821,7 +2820,7 @@ describe('v2.ConversationModelsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2857,7 +2856,7 @@ describe('v2.ConversationModelsClient', () => {
         conversation_dataset: 'conversationDatasetValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2934,7 +2933,7 @@ describe('v2.ConversationModelsClient', () => {
         location: 'locationValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2987,7 +2986,7 @@ describe('v2.ConversationModelsClient', () => {
         generator: 'generatorValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3052,7 +3051,7 @@ describe('v2.ConversationModelsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3143,7 +3142,7 @@ describe('v2.ConversationModelsClient', () => {
         project: 'projectValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3181,7 +3180,7 @@ describe('v2.ConversationModelsClient', () => {
         project: 'projectValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3220,7 +3219,7 @@ describe('v2.ConversationModelsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3283,7 +3282,7 @@ describe('v2.ConversationModelsClient', () => {
         environment: 'environmentValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3350,7 +3349,7 @@ describe('v2.ConversationModelsClient', () => {
         context: 'contextValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3476,7 +3475,7 @@ describe('v2.ConversationModelsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3597,7 +3596,7 @@ describe('v2.ConversationModelsClient', () => {
         project: 'projectValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3643,7 +3642,7 @@ describe('v2.ConversationModelsClient', () => {
         intent: 'intentValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3705,7 +3704,7 @@ describe('v2.ConversationModelsClient', () => {
         context: 'contextValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3784,7 +3783,7 @@ describe('v2.ConversationModelsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3860,7 +3859,7 @@ describe('v2.ConversationModelsClient', () => {
         version: 'versionValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3921,7 +3920,7 @@ describe('v2.ConversationModelsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3984,7 +3983,7 @@ describe('v2.ConversationModelsClient', () => {
         message: 'messageValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4062,7 +4061,7 @@ describe('v2.ConversationModelsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4128,7 +4127,7 @@ describe('v2.ConversationModelsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4211,7 +4210,7 @@ describe('v2.ConversationModelsClient', () => {
         participant: 'participantValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4291,7 +4290,7 @@ describe('v2.ConversationModelsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4356,7 +4355,7 @@ describe('v2.ConversationModelsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4419,7 +4418,7 @@ describe('v2.ConversationModelsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4483,7 +4482,7 @@ describe('v2.ConversationModelsClient', () => {
         document: 'documentValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4561,7 +4560,7 @@ describe('v2.ConversationModelsClient', () => {
         location: 'locationValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4625,7 +4624,7 @@ describe('v2.ConversationModelsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4704,7 +4703,7 @@ describe('v2.ConversationModelsClient', () => {
         environment: 'environmentValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4787,7 +4786,7 @@ describe('v2.ConversationModelsClient', () => {
         context: 'contextValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4933,7 +4932,7 @@ describe('v2.ConversationModelsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5074,7 +5073,7 @@ describe('v2.ConversationModelsClient', () => {
         location: 'locationValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5136,7 +5135,7 @@ describe('v2.ConversationModelsClient', () => {
         intent: 'intentValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5216,7 +5215,7 @@ describe('v2.ConversationModelsClient', () => {
         context: 'contextValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5317,7 +5316,7 @@ describe('v2.ConversationModelsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5422,7 +5421,7 @@ describe('v2.ConversationModelsClient', () => {
         version: 'versionValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5500,7 +5499,7 @@ describe('v2.ConversationModelsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5579,7 +5578,7 @@ describe('v2.ConversationModelsClient', () => {
         message: 'messageValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5679,7 +5678,7 @@ describe('v2.ConversationModelsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5762,7 +5761,7 @@ describe('v2.ConversationModelsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5868,7 +5867,7 @@ describe('v2.ConversationModelsClient', () => {
         participant: 'participantValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5973,7 +5972,7 @@ describe('v2.ConversationModelsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6056,7 +6055,7 @@ describe('v2.ConversationModelsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6135,7 +6134,7 @@ describe('v2.ConversationModelsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6215,7 +6214,7 @@ describe('v2.ConversationModelsClient', () => {
         document: 'documentValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6320,7 +6319,7 @@ describe('v2.ConversationModelsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6384,7 +6383,7 @@ describe('v2.ConversationModelsClient', () => {
         tool: 'toolValue',
       };
       const client = new conversationmodelsModule.v2.ConversationModelsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

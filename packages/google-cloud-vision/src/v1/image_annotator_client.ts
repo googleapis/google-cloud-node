@@ -29,7 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class ImageAnnotatorClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('vision');
@@ -66,10 +66,10 @@ export class ImageAnnotatorClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  imageAnnotatorStub?: Promise<{ [name: string]: Function }>;
+  imageAnnotatorStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ImageAnnotatorClient.
@@ -145,7 +145,7 @@ export class ImageAnnotatorClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -231,9 +231,9 @@ export class ImageAnnotatorClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
-            { get: '/v1/{name=operations/*}' },
-            { get: '/v1/{name=locations/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=operations/*}'},
+            {get: '/v1/{name=locations/*/operations/*}'},
           ],
         },
       ];
@@ -280,7 +280,7 @@ export class ImageAnnotatorClient {
       'google.cloud.vision.v1.ImageAnnotator',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -320,7 +320,7 @@ export class ImageAnnotatorClient {
           (this._protos as any).google.cloud.vision.v1.ImageAnnotator,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -332,7 +332,7 @@ export class ImageAnnotatorClient {
     ];
     for (const methodName of imageAnnotatorStubMethods) {
       const callPromise = this.imageAnnotatorStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -553,7 +553,7 @@ export class ImageAnnotatorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchAnnotateImages request %j', request);
@@ -714,7 +714,7 @@ export class ImageAnnotatorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchAnnotateFiles request %j', request);
@@ -891,7 +891,7 @@ export class ImageAnnotatorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -948,7 +948,7 @@ export class ImageAnnotatorClient {
     this._log.info('asyncBatchAnnotateImages long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1085,7 +1085,7 @@ export class ImageAnnotatorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1142,7 +1142,7 @@ export class ImageAnnotatorClient {
     this._log.info('asyncBatchAnnotateFiles long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1566,7 +1566,7 @@ export class ImageAnnotatorClient {
    */
   close(): Promise<void> {
     if (this.imageAnnotatorStub && !this._terminated) {
-      return this.imageAnnotatorStub.then((stub) => {
+      return this.imageAnnotatorStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

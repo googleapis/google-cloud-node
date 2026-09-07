@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as eventarcModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -275,7 +275,7 @@ describe('v1.EventarcClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.eventarcStub, undefined);
@@ -283,12 +283,12 @@ describe('v1.EventarcClient', () => {
       assert(client.eventarcStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.eventarcStub);
@@ -297,14 +297,14 @@ describe('v1.EventarcClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.eventarcStub, undefined);
@@ -313,7 +313,7 @@ describe('v1.EventarcClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -321,7 +321,7 @@ describe('v1.EventarcClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -333,7 +333,7 @@ describe('v1.EventarcClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -356,7 +356,7 @@ describe('v1.EventarcClient', () => {
   describe('getTrigger', () => {
     it('invokes getTrigger without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getTrigger without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getTrigger with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getTrigger with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTrigger(request), expectedError);
@@ -488,7 +488,7 @@ describe('v1.EventarcClient', () => {
   describe('getChannel', () => {
     it('invokes getChannel without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getChannel without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getChannel with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getChannel with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getChannel(request), expectedError);
@@ -620,7 +620,7 @@ describe('v1.EventarcClient', () => {
   describe('getProvider', () => {
     it('invokes getProvider without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getProvider without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getProvider with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getProvider with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProvider(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1.EventarcClient', () => {
   describe('getChannelConnection', () => {
     it('invokes getChannelConnection without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getChannelConnection without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getChannelConnection with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getChannelConnection with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getChannelConnection(request), expectedError);
@@ -885,7 +885,7 @@ describe('v1.EventarcClient', () => {
   describe('getGoogleChannelConfig', () => {
     it('invokes getGoogleChannelConfig without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getGoogleChannelConfig without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getGoogleChannelConfig with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getGoogleChannelConfig with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1024,7 +1024,7 @@ describe('v1.EventarcClient', () => {
   describe('updateGoogleChannelConfig', () => {
     it('invokes updateGoogleChannelConfig without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1057,7 +1057,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateGoogleChannelConfig without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateGoogleChannelConfig with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1140,7 +1140,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateGoogleChannelConfig with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1154,7 +1154,7 @@ describe('v1.EventarcClient', () => {
       );
       request.googleChannelConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1167,7 +1167,7 @@ describe('v1.EventarcClient', () => {
   describe('getMessageBus', () => {
     it('invokes getMessageBus without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getMessageBus without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getMessageBus with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1276,7 +1276,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getMessageBus with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1289,7 +1289,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMessageBus(request), expectedError);
@@ -1299,7 +1299,7 @@ describe('v1.EventarcClient', () => {
   describe('getEnrollment', () => {
     it('invokes getEnrollment without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1330,7 +1330,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getEnrollment without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getEnrollment with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1408,7 +1408,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getEnrollment with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1421,7 +1421,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEnrollment(request), expectedError);
@@ -1431,7 +1431,7 @@ describe('v1.EventarcClient', () => {
   describe('getPipeline', () => {
     it('invokes getPipeline without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1462,7 +1462,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getPipeline without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1509,7 +1509,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getPipeline with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1540,7 +1540,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getPipeline with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1553,7 +1553,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPipeline(request), expectedError);
@@ -1563,7 +1563,7 @@ describe('v1.EventarcClient', () => {
   describe('getGoogleApiSource', () => {
     it('invokes getGoogleApiSource without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1595,7 +1595,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getGoogleApiSource without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getGoogleApiSource with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1673,7 +1673,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes getGoogleApiSource with closed client', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1686,7 +1686,7 @@ describe('v1.EventarcClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGoogleApiSource(request), expectedError);
@@ -1696,7 +1696,7 @@ describe('v1.EventarcClient', () => {
   describe('createTrigger', () => {
     it('invokes createTrigger without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1729,7 +1729,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createTrigger without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1783,7 +1783,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createTrigger with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1814,7 +1814,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createTrigger with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1847,7 +1847,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateTriggerProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,8 +1855,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTriggerProgress(
@@ -1869,7 +1869,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateTriggerProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v1.EventarcClient', () => {
   describe('updateTrigger', () => {
     it('invokes updateTrigger without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1924,7 +1924,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateTrigger without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1979,7 +1979,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateTrigger with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2011,7 +2011,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateTrigger with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2045,7 +2045,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateTriggerProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,8 +2053,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateTriggerProgress(
@@ -2067,7 +2067,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateTriggerProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,7 +2088,7 @@ describe('v1.EventarcClient', () => {
   describe('deleteTrigger', () => {
     it('invokes deleteTrigger without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2121,7 +2121,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteTrigger without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2175,7 +2175,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteTrigger with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2206,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteTrigger with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2239,7 +2239,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteTriggerProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2247,8 +2247,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTriggerProgress(
@@ -2261,7 +2261,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteTriggerProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2282,7 +2282,7 @@ describe('v1.EventarcClient', () => {
   describe('createChannel', () => {
     it('invokes createChannel without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2315,7 +2315,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createChannel without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2369,7 +2369,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createChannel with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2400,7 +2400,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createChannel with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2433,7 +2433,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateChannelProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2441,8 +2441,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateChannelProgress(
@@ -2455,7 +2455,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateChannelProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2476,7 +2476,7 @@ describe('v1.EventarcClient', () => {
   describe('updateChannel', () => {
     it('invokes updateChannel without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2510,7 +2510,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateChannel without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2565,7 +2565,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateChannel with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2597,7 +2597,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateChannel with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2631,7 +2631,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateChannelProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2639,8 +2639,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateChannelProgress(
@@ -2653,7 +2653,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateChannelProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2674,7 +2674,7 @@ describe('v1.EventarcClient', () => {
   describe('deleteChannel', () => {
     it('invokes deleteChannel without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2707,7 +2707,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteChannel without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2761,7 +2761,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteChannel with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2792,7 +2792,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteChannel with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2825,7 +2825,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteChannelProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2833,8 +2833,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteChannelProgress(
@@ -2847,7 +2847,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteChannelProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2868,7 +2868,7 @@ describe('v1.EventarcClient', () => {
   describe('createChannelConnection', () => {
     it('invokes createChannelConnection without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2901,7 +2901,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createChannelConnection without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2955,7 +2955,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createChannelConnection with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2989,7 +2989,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createChannelConnection with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3022,7 +3022,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateChannelConnectionProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3030,8 +3030,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3045,7 +3045,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateChannelConnectionProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3066,7 +3066,7 @@ describe('v1.EventarcClient', () => {
   describe('deleteChannelConnection', () => {
     it('invokes deleteChannelConnection without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3099,7 +3099,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteChannelConnection without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3153,7 +3153,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteChannelConnection with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3187,7 +3187,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteChannelConnection with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3220,7 +3220,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteChannelConnectionProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3228,8 +3228,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3243,7 +3243,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteChannelConnectionProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3264,7 +3264,7 @@ describe('v1.EventarcClient', () => {
   describe('createMessageBus', () => {
     it('invokes createMessageBus without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3297,7 +3297,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createMessageBus without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3351,7 +3351,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createMessageBus with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3382,7 +3382,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createMessageBus with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3415,7 +3415,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateMessageBusProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3423,8 +3423,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMessageBusProgress(
@@ -3437,7 +3437,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateMessageBusProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3458,7 +3458,7 @@ describe('v1.EventarcClient', () => {
   describe('updateMessageBus', () => {
     it('invokes updateMessageBus without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3492,7 +3492,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateMessageBus without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3547,7 +3547,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateMessageBus with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3579,7 +3579,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateMessageBus with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3613,7 +3613,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateMessageBusProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3621,8 +3621,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMessageBusProgress(
@@ -3635,7 +3635,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateMessageBusProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3656,7 +3656,7 @@ describe('v1.EventarcClient', () => {
   describe('deleteMessageBus', () => {
     it('invokes deleteMessageBus without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3689,7 +3689,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteMessageBus without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3743,7 +3743,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteMessageBus with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3774,7 +3774,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteMessageBus with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3807,7 +3807,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteMessageBusProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3815,8 +3815,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteMessageBusProgress(
@@ -3829,7 +3829,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteMessageBusProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3850,7 +3850,7 @@ describe('v1.EventarcClient', () => {
   describe('createEnrollment', () => {
     it('invokes createEnrollment without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3883,7 +3883,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createEnrollment without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3937,7 +3937,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createEnrollment with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3968,7 +3968,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createEnrollment with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4001,7 +4001,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateEnrollmentProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4009,8 +4009,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEnrollmentProgress(
@@ -4023,7 +4023,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateEnrollmentProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4044,7 +4044,7 @@ describe('v1.EventarcClient', () => {
   describe('updateEnrollment', () => {
     it('invokes updateEnrollment without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4078,7 +4078,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateEnrollment without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4133,7 +4133,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateEnrollment with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4165,7 +4165,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateEnrollment with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4199,7 +4199,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateEnrollmentProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4207,8 +4207,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEnrollmentProgress(
@@ -4221,7 +4221,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateEnrollmentProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4242,7 +4242,7 @@ describe('v1.EventarcClient', () => {
   describe('deleteEnrollment', () => {
     it('invokes deleteEnrollment without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4275,7 +4275,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteEnrollment without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4329,7 +4329,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteEnrollment with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4360,7 +4360,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteEnrollment with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4393,7 +4393,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteEnrollmentProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4401,8 +4401,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEnrollmentProgress(
@@ -4415,7 +4415,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteEnrollmentProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4436,7 +4436,7 @@ describe('v1.EventarcClient', () => {
   describe('createPipeline', () => {
     it('invokes createPipeline without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4469,7 +4469,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createPipeline without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4523,7 +4523,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createPipeline with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4554,7 +4554,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createPipeline with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4587,7 +4587,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreatePipelineProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4595,8 +4595,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePipelineProgress(
@@ -4609,7 +4609,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreatePipelineProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4630,7 +4630,7 @@ describe('v1.EventarcClient', () => {
   describe('updatePipeline', () => {
     it('invokes updatePipeline without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4664,7 +4664,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updatePipeline without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4719,7 +4719,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updatePipeline with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4751,7 +4751,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updatePipeline with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4785,7 +4785,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdatePipelineProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4793,8 +4793,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdatePipelineProgress(
@@ -4807,7 +4807,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdatePipelineProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4828,7 +4828,7 @@ describe('v1.EventarcClient', () => {
   describe('deletePipeline', () => {
     it('invokes deletePipeline without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4861,7 +4861,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deletePipeline without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4915,7 +4915,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deletePipeline with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4946,7 +4946,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deletePipeline with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4979,7 +4979,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeletePipelineProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4987,8 +4987,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePipelineProgress(
@@ -5001,7 +5001,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeletePipelineProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5022,7 +5022,7 @@ describe('v1.EventarcClient', () => {
   describe('createGoogleApiSource', () => {
     it('invokes createGoogleApiSource without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5055,7 +5055,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createGoogleApiSource without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5109,7 +5109,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createGoogleApiSource with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5143,7 +5143,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes createGoogleApiSource with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5176,7 +5176,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateGoogleApiSourceProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5184,8 +5184,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateGoogleApiSourceProgress(
@@ -5198,7 +5198,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkCreateGoogleApiSourceProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5219,7 +5219,7 @@ describe('v1.EventarcClient', () => {
   describe('updateGoogleApiSource', () => {
     it('invokes updateGoogleApiSource without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5253,7 +5253,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateGoogleApiSource without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5308,7 +5308,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateGoogleApiSource with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5343,7 +5343,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes updateGoogleApiSource with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5377,7 +5377,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateGoogleApiSourceProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5385,8 +5385,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateGoogleApiSourceProgress(
@@ -5399,7 +5399,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkUpdateGoogleApiSourceProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5420,7 +5420,7 @@ describe('v1.EventarcClient', () => {
   describe('deleteGoogleApiSource', () => {
     it('invokes deleteGoogleApiSource without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5453,7 +5453,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteGoogleApiSource without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5507,7 +5507,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteGoogleApiSource with call error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5541,7 +5541,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes deleteGoogleApiSource with LRO error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5574,7 +5574,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteGoogleApiSourceProgress without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5582,8 +5582,8 @@ describe('v1.EventarcClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteGoogleApiSourceProgress(
@@ -5596,7 +5596,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes checkDeleteGoogleApiSourceProgress with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5617,7 +5617,7 @@ describe('v1.EventarcClient', () => {
   describe('listTriggers', () => {
     it('invokes listTriggers without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5650,7 +5650,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listTriggers without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5699,7 +5699,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listTriggers with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5730,7 +5730,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listTriggersStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5776,15 +5776,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listTriggers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTriggersStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5827,15 +5827,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listTriggers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTriggers without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5870,15 +5870,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listTriggers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTriggers with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5910,9 +5910,9 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listTriggers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5920,7 +5920,7 @@ describe('v1.EventarcClient', () => {
   describe('listChannels', () => {
     it('invokes listChannels without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5953,7 +5953,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listChannels without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6002,7 +6002,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listChannels with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6033,7 +6033,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listChannelsStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6079,15 +6079,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listChannels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listChannelsStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6130,15 +6130,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listChannels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChannels without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6173,15 +6173,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listChannels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChannels with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6213,9 +6213,9 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listChannels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6223,7 +6223,7 @@ describe('v1.EventarcClient', () => {
   describe('listProviders', () => {
     it('invokes listProviders without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6256,7 +6256,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listProviders without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6305,7 +6305,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listProviders with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6336,7 +6336,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listProvidersStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6382,15 +6382,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProvidersStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6431,15 +6431,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProviders without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6474,15 +6474,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProviders with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6514,9 +6514,9 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6524,7 +6524,7 @@ describe('v1.EventarcClient', () => {
   describe('listChannelConnections', () => {
     it('invokes listChannelConnections without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6564,7 +6564,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listChannelConnections without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6596,8 +6596,7 @@ describe('v1.EventarcClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.eventarc.v1.IChannelConnection[]
-              | null,
+              protos.google.cloud.eventarc.v1.IChannelConnection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6621,7 +6620,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listChannelConnections with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6655,7 +6654,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listChannelConnectionsStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6722,7 +6721,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listChannelConnectionsStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6778,7 +6777,7 @@ describe('v1.EventarcClient', () => {
 
     it('uses async iteration with listChannelConnections without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6832,7 +6831,7 @@ describe('v1.EventarcClient', () => {
 
     it('uses async iteration with listChannelConnections with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6879,7 +6878,7 @@ describe('v1.EventarcClient', () => {
   describe('listMessageBuses', () => {
     it('invokes listMessageBuses without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6912,7 +6911,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listMessageBuses without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6961,7 +6960,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listMessageBuses with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6992,7 +6991,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listMessageBusesStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7038,15 +7037,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listMessageBuses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMessageBusesStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7087,15 +7086,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listMessageBuses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMessageBuses without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7130,15 +7129,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listMessageBuses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMessageBuses with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7170,9 +7169,9 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listMessageBuses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7180,7 +7179,7 @@ describe('v1.EventarcClient', () => {
   describe('listMessageBusEnrollments', () => {
     it('invokes listMessageBusEnrollments without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7210,7 +7209,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listMessageBusEnrollments without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7252,7 +7251,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listMessageBusEnrollments with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7286,7 +7285,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listMessageBusEnrollmentsStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7339,7 +7338,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listMessageBusEnrollmentsStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7391,7 +7390,7 @@ describe('v1.EventarcClient', () => {
 
     it('uses async iteration with listMessageBusEnrollments without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7434,7 +7433,7 @@ describe('v1.EventarcClient', () => {
 
     it('uses async iteration with listMessageBusEnrollments with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7480,7 +7479,7 @@ describe('v1.EventarcClient', () => {
   describe('listEnrollments', () => {
     it('invokes listEnrollments without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7513,7 +7512,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listEnrollments without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7562,7 +7561,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listEnrollments with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7593,7 +7592,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listEnrollmentsStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7639,15 +7638,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listEnrollments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEnrollmentsStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7688,15 +7687,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listEnrollments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEnrollments without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7731,15 +7730,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listEnrollments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEnrollments with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7771,9 +7770,9 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listEnrollments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7781,7 +7780,7 @@ describe('v1.EventarcClient', () => {
   describe('listPipelines', () => {
     it('invokes listPipelines without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7814,7 +7813,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listPipelines without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7863,7 +7862,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listPipelines with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7894,7 +7893,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listPipelinesStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7940,15 +7939,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listPipelines.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPipelinesStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7989,15 +7988,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listPipelines.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPipelines without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8032,15 +8031,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listPipelines.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPipelines with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8072,9 +8071,9 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listPipelines.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8082,7 +8081,7 @@ describe('v1.EventarcClient', () => {
   describe('listGoogleApiSources', () => {
     it('invokes listGoogleApiSources without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8122,7 +8121,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listGoogleApiSources without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8177,7 +8176,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listGoogleApiSources with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8208,7 +8207,7 @@ describe('v1.EventarcClient', () => {
 
     it('invokes listGoogleApiSourcesStream without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8260,15 +8259,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listGoogleApiSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGoogleApiSourcesStream with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8309,15 +8308,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listGoogleApiSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGoogleApiSources without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8358,15 +8357,15 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listGoogleApiSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGoogleApiSources with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8399,16 +8398,16 @@ describe('v1.EventarcClient', () => {
       assert(
         (client.descriptors.page.listGoogleApiSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8438,7 +8437,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8476,7 +8475,7 @@ describe('v1.EventarcClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8486,7 +8485,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8518,7 +8517,7 @@ describe('v1.EventarcClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8548,7 +8547,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8586,7 +8585,7 @@ describe('v1.EventarcClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8596,7 +8595,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8628,7 +8627,7 @@ describe('v1.EventarcClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8661,7 +8660,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8699,7 +8698,7 @@ describe('v1.EventarcClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8709,7 +8708,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8744,7 +8743,7 @@ describe('v1.EventarcClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8774,7 +8773,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8818,7 +8817,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8853,7 +8852,7 @@ describe('v1.EventarcClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8901,7 +8900,7 @@ describe('v1.EventarcClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8942,7 +8941,7 @@ describe('v1.EventarcClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8963,7 +8962,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8991,7 +8990,7 @@ describe('v1.EventarcClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9001,7 +9000,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9025,7 +9024,7 @@ describe('v1.EventarcClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9047,7 +9046,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9075,7 +9074,7 @@ describe('v1.EventarcClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9085,7 +9084,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9109,7 +9108,7 @@ describe('v1.EventarcClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9131,7 +9130,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9159,7 +9158,7 @@ describe('v1.EventarcClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9169,7 +9168,7 @@ describe('v1.EventarcClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9193,7 +9192,7 @@ describe('v1.EventarcClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9228,7 +9227,7 @@ describe('v1.EventarcClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9264,7 +9263,7 @@ describe('v1.EventarcClient', () => {
         channel: 'channelValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9328,7 +9327,7 @@ describe('v1.EventarcClient', () => {
         channel_connection: 'channelConnectionValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9405,7 +9404,7 @@ describe('v1.EventarcClient', () => {
         enrollment: 'enrollmentValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9469,7 +9468,7 @@ describe('v1.EventarcClient', () => {
         google_api_source: 'googleApiSourceValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9533,7 +9532,7 @@ describe('v1.EventarcClient', () => {
         location: 'locationValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9595,7 +9594,7 @@ describe('v1.EventarcClient', () => {
         location: 'locationValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9645,7 +9644,7 @@ describe('v1.EventarcClient', () => {
         message_bus: 'messageBusValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9709,7 +9708,7 @@ describe('v1.EventarcClient', () => {
         pipeline: 'pipelineValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9771,7 +9770,7 @@ describe('v1.EventarcClient', () => {
         project: 'projectValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9811,7 +9810,7 @@ describe('v1.EventarcClient', () => {
         provider: 'providerValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9875,7 +9874,7 @@ describe('v1.EventarcClient', () => {
         trigger: 'triggerValue',
       };
       const client = new eventarcModule.v1.EventarcClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

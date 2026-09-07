@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as autokeyModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -275,7 +275,7 @@ describe('v1.AutokeyClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.autokeyStub, undefined);
@@ -283,12 +283,12 @@ describe('v1.AutokeyClient', () => {
       assert(client.autokeyStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.autokeyStub);
@@ -297,14 +297,14 @@ describe('v1.AutokeyClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.autokeyStub, undefined);
@@ -313,7 +313,7 @@ describe('v1.AutokeyClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -321,7 +321,7 @@ describe('v1.AutokeyClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -333,7 +333,7 @@ describe('v1.AutokeyClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -356,7 +356,7 @@ describe('v1.AutokeyClient', () => {
   describe('getKeyHandle', () => {
     it('invokes getKeyHandle without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes getKeyHandle without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes getKeyHandle with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes getKeyHandle with closed client', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1.AutokeyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getKeyHandle(request), expectedError);
@@ -488,7 +488,7 @@ describe('v1.AutokeyClient', () => {
   describe('createKeyHandle', () => {
     it('invokes createKeyHandle without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes createKeyHandle without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes createKeyHandle with call error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes createKeyHandle with LRO error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -639,7 +639,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes checkCreateKeyHandleProgress without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -647,8 +647,8 @@ describe('v1.AutokeyClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateKeyHandleProgress(
@@ -661,7 +661,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes checkCreateKeyHandleProgress with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -682,7 +682,7 @@ describe('v1.AutokeyClient', () => {
   describe('listKeyHandles', () => {
     it('invokes listKeyHandles without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -715,7 +715,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes listKeyHandles without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -764,7 +764,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes listKeyHandles with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1.AutokeyClient', () => {
 
     it('invokes listKeyHandlesStream without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,15 +838,15 @@ describe('v1.AutokeyClient', () => {
       assert(
         (client.descriptors.page.listKeyHandles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listKeyHandlesStream with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -884,15 +884,15 @@ describe('v1.AutokeyClient', () => {
       assert(
         (client.descriptors.page.listKeyHandles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKeyHandles without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -927,15 +927,15 @@ describe('v1.AutokeyClient', () => {
       assert(
         (client.descriptors.page.listKeyHandles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKeyHandles with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,16 +967,16 @@ describe('v1.AutokeyClient', () => {
       assert(
         (client.descriptors.page.listKeyHandles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1044,7 +1044,7 @@ describe('v1.AutokeyClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1054,7 +1054,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1086,7 +1086,7 @@ describe('v1.AutokeyClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1116,7 +1116,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1154,7 +1154,7 @@ describe('v1.AutokeyClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1164,7 +1164,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1.AutokeyClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1267,7 +1267,7 @@ describe('v1.AutokeyClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1277,7 +1277,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v1.AutokeyClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1386,7 +1386,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1421,7 +1421,7 @@ describe('v1.AutokeyClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1469,7 +1469,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1510,7 +1510,7 @@ describe('v1.AutokeyClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1559,7 +1559,7 @@ describe('v1.AutokeyClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1569,7 +1569,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1593,7 +1593,7 @@ describe('v1.AutokeyClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1615,7 +1615,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1643,7 +1643,7 @@ describe('v1.AutokeyClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1653,7 +1653,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1677,7 +1677,7 @@ describe('v1.AutokeyClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1699,7 +1699,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1727,7 +1727,7 @@ describe('v1.AutokeyClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1737,7 +1737,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1761,7 +1761,7 @@ describe('v1.AutokeyClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1796,7 +1796,7 @@ describe('v1.AutokeyClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v1.AutokeyClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1.AutokeyClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1999,7 +1999,7 @@ describe('v1.AutokeyClient', () => {
         location: 'locationValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2049,7 +2049,7 @@ describe('v1.AutokeyClient', () => {
         ekm_connection: 'ekmConnectionValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2111,7 +2111,7 @@ describe('v1.AutokeyClient', () => {
         folder: 'folderValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2158,7 +2158,7 @@ describe('v1.AutokeyClient', () => {
         import_job: 'importJobValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2233,7 +2233,7 @@ describe('v1.AutokeyClient', () => {
         key_handle: 'keyHandleValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2297,7 +2297,7 @@ describe('v1.AutokeyClient', () => {
         key_ring: 'keyRingValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2360,7 +2360,7 @@ describe('v1.AutokeyClient', () => {
         location: 'locationValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2408,7 +2408,7 @@ describe('v1.AutokeyClient', () => {
         project: 'projectValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2457,7 +2457,7 @@ describe('v1.AutokeyClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2543,7 +2543,7 @@ describe('v1.AutokeyClient', () => {
         retired_resource: 'retiredResourceValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1.AutokeyClient', () => {
         single_tenant_hsm_instance: 'singleTenantHsmInstanceValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2690,7 +2690,7 @@ describe('v1.AutokeyClient', () => {
         proposal: 'proposalValue',
       };
       const client = new autokeyModule.v1.AutokeyClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

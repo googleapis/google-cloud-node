@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class RapidMigrationAssessmentClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('rapidmigrationassessment');
@@ -68,11 +68,11 @@ export class RapidMigrationAssessmentClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  rapidMigrationAssessmentStub?: Promise<{ [name: string]: Function }>;
+  rapidMigrationAssessmentStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of RapidMigrationAssessmentClient.
@@ -149,7 +149,7 @@ export class RapidMigrationAssessmentClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -362,7 +362,7 @@ export class RapidMigrationAssessmentClient {
       'google.cloud.rapidmigrationassessment.v1.RapidMigrationAssessment',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -403,7 +403,7 @@ export class RapidMigrationAssessmentClient {
             .RapidMigrationAssessment,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -421,7 +421,7 @@ export class RapidMigrationAssessmentClient {
     ];
     for (const methodName of rapidMigrationAssessmentStubMethods) {
       const callPromise = this.rapidMigrationAssessmentStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -628,7 +628,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAnnotation request %j', request);
@@ -771,7 +771,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCollector request %j', request);
@@ -928,7 +928,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -985,7 +985,7 @@ export class RapidMigrationAssessmentClient {
     this._log.info('createCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1101,7 +1101,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1158,7 +1158,7 @@ export class RapidMigrationAssessmentClient {
     this._log.info('createAnnotation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1290,7 +1290,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         'collector.name': request.collector!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1347,7 +1347,7 @@ export class RapidMigrationAssessmentClient {
     this._log.info('updateCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1474,7 +1474,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1531,7 +1531,7 @@ export class RapidMigrationAssessmentClient {
     this._log.info('deleteCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1657,7 +1657,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1714,7 +1714,7 @@ export class RapidMigrationAssessmentClient {
     this._log.info('resumeCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1840,7 +1840,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1897,7 +1897,7 @@ export class RapidMigrationAssessmentClient {
     this._log.info('registerCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2023,7 +2023,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2080,7 +2080,7 @@ export class RapidMigrationAssessmentClient {
     this._log.info('pauseCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2192,7 +2192,7 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2264,7 +2264,7 @@ export class RapidMigrationAssessmentClient {
       });
     const defaultCallSettings = this._defaults['listCollectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCollectors stream %j', request);
@@ -2318,7 +2318,7 @@ export class RapidMigrationAssessmentClient {
       });
     const defaultCallSettings = this._defaults['listCollectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCollectors iterate %j', request);
@@ -2781,11 +2781,11 @@ export class RapidMigrationAssessmentClient {
    */
   close(): Promise<void> {
     if (this.rapidMigrationAssessmentStub && !this._terminated) {
-      return this.rapidMigrationAssessmentStub.then((stub) => {
+      return this.rapidMigrationAssessmentStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

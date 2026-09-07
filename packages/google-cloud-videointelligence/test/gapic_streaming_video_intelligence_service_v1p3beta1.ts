@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as streamingvideointelligenceserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -108,7 +108,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'videointelligence.example.com');
@@ -117,7 +117,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'videointelligence.example.com');
@@ -144,7 +144,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -162,7 +162,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -195,7 +195,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -207,15 +207,15 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
       assert(client.streamingVideoIntelligenceServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.streamingVideoIntelligenceServiceStub);
@@ -224,16 +224,16 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -246,7 +246,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -256,7 +256,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -271,7 +271,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -297,7 +297,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -345,7 +345,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
       const client =
         new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

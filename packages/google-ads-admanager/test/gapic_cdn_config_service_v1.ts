@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as cdnconfigserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.CdnConfigServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.CdnConfigServiceClient', () => {
       assert(client.cdnConfigServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cdnConfigServiceStub);
@@ -274,12 +274,12 @@ describe('v1.CdnConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.CdnConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -455,7 +455,7 @@ describe('v1.CdnConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCdnConfig(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.CdnConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCdnConfig(request), expectedError);
@@ -723,7 +723,7 @@ describe('v1.CdnConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -862,7 +862,7 @@ describe('v1.CdnConfigServiceClient', () => {
       );
       request.cdnConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCdnConfig(request), expectedError);
@@ -998,7 +998,7 @@ describe('v1.CdnConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1137,7 +1137,7 @@ describe('v1.CdnConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1276,7 +1276,7 @@ describe('v1.CdnConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1289,7 +1289,7 @@ describe('v1.CdnConfigServiceClient', () => {
   describe('listCdnConfigs', () => {
     it('invokes listCdnConfigs without error', async () => {
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1.CdnConfigServiceClient', () => {
 
     it('invokes listCdnConfigs without error using callback', async () => {
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1371,7 +1371,7 @@ describe('v1.CdnConfigServiceClient', () => {
 
     it('invokes listCdnConfigs with error', async () => {
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v1.CdnConfigServiceClient', () => {
 
     it('invokes listCdnConfigsStream without error', async () => {
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,15 +1448,15 @@ describe('v1.CdnConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCdnConfigsStream with error', async () => {
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1497,9 +1497,9 @@ describe('v1.CdnConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1540,15 +1540,15 @@ describe('v1.CdnConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCdnConfigs with error', async () => {
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,9 +1580,9 @@ describe('v1.CdnConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1596,7 +1596,7 @@ describe('v1.CdnConfigServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1660,7 +1660,7 @@ describe('v1.CdnConfigServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1729,7 +1729,7 @@ describe('v1.CdnConfigServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1778,7 +1778,7 @@ describe('v1.CdnConfigServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1827,7 +1827,7 @@ describe('v1.CdnConfigServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v1.CdnConfigServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1928,7 +1928,7 @@ describe('v1.CdnConfigServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1981,7 +1981,7 @@ describe('v1.CdnConfigServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v1.CdnConfigServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2083,7 @@ describe('v1.CdnConfigServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2136,7 +2136,7 @@ describe('v1.CdnConfigServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2188,7 +2188,7 @@ describe('v1.CdnConfigServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2241,7 +2241,7 @@ describe('v1.CdnConfigServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2294,7 +2294,7 @@ describe('v1.CdnConfigServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2351,7 +2351,7 @@ describe('v1.CdnConfigServiceClient', () => {
         company: 'companyValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2400,7 +2400,7 @@ describe('v1.CdnConfigServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2449,7 +2449,7 @@ describe('v1.CdnConfigServiceClient', () => {
         content: 'contentValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2498,7 +2498,7 @@ describe('v1.CdnConfigServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2550,7 +2550,7 @@ describe('v1.CdnConfigServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2602,7 +2602,7 @@ describe('v1.CdnConfigServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2651,7 +2651,7 @@ describe('v1.CdnConfigServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2703,7 +2703,7 @@ describe('v1.CdnConfigServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2760,7 +2760,7 @@ describe('v1.CdnConfigServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2813,7 +2813,7 @@ describe('v1.CdnConfigServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2865,7 +2865,7 @@ describe('v1.CdnConfigServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2928,7 +2928,7 @@ describe('v1.CdnConfigServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2993,7 +2993,7 @@ describe('v1.CdnConfigServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3058,7 +3058,7 @@ describe('v1.CdnConfigServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3120,7 +3120,7 @@ describe('v1.CdnConfigServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3167,7 +3167,7 @@ describe('v1.CdnConfigServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3224,7 +3224,7 @@ describe('v1.CdnConfigServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3277,7 +3277,7 @@ describe('v1.CdnConfigServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3340,7 +3340,7 @@ describe('v1.CdnConfigServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3405,7 +3405,7 @@ describe('v1.CdnConfigServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3457,7 +3457,7 @@ describe('v1.CdnConfigServiceClient', () => {
         label: 'labelValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3506,7 +3506,7 @@ describe('v1.CdnConfigServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3555,7 +3555,7 @@ describe('v1.CdnConfigServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3607,7 +3607,7 @@ describe('v1.CdnConfigServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3659,7 +3659,7 @@ describe('v1.CdnConfigServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3712,7 +3712,7 @@ describe('v1.CdnConfigServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3764,7 +3764,7 @@ describe('v1.CdnConfigServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3816,7 +3816,7 @@ describe('v1.CdnConfigServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3881,7 +3881,7 @@ describe('v1.CdnConfigServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3932,7 +3932,7 @@ describe('v1.CdnConfigServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3971,7 +3971,7 @@ describe('v1.CdnConfigServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4024,7 +4024,7 @@ describe('v1.CdnConfigServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4089,7 +4089,7 @@ describe('v1.CdnConfigServiceClient', () => {
         order: 'orderValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4138,7 +4138,7 @@ describe('v1.CdnConfigServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4187,7 +4187,7 @@ describe('v1.CdnConfigServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4239,7 +4239,7 @@ describe('v1.CdnConfigServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4292,7 +4292,7 @@ describe('v1.CdnConfigServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4355,7 +4355,7 @@ describe('v1.CdnConfigServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4418,7 +4418,7 @@ describe('v1.CdnConfigServiceClient', () => {
         report: 'reportValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4467,7 +4467,7 @@ describe('v1.CdnConfigServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4530,7 +4530,7 @@ describe('v1.CdnConfigServiceClient', () => {
         role: 'roleValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4579,7 +4579,7 @@ describe('v1.CdnConfigServiceClient', () => {
         site: 'siteValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4628,7 +4628,7 @@ describe('v1.CdnConfigServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4677,7 +4677,7 @@ describe('v1.CdnConfigServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4730,7 +4730,7 @@ describe('v1.CdnConfigServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4783,7 +4783,7 @@ describe('v1.CdnConfigServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4840,7 +4840,7 @@ describe('v1.CdnConfigServiceClient', () => {
         team: 'teamValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4889,7 +4889,7 @@ describe('v1.CdnConfigServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4952,7 +4952,7 @@ describe('v1.CdnConfigServiceClient', () => {
         user: 'userValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5001,7 +5001,7 @@ describe('v1.CdnConfigServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5064,7 +5064,7 @@ describe('v1.CdnConfigServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new cdnconfigserviceModule.v1.CdnConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

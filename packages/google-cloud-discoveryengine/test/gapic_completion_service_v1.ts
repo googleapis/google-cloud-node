@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as completionserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -196,7 +196,7 @@ describe('v1.CompletionServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new completionserviceModule.v1.CompletionServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -240,7 +240,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.completionServiceStub, undefined);
@@ -248,12 +248,12 @@ describe('v1.CompletionServiceClient', () => {
       assert(client.completionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.completionServiceStub);
@@ -262,14 +262,14 @@ describe('v1.CompletionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.completionServiceStub, undefined);
@@ -278,7 +278,7 @@ describe('v1.CompletionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1.CompletionServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1.CompletionServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('completeQuery', () => {
     it('invokes completeQuery without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes completeQuery without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes completeQuery with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes completeQuery with closed client', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.CompletionServiceClient', () => {
       );
       request.dataStore = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.completeQuery(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('importSuggestionDenyListEntries', () => {
     it('invokes importSuggestionDenyListEntries without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes importSuggestionDenyListEntries without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -540,7 +540,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes importSuggestionDenyListEntries with call error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes importSuggestionDenyListEntries with LRO error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes checkImportSuggestionDenyListEntriesProgress without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,8 +610,8 @@ describe('v1.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -625,7 +625,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes checkImportSuggestionDenyListEntriesProgress with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('purgeSuggestionDenyListEntries', () => {
     it('invokes purgeSuggestionDenyListEntries without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes purgeSuggestionDenyListEntries without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes purgeSuggestionDenyListEntries with call error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes purgeSuggestionDenyListEntries with LRO error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes checkPurgeSuggestionDenyListEntriesProgress without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -808,8 +808,8 @@ describe('v1.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -823,7 +823,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes checkPurgeSuggestionDenyListEntriesProgress with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('importCompletionSuggestions', () => {
     it('invokes importCompletionSuggestions without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes importCompletionSuggestions without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes importCompletionSuggestions with call error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes importCompletionSuggestions with LRO error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes checkImportCompletionSuggestionsProgress without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,8 +1006,8 @@ describe('v1.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1021,7 +1021,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes checkImportCompletionSuggestionsProgress with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('purgeCompletionSuggestions', () => {
     it('invokes purgeCompletionSuggestions without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes purgeCompletionSuggestions without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes purgeCompletionSuggestions with call error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1163,7 +1163,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes purgeCompletionSuggestions with LRO error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes checkPurgeCompletionSuggestionsProgress without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1204,8 +1204,8 @@ describe('v1.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1219,7 +1219,7 @@ describe('v1.CompletionServiceClient', () => {
 
     it('invokes checkPurgeCompletionSuggestionsProgress with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1269,7 +1269,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1313,7 +1313,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1348,7 +1348,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1437,7 +1437,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1458,7 +1458,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1486,7 +1486,7 @@ describe('v1.CompletionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1496,7 +1496,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1520,7 +1520,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1542,7 +1542,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1570,7 +1570,7 @@ describe('v1.CompletionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1580,7 +1580,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1604,7 +1604,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1626,7 +1626,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1654,7 +1654,7 @@ describe('v1.CompletionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1664,7 +1664,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1688,7 +1688,7 @@ describe('v1.CompletionServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1723,7 +1723,7 @@ describe('v1.CompletionServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1762,7 +1762,7 @@ describe('v1.CompletionServiceClient', () => {
         assist_answer: 'assistAnswerValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1861,7 +1861,7 @@ describe('v1.CompletionServiceClient', () => {
         assistant: 'assistantValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1948,7 +1948,7 @@ describe('v1.CompletionServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2023,7 +2023,7 @@ describe('v1.CompletionServiceClient', () => {
         identity_mapping_store: 'identityMappingStoreValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2102,7 +2102,7 @@ describe('v1.CompletionServiceClient', () => {
         project: 'projectValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2141,7 +2141,7 @@ describe('v1.CompletionServiceClient', () => {
         location: 'locationValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2205,7 +2205,7 @@ describe('v1.CompletionServiceClient', () => {
         cmek_config: 'cmekConfigValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2285,7 +2285,7 @@ describe('v1.CompletionServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2389,7 +2389,7 @@ describe('v1.CompletionServiceClient', () => {
         document: 'documentValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2536,7 +2536,7 @@ describe('v1.CompletionServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2699,7 +2699,7 @@ describe('v1.CompletionServiceClient', () => {
         control: 'controlValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2825,7 +2825,7 @@ describe('v1.CompletionServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2952,7 +2952,7 @@ describe('v1.CompletionServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3078,7 +3078,7 @@ describe('v1.CompletionServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3187,7 +3187,7 @@ describe('v1.CompletionServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3313,7 +3313,7 @@ describe('v1.CompletionServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3441,7 +3441,7 @@ describe('v1.CompletionServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3586,7 +3586,7 @@ describe('v1.CompletionServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3711,7 +3711,7 @@ describe('v1.CompletionServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3820,7 +3820,7 @@ describe('v1.CompletionServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3947,7 +3947,7 @@ describe('v1.CompletionServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4073,7 +4073,7 @@ describe('v1.CompletionServiceClient', () => {
         control: 'controlValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4199,7 +4199,7 @@ describe('v1.CompletionServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4325,7 +4325,7 @@ describe('v1.CompletionServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4452,7 +4452,7 @@ describe('v1.CompletionServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4595,7 +4595,7 @@ describe('v1.CompletionServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4718,7 +4718,7 @@ describe('v1.CompletionServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4799,7 +4799,7 @@ describe('v1.CompletionServiceClient', () => {
         document: 'documentValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4926,7 +4926,7 @@ describe('v1.CompletionServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5068,7 +5068,7 @@ describe('v1.CompletionServiceClient', () => {
         control: 'controlValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5163,7 +5163,7 @@ describe('v1.CompletionServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5270,7 +5270,7 @@ describe('v1.CompletionServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5376,7 +5376,7 @@ describe('v1.CompletionServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5465,7 +5465,7 @@ describe('v1.CompletionServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5558,7 +5558,7 @@ describe('v1.CompletionServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5665,7 +5665,7 @@ describe('v1.CompletionServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5789,7 +5789,7 @@ describe('v1.CompletionServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5886,7 +5886,7 @@ describe('v1.CompletionServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5975,7 +5975,7 @@ describe('v1.CompletionServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6083,7 +6083,7 @@ describe('v1.CompletionServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new completionserviceModule.v1.CompletionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -29,7 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('text-to-speech');
@@ -64,9 +64,9 @@ export class TextToSpeechLongAudioSynthesizeClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   operationsClient: gax.OperationsClient;
-  textToSpeechLongAudioSynthesizeStub?: Promise<{ [name: string]: Function }>;
+  textToSpeechLongAudioSynthesizeStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of TextToSpeechLongAudioSynthesizeClient.
@@ -143,7 +143,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -243,7 +243,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
       'google.cloud.texttospeech.v1beta1.TextToSpeechLongAudioSynthesize',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -284,14 +284,14 @@ export class TextToSpeechLongAudioSynthesizeClient {
             .TextToSpeechLongAudioSynthesize,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const textToSpeechLongAudioSynthesizeStubMethods = ['synthesizeLongAudio'];
     for (const methodName of textToSpeechLongAudioSynthesizeStubMethods) {
       const callPromise = this.textToSpeechLongAudioSynthesizeStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -513,7 +513,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -570,7 +570,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
     this._log.info('synthesizeLongAudio long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -814,7 +814,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
    */
   close(): Promise<void> {
     if (this.textToSpeechLongAudioSynthesizeStub && !this._terminated) {
-      return this.textToSpeechLongAudioSynthesizeStub.then((stub) => {
+      return this.textToSpeechLongAudioSynthesizeStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class ServiceUsageClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('service-usage');
@@ -66,9 +66,9 @@ export class ServiceUsageClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   operationsClient: gax.OperationsClient;
-  serviceUsageStub?: Promise<{ [name: string]: Function }>;
+  serviceUsageStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ServiceUsageClient.
@@ -144,7 +144,7 @@ export class ServiceUsageClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -411,7 +411,7 @@ export class ServiceUsageClient {
       'google.api.serviceusage.v1beta1.ServiceUsage',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -451,7 +451,7 @@ export class ServiceUsageClient {
           (this._protos as any).google.api.serviceusage.v1beta1.ServiceUsage,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -478,7 +478,7 @@ export class ServiceUsageClient {
     ];
     for (const methodName of serviceUsageStubMethods) {
       const callPromise = this.serviceUsageStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -688,7 +688,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -838,7 +838,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getConsumerQuotaMetric request %j', request);
@@ -986,7 +986,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getConsumerQuotaLimit request %j', request);
@@ -1149,7 +1149,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -1217,7 +1217,7 @@ export class ServiceUsageClient {
     this._log.info('enableService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1344,7 +1344,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -1412,7 +1412,7 @@ export class ServiceUsageClient {
     this._log.info('disableService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1550,7 +1550,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -1618,7 +1618,7 @@ export class ServiceUsageClient {
     this._log.info('batchEnableServices long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1750,7 +1750,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1807,7 +1807,7 @@ export class ServiceUsageClient {
     this._log.info('createAdminOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1937,7 +1937,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1994,7 +1994,7 @@ export class ServiceUsageClient {
     this._log.info('updateAdminOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2118,7 +2118,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2175,7 +2175,7 @@ export class ServiceUsageClient {
     this._log.info('deleteAdminOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2303,7 +2303,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2360,7 +2360,7 @@ export class ServiceUsageClient {
     this._log.info('importAdminOverrides long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2491,7 +2491,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2548,7 +2548,7 @@ export class ServiceUsageClient {
     this._log.info('createConsumerOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2678,7 +2678,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2735,7 +2735,7 @@ export class ServiceUsageClient {
     this._log.info('updateConsumerOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2859,7 +2859,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2916,7 +2916,7 @@ export class ServiceUsageClient {
     this._log.info('deleteConsumerOverride long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3044,7 +3044,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3101,7 +3101,7 @@ export class ServiceUsageClient {
     this._log.info('importConsumerOverrides long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3221,7 +3221,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3278,7 +3278,7 @@ export class ServiceUsageClient {
     this._log.info('generateServiceIdentity long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3402,7 +3402,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -3485,7 +3485,7 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -3550,7 +3550,7 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -3671,7 +3671,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3746,7 +3746,7 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listConsumerQuotaMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConsumerQuotaMetrics stream %j', request);
@@ -3803,7 +3803,7 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listConsumerQuotaMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConsumerQuotaMetrics iterate %j', request);
@@ -3912,7 +3912,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3984,7 +3984,7 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listAdminOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAdminOverrides stream %j', request);
@@ -4038,7 +4038,7 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listAdminOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAdminOverrides iterate %j', request);
@@ -4147,7 +4147,7 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4219,7 +4219,7 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listConsumerOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConsumerOverrides stream %j', request);
@@ -4273,7 +4273,7 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listConsumerOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConsumerOverrides iterate %j', request);
@@ -4514,7 +4514,7 @@ export class ServiceUsageClient {
    */
   close(): Promise<void> {
     if (this.serviceUsageStub && !this._terminated) {
-      return this.serviceUsageStub.then((stub) => {
+      return this.serviceUsageStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
