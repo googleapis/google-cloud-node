@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class MigrationCenterClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('migrationcenter');
@@ -68,11 +68,11 @@ export class MigrationCenterClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  migrationCenterStub?: Promise<{ [name: string]: Function }>;
+  migrationCenterStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of MigrationCenterClient.
@@ -148,7 +148,7 @@ export class MigrationCenterClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -608,7 +608,7 @@ export class MigrationCenterClient {
       'google.cloud.migrationcenter.v1.MigrationCenter',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -648,7 +648,7 @@ export class MigrationCenterClient {
           (this._protos as any).google.cloud.migrationcenter.v1.MigrationCenter,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -704,7 +704,7 @@ export class MigrationCenterClient {
     ];
     for (const methodName of migrationCenterStubMethods) {
       const callPromise = this.migrationCenterStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -907,7 +907,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAsset request %j', request);
@@ -1062,7 +1062,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'asset.name': request.asset!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAsset request %j', request);
@@ -1208,7 +1208,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchUpdateAssets request %j', request);
@@ -1359,7 +1359,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAsset request %j', request);
@@ -1510,7 +1510,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchDeleteAssets request %j', request);
@@ -1657,7 +1657,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reportAssetFrames request %j', request);
@@ -1805,7 +1805,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('aggregateAssetsValues request %j', request);
@@ -1945,7 +1945,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getImportJob request %j', request);
@@ -2088,7 +2088,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getImportDataFile request %j', request);
@@ -2225,7 +2225,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGroup request %j', request);
@@ -2364,7 +2364,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getErrorFrame request %j', request);
@@ -2501,7 +2501,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSource request %j', request);
@@ -2641,7 +2641,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPreferenceSet request %j', request);
@@ -2778,7 +2778,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSettings request %j', request);
@@ -2921,7 +2921,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReportConfig request %j', request);
@@ -3060,7 +3060,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReport request %j', request);
@@ -3225,7 +3225,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3282,7 +3282,7 @@ export class MigrationCenterClient {
     this._log.info('createImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3412,7 +3412,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3469,7 +3469,7 @@ export class MigrationCenterClient {
     this._log.info('deleteImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3602,7 +3602,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'import_job.name': request.importJob!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3659,7 +3659,7 @@ export class MigrationCenterClient {
     this._log.info('updateImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3785,7 +3785,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3842,7 +3842,7 @@ export class MigrationCenterClient {
     this._log.info('validateImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3968,7 +3968,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4025,7 +4025,7 @@ export class MigrationCenterClient {
     this._log.info('runImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4155,7 +4155,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4212,7 +4212,7 @@ export class MigrationCenterClient {
     this._log.info('createImportDataFile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4338,7 +4338,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4395,7 +4395,7 @@ export class MigrationCenterClient {
     this._log.info('deleteImportDataFile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4529,7 +4529,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4586,7 +4586,7 @@ export class MigrationCenterClient {
     this._log.info('createGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4718,7 +4718,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'group.name': request.group!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4775,7 +4775,7 @@ export class MigrationCenterClient {
     this._log.info('updateGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4901,7 +4901,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4958,7 +4958,7 @@ export class MigrationCenterClient {
     this._log.info('deleteGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5095,7 +5095,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         group: request.group ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5152,7 +5152,7 @@ export class MigrationCenterClient {
     this._log.info('addAssetsToGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5288,7 +5288,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         group: request.group ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5345,7 +5345,7 @@ export class MigrationCenterClient {
     this._log.info('removeAssetsFromGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5479,7 +5479,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5536,7 +5536,7 @@ export class MigrationCenterClient {
     this._log.info('createSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5669,7 +5669,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'source.name': request.source!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5726,7 +5726,7 @@ export class MigrationCenterClient {
     this._log.info('updateSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5852,7 +5852,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5909,7 +5909,7 @@ export class MigrationCenterClient {
     this._log.info('deleteSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6044,7 +6044,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6101,7 +6101,7 @@ export class MigrationCenterClient {
     this._log.info('createPreferenceSet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6234,7 +6234,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'preference_set.name': request.preferenceSet!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6291,7 +6291,7 @@ export class MigrationCenterClient {
     this._log.info('updatePreferenceSet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6417,7 +6417,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6474,7 +6474,7 @@ export class MigrationCenterClient {
     this._log.info('deletePreferenceSet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6607,7 +6607,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'settings.name': request.settings!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6664,7 +6664,7 @@ export class MigrationCenterClient {
     this._log.info('updateSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6798,7 +6798,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6855,7 +6855,7 @@ export class MigrationCenterClient {
     this._log.info('createReportConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6985,7 +6985,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7042,7 +7042,7 @@ export class MigrationCenterClient {
     this._log.info('deleteReportConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7176,7 +7176,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7233,7 +7233,7 @@ export class MigrationCenterClient {
     this._log.info('createReport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7359,7 +7359,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7416,7 +7416,7 @@ export class MigrationCenterClient {
     this._log.info('deleteReport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7530,7 +7530,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7604,7 +7604,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssets stream %j', request);
@@ -7660,7 +7660,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssets iterate %j', request);
@@ -7772,7 +7772,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7847,7 +7847,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImportJobs stream %j', request);
@@ -7904,7 +7904,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImportJobs iterate %j', request);
@@ -8019,7 +8019,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8097,7 +8097,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listImportDataFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImportDataFiles stream %j', request);
@@ -8157,7 +8157,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listImportDataFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImportDataFiles iterate %j', request);
@@ -8266,7 +8266,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8338,7 +8338,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGroups stream %j', request);
@@ -8392,7 +8392,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGroups iterate %j', request);
@@ -8500,7 +8500,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8571,7 +8571,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listErrorFrames'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listErrorFrames stream %j', request);
@@ -8624,7 +8624,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listErrorFrames'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listErrorFrames iterate %j', request);
@@ -8733,7 +8733,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8805,7 +8805,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSources stream %j', request);
@@ -8859,7 +8859,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSources iterate %j', request);
@@ -8967,7 +8967,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9038,7 +9038,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listPreferenceSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPreferenceSets stream %j', request);
@@ -9091,7 +9091,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listPreferenceSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPreferenceSets iterate %j', request);
@@ -9200,7 +9200,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9272,7 +9272,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReportConfigs stream %j', request);
@@ -9326,7 +9326,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReportConfigs iterate %j', request);
@@ -9437,7 +9437,7 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9511,7 +9511,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReports stream %j', request);
@@ -9567,7 +9567,7 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReports iterate %j', request);
@@ -10502,11 +10502,11 @@ export class MigrationCenterClient {
    */
   close(): Promise<void> {
     if (this.migrationCenterStub && !this._terminated) {
-      return this.migrationCenterStub.then((stub) => {
+      return this.migrationCenterStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

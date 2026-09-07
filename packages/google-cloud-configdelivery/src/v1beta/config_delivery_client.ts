@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,7 +56,7 @@ export class ConfigDeliveryClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('configdelivery');
@@ -69,11 +69,11 @@ export class ConfigDeliveryClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  configDeliveryStub?: Promise<{ [name: string]: Function }>;
+  configDeliveryStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ConfigDeliveryClient.
@@ -149,7 +149,7 @@ export class ConfigDeliveryClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -485,7 +485,7 @@ export class ConfigDeliveryClient {
       'google.cloud.configdelivery.v1beta.ConfigDelivery',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -526,7 +526,7 @@ export class ConfigDeliveryClient {
             .ConfigDelivery,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -559,7 +559,7 @@ export class ConfigDeliveryClient {
     ];
     for (const methodName of configDeliveryStubMethods) {
       const callPromise = this.configDeliveryStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -766,7 +766,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getResourceBundle request %j', request);
@@ -909,7 +909,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getFleetPackage request %j', request);
@@ -1046,7 +1046,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRelease request %j', request);
@@ -1183,7 +1183,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVariant request %j', request);
@@ -1320,7 +1320,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRollout request %j', request);
@@ -1490,7 +1490,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1547,7 +1547,7 @@ export class ConfigDeliveryClient {
     this._log.info('createResourceBundle long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1679,7 +1679,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         'resource_bundle.name': request.resourceBundle!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1736,7 +1736,7 @@ export class ConfigDeliveryClient {
     this._log.info('updateResourceBundle long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1866,7 +1866,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1923,7 +1923,7 @@ export class ConfigDeliveryClient {
     this._log.info('deleteResourceBundle long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2055,7 +2055,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2112,7 +2112,7 @@ export class ConfigDeliveryClient {
     this._log.info('createFleetPackage long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2244,7 +2244,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         'fleet_package.name': request.fleetPackage!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2301,7 +2301,7 @@ export class ConfigDeliveryClient {
     this._log.info('updateFleetPackage long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2434,7 +2434,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2491,7 +2491,7 @@ export class ConfigDeliveryClient {
     this._log.info('deleteFleetPackage long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2623,7 +2623,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2680,7 +2680,7 @@ export class ConfigDeliveryClient {
     this._log.info('createRelease long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2812,7 +2812,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         'release.name': request.release!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2869,7 +2869,7 @@ export class ConfigDeliveryClient {
     this._log.info('updateRelease long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2999,7 +2999,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3056,7 +3056,7 @@ export class ConfigDeliveryClient {
     this._log.info('deleteRelease long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3187,7 +3187,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3244,7 +3244,7 @@ export class ConfigDeliveryClient {
     this._log.info('createVariant long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3376,7 +3376,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         'variant.name': request.variant!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3433,7 +3433,7 @@ export class ConfigDeliveryClient {
     this._log.info('updateVariant long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3559,7 +3559,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3616,7 +3616,7 @@ export class ConfigDeliveryClient {
     this._log.info('deleteVariant long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3730,7 +3730,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3787,7 +3787,7 @@ export class ConfigDeliveryClient {
     this._log.info('suspendRollout long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3901,7 +3901,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3958,7 +3958,7 @@ export class ConfigDeliveryClient {
     this._log.info('resumeRollout long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4072,7 +4072,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4129,7 +4129,7 @@ export class ConfigDeliveryClient {
     this._log.info('abortRollout long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4241,7 +4241,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4313,7 +4313,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listResourceBundles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResourceBundles stream %j', request);
@@ -4367,7 +4367,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listResourceBundles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResourceBundles iterate %j', request);
@@ -4476,7 +4476,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4548,7 +4548,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listFleetPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFleetPackages stream %j', request);
@@ -4602,7 +4602,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listFleetPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFleetPackages iterate %j', request);
@@ -4711,7 +4711,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4783,7 +4783,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listReleases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReleases stream %j', request);
@@ -4837,7 +4837,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listReleases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReleases iterate %j', request);
@@ -4946,7 +4946,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5018,7 +5018,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listVariants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVariants stream %j', request);
@@ -5072,7 +5072,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listVariants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVariants iterate %j', request);
@@ -5181,7 +5181,7 @@ export class ConfigDeliveryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5253,7 +5253,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRollouts stream %j', request);
@@ -5307,7 +5307,7 @@ export class ConfigDeliveryClient {
       });
     const defaultCallSettings = this._defaults['listRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRollouts iterate %j', request);
@@ -6070,11 +6070,11 @@ export class ConfigDeliveryClient {
    */
   close(): Promise<void> {
     if (this.configDeliveryStub && !this._terminated) {
-      return this.configDeliveryStub.then((stub) => {
+      return this.configDeliveryStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

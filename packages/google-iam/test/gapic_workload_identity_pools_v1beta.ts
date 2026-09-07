@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as workloadidentitypoolsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -283,7 +283,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.workloadIdentityPoolsStub, undefined);
@@ -291,13 +291,13 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
       assert(client.workloadIdentityPoolsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.workloadIdentityPoolsStub);
@@ -306,15 +306,15 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.workloadIdentityPoolsStub, undefined);
@@ -323,7 +323,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -332,7 +332,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -345,7 +345,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -369,7 +369,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes getWorkloadIdentityPool without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes getWorkloadIdentityPool without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes getWorkloadIdentityPool with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes getWorkloadIdentityPool with closed client', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -498,7 +498,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -512,7 +512,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes getWorkloadIdentityPoolProvider without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes getWorkloadIdentityPoolProvider without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes getWorkloadIdentityPoolProvider with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -628,7 +628,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes getWorkloadIdentityPoolProvider with closed client', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -641,7 +641,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -655,7 +655,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes createWorkloadIdentityPool without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -689,7 +689,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes createWorkloadIdentityPool without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -744,7 +744,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes createWorkloadIdentityPool with call error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -779,7 +779,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes createWorkloadIdentityPool with LRO error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -813,7 +813,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkCreateWorkloadIdentityPoolProgress without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -821,8 +821,8 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -837,7 +837,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkCreateWorkloadIdentityPoolProgress with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes updateWorkloadIdentityPool without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes updateWorkloadIdentityPool without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -950,7 +950,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes updateWorkloadIdentityPool with call error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes updateWorkloadIdentityPool with LRO error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1021,7 +1021,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkUpdateWorkloadIdentityPoolProgress without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1029,8 +1029,8 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1045,7 +1045,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkUpdateWorkloadIdentityPoolProgress with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes deleteWorkloadIdentityPool without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1101,7 +1101,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes deleteWorkloadIdentityPool without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1156,7 +1156,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes deleteWorkloadIdentityPool with call error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes deleteWorkloadIdentityPool with LRO error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkDeleteWorkloadIdentityPoolProgress without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1233,8 +1233,8 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1249,7 +1249,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkDeleteWorkloadIdentityPoolProgress with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes undeleteWorkloadIdentityPool without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1305,7 +1305,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes undeleteWorkloadIdentityPool without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1360,7 +1360,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes undeleteWorkloadIdentityPool with call error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1395,7 +1395,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes undeleteWorkloadIdentityPool with LRO error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1429,7 +1429,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkUndeleteWorkloadIdentityPoolProgress without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1437,8 +1437,8 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1453,7 +1453,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkUndeleteWorkloadIdentityPoolProgress with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1475,7 +1475,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes createWorkloadIdentityPoolProvider without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1510,7 +1510,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes createWorkloadIdentityPoolProvider without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes createWorkloadIdentityPoolProvider with call error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1598,7 +1598,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes createWorkloadIdentityPoolProvider with LRO error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1630,7 +1630,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkCreateWorkloadIdentityPoolProviderProgress without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1638,8 +1638,8 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1654,7 +1654,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkCreateWorkloadIdentityPoolProviderProgress with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1676,7 +1676,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes updateWorkloadIdentityPoolProvider without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1712,7 +1712,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes updateWorkloadIdentityPoolProvider without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1768,7 +1768,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes updateWorkloadIdentityPoolProvider with call error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1802,7 +1802,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes updateWorkloadIdentityPoolProvider with LRO error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkUpdateWorkloadIdentityPoolProviderProgress without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1843,8 +1843,8 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1859,7 +1859,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkUpdateWorkloadIdentityPoolProviderProgress with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1881,7 +1881,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes deleteWorkloadIdentityPoolProvider without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1916,7 +1916,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes deleteWorkloadIdentityPoolProvider without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes deleteWorkloadIdentityPoolProvider with call error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2004,7 +2004,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes deleteWorkloadIdentityPoolProvider with LRO error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2036,7 +2036,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkDeleteWorkloadIdentityPoolProviderProgress without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2044,8 +2044,8 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2060,7 +2060,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkDeleteWorkloadIdentityPoolProviderProgress with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes undeleteWorkloadIdentityPoolProvider without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2117,7 +2117,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes undeleteWorkloadIdentityPoolProvider without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2172,7 +2172,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes undeleteWorkloadIdentityPoolProvider with call error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2205,7 +2205,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes undeleteWorkloadIdentityPoolProvider with LRO error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2237,7 +2237,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkUndeleteWorkloadIdentityPoolProviderProgress without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2245,8 +2245,8 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2261,7 +2261,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes checkUndeleteWorkloadIdentityPoolProviderProgress with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2283,7 +2283,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPools without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2324,7 +2324,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPools without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2380,7 +2380,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPools with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2415,7 +2415,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPoolsStream without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2482,7 +2482,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPoolsStream with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2538,7 +2538,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('uses async iteration with listWorkloadIdentityPools without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2592,7 +2592,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('uses async iteration with listWorkloadIdentityPools with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2639,7 +2639,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPoolProviders without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2681,7 +2681,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPoolProviders without error using callback', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2713,8 +2713,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[]
-              | null,
+              protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2739,7 +2738,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPoolProviders with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2774,7 +2773,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPoolProvidersStream without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2845,7 +2844,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('invokes listWorkloadIdentityPoolProvidersStream with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2905,7 +2904,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('uses async iteration with listWorkloadIdentityPoolProviders without error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2960,7 +2959,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
     it('uses async iteration with listWorkloadIdentityPoolProviders with error', async () => {
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3012,7 +3011,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
       };
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3053,7 +3052,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
       };
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3136,7 +3135,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
       };
       const client =
         new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

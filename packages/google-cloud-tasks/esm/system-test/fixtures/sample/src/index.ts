@@ -17,7 +17,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { CloudTasksClient } from '@google-cloud/tasks';
+import {CloudTasksClient} from '@google-cloud/tasks';
 
 // check that the client class type name can be used
 function doStuffWithCloudTasksClient(client: CloudTasksClient) {

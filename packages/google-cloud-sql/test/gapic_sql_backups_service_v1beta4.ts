@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sqlbackupsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -248,7 +248,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sqlBackupsServiceStub, undefined);
@@ -256,13 +256,13 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       assert(client.sqlBackupsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sqlBackupsServiceStub);
@@ -271,15 +271,15 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sqlBackupsServiceStub, undefined);
@@ -288,7 +288,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -297,7 +297,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -310,7 +310,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -334,7 +334,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes createBackup without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -366,7 +366,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes createBackup without error using callback', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -414,7 +414,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes createBackup with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -446,7 +446,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes createBackup with closed client', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createBackup(request), expectedError);
@@ -470,7 +470,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes getBackup without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes getBackup without error using callback', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -550,7 +550,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes getBackup with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -579,7 +579,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes getBackup with closed client', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -592,7 +592,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -603,7 +603,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes updateBackup without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -636,7 +636,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes updateBackup without error using callback', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -685,7 +685,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes updateBackup with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -718,7 +718,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes updateBackup with closed client', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -732,7 +732,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       );
       request.backup.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBackup(request), expectedError);
@@ -743,7 +743,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes deleteBackup without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -775,7 +775,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes deleteBackup without error using callback', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -823,7 +823,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes deleteBackup with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -855,7 +855,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes deleteBackup with closed client', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -868,7 +868,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBackup(request), expectedError);
@@ -879,7 +879,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes listBackups without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes listBackups without error using callback', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -963,7 +963,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes listBackups with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -995,7 +995,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes listBackupsStream without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1041,16 +1041,16 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1093,16 +1093,16 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1137,16 +1137,16 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1180,9 +1180,9 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1190,7 +1190,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1266,7 +1266,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1302,7 +1302,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1351,7 +1351,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1399,7 +1399,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       };
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       };
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       };
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1591,7 +1591,7 @@ describe('v1beta4.SqlBackupsServiceClient', () => {
       };
       const client =
         new sqlbackupsserviceModule.v1beta4.SqlBackupsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

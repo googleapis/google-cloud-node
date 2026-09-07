@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class DatabaseAdminClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('spanner-api');
@@ -72,10 +72,10 @@ export class DatabaseAdminClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  databaseAdminStub?: Promise<{ [name: string]: Function }>;
+  databaseAdminStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DatabaseAdminClient.
@@ -151,7 +151,7 @@ export class DatabaseAdminClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -282,7 +282,7 @@ export class DatabaseAdminClient {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1/{name=projects/*/instances/*/databases/*/operations/*}:cancel',
           additional_bindings: [
-            { post: '/v1/{name=projects/*/instances/*/operations/*}:cancel' },
+            {post: '/v1/{name=projects/*/instances/*/operations/*}:cancel'},
             {
               post: '/v1/{name=projects/*/instances/*/backups/*/operations/*}:cancel',
             },
@@ -295,30 +295,30 @@ export class DatabaseAdminClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/instances/*/databases/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=projects/*/instances/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/instances/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/instances/*/backups/*/operations/*}',
             },
-            { delete: '/v1/{name=projects/*/instanceConfigs/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/instanceConfigs/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/instances/*/databases/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/instances/*/operations/*}' },
-            { get: '/v1/{name=projects/*/instances/*/backups/*/operations/*}' },
-            { get: '/v1/{name=projects/*/instanceConfigs/*/operations/*}' },
+            {get: '/v1/{name=projects/*/instances/*/operations/*}'},
+            {get: '/v1/{name=projects/*/instances/*/backups/*/operations/*}'},
+            {get: '/v1/{name=projects/*/instanceConfigs/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/instances/*/databases/*/operations}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/instances/*/operations}' },
-            { get: '/v1/{name=projects/*/instances/*/backups/*/operations}' },
-            { get: '/v1/{name=projects/*/instanceConfigs/*/operations}' },
+            {get: '/v1/{name=projects/*/instances/*/operations}'},
+            {get: '/v1/{name=projects/*/instances/*/backups/*/operations}'},
+            {get: '/v1/{name=projects/*/instanceConfigs/*/operations}'},
           ],
         },
       ];
@@ -401,7 +401,7 @@ export class DatabaseAdminClient {
       'google.spanner.admin.database.v1.DatabaseAdmin',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -441,7 +441,7 @@ export class DatabaseAdminClient {
           (this._protos as any).google.spanner.admin.database.v1.DatabaseAdmin,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -476,7 +476,7 @@ export class DatabaseAdminClient {
     ];
     for (const methodName of databaseAdminStubMethods) {
       const callPromise = this.databaseAdminStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -681,7 +681,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDatabase request %j', request);
@@ -822,7 +822,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('dropDatabase request %j', request);
@@ -969,7 +969,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDatabaseDdl request %j', request);
@@ -1116,7 +1116,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -1251,7 +1251,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -1390,7 +1390,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -1525,7 +1525,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBackup request %j', request);
@@ -1669,7 +1669,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'backup.name': request.backup!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateBackup request %j', request);
@@ -1809,7 +1809,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteBackup request %j', request);
@@ -1962,7 +1962,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addSplitPoints request %j', request);
@@ -2111,7 +2111,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createBackupSchedule request %j', request);
@@ -2256,7 +2256,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBackupSchedule request %j', request);
@@ -2407,7 +2407,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_schedule.name': request.backupSchedule!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateBackupSchedule request %j', request);
@@ -2552,7 +2552,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteBackupSchedule request %j', request);
@@ -2700,7 +2700,7 @@ export class DatabaseAdminClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('internalUpdateGraphOperation request %j', request);
@@ -2891,7 +2891,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2948,7 +2948,7 @@ export class DatabaseAdminClient {
     this._log.info('createDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3100,7 +3100,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'database.name': request.database!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3157,7 +3157,7 @@ export class DatabaseAdminClient {
     this._log.info('updateDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3319,7 +3319,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3376,7 +3376,7 @@ export class DatabaseAdminClient {
     this._log.info('updateDatabaseDdl long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3516,7 +3516,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3573,7 +3573,7 @@ export class DatabaseAdminClient {
     this._log.info('createBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3721,7 +3721,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3778,7 +3778,7 @@ export class DatabaseAdminClient {
     this._log.info('copyBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3925,7 +3925,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3982,7 +3982,7 @@ export class DatabaseAdminClient {
     this._log.info('restoreDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4094,7 +4094,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4166,7 +4166,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabases stream %j', request);
@@ -4220,7 +4220,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabases iterate %j', request);
@@ -4373,7 +4373,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4487,7 +4487,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackups stream %j', request);
@@ -4583,7 +4583,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackups iterate %j', request);
@@ -4746,7 +4746,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4865,7 +4865,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabaseOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabaseOperations stream %j', request);
@@ -4966,7 +4966,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabaseOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabaseOperations iterate %j', request);
@@ -5156,7 +5156,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5300,7 +5300,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackupOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupOperations stream %j', request);
@@ -5426,7 +5426,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackupOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupOperations iterate %j', request);
@@ -5536,7 +5536,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5609,7 +5609,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabaseRoles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabaseRoles stream %j', request);
@@ -5664,7 +5664,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabaseRoles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatabaseRoles iterate %j', request);
@@ -5775,7 +5775,7 @@ export class DatabaseAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5849,7 +5849,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackupSchedules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupSchedules stream %j', request);
@@ -5905,7 +5905,7 @@ export class DatabaseAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackupSchedules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBackupSchedules iterate %j', request);
@@ -6501,7 +6501,7 @@ export class DatabaseAdminClient {
    */
   close(): Promise<void> {
     if (this.databaseAdminStub && !this._terminated) {
-      return this.databaseAdminStub.then((stub) => {
+      return this.databaseAdminStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

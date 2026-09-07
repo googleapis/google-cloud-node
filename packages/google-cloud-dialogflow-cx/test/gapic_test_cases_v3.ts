@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as testcasesModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v3.TestCasesClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.testCasesStub, undefined);
@@ -282,12 +282,12 @@ describe('v3.TestCasesClient', () => {
       assert(client.testCasesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.testCasesStub);
@@ -296,14 +296,14 @@ describe('v3.TestCasesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.testCasesStub, undefined);
@@ -312,7 +312,7 @@ describe('v3.TestCasesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v3.TestCasesClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v3.TestCasesClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v3.TestCasesClient', () => {
   describe('batchDeleteTestCases', () => {
     it('invokes batchDeleteTestCases without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes batchDeleteTestCases without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes batchDeleteTestCases with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes batchDeleteTestCases with closed client', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v3.TestCasesClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchDeleteTestCases(request), expectedError);
@@ -488,7 +488,7 @@ describe('v3.TestCasesClient', () => {
   describe('getTestCase', () => {
     it('invokes getTestCase without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes getTestCase without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes getTestCase with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes getTestCase with closed client', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v3.TestCasesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTestCase(request), expectedError);
@@ -620,7 +620,7 @@ describe('v3.TestCasesClient', () => {
   describe('createTestCase', () => {
     it('invokes createTestCase without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes createTestCase without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes createTestCase with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes createTestCase with closed client', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v3.TestCasesClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTestCase(request), expectedError);
@@ -752,7 +752,7 @@ describe('v3.TestCasesClient', () => {
   describe('updateTestCase', () => {
     it('invokes updateTestCase without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes updateTestCase without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes updateTestCase with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes updateTestCase with closed client', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v3.TestCasesClient', () => {
       );
       request.testCase.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTestCase(request), expectedError);
@@ -888,7 +888,7 @@ describe('v3.TestCasesClient', () => {
   describe('calculateCoverage', () => {
     it('invokes calculateCoverage without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes calculateCoverage without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes calculateCoverage with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes calculateCoverage with closed client', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v3.TestCasesClient', () => {
       );
       request.agent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.calculateCoverage(request), expectedError);
@@ -1020,7 +1020,7 @@ describe('v3.TestCasesClient', () => {
   describe('getTestCaseResult', () => {
     it('invokes getTestCaseResult without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes getTestCaseResult without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes getTestCaseResult with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes getTestCaseResult with closed client', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v3.TestCasesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTestCaseResult(request), expectedError);
@@ -1152,7 +1152,7 @@ describe('v3.TestCasesClient', () => {
   describe('runTestCase', () => {
     it('invokes runTestCase without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1184,7 +1184,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes runTestCase without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1238,7 +1238,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes runTestCase with call error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1269,7 +1269,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes runTestCase with LRO error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1302,7 +1302,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes checkRunTestCaseProgress without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,8 +1310,8 @@ describe('v3.TestCasesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunTestCaseProgress(
@@ -1324,7 +1324,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes checkRunTestCaseProgress with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v3.TestCasesClient', () => {
   describe('batchRunTestCases', () => {
     it('invokes batchRunTestCases without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes batchRunTestCases without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1429,7 +1429,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes batchRunTestCases with call error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1460,7 +1460,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes batchRunTestCases with LRO error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,7 +1493,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes checkBatchRunTestCasesProgress without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,8 +1501,8 @@ describe('v3.TestCasesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchRunTestCasesProgress(
@@ -1515,7 +1515,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes checkBatchRunTestCasesProgress with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1536,7 +1536,7 @@ describe('v3.TestCasesClient', () => {
   describe('importTestCases', () => {
     it('invokes importTestCases without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1569,7 +1569,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes importTestCases without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1623,7 +1623,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes importTestCases with call error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1654,7 +1654,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes importTestCases with LRO error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes checkImportTestCasesProgress without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1695,8 +1695,8 @@ describe('v3.TestCasesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportTestCasesProgress(
@@ -1709,7 +1709,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes checkImportTestCasesProgress with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1730,7 +1730,7 @@ describe('v3.TestCasesClient', () => {
   describe('exportTestCases', () => {
     it('invokes exportTestCases without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,7 +1763,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes exportTestCases without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1817,7 +1817,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes exportTestCases with call error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1848,7 +1848,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes exportTestCases with LRO error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,7 +1881,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes checkExportTestCasesProgress without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1889,8 +1889,8 @@ describe('v3.TestCasesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportTestCasesProgress(
@@ -1903,7 +1903,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes checkExportTestCasesProgress with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1924,7 +1924,7 @@ describe('v3.TestCasesClient', () => {
   describe('listTestCases', () => {
     it('invokes listTestCases without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1963,7 +1963,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes listTestCases without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2018,7 +2018,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes listTestCases with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2049,7 +2049,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes listTestCasesStream without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2101,15 +2101,15 @@ describe('v3.TestCasesClient', () => {
       assert(
         (client.descriptors.page.listTestCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTestCasesStream with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2150,15 +2150,15 @@ describe('v3.TestCasesClient', () => {
       assert(
         (client.descriptors.page.listTestCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTestCases without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2199,15 +2199,15 @@ describe('v3.TestCasesClient', () => {
       assert(
         (client.descriptors.page.listTestCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTestCases with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2239,9 +2239,9 @@ describe('v3.TestCasesClient', () => {
       assert(
         (client.descriptors.page.listTestCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2249,7 +2249,7 @@ describe('v3.TestCasesClient', () => {
   describe('listTestCaseResults', () => {
     it('invokes listTestCaseResults without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,7 +2289,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes listTestCaseResults without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2321,8 +2321,7 @@ describe('v3.TestCasesClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.cx.v3.ITestCaseResult[]
-              | null,
+              protos.google.cloud.dialogflow.cx.v3.ITestCaseResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2346,7 +2345,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes listTestCaseResults with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2377,7 +2376,7 @@ describe('v3.TestCasesClient', () => {
 
     it('invokes listTestCaseResultsStream without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2430,15 +2429,15 @@ describe('v3.TestCasesClient', () => {
       assert(
         (client.descriptors.page.listTestCaseResults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTestCaseResultsStream with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2480,15 +2479,15 @@ describe('v3.TestCasesClient', () => {
       assert(
         (client.descriptors.page.listTestCaseResults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTestCaseResults without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2530,15 +2529,15 @@ describe('v3.TestCasesClient', () => {
       assert(
         (client.descriptors.page.listTestCaseResults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTestCaseResults with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2571,16 +2570,16 @@ describe('v3.TestCasesClient', () => {
       assert(
         (client.descriptors.page.listTestCaseResults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2610,7 +2609,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2654,7 +2653,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2689,7 +2688,7 @@ describe('v3.TestCasesClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2737,7 +2736,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2778,7 +2777,7 @@ describe('v3.TestCasesClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2799,7 +2798,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2827,7 +2826,7 @@ describe('v3.TestCasesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2837,7 +2836,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2861,7 +2860,7 @@ describe('v3.TestCasesClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2883,7 +2882,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2911,7 +2910,7 @@ describe('v3.TestCasesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2921,7 +2920,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2945,7 +2944,7 @@ describe('v3.TestCasesClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2967,7 +2966,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2995,7 +2994,7 @@ describe('v3.TestCasesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3005,7 +3004,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3029,7 +3028,7 @@ describe('v3.TestCasesClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3064,7 +3063,7 @@ describe('v3.TestCasesClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3100,7 +3099,7 @@ describe('v3.TestCasesClient', () => {
         agent: 'agentValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3164,7 +3163,7 @@ describe('v3.TestCasesClient', () => {
         agent: 'agentValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3243,7 +3242,7 @@ describe('v3.TestCasesClient', () => {
         agent: 'agentValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3322,7 +3321,7 @@ describe('v3.TestCasesClient', () => {
         changelog: 'changelogValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3399,7 +3398,7 @@ describe('v3.TestCasesClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3511,7 +3510,7 @@ describe('v3.TestCasesClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3598,7 +3597,7 @@ describe('v3.TestCasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3674,7 +3673,7 @@ describe('v3.TestCasesClient', () => {
         environment: 'environmentValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3751,7 +3750,7 @@ describe('v3.TestCasesClient', () => {
         example: 'exampleValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3839,7 +3838,7 @@ describe('v3.TestCasesClient', () => {
         experiment: 'experimentValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3926,7 +3925,7 @@ describe('v3.TestCasesClient', () => {
         flow: 'flowValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4002,7 +4001,7 @@ describe('v3.TestCasesClient', () => {
         flow: 'flowValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4095,7 +4094,7 @@ describe('v3.TestCasesClient', () => {
         generator: 'generatorValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4171,7 +4170,7 @@ describe('v3.TestCasesClient', () => {
         intent: 'intentValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4245,7 +4244,7 @@ describe('v3.TestCasesClient', () => {
         location: 'locationValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4297,7 +4296,7 @@ describe('v3.TestCasesClient', () => {
         page: 'pageValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4384,7 +4383,7 @@ describe('v3.TestCasesClient', () => {
         playbook: 'playbookValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4461,7 +4460,7 @@ describe('v3.TestCasesClient', () => {
         version: 'versionValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4545,7 +4544,7 @@ describe('v3.TestCasesClient', () => {
         project: 'projectValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4589,7 +4588,7 @@ describe('v3.TestCasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4734,7 +4733,7 @@ describe('v3.TestCasesClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4859,7 +4858,7 @@ describe('v3.TestCasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4984,7 +4983,7 @@ describe('v3.TestCasesClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5089,7 +5088,7 @@ describe('v3.TestCasesClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5158,7 +5157,7 @@ describe('v3.TestCasesClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5235,7 +5234,7 @@ describe('v3.TestCasesClient', () => {
         result: 'resultValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5322,7 +5321,7 @@ describe('v3.TestCasesClient', () => {
         tool: 'toolValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5399,7 +5398,7 @@ describe('v3.TestCasesClient', () => {
         version: 'versionValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5487,7 +5486,7 @@ describe('v3.TestCasesClient', () => {
         version: 'versionValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5574,7 +5573,7 @@ describe('v3.TestCasesClient', () => {
         webhook: 'webhookValue',
       };
       const client = new testcasesModule.v3.TestCasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

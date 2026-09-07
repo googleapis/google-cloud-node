@@ -31,7 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class CmekConfigServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('discoveryengine');
@@ -66,11 +66,11 @@ export class CmekConfigServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  cmekConfigServiceStub?: Promise<{ [name: string]: Function }>;
+  cmekConfigServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CmekConfigServiceClient.
@@ -146,7 +146,7 @@ export class CmekConfigServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -446,8 +446,8 @@ export class CmekConfigServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
-            { get: '/v1/{name=projects/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/operations/*}'},
           ],
         },
         {
@@ -478,23 +478,19 @@ export class CmekConfigServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/engines/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/collections/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
             },
             {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*}/operations' },
-            { get: '/v1/{name=projects/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*}/operations'},
           ],
         },
       ];
@@ -533,7 +529,7 @@ export class CmekConfigServiceClient {
       'google.cloud.discoveryengine.v1.CmekConfigService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -574,7 +570,7 @@ export class CmekConfigServiceClient {
             .CmekConfigService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -586,7 +582,7 @@ export class CmekConfigServiceClient {
     ];
     for (const methodName of cmekConfigServiceStubMethods) {
       const callPromise = this.cmekConfigServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -791,7 +787,7 @@ export class CmekConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCmekConfig request %j', request);
@@ -941,7 +937,7 @@ export class CmekConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCmekConfigs request %j', request);
@@ -1097,7 +1093,7 @@ export class CmekConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'config.name': request.config!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1154,7 +1150,7 @@ export class CmekConfigServiceClient {
     this._log.info('updateCmekConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1268,7 +1264,7 @@ export class CmekConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1325,7 +1321,7 @@ export class CmekConfigServiceClient {
     this._log.info('deleteCmekConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5496,11 +5492,11 @@ export class CmekConfigServiceClient {
    */
   close(): Promise<void> {
     if (this.cmekConfigServiceStub && !this._terminated) {
-      return this.cmekConfigServiceStub.then((stub) => {
+      return this.cmekConfigServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

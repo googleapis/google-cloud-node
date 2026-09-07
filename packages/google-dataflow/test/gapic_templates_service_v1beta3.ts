@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as templatesserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -181,7 +181,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.templatesServiceStub, undefined);
@@ -189,12 +189,12 @@ describe('v1beta3.TemplatesServiceClient', () => {
       assert(client.templatesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.templatesServiceStub);
@@ -203,14 +203,14 @@ describe('v1beta3.TemplatesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.templatesServiceStub, undefined);
@@ -219,7 +219,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -227,7 +227,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -239,7 +239,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -262,7 +262,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
   describe('createJobFromTemplate', () => {
     it('invokes createJobFromTemplate without error', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -299,7 +299,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes createJobFromTemplate without error using callback', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes createJobFromTemplate with error', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes createJobFromTemplate with closed client', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -408,7 +408,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
       );
       request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -421,7 +421,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
   describe('launchTemplate', () => {
     it('invokes launchTemplate without error', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -457,7 +457,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes launchTemplate without error using callback', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -509,7 +509,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes launchTemplate with error', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes launchTemplate with closed client', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
       );
       request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.launchTemplate(request), expectedError);
@@ -573,7 +573,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
   describe('getTemplate', () => {
     it('invokes getTemplate without error', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes getTemplate without error using callback', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes getTemplate with error', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
 
     it('invokes getTemplate with closed client', async () => {
       const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -715,7 +715,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
       );
       request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTemplate(request), expectedError);

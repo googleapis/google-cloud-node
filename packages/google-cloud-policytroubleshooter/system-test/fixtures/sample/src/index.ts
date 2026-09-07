@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { IamCheckerClient } from '@google-cloud/policy-troubleshooter';
+import {IamCheckerClient} from '@google-cloud/policy-troubleshooter';
 
 // check that the client class type name can be used
 function doStuffWithIamCheckerClient(client: IamCheckerClient) {

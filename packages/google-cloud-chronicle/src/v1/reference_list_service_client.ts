@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class ReferenceListServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('chronicle');
@@ -64,9 +64,9 @@ export class ReferenceListServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  referenceListServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  referenceListServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ReferenceListServiceClient.
@@ -142,7 +142,7 @@ export class ReferenceListServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -285,7 +285,7 @@ export class ReferenceListServiceClient {
       'google.cloud.chronicle.v1.ReferenceListService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -325,7 +325,7 @@ export class ReferenceListServiceClient {
           (this._protos as any).google.cloud.chronicle.v1.ReferenceListService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -338,7 +338,7 @@ export class ReferenceListServiceClient {
     ];
     for (const methodName of referenceListServiceStubMethods) {
       const callPromise = this.referenceListServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -545,7 +545,7 @@ export class ReferenceListServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReferenceList request %j', request);
@@ -689,7 +689,7 @@ export class ReferenceListServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createReferenceList request %j', request);
@@ -835,7 +835,7 @@ export class ReferenceListServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'reference_list.name': request.referenceList!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateReferenceList request %j', request);
@@ -979,7 +979,7 @@ export class ReferenceListServiceClient {
       this._gaxModule.routingHeader.fromParams({
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('verifyReferenceList request %j', request);
@@ -1135,7 +1135,7 @@ export class ReferenceListServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1213,7 +1213,7 @@ export class ReferenceListServiceClient {
       });
     const defaultCallSettings = this._defaults['listReferenceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReferenceLists stream %j', request);
@@ -1273,7 +1273,7 @@ export class ReferenceListServiceClient {
       });
     const defaultCallSettings = this._defaults['listReferenceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReferenceLists iterate %j', request);
@@ -2759,7 +2759,7 @@ export class ReferenceListServiceClient {
    */
   close(): Promise<void> {
     if (this.referenceListServiceStub && !this._terminated) {
-      return this.referenceListServiceStub.then((stub) => {
+      return this.referenceListServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

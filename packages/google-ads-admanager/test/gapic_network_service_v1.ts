@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as networkserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.NetworkServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.NetworkServiceClient', () => {
       assert(client.networkServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.networkServiceStub);
@@ -274,12 +274,12 @@ describe('v1.NetworkServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.NetworkServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -455,7 +455,7 @@ describe('v1.NetworkServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNetwork(request), expectedError);
@@ -591,7 +591,7 @@ describe('v1.NetworkServiceClient', () => {
       );
       request.network.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateNetwork(request), expectedError);
@@ -677,7 +677,7 @@ describe('v1.NetworkServiceClient', () => {
         new protos.google.ads.admanager.v1.ProvisionTestNetworkRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.provisionTestNetwork(request), expectedError);
@@ -814,7 +814,7 @@ describe('v1.NetworkServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -827,7 +827,7 @@ describe('v1.NetworkServiceClient', () => {
   describe('listNetworks', () => {
     it('invokes listNetworks without error', async () => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v1.NetworkServiceClient', () => {
 
     it('invokes listNetworks without error using callback', async () => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v1.NetworkServiceClient', () => {
 
     it('invokes listNetworks with error', async () => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -898,7 +898,7 @@ describe('v1.NetworkServiceClient', () => {
 
     it('invokes listNetworksStream without error', async () => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -939,7 +939,7 @@ describe('v1.NetworkServiceClient', () => {
 
     it('invokes listNetworksStream with error', async () => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1.NetworkServiceClient', () => {
 
     it('uses async iteration with listNetworks with error', async () => {
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1.NetworkServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v1.NetworkServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1.NetworkServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1224,7 +1224,7 @@ describe('v1.NetworkServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,7 +1273,7 @@ describe('v1.NetworkServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1.NetworkServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v1.NetworkServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1427,7 +1427,7 @@ describe('v1.NetworkServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1480,7 +1480,7 @@ describe('v1.NetworkServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1529,7 +1529,7 @@ describe('v1.NetworkServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1582,7 +1582,7 @@ describe('v1.NetworkServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1.NetworkServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v1.NetworkServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,7 +1740,7 @@ describe('v1.NetworkServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1797,7 +1797,7 @@ describe('v1.NetworkServiceClient', () => {
         company: 'companyValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1846,7 +1846,7 @@ describe('v1.NetworkServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.NetworkServiceClient', () => {
         content: 'contentValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1944,7 +1944,7 @@ describe('v1.NetworkServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,7 +1996,7 @@ describe('v1.NetworkServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2048,7 +2048,7 @@ describe('v1.NetworkServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2097,7 @@ describe('v1.NetworkServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2149,7 +2149,7 @@ describe('v1.NetworkServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2206,7 @@ describe('v1.NetworkServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2259,7 +2259,7 @@ describe('v1.NetworkServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2311,7 @@ describe('v1.NetworkServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2374,7 +2374,7 @@ describe('v1.NetworkServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2439,7 +2439,7 @@ describe('v1.NetworkServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2504,7 +2504,7 @@ describe('v1.NetworkServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v1.NetworkServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2613,7 +2613,7 @@ describe('v1.NetworkServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2670,7 +2670,7 @@ describe('v1.NetworkServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2723,7 +2723,7 @@ describe('v1.NetworkServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2786,7 +2786,7 @@ describe('v1.NetworkServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2851,7 +2851,7 @@ describe('v1.NetworkServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2903,7 +2903,7 @@ describe('v1.NetworkServiceClient', () => {
         label: 'labelValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2952,7 +2952,7 @@ describe('v1.NetworkServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3001,7 +3001,7 @@ describe('v1.NetworkServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,7 +3053,7 @@ describe('v1.NetworkServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3105,7 +3105,7 @@ describe('v1.NetworkServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3158,7 +3158,7 @@ describe('v1.NetworkServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3210,7 +3210,7 @@ describe('v1.NetworkServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3262,7 +3262,7 @@ describe('v1.NetworkServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3327,7 +3327,7 @@ describe('v1.NetworkServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3378,7 +3378,7 @@ describe('v1.NetworkServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3417,7 +3417,7 @@ describe('v1.NetworkServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3470,7 +3470,7 @@ describe('v1.NetworkServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3535,7 +3535,7 @@ describe('v1.NetworkServiceClient', () => {
         order: 'orderValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3584,7 +3584,7 @@ describe('v1.NetworkServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3633,7 +3633,7 @@ describe('v1.NetworkServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3685,7 +3685,7 @@ describe('v1.NetworkServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3738,7 +3738,7 @@ describe('v1.NetworkServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3801,7 +3801,7 @@ describe('v1.NetworkServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3864,7 +3864,7 @@ describe('v1.NetworkServiceClient', () => {
         report: 'reportValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3913,7 +3913,7 @@ describe('v1.NetworkServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3976,7 +3976,7 @@ describe('v1.NetworkServiceClient', () => {
         role: 'roleValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4025,7 +4025,7 @@ describe('v1.NetworkServiceClient', () => {
         site: 'siteValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4074,7 +4074,7 @@ describe('v1.NetworkServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4123,7 +4123,7 @@ describe('v1.NetworkServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4176,7 +4176,7 @@ describe('v1.NetworkServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4229,7 +4229,7 @@ describe('v1.NetworkServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4286,7 +4286,7 @@ describe('v1.NetworkServiceClient', () => {
         team: 'teamValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4335,7 +4335,7 @@ describe('v1.NetworkServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4398,7 +4398,7 @@ describe('v1.NetworkServiceClient', () => {
         user: 'userValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4447,7 +4447,7 @@ describe('v1.NetworkServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4510,7 +4510,7 @@ describe('v1.NetworkServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new networkserviceModule.v1.NetworkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

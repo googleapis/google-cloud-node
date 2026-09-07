@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as attachedclustersModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.attachedClustersStub, undefined);
@@ -282,12 +282,12 @@ describe('v1.AttachedClustersClient', () => {
       assert(client.attachedClustersStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.attachedClustersStub);
@@ -296,14 +296,14 @@ describe('v1.AttachedClustersClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.attachedClustersStub, undefined);
@@ -312,7 +312,7 @@ describe('v1.AttachedClustersClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1.AttachedClustersClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1.AttachedClustersClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('getAttachedCluster', () => {
     it('invokes getAttachedCluster without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes getAttachedCluster without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes getAttachedCluster with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes getAttachedCluster with closed client', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1.AttachedClustersClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAttachedCluster(request), expectedError);
@@ -488,7 +488,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('getAttachedServerConfig', () => {
     it('invokes getAttachedServerConfig without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes getAttachedServerConfig without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes getAttachedServerConfig with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes getAttachedServerConfig with closed client', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v1.AttachedClustersClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -627,7 +627,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('generateAttachedClusterInstallManifest', () => {
     it('invokes generateAttachedClusterInstallManifest without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes generateAttachedClusterInstallManifest without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes generateAttachedClusterInstallManifest with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes generateAttachedClusterInstallManifest with closed client', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1.AttachedClustersClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -765,7 +765,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('generateAttachedClusterAgentToken', () => {
     it('invokes generateAttachedClusterAgentToken without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes generateAttachedClusterAgentToken without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes generateAttachedClusterAgentToken with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -879,7 +879,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes generateAttachedClusterAgentToken with closed client', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -892,7 +892,7 @@ describe('v1.AttachedClustersClient', () => {
       );
       request.attachedCluster = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -905,7 +905,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('createAttachedCluster', () => {
     it('invokes createAttachedCluster without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -938,7 +938,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes createAttachedCluster without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes createAttachedCluster with call error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1026,7 +1026,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes createAttachedCluster with LRO error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes checkCreateAttachedClusterProgress without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,8 +1067,8 @@ describe('v1.AttachedClustersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAttachedClusterProgress(
@@ -1081,7 +1081,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes checkCreateAttachedClusterProgress with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('updateAttachedCluster', () => {
     it('invokes updateAttachedCluster without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes updateAttachedCluster without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes updateAttachedCluster with call error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1226,7 +1226,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes updateAttachedCluster with LRO error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes checkUpdateAttachedClusterProgress without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1268,8 +1268,8 @@ describe('v1.AttachedClustersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAttachedClusterProgress(
@@ -1282,7 +1282,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes checkUpdateAttachedClusterProgress with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('importAttachedCluster', () => {
     it('invokes importAttachedCluster without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1336,7 +1336,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes importAttachedCluster without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1390,7 +1390,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes importAttachedCluster with call error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1424,7 +1424,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes importAttachedCluster with LRO error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1457,7 +1457,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes checkImportAttachedClusterProgress without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1465,8 +1465,8 @@ describe('v1.AttachedClustersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportAttachedClusterProgress(
@@ -1479,7 +1479,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes checkImportAttachedClusterProgress with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,7 +1500,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('deleteAttachedCluster', () => {
     it('invokes deleteAttachedCluster without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes deleteAttachedCluster without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +1587,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes deleteAttachedCluster with call error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1621,7 +1621,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes deleteAttachedCluster with LRO error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1654,7 +1654,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes checkDeleteAttachedClusterProgress without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1662,8 +1662,8 @@ describe('v1.AttachedClustersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAttachedClusterProgress(
@@ -1676,7 +1676,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes checkDeleteAttachedClusterProgress with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1697,7 +1697,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('listAttachedClusters', () => {
     it('invokes listAttachedClusters without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1737,7 +1737,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes listAttachedClusters without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,8 +1769,7 @@ describe('v1.AttachedClustersClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gkemulticloud.v1.IAttachedCluster[]
-              | null,
+              protos.google.cloud.gkemulticloud.v1.IAttachedCluster[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1794,7 +1793,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes listAttachedClusters with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1825,7 +1824,7 @@ describe('v1.AttachedClustersClient', () => {
 
     it('invokes listAttachedClustersStream without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,15 +1877,15 @@ describe('v1.AttachedClustersClient', () => {
       assert(
         (client.descriptors.page.listAttachedClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAttachedClustersStream with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1928,15 +1927,15 @@ describe('v1.AttachedClustersClient', () => {
       assert(
         (client.descriptors.page.listAttachedClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAttachedClusters without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1978,15 +1977,15 @@ describe('v1.AttachedClustersClient', () => {
       assert(
         (client.descriptors.page.listAttachedClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAttachedClusters with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2019,16 +2018,16 @@ describe('v1.AttachedClustersClient', () => {
       assert(
         (client.descriptors.page.listAttachedClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2049,7 +2048,7 @@ describe('v1.AttachedClustersClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2077,7 +2076,7 @@ describe('v1.AttachedClustersClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2087,7 +2086,7 @@ describe('v1.AttachedClustersClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2111,7 +2110,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2133,7 +2132,7 @@ describe('v1.AttachedClustersClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2161,7 +2160,7 @@ describe('v1.AttachedClustersClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2171,7 +2170,7 @@ describe('v1.AttachedClustersClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2195,7 +2194,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2217,7 +2216,7 @@ describe('v1.AttachedClustersClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2245,7 +2244,7 @@ describe('v1.AttachedClustersClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2255,7 +2254,7 @@ describe('v1.AttachedClustersClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2279,7 +2278,7 @@ describe('v1.AttachedClustersClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2314,7 +2313,7 @@ describe('v1.AttachedClustersClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2350,7 +2349,7 @@ describe('v1.AttachedClustersClient', () => {
         attached_cluster: 'attachedClusterValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2414,7 +2413,7 @@ describe('v1.AttachedClustersClient', () => {
         location: 'locationValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2478,7 +2477,7 @@ describe('v1.AttachedClustersClient', () => {
         aws_cluster: 'awsClusterValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2543,7 +2542,7 @@ describe('v1.AttachedClustersClient', () => {
         aws_node_pool: 'awsNodePoolValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2617,7 +2616,7 @@ describe('v1.AttachedClustersClient', () => {
         location: 'locationValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2670,7 +2669,7 @@ describe('v1.AttachedClustersClient', () => {
         azure_client: 'azureClientValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2734,7 +2733,7 @@ describe('v1.AttachedClustersClient', () => {
         azure_cluster: 'azureClusterValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2799,7 +2798,7 @@ describe('v1.AttachedClustersClient', () => {
         azure_node_pool: 'azureNodePoolValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2873,7 +2872,7 @@ describe('v1.AttachedClustersClient', () => {
         location: 'locationValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2934,7 +2933,7 @@ describe('v1.AttachedClustersClient', () => {
         location: 'locationValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2982,7 +2981,7 @@ describe('v1.AttachedClustersClient', () => {
         project: 'projectValue',
       };
       const client = new attachedclustersModule.v1.AttachedClustersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

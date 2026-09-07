@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as documentprocessorserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -243,7 +243,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new documentprocessorserviceModule.v1.DocumentProcessorServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'documentai.configured.example.com');
@@ -288,7 +288,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.documentProcessorServiceStub, undefined);
@@ -296,13 +296,13 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(client.documentProcessorServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.documentProcessorServiceStub);
@@ -311,15 +311,15 @@ describe('v1.DocumentProcessorServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.documentProcessorServiceStub, undefined);
@@ -328,7 +328,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -337,7 +337,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -350,7 +350,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -374,7 +374,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes processDocument without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -406,7 +406,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes processDocument without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -454,7 +454,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes processDocument with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes processDocument with closed client', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -499,7 +499,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.processDocument(request), expectedError);
@@ -510,7 +510,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes fetchProcessorTypes without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -543,7 +543,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes fetchProcessorTypes without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes fetchProcessorTypes with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes fetchProcessorTypes with closed client', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -636,7 +636,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchProcessorTypes(request), expectedError);
@@ -647,7 +647,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessorType without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessorType without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -727,7 +727,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessorType with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -759,7 +759,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessorType with closed client', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -772,7 +772,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcessorType(request), expectedError);
@@ -783,7 +783,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessor without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -815,7 +815,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessor without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -863,7 +863,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessor with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessor with closed client', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -908,7 +908,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcessor(request), expectedError);
@@ -919,7 +919,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessorVersion without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -952,7 +952,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessorVersion without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessorVersion with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1032,7 +1032,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getProcessorVersion with closed client', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1045,7 +1045,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcessorVersion(request), expectedError);
@@ -1056,7 +1056,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes createProcessor without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1088,7 +1088,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes createProcessor without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes createProcessor with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1168,7 +1168,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes createProcessor with closed client', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createProcessor(request), expectedError);
@@ -1192,7 +1192,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getEvaluation without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1224,7 +1224,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getEvaluation without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getEvaluation with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1304,7 +1304,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getEvaluation with closed client', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1317,7 +1317,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluation(request), expectedError);
@@ -1328,7 +1328,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes batchProcessDocuments without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1362,7 +1362,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes batchProcessDocuments without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes batchProcessDocuments with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes batchProcessDocuments with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1486,7 +1486,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkBatchProcessDocumentsProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1494,8 +1494,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchProcessDocumentsProgress(
@@ -1509,7 +1509,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkBatchProcessDocumentsProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes trainProcessorVersion without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes trainProcessorVersion without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1620,7 +1620,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes trainProcessorVersion with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes trainProcessorVersion with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1689,7 +1689,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkTrainProcessorVersionProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1697,8 +1697,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTrainProcessorVersionProgress(
@@ -1712,7 +1712,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkTrainProcessorVersionProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1734,7 +1734,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteProcessorVersion without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1768,7 +1768,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteProcessorVersion without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1823,7 +1823,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteProcessorVersion with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1858,7 +1858,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteProcessorVersion with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1892,7 +1892,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkDeleteProcessorVersionProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1900,8 +1900,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteProcessorVersionProgress(
@@ -1915,7 +1915,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkDeleteProcessorVersionProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1937,7 +1937,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deployProcessorVersion without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deployProcessorVersion without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2026,7 +2026,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deployProcessorVersion with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2061,7 +2061,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deployProcessorVersion with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2095,7 +2095,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkDeployProcessorVersionProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2103,8 +2103,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeployProcessorVersionProgress(
@@ -2118,7 +2118,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkDeployProcessorVersionProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes undeployProcessorVersion without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2174,7 +2174,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes undeployProcessorVersion without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2229,7 +2229,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes undeployProcessorVersion with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2264,7 +2264,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes undeployProcessorVersion with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2298,7 +2298,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkUndeployProcessorVersionProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2306,8 +2306,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2322,7 +2322,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkUndeployProcessorVersionProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2344,7 +2344,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteProcessor without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2378,7 +2378,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteProcessor without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2433,7 +2433,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteProcessor with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2465,7 +2465,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteProcessor with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2499,7 +2499,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkDeleteProcessorProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2507,8 +2507,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteProcessorProgress(
@@ -2522,7 +2522,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkDeleteProcessorProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2544,7 +2544,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes enableProcessor without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2578,7 +2578,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes enableProcessor without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2633,7 +2633,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes enableProcessor with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2665,7 +2665,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes enableProcessor with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2699,7 +2699,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkEnableProcessorProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2707,8 +2707,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEnableProcessorProgress(
@@ -2722,7 +2722,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkEnableProcessorProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2744,7 +2744,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes disableProcessor without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2778,7 +2778,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes disableProcessor without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2833,7 +2833,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes disableProcessor with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2865,7 +2865,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes disableProcessor with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2899,7 +2899,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkDisableProcessorProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2907,8 +2907,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDisableProcessorProgress(
@@ -2922,7 +2922,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkDisableProcessorProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2944,7 +2944,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes setDefaultProcessorVersion without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2978,7 +2978,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes setDefaultProcessorVersion without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3033,7 +3033,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes setDefaultProcessorVersion with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3068,7 +3068,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes setDefaultProcessorVersion with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3102,7 +3102,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkSetDefaultProcessorVersionProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3110,8 +3110,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3126,7 +3126,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkSetDefaultProcessorVersionProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3148,7 +3148,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes reviewDocument without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3182,7 +3182,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes reviewDocument without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3237,7 +3237,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes reviewDocument with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3269,7 +3269,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes reviewDocument with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3303,7 +3303,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkReviewDocumentProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3311,8 +3311,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkReviewDocumentProgress(
@@ -3326,7 +3326,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkReviewDocumentProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3348,7 +3348,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes evaluateProcessorVersion without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3382,7 +3382,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes evaluateProcessorVersion without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3437,7 +3437,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes evaluateProcessorVersion with call error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3472,7 +3472,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes evaluateProcessorVersion with LRO error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3506,7 +3506,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkEvaluateProcessorVersionProgress without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3514,8 +3514,8 @@ describe('v1.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3530,7 +3530,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes checkEvaluateProcessorVersionProgress with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3552,7 +3552,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorTypes without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3593,7 +3593,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorTypes without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3649,7 +3649,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorTypes with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3681,7 +3681,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorTypesStream without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3733,16 +3733,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessorTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProcessorTypesStream with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3783,16 +3783,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessorTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcessorTypes without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3833,16 +3833,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessorTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcessorTypes with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3875,9 +3875,9 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessorTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3886,7 +3886,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessors without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3926,7 +3926,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessors without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3982,7 +3982,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessors with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4014,7 +4014,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorsStream without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4066,16 +4066,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProcessorsStream with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4116,16 +4116,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcessors without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4166,16 +4166,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcessors with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4207,9 +4207,9 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4218,7 +4218,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorVersions without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4259,7 +4259,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorVersions without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4291,8 +4291,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.documentai.v1.IProcessorVersion[]
-              | null,
+              protos.google.cloud.documentai.v1.IProcessorVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4317,7 +4316,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorVersions with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4352,7 +4351,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorVersionsStream without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4420,7 +4419,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listProcessorVersionsStream with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4477,7 +4476,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('uses async iteration with listProcessorVersions without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4532,7 +4531,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('uses async iteration with listProcessorVersions with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4580,7 +4579,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listEvaluations without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4620,7 +4619,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listEvaluations without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4676,7 +4675,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listEvaluations with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4708,7 +4707,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes listEvaluationsStream without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4760,16 +4759,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEvaluationsStream with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4810,16 +4809,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluations without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4860,16 +4859,16 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluations with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4901,9 +4900,9 @@ describe('v1.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4911,7 +4910,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4942,7 +4941,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4987,7 +4986,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5023,7 +5022,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5072,7 +5071,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5114,7 +5113,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5136,7 +5135,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5164,7 +5163,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5175,7 +5174,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5200,7 +5199,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5223,7 +5222,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5251,7 +5250,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5262,7 +5261,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5287,7 +5286,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5310,7 +5309,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5338,7 +5337,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5349,7 +5348,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5374,7 +5373,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5410,7 +5409,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5449,7 +5448,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       };
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5536,7 +5535,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       };
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5612,7 +5611,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       };
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5663,7 +5662,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       };
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5728,7 +5727,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       };
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5794,7 +5793,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       };
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5872,7 +5871,7 @@ describe('v1.DocumentProcessorServiceClient', () => {
       };
       const client =
         new documentprocessorserviceModule.v1.DocumentProcessorServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

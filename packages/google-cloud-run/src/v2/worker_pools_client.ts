@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class WorkerPoolsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('run');
@@ -68,11 +68,11 @@ export class WorkerPoolsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  workerPoolsStub?: Promise<{ [name: string]: Function }>;
+  workerPoolsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of WorkerPoolsClient.
@@ -148,7 +148,7 @@ export class WorkerPoolsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -327,7 +327,7 @@ export class WorkerPoolsClient {
       'google.cloud.run.v2.WorkerPools',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -367,7 +367,7 @@ export class WorkerPoolsClient {
           (this._protos as any).google.cloud.run.v2.WorkerPools,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -383,7 +383,7 @@ export class WorkerPoolsClient {
     ];
     for (const methodName of workerPoolsStubMethods) {
       const callPromise = this.workerPoolsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -584,13 +584,13 @@ export class WorkerPoolsClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkerPool request %j', request);
@@ -719,7 +719,7 @@ export class WorkerPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -856,7 +856,7 @@ export class WorkerPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -988,7 +988,7 @@ export class WorkerPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -1151,13 +1151,13 @@ export class WorkerPoolsClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1214,7 +1214,7 @@ export class WorkerPoolsClient {
     this._log.info('createWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1349,13 +1349,13 @@ export class WorkerPoolsClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1412,7 +1412,7 @@ export class WorkerPoolsClient {
     this._log.info('updateWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1538,13 +1538,13 @@ export class WorkerPoolsClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1601,7 +1601,7 @@ export class WorkerPoolsClient {
     this._log.info('deleteWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1713,13 +1713,13 @@ export class WorkerPoolsClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1795,7 +1795,7 @@ export class WorkerPoolsClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
@@ -1803,7 +1803,7 @@ export class WorkerPoolsClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkerPools stream %j', request);
@@ -1861,7 +1861,7 @@ export class WorkerPoolsClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
@@ -1869,7 +1869,7 @@ export class WorkerPoolsClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkerPools iterate %j', request);
@@ -2668,11 +2668,11 @@ export class WorkerPoolsClient {
    */
   close(): Promise<void> {
     if (this.workerPoolsStub && !this._terminated) {
-      return this.workerPoolsStub.then((stub) => {
+      return this.workerPoolsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

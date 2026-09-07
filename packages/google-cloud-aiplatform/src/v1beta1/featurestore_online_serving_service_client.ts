@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class FeaturestoreOnlineServingServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -66,11 +66,11 @@ export class FeaturestoreOnlineServingServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  featurestoreOnlineServingServiceStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  featurestoreOnlineServingServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of FeaturestoreOnlineServingServiceClient.
@@ -147,7 +147,7 @@ export class FeaturestoreOnlineServingServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -439,7 +439,7 @@ export class FeaturestoreOnlineServingServiceClient {
       'google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -480,7 +480,7 @@ export class FeaturestoreOnlineServingServiceClient {
             .FeaturestoreOnlineServingService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -491,11 +491,11 @@ export class FeaturestoreOnlineServingServiceClient {
     ];
     for (const methodName of featurestoreOnlineServingServiceStubMethods) {
       const callPromise = this.featurestoreOnlineServingServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -719,7 +719,7 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readFeatureValues request %j', request);
@@ -874,7 +874,7 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('writeFeatureValues request %j', request);
@@ -967,7 +967,7 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamingReadFeatureValues stream %j', options);
@@ -5687,14 +5687,14 @@ export class FeaturestoreOnlineServingServiceClient {
    */
   close(): Promise<void> {
     if (this.featurestoreOnlineServingServiceStub && !this._terminated) {
-      return this.featurestoreOnlineServingServiceStub.then((stub) => {
+      return this.featurestoreOnlineServingServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });
