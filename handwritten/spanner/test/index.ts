@@ -91,7 +91,7 @@ const fakeGrpcGcp = () => {
 };
 
 let promisified = false;
-const fakePfy = Object.assign({}, pfy, {
+const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'Spanner') {
       return;
@@ -224,7 +224,7 @@ describe('Spanner', () => {
   afterEach(() => sandbox.restore());
 
   describe('instantiation', () => {
-    const EXPECTED_OPTIONS = Object.assign({}, OPTIONS, {
+    const EXPECTED_OPTIONS = extend({}, OPTIONS, {
       libName: 'gccl',
       libVersion: require('../../package.json').version,
       scopes: [],
@@ -267,7 +267,7 @@ describe('Spanner', () => {
 
       const spanner = new Spanner(OPTIONS);
 
-      const expectedOptions = Object.assign({}, EXPECTED_OPTIONS, {
+      const expectedOptions = extend({}, EXPECTED_OPTIONS, {
         scopes: expectedScopes,
       });
 
@@ -282,7 +282,7 @@ describe('Spanner', () => {
         'grpc.keepalive_time_ms': 300,
         'grpc.keepalive_timeout_ms': 100,
       };
-      const options = Object.assign({}, OPTIONS, keepaliveOptions);
+      const options = extend({}, OPTIONS, keepaliveOptions);
       const spanner = new Spanner(options);
       const expectedOptions = Object.assign(
         {},
@@ -880,7 +880,7 @@ describe('Spanner', () => {
     const CONFIG: any = {
       config: 'b',
     };
-    const ORIGINAL_CONFIG = Object.assign({}, CONFIG);
+    const ORIGINAL_CONFIG = extend({}, CONFIG);
 
     beforeEach(() => {
       PATH = 'projects/' + spanner.projectId + '/instances/' + NAME;
@@ -1000,7 +1000,7 @@ describe('Spanner', () => {
 
     describe('config.nodes', () => {
       it('should rename to nodeCount', () => {
-        const config = Object.assign({}, CONFIG, {nodes: 10});
+        const config = extend({}, CONFIG, { nodes: 10 });
         const stub = sandbox.stub(spanner, 'request');
         spanner.createInstance(NAME, config, assert.ifError);
 
@@ -1014,8 +1014,8 @@ describe('Spanner', () => {
     describe('config.config', () => {
       it('should format a name', done => {
         const name = 'config-name';
-        const config = Object.assign({}, CONFIG, {config: name});
-        const originalConfig = Object.assign({}, config);
+        const config = extend({}, CONFIG, { config: name });
+        const originalConfig = extend({}, config);
         spanner.request = config_ => {
           assert.deepStrictEqual(config, originalConfig);
           const reqOpts = config_.reqOpts;
@@ -1085,14 +1085,14 @@ describe('Spanner', () => {
     const OPTIONS: GetInstancesOptions = {
       filter: 'b',
     };
-    const ORIGINAL_OPTIONS = Object.assign({}, OPTIONS);
+    const ORIGINAL_OPTIONS = extend({}, OPTIONS);
 
     beforeEach(() => {
       spanner.request = util.noop;
     });
 
     it('should make the correct request', done => {
-      const expectedReqOpts = Object.assign({}, OPTIONS, {
+      const expectedReqOpts = extend({}, OPTIONS, {
         parent: 'projects/' + spanner.projectId,
       });
 
@@ -1118,7 +1118,7 @@ describe('Spanner', () => {
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const options = Object.assign({}, OPTIONS, {gaxOptions});
-      const expectedReqOpts = Object.assign(
+      const expectedReqOpts = extend(
         {},
         OPTIONS,
         {
@@ -1153,7 +1153,7 @@ describe('Spanner', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       });
-      const expectedReqOpts = Object.assign(
+      const expectedReqOpts = extend(
         {},
         OPTIONS,
         {
@@ -1259,7 +1259,7 @@ describe('Spanner', () => {
           filter,
           gaxOptions: {timeout: 1000, autoPaginate: false},
         };
-        const EXPECTEDNEXTQUERY = Object.assign(
+        const EXPECTEDNEXTQUERY = extend(
           {},
           GETINSTANCESOPTIONS,
           NEXTPAGEREQUEST,
@@ -1280,11 +1280,11 @@ describe('Spanner', () => {
     const OPTIONS: GetInstancesOptions = {
       filter: 'b',
     };
-    const ORIGINAL_OPTIONS = Object.assign({}, OPTIONS);
+    const ORIGINAL_OPTIONS = extend({}, OPTIONS);
     const returnValue = {};
 
     it('should make and return the correct gax API call', () => {
-      const expectedReqOpts = Object.assign({}, OPTIONS, {
+      const expectedReqOpts = extend({}, OPTIONS, {
         parent: 'projects/' + spanner.projectId,
       });
 
@@ -1310,7 +1310,7 @@ describe('Spanner', () => {
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const options = {gaxOptions};
-      const expectedReqOpts = Object.assign(
+      const expectedReqOpts = extend(
         {},
         {
           parent: 'projects/' + spanner.projectId,
@@ -1345,7 +1345,7 @@ describe('Spanner', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       };
-      const expectedReqOpts = Object.assign(
+      const expectedReqOpts = extend(
         {},
         {
           parent: 'projects/' + spanner.projectId,
@@ -1392,7 +1392,7 @@ describe('Spanner', () => {
     const CONFIG: any = {
       baseConfig: 'x',
     };
-    const ORIGINAL_CONFIG = Object.assign({}, CONFIG);
+    const ORIGINAL_CONFIG = extend({}, CONFIG);
 
     beforeEach(() => {
       PATH = 'projects/' + spanner.projectId + '/instanceConfigs/' + NAME;
@@ -1557,7 +1557,7 @@ describe('Spanner', () => {
         pageSize: 5,
         gaxOptions: {autoPaginate: false},
       };
-      const expectedQuery = Object.assign({}, options, {
+      const expectedQuery = extend({}, options, {
         parent: 'projects/' + spanner.projectId,
       });
       delete expectedQuery.gaxOptions;
@@ -1590,7 +1590,7 @@ describe('Spanner', () => {
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const options = Object.assign({}, OPTIONS, {gaxOptions});
-      const expectedReqOpts = Object.assign(
+      const expectedReqOpts = extend(
         {},
         OPTIONS,
         {
@@ -1625,7 +1625,7 @@ describe('Spanner', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       });
-      const expectedReqOpts = Object.assign(
+      const expectedReqOpts = extend(
         {},
         OPTIONS,
         {
@@ -1678,7 +1678,7 @@ describe('Spanner', () => {
         filter,
         gaxOptions: {timeout: 1000, autoPaginate: false},
       };
-      const EXPECTEDNEXTQUERY = Object.assign(
+      const EXPECTEDNEXTQUERY = extend(
         {},
         GETINSTANCECONFIGSOPTIONS,
         NEXTPAGEREQUEST,
@@ -1698,7 +1698,7 @@ describe('Spanner', () => {
     const OPTIONS = {
       a: 'b',
     } as spnr.GetInstanceConfigOperationsOptions;
-    const ORIGINAL_OPTIONS = Object.assign({}, OPTIONS);
+    const ORIGINAL_OPTIONS = extend({}, OPTIONS);
 
     it('should make the correct request', done => {
       const gaxOpts = {
@@ -1706,7 +1706,7 @@ describe('Spanner', () => {
       };
       const options = {a: 'b', gaxOptions: gaxOpts};
 
-      const expectedReqOpts = Object.assign({}, OPTIONS, {
+      const expectedReqOpts = extend({}, OPTIONS, {
         parent: spanner.projectFormattedName_,
       });
 
@@ -1731,7 +1731,7 @@ describe('Spanner', () => {
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
       const options = Object.assign({}, OPTIONS, {gaxOptions});
-      const expectedReqOpts = Object.assign(
+      const expectedReqOpts = extend(
         {},
         OPTIONS,
         {
@@ -1765,7 +1765,7 @@ describe('Spanner', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       });
-      const expectedReqOpts = Object.assign(
+      const expectedReqOpts = extend(
         {},
         OPTIONS,
         {
@@ -1845,7 +1845,7 @@ describe('Spanner', () => {
     const returnValue = {};
 
     it('should make and return the correct gax API call', () => {
-      const expectedOptions: {gaxOptions?: {}} = Object.assign({}, OPTIONS, {
+      const expectedOptions: { gaxOptions?: {} } = extend({}, OPTIONS, {
         parent: 'projects/' + spanner.projectId,
       });
       delete expectedOptions.gaxOptions;
@@ -1938,7 +1938,7 @@ describe('Spanner', () => {
           gaxOptions,
         },
       );
-      const expectedReqOpts: {gaxOptions?: {}} = Object.assign(
+      const expectedReqOpts: { gaxOptions?: {} } = extend(
         {},
         OPTIONS,
         {

@@ -19,6 +19,7 @@
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {before, beforeEach, describe, it} from 'mocha';
+import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {
   CLOUD_RESOURCE_HEADER,
@@ -32,7 +33,7 @@ import {
 } from '../src/request_id_header';
 
 let promisified = false;
-const fakePfy = Object.assign({}, pfy, {
+const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'Session') {
       return;
@@ -172,7 +173,7 @@ describe('Session', () => {
           uniqueProperty: true,
         };
 
-        const databaseInstance = Object.assign({}, DATABASE, {
+        const databaseInstance = extend({}, DATABASE, {
           createSession(options_, callback) {
             assert.strictEqual(options_, options);
             callback(null, createdSession, apiResponse);
@@ -223,7 +224,7 @@ describe('Session', () => {
         const error = new Error('Error.');
         const apiResponse = {};
 
-        const databaseInstance = Object.assign({}, DATABASE, {
+        const databaseInstance = extend({}, DATABASE, {
           createSession(options_, callback) {
             callback(error, null, apiResponse);
           },

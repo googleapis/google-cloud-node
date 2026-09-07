@@ -36,6 +36,7 @@ import {
   Spanner,
 } from './index';
 import {promisifyAll} from '@google-cloud/promisify';
+import extend = require('extend');
 
 export type IOperation = instanceAdmin.longrunning.IOperation;
 
@@ -315,7 +316,7 @@ class InstanceConfig extends common.GrpcServiceObject {
     callback?: SetInstanceConfigMetadataCallback,
   ): void | Promise<SetInstanceConfigMetadataResponse> {
     const reqOpts = {
-      instanceConfig: Object.assign(
+      instanceConfig: extend(
         {
           name: this.formattedName_,
         },

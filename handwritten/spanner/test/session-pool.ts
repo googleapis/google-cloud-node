@@ -17,6 +17,7 @@
 import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import * as events from 'events';
+import * as extend from 'extend';
 import PQueue from 'p-queue';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
@@ -46,7 +47,7 @@ export class FakeTransaction {
   async begin(): Promise<void> {}
 }
 
-const fakeStackTrace = Object.assign({}, stackTrace);
+const fakeStackTrace = extend({}, stackTrace);
 
 function noop() {}
 

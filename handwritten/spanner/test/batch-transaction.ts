@@ -20,6 +20,7 @@ import {util} from '@google-cloud/common';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
+import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 
@@ -34,7 +35,7 @@ import {ExecuteSqlRequest} from '../src/transaction';
 import {CallOptions} from 'google-gax';
 
 let promisified = false;
-const fakePfy = Object.assign({}, pfy, {
+const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'BatchTransaction') {
       return;
@@ -311,7 +312,7 @@ describe('BatchTransaction', () => {
         assert.ifError(err);
 
         parts.forEach((partition, i) => {
-          const expectedPartition = Object.assign(
+          const expectedPartition = extend(
             {},
             expectedQuery,
             PARTITIONS[i],
@@ -324,7 +325,7 @@ describe('BatchTransaction', () => {
     });
 
     it('should update the transaction with returned metadata', done => {
-      const response = Object.assign({}, RESPONSE, {
+      const response = extend({}, RESPONSE, {
         transaction: {
           id: ID,
           readTimestamp: TIMESTAMP,

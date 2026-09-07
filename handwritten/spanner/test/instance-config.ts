@@ -18,6 +18,7 @@
 import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import {grpc} from 'google-gax';
+import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as pfy from '@google-cloud/promisify';
 import * as sinon from 'sinon';
@@ -27,7 +28,7 @@ import {Spanner, GetInstanceConfigResponse} from '../src';
 import {CLOUD_RESOURCE_HEADER} from '../src/common';
 
 let promisified = false;
-const fakePfy = Object.assign({}, pfy, {
+const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'InstanceConfig') {
       return;
@@ -99,7 +100,7 @@ describe('InstanceConfig', () => {
     });
 
     it('should localize the request function', done => {
-      const spannerInstance = Object.assign({}, SPANNER);
+      const spannerInstance = extend({}, SPANNER);
 
       spannerInstance.request = function () {
         assert.strictEqual(this, spannerInstance);
@@ -113,7 +114,7 @@ describe('InstanceConfig', () => {
 
     it('should inherit from ServiceObject', done => {
       const options = {};
-      const spannerInstance = Object.assign({}, SPANNER, {
+      const spannerInstance = extend({}, SPANNER, {
         createInstanceConfig(name, options_, callback) {
           assert.strictEqual(name, instanceConfig.formattedName_);
           assert.strictEqual(options_, options);
@@ -306,7 +307,7 @@ describe('InstanceConfig', () => {
     const METADATA = {
       needsToBeSnakeCased: true,
     } as instConfig.IInstanceConfig;
-    const ORIGINAL_METADATA = Object.assign({}, METADATA);
+    const ORIGINAL_METADATA = extend({}, METADATA);
 
     it('should make and return the request', () => {
       const requestReturnValue = {};
@@ -317,9 +318,9 @@ describe('InstanceConfig', () => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'updateInstanceConfig');
 
-        const expectedReqOpts = Object.assign(
+        const expectedReqOpts = extend(
           {},
-          Object.assign({}, METADATA, {
+          extend({}, METADATA, {
             name: instanceConfig.formattedName_,
           }),
         ) as instConfig.IInstanceConfig as instConfig.SetInstanceConfigMetadataRequest;
