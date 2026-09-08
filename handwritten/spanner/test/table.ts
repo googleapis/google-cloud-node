@@ -19,7 +19,6 @@ import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import {split} from 'split-array-stream';
 import {Transform} from 'stream';
 import * as through from 'through2';
 
@@ -595,9 +594,9 @@ describe('Table', () => {
 
         const stream = through.obj();
 
-        setImmediate(async () => {
+        setImmediate(() => {
           try {
-            await split(rows, stream);
+            rows.forEach(row => stream.push(row));
             stream.end();
           } catch (err) {
             stream.destroy(err as Error);
