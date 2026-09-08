@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {EventEmitter} from 'events';
 import {Span, trace, Tracer} from '@opentelemetry/api';
 
 /**
@@ -68,22 +69,86 @@ export function getGaxTracer(): Tracer {
 }
 
 /**
+ * Manages span lifecycle for Promise-based operations.
+ *
+ * @param {T} promise - The promise returned from the traced operation.
+ * @param {(err: unknown) => void} recordError - Callback to record errors on the span.
+ * @param {() => void} endSpan - Callback to end the span idempotently.
+ */
+export function handlePromise<T>(
+  promise: T,
+  recordError: (err: unknown) => void,
+  endSpan: () => void,
+): void {
+  Promise.resolve(promise)
+    .then(() => {
+      endSpan();
+      return null;
+    })
+    .catch(err => {
+      recordError(err);
+      endSpan();
+    });
+}
+
+/**
+ * Manages span lifecycle for Stream-based operations.
+ *
+ * @param {EventEmitter} stream - The stream returned from the traced operation.
+ * @param {(err: unknown) => void} recordError - Callback to record errors on the span.
+ * @param {() => void} endSpan - Callback to end the span idempotently.
+ */
+export function handleStream(
+  stream: EventEmitter,
+  recordError: (err: unknown) => void,
+  endSpan: () => void,
+): void {
+  stream.on('error', (err: unknown) => {
+    recordError(err);
+    endSpan();
+  });
+  stream.on('end', () => {
+    endSpan();
+  });
+  stream.on('close', () => {
+    endSpan();
+  });
+}
+
+/**
  * Executes a function within an active OpenTelemetry span, populating standard
  * GCP telemetry attributes and recording errors/exceptions if thrown.
  *
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
- * @param {() => Promise<T>} fn - The asynchronous operation to trace.
- * @returns {Promise<T>} The result of the traced operation.
+ * @param {() => T} fn - The operation to trace.
+ * @param {boolean | 'promise' | 'stream'} [isStream=false] - Whether the operation is a stream or a promise.
+ * @returns {T} The result of the traced operation.
  */
-export async function traceAttempt<T = unknown>(
+export function traceAttempt<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => Promise<T>,
-): Promise<T> {
+  fn: () => T,
+  isStream: true | 'stream',
+): T;
+export function traceAttempt<T>(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+  fn: () => T,
+  isStream?: boolean | 'promise' | 'stream',
+): T;
+export function traceAttempt(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fn: () => any,
+  isStream: boolean | 'promise' | 'stream' = false,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any {
+  const isStreamCall = isStream === true || isStream === 'stream';
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
-  return getGaxTracer().startActiveSpan(spanName, {}, async (span: Span) => {
+  return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
     span.setAttributes({
       'gcp.client.service': staticArgs.gcpClientService,
       'gcp.client.version': staticArgs.gcpVersion,
@@ -93,22 +158,45 @@ export async function traceAttempt<T = unknown>(
       'gcp.method.type': dynamicArgs.rpcType,
     });
 
+    let spanEnded = false;
+    const endSpan = () => {
+      if (!spanEnded) {
+        spanEnded = true;
+        span.end();
+      }
+    };
+
+    const recordError = (e: unknown) => {
+      if (e instanceof Error) {
+        span.setAttributes({
+          'error.message': e.message,
+          'error.type': e.constructor?.name ?? e.name,
+        });
+        span.recordException(e);
+        if (e.name) {
+          span.setAttribute('exception.type', e.name);
+        }
+      } else {
+        const message = String(e);
+        span.setAttributes({
+          'error.message': message,
+        });
+        span.recordException(message);
+      }
+    };
+
     try {
-      const result = await fn();
+      const result = fn();
+      if (isStreamCall) {
+        handleStream(result, recordError, endSpan);
+      } else {
+        handlePromise(result, recordError, endSpan);
+      }
       return result;
     } catch (e) {
-      const err = e as Error;
-      span.setAttributes({
-        'error.message': err.message,
-        'error.type': err.constructor?.name ?? err.name,
-      });
-      span.recordException(err);
-      if (err.name) {
-        span.setAttribute('exception.type', err.name);
-      }
+      recordError(e);
+      endSpan();
       throw e;
-    } finally {
-      span.end();
     }
   });
 }
