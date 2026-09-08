@@ -20,7 +20,7 @@
 
 // BigInt JSON serialization.
 // https://github.com/jsdoc/jsdoc/issues/1918
-BigInt.prototype.toJSON = function() {
+BigInt.prototype.toJSON = function () {
   return this.toString() + 'n';
 };
 

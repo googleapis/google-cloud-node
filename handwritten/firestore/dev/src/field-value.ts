@@ -503,7 +503,7 @@ export class Bytes implements firestore.Bytes {
    * @param other - The `Bytes` object to compare against.
    * @returns true if this `Bytes` object is equal to the provided one.
    */
-  isEqual(other: any): boolean {
+  isEqual(other: unknown): boolean {
     if (other instanceof Bytes) {
       return (
         this.subtype === other.subtype &&
