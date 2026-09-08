@@ -804,6 +804,9 @@ export function constructSettings(
   enableTelemetryTracing?: boolean,
   internalTelemetryInfo?: StaticTraceContext,
 ) {
+  otherArgs = internalTelemetryInfo
+    ? {...otherArgs, internalTelemetryInfo}
+    : otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
@@ -860,9 +863,10 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs: internalTelemetryInfo || enableTelemetryTracing
-        ? { ...otherArgs, internalMethodName: methodName }
-        : otherArgs,
+      otherArgs:
+        internalTelemetryInfo || enableTelemetryTracing
+          ? {...otherArgs, internalMethodName: methodName}
+          : otherArgs,
       apiName,
       enableTelemetryTracing,
     });
