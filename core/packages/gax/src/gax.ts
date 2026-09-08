@@ -804,9 +804,6 @@ export function constructSettings(
   enableTelemetryTracing?: boolean,
   internalTelemetryInfo?: StaticTraceContext,
 ) {
-  otherArgs = internalTelemetryInfo
-    ? {...otherArgs, internalTelemetryInfo}
-    : otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
