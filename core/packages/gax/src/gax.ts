@@ -863,7 +863,9 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs,
+      otherArgs: internalTelemetryInfo || enableTelemetryTracing
+        ? { ...otherArgs, internalMethodName: methodName }
+        : otherArgs,
       apiName,
       enableTelemetryTracing,
     });
