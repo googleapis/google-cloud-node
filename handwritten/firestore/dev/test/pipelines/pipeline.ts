@@ -267,7 +267,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
     await firestore
       .pipeline()
       .literals([{foo: 'bar'}])
-      .insert({collection: 'foo', documentId: 'doc1'})
+      .insert({collection: 'foo', documentIdExpression: 'doc1'})
       .update()
       .upsert([], {collection: 'bar'})
       .delete()

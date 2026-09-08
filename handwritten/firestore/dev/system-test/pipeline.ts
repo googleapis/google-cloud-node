@@ -470,7 +470,7 @@ describe.skipClassic('Pipeline class', () => {
         const res = await firestore
           .pipeline()
           .literals([{title: 'New Book', author: 'Author 1'}])
-          .insert({collection: dmlCol.path, documentId: constant(newDocId)})
+          .insert({collection: dmlCol.path, documentIdExpression: constant(newDocId)})
           .execute();
 
         expectResults(res, {documents_modified: 1});
@@ -487,7 +487,7 @@ describe.skipClassic('Pipeline class', () => {
           .literals([{title: 'Upserted Book', count: 1}])
           .upsert([add(field('count'), constant(1)).as('count')], {
             collection: dmlCol.path,
-            documentId: constant(upsertDocId),
+            documentIdExpression: constant(upsertDocId),
           })
           .execute({atomic: true});
 
@@ -503,7 +503,7 @@ describe.skipClassic('Pipeline class', () => {
         const res = await firestore
           .pipeline()
           .literals([{title: 'Atomic Book'}])
-          .insert({collection: dmlCol.path, documentId: constant(atomicDocId)})
+          .insert({collection: dmlCol.path, documentIdExpression: constant(atomicDocId)})
           .execute({atomic: true});
 
         expectResults(res, {documents_modified: 1});
@@ -518,7 +518,7 @@ describe.skipClassic('Pipeline class', () => {
           const insertPpl = firestore
             .pipeline()
             .literals([{title: 'Tx Book'}])
-            .insert({collection: dmlCol.path, documentId: constant(txDocId)});
+            .insert({collection: dmlCol.path, documentIdExpression: constant(txDocId)});
 
           const res = await transaction.execute(insertPpl);
           expectResults(res, {documents_modified: 1});
