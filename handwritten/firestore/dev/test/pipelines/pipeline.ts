@@ -269,7 +269,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
       .literals([{foo: 'bar'}])
       .insert({collection: 'foo', documentIdExpression: 'doc1'})
       .update()
-      .upsert([], {collection: 'bar'})
+      .upsert({collection: 'bar', additionalFields: []})
       .delete()
       .execute();
 

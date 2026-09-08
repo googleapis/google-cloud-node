@@ -1042,8 +1042,11 @@ export class InsertStage implements Stage {
  */
 export type InternalUpsertStageOptions = Omit<
   firestore.Pipelines.UpsertStageOptions,
-  'transforms' | 'collection' | 'documentIdExpression'
+  'additionalFields' | 'transforms' | 'collection' | 'documentIdExpression'
 > & {
+  additionalFields?:
+    | AliasedExpression[]
+    | firestore.Pipelines.AliasedExpression[];
   transforms?: AliasedExpression[];
   collection?: string | CollectionReference | firestore.CollectionReference;
   documentIdExpression?: string | Expression | firestore.Pipelines.Expression;
@@ -1057,13 +1060,17 @@ export class UpsertStage implements Stage {
   readonly optionsUtil = new OptionsUtil({});
   private readonly collectionPath?: string;
   private readonly documentIdExpr?: Expression;
-  private readonly transforms: Map<string, Expression>;
+  private readonly additionalFields: Map<string, Expression>;
 
   constructor(
-    transforms: AliasedExpression[] = [],
+    additionalFields: AliasedExpression[] = [],
     private options: InternalUpsertStageOptions = {},
   ) {
-    this.transforms = selectablesToMap(transforms);
+    const fields =
+      (options.additionalFields ??
+        options.transforms ??
+        additionalFields) as AliasedExpression[];
+    this.additionalFields = selectablesToMap(fields);
     if (options.collection) {
       this.collectionPath =
         typeof options.collection === 'string'
@@ -1096,7 +1103,7 @@ export class UpsertStage implements Stage {
       options['document_id'] = this.documentIdExpr._toProto(serializer);
     }
 
-    const args: api.IValue[] = [serializer.encodeValue(this.transforms)!];
+    const args: api.IValue[] = [serializer.encodeValue(this.additionalFields)!];
 
     return {
       name: this.name,
@@ -1106,7 +1113,7 @@ export class UpsertStage implements Stage {
   }
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    validateUserDataHelper(this.transforms, ignoreUndefinedProperties);
+    validateUserDataHelper(this.additionalFields, ignoreUndefinedProperties);
     if (this.documentIdExpr) {
       validateUserDataHelper(this.documentIdExpr, ignoreUndefinedProperties);
     }

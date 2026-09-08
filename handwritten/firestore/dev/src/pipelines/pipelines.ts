@@ -1850,35 +1850,44 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * @beta
    * Performs an upsert operation on documents from previous stages.
    *
-   * @param transforms - Transformations to apply on upsert.
+   * @param additionalFields - Additional fields to apply on upsert.
    * @param options - Options defining how this Upsert stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   upsert(
-    transforms?: AliasedExpression[],
-    options?: Omit<firestore.Pipelines.UpsertStageOptions, 'transforms'>,
+    additionalFields?: AliasedExpression[],
+    options?: Omit<
+      firestore.Pipelines.UpsertStageOptions,
+      'additionalFields' | 'transforms'
+    >,
   ): Pipeline;
   upsert(options?: firestore.Pipelines.UpsertStageOptions): Pipeline;
   upsert(
-    transformsOrOptions?:
+    additionalFieldsOrOptions?:
       | AliasedExpression[]
       | firestore.Pipelines.UpsertStageOptions,
-    options?: Omit<firestore.Pipelines.UpsertStageOptions, 'transforms'>,
+    options?: Omit<
+      firestore.Pipelines.UpsertStageOptions,
+      'additionalFields' | 'transforms'
+    >,
   ): Pipeline {
-    let transforms: AliasedExpression[] = [];
+    let additionalFields: AliasedExpression[] = [];
     let opts: InternalUpsertStageOptions = {};
 
-    if (Array.isArray(transformsOrOptions)) {
-      transforms = transformsOrOptions;
+    if (Array.isArray(additionalFieldsOrOptions)) {
+      additionalFields = additionalFieldsOrOptions;
       opts = (options ?? {}) as InternalUpsertStageOptions;
-    } else if (transformsOrOptions) {
-      const {transforms: t, ...rest} =
-        transformsOrOptions as firestore.Pipelines.UpsertStageOptions;
-      transforms = (t ?? []) as AliasedExpression[];
+    } else if (additionalFieldsOrOptions) {
+      const {
+        additionalFields: af,
+        transforms: t,
+        ...rest
+      } = additionalFieldsOrOptions as firestore.Pipelines.UpsertStageOptions;
+      additionalFields = (af ?? t ?? []) as AliasedExpression[];
       opts = rest as InternalUpsertStageOptions;
     }
 
-    return this._addStage(new UpsertStage(transforms, opts));
+    return this._addStage(new UpsertStage(additionalFields, opts));
   }
 
   /**
