@@ -15,10 +15,13 @@
  */
 
 import * as assert from 'assert';
+import {EventEmitter} from 'events';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
   getGaxTracer,
   traceAttempt,
+  handlePromise,
+  handleStream,
   DynamicTraceContext,
   StaticTraceContext,
 } from '../../src/observability/TracerHelper';
@@ -162,6 +165,284 @@ describe('TracerHelper', () => {
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
       assert.strictEqual(spans[0].attributes['gcp.method.type'], 'http');
+    });
+
+    it('manages span lifetime for resolved promises', async () => {
+      const result = await traceAttempt(
+        dynamicArgs,
+        staticArgs,
+        () => Promise.resolve('async-result'),
+      );
+      assert.strictEqual(result, 'async-result');
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans[0].events.length, 0);
+    });
+
+    it('does not end span prematurely for pending asynchronous promises', async () => {
+      let resolvePromise: (val: string) => void;
+      const asyncPromise = new Promise<string>(resolve => {
+        resolvePromise = resolve;
+      });
+
+      const resultPromise = traceAttempt(
+        dynamicArgs,
+        staticArgs,
+        () => asyncPromise,
+      );
+
+      // Verify the span is NOT closed while the promise is pending
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      resolvePromise!('success');
+      const result = await resultPromise;
+      assert.strictEqual(result, 'success');
+
+      // Span should only be ended after resolution
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports custom thenables that do not inherit from Promise', async () => {
+      const customThenable = {
+        then(onfulfilled?: (val: unknown) => void) {
+          setTimeout(() => {
+            if (onfulfilled) {
+              onfulfilled('custom-result');
+            }
+          }, 10);
+        },
+      };
+
+      const result = traceAttempt(
+        dynamicArgs,
+        staticArgs,
+        () => customThenable,
+      );
+      assert.strictEqual(result, customThenable);
+
+      const initialSpans = harness.getSpans('google-gax');
+      assert.strictEqual(initialSpans.length, 0);
+
+      await new Promise(resolve => setTimeout(resolve, 25));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('does not end span prematurely until asynchronous promise rejects', async () => {
+      let rejectPromise: (err: Error) => void;
+      const asyncPromise = new Promise((_resolve, reject) => {
+        rejectPromise = reject;
+      });
+
+      const error = new Error('async promise failure');
+      void traceAttempt(dynamicArgs, staticArgs, () => asyncPromise);
+
+      // Verify the span is NOT closed while the promise is pending
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      rejectPromise!(error);
+      await new Promise(resolve => setTimeout(resolve, 15));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(
+        spans[0].attributes['error.message'],
+        'async promise failure',
+      );
+      assert.strictEqual(spans[0].events.length, 1);
+    });
+
+    it('does not end span prematurely while stream is active and emitting data', () => {
+      const emitter = new EventEmitter();
+      const result = traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
+      assert.strictEqual(result, emitter);
+
+      // Span must not be finished when stream is created
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Emitting data chunks should not close the span
+      emitter.emit('data', 'chunk 1');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      emitter.emit('data', 'chunk 2');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Only when the stream finishes does the span end
+      emitter.emit('end');
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans[0].events.length, 0);
+    });
+
+    it('does not end span prematurely until stream emits error event', () => {
+      const emitter = new EventEmitter();
+      traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
+
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      emitter.emit('data', 'chunk');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      const error = new Error('stream failure');
+      emitter.emit('error', error);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(
+        spans[0].attributes['error.message'],
+        'stream failure',
+      );
+      assert.strictEqual(spans[0].events.length, 1);
+      assert.strictEqual(spans[0].events[0].name, 'exception');
+    });
+
+    it('does not end span prematurely until stream emits close event', () => {
+      const emitter = new EventEmitter();
+      traceAttempt(dynamicArgs, staticArgs, () => emitter, 'stream');
+
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      emitter.emit('data', 'chunk');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      emitter.emit('close');
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+  });
+
+  describe('handlePromise', () => {
+    it('waits for promise resolution before ending span', async () => {
+      let ended = false;
+      let resolvePromise: () => void;
+      const promise = new Promise<void>(resolve => {
+        resolvePromise = resolve;
+      });
+
+      handlePromise(
+        promise,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+      assert.strictEqual(ended, false);
+
+      resolvePromise!();
+      await new Promise(resolve => setTimeout(resolve, 15));
+      assert.strictEqual(ended, true);
+    });
+
+    it('records error and ends span when promise rejects', async () => {
+      let ended = false;
+      let recordedError: unknown;
+      const error = new Error('promise error');
+
+      handlePromise(
+        Promise.reject(error),
+        err => {
+          recordedError = err;
+        },
+        () => {
+          ended = true;
+        },
+      );
+
+      await new Promise(resolve => setTimeout(resolve, 15));
+      assert.strictEqual(ended, true);
+      assert.strictEqual(recordedError, error);
+    });
+
+    it('supports custom thenables', async () => {
+      let ended = false;
+      const thenable = {
+        then(onfulfilled?: (val?: unknown) => unknown) {
+          setTimeout(() => {
+            onfulfilled?.();
+          }, 10);
+        },
+      };
+
+      handlePromise(
+        thenable,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+      assert.strictEqual(ended, false);
+
+      await new Promise(resolve => setTimeout(resolve, 20));
+      assert.strictEqual(ended, true);
+    });
+  });
+
+  describe('handleStream', () => {
+    it('manages stream events and ends span on end', () => {
+      let ended = false;
+      const emitter = new EventEmitter();
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+
+      assert.strictEqual(ended, false);
+      emitter.emit('data', 'chunk');
+      assert.strictEqual(ended, false);
+
+      emitter.emit('end');
+      assert.strictEqual(ended, true);
+    });
+
+    it('ends span on stream close', () => {
+      let ended = false;
+      const emitter = new EventEmitter();
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+
+      assert.strictEqual(ended, false);
+      emitter.emit('close');
+      assert.strictEqual(ended, true);
+    });
+
+    it('records error and ends span on stream error', () => {
+      let ended = false;
+      let recordedError: unknown;
+      const error = new Error('stream failure');
+      const emitter = new EventEmitter();
+
+      handleStream(
+        emitter,
+        err => {
+          recordedError = err;
+        },
+        () => {
+          ended = true;
+        },
+      );
+
+      assert.strictEqual(ended, false);
+      emitter.emit('error', error);
+      assert.strictEqual(ended, true);
+      assert.strictEqual(recordedError, error);
     });
   });
 });
