@@ -718,8 +718,7 @@ describe('storage', function () {
         const isUblaError =
           reason === 'cannotUseAclWithUniformBucketLevelAccess' ||
           reason === 'conditionNotMet' ||
-          /uniform bucket-level access/i.test(message) ||
-          /\bacl\b/i.test(message);
+          /uniform bucket-level access/i.test(message);
 
         assert.ok(
           isUblaError,
@@ -1618,7 +1617,7 @@ describe('storage', function () {
       });
       await bucket.getMetadata();
       assert.strictEqual(
-        bucket.metadata?.lifecycle!.rule!.length,
+        bucket.metadata?.lifecycle?.rule?.length,
         numExistingRules + 2,
       );
     });
