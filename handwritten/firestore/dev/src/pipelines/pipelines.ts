@@ -1799,6 +1799,18 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * @beta
    * Performs an update operation using documents from previous stages.
    *
+   * @param transformedField - The first field transformation to apply.
+   * @param additionalFields - Additional field transformations to apply.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  update(
+    transformedField: AliasedExpression,
+    ...additionalFields: AliasedExpression[]
+  ): Pipeline;
+  /**
+   * @beta
+   * Performs an update operation using documents from previous stages.
+   *
    * @param transformedFields - The list of transformations to apply.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
@@ -1815,11 +1827,17 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   ): Pipeline;
   update(
     transformedFieldsOrMap?:
+      | AliasedExpression
       | AliasedExpression[]
       | Map<string, Expression>
       | Record<string, Expression>,
+    ...additionalFields: AliasedExpression[]
   ): Pipeline {
-    if (
+    if (isAliasedExpr(transformedFieldsOrMap)) {
+      return this._addStage(
+        new UpdateStage([transformedFieldsOrMap, ...additionalFields]),
+      );
+    } else if (
       transformedFieldsOrMap instanceof Map ||
       Array.isArray(transformedFieldsOrMap)
     ) {
@@ -1850,35 +1868,73 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * @beta
    * Performs an upsert operation on documents from previous stages.
    *
-   * @param transforms - Transformations to apply on upsert.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  upsert(): Pipeline;
+  /**
+   * @beta
+   * Performs an upsert operation on documents from previous stages.
+   *
+   * @param options - Options defining how this Upsert stage is evaluated.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  upsert(options: firestore.Pipelines.UpsertStageOptions): Pipeline;
+  /**
+   * @beta
+   * Performs an upsert operation on documents from previous stages.
+   *
+   * @param additionalField - The first additional field to apply on upsert.
+   * @param additionalFields - Additional fields to apply on upsert.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  upsert(
+    additionalField: AliasedExpression,
+    ...additionalFields: AliasedExpression[]
+  ): Pipeline;
+  /**
+   * @beta
+   * Performs an upsert operation on documents from previous stages.
+   *
+   * @param additionalFields - Additional fields to apply on upsert.
    * @param options - Options defining how this Upsert stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   upsert(
-    transforms?: AliasedExpression[],
-    options?: Omit<firestore.Pipelines.UpsertStageOptions, 'transforms'>,
+    additionalFields: AliasedExpression[],
+    options?: firestore.Pipelines.UpsertStageOptions,
   ): Pipeline;
-  upsert(options?: firestore.Pipelines.UpsertStageOptions): Pipeline;
   upsert(
-    transformsOrOptions?:
+    additionalFieldsOrOptions?:
+      | AliasedExpression
       | AliasedExpression[]
       | firestore.Pipelines.UpsertStageOptions,
-    options?: Omit<firestore.Pipelines.UpsertStageOptions, 'transforms'>,
+    ...restArgs: unknown[]
   ): Pipeline {
-    let transforms: AliasedExpression[] = [];
-    let opts: InternalUpsertStageOptions = {};
+    let additionalFields: AliasedExpression[] | undefined;
+    let options: firestore.Pipelines.UpsertStageOptions | undefined;
 
-    if (Array.isArray(transformsOrOptions)) {
-      transforms = transformsOrOptions;
-      opts = (options ?? {}) as InternalUpsertStageOptions;
-    } else if (transformsOrOptions) {
-      const {transforms: t, ...rest} =
-        transformsOrOptions as firestore.Pipelines.UpsertStageOptions;
-      transforms = (t ?? []) as AliasedExpression[];
-      opts = rest as InternalUpsertStageOptions;
+    if (isAliasedExpr(additionalFieldsOrOptions)) {
+      additionalFields = [
+        additionalFieldsOrOptions,
+        ...(restArgs as AliasedExpression[]),
+      ];
+      options = undefined;
+    } else if (Array.isArray(additionalFieldsOrOptions)) {
+      additionalFields = additionalFieldsOrOptions;
+      options = restArgs[0] as
+        | firestore.Pipelines.UpsertStageOptions
+        | undefined;
+    } else {
+      additionalFields = undefined;
+      options = additionalFieldsOrOptions;
     }
 
-    return this._addStage(new UpsertStage(transforms, opts));
+    return this._addStage(
+      new UpsertStage({
+        ...options,
+        ...(additionalFields ? {additionalFields} : {}),
+      }),
+    );
   }
 
   /**

@@ -480,14 +480,15 @@ describe.skipClassic('Pipeline class', () => {
         expect(snap.get('title')).to.equal('New Book');
       });
 
-      it('can execute upsert stage with transforms', async () => {
+      it('can execute upsert stage with additionalFields', async () => {
         const upsertDocId = 'upsertBook_1';
         const res = await firestore
           .pipeline()
           .literals([{title: 'Upserted Book', count: 1}])
-          .upsert([add(field('count'), constant(1)).as('count')], {
+          .upsert({
             collection: dmlCol.path,
             documentIdExpression: constant(upsertDocId),
+            additionalFields: [add(field('count'), constant(1)).as('count')],
           })
           .execute({atomic: true});
 

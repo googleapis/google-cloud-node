@@ -1042,9 +1042,14 @@ export class InsertStage implements Stage {
  */
 export type InternalUpsertStageOptions = Omit<
   firestore.Pipelines.UpsertStageOptions,
-  'transforms' | 'collection' | 'documentIdExpression'
+  'additionalFields' | 'transforms' | 'collection' | 'documentIdExpression'
 > & {
-  transforms?: AliasedExpression[];
+  additionalFields?:
+    | AliasedExpression[]
+    | firestore.Pipelines.AliasedExpression[];
+  transforms?:
+    | AliasedExpression[]
+    | firestore.Pipelines.AliasedExpression[];
   collection?: string | CollectionReference | firestore.CollectionReference;
   documentIdExpression?: string | Expression | firestore.Pipelines.Expression;
 };
@@ -1057,27 +1062,48 @@ export class UpsertStage implements Stage {
   readonly optionsUtil = new OptionsUtil({});
   private readonly collectionPath?: string;
   private readonly documentIdExpr?: Expression;
-  private readonly transforms: Map<string, Expression>;
+  private readonly additionalFields: Map<string, Expression>;
+
+  private readonly options: InternalUpsertStageOptions;
 
   constructor(
-    transforms: AliasedExpression[] = [],
-    private options: InternalUpsertStageOptions = {},
+    additionalFieldsOrOptions?:
+      | AliasedExpression[]
+      | InternalUpsertStageOptions,
+    options?: InternalUpsertStageOptions,
   ) {
-    this.transforms = selectablesToMap(transforms);
-    if (options.collection) {
+    let fields: AliasedExpression[] = [];
+    let opts: InternalUpsertStageOptions = {};
+
+    if (Array.isArray(additionalFieldsOrOptions)) {
+      fields = additionalFieldsOrOptions;
+      opts = options ?? {};
+    } else if (additionalFieldsOrOptions) {
+      opts = additionalFieldsOrOptions;
+    } else if (options) {
+      opts = options;
+    }
+    this.options = opts;
+
+    const resolvedFields =
+      (opts.additionalFields ??
+        opts.transforms ??
+        fields) as AliasedExpression[];
+    this.additionalFields = selectablesToMap(resolvedFields);
+    if (opts.collection) {
       this.collectionPath =
-        typeof options.collection === 'string'
-          ? options.collection
-          : (options.collection as CollectionReference).path;
+        typeof opts.collection === 'string'
+          ? opts.collection
+          : (opts.collection as CollectionReference).path;
       if (!this.collectionPath.startsWith('/')) {
         this.collectionPath = '/' + this.collectionPath;
       }
     }
-    if (options.documentIdExpression) {
+    if (opts.documentIdExpression) {
       this.documentIdExpr =
-        typeof options.documentIdExpression === 'string'
-          ? field(options.documentIdExpression)
-          : (options.documentIdExpression as Expression);
+        typeof opts.documentIdExpression === 'string'
+          ? field(opts.documentIdExpression)
+          : (opts.documentIdExpression as Expression);
     }
   }
 
@@ -1096,7 +1122,7 @@ export class UpsertStage implements Stage {
       options['document_id'] = this.documentIdExpr._toProto(serializer);
     }
 
-    const args: api.IValue[] = [serializer.encodeValue(this.transforms)!];
+    const args: api.IValue[] = [serializer.encodeValue(this.additionalFields)!];
 
     return {
       name: this.name,
@@ -1106,7 +1132,7 @@ export class UpsertStage implements Stage {
   }
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    validateUserDataHelper(this.transforms, ignoreUndefinedProperties);
+    validateUserDataHelper(this.additionalFields, ignoreUndefinedProperties);
     if (this.documentIdExpr) {
       validateUserDataHelper(this.documentIdExpr, ignoreUndefinedProperties);
     }

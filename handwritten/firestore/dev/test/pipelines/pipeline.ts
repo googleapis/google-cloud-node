@@ -19,7 +19,9 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {createInstance, stream} from '../util/helpers';
 import {google} from '../../protos/firestore_v1_proto_api';
-import {Timestamp} from '../../src';
+import {Pipelines, Timestamp} from '../../src';
+import constant = Pipelines.constant;
+import field = Pipelines.field;
 import IExecutePipelineRequest = google.firestore.v1.IExecutePipelineRequest;
 import IExecutePipelineResponse = google.firestore.v1.IExecutePipelineResponse;
 
@@ -269,7 +271,7 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
       .literals([{foo: 'bar'}])
       .insert({collection: 'foo', documentIdExpression: 'doc1'})
       .update()
-      .upsert([], {collection: 'bar'})
+      .upsert({collection: 'bar', additionalFields: []})
       .delete()
       .execute();
 
@@ -311,6 +313,337 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
     });
 
     expect(stages[4].name).to.equal('delete');
+  });
+
+  describe('update stage overloads', () => {
+    it('serializes 0-arg update()', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore.pipeline().collection('foo').update().execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('update');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {},
+          },
+        },
+      ]);
+    });
+
+    it('serializes single expression update(expr)', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .update(constant(true).as('active'))
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('update');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+            },
+          },
+        },
+      ]);
+    });
+
+    it('serializes multiple variadic expressions update(expr1, expr2)', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .update(constant(true).as('active'), constant(1).as('count'))
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('update');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+              count: {integerValue: 1},
+            },
+          },
+        },
+      ]);
+    });
+
+    it('serializes array of expressions update([expr])', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .update([constant(true).as('active')])
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('update');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+            },
+          },
+        },
+      ]);
+    });
+  });
+
+  describe('upsert stage overloads', () => {
+    it('serializes 0-arg upsert()', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore.pipeline().collection('foo').upsert().execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('upsert');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {},
+          },
+        },
+      ]);
+      expect(stages[1].options).to.be.undefined;
+    });
+
+    it('serializes options-only upsert(options)', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .upsert({
+          collection: 'users',
+          documentIdExpression: field('id'),
+        })
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('upsert');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {},
+          },
+        },
+      ]);
+      expect(stages[1].options).to.deep.equal({
+        collection: {referenceValue: '/users'},
+        document_id: {fieldReferenceValue: 'id'},
+      });
+    });
+
+    it('serializes single variadic expression upsert(expr)', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .upsert(constant(true).as('active'))
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('upsert');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+            },
+          },
+        },
+      ]);
+      expect(stages[1].options).to.be.undefined;
+    });
+
+    it('serializes multiple variadic expressions upsert(expr1, expr2)', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .upsert(constant(true).as('active'), constant(1).as('count'))
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('upsert');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+              count: {integerValue: 1},
+            },
+          },
+        },
+      ]);
+      expect(stages[1].options).to.be.undefined;
+    });
+
+    it('serializes array of expressions without options upsert([expr])', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .upsert([constant(true).as('active')])
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('upsert');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+            },
+          },
+        },
+      ]);
+      expect(stages[1].options).to.be.undefined;
+    });
+
+    it('serializes array of expressions with options upsert([expr], options)', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .upsert([constant(true).as('active')], {collection: 'users'})
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('upsert');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+            },
+          },
+        },
+      ]);
+      expect(stages[1].options).to.deep.equal({
+        collection: {referenceValue: '/users'},
+      });
+    });
+
+    it('supports deprecated transforms option for backward compatibility', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({
+        executePipeline: spy,
+      });
+
+      await firestore
+        .pipeline()
+        .collection('foo')
+        .upsert({
+          collection: 'users',
+          transforms: [constant(true).as('active')],
+        })
+        .execute();
+
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+
+      expect(stages[1].name).to.equal('upsert');
+      expect(stages[1].args).to.deep.equal([
+        {
+          mapValue: {
+            fields: {
+              active: {booleanValue: true},
+            },
+          },
+        },
+      ]);
+      expect(stages[1].options).to.deep.equal({
+        collection: {referenceValue: '/users'},
+      });
+    });
   });
 });
 

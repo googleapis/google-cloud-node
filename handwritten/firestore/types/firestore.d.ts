@@ -12722,6 +12722,18 @@ declare namespace FirebaseFirestore {
        * @beta
        * Performs an update operation using documents from previous stages.
        *
+       * @param transformedField - The first field transformation to apply.
+       * @param additionalFields - Additional field transformations to apply.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      update(
+        transformedField: AliasedExpression,
+        ...additionalFields: AliasedExpression[]
+      ): Pipeline;
+      /**
+       * @beta
+       * Performs an update operation using documents from previous stages.
+       *
        * @param transformedFields - The list of transformations to apply.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
@@ -12748,15 +12760,41 @@ declare namespace FirebaseFirestore {
        * @beta
        * Performs an upsert operation on documents from previous stages.
        *
-       * @param transforms - Transformations to apply on upsert.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      upsert(): Pipeline;
+      /**
+       * @beta
+       * Performs an upsert operation on documents from previous stages.
+       *
+       * @param options - Options defining how this Upsert stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      upsert(options: UpsertStageOptions): Pipeline;
+      /**
+       * @beta
+       * Performs an upsert operation on documents from previous stages.
+       *
+       * @param additionalField - The first additional field to apply on upsert.
+       * @param additionalFields - Additional fields to apply on upsert.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      upsert(
+        additionalField: AliasedExpression,
+        ...additionalFields: AliasedExpression[]
+      ): Pipeline;
+      /**
+       * @beta
+       * Performs an upsert operation on documents from previous stages.
+       *
+       * @param additionalFields - Additional fields to apply on upsert.
        * @param options - Options defining how this Upsert stage is evaluated.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       upsert(
-        transforms?: AliasedExpression[],
-        options?: Omit<UpsertStageOptions, 'transforms'>,
+        additionalFields: AliasedExpression[],
+        options?: UpsertStageOptions,
       ): Pipeline;
-      upsert(options?: UpsertStageOptions): Pipeline;
       /**
        * Appends a literals stage to the pipeline.
        *
@@ -13962,6 +14000,10 @@ declare namespace FirebaseFirestore {
      * Options defining how an Upsert stage is evaluated.
      */
     export type UpsertStageOptions = StageOptions & {
+      additionalFields?: AliasedExpression[];
+      /**
+       * @deprecated Use `additionalFields` instead.
+       */
       transforms?: AliasedExpression[];
       collection?: string | CollectionReference;
       documentIdExpression?: string | Expression;
