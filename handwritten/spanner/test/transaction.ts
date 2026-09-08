@@ -339,6 +339,7 @@ describe('Transaction', () => {
 
       beforeEach(() => {
         PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        REQUEST_STREAM.callsFake(() => new EventEmitter());
       });
 
       it('should send the correct request', () => {
@@ -387,6 +388,26 @@ describe('Transaction', () => {
         const {reqOpts} = REQUEST_STREAM.lastCall.args[0];
 
         assert.deepStrictEqual(reqOpts.requestOptions, {requestTag});
+      });
+
+      it('should not mutate the original request object', () => {
+        const request = {
+          keys: ['1'],
+          ranges: [{}, {}],
+          columns: ['SingerId'],
+          json: true,
+          jsonOptions: {},
+          gaxOptions: {},
+          maxResumeRetries: 5,
+          requestOptions: {requestTag: 'tag'},
+          directedReadOptions: {},
+          columnsMetadata: {},
+        };
+        const requestCopy = Object.assign({}, request);
+
+        snapshot.createReadStream(TABLE, request);
+
+        assert.deepStrictEqual(request, requestCopy);
       });
 
       it('should send the correct `reqOpts`', () => {
@@ -726,6 +747,7 @@ describe('Transaction', () => {
 
       beforeEach(() => {
         PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        REQUEST_STREAM.callsFake(() => new EventEmitter());
       });
 
       it('should send the correct request', () => {
@@ -763,6 +785,68 @@ describe('Transaction', () => {
         const {reqOpts} = REQUEST_STREAM.lastCall.args[0];
 
         assert.deepStrictEqual(reqOpts.transaction, expectedTransaction);
+      });
+
+      it('should not mutate the original query object', () => {
+        const query = {
+          sql: 'SELECT * FROM `MyTable` WHERE id = @id',
+          json: true,
+          jsonOptions: {},
+          gaxOptions: {},
+          maxResumeRetries: 5,
+          params: {id: '1'},
+          types: {},
+          requestOptions: {requestTag: 'foo'},
+          columnsMetadata: {},
+        };
+        const queryCopy = {
+          sql: query.sql,
+          json: true,
+          jsonOptions: {},
+          gaxOptions: {},
+          maxResumeRetries: 5,
+          params: Object.assign({}, query.params),
+          types: Object.assign({}, query.types),
+          requestOptions: Object.assign({}, query.requestOptions),
+          columnsMetadata: {},
+        };
+
+        snapshot.requestOptions = {transactionTag: 'tx-tag'};
+        snapshot.runStream(query);
+
+        assert.deepStrictEqual(query, queryCopy);
+      });
+
+      it('should preserve parameters and metadata on multiple makeRequest calls', () => {
+        const encodeParamsSpy = sandbox.spy(Snapshot, 'encodeParams');
+        const query = {
+          sql: 'SELECT * FROM `MyTable` WHERE id = @id',
+          params: {id: '1'},
+          types: {id: 'string'},
+          requestOptions: {requestTag: 'custom-tag'},
+        };
+        snapshot.runStream(query);
+
+        const makeRequest = PARTIAL_RESULT_STREAM.lastCall.args[0];
+        makeRequest();
+        const firstCallReqOpts = REQUEST_STREAM.lastCall.args[0].reqOpts;
+
+        makeRequest('resume-token');
+        const secondCallReqOpts = REQUEST_STREAM.lastCall.args[0].reqOpts;
+
+        assert.strictEqual(encodeParamsSpy.callCount, 1);
+        assert.deepStrictEqual(
+          firstCallReqOpts.params,
+          secondCallReqOpts.params,
+        );
+        assert.deepStrictEqual(
+          firstCallReqOpts.paramTypes,
+          secondCallReqOpts.paramTypes,
+        );
+        assert.deepStrictEqual(
+          firstCallReqOpts.requestOptions,
+          secondCallReqOpts.requestOptions,
+        );
       });
 
       it('should set request tag', () => {
@@ -845,6 +929,22 @@ describe('Transaction', () => {
 
         assert.strictEqual(call1.reqOpts.seqno, 1);
         assert.strictEqual(call2.reqOpts.seqno, 2);
+      });
+
+      it('should preserve the same `seqno` across makeRequest retries and resumptions', () => {
+        snapshot.runStream(QUERY);
+
+        const makeRequest = PARTIAL_RESULT_STREAM.lastCall.args[0];
+        makeRequest();
+        const call1 = REQUEST_STREAM.lastCall.args[0];
+
+        // Simulate transaction ID arrival and stream resumption
+        snapshot.id = 'tx-123';
+        makeRequest('resume-token');
+        const call2 = REQUEST_STREAM.lastCall.args[0];
+
+        assert.strictEqual(call1.reqOpts.seqno, 1);
+        assert.strictEqual(call2.reqOpts.seqno, 1);
       });
 
       it('should pass a stream to `PartialResultStream`', () => {
@@ -1109,6 +1209,14 @@ describe('Transaction', () => {
 
         assert.deepStrictEqual(keySet, fakeKeySet);
       });
+
+      it('should not mutate the original keySet object', () => {
+        const fakeKeySet = {keys: []};
+        const fakeKeySetCopy = Object.assign({}, fakeKeySet);
+        Snapshot.encodeKeySet({keySet: fakeKeySet, keys: ['a']});
+
+        assert.deepStrictEqual(fakeKeySet, fakeKeySetCopy);
+      });
     });
 
     describe('encodeTimestampBounds', () => {
@@ -1273,6 +1381,80 @@ describe('Transaction', () => {
         });
 
         assert.strictEqual(paramTypes.a, expectedTypes.a);
+      });
+
+      it('should not mutate the original types or paramTypes objects', () => {
+        const fakeParams = {a: 'foo', b: 3};
+        const fakeTypes = {b: 'number'};
+        const fakeParamTypes = {};
+
+        Snapshot.encodeParams({
+          params: fakeParams,
+          types: fakeTypes,
+          paramTypes: fakeParamTypes,
+        });
+
+        assert.deepStrictEqual(fakeTypes, {b: 'number'});
+        assert.deepStrictEqual(fakeParamTypes, {});
+      });
+
+      it('should return empty params and paramTypes for parameterless queries', () => {
+        const result = Snapshot.encodeParams({});
+        assert.deepStrictEqual(result, {
+          params: {fields: {}},
+          paramTypes: {},
+        });
+      });
+
+      it('should omit TYPE_CODE_UNSPECIFIED when SPANNER_ENABLE_UUID_AS_UNTYPED is true', () => {
+        const savedEnv = process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'];
+        try {
+          process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = 'true';
+          const fakeParams = {a: 'some-uuid'};
+          sandbox.stub(codec, 'getType').returns({type: 'unspecified'});
+          sandbox.stub(codec, 'createTypeObject').returns({
+            code: 'TYPE_CODE_UNSPECIFIED',
+          } as any);
+
+          const {paramTypes} = Snapshot.encodeParams({params: fakeParams});
+          assert.strictEqual(paramTypes.a, undefined);
+        } finally {
+          if (savedEnv === undefined) {
+            delete process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'];
+          } else {
+            process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = savedEnv;
+          }
+        }
+      });
+    });
+
+    describe('configureTagOptions', () => {
+      it('should not mutate the original requestOptions object', () => {
+        const originalRequestOptions = {requestTag: 'tag-1'};
+        const copy = Object.assign({}, originalRequestOptions);
+        const configured = snapshot.configureTagOptions(
+          false,
+          'tx-tag',
+          originalRequestOptions,
+        );
+
+        assert.deepStrictEqual(originalRequestOptions, copy);
+        assert.deepStrictEqual(configured, {
+          requestTag: 'tag-1',
+          transactionTag: 'tx-tag',
+        });
+      });
+
+      it('should return a new object when singleUse is true', () => {
+        const originalRequestOptions = {requestTag: 'tag-1'};
+        const configured = snapshot.configureTagOptions(
+          true,
+          'tx-tag',
+          originalRequestOptions,
+        );
+
+        assert.notStrictEqual(configured, originalRequestOptions);
+        assert.deepStrictEqual(configured, originalRequestOptions);
       });
     });
   });
