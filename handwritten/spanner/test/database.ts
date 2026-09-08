@@ -3253,6 +3253,54 @@ describe('Database', () => {
         done();
       });
     });
+
+    let restoreProcessListeners: (() => void) | null = null;
+
+    afterEach(() => {
+      if (restoreProcessListeners) {
+        restoreProcessListeners();
+        restoreProcessListeners = null;
+      }
+    });
+
+    it('should not treat an error in release as a transaction runner failure', done => {
+      const releaseError = new Error('release failed');
+      const releaseStub = (
+        sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
+      )
+        .withArgs(SESSION)
+        .throws(releaseError);
+
+      sandbox.stub(FakeTransactionRunner.prototype, 'run').resolves();
+
+      const runFunction = sandbox.spy();
+
+      const originalListeners = process.listeners('uncaughtException');
+      process.removeAllListeners('uncaughtException');
+      restoreProcessListeners = () => {
+        process.removeAllListeners('uncaughtException');
+        for (const listener of originalListeners) {
+          process.on('uncaughtException', listener);
+        }
+      };
+
+      process.once('uncaughtException', (error: Error) => {
+        if (restoreProcessListeners) {
+          restoreProcessListeners();
+          restoreProcessListeners = null;
+        }
+        try {
+          assert.strictEqual(error, releaseError);
+          assert.strictEqual(releaseStub.callCount, 1);
+          sinon.assert.notCalled(runFunction);
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+
+      database.runTransaction(runFunction);
+    });
   });
 
   describe('runTransactionAsync', () => {
