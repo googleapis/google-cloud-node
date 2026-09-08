@@ -19,12 +19,12 @@
  * Benchmark Suite: Node.js vs. Go Official Cloud Spanner Client Libraries
  * 
  * Compares standard customer usage of:
- * - @google-cloud/spanner (Node.js official npm package)
+ * - @google-cloud/spanner (Node.js official npm package with dynamic channel pooling)
  * - cloud.google.com/go/spanner (Go official client library)
  * 
  * Matrix:
  * - Concurrency levels: [1, 2, 4, 8, 16, 25]
- * - Channel counts    : [1, 2, 4, 8]
+ * - Channel Pooling   : Dynamic (Default customer configuration)
  * - Scenarios:
  *   1. Point Select Query (SELECT 1 as col_int, 'CONSTANT' as col_const)
  *   2. 1000 Row Read Query (SELECT * FROM AsyncBenchmarkTable LIMIT 1000)
@@ -56,7 +56,6 @@ const DURATION_SEC = parseInt(process.env.BENCHMARK_DURATION_SEC || (process.env
 const WARMUP_SEC = parseInt(process.env.BENCHMARK_WARMUP_SEC || (process.env.SHORT_BENCHMARK ? '1' : '2'), 10);
 
 const CONCURRENCY_LEVELS = [1, 2, 4, 8, 16, 25];
-const CHANNEL_COUNTS = [1, 2, 4, 8];
 
 const GO_BENCH_DIR = path.join(__dirname, 'go-bench');
 const GO_BENCH_BIN = path.join(GO_BENCH_DIR, 'spanner_go_bench');
@@ -232,13 +231,12 @@ async function runNodeBenchmark(database, sql, concurrency, durationSec, warmupS
 /**
  * Runs Go Spanner Benchmark using the compiled standalone Go customer client binary
  */
-function runGoBenchmark(sql, channels, concurrency, durationSec, warmupSec) {
+function runGoBenchmark(sql, concurrency, durationSec, warmupSec) {
   const args = [
     '-project', PROJECT,
     '-instance', INSTANCE,
     '-database', DATABASE,
     '-sql', sql,
-    '-channels', String(channels),
     '-concurrency', String(concurrency),
     '-duration', String(durationSec),
     '-warmup', String(warmupSec),
@@ -255,15 +253,16 @@ function runGoBenchmark(sql, channels, concurrency, durationSec, warmupSec) {
 }
 
 async function runScenario(scenarioName, sql) {
-  console.log('\n' + '='.repeat(120));
+  console.log('\n' + '='.repeat(130));
   console.log(`SCENARIO: ${scenarioName}`);
   console.log(`Query: ${sql}`);
+  console.log(`Channel Pooling: Dynamic (Default customer library behavior)`);
   console.log(`Duration: ${DURATION_SEC}s per test point | Warmup: ${WARMUP_SEC}s`);
-  console.log('='.repeat(120));
+  console.log('='.repeat(130));
 
   console.log([
     'Concurrency'.padEnd(12),
-    'Channels'.padEnd(10),
+    'Channel Pool'.padEnd(18),
     'Node QPS / P50'.padEnd(20),
     'Go QPS / P50'.padEnd(20),
     'Node P95 / P99'.padEnd(20),
@@ -272,93 +271,80 @@ async function runScenario(scenarioName, sql) {
     'Go CPU'.padEnd(10),
     'Go/Node Ratio'.padEnd(14)
   ].join(' | '));
-  console.log('-'.repeat(140));
+  console.log('-'.repeat(145));
 
   const scenarioResults = [];
 
-  // Pre-initialize Node.js clients for each channel configuration
-  const nodeDatabases = {};
-  for (const ch of CHANNEL_COUNTS) {
-    const spanner = new Spanner({
-      projectId: PROJECT,
-      'grpc.gcp.channel_pool.max_size': ch,
-    });
-    nodeDatabases[ch] = spanner.instance(INSTANCE).database(DATABASE);
-    // Prevent unhandled errors from crashing
-    nodeDatabases[ch].on('error', () => {});
-  }
+  // Initialize Node.js Spanner client with default configuration (grpc-gcp dynamic channel pooling)
+  const spanner = new Spanner({ projectId: PROJECT });
+  const nodeDb = spanner.instance(INSTANCE).database(DATABASE);
+  nodeDb.on('error', () => {});
 
   for (const concurrency of CONCURRENCY_LEVELS) {
-    for (const channels of CHANNEL_COUNTS) {
-      const nodeDb = nodeDatabases[channels];
+    // 1. Run Node.js Benchmark
+    const nodeRes = await runNodeBenchmark(nodeDb, sql, concurrency, DURATION_SEC, WARMUP_SEC);
 
-      // 1. Run Node.js Benchmark
-      const nodeRes = await runNodeBenchmark(nodeDb, sql, concurrency, DURATION_SEC, WARMUP_SEC);
+    // 2. Run Go Benchmark
+    const goRes = runGoBenchmark(sql, concurrency, DURATION_SEC, WARMUP_SEC);
 
-      // 2. Run Go Benchmark
-      const goRes = runGoBenchmark(sql, channels, concurrency, DURATION_SEC, WARMUP_SEC);
+    const ratioQps = nodeRes.qps > 0 ? (goRes.qps / nodeRes.qps).toFixed(2) + 'x' : 'N/A';
+    const nodeQpsP50 = `${nodeRes.qps.toFixed(1)} / ${nodeRes.p50.toFixed(1)}ms`;
+    const goQpsP50 = `${goRes.qps.toFixed(1)} / ${goRes.p50.toFixed(1)}ms`;
+    const nodeP95P99 = `${nodeRes.p95.toFixed(1)} / ${nodeRes.p99.toFixed(1)}ms`;
+    const goP95P99 = `${goRes.p95.toFixed(1)} / ${goRes.p99.toFixed(1)}ms`;
 
-      const ratioQps = nodeRes.qps > 0 ? (goRes.qps / nodeRes.qps).toFixed(2) + 'x' : 'N/A';
-      const nodeQpsP50 = `${nodeRes.qps.toFixed(1)} / ${nodeRes.p50.toFixed(1)}ms`;
-      const goQpsP50 = `${goRes.qps.toFixed(1)} / ${goRes.p50.toFixed(1)}ms`;
-      const nodeP95P99 = `${nodeRes.p95.toFixed(1)} / ${nodeRes.p99.toFixed(1)}ms`;
-      const goP95P99 = `${goRes.p95.toFixed(1)} / ${goRes.p99.toFixed(1)}ms`;
+    console.log([
+      String(concurrency).padEnd(12),
+      'Dynamic (Default)'.padEnd(18),
+      nodeQpsP50.padEnd(20),
+      goQpsP50.padEnd(20),
+      nodeP95P99.padEnd(20),
+      goP95P99.padEnd(20),
+      `${nodeRes.cpuUtil.toFixed(1)}%`.padEnd(10),
+      `${goRes.cpuUtil.toFixed(1)}%`.padEnd(10),
+      ratioQps.padEnd(14)
+    ].join(' | '));
 
-      console.log([
-        String(concurrency).padEnd(12),
-        String(channels).padEnd(10),
-        nodeQpsP50.padEnd(20),
-        goQpsP50.padEnd(20),
-        nodeP95P99.padEnd(20),
-        goP95P99.padEnd(20),
-        `${nodeRes.cpuUtil.toFixed(1)}%`.padEnd(10),
-        `${goRes.cpuUtil.toFixed(1)}%`.padEnd(10),
-        ratioQps.padEnd(14)
-      ].join(' | '));
-
-      scenarioResults.push({
-        concurrency,
-        channels,
-        node: nodeRes,
-        go: goRes,
-        qpsRatio: nodeRes.qps > 0 ? goRes.qps / nodeRes.qps : 0,
-        p50Ratio: nodeRes.p50 > 0 ? goRes.p50 / nodeRes.p50 : 0
-      });
-    }
-    console.log('-'.repeat(140));
+    scenarioResults.push({
+      concurrency,
+      channelPool: 'Dynamic (Default)',
+      node: nodeRes,
+      go: goRes,
+      qpsRatio: nodeRes.qps > 0 ? goRes.qps / nodeRes.qps : 0,
+      p50Ratio: nodeRes.p50 > 0 ? goRes.p50 / nodeRes.p50 : 0
+    });
   }
 
-  // Close Node clients
-  for (const ch of Object.keys(nodeDatabases)) {
-    try {
-      await nodeDatabases[ch].close();
-    } catch (e) {}
-  }
+  // Close Node client
+  try {
+    await nodeDb.close();
+  } catch (e) {}
 
   return scenarioResults;
 }
 
 function generateMarkdownReport(results) {
   let md = `# Cloud Spanner Official Client Libraries Benchmark: Node.js vs. Go\n\n`;
-  md += `This report compares standard customer usage of the official **Node.js client library** (\`@google-cloud/spanner\`) and the official **Go client library** (\`cloud.google.com/go/spanner\`) across multiple concurrency levels and gRPC channel pool sizes.\n\n`;
+  md += `This report compares standard customer usage of the official **Node.js client library** (\`@google-cloud/spanner\`) and the official **Go client library** (\`cloud.google.com/go/spanner\`) across concurrency levels using default dynamic channel pooling.\n\n`;
 
   md += `## 1. System & Environment Information\n\n`;
   md += `* **OS**: \`${os.type()} ${os.release()} (${os.arch()})\`\n`;
   md += `* **CPU Cores**: \`${os.cpus().length} core(s)\`\n`;
   md += `* **Node.js Version**: \`${process.version}\`\n`;
   md += `* **Database Target**: \`projects/${PROJECT}/instances/${INSTANCE}/databases/${DATABASE}\`\n`;
+  md += `* **Channel Pooling**: \`Dynamic (Default customer library behavior)\`\n`;
   md += `* **Duration Per Point**: \`${DURATION_SEC} seconds\` (\`+${WARMUP_SEC}s warmup\`)\n\n`;
 
   for (const scenario of results) {
     md += `## 2. ${scenario.name}\n\n`;
     md += `**Query**: \`${scenario.sql}\`\n\n`;
 
-    md += `| Concurrency | Channels | Node QPS | Go QPS | Go/Node QPS Ratio | Node P50 | Go P50 | Node P95 | Go P95 | Node CPU | Go CPU |\n`;
+    md += `| Concurrency | Channel Pool | Node QPS | Go QPS | Go/Node QPS Ratio | Node P50 | Go P50 | Node P95 | Go P95 | Node CPU | Go CPU |\n`;
     md += `| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n`;
 
     for (const r of scenario.data) {
       const qpsRatio = r.qpsRatio.toFixed(2) + 'x';
-      md += `| **${r.concurrency}** | **${r.channels}** | ${r.node.qps.toFixed(1)} | ${r.go.qps.toFixed(1)} | **${qpsRatio}** | ${r.node.p50.toFixed(2)} ms | ${r.go.p50.toFixed(2)} ms | ${r.node.p95.toFixed(2)} ms | ${r.go.p95.toFixed(2)} ms | ${r.node.cpuUtil.toFixed(1)}% | ${r.go.cpuUtil.toFixed(1)}% |\n`;
+      md += `| **${r.concurrency}** | Dynamic (Default) | ${r.node.qps.toFixed(1)} | ${r.go.qps.toFixed(1)} | **${qpsRatio}** | ${r.node.p50.toFixed(2)} ms | ${r.go.p50.toFixed(2)} ms | ${r.node.p95.toFixed(2)} ms | ${r.go.p95.toFixed(2)} ms | ${r.node.cpuUtil.toFixed(1)}% | ${r.go.cpuUtil.toFixed(1)}% |\n`;
     }
     md += `\n`;
   }
@@ -373,8 +359,8 @@ async function main() {
   console.log(`Node.js Version : ${process.version}`);
   console.log(`OS Platform     : ${os.type()} ${os.arch()} (${os.cpus().length} vCPU cores)`);
   console.log(`Target Database : projects/${PROJECT}/instances/${INSTANCE}/databases/${DATABASE}`);
-  console.log(`Concurrency Grid: ${CONCURRENCY_LEVELS.join(', ')}`);
-  console.log(`Channels Grid   : ${CHANNEL_COUNTS.join(', ')}\n`);
+  console.log(`Channel Pooling : Dynamic (Default customer library behavior)`);
+  console.log(`Concurrency Grid: ${CONCURRENCY_LEVELS.join(', ')}\n`);
 
   ensureGoBinary();
 
