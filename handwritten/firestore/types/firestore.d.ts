@@ -14131,7 +14131,7 @@ declare namespace FirebaseFirestore {
      */
     export type InsertStageOptions = StageOptions & {
       collection?: string | CollectionReference;
-      documentId?: string | Expression;
+      documentIdExpression?: string | Expression;
     };
 
     /**
@@ -14140,7 +14140,7 @@ declare namespace FirebaseFirestore {
     export type UpsertStageOptions = StageOptions & {
       transforms?: AliasedExpression[];
       collection?: string | CollectionReference;
-      documentId?: string | Expression;
+      documentIdExpression?: string | Expression;
     };
 
     /**

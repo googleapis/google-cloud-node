@@ -975,10 +975,10 @@ export class UpdateStage implements Stage {
  */
 export type InternalInsertStageOptions = Omit<
   firestore.Pipelines.InsertStageOptions,
-  'collection' | 'documentId'
+  'collection' | 'documentIdExpression'
 > & {
   collection?: string | CollectionReference | firestore.CollectionReference;
-  documentId?: string | Expression | firestore.Pipelines.Expression;
+  documentIdExpression?: string | Expression | firestore.Pipelines.Expression;
 };
 
 /**
@@ -1000,11 +1000,11 @@ export class InsertStage implements Stage {
         this.collectionPath = '/' + this.collectionPath;
       }
     }
-    if (options.documentId) {
+    if (options.documentIdExpression) {
       this.documentIdExpr =
-        typeof options.documentId === 'string'
-          ? field(options.documentId)
-          : (options.documentId as Expression);
+        typeof options.documentIdExpression === 'string'
+          ? field(options.documentIdExpression)
+          : (options.documentIdExpression as Expression);
     }
   }
 
@@ -1042,11 +1042,11 @@ export class InsertStage implements Stage {
  */
 export type InternalUpsertStageOptions = Omit<
   firestore.Pipelines.UpsertStageOptions,
-  'transforms' | 'collection' | 'documentId'
+  'transforms' | 'collection' | 'documentIdExpression'
 > & {
   transforms?: AliasedExpression[];
   collection?: string | CollectionReference | firestore.CollectionReference;
-  documentId?: string | Expression | firestore.Pipelines.Expression;
+  documentIdExpression?: string | Expression | firestore.Pipelines.Expression;
 };
 
 /**
@@ -1073,11 +1073,11 @@ export class UpsertStage implements Stage {
         this.collectionPath = '/' + this.collectionPath;
       }
     }
-    if (options.documentId) {
+    if (options.documentIdExpression) {
       this.documentIdExpr =
-        typeof options.documentId === 'string'
-          ? field(options.documentId)
-          : (options.documentId as Expression);
+        typeof options.documentIdExpression === 'string'
+          ? field(options.documentIdExpression)
+          : (options.documentIdExpression as Expression);
     }
   }
 
