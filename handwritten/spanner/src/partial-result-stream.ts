@@ -557,10 +557,6 @@ export class PartialResultStream extends Transform implements ResultEvents {
  * It holds chunks in a queue until a "checkpoint" is reached (as determined by
  * `isCheckpointFn`) or until the queue exceeds `maxQueued` items.
  *
- * This matches the legacy behavior of buffering chunks and flushing them
- * asynchronously using `setImmediate` to yield control back to the event loop,
- * preventing long-running synchronous loops from blocking other processing.
- *
  * @private
  */
 class CheckpointStream extends Transform {
