@@ -99,7 +99,7 @@ func main() {
 	instance := flag.String("instance", "suvham-testing", "Cloud Spanner Instance ID")
 	database := flag.String("database", "benchmark_db_async", "Cloud Spanner Database ID")
 	sql := flag.String("sql", "SELECT 1 as col_int, 'CONSTANT' as col_const", "SQL Query")
-	channels := flag.Int("channels", 4, "Number of gRPC channels (connection pool size)")
+	channels := flag.Int("channels", 0, "Number of gRPC channels (0 = default customer client pool)")
 	concurrency := flag.Int("concurrency", 1, "Concurrency level (number of worker goroutines)")
 	durationSec := flag.Int("duration", 10, "Benchmark duration in seconds")
 	warmupSec := flag.Int("warmup", 2, "Warmup duration in seconds")
@@ -110,8 +110,16 @@ func main() {
 	ctx := context.Background()
 	dbPath := fmt.Sprintf("projects/%s/instances/%s/databases/%s", *project, *instance, *database)
 
-	// Create official Go Spanner Client with configured gRPC connection pool
-	client, err := spanner.NewClient(ctx, dbPath, option.WithGRPCConnectionPool(*channels))
+	var (
+		client *spanner.Client
+		err    error
+	)
+	if *channels > 0 {
+		client, err = spanner.NewClient(ctx, dbPath, option.WithGRPCConnectionPool(*channels))
+	} else {
+		// Standard default customer Go client setup
+		client, err = spanner.NewClient(ctx, dbPath)
+	}
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating Spanner client: %v\n", err)
 		os.Exit(1)
