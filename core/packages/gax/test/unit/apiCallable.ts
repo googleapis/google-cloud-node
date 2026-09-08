@@ -15,12 +15,15 @@
  */
 
 import assert from 'assert';
+import {PassThrough} from 'stream';
 import {status} from '@grpc/grpc-js';
 import {afterEach, beforeEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
 
-import {RequestType} from '../../src/apitypes';
+import {CancellableStream, GRPCCall, RequestType} from '../../src/apitypes';
 import {createApiCall as realCreateApiCall} from '../../src/createApiCall';
+import {StreamDescriptor} from '../../src/descriptor';
+import {StreamType} from '../../src/streamingCalls/streaming';
 import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {OtelHarness} from './otelHarness';
@@ -593,7 +596,9 @@ describe('createApiCall', () => {
         callback: (err: GoogleError | null, resp?: unknown) => void,
       ) {
         const error = new GoogleError('RPC test failure');
-        callback(error);
+        setImmediate(() => {
+          callback(error);
+        });
         return {
           cancel: () => {},
         };
@@ -692,6 +697,104 @@ describe('createApiCall', () => {
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 0);
+    });
+
+    it('manages span lifetime for streaming API calls until stream ends', done => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const spy = sinon.spy(() => {
+        const s = new PassThrough({
+          objectMode: true,
+        });
+        s.push({data: 'chunk1'});
+        s.push({data: 'chunk2'});
+        s.push(null);
+        return Object.assign(s, {cancel: () => {}});
+      });
+
+      const apiCall = realCreateApiCall(
+        spy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      const stream = apiCall({}, undefined) as CancellableStream;
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      const received: unknown[] = [];
+      stream.on('data', chunk => {
+        received.push(chunk);
+      });
+      stream.on('end', () => {
+        try {
+          assert.strictEqual(received.length, 2);
+          const spans = harness.getSpans('google-gax');
+          assert.strictEqual(spans.length, 1);
+          const span = spans[0];
+          assert.strictEqual(span.ended, true);
+          assert.strictEqual(span.name, 'EchoClient.Echo');
+          assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+          done();
+        } catch (e) {
+          done(e);
+        }
+      });
+    });
+
+    it('records error details on the span when a streaming API call errors', done => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const spy = sinon.spy(() => {
+        const s = new PassThrough({
+          objectMode: true,
+        });
+        setImmediate(() => {
+          s.emit('error', new GoogleError('streaming test failure'));
+        });
+        return Object.assign(s, {cancel: () => {}});
+      });
+
+      const apiCall = realCreateApiCall(
+        spy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      const stream = apiCall({}, undefined) as CancellableStream;
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      stream.on('error', (err: GoogleError) => {
+        try {
+          assert.strictEqual(err.message, 'streaming test failure');
+          const spans = harness.getSpans('google-gax');
+          assert.strictEqual(spans.length, 1);
+          const span = spans[0];
+          assert.strictEqual(span.ended, true);
+          assert.strictEqual(
+            span.attributes['error.message'],
+            'streaming test failure',
+          );
+          assert.strictEqual(span.events.length, 1);
+          assert.strictEqual(span.events[0].name, 'exception');
+          done();
+        } catch (e) {
+          done(e);
+        }
+      });
     });
   });
 });
