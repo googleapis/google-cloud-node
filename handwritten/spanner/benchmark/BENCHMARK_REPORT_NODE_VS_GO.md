@@ -17,12 +17,12 @@ This report compares standard customer usage of the official **Node.js client li
 
 | Concurrency | Channel Pool | Node QPS | Go QPS | Go/Node QPS Ratio | Node P50 | Go P50 | Node P95 | Go P95 | Node CPU | Go CPU |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **1** | Dynamic (Default) | 135.9 | 262.2 | **1.93x** | 6.60 ms | 3.68 ms | 12.25 ms | 5.13 ms | 51.5% | 13.2% |
-| **2** | Dynamic (Default) | 302.6 | 468.2 | **1.55x** | 5.86 ms | 4.18 ms | 11.03 ms | 6.04 ms | 58.7% | 19.5% |
-| **4** | Dynamic (Default) | 467.1 | 769.6 | **1.65x** | 7.11 ms | 5.10 ms | 19.98 ms | 7.22 ms | 77.2% | 25.2% |
-| **8** | Dynamic (Default) | 588.9 | 1854.8 | **3.15x** | 11.04 ms | 4.16 ms | 26.14 ms | 6.53 ms | 91.8% | 51.6% |
-| **16** | Dynamic (Default) | 689.4 | 2786.2 | **4.04x** | 18.27 ms | 5.27 ms | 37.15 ms | 9.48 ms | 98.7% | 65.8% |
-| **25** | Dynamic (Default) | 681.1 | 3489.7 | **5.12x** | 29.96 ms | 6.82 ms | 58.83 ms | 11.01 ms | 99.0% | 69.5% |
+| **1** | Dynamic (Default) | 149.9 | 282.9 | **1.89x** | 5.83 ms | 3.47 ms | 12.16 ms | 4.69 ms | 76.3% | 14.0% |
+| **2** | Dynamic (Default) | 351.0 | 462.7 | **1.32x** | 5.00 ms | 4.23 ms | 9.61 ms | 6.01 ms | 59.9% | 19.6% |
+| **4** | Dynamic (Default) | 483.4 | 778.9 | **1.61x** | 6.99 ms | 4.96 ms | 18.65 ms | 7.27 ms | 70.5% | 26.0% |
+| **8** | Dynamic (Default) | 680.2 | 1631.5 | **2.40x** | 9.47 ms | 4.53 ms | 24.78 ms | 8.16 ms | 89.1% | 45.6% |
+| **16** | Dynamic (Default) | 754.6 | 2932.6 | **3.89x** | 16.28 ms | 5.07 ms | 35.48 ms | 8.82 ms | 94.7% | 66.6% |
+| **25** | Dynamic (Default) | 764.0 | 3524.7 | **4.61x** | 25.64 ms | 6.75 ms | 53.55 ms | 11.07 ms | 96.5% | 73.3% |
 
 ## 2. Scenario 2: 1000 Row Read Query
 
@@ -30,10 +30,10 @@ This report compares standard customer usage of the official **Node.js client li
 
 | Concurrency | Channel Pool | Node QPS | Go QPS | Go/Node QPS Ratio | Node P50 | Go P50 | Node P95 | Go P95 | Node CPU | Go CPU |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **1** | Dynamic (Default) | 26.3 | 43.9 | **1.67x** | 30.04 ms | 22.52 ms | 100.22 ms | 26.38 ms | 72.4% | 53.0% |
-| **2** | Dynamic (Default) | 36.0 | 71.0 | **1.97x** | 44.08 ms | 25.60 ms | 138.45 ms | 42.70 ms | 94.2% | 78.7% |
-| **4** | Dynamic (Default) | 36.2 | 84.4 | **2.33x** | 91.69 ms | 44.43 ms | 185.28 ms | 67.14 ms | 92.6% | 90.7% |
-| **8** | Dynamic (Default) | 35.3 | 96.0 | **2.72x** | 240.28 ms | 79.51 ms | 290.83 ms | 133.22 ms | 91.8% | 99.7% |
-| **16** | Dynamic (Default) | 35.7 | 102.0 | **2.86x** | 442.82 ms | 124.06 ms | 527.54 ms | 329.41 ms | 91.4% | 99.8% |
-| **25** | Dynamic (Default) | 35.4 | 106.1 | **3.00x** | 719.29 ms | 224.32 ms | 760.48 ms | 426.15 ms | 92.6% | 99.9% |
+| **1** | Dynamic (Default) | 27.6 | 48.4 | **1.75x** | 28.84 ms | 20.47 ms | 92.12 ms | 23.19 ms | 72.1% | 57.8% |
+| **2** | Dynamic (Default) | 36.2 | 68.3 | **1.88x** | 43.01 ms | 26.45 ms | 132.58 ms | 42.62 ms | 93.4% | 76.2% |
+| **4** | Dynamic (Default) | 36.9 | 81.3 | **2.20x** | 92.18 ms | 48.88 ms | 176.50 ms | 72.96 ms | 92.2% | 87.2% |
+| **8** | Dynamic (Default) | 35.7 | 97.5 | **2.73x** | 240.55 ms | 78.79 ms | 276.29 ms | 148.17 ms | 93.0% | 99.7% |
+| **16** | Dynamic (Default) | 36.6 | 101.7 | **2.78x** | 425.01 ms | 110.55 ms | 518.44 ms | 413.29 ms | 93.9% | 99.8% |
+| **25** | Dynamic (Default) | 35.9 | 106.2 | **2.96x** | 696.55 ms | 159.18 ms | 777.60 ms | 607.18 ms | 92.0% | 99.8% |
 
