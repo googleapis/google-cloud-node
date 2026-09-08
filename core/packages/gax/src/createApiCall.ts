@@ -22,7 +22,6 @@ import {createAPICaller} from './apiCaller';
 import {
   APICallback,
   GaxCall,
-  GaxCallResult,
   GRPCCall,
   GRPCCallOtherArgs,
   RequestType,
@@ -199,13 +198,9 @@ export function createApiCall(
       callOptions?: CallOptions,
       callback?: APICallback,
     ) => {
-      return traceAttempt(dynamicArgs, staticArgs, async () => {
-        return (await invokeCall(
-          request,
-          callOptions,
-          callback,
-        )) as GaxCallResult;
-      }) as unknown as GaxCallResult;
+      return traceAttempt(dynamicArgs, staticArgs, () => {
+        return invokeCall(request, callOptions, callback);
+      });
     };
   } else {
     return invokeCall;
