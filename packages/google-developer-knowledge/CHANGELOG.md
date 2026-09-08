@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.7.0...developer-knowledge-v0.8.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.6.0...developer-knowledge-v0.7.0) (2026-09-03)
 
 
