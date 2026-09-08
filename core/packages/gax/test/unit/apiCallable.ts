@@ -605,9 +605,12 @@ describe('createApiCall', () => {
       }
 
       const apiCall = realCreateApiCall(failingFunc, settings);
+      const promise = apiCall({}, undefined);
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
       await assert.rejects(
         async () => {
-          await apiCall({}, undefined);
+          await promise;
         },
         (err: GoogleError) => {
           assert.strictEqual(err.message, 'RPC test failure');
@@ -622,6 +625,48 @@ describe('createApiCall', () => {
       assert.strictEqual(span.attributes['error.message'], 'RPC test failure');
       assert.strictEqual(span.events.length, 1);
       assert.strictEqual(span.events[0].name, 'exception');
+    });
+
+    it('does not end span prematurely for successful asynchronous API calls', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function asyncFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        setImmediate(() => {
+          callback(null, {data: 'hello'});
+        });
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(asyncFunc, settings);
+      const promise = apiCall({}, undefined);
+
+      // Verify the span is not ended prematurely while the call is in flight
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      const [response] = (await promise) as [{data: string}, unknown, unknown];
+      assert.deepStrictEqual(response, {data: 'hello'});
+
+      // Span must only be ended after completion
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(span.name, 'EchoClient.Echo');
     });
 
     it('cancels the call and ends the span', async () => {
@@ -731,6 +776,8 @@ describe('createApiCall', () => {
       const received: unknown[] = [];
       stream.on('data', chunk => {
         received.push(chunk);
+        // Span must remain active while streaming chunks
+        assert.strictEqual(harness.getSpans('google-gax').length, 0);
       });
       stream.on('end', () => {
         try {
