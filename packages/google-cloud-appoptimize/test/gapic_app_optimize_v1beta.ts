@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as appoptimizeModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.appOptimizeStub, undefined);
@@ -284,12 +284,12 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(client.appOptimizeStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.appOptimizeStub);
@@ -298,14 +298,14 @@ describe('v1beta.AppOptimizeClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.appOptimizeStub, undefined);
@@ -314,7 +314,7 @@ describe('v1beta.AppOptimizeClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1beta.AppOptimizeClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1beta.AppOptimizeClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('getReport', () => {
     it('invokes getReport without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes getReport without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes getReport with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes getReport with closed client', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -476,7 +476,7 @@ describe('v1beta.AppOptimizeClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReport(request), expectedError);
@@ -486,7 +486,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('deleteReport', () => {
     it('invokes deleteReport without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes deleteReport without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes deleteReport with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -595,7 +595,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes deleteReport with closed client', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v1beta.AppOptimizeClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteReport(request), expectedError);
@@ -618,7 +618,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('createReport', () => {
     it('invokes createReport without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes createReport without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes createReport with call error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes createReport with LRO error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -768,7 +768,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes checkCreateReportProgress without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -776,8 +776,8 @@ describe('v1beta.AppOptimizeClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReportProgress(
@@ -790,7 +790,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes checkCreateReportProgress with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -808,7 +808,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('listReports', () => {
     it('invokes listReports without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes listReports without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -902,7 +902,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes listReports with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -933,7 +933,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes listReportsStream without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -985,15 +985,15 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReportsStream with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1036,15 +1036,15 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReports without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1085,15 +1085,15 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(
         (client.descriptors.page.listReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReports with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1127,9 +1127,9 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(
         (client.descriptors.page.listReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1137,7 +1137,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('readReport', () => {
     it('invokes readReport without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1170,7 +1170,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes readReport without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1219,7 +1219,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes readReport with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1beta.AppOptimizeClient', () => {
 
     it('invokes readReportStream without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1293,15 +1293,15 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(
         (client.descriptors.page.readReport.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes readReportStream with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1341,15 +1341,15 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(
         (client.descriptors.page.readReport.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with readReport without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1384,15 +1384,15 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(
         (client.descriptors.page.readReport.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with readReport with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1426,16 +1426,16 @@ describe('v1beta.AppOptimizeClient', () => {
       assert(
         (client.descriptors.page.readReport.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1465,7 +1465,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1509,7 +1509,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1544,7 +1544,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1592,7 +1592,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1633,7 +1633,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1654,7 +1654,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1682,7 +1682,7 @@ describe('v1beta.AppOptimizeClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1692,7 +1692,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1716,7 +1716,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1738,7 +1738,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1766,7 +1766,7 @@ describe('v1beta.AppOptimizeClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1776,7 +1776,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1800,7 +1800,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1822,7 +1822,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1850,7 +1850,7 @@ describe('v1beta.AppOptimizeClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1860,7 +1860,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1884,7 +1884,7 @@ describe('v1beta.AppOptimizeClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1919,7 +1919,7 @@ describe('v1beta.AppOptimizeClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1955,7 +1955,7 @@ describe('v1beta.AppOptimizeClient', () => {
         application: 'applicationValue',
       };
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2018,7 +2018,7 @@ describe('v1beta.AppOptimizeClient', () => {
         location: 'locationValue',
       };
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1beta.AppOptimizeClient', () => {
         project: 'projectValue',
       };
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2106,7 +2106,7 @@ describe('v1beta.AppOptimizeClient', () => {
         report: 'reportValue',
       };
       const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

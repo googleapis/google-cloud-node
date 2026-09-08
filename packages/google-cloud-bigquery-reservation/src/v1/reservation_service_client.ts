@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -65,7 +65,7 @@ export class ReservationServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('bigquery-reservation');
@@ -78,9 +78,9 @@ export class ReservationServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  reservationServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  reservationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ReservationServiceClient.
@@ -156,7 +156,7 @@ export class ReservationServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -280,7 +280,7 @@ export class ReservationServiceClient {
       'google.cloud.bigquery.reservation.v1.ReservationService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -321,7 +321,7 @@ export class ReservationServiceClient {
             .ReservationService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -359,7 +359,7 @@ export class ReservationServiceClient {
     ];
     for (const methodName of reservationServiceStubMethods) {
       const callPromise = this.reservationServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -573,7 +573,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createReservation request %j', request);
@@ -717,7 +717,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReservation request %j', request);
@@ -863,7 +863,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteReservation request %j', request);
@@ -1008,7 +1008,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'reservation.name': request.reservation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateReservation request %j', request);
@@ -1160,7 +1160,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('failoverReservation request %j', request);
@@ -1315,7 +1315,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCapacityCommitment request %j', request);
@@ -1459,7 +1459,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCapacityCommitment request %j', request);
@@ -1609,7 +1609,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteCapacityCommitment request %j', request);
@@ -1760,7 +1760,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'capacity_commitment.name': request.capacityCommitment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCapacityCommitment request %j', request);
@@ -1913,7 +1913,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('splitCapacityCommitment request %j', request);
@@ -2074,7 +2074,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('mergeCapacityCommitments request %j', request);
@@ -2259,7 +2259,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAssignment request %j', request);
@@ -2417,7 +2417,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAssignment request %j', request);
@@ -2575,7 +2575,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('moveAssignment request %j', request);
@@ -2722,7 +2722,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'assignment.name': request.assignment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAssignment request %j', request);
@@ -2866,7 +2866,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBiReservation request %j', request);
@@ -3018,7 +3018,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'bi_reservation.name': request.biReservation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateBiReservation request %j', request);
@@ -3165,7 +3165,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -3310,7 +3310,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -3446,7 +3446,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -3591,7 +3591,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createReservationGroup request %j', request);
@@ -3735,7 +3735,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReservationGroup request %j', request);
@@ -3881,7 +3881,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteReservationGroup request %j', request);
@@ -4026,7 +4026,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'reservation_group.name': request.reservationGroup!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateReservationGroup request %j', request);
@@ -4172,7 +4172,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4240,7 +4240,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listReservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReservations stream %j', request);
@@ -4290,7 +4290,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listReservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReservations iterate %j', request);
@@ -4395,7 +4395,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4463,7 +4463,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listCapacityCommitments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCapacityCommitments stream %j', request);
@@ -4513,7 +4513,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listCapacityCommitments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCapacityCommitments iterate %j', request);
@@ -4643,7 +4643,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4716,7 +4716,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssignments stream %j', request);
@@ -4771,7 +4771,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssignments iterate %j', request);
@@ -4908,7 +4908,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -4991,7 +4991,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -5056,7 +5056,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -5194,7 +5194,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5271,7 +5271,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchAllAssignments stream %j', request);
@@ -5330,7 +5330,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchAllAssignments iterate %j', request);
@@ -5435,7 +5435,7 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5503,7 +5503,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listReservationGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReservationGroups stream %j', request);
@@ -5553,7 +5553,7 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listReservationGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReservationGroups iterate %j', request);
@@ -5915,7 +5915,7 @@ export class ReservationServiceClient {
    */
   close(): Promise<void> {
     if (this.reservationServiceStub && !this._terminated) {
-      return this.reservationServiceStub.then((stub) => {
+      return this.reservationServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

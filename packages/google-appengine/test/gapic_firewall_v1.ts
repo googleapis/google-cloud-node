@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as firewallModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v1.FirewallClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.firewallStub, undefined);
@@ -245,12 +245,12 @@ describe('v1.FirewallClient', () => {
       assert(client.firewallStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.firewallStub);
@@ -259,14 +259,14 @@ describe('v1.FirewallClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.firewallStub, undefined);
@@ -275,7 +275,7 @@ describe('v1.FirewallClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v1.FirewallClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v1.FirewallClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v1.FirewallClient', () => {
   describe('batchUpdateIngressRules', () => {
     it('invokes batchUpdateIngressRules without error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -350,7 +350,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes batchUpdateIngressRules without error using callback', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -397,7 +397,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes batchUpdateIngressRules with error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes batchUpdateIngressRules with closed client', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1.FirewallClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -457,7 +457,7 @@ describe('v1.FirewallClient', () => {
   describe('createIngressRule', () => {
     it('invokes createIngressRule without error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes createIngressRule without error using callback', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes createIngressRule with error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes createIngressRule with closed client', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -579,7 +579,7 @@ describe('v1.FirewallClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createIngressRule(request), expectedError);
@@ -589,7 +589,7 @@ describe('v1.FirewallClient', () => {
   describe('getIngressRule', () => {
     it('invokes getIngressRule without error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -620,7 +620,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes getIngressRule without error using callback', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes getIngressRule with error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes getIngressRule with closed client', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.FirewallClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIngressRule(request), expectedError);
@@ -721,7 +721,7 @@ describe('v1.FirewallClient', () => {
   describe('updateIngressRule', () => {
     it('invokes updateIngressRule without error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes updateIngressRule without error using callback', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes updateIngressRule with error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes updateIngressRule with closed client', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1.FirewallClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateIngressRule(request), expectedError);
@@ -853,7 +853,7 @@ describe('v1.FirewallClient', () => {
   describe('deleteIngressRule', () => {
     it('invokes deleteIngressRule without error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -884,7 +884,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes deleteIngressRule without error using callback', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes deleteIngressRule with error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes deleteIngressRule with closed client', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v1.FirewallClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteIngressRule(request), expectedError);
@@ -985,7 +985,7 @@ describe('v1.FirewallClient', () => {
   describe('listIngressRules', () => {
     it('invokes listIngressRules without error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes listIngressRules without error using callback', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes listIngressRules with error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v1.FirewallClient', () => {
 
     it('invokes listIngressRulesStream without error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1144,15 +1144,15 @@ describe('v1.FirewallClient', () => {
       assert(
         (client.descriptors.page.listIngressRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIngressRulesStream with error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1193,15 +1193,15 @@ describe('v1.FirewallClient', () => {
       assert(
         (client.descriptors.page.listIngressRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIngressRules without error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1236,15 +1236,15 @@ describe('v1.FirewallClient', () => {
       assert(
         (client.descriptors.page.listIngressRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIngressRules with error', async () => {
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1276,9 +1276,9 @@ describe('v1.FirewallClient', () => {
       assert(
         (client.descriptors.page.listIngressRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1293,7 +1293,7 @@ describe('v1.FirewallClient', () => {
         instance: 'instanceValue',
       };
       const client = new firewallModule.v1.FirewallClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

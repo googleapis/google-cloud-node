@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { WorkstationsClient } from '@google-cloud/workstations';
+import {WorkstationsClient} from '@google-cloud/workstations';
 
 // check that the client class type name can be used
 function doStuffWithWorkstationsClient(client: WorkstationsClient) {

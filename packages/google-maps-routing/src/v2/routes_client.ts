@@ -24,10 +24,10 @@ import type {
   Descriptors,
   ClientOptions,
 } from 'google-gax';
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +49,7 @@ export class RoutesClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('routing');
@@ -62,8 +62,8 @@ export class RoutesClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  routesStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  routesStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of RoutesClient.
@@ -139,7 +139,7 @@ export class RoutesClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -210,7 +210,7 @@ export class RoutesClient {
       'google.maps.routing.v2.Routes',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -250,18 +250,18 @@ export class RoutesClient {
           (this._protos as any).google.maps.routing.v2.Routes,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const routesStubMethods = ['computeRoutes', 'computeRouteMatrix'];
     for (const methodName of routesStubMethods) {
       const callPromise = this.routesStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -592,7 +592,7 @@ export class RoutesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('computeRoutes request %j', request);
@@ -767,7 +767,7 @@ export class RoutesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('computeRouteMatrix stream %j', options);
@@ -782,7 +782,7 @@ export class RoutesClient {
    */
   close(): Promise<void> {
     if (this.routesStub && !this._terminated) {
-      return this.routesStub.then((stub) => {
+      return this.routesStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

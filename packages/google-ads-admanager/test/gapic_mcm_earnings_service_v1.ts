@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as mcmearningsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.McmEarningsServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -262,12 +262,12 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(client.mcmEarningsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.mcmEarningsServiceStub);
@@ -276,12 +276,12 @@ describe('v1.McmEarningsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -292,7 +292,7 @@ describe('v1.McmEarningsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v1.McmEarningsServiceClient', () => {
   describe('fetchMcmEarnings', () => {
     it('invokes fetchMcmEarnings without error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -368,7 +368,7 @@ describe('v1.McmEarningsServiceClient', () => {
 
     it('invokes fetchMcmEarnings without error using callback', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -417,7 +417,7 @@ describe('v1.McmEarningsServiceClient', () => {
 
     it('invokes fetchMcmEarnings with error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v1.McmEarningsServiceClient', () => {
 
     it('invokes fetchMcmEarningsStream without error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -494,15 +494,15 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(
         (client.descriptors.page.fetchMcmEarnings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes fetchMcmEarningsStream with error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -543,9 +543,9 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(
         (client.descriptors.page.fetchMcmEarnings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -586,15 +586,15 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(
         (client.descriptors.page.fetchMcmEarnings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchMcmEarnings with error', async () => {
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -626,9 +626,9 @@ describe('v1.McmEarningsServiceClient', () => {
       assert(
         (client.descriptors.page.fetchMcmEarnings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -642,7 +642,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -775,7 +775,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -824,7 +824,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.McmEarningsServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -922,7 +922,7 @@ describe('v1.McmEarningsServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v1.McmEarningsServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,7 +1027,7 @@ describe('v1.McmEarningsServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1080,7 +1080,7 @@ describe('v1.McmEarningsServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v1.McmEarningsServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1182,7 +1182,7 @@ describe('v1.McmEarningsServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1234,7 @@ describe('v1.McmEarningsServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1287,7 +1287,7 @@ describe('v1.McmEarningsServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1340,7 +1340,7 @@ describe('v1.McmEarningsServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1397,7 +1397,7 @@ describe('v1.McmEarningsServiceClient', () => {
         company: 'companyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1446,7 +1446,7 @@ describe('v1.McmEarningsServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1.McmEarningsServiceClient', () => {
         content: 'contentValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1544,7 +1544,7 @@ describe('v1.McmEarningsServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1596,7 +1596,7 @@ describe('v1.McmEarningsServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1648,7 +1648,7 @@ describe('v1.McmEarningsServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1697,7 +1697,7 @@ describe('v1.McmEarningsServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1749,7 @@ describe('v1.McmEarningsServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1806,7 +1806,7 @@ describe('v1.McmEarningsServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1859,7 +1859,7 @@ describe('v1.McmEarningsServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1911,7 +1911,7 @@ describe('v1.McmEarningsServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,7 +1974,7 @@ describe('v1.McmEarningsServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2039,7 +2039,7 @@ describe('v1.McmEarningsServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2104,7 +2104,7 @@ describe('v1.McmEarningsServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2166,7 +2166,7 @@ describe('v1.McmEarningsServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2213,7 +2213,7 @@ describe('v1.McmEarningsServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2270,7 +2270,7 @@ describe('v1.McmEarningsServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2323,7 +2323,7 @@ describe('v1.McmEarningsServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2386,7 +2386,7 @@ describe('v1.McmEarningsServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2451,7 +2451,7 @@ describe('v1.McmEarningsServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2503,7 +2503,7 @@ describe('v1.McmEarningsServiceClient', () => {
         label: 'labelValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2552,7 +2552,7 @@ describe('v1.McmEarningsServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2601,7 +2601,7 @@ describe('v1.McmEarningsServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2653,7 +2653,7 @@ describe('v1.McmEarningsServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2705,7 +2705,7 @@ describe('v1.McmEarningsServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2758,7 +2758,7 @@ describe('v1.McmEarningsServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2810,7 +2810,7 @@ describe('v1.McmEarningsServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2862,7 +2862,7 @@ describe('v1.McmEarningsServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2927,7 +2927,7 @@ describe('v1.McmEarningsServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2978,7 +2978,7 @@ describe('v1.McmEarningsServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3017,7 +3017,7 @@ describe('v1.McmEarningsServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3070,7 +3070,7 @@ describe('v1.McmEarningsServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3135,7 +3135,7 @@ describe('v1.McmEarningsServiceClient', () => {
         order: 'orderValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3184,7 +3184,7 @@ describe('v1.McmEarningsServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3233,7 +3233,7 @@ describe('v1.McmEarningsServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3285,7 +3285,7 @@ describe('v1.McmEarningsServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3338,7 +3338,7 @@ describe('v1.McmEarningsServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3401,7 +3401,7 @@ describe('v1.McmEarningsServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3464,7 +3464,7 @@ describe('v1.McmEarningsServiceClient', () => {
         report: 'reportValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3513,7 +3513,7 @@ describe('v1.McmEarningsServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3576,7 +3576,7 @@ describe('v1.McmEarningsServiceClient', () => {
         role: 'roleValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3625,7 +3625,7 @@ describe('v1.McmEarningsServiceClient', () => {
         site: 'siteValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3674,7 +3674,7 @@ describe('v1.McmEarningsServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3723,7 +3723,7 @@ describe('v1.McmEarningsServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3776,7 +3776,7 @@ describe('v1.McmEarningsServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3829,7 +3829,7 @@ describe('v1.McmEarningsServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3886,7 +3886,7 @@ describe('v1.McmEarningsServiceClient', () => {
         team: 'teamValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3935,7 +3935,7 @@ describe('v1.McmEarningsServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3998,7 +3998,7 @@ describe('v1.McmEarningsServiceClient', () => {
         user: 'userValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4047,7 +4047,7 @@ describe('v1.McmEarningsServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4110,7 +4110,7 @@ describe('v1.McmEarningsServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

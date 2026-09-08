@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,7 +58,7 @@ export class EdgeNetworkClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('edgenetwork');
@@ -71,11 +71,11 @@ export class EdgeNetworkClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  edgeNetworkStub?: Promise<{ [name: string]: Function }>;
+  edgeNetworkStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of EdgeNetworkClient.
@@ -151,7 +151,7 @@ export class EdgeNetworkClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -445,7 +445,7 @@ export class EdgeNetworkClient {
       'google.cloud.edgenetwork.v1.EdgeNetwork',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -485,7 +485,7 @@ export class EdgeNetworkClient {
           (this._protos as any).google.cloud.edgenetwork.v1.EdgeNetwork,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -519,7 +519,7 @@ export class EdgeNetworkClient {
     ];
     for (const methodName of edgeNetworkStubMethods) {
       const callPromise = this.edgeNetworkStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -720,7 +720,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('initializeZone request %j', request);
@@ -848,7 +848,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -979,7 +979,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNetwork request %j', request);
@@ -1113,7 +1113,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('diagnoseNetwork request %j', request);
@@ -1244,7 +1244,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSubnet request %j', request);
@@ -1378,7 +1378,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInterconnect request %j', request);
@@ -1521,7 +1521,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('diagnoseInterconnect request %j', request);
@@ -1664,7 +1664,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInterconnectAttachment request %j', request);
@@ -1795,7 +1795,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRouter request %j', request);
@@ -1929,7 +1929,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('diagnoseRouter request %j', request);
@@ -2096,7 +2096,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2153,7 +2153,7 @@ export class EdgeNetworkClient {
     this._log.info('createNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2279,7 +2279,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2336,7 +2336,7 @@ export class EdgeNetworkClient {
     this._log.info('deleteNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2468,7 +2468,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2525,7 +2525,7 @@ export class EdgeNetworkClient {
     this._log.info('createSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2657,7 +2657,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         'subnet.name': request.subnet!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2714,7 +2714,7 @@ export class EdgeNetworkClient {
     this._log.info('updateSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2840,7 +2840,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2897,7 +2897,7 @@ export class EdgeNetworkClient {
     this._log.info('deleteSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3029,7 +3029,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3092,7 +3092,7 @@ export class EdgeNetworkClient {
     this._log.info('createInterconnectAttachment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3218,7 +3218,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3281,7 +3281,7 @@ export class EdgeNetworkClient {
     this._log.info('deleteInterconnectAttachment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3413,7 +3413,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3470,7 +3470,7 @@ export class EdgeNetworkClient {
     this._log.info('createRouter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3602,7 +3602,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         'router.name': request.router!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3659,7 +3659,7 @@ export class EdgeNetworkClient {
     this._log.info('updateRouter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3785,7 +3785,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3842,7 +3842,7 @@ export class EdgeNetworkClient {
     this._log.info('deleteRouter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3950,7 +3950,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -4028,7 +4028,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -4088,7 +4088,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -4202,7 +4202,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4274,7 +4274,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworks stream %j', request);
@@ -4328,7 +4328,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNetworks iterate %j', request);
@@ -4437,7 +4437,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4509,7 +4509,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubnets stream %j', request);
@@ -4563,7 +4563,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSubnets iterate %j', request);
@@ -4672,7 +4672,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4744,7 +4744,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterconnects stream %j', request);
@@ -4798,7 +4798,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterconnects iterate %j', request);
@@ -4907,7 +4907,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4979,7 +4979,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterconnectAttachments stream %j', request);
@@ -5033,7 +5033,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInterconnectAttachments iterate %j', request);
@@ -5142,7 +5142,7 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5214,7 +5214,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listRouters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRouters stream %j', request);
@@ -5268,7 +5268,7 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listRouters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRouters iterate %j', request);
@@ -6042,11 +6042,11 @@ export class EdgeNetworkClient {
    */
   close(): Promise<void> {
     if (this.edgeNetworkStub && !this._terminated) {
-      return this.edgeNetworkStub.then((stub) => {
+      return this.edgeNetworkStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

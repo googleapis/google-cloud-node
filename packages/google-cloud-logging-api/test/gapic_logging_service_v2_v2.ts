@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as loggingservicev2Module from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -131,9 +131,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -253,7 +253,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.loggingServiceV2Stub, undefined);
@@ -261,12 +261,12 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(client.loggingServiceV2Stub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.loggingServiceV2Stub);
@@ -275,14 +275,14 @@ describe('v2.LoggingServiceV2Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.loggingServiceV2Stub, undefined);
@@ -291,7 +291,7 @@ describe('v2.LoggingServiceV2Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -299,7 +299,7 @@ describe('v2.LoggingServiceV2Client', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -311,7 +311,7 @@ describe('v2.LoggingServiceV2Client', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -334,7 +334,7 @@ describe('v2.LoggingServiceV2Client', () => {
   describe('deleteLog', () => {
     it('invokes deleteLog without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -365,7 +365,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes deleteLog without error using callback', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -412,7 +412,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes deleteLog with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes deleteLog with closed client', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v2.LoggingServiceV2Client', () => {
       );
       request.logName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteLog(request), expectedError);
@@ -463,7 +463,7 @@ describe('v2.LoggingServiceV2Client', () => {
   describe('writeLogEntries', () => {
     it('invokes writeLogEntries without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes writeLogEntries without error using callback', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes writeLogEntries with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes writeLogEntries with closed client', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -538,7 +538,7 @@ describe('v2.LoggingServiceV2Client', () => {
         new protos.google.logging.v2.WriteLogEntriesRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.writeLogEntries(request), expectedError);
@@ -548,7 +548,7 @@ describe('v2.LoggingServiceV2Client', () => {
   describe('tailLogEntries', () => {
     it('invokes tailLogEntries without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes tailLogEntries with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -634,7 +634,7 @@ describe('v2.LoggingServiceV2Client', () => {
   describe('listLogEntries', () => {
     it('invokes listLogEntries without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -653,7 +653,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listLogEntries without error using callback', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -688,7 +688,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listLogEntries with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -705,7 +705,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listLogEntriesStream without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listLogEntriesStream with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -776,7 +776,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('uses async iteration with listLogEntries without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -806,7 +806,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('uses async iteration with listLogEntries with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v2.LoggingServiceV2Client', () => {
   describe('listMonitoredResourceDescriptors', () => {
     it('invokes listMonitoredResourceDescriptors without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listMonitoredResourceDescriptors without error using callback', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -902,7 +902,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listMonitoredResourceDescriptors with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -922,7 +922,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listMonitoredResourceDescriptorsStream without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listMonitoredResourceDescriptorsStream with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('uses async iteration with listMonitoredResourceDescriptors without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('uses async iteration with listMonitoredResourceDescriptors with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v2.LoggingServiceV2Client', () => {
   describe('listLogs', () => {
     it('invokes listLogs without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1113,7 +1113,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listLogs without error using callback', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1155,7 +1155,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listLogs with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1183,7 +1183,7 @@ describe('v2.LoggingServiceV2Client', () => {
 
     it('invokes listLogsStream without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1222,15 +1222,15 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLogsStream with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,15 +1270,15 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLogs without error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1308,15 +1308,15 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLogs with error', async () => {
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1349,9 +1349,9 @@ describe('v2.LoggingServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1363,7 +1363,7 @@ describe('v2.LoggingServiceV2Client', () => {
         billing_account: 'billingAccountValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1413,7 +1413,7 @@ describe('v2.LoggingServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v2.LoggingServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1557,7 +1557,7 @@ describe('v2.LoggingServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1654,7 +1654,7 @@ describe('v2.LoggingServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1749,7 @@ describe('v2.LoggingServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1810,7 +1810,7 @@ describe('v2.LoggingServiceV2Client', () => {
         billing_account: 'billingAccountValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1856,7 +1856,7 @@ describe('v2.LoggingServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1917,7 +1917,7 @@ describe('v2.LoggingServiceV2Client', () => {
         folder: 'folderValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1962,7 +1962,7 @@ describe('v2.LoggingServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2015,7 +2015,7 @@ describe('v2.LoggingServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2093,7 +2093,7 @@ describe('v2.LoggingServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2188,7 +2188,7 @@ describe('v2.LoggingServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2281,7 +2281,7 @@ describe('v2.LoggingServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2329,7 +2329,7 @@ describe('v2.LoggingServiceV2Client', () => {
         folder: 'folderValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2368,7 +2368,7 @@ describe('v2.LoggingServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2417,7 +2417,7 @@ describe('v2.LoggingServiceV2Client', () => {
         metric: 'metricValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2465,7 +2465,7 @@ describe('v2.LoggingServiceV2Client', () => {
         organization: 'organizationValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2511,7 +2511,7 @@ describe('v2.LoggingServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2575,7 +2575,7 @@ describe('v2.LoggingServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2655,7 +2655,7 @@ describe('v2.LoggingServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2750,7 +2750,7 @@ describe('v2.LoggingServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2843,7 +2843,7 @@ describe('v2.LoggingServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2895,7 +2895,7 @@ describe('v2.LoggingServiceV2Client', () => {
         organization: 'organizationValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2941,7 +2941,7 @@ describe('v2.LoggingServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2996,7 +2996,7 @@ describe('v2.LoggingServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3034,7 +3034,7 @@ describe('v2.LoggingServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3079,7 +3079,7 @@ describe('v2.LoggingServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3135,7 +3135,7 @@ describe('v2.LoggingServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3215,7 +3215,7 @@ describe('v2.LoggingServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3310,7 +3310,7 @@ describe('v2.LoggingServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3403,7 +3403,7 @@ describe('v2.LoggingServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3451,7 +3451,7 @@ describe('v2.LoggingServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3490,7 +3490,7 @@ describe('v2.LoggingServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new loggingservicev2Module.v2.LoggingServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as apihubModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf, LocationProtos } from 'google-gax';
+import {GoogleAuth, protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.ApiHubClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -258,12 +258,12 @@ describe('v1.ApiHubClient', () => {
       assert(client.apiHubStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new apihubModule.v1.ApiHubClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.apiHubStub);
@@ -272,12 +272,12 @@ describe('v1.ApiHubClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new apihubModule.v1.ApiHubClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -288,7 +288,7 @@ describe('v1.ApiHubClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -450,7 +450,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createApi(request), expectedError);
@@ -579,7 +579,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApi(request), expectedError);
@@ -712,7 +712,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.api.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateApi(request), expectedError);
@@ -841,7 +841,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteApi(request), expectedError);
@@ -973,7 +973,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createVersion(request), expectedError);
@@ -1105,7 +1105,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVersion(request), expectedError);
@@ -1241,7 +1241,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.version.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateVersion(request), expectedError);
@@ -1373,7 +1373,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteVersion(request), expectedError);
@@ -1505,7 +1505,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSpec(request), expectedError);
@@ -1634,7 +1634,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSpec(request), expectedError);
@@ -1766,7 +1766,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSpecContents(request), expectedError);
@@ -1902,7 +1902,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.spec.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSpec(request), expectedError);
@@ -2034,7 +2034,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSpec(request), expectedError);
@@ -2167,7 +2167,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createApiOperation(request), expectedError);
@@ -2299,7 +2299,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApiOperation(request), expectedError);
@@ -2436,7 +2436,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.apiOperation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateApiOperation(request), expectedError);
@@ -2569,7 +2569,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteApiOperation(request), expectedError);
@@ -2701,7 +2701,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDefinition(request), expectedError);
@@ -2833,7 +2833,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDeployment(request), expectedError);
@@ -2965,7 +2965,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeployment(request), expectedError);
@@ -3101,7 +3101,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.deployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDeployment(request), expectedError);
@@ -3233,7 +3233,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDeployment(request), expectedError);
@@ -3365,7 +3365,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAttribute(request), expectedError);
@@ -3497,7 +3497,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAttribute(request), expectedError);
@@ -3633,7 +3633,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.attribute.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAttribute(request), expectedError);
@@ -3765,7 +3765,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAttribute(request), expectedError);
@@ -3897,7 +3897,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createExternalApi(request), expectedError);
@@ -4029,7 +4029,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExternalApi(request), expectedError);
@@ -4165,7 +4165,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.externalApi.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateExternalApi(request), expectedError);
@@ -4297,7 +4297,7 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteExternalApi(request), expectedError);
@@ -4307,7 +4307,7 @@ describe('v1.ApiHubClient', () => {
   describe('listApis', () => {
     it('invokes listApis without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4340,7 +4340,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listApis without error using callback', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4389,7 +4389,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listApis with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4417,7 +4417,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listApisStream without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4460,15 +4460,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listApis.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listApisStream with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4508,9 +4508,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listApis.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4550,15 +4550,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listApis.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApis with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4591,9 +4591,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listApis.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4601,7 +4601,7 @@ describe('v1.ApiHubClient', () => {
   describe('listVersions', () => {
     it('invokes listVersions without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4634,7 +4634,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listVersions without error using callback', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4683,7 +4683,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listVersions with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4714,7 +4714,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listVersionsStream without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4757,15 +4757,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVersionsStream with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4805,9 +4805,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4848,15 +4848,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVersions with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4888,9 +4888,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4898,7 +4898,7 @@ describe('v1.ApiHubClient', () => {
   describe('listSpecs', () => {
     it('invokes listSpecs without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4931,7 +4931,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listSpecs without error using callback', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4980,7 +4980,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listSpecs with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5008,7 +5008,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listSpecsStream without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5051,15 +5051,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listSpecs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSpecsStream with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5099,9 +5099,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listSpecs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5141,15 +5141,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listSpecs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSpecs with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5182,9 +5182,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listSpecs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5192,7 +5192,7 @@ describe('v1.ApiHubClient', () => {
   describe('listApiOperations', () => {
     it('invokes listApiOperations without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5225,7 +5225,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listApiOperations without error using callback', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5274,7 +5274,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listApiOperations with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5305,7 +5305,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listApiOperationsStream without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5351,15 +5351,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listApiOperations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listApiOperationsStream with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5400,9 +5400,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listApiOperations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5443,15 +5443,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listApiOperations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApiOperations with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5483,9 +5483,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listApiOperations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5493,7 +5493,7 @@ describe('v1.ApiHubClient', () => {
   describe('listDeployments', () => {
     it('invokes listDeployments without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5526,7 +5526,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listDeployments without error using callback', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5575,7 +5575,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listDeployments with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5606,7 +5606,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listDeploymentsStream without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5652,15 +5652,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeploymentsStream with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5701,9 +5701,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5744,15 +5744,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5784,9 +5784,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5794,7 +5794,7 @@ describe('v1.ApiHubClient', () => {
   describe('listAttributes', () => {
     it('invokes listAttributes without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5827,7 +5827,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listAttributes without error using callback', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5876,7 +5876,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listAttributes with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5907,7 +5907,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listAttributesStream without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5953,15 +5953,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listAttributes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAttributesStream with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6002,9 +6002,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listAttributes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6045,15 +6045,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listAttributes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAttributes with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6085,9 +6085,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listAttributes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6095,7 +6095,7 @@ describe('v1.ApiHubClient', () => {
   describe('searchResources', () => {
     it('invokes searchResources without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6128,7 +6128,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes searchResources without error using callback', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6177,7 +6177,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes searchResources with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6208,7 +6208,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes searchResourcesStream without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6254,15 +6254,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.searchResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchResourcesStream with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6303,9 +6303,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.searchResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6346,15 +6346,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.searchResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchResources with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6386,9 +6386,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.searchResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6396,7 +6396,7 @@ describe('v1.ApiHubClient', () => {
   describe('listExternalApis', () => {
     it('invokes listExternalApis without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6429,7 +6429,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listExternalApis without error using callback', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6478,7 +6478,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listExternalApis with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6509,7 +6509,7 @@ describe('v1.ApiHubClient', () => {
 
     it('invokes listExternalApisStream without error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6555,15 +6555,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listExternalApis.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExternalApisStream with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6604,9 +6604,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listExternalApis.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -6647,15 +6647,15 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listExternalApis.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExternalApis with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6687,9 +6687,9 @@ describe('v1.ApiHubClient', () => {
       assert(
         (client.descriptors.page.listExternalApis.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6853,7 +6853,7 @@ describe('v1.ApiHubClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6901,7 +6901,7 @@ describe('v1.ApiHubClient', () => {
         api: 'apiValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6965,7 +6965,7 @@ describe('v1.ApiHubClient', () => {
         api_hub_instance: 'apiHubInstanceValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7032,7 +7032,7 @@ describe('v1.ApiHubClient', () => {
         operation: 'operationValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7118,7 +7118,7 @@ describe('v1.ApiHubClient', () => {
         attribute: 'attributeValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7182,7 +7182,7 @@ describe('v1.ApiHubClient', () => {
         curation: 'curationValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7248,7 +7248,7 @@ describe('v1.ApiHubClient', () => {
         definition: 'definitionValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7334,7 +7334,7 @@ describe('v1.ApiHubClient', () => {
         dependency: 'dependencyValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7398,7 +7398,7 @@ describe('v1.ApiHubClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7462,7 +7462,7 @@ describe('v1.ApiHubClient', () => {
         discovered_api_observation: 'discoveredApiObservationValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7544,7 +7544,7 @@ describe('v1.ApiHubClient', () => {
         discovered_api_operation: 'discoveredApiOperationValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7642,7 +7642,7 @@ describe('v1.ApiHubClient', () => {
         external_api: 'externalApiValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7706,7 +7706,7 @@ describe('v1.ApiHubClient', () => {
         host_project_registration: 'hostProjectRegistrationValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7786,7 +7786,7 @@ describe('v1.ApiHubClient', () => {
         location: 'locationValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7836,7 +7836,7 @@ describe('v1.ApiHubClient', () => {
         plugin: 'pluginValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7901,7 +7901,7 @@ describe('v1.ApiHubClient', () => {
         instance: 'instanceValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7974,7 +7974,7 @@ describe('v1.ApiHubClient', () => {
         project: 'projectValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8014,7 +8014,7 @@ describe('v1.ApiHubClient', () => {
         runtime_project_attachment: 'runtimeProjectAttachmentValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8097,7 +8097,7 @@ describe('v1.ApiHubClient', () => {
         spec: 'specValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8183,7 +8183,7 @@ describe('v1.ApiHubClient', () => {
         plugin: 'pluginValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8248,7 +8248,7 @@ describe('v1.ApiHubClient', () => {
         version: 'versionValue',
       };
       const client = new apihubModule.v1.ApiHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

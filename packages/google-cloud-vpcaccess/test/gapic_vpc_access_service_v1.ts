@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as vpcaccessserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vpcAccessServiceStub, undefined);
@@ -284,12 +284,12 @@ describe('v1.VpcAccessServiceClient', () => {
       assert(client.vpcAccessServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.vpcAccessServiceStub);
@@ -298,14 +298,14 @@ describe('v1.VpcAccessServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vpcAccessServiceStub, undefined);
@@ -314,7 +314,7 @@ describe('v1.VpcAccessServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1.VpcAccessServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1.VpcAccessServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('getConnector', () => {
     it('invokes getConnector without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes getConnector without error using callback', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes getConnector with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes getConnector with closed client', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.VpcAccessServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnector(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('createConnector', () => {
     it('invokes createConnector without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes createConnector without error using callback', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +576,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes createConnector with call error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes createConnector with LRO error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -640,7 +640,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes checkCreateConnectorProgress without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,8 +648,8 @@ describe('v1.VpcAccessServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateConnectorProgress(
@@ -662,7 +662,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes checkCreateConnectorProgress with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -683,7 +683,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('deleteConnector', () => {
     it('invokes deleteConnector without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -716,7 +716,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes deleteConnector without error using callback', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -770,7 +770,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes deleteConnector with call error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes deleteConnector with LRO error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes checkDeleteConnectorProgress without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,8 +842,8 @@ describe('v1.VpcAccessServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteConnectorProgress(
@@ -856,7 +856,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes checkDeleteConnectorProgress with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('listConnectors', () => {
     it('invokes listConnectors without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -910,7 +910,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes listConnectors without error using callback', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes listConnectors with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,7 +990,7 @@ describe('v1.VpcAccessServiceClient', () => {
 
     it('invokes listConnectorsStream without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1036,15 +1036,15 @@ describe('v1.VpcAccessServiceClient', () => {
       assert(
         (client.descriptors.page.listConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConnectorsStream with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1085,15 +1085,15 @@ describe('v1.VpcAccessServiceClient', () => {
       assert(
         (client.descriptors.page.listConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnectors without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1128,15 +1128,15 @@ describe('v1.VpcAccessServiceClient', () => {
       assert(
         (client.descriptors.page.listConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnectors with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1168,16 +1168,16 @@ describe('v1.VpcAccessServiceClient', () => {
       assert(
         (client.descriptors.page.listConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1207,7 +1207,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1251,7 +1251,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1286,7 +1286,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1334,7 +1334,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1424,7 +1424,7 @@ describe('v1.VpcAccessServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1434,7 +1434,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1458,7 +1458,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1480,7 +1480,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1508,7 +1508,7 @@ describe('v1.VpcAccessServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1518,7 +1518,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1542,7 +1542,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1564,7 +1564,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1592,7 +1592,7 @@ describe('v1.VpcAccessServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1602,7 +1602,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1626,7 +1626,7 @@ describe('v1.VpcAccessServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1661,7 +1661,7 @@ describe('v1.VpcAccessServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1697,7 +1697,7 @@ describe('v1.VpcAccessServiceClient', () => {
         connector: 'connectorValue',
       };
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1760,7 +1760,7 @@ describe('v1.VpcAccessServiceClient', () => {
         location: 'locationValue',
       };
       const client = new vpcaccessserviceModule.v1.VpcAccessServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

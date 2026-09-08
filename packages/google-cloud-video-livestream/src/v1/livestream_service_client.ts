@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class LivestreamServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('livestream');
@@ -72,11 +72,11 @@ export class LivestreamServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  livestreamServiceStub?: Promise<{ [name: string]: Function }>;
+  livestreamServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of LivestreamServiceClient.
@@ -152,7 +152,7 @@ export class LivestreamServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -529,7 +529,7 @@ export class LivestreamServiceClient {
       'google.cloud.video.livestream.v1.LivestreamService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -570,7 +570,7 @@ export class LivestreamServiceClient {
             .LivestreamService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -612,7 +612,7 @@ export class LivestreamServiceClient {
     ];
     for (const methodName of livestreamServiceStubMethods) {
       const callPromise = this.livestreamServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -814,7 +814,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getChannel request %j', request);
@@ -952,7 +952,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInput request %j', request);
@@ -1087,7 +1087,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('previewInput request %j', request);
@@ -1248,7 +1248,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEvent request %j', request);
@@ -1386,7 +1386,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvent request %j', request);
@@ -1535,7 +1535,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvent request %j', request);
@@ -1673,7 +1673,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getClip request %j', request);
@@ -1808,7 +1808,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDvrSession request %j', request);
@@ -1946,7 +1946,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAsset request %j', request);
@@ -2081,7 +2081,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPool request %j', request);
@@ -2253,7 +2253,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2310,7 +2310,7 @@ export class LivestreamServiceClient {
     this._log.info('createChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2442,7 +2442,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2499,7 +2499,7 @@ export class LivestreamServiceClient {
     this._log.info('deleteChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2646,7 +2646,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'channel.name': request.channel!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2703,7 +2703,7 @@ export class LivestreamServiceClient {
     this._log.info('updateChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2831,7 +2831,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2888,7 +2888,7 @@ export class LivestreamServiceClient {
     this._log.info('startChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3016,7 +3016,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3073,7 +3073,7 @@ export class LivestreamServiceClient {
     this._log.info('stopChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3205,7 +3205,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3262,7 +3262,7 @@ export class LivestreamServiceClient {
     this._log.info('startDistribution long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3393,7 +3393,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3450,7 +3450,7 @@ export class LivestreamServiceClient {
     this._log.info('stopDistribution long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3586,7 +3586,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3643,7 +3643,7 @@ export class LivestreamServiceClient {
     this._log.info('createInput long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3770,7 +3770,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3827,7 +3827,7 @@ export class LivestreamServiceClient {
     this._log.info('deleteInput long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3967,7 +3967,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'input.name': request.input!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4024,7 +4024,7 @@ export class LivestreamServiceClient {
     this._log.info('updateInput long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4160,7 +4160,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4217,7 +4217,7 @@ export class LivestreamServiceClient {
     this._log.info('createClip long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4345,7 +4345,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4402,7 +4402,7 @@ export class LivestreamServiceClient {
     this._log.info('deleteClip long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4538,7 +4538,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4595,7 +4595,7 @@ export class LivestreamServiceClient {
     this._log.info('createDvrSession long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4722,7 +4722,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4779,7 +4779,7 @@ export class LivestreamServiceClient {
     this._log.info('deleteDvrSession long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4914,7 +4914,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'dvr_session.name': request.dvrSession!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4971,7 +4971,7 @@ export class LivestreamServiceClient {
     this._log.info('updateDvrSession long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5108,7 +5108,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5165,7 +5165,7 @@ export class LivestreamServiceClient {
     this._log.info('createAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5292,7 +5292,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5349,7 +5349,7 @@ export class LivestreamServiceClient {
     this._log.info('deleteAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5483,7 +5483,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'pool.name': request.pool!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5540,7 +5540,7 @@ export class LivestreamServiceClient {
     this._log.info('updatePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5657,7 +5657,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5734,7 +5734,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listChannels stream %j', request);
@@ -5793,7 +5793,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listChannels iterate %j', request);
@@ -5907,7 +5907,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5984,7 +5984,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listInputs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInputs stream %j', request);
@@ -6043,7 +6043,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listInputs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInputs iterate %j', request);
@@ -6157,7 +6157,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6234,7 +6234,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvents stream %j', request);
@@ -6293,7 +6293,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvents iterate %j', request);
@@ -6402,7 +6402,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6474,7 +6474,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listClips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listClips stream %j', request);
@@ -6528,7 +6528,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listClips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listClips iterate %j', request);
@@ -6637,7 +6637,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6709,7 +6709,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listDvrSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDvrSessions stream %j', request);
@@ -6763,7 +6763,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listDvrSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDvrSessions iterate %j', request);
@@ -6873,7 +6873,7 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6946,7 +6946,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssets stream %j', request);
@@ -7001,7 +7001,7 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssets iterate %j', request);
@@ -7774,11 +7774,11 @@ export class LivestreamServiceClient {
    */
   close(): Promise<void> {
     if (this.livestreamServiceStub && !this._terminated) {
-      return this.livestreamServiceStub.then((stub) => {
+      return this.livestreamServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

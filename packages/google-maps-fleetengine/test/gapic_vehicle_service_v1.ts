@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as vehicleserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vehicleServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.VehicleServiceClient', () => {
       assert(client.vehicleServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.vehicleServiceStub);
@@ -261,14 +261,14 @@ describe('v1.VehicleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vehicleServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.VehicleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.VehicleServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.VehicleServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.VehicleServiceClient', () => {
   describe('createVehicle', () => {
     it('invokes createVehicle without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -348,7 +348,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes createVehicle without error using callback', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes createVehicle with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes createVehicle with closed client', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.VehicleServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.parent = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createVehicle(request), expectedError);
@@ -440,7 +440,7 @@ describe('v1.VehicleServiceClient', () => {
   describe('getVehicle', () => {
     it('invokes getVehicle without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes getVehicle without error using callback', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -512,7 +512,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes getVehicle with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -540,7 +540,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes getVehicle with closed client', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -550,7 +550,7 @@ describe('v1.VehicleServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVehicle(request), expectedError);
@@ -560,7 +560,7 @@ describe('v1.VehicleServiceClient', () => {
   describe('deleteVehicle', () => {
     it('invokes deleteVehicle without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes deleteVehicle without error using callback', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes deleteVehicle with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes deleteVehicle with closed client', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -670,7 +670,7 @@ describe('v1.VehicleServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteVehicle(request), expectedError);
@@ -680,7 +680,7 @@ describe('v1.VehicleServiceClient', () => {
   describe('updateVehicle', () => {
     it('invokes updateVehicle without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes updateVehicle without error using callback', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes updateVehicle with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes updateVehicle with closed client', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -790,7 +790,7 @@ describe('v1.VehicleServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateVehicle(request), expectedError);
@@ -800,7 +800,7 @@ describe('v1.VehicleServiceClient', () => {
   describe('updateVehicleAttributes', () => {
     it('invokes updateVehicleAttributes without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes updateVehicleAttributes without error using callback', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes updateVehicleAttributes with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -904,7 +904,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes updateVehicleAttributes with closed client', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1.VehicleServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -927,7 +927,7 @@ describe('v1.VehicleServiceClient', () => {
   describe('searchVehicles', () => {
     it('invokes searchVehicles without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -955,7 +955,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes searchVehicles without error using callback', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes searchVehicles with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,7 +1027,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes searchVehicles with closed client', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v1.VehicleServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.parent = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchVehicles(request), expectedError);
@@ -1047,7 +1047,7 @@ describe('v1.VehicleServiceClient', () => {
   describe('listVehicles', () => {
     it('invokes listVehicles without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes listVehicles without error using callback', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1123,7 +1123,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes listVehicles with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v1.VehicleServiceClient', () => {
 
     it('invokes listVehiclesStream without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1191,15 +1191,15 @@ describe('v1.VehicleServiceClient', () => {
       assert(
         (client.descriptors.page.listVehicles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVehiclesStream with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1236,15 +1236,15 @@ describe('v1.VehicleServiceClient', () => {
       assert(
         (client.descriptors.page.listVehicles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVehicles without error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1276,15 +1276,15 @@ describe('v1.VehicleServiceClient', () => {
       assert(
         (client.descriptors.page.listVehicles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVehicles with error', async () => {
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1313,9 +1313,9 @@ describe('v1.VehicleServiceClient', () => {
       assert(
         (client.descriptors.page.listVehicles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1328,7 +1328,7 @@ describe('v1.VehicleServiceClient', () => {
         trip: 'tripValue',
       };
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v1.VehicleServiceClient', () => {
         vehicle: 'vehicleValue',
       };
       const client = new vehicleserviceModule.v1.VehicleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

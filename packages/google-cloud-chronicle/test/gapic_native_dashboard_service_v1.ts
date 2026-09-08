@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as nativedashboardserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -251,7 +251,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.nativeDashboardServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.NativeDashboardServiceClient', () => {
       assert(client.nativeDashboardServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.nativeDashboardServiceStub);
@@ -274,15 +274,15 @@ describe('v1.NativeDashboardServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.nativeDashboardServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.NativeDashboardServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes createNativeDashboard without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes createNativeDashboard without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes createNativeDashboard with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes createNativeDashboard with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes getNativeDashboard without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes getNativeDashboard without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes getNativeDashboard with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes getNativeDashboard with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNativeDashboard(request), expectedError);
@@ -617,7 +617,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes updateNativeDashboard without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes updateNativeDashboard without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes updateNativeDashboard with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes updateNativeDashboard with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.nativeDashboard.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -764,7 +764,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes duplicateNativeDashboard without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes duplicateNativeDashboard without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes duplicateNativeDashboard with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes duplicateNativeDashboard with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -893,7 +893,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -907,7 +907,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes deleteNativeDashboard without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -940,7 +940,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes deleteNativeDashboard without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -988,7 +988,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes deleteNativeDashboard with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes deleteNativeDashboard with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1036,7 +1036,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1050,7 +1050,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes addChart without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1082,7 +1082,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes addChart without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1130,7 +1130,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes addChart with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes addChart with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1172,7 +1172,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addChart(request), expectedError);
@@ -1183,7 +1183,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes removeChart without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1215,7 +1215,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes removeChart without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes removeChart with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1295,7 +1295,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes removeChart with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeChart(request), expectedError);
@@ -1319,7 +1319,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes editChart without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1351,7 +1351,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes editChart without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1399,7 +1399,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes editChart with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1428,7 +1428,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes editChart with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.editChart(request), expectedError);
@@ -1452,7 +1452,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes duplicateChart without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1484,7 +1484,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes duplicateChart without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1532,7 +1532,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes duplicateChart with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1564,7 +1564,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes duplicateChart with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1577,7 +1577,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.duplicateChart(request), expectedError);
@@ -1588,7 +1588,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes exportNativeDashboards without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1621,7 +1621,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes exportNativeDashboards without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1669,7 +1669,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes exportNativeDashboards with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1704,7 +1704,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes exportNativeDashboards with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1717,7 +1717,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1731,7 +1731,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes importNativeDashboards without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1764,7 +1764,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes importNativeDashboards without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1812,7 +1812,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes importNativeDashboards with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1847,7 +1847,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes importNativeDashboards with closed client', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1860,7 +1860,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1874,7 +1874,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes listNativeDashboards without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes listNativeDashboards without error using callback', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes listNativeDashboards with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2003,7 +2003,7 @@ describe('v1.NativeDashboardServiceClient', () => {
     it('invokes listNativeDashboardsStream without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2056,16 +2056,16 @@ describe('v1.NativeDashboardServiceClient', () => {
       assert(
         (client.descriptors.page.listNativeDashboards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNativeDashboardsStream with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2107,16 +2107,16 @@ describe('v1.NativeDashboardServiceClient', () => {
       assert(
         (client.descriptors.page.listNativeDashboards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNativeDashboards without error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2157,16 +2157,16 @@ describe('v1.NativeDashboardServiceClient', () => {
       assert(
         (client.descriptors.page.listNativeDashboards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNativeDashboards with error', async () => {
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2199,9 +2199,9 @@ describe('v1.NativeDashboardServiceClient', () => {
       assert(
         (client.descriptors.page.listNativeDashboards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2216,7 +2216,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2282,7 +2282,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2359,7 +2359,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2436,7 +2436,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2514,7 +2514,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2592,7 +2592,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2669,7 +2669,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2768,7 +2768,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2857,7 +2857,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2953,7 +2953,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3046,7 +3046,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3141,7 +3141,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3205,7 +3205,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3257,7 +3257,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3331,7 +3331,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3373,7 +3373,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3451,7 +3451,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3539,7 +3539,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3616,7 +3616,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3693,7 +3693,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3786,7 +3786,7 @@ describe('v1.NativeDashboardServiceClient', () => {
       };
       const client =
         new nativedashboardserviceModule.v1.NativeDashboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

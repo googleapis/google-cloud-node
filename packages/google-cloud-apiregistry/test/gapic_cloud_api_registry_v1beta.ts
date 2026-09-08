@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudapiregistryModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudApiRegistryStub, undefined);
@@ -252,12 +252,12 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(client.cloudApiRegistryStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudApiRegistryStub);
@@ -266,14 +266,14 @@ describe('v1beta.CloudApiRegistryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudApiRegistryStub, undefined);
@@ -282,7 +282,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -290,7 +290,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -302,7 +302,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -325,7 +325,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
   describe('getMcpServer', () => {
     it('invokes getMcpServer without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -356,7 +356,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes getMcpServer without error using callback', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes getMcpServer with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes getMcpServer with closed client', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMcpServer(request), expectedError);
@@ -457,7 +457,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
   describe('getMcpTool', () => {
     it('invokes getMcpTool without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes getMcpTool without error using callback', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes getMcpTool with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes getMcpTool with closed client', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -579,7 +579,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMcpTool(request), expectedError);
@@ -589,7 +589,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
   describe('listMcpServers', () => {
     it('invokes listMcpServers without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -628,7 +628,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes listMcpServers without error using callback', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -683,7 +683,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes listMcpServers with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -714,7 +714,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes listMcpServersStream without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -767,15 +767,15 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMcpServersStream with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -817,15 +817,15 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMcpServers without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -866,15 +866,15 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMcpServers with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -907,9 +907,9 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -917,7 +917,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
   describe('listMcpTools', () => {
     it('invokes listMcpTools without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -956,7 +956,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes listMcpTools without error using callback', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes listMcpTools with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
 
     it('invokes listMcpToolsStream without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,15 +1094,15 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpTools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMcpToolsStream with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1145,15 +1145,15 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpTools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMcpTools without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1194,15 +1194,15 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpTools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMcpTools with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,16 +1234,16 @@ describe('v1beta.CloudApiRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpTools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,7 +1273,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1317,7 +1317,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1352,7 +1352,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1400,7 +1400,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
         api_namespace: 'apiNamespaceValue',
       };
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
         location: 'locationValue',
       };
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1559,7 +1559,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
         project: 'projectValue',
       };
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
         mcp_tool: 'mcpToolValue',
       };
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1726,7 +1726,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
         mcp_server: 'mcpServerValue',
       };
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1832,7 +1832,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
         mcp_tool: 'mcpToolValue',
       };
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1928,7 +1928,7 @@ describe('v1beta.CloudApiRegistryClient', () => {
         mcp_server: 'mcpServerValue',
       };
       const client = new cloudapiregistryModule.v1beta.CloudApiRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

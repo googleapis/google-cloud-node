@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cacheserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cacheServiceStub, undefined);
@@ -250,12 +250,12 @@ describe('v1beta.CacheServiceClient', () => {
       assert(client.cacheServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cacheServiceStub);
@@ -264,14 +264,14 @@ describe('v1beta.CacheServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cacheServiceStub, undefined);
@@ -280,7 +280,7 @@ describe('v1beta.CacheServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1beta.CacheServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1beta.CacheServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1beta.CacheServiceClient', () => {
   describe('createCachedContent', () => {
     it('invokes createCachedContent without error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -341,7 +341,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes createCachedContent without error using callback', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -374,7 +374,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes createCachedContent with error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes createCachedContent with closed client', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1beta.CacheServiceClient', () => {
         new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCachedContent(request), expectedError);
@@ -409,7 +409,7 @@ describe('v1beta.CacheServiceClient', () => {
   describe('getCachedContent', () => {
     it('invokes getCachedContent without error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes getCachedContent without error using callback', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes getCachedContent with error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes getCachedContent with closed client', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1beta.CacheServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCachedContent(request), expectedError);
@@ -541,7 +541,7 @@ describe('v1beta.CacheServiceClient', () => {
   describe('updateCachedContent', () => {
     it('invokes updateCachedContent without error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes updateCachedContent without error using callback', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -622,7 +622,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes updateCachedContent with error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes updateCachedContent with closed client', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -668,7 +668,7 @@ describe('v1beta.CacheServiceClient', () => {
       );
       request.cachedContent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCachedContent(request), expectedError);
@@ -678,7 +678,7 @@ describe('v1beta.CacheServiceClient', () => {
   describe('deleteCachedContent', () => {
     it('invokes deleteCachedContent without error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes deleteCachedContent without error using callback', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -757,7 +757,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes deleteCachedContent with error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -788,7 +788,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes deleteCachedContent with closed client', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1beta.CacheServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCachedContent(request), expectedError);
@@ -811,7 +811,7 @@ describe('v1beta.CacheServiceClient', () => {
   describe('listCachedContents', () => {
     it('invokes listCachedContents without error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -837,7 +837,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes listCachedContents without error using callback', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes listCachedContents with error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,7 +897,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes listCachedContentsStream without error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('invokes listCachedContentsStream with error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('uses async iteration with listCachedContents without error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v1beta.CacheServiceClient', () => {
 
     it('uses async iteration with listCachedContents with error', async () => {
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1057,7 +1057,7 @@ describe('v1beta.CacheServiceClient', () => {
         id: 'idValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1097,7 +1097,7 @@ describe('v1beta.CacheServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1beta.CacheServiceClient', () => {
         corpus: 'corpusValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1beta.CacheServiceClient', () => {
         permission: 'permissionValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v1beta.CacheServiceClient', () => {
         document: 'documentValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1beta.CacheServiceClient', () => {
         file: 'fileValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1346,7 @@ describe('v1beta.CacheServiceClient', () => {
         model: 'modelValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1384,7 +1384,7 @@ describe('v1beta.CacheServiceClient', () => {
         tuned_model: 'tunedModelValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v1beta.CacheServiceClient', () => {
         permission: 'permissionValue',
       };
       const client = new cacheserviceModule.v1beta.CacheServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

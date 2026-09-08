@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { IsochroneServiceClient } from '@google-maps/isochrones';
+import {IsochroneServiceClient} from '@google-maps/isochrones';
 
 // check that the client class type name can be used
 function doStuffWithIsochroneServiceClient(client: IsochroneServiceClient) {

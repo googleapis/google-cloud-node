@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as securesourcemanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -205,7 +205,7 @@ describe('v1.SecureSourceManagerClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'securesourcemanager.example.com');
@@ -213,7 +213,7 @@ describe('v1.SecureSourceManagerClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'securesourcemanager.example.com');
@@ -288,7 +288,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -297,14 +297,14 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(client.secureSourceManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.secureSourceManagerStub);
@@ -313,15 +313,15 @@ describe('v1.SecureSourceManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -331,7 +331,7 @@ describe('v1.SecureSourceManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1.SecureSourceManagerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -354,7 +354,7 @@ describe('v1.SecureSourceManagerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -379,7 +379,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getInstance without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -412,7 +412,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getInstance without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -461,7 +461,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getInstance with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -494,7 +494,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getInstance with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -508,7 +508,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -519,7 +519,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getRepository without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -552,7 +552,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getRepository without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -601,7 +601,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getRepository with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -634,7 +634,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getRepository with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -648,7 +648,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRepository(request), expectedError);
@@ -659,7 +659,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getHook without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -692,7 +692,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getHook without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -741,7 +741,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getHook with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -771,7 +771,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getHook with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -785,7 +785,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getHook(request), expectedError);
@@ -796,7 +796,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIamPolicyRepo without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -829,7 +829,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIamPolicyRepo without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -878,7 +878,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIamPolicyRepo with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -911,7 +911,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIamPolicyRepo with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -925,7 +925,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicyRepo(request), expectedError);
@@ -936,7 +936,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes setIamPolicyRepo without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -969,7 +969,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes setIamPolicyRepo without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1018,7 +1018,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes setIamPolicyRepo with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1051,7 +1051,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes setIamPolicyRepo with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1065,7 +1065,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicyRepo(request), expectedError);
@@ -1076,7 +1076,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes testIamPermissionsRepo without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1110,7 +1110,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes testIamPermissionsRepo without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1159,7 +1159,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes testIamPermissionsRepo with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1195,7 +1195,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes testIamPermissionsRepo with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1209,7 +1209,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1223,7 +1223,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getBranchRule without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1256,7 +1256,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getBranchRule without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1305,7 +1305,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getBranchRule with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1338,7 +1338,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getBranchRule with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1352,7 +1352,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBranchRule(request), expectedError);
@@ -1363,7 +1363,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getPullRequest without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1396,7 +1396,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getPullRequest without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1445,7 +1445,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getPullRequest with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1478,7 +1478,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getPullRequest with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1492,7 +1492,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPullRequest(request), expectedError);
@@ -1503,7 +1503,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes fetchBlob without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1536,7 +1536,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes fetchBlob without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1585,7 +1585,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes fetchBlob with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1615,7 +1615,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes fetchBlob with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1629,7 +1629,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.repository = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchBlob(request), expectedError);
@@ -1640,7 +1640,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIssue without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1673,7 +1673,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIssue without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1722,7 +1722,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIssue with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1752,7 +1752,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIssue with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1766,7 +1766,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIssue(request), expectedError);
@@ -1777,7 +1777,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getPullRequestComment without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1811,7 +1811,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getPullRequestComment without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1860,7 +1860,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getPullRequestComment with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1896,7 +1896,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getPullRequestComment with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1910,7 +1910,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1924,7 +1924,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIssueComment without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1957,7 +1957,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIssueComment without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2006,7 +2006,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIssueComment with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2039,7 +2039,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIssueComment with closed client', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2053,7 +2053,7 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIssueComment(request), expectedError);
@@ -2064,7 +2064,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createInstance without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2099,7 +2099,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createInstance without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2155,7 +2155,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createInstance with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2188,7 +2188,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createInstance with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2223,7 +2223,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2232,8 +2232,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -2247,7 +2247,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2270,7 +2270,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteInstance without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2305,7 +2305,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteInstance without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2361,7 +2361,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteInstance with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2394,7 +2394,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteInstance with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2429,7 +2429,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteInstanceProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2438,8 +2438,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInstanceProgress(
@@ -2453,7 +2453,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteInstanceProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2476,7 +2476,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createRepository without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2511,7 +2511,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createRepository without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2567,7 +2567,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createRepository with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2600,7 +2600,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createRepository with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2635,7 +2635,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateRepositoryProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2644,8 +2644,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRepositoryProgress(
@@ -2659,7 +2659,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateRepositoryProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2682,7 +2682,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateRepository without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2718,7 +2718,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateRepository without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2775,7 +2775,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateRepository with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2809,7 +2809,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateRepository with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2845,7 +2845,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateRepositoryProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2854,8 +2854,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateRepositoryProgress(
@@ -2869,7 +2869,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateRepositoryProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2892,7 +2892,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteRepository without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2927,7 +2927,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteRepository without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2983,7 +2983,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteRepository with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3016,7 +3016,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteRepository with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3051,7 +3051,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteRepositoryProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3060,8 +3060,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRepositoryProgress(
@@ -3075,7 +3075,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteRepositoryProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3098,7 +3098,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createHook without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3132,7 +3132,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createHook without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3188,7 +3188,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createHook with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3221,7 +3221,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createHook with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3256,7 +3256,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateHookProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3265,8 +3265,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateHookProgress(
@@ -3280,7 +3280,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateHookProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3300,7 +3300,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateHook without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3335,7 +3335,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateHook without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3392,7 +3392,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateHook with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3426,7 +3426,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateHook with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3462,7 +3462,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateHookProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3471,8 +3471,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateHookProgress(
@@ -3486,7 +3486,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateHookProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3506,7 +3506,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteHook without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3540,7 +3540,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteHook without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3596,7 +3596,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteHook with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3629,7 +3629,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteHook with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3664,7 +3664,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteHookProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3673,8 +3673,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteHookProgress(
@@ -3688,7 +3688,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteHookProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3708,7 +3708,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createBranchRule without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3743,7 +3743,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createBranchRule without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3799,7 +3799,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createBranchRule with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3832,7 +3832,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createBranchRule with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3867,7 +3867,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateBranchRuleProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3876,8 +3876,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBranchRuleProgress(
@@ -3891,7 +3891,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateBranchRuleProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3914,7 +3914,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateBranchRule without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3950,7 +3950,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateBranchRule without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4007,7 +4007,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateBranchRule with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4041,7 +4041,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateBranchRule with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4077,7 +4077,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateBranchRuleProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4086,8 +4086,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBranchRuleProgress(
@@ -4101,7 +4101,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateBranchRuleProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4124,7 +4124,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteBranchRule without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4159,7 +4159,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteBranchRule without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4215,7 +4215,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteBranchRule with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4248,7 +4248,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteBranchRule with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4283,7 +4283,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteBranchRuleProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4292,8 +4292,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBranchRuleProgress(
@@ -4307,7 +4307,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteBranchRuleProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4330,7 +4330,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createPullRequest without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4365,7 +4365,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createPullRequest without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4421,7 +4421,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createPullRequest with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4454,7 +4454,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createPullRequest with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4489,7 +4489,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreatePullRequestProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4498,8 +4498,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePullRequestProgress(
@@ -4513,7 +4513,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreatePullRequestProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4536,7 +4536,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updatePullRequest without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4572,7 +4572,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updatePullRequest without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4629,7 +4629,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updatePullRequest with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4663,7 +4663,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updatePullRequest with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4699,7 +4699,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdatePullRequestProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4708,8 +4708,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdatePullRequestProgress(
@@ -4723,7 +4723,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdatePullRequestProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4746,7 +4746,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes mergePullRequest without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4781,7 +4781,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes mergePullRequest without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4837,7 +4837,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes mergePullRequest with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4870,7 +4870,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes mergePullRequest with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4905,7 +4905,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkMergePullRequestProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4914,8 +4914,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMergePullRequestProgress(
@@ -4929,7 +4929,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkMergePullRequestProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4952,7 +4952,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes openPullRequest without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4987,7 +4987,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes openPullRequest without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5043,7 +5043,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes openPullRequest with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5076,7 +5076,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes openPullRequest with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5111,7 +5111,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkOpenPullRequestProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5120,8 +5120,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkOpenPullRequestProgress(
@@ -5135,7 +5135,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkOpenPullRequestProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5158,7 +5158,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes closePullRequest without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5193,7 +5193,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes closePullRequest without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5249,7 +5249,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes closePullRequest with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5282,7 +5282,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes closePullRequest with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5317,7 +5317,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkClosePullRequestProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5326,8 +5326,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkClosePullRequestProgress(
@@ -5341,7 +5341,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkClosePullRequestProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5364,7 +5364,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createIssue without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5398,7 +5398,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createIssue without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5454,7 +5454,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createIssue with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5487,7 +5487,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createIssue with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5522,7 +5522,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateIssueProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5531,8 +5531,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIssueProgress(
@@ -5546,7 +5546,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateIssueProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5566,7 +5566,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateIssue without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5601,7 +5601,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateIssue without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5658,7 +5658,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateIssue with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5692,7 +5692,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateIssue with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5728,7 +5728,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateIssueProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5737,8 +5737,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateIssueProgress(
@@ -5752,7 +5752,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateIssueProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5772,7 +5772,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteIssue without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5806,7 +5806,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteIssue without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5862,7 +5862,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteIssue with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5895,7 +5895,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteIssue with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5930,7 +5930,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteIssueProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5939,8 +5939,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteIssueProgress(
@@ -5954,7 +5954,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteIssueProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5974,7 +5974,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes openIssue without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6008,7 +6008,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes openIssue without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6064,7 +6064,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes openIssue with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6097,7 +6097,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes openIssue with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6132,7 +6132,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkOpenIssueProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6141,8 +6141,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkOpenIssueProgress(
@@ -6156,7 +6156,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkOpenIssueProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6176,7 +6176,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes closeIssue without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6210,7 +6210,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes closeIssue without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6266,7 +6266,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes closeIssue with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6299,7 +6299,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes closeIssue with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6334,7 +6334,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCloseIssueProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6343,8 +6343,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCloseIssueProgress(
@@ -6358,7 +6358,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCloseIssueProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6378,7 +6378,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createPullRequestComment without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6413,7 +6413,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createPullRequestComment without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6469,7 +6469,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createPullRequestComment with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6505,7 +6505,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createPullRequestComment with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6540,7 +6540,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreatePullRequestCommentProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6549,8 +6549,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6565,7 +6565,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreatePullRequestCommentProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6588,7 +6588,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updatePullRequestComment without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6624,7 +6624,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updatePullRequestComment without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6681,7 +6681,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updatePullRequestComment with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6718,7 +6718,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updatePullRequestComment with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6754,7 +6754,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdatePullRequestCommentProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6763,8 +6763,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6779,7 +6779,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdatePullRequestCommentProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6802,7 +6802,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deletePullRequestComment without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6837,7 +6837,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deletePullRequestComment without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6893,7 +6893,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deletePullRequestComment with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6929,7 +6929,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deletePullRequestComment with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6964,7 +6964,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeletePullRequestCommentProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6973,8 +6973,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6989,7 +6989,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeletePullRequestCommentProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7012,7 +7012,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes batchCreatePullRequestComments without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7047,7 +7047,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes batchCreatePullRequestComments without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7103,7 +7103,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes batchCreatePullRequestComments with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7139,7 +7139,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes batchCreatePullRequestComments with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7174,7 +7174,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkBatchCreatePullRequestCommentsProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7183,8 +7183,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -7199,7 +7199,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkBatchCreatePullRequestCommentsProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7222,7 +7222,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes resolvePullRequestComments without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7257,7 +7257,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes resolvePullRequestComments without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7313,7 +7313,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes resolvePullRequestComments with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7349,7 +7349,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes resolvePullRequestComments with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7384,7 +7384,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkResolvePullRequestCommentsProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7393,8 +7393,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -7409,7 +7409,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkResolvePullRequestCommentsProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7432,7 +7432,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes unresolvePullRequestComments without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7467,7 +7467,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes unresolvePullRequestComments without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7523,7 +7523,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes unresolvePullRequestComments with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7559,7 +7559,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes unresolvePullRequestComments with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7594,7 +7594,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUnresolvePullRequestCommentsProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7603,8 +7603,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -7619,7 +7619,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUnresolvePullRequestCommentsProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7642,7 +7642,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createIssueComment without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7677,7 +7677,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createIssueComment without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7733,7 +7733,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createIssueComment with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7766,7 +7766,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes createIssueComment with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7801,7 +7801,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateIssueCommentProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7810,8 +7810,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIssueCommentProgress(
@@ -7825,7 +7825,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkCreateIssueCommentProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7848,7 +7848,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateIssueComment without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7884,7 +7884,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateIssueComment without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7941,7 +7941,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateIssueComment with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7975,7 +7975,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes updateIssueComment with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8011,7 +8011,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateIssueCommentProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8020,8 +8020,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateIssueCommentProgress(
@@ -8035,7 +8035,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkUpdateIssueCommentProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8058,7 +8058,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteIssueComment without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8093,7 +8093,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteIssueComment without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8149,7 +8149,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteIssueComment with call error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8182,7 +8182,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteIssueComment with LRO error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8217,7 +8217,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteIssueCommentProgress without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8226,8 +8226,8 @@ describe('v1.SecureSourceManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteIssueCommentProgress(
@@ -8241,7 +8241,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes checkDeleteIssueCommentProgress with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8264,7 +8264,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listInstances without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8305,7 +8305,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listInstances without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8338,8 +8338,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IInstance[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IInstance[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8364,7 +8363,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listInstances with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8397,7 +8396,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listInstancesStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8451,16 +8450,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8503,16 +8502,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8555,16 +8554,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8598,9 +8597,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8609,7 +8608,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listRepositories without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8650,7 +8649,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listRepositories without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8683,8 +8682,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IRepository[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IRepository[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8709,7 +8707,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listRepositories with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8742,7 +8740,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listRepositoriesStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8796,16 +8794,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRepositoriesStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8848,16 +8846,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRepositories without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8900,16 +8898,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRepositories with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8943,9 +8941,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8954,7 +8952,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listHooks without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8995,7 +8993,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listHooks without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9052,7 +9050,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listHooks with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9082,7 +9080,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listHooksStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9135,16 +9133,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listHooks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listHooksStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9188,16 +9186,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listHooks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHooks without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9238,16 +9236,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listHooks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHooks with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9282,9 +9280,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listHooks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9293,7 +9291,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listBranchRules without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9334,7 +9332,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listBranchRules without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9367,8 +9365,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IBranchRule[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IBranchRule[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9393,7 +9390,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listBranchRules with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9426,7 +9423,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listBranchRulesStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9480,16 +9477,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listBranchRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBranchRulesStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9532,16 +9529,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listBranchRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBranchRules without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9584,16 +9581,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listBranchRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBranchRules with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9627,9 +9624,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listBranchRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9638,7 +9635,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequests without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9679,7 +9676,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequests without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9712,8 +9709,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IPullRequest[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IPullRequest[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9738,7 +9734,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequests with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9771,7 +9767,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestsStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9827,16 +9823,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listPullRequests.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPullRequestsStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9881,16 +9877,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listPullRequests.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPullRequests without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9933,16 +9929,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listPullRequests.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPullRequests with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9976,9 +9972,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listPullRequests.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9987,7 +9983,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestFileDiffs without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10029,7 +10025,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestFileDiffs without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10062,8 +10058,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IFileDiff[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IFileDiff[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10088,7 +10083,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestFileDiffs with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10124,7 +10119,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestFileDiffsStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10193,7 +10188,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestFileDiffsStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10251,7 +10246,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('uses async iteration with listPullRequestFileDiffs without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10307,7 +10302,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('uses async iteration with listPullRequestFileDiffs with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10356,7 +10351,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes fetchTree without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10397,7 +10392,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes fetchTree without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10430,8 +10425,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.ITreeEntry[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.ITreeEntry[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10456,7 +10450,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes fetchTree with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10486,7 +10480,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes fetchTreeStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10540,16 +10534,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.fetchTree.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes fetchTreeStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10594,16 +10588,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.fetchTree.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchTree without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10645,16 +10639,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.fetchTree.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchTree with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10689,9 +10683,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.fetchTree.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10700,7 +10694,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listIssues without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10741,7 +10735,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listIssues without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10798,7 +10792,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listIssues with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10831,7 +10825,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listIssuesStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10885,16 +10879,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssues.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIssuesStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10939,16 +10933,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssues.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIssues without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10990,16 +10984,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssues.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIssues with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11035,9 +11029,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssues.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11046,7 +11040,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestComments without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11088,7 +11082,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestComments without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11147,7 +11141,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestComments with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11183,7 +11177,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestCommentsStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11254,7 +11248,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listPullRequestCommentsStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11314,7 +11308,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('uses async iteration with listPullRequestComments without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11370,7 +11364,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('uses async iteration with listPullRequestComments with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11419,7 +11413,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listIssueComments without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11460,7 +11454,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listIssueComments without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11493,8 +11487,7 @@ describe('v1.SecureSourceManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.securesourcemanager.v1.IIssueComment[]
-              | null,
+              protos.google.cloud.securesourcemanager.v1.IIssueComment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11519,7 +11512,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listIssueComments with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11552,7 +11545,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes listIssueCommentsStream without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11608,16 +11601,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssueComments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIssueCommentsStream with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11662,16 +11655,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssueComments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIssueComments without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11714,16 +11707,16 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssueComments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIssueComments with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11757,9 +11750,9 @@ describe('v1.SecureSourceManagerClient', () => {
       assert(
         (client.descriptors.page.listIssueComments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11767,7 +11760,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11799,7 +11792,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11838,7 +11831,7 @@ describe('v1.SecureSourceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -11849,7 +11842,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11883,7 +11876,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11915,7 +11908,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11954,7 +11947,7 @@ describe('v1.SecureSourceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -11965,7 +11958,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11999,7 +11992,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12034,7 +12027,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12073,7 +12066,7 @@ describe('v1.SecureSourceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12084,7 +12077,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12121,7 +12114,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12153,7 +12146,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12199,7 +12192,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12236,7 +12229,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12286,7 +12279,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12329,7 +12322,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12352,7 +12345,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12381,7 +12374,7 @@ describe('v1.SecureSourceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12392,7 +12385,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12418,7 +12411,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12442,7 +12435,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12471,7 +12464,7 @@ describe('v1.SecureSourceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12482,7 +12475,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12508,7 +12501,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12532,7 +12525,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12561,7 +12554,7 @@ describe('v1.SecureSourceManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -12572,7 +12565,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12598,7 +12591,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12635,7 +12628,7 @@ describe('v1.SecureSourceManagerClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12674,7 +12667,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12752,7 +12745,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12830,7 +12823,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12907,7 +12900,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12974,7 +12967,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -13053,7 +13046,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -13140,7 +13133,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -13190,7 +13183,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -13233,7 +13226,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -13312,7 +13305,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -13420,7 +13413,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -13485,7 +13478,7 @@ describe('v1.SecureSourceManagerClient', () => {
       };
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

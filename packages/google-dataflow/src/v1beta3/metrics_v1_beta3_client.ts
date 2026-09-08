@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class MetricsV1Beta3Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataflow');
@@ -64,8 +64,8 @@ export class MetricsV1Beta3Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  metricsV1Beta3Stub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  metricsV1Beta3Stub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of MetricsV1Beta3Client.
@@ -141,7 +141,7 @@ export class MetricsV1Beta3Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -218,7 +218,7 @@ export class MetricsV1Beta3Client {
       'google.dataflow.v1beta3.MetricsV1Beta3',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -258,7 +258,7 @@ export class MetricsV1Beta3Client {
           (this._protos as any).google.dataflow.v1beta3.MetricsV1Beta3,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -269,7 +269,7 @@ export class MetricsV1Beta3Client {
     ];
     for (const methodName of metricsV1Beta3StubMethods) {
       const callPromise = this.metricsV1Beta3Stub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -481,7 +481,7 @@ export class MetricsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getJobMetrics request %j', request);
@@ -631,7 +631,7 @@ export class MetricsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -710,7 +710,7 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getJobExecutionDetails stream %j', request);
@@ -771,7 +771,7 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getJobExecutionDetails iterate %j', request);
@@ -891,7 +891,7 @@ export class MetricsV1Beta3Client {
         job_id: request.jobId?.toString() ?? '',
         stage_id: request.stageId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -977,7 +977,7 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getStageExecutionDetails stream %j', request);
@@ -1045,7 +1045,7 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getStageExecutionDetails iterate %j', request);
@@ -1064,7 +1064,7 @@ export class MetricsV1Beta3Client {
    */
   close(): Promise<void> {
     if (this.metricsV1Beta3Stub && !this._terminated) {
-      return this.metricsV1Beta3Stub.then((stub) => {
+      return this.metricsV1Beta3Stub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

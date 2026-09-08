@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as adruleserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.AdRuleServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.AdRuleServiceClient', () => {
       assert(client.adRuleServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.adRuleServiceStub);
@@ -274,12 +274,12 @@ describe('v1.AdRuleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.AdRuleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -452,7 +452,7 @@ describe('v1.AdRuleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAdRule(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.AdRuleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAdRule(request), expectedError);
@@ -717,7 +717,7 @@ describe('v1.AdRuleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateAdRules(request), expectedError);
@@ -853,7 +853,7 @@ describe('v1.AdRuleServiceClient', () => {
       );
       request.adRule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAdRule(request), expectedError);
@@ -986,7 +986,7 @@ describe('v1.AdRuleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateAdRules(request), expectedError);
@@ -1119,7 +1119,7 @@ describe('v1.AdRuleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchActivateAdRules(request), expectedError);
@@ -1255,7 +1255,7 @@ describe('v1.AdRuleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1391,7 +1391,7 @@ describe('v1.AdRuleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchDeleteAdRules(request), expectedError);
@@ -1401,7 +1401,7 @@ describe('v1.AdRuleServiceClient', () => {
   describe('listAdRules', () => {
     it('invokes listAdRules without error', async () => {
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1434,7 +1434,7 @@ describe('v1.AdRuleServiceClient', () => {
 
     it('invokes listAdRules without error using callback', async () => {
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,7 +1483,7 @@ describe('v1.AdRuleServiceClient', () => {
 
     it('invokes listAdRules with error', async () => {
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1514,7 +1514,7 @@ describe('v1.AdRuleServiceClient', () => {
 
     it('invokes listAdRulesStream without error', async () => {
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1557,15 +1557,15 @@ describe('v1.AdRuleServiceClient', () => {
       assert(
         (client.descriptors.page.listAdRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAdRulesStream with error', async () => {
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1605,9 +1605,9 @@ describe('v1.AdRuleServiceClient', () => {
       assert(
         (client.descriptors.page.listAdRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1648,15 +1648,15 @@ describe('v1.AdRuleServiceClient', () => {
       assert(
         (client.descriptors.page.listAdRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAdRules with error', async () => {
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1690,9 +1690,9 @@ describe('v1.AdRuleServiceClient', () => {
       assert(
         (client.descriptors.page.listAdRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1706,7 +1706,7 @@ describe('v1.AdRuleServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1770,7 +1770,7 @@ describe('v1.AdRuleServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1839,7 +1839,7 @@ describe('v1.AdRuleServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1888,7 +1888,7 @@ describe('v1.AdRuleServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1937,7 +1937,7 @@ describe('v1.AdRuleServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1986,7 +1986,7 @@ describe('v1.AdRuleServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2038,7 +2038,7 @@ describe('v1.AdRuleServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2091,7 +2091,7 @@ describe('v1.AdRuleServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2144,7 +2144,7 @@ describe('v1.AdRuleServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2193,7 +2193,7 @@ describe('v1.AdRuleServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2246,7 +2246,7 @@ describe('v1.AdRuleServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2298,7 +2298,7 @@ describe('v1.AdRuleServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2351,7 +2351,7 @@ describe('v1.AdRuleServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2404,7 +2404,7 @@ describe('v1.AdRuleServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2461,7 +2461,7 @@ describe('v1.AdRuleServiceClient', () => {
         company: 'companyValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2510,7 +2510,7 @@ describe('v1.AdRuleServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2559,7 +2559,7 @@ describe('v1.AdRuleServiceClient', () => {
         content: 'contentValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1.AdRuleServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2660,7 +2660,7 @@ describe('v1.AdRuleServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2712,7 +2712,7 @@ describe('v1.AdRuleServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2761,7 +2761,7 @@ describe('v1.AdRuleServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2813,7 +2813,7 @@ describe('v1.AdRuleServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2870,7 +2870,7 @@ describe('v1.AdRuleServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2923,7 +2923,7 @@ describe('v1.AdRuleServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2975,7 +2975,7 @@ describe('v1.AdRuleServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3038,7 +3038,7 @@ describe('v1.AdRuleServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3103,7 +3103,7 @@ describe('v1.AdRuleServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3168,7 +3168,7 @@ describe('v1.AdRuleServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3230,7 +3230,7 @@ describe('v1.AdRuleServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3277,7 +3277,7 @@ describe('v1.AdRuleServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3334,7 +3334,7 @@ describe('v1.AdRuleServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3387,7 +3387,7 @@ describe('v1.AdRuleServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3450,7 +3450,7 @@ describe('v1.AdRuleServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3515,7 +3515,7 @@ describe('v1.AdRuleServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3567,7 +3567,7 @@ describe('v1.AdRuleServiceClient', () => {
         label: 'labelValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3616,7 +3616,7 @@ describe('v1.AdRuleServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3665,7 +3665,7 @@ describe('v1.AdRuleServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3717,7 +3717,7 @@ describe('v1.AdRuleServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3769,7 +3769,7 @@ describe('v1.AdRuleServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3822,7 +3822,7 @@ describe('v1.AdRuleServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3874,7 +3874,7 @@ describe('v1.AdRuleServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3926,7 +3926,7 @@ describe('v1.AdRuleServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3991,7 +3991,7 @@ describe('v1.AdRuleServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4042,7 +4042,7 @@ describe('v1.AdRuleServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4081,7 +4081,7 @@ describe('v1.AdRuleServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4134,7 +4134,7 @@ describe('v1.AdRuleServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4199,7 +4199,7 @@ describe('v1.AdRuleServiceClient', () => {
         order: 'orderValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4248,7 +4248,7 @@ describe('v1.AdRuleServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4297,7 +4297,7 @@ describe('v1.AdRuleServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4349,7 +4349,7 @@ describe('v1.AdRuleServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4402,7 +4402,7 @@ describe('v1.AdRuleServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4465,7 +4465,7 @@ describe('v1.AdRuleServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4528,7 +4528,7 @@ describe('v1.AdRuleServiceClient', () => {
         report: 'reportValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4577,7 +4577,7 @@ describe('v1.AdRuleServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4640,7 +4640,7 @@ describe('v1.AdRuleServiceClient', () => {
         role: 'roleValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4689,7 +4689,7 @@ describe('v1.AdRuleServiceClient', () => {
         site: 'siteValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4738,7 +4738,7 @@ describe('v1.AdRuleServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4787,7 +4787,7 @@ describe('v1.AdRuleServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4840,7 +4840,7 @@ describe('v1.AdRuleServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4893,7 +4893,7 @@ describe('v1.AdRuleServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4950,7 +4950,7 @@ describe('v1.AdRuleServiceClient', () => {
         team: 'teamValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4999,7 +4999,7 @@ describe('v1.AdRuleServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5062,7 +5062,7 @@ describe('v1.AdRuleServiceClient', () => {
         user: 'userValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5111,7 +5111,7 @@ describe('v1.AdRuleServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5174,7 +5174,7 @@ describe('v1.AdRuleServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new adruleserviceModule.v1.AdRuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

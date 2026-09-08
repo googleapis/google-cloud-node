@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as agentsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v2.AgentsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.agentsStub, undefined);
@@ -282,12 +282,12 @@ describe('v2.AgentsClient', () => {
       assert(client.agentsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.agentsStub);
@@ -296,14 +296,14 @@ describe('v2.AgentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.agentsStub, undefined);
@@ -312,7 +312,7 @@ describe('v2.AgentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v2.AgentsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v2.AgentsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v2.AgentsClient', () => {
   describe('getAgent', () => {
     it('invokes getAgent without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes getAgent without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes getAgent with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes getAgent with closed client', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v2.AgentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAgent(request), expectedError);
@@ -484,7 +484,7 @@ describe('v2.AgentsClient', () => {
   describe('setAgent', () => {
     it('invokes setAgent without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes setAgent without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes setAgent with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes setAgent with closed client', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v2.AgentsClient', () => {
       );
       request.agent.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setAgent(request), expectedError);
@@ -617,7 +617,7 @@ describe('v2.AgentsClient', () => {
   describe('deleteAgent', () => {
     it('invokes deleteAgent without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes deleteAgent without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes deleteAgent with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes deleteAgent with closed client', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v2.AgentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAgent(request), expectedError);
@@ -749,7 +749,7 @@ describe('v2.AgentsClient', () => {
   describe('getValidationResult', () => {
     it('invokes getValidationResult without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes getValidationResult without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes getValidationResult with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes getValidationResult with closed client', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v2.AgentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getValidationResult(request), expectedError);
@@ -882,7 +882,7 @@ describe('v2.AgentsClient', () => {
   describe('trainAgent', () => {
     it('invokes trainAgent without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes trainAgent without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes trainAgent with call error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes trainAgent with LRO error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1032,7 +1032,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes checkTrainAgentProgress without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1040,8 +1040,8 @@ describe('v2.AgentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTrainAgentProgress(
@@ -1054,7 +1054,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes checkTrainAgentProgress with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1072,7 +1072,7 @@ describe('v2.AgentsClient', () => {
   describe('exportAgent', () => {
     it('invokes exportAgent without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes exportAgent without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1158,7 +1158,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes exportAgent with call error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1189,7 +1189,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes exportAgent with LRO error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1222,7 +1222,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes checkExportAgentProgress without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1230,8 +1230,8 @@ describe('v2.AgentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportAgentProgress(
@@ -1244,7 +1244,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes checkExportAgentProgress with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1262,7 +1262,7 @@ describe('v2.AgentsClient', () => {
   describe('importAgent', () => {
     it('invokes importAgent without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes importAgent without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1348,7 +1348,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes importAgent with call error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes importAgent with LRO error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1412,7 +1412,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes checkImportAgentProgress without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1420,8 +1420,8 @@ describe('v2.AgentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportAgentProgress(
@@ -1434,7 +1434,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes checkImportAgentProgress with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v2.AgentsClient', () => {
   describe('restoreAgent', () => {
     it('invokes restoreAgent without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1484,7 +1484,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes restoreAgent without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1538,7 +1538,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes restoreAgent with call error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1569,7 +1569,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes restoreAgent with LRO error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes checkRestoreAgentProgress without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1610,8 +1610,8 @@ describe('v2.AgentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreAgentProgress(
@@ -1624,7 +1624,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes checkRestoreAgentProgress with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v2.AgentsClient', () => {
   describe('searchAgents', () => {
     it('invokes searchAgents without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +1675,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes searchAgents without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1724,7 +1724,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes searchAgents with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1755,7 +1755,7 @@ describe('v2.AgentsClient', () => {
 
     it('invokes searchAgentsStream without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1801,15 +1801,15 @@ describe('v2.AgentsClient', () => {
       assert(
         (client.descriptors.page.searchAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchAgentsStream with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1852,15 +1852,15 @@ describe('v2.AgentsClient', () => {
       assert(
         (client.descriptors.page.searchAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAgents without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1895,15 +1895,15 @@ describe('v2.AgentsClient', () => {
       assert(
         (client.descriptors.page.searchAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAgents with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1935,16 +1935,16 @@ describe('v2.AgentsClient', () => {
       assert(
         (client.descriptors.page.searchAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,7 +1974,7 @@ describe('v2.AgentsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2018,7 +2018,7 @@ describe('v2.AgentsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,7 +2053,7 @@ describe('v2.AgentsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2101,7 +2101,7 @@ describe('v2.AgentsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2142,7 +2142,7 @@ describe('v2.AgentsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2163,7 +2163,7 @@ describe('v2.AgentsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2191,7 +2191,7 @@ describe('v2.AgentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2201,7 +2201,7 @@ describe('v2.AgentsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2225,7 +2225,7 @@ describe('v2.AgentsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2247,7 +2247,7 @@ describe('v2.AgentsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2275,7 +2275,7 @@ describe('v2.AgentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2285,7 +2285,7 @@ describe('v2.AgentsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2309,7 +2309,7 @@ describe('v2.AgentsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2331,7 +2331,7 @@ describe('v2.AgentsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2359,7 +2359,7 @@ describe('v2.AgentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2369,7 +2369,7 @@ describe('v2.AgentsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2393,7 +2393,7 @@ describe('v2.AgentsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2428,7 +2428,7 @@ describe('v2.AgentsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2464,7 @@ describe('v2.AgentsClient', () => {
         conversation_dataset: 'conversationDatasetValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2541,7 +2541,7 @@ describe('v2.AgentsClient', () => {
         location: 'locationValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2594,7 +2594,7 @@ describe('v2.AgentsClient', () => {
         generator: 'generatorValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2659,7 +2659,7 @@ describe('v2.AgentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2750,7 +2750,7 @@ describe('v2.AgentsClient', () => {
         project: 'projectValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2788,7 +2788,7 @@ describe('v2.AgentsClient', () => {
         project: 'projectValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2827,7 +2827,7 @@ describe('v2.AgentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2890,7 +2890,7 @@ describe('v2.AgentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2957,7 +2957,7 @@ describe('v2.AgentsClient', () => {
         context: 'contextValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3083,7 +3083,7 @@ describe('v2.AgentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3204,7 +3204,7 @@ describe('v2.AgentsClient', () => {
         project: 'projectValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3250,7 +3250,7 @@ describe('v2.AgentsClient', () => {
         intent: 'intentValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3312,7 +3312,7 @@ describe('v2.AgentsClient', () => {
         context: 'contextValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3391,7 +3391,7 @@ describe('v2.AgentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3467,7 +3467,7 @@ describe('v2.AgentsClient', () => {
         version: 'versionValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3528,7 +3528,7 @@ describe('v2.AgentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3591,7 +3591,7 @@ describe('v2.AgentsClient', () => {
         message: 'messageValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3669,7 +3669,7 @@ describe('v2.AgentsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3735,7 +3735,7 @@ describe('v2.AgentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3818,7 +3818,7 @@ describe('v2.AgentsClient', () => {
         participant: 'participantValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3898,7 +3898,7 @@ describe('v2.AgentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3963,7 +3963,7 @@ describe('v2.AgentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4026,7 +4026,7 @@ describe('v2.AgentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4090,7 +4090,7 @@ describe('v2.AgentsClient', () => {
         document: 'documentValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4168,7 +4168,7 @@ describe('v2.AgentsClient', () => {
         location: 'locationValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4232,7 +4232,7 @@ describe('v2.AgentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4311,7 +4311,7 @@ describe('v2.AgentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4394,7 +4394,7 @@ describe('v2.AgentsClient', () => {
         context: 'contextValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4540,7 +4540,7 @@ describe('v2.AgentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4681,7 +4681,7 @@ describe('v2.AgentsClient', () => {
         location: 'locationValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4743,7 +4743,7 @@ describe('v2.AgentsClient', () => {
         intent: 'intentValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4823,7 +4823,7 @@ describe('v2.AgentsClient', () => {
         context: 'contextValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4924,7 +4924,7 @@ describe('v2.AgentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5029,7 +5029,7 @@ describe('v2.AgentsClient', () => {
         version: 'versionValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5107,7 +5107,7 @@ describe('v2.AgentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5186,7 +5186,7 @@ describe('v2.AgentsClient', () => {
         message: 'messageValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5286,7 +5286,7 @@ describe('v2.AgentsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5369,7 +5369,7 @@ describe('v2.AgentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5475,7 +5475,7 @@ describe('v2.AgentsClient', () => {
         participant: 'participantValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5580,7 +5580,7 @@ describe('v2.AgentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5663,7 +5663,7 @@ describe('v2.AgentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5742,7 +5742,7 @@ describe('v2.AgentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5822,7 +5822,7 @@ describe('v2.AgentsClient', () => {
         document: 'documentValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5927,7 +5927,7 @@ describe('v2.AgentsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5991,7 +5991,7 @@ describe('v2.AgentsClient', () => {
         tool: 'toolValue',
       };
       const client = new agentsModule.v2.AgentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
