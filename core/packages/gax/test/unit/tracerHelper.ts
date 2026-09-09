@@ -25,6 +25,11 @@ import {
   DynamicTraceContext,
   StaticTraceContext,
 } from '../../src/observability/TracerHelper';
+import {
+  GaxCallResult,
+  CancellableStream,
+  ResultTuple,
+} from '../../src/apitypes';
 import {OtelHarness} from './otelHarness';
 
 describe('TracerHelper', () => {
@@ -345,6 +350,43 @@ describe('TracerHelper', () => {
         true,
       );
       assert.strictEqual(result, nonEmitter);
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports GaxCallResult promise operations', async () => {
+      const cancellablePromise = Object.assign(
+        Promise.resolve([{}, undefined, undefined] as ResultTuple),
+        {
+          cancel: () => {},
+        },
+      ) as GaxCallResult;
+
+      const result = traceAttempt(
+        dynamicArgs,
+        staticArgs,
+        () => cancellablePromise,
+      );
+      assert.strictEqual(result, cancellablePromise);
+      await result;
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports GaxCallResult stream operations', () => {
+      const stream = Object.assign(new EventEmitter(), {
+        cancel: () => {},
+      }) as unknown as CancellableStream;
+
+      const result = traceAttempt(dynamicArgs, staticArgs, () => stream, true);
+      assert.strictEqual(result, stream);
+
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+      stream.emit('end');
+
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
       assert.strictEqual(spans[0].ended, true);
