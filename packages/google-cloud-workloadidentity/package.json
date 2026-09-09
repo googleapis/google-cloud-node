@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/workloadidentity",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Workloadidentity client for Node.js",
   "repository": {
     "type": "git",
