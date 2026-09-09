@@ -168,10 +168,8 @@ describe('TracerHelper', () => {
     });
 
     it('manages span lifetime for resolved promises', async () => {
-      const result = await traceAttempt(
-        dynamicArgs,
-        staticArgs,
-        () => Promise.resolve('async-result'),
+      const result = await traceAttempt(dynamicArgs, staticArgs, () =>
+        Promise.resolve('async-result'),
       );
       assert.strictEqual(result, 'async-result');
 
