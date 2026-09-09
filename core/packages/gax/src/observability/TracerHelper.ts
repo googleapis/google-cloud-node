@@ -15,7 +15,7 @@
  */
 
 import {EventEmitter} from 'events';
-import { Span, trace, Tracer } from '@opentelemetry/api';
+import {Span, trace, Tracer} from '@opentelemetry/api';
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -71,9 +71,10 @@ export function getGaxTracer(): Tracer {
 /**
  * Manages span lifecycle for Promise-based operations.
  *
+ * @template T
  * @param {T} promise - The promise returned from the traced operation.
- * @param {(err: unknown) => void} recordError - Callback to record errors on the span.
- * @param {() => void} endSpan - Callback to end the span idempotently.
+ * @param {function} recordError - Callback to record errors on the span.
+ * @param {function} endSpan - Callback to end the span idempotently.
  */
 export function handlePromise<T>(
   promise: T,
@@ -92,11 +93,11 @@ export function handlePromise<T>(
 }
 
 /**
- * Manages span lifecycle for Stream-based operations.
+ * Manages span lifecycle for Stream-based operations and cleans up event listeners.
  *
  * @param {EventEmitter} stream - The stream returned from the traced operation.
- * @param {(err: unknown) => void} recordError - Callback to record errors on the span.
- * @param {() => void} endSpan - Callback to end the span idempotently.
+ * @param {function} recordError - Callback to record errors on the span.
+ * @param {function} endSpan - Callback to end the span idempotently.
  */
 export function handleStream(
   stream: EventEmitter,
@@ -137,8 +138,8 @@ export function handleStream(
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
- * @param {() => T} fn - The operation to trace.
- * @param {boolean} [isStreamCall=false] - Whether the operation is a stream or a promise.
+ * @param {function} fn - The operation to trace.
+ * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call (true) or promise call (false).
  * @returns {T} The result of the traced operation.
  */
 export function traceAttempt<T extends EventEmitter>(
@@ -157,7 +158,7 @@ export function traceAttempt(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
   fn: () => unknown,
-  isStreamCall: boolean = false,
+  isStreamCall = false,
 ): unknown {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
