@@ -109,7 +109,6 @@ export function handleStream(
     stream.removeListener('error', onError);
     stream.removeListener('end', onEnd);
     stream.removeListener('close', onClose);
-    endSpan();
   };
 
   const onError = (err: unknown) => {
@@ -150,7 +149,7 @@ export function traceAttempt<T extends EventEmitter>(
   fn: () => CancellableStream,
   isStreamCall: true,
 ): T;
-export function traceAttempt<T>(
+export function traceAttempt<T extends PromiseLike<T>>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
   fn: () => CancellablePromise<T>,
@@ -159,9 +158,9 @@ export function traceAttempt<T>(
 export function traceAttempt(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => T,
+  fn: () => unknown,
   isStreamCall: boolean = false,
-): T {
+): unknown {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
     span.setAttributes({
