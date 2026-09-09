@@ -141,11 +141,9 @@ export function traceAttempt<T>(
 export function traceAttempt(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fn: () => any,
+  fn: () => unknown,
   isStream: boolean | 'promise' | 'stream' = false,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): any {
+): unknown {
   const isStreamCall = isStream === true || isStream === 'stream';
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
@@ -188,7 +186,7 @@ export function traceAttempt(
     try {
       const result = fn();
       if (isStreamCall) {
-        handleStream(result, recordError, endSpan);
+        handleStream(result as EventEmitter, recordError, endSpan);
       } else {
         handlePromise(result, recordError, endSpan);
       }
