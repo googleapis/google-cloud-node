@@ -5,6 +5,21 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "fb690675-0f94-4f81-8335-e0b683a5798f",
+      "createTime": "2026-09-09T14:40:18.857Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "084318e4922f48b5de9e135b292986ab26ccde85",
           "message": "Support conversion and serialization for Temporal.Instant",
           "issues": [],
@@ -94037,5 +94052,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-09T14:40:18.548Z"
+  "updateTime": "2026-09-09T14:40:18.857Z"
 }
