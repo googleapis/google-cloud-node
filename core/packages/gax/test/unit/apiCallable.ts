@@ -21,7 +21,7 @@ import {afterEach, beforeEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
 
 import {CancellableStream, GRPCCall, RequestType} from '../../src/apitypes';
-import {createApiCall as realCreateApiCall} from '../../src/createApiCall';
+import {createApiCall as gaxCreateApiCall} from '../../src/createApiCall';
 import {createApiCall as fallbackCreateApiCall} from '../../src/fallback';
 import {StreamDescriptor} from '../../src/descriptor';
 import {StreamType} from '../../src/streamingCalls/streaming';
@@ -381,7 +381,7 @@ describe('createApiCall', () => {
         return {cancel: () => {}};
       }
 
-      const apiCall = realCreateApiCall(func, settings);
+      const apiCall = gaxCreateApiCall(func, settings);
       await apiCall({param: 'test'}, undefined);
 
       assert.strictEqual(traceAttemptSpy.calledOnce, true);
@@ -417,7 +417,7 @@ describe('createApiCall', () => {
         return Object.assign(s, {cancel: () => {}});
       });
 
-      const apiCall = realCreateApiCall(
+      const apiCall = gaxCreateApiCall(
         spy as unknown as GRPCCall,
         settings,
         new StreamDescriptor(StreamType.SERVER_STREAMING, true),
@@ -450,7 +450,7 @@ describe('createApiCall', () => {
         return {cancel: () => {}};
       }
 
-      const apiCall = realCreateApiCall(func, settings);
+      const apiCall = gaxCreateApiCall(func, settings);
       await apiCall({}, undefined);
 
       assert.strictEqual(traceAttemptSpy.calledOnce, true);
@@ -485,7 +485,7 @@ describe('createApiCall', () => {
         return {cancel: () => {}};
       }
 
-      const apiCall = realCreateApiCall(func, settings);
+      const apiCall = gaxCreateApiCall(func, settings);
       await apiCall({}, undefined);
 
       assert.strictEqual(traceAttemptSpy.called, false);
@@ -515,7 +515,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(func, settings);
+      const apiCall = gaxCreateApiCall(func, settings);
       const [response] = (await apiCall({}, undefined)) as [
         {data: string},
         unknown,
@@ -565,7 +565,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(func, settings, undefined, true);
+      const apiCall = gaxCreateApiCall(func, settings, undefined, true);
       await apiCall({}, undefined);
 
       const spans = harness.getSpans('google-gax');
@@ -709,7 +709,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(func, settings, undefined, false);
+      const apiCall = gaxCreateApiCall(func, settings, undefined, false);
       await apiCall({}, undefined);
 
       const spans = harness.getSpans('google-gax');
@@ -741,7 +741,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(func, settings, undefined, 'rest');
+      const apiCall = gaxCreateApiCall(func, settings, undefined, 'rest');
       await apiCall({}, undefined);
 
       const spans = harness.getSpans('google-gax');
@@ -773,7 +773,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(func, settings, undefined, 'proto');
+      const apiCall = gaxCreateApiCall(func, settings, undefined, 'proto');
       await apiCall({}, undefined);
 
       const spans = harness.getSpans('google-gax');
@@ -815,7 +815,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(func, defaults.echo);
+      const apiCall = gaxCreateApiCall(func, defaults.echo);
       await apiCall({}, undefined);
 
       const spans = harness.getSpans('google-gax');
@@ -863,7 +863,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(failingFunc, settings);
+      const apiCall = gaxCreateApiCall(failingFunc, settings);
       const promise = apiCall({}, undefined);
       assert.strictEqual(harness.getSpans('google-gax').length, 0);
 
@@ -911,7 +911,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(asyncFunc, settings);
+      const apiCall = gaxCreateApiCall(asyncFunc, settings);
       const promise = apiCall({}, undefined);
 
       // Verify the span is not ended prematurely while the call is in flight
@@ -958,7 +958,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(cancellableFunc, settings);
+      const apiCall = gaxCreateApiCall(cancellableFunc, settings);
       const promise = apiCall({}, undefined);
       assert.strictEqual(typeof promise.cancel, 'function');
       promise.cancel();
@@ -996,7 +996,7 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(func, settings);
+      const apiCall = gaxCreateApiCall(func, settings);
       await apiCall({}, undefined);
 
       const spans = harness.getSpans('google-gax');
@@ -1024,7 +1024,7 @@ describe('createApiCall', () => {
         return Object.assign(s, {cancel: () => {}});
       });
 
-      const apiCall = realCreateApiCall(
+      const apiCall = gaxCreateApiCall(
         spy as unknown as GRPCCall,
         settings,
         new StreamDescriptor(StreamType.SERVER_STREAMING, true),
@@ -1075,7 +1075,7 @@ describe('createApiCall', () => {
         return Object.assign(s, {cancel: () => {}});
       });
 
-      const apiCall = realCreateApiCall(
+      const apiCall = gaxCreateApiCall(
         spy as unknown as GRPCCall,
         settings,
         new StreamDescriptor(StreamType.SERVER_STREAMING, true),
