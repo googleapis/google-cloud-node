@@ -16,6 +16,7 @@
 
 import {EventEmitter} from 'events';
 import {Span, trace, Tracer} from '@opentelemetry/api';
+import {GaxCallResult} from '../apitypes';
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -157,9 +158,9 @@ export function traceAttempt<T>(
 export function traceAttempt(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => unknown,
+  fn: () => GaxCallResult,
   isStreamCall = false,
-): unknown {
+): GaxCallResult {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
     span.setAttributes({
