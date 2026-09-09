@@ -149,7 +149,7 @@ export function traceAttempt<T extends EventEmitter>(
   fn: () => CancellableStream,
   isStreamCall: true,
 ): T;
-export function traceAttempt<T extends PromiseLike<T>>(
+export function traceAttempt<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
   fn: () => CancellablePromise<T>,
