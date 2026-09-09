@@ -204,6 +204,8 @@ export function traceAttempt(
         handleStream(result, recordError, endSpan);
       } else if (!isStreamCall && result instanceof Promise) {
         handlePromise(result, recordError, endSpan);
+      } else {
+        endSpan();
       }
       return result;
     } catch (e) {
