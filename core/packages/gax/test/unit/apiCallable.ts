@@ -22,6 +22,7 @@ import * as sinon from 'sinon';
 
 import {CancellableStream, GRPCCall, RequestType} from '../../src/apitypes';
 import {createApiCall as realCreateApiCall} from '../../src/createApiCall';
+import {createApiCall as fallbackCreateApiCall} from '../../src/fallback';
 import {StreamDescriptor} from '../../src/descriptor';
 import {StreamType} from '../../src/streamingCalls/streaming';
 import * as gax from '../../src/gax';
@@ -573,6 +574,116 @@ describe('createApiCall', () => {
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+    });
+
+    it('passes fallback flag through when using fallback createApiCall with default options', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = fallbackCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [dynamicArgs] = traceAttemptSpy.firstCall.args;
+      assert.strictEqual(dynamicArgs.rpcType, 'http');
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.name, 'EchoClient.Echo');
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+    });
+
+    it('passes explicit _fallback through when using fallback createApiCall', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = fallbackCreateApiCall(func, settings, undefined, 'rest');
+      await apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [dynamicArgs] = traceAttemptSpy.firstCall.args;
+      assert.strictEqual(dynamicArgs.rpcType, 'http');
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+    });
+
+    it('passes fallback flag and isStreamingCall as true for server-streaming fallback calls', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const spy = sinon.spy(() => {
+        const s = new PassThrough({objectMode: true});
+        s.push(null);
+        return Object.assign(s, {cancel: () => {}});
+      });
+
+      const apiCall = fallbackCreateApiCall(
+        spy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      void apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [dynamicArgs, , , isStreamingCall] = traceAttemptSpy.firstCall.args;
+      assert.strictEqual(dynamicArgs.rpcType, 'http');
+      assert.strictEqual(isStreamingCall, true);
     });
 
     it('sets rpcType to grpc when _fallback is boolean false', async () => {
