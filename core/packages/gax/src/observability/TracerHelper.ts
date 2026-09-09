@@ -143,6 +143,12 @@ export function handleStream(
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call (true) or promise call (false).
  * @returns {T} The result of the traced operation.
  */
+export function traceAttempt(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+  fn: () => GaxCallResult,
+  isStreamCall?: boolean,
+): GaxCallResult;
 export function traceAttempt<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
