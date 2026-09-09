@@ -319,26 +319,32 @@ export function handleContextValidation(
   }
 }
 
-let mimePromise: Promise<typeof import('mime')> | undefined;
+export interface Mime {
+  getType(path: string): string | null;
+  getExtension?(mime: string): string | null;
+  define?(typeMap: {[key: string]: string[]}, force?: boolean): void;
+}
+
+export type Limit = import('p-limit').Limit;
+export type PLimit = (concurrency: number) => Limit;
+
+let mimePromise: Promise<Mime> | undefined;
 
 /**
- * Lazily loads and returns the `mime` module.
+ * Lazily loads and returns the `mime` module instance.
  * Caches the resolved module so dynamic import is evaluated only once.
  *
  * @internal
  */
-export async function getMime(): Promise<typeof import('mime')> {
+export function getMime(): Promise<Mime> {
   if (!mimePromise) {
     mimePromise = import('mime')
       .then(mod => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const modObj = mod as any;
-        const mime =
-          modObj && modObj.default && modObj.default.getType
+        const modObj = mod as unknown as {default?: Mime} & Partial<Mime>;
+        const mime: Mime =
+          modObj.default && typeof modObj.default.getType === 'function'
             ? modObj.default
-            : modObj && modObj.getType
-              ? modObj
-              : modObj.default || modObj;
+            : (modObj as Mime);
         return mime;
       })
       .catch(err => {
@@ -349,22 +355,23 @@ export async function getMime(): Promise<typeof import('mime')> {
   return mimePromise;
 }
 
-let pLimitPromise: Promise<typeof import('p-limit')> | undefined;
+let pLimitPromise: Promise<PLimit> | undefined;
 
 /**
- * Lazily loads and returns the `p-limit` module.
+ * Lazily loads and returns the `p-limit` limiter function.
  * Caches the resolved module so dynamic import is evaluated only once.
  *
  * @internal
  */
-export async function getPLimit(): Promise<typeof import('p-limit')> {
+export function getPLimit(): Promise<PLimit> {
   if (!pLimitPromise) {
     pLimitPromise = import('p-limit')
       .then(mod => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const modObj = mod as any;
-        const pLimit =
-          typeof mod === 'function' ? mod : modObj.default || modObj;
+        const modObj = mod as unknown as {default?: PLimit};
+        const pLimit: PLimit =
+          typeof mod === 'function'
+            ? (mod as PLimit)
+            : modObj.default || (modObj as PLimit);
         return pLimit;
       })
       .catch(err => {

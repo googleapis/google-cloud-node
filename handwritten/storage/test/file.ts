@@ -2367,6 +2367,78 @@ describe('File', () => {
       writable.write('data');
     });
 
+    it('should not call getMime if contentType is provided', done => {
+      let getMimeCalled = false;
+      const FileWithStub = proxyquire('../src/file.js', {
+        './nodejs-common': {
+          ServiceObject: FakeServiceObject,
+          util: fakeUtil,
+        },
+        '@google-cloud/promisify': fakePromisify,
+        fs: fakeFs,
+        '../src/resumable-upload': fakeResumableUpload,
+        os: fakeOs,
+        './signer': fakeSigner,
+        zlib: fakeZlib,
+        './util.js': {
+          ...require('../src/util.js'),
+          getMime: async () => {
+            getMimeCalled = true;
+            return {getType: () => 'image/png'};
+          },
+        },
+      }).File;
+
+      const f = new FileWithStub(STORAGE.bucket('test-bucket'), 'test.png');
+      const writable = f.createWriteStream({contentType: 'text/plain'});
+      f.startResumableUpload_ = (
+        stream: {},
+        options: {metadata: {contentType?: string}}
+      ) => {
+        assert.strictEqual(options.metadata.contentType, 'text/plain');
+        assert.strictEqual(getMimeCalled, false);
+        done();
+      };
+      writable.write('data');
+    });
+
+    it('should not call getMime if metadata.contentType is provided', done => {
+      let getMimeCalled = false;
+      const FileWithStub = proxyquire('../src/file.js', {
+        './nodejs-common': {
+          ServiceObject: FakeServiceObject,
+          util: fakeUtil,
+        },
+        '@google-cloud/promisify': fakePromisify,
+        fs: fakeFs,
+        '../src/resumable-upload': fakeResumableUpload,
+        os: fakeOs,
+        './signer': fakeSigner,
+        zlib: fakeZlib,
+        './util.js': {
+          ...require('../src/util.js'),
+          getMime: async () => {
+            getMimeCalled = true;
+            return {getType: () => 'image/png'};
+          },
+        },
+      }).File;
+
+      const f = new FileWithStub(STORAGE.bucket('test-bucket'), 'test.png');
+      const writable = f.createWriteStream({
+        metadata: {contentType: 'application/json'},
+      });
+      f.startResumableUpload_ = (
+        stream: {},
+        options: {metadata: {contentType?: string}}
+      ) => {
+        assert.strictEqual(options.metadata.contentType, 'application/json');
+        assert.strictEqual(getMimeCalled, false);
+        done();
+      };
+      writable.write('data');
+    });
+
     it('should detect contentType with contentType:auto', done => {
       const writable = file.createWriteStream({contentType: 'auto'});
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

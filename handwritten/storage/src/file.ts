@@ -2158,10 +2158,6 @@ class File extends ServiceObject<File, FileMetadata> {
       options!.metadata!.contentType = options.contentType;
     }
 
-    if (options.gzip === true) {
-      options!.metadata!.contentEncoding = 'gzip';
-    }
-
     let crc32c = true;
     let md5 = false;
 
@@ -2221,35 +2217,11 @@ class File extends ServiceObject<File, FileMetadata> {
       emitStream.destroy();
     });
 
-    const transformStreams: Transform[] = [];
-
-    if (options.gzip === true) {
-      transformStreams.push(zlib.createGzip());
-    }
-
     const emitStream = new PassThroughShim();
 
     // If `writeStream` is destroyed before the `writing` event, `emitStream` will not have any listeners. This prevents an unhandled error.
     const noop = () => {};
     emitStream.on('error', noop);
-
-    let hashCalculatingStream: HashStreamValidator | null = null;
-
-    if (crc32c || md5) {
-      const crc32cInstance = options.resumeCRC32C
-        ? CRC32C.from(options.resumeCRC32C)
-        : undefined;
-
-      hashCalculatingStream = new HashStreamValidator({
-        crc32c,
-        crc32cInstance,
-        md5,
-        crc32cGenerator: this.crc32cGenerator,
-        updateHashesOnly: true,
-      });
-
-      transformStreams.push(hashCalculatingStream);
-    }
 
     const fileWriteStream = duplexify();
     let fileWriteStreamMetadataReceived = false;
@@ -2283,10 +2255,34 @@ class File extends ServiceObject<File, FileMetadata> {
           gzip = COMPRESSIBLE_MIME_REGEX.test(
             options!.metadata!.contentType || ''
           );
-          if (gzip) {
-            options!.metadata!.contentEncoding = 'gzip';
-            transformStreams.unshift(zlib.createGzip());
-          }
+        }
+
+        if (gzip) {
+          options!.metadata!.contentEncoding = 'gzip';
+        }
+
+        const transformStreams: Transform[] = [];
+
+        if (gzip) {
+          transformStreams.push(zlib.createGzip());
+        }
+
+        let hashCalculatingStream: HashStreamValidator | null = null;
+
+        if (crc32c || md5) {
+          const crc32cInstance = options.resumeCRC32C
+            ? CRC32C.from(options.resumeCRC32C)
+            : undefined;
+
+          hashCalculatingStream = new HashStreamValidator({
+            crc32c,
+            crc32cInstance,
+            md5,
+            crc32cGenerator: this.crc32cGenerator,
+            updateHashesOnly: true,
+          });
+
+          transformStreams.push(hashCalculatingStream);
         }
 
         if (options.resumable === false) {

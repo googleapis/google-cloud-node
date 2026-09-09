@@ -227,7 +227,6 @@ describe('Bucket', () => {
   before(() => {
     const bucketModule = proxyquire('../src/bucket.js', {
       fs: fakeFs,
-      'p-limit': fakePLimit,
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
       './nodejs-common': {
