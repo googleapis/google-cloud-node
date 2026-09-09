@@ -447,7 +447,7 @@ export function createApiCall(
       );
     };
   }
-  return _createApiCall(func, settings, descriptor);
+  return _createApiCall(func, settings, descriptor, _fallback ?? true);
 }
 
 export {protobuf};
