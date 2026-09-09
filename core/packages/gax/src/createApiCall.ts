@@ -194,7 +194,7 @@ export function createApiCall(
       methodName: settings.otherArgs?.internalMethodName ?? '',
       rpcType: isFallback ? 'http' : 'grpc',
     };
-    const isStreaming = apiCaller instanceof StreamingApiCaller;
+    const isStreamingCall = apiCaller instanceof StreamingApiCaller;
     return (
       request: RequestType,
       callOptions?: CallOptions,
@@ -206,7 +206,7 @@ export function createApiCall(
         () => {
           return invokeCall(request, callOptions, callback);
         },
-        isStreaming,
+        isStreamingCall,
       );
     };
   } else {
