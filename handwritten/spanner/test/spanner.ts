@@ -1296,7 +1296,14 @@ describe('Spanner with mock server', () => {
         database
           .close()
           .then(() => {
-            const gotStreamingCalls = xGoogReqIDInterceptor.getStreamingCalls();
+            const gotStreamingCalls = xGoogReqIDInterceptor
+              .getStreamingCalls()
+              .map(call => {
+                const parts = call.reqId.split('.');
+                assert(parseInt(parts[3], 10) >= 1);
+                parts[3] = '1';
+                return {...call, reqId: parts.join('.')};
+              });
             const wantStreamingCalls = [
               {
                 method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',
@@ -7292,6 +7299,12 @@ describe('Spanner with mock server', () => {
           reqId: `1.${randIdForProcess}.1.1.9.1`,
         },
       ];
+      const normalizeChannelId = (call: {method: string; reqId: string}) => {
+        const parts = call.reqId.split('.');
+        assert(parseInt(parts[3], 10) >= 1);
+        parts[3] = '1';
+        return {...call, reqId: parts.join('.')};
+      };
       const gotUnaryCalls = xGoogReqIDInterceptor.getUnaryCalls();
       assert.deepStrictEqual(
         gotUnaryCalls[0].method,
@@ -7300,11 +7313,13 @@ describe('Spanner with mock server', () => {
       // It is non-deterministic to try to get the exact clientId used to invoke .BatchCreateSessions
       // given that these tests run as a collective and sessions are pooled.
       assert.deepStrictEqual(
-        gotUnaryCalls.slice(1),
+        gotUnaryCalls.slice(1).map(normalizeChannelId),
         wantUnaryCallsWithoutBatchCreateSessions,
       );
 
-      const gotStreamingCalls = xGoogReqIDInterceptor.getStreamingCalls();
+      const gotStreamingCalls = xGoogReqIDInterceptor
+        .getStreamingCalls()
+        .map(normalizeChannelId);
       const wantStreamingCalls = [
         {
           method: '/google.spanner.v1.Spanner/ExecuteStreamingSql',

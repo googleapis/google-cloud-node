@@ -137,6 +137,13 @@ export class MultiplexedSession
                 },
               );
               this._multiplexedSession = createSessionResponse;
+              const spanner = (this.database?.parent as any)?.parent;
+              if (
+                spanner?.setPrimeSession &&
+                createSessionResponse?.formattedName_
+              ) {
+                spanner.setPrimeSession(createSessionResponse.formattedName_);
+              }
               span.addEvent('Created a multiplexed session');
             } catch (e) {
               setSpanError(span, e as Error);
