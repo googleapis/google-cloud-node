@@ -10,6 +10,21 @@
           "issues": []
         }
       ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "fb690675-0f94-4f81-8335-e0b683a5798f",
+      "createTime": "2026-09-09T14:40:18.857Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
       "version": "5.1.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/artifact-registry",
@@ -94014,5 +94029,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-08T16:07:57.731Z"
+  "updateTime": "2026-09-09T14:40:18.857Z"
 }
