@@ -16,6 +16,8 @@
 
 import {EventEmitter} from 'events';
 import {Span, trace, Tracer} from '@opentelemetry/api';
+import { CancellableStream } from '../apitypes';
+import { CancellablePromise } from '../call';
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -103,16 +105,32 @@ export function handleStream(
   recordError: (err: unknown) => void,
   endSpan: () => void,
 ): void {
-  stream.on('error', (err: unknown) => {
+  const cleanup = () => {
+    stream.removeListener('error', onError);
+    stream.removeListener('end', onEnd);
+    stream.removeListener('close', onClose);
+    endSpan();
+  };
+
+  const onError = (err: unknown) => {
+    cleanup();
     recordError(err);
     endSpan();
-  });
-  stream.on('end', () => {
+  };
+
+  const onEnd = () => {
+    cleanup();
     endSpan();
-  });
-  stream.on('close', () => {
+  };
+
+  const onClose = () => {
+    cleanup();
     endSpan();
-  });
+  };
+
+  stream.on('error', onError);
+  stream.on('end', onEnd);
+  stream.on('close', onClose);
 }
 
 /**
@@ -123,28 +141,27 @@ export function handleStream(
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
  * @param {() => T} fn - The operation to trace.
- * @param {boolean | 'promise' | 'stream'} [isStream=false] - Whether the operation is a stream or a promise.
+ * @param {boolean} [isStreamCall=false] - Whether the operation is a stream or a promise.
  * @returns {T} The result of the traced operation.
  */
 export function traceAttempt<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => T,
-  isStream: true | 'stream',
+  fn: () => CancellableStream,
+  isStreamCall: true,
 ): T;
 export function traceAttempt<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => T,
-  isStream?: boolean | 'promise' | 'stream',
+  fn: () => CancellablePromise<T>,
+  isStreamCall?: false,
 ): T;
 export function traceAttempt(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => unknown,
-  isStream: boolean | 'promise' | 'stream' = false,
-): unknown {
-  const isStreamCall = isStream === true || isStream === 'stream';
+  fn: () => T,
+  isStreamCall: boolean = false,
+): T {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
     span.setAttributes({
@@ -185,9 +202,9 @@ export function traceAttempt(
 
     try {
       const result = fn();
-      if (isStreamCall) {
-        handleStream(result as EventEmitter, recordError, endSpan);
-      } else {
+      if (isStreamCall && result instanceof EventEmitter) {
+        handleStream(result, recordError, endSpan);
+      } else if (!isStreamCall && result instanceof Promise) {
         handlePromise(result, recordError, endSpan);
       }
       return result;
