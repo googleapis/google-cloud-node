@@ -2381,7 +2381,8 @@ class Database extends common.GrpcServiceObject {
   ): void;
   async getOperations(
     optionsOrCallback?:
-      GetDatabaseOperationsOptions | GetDatabaseOperationsCallback,
+      | GetDatabaseOperationsOptions
+      | GetDatabaseOperationsCallback,
   ): Promise<GetDatabaseOperationsResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};

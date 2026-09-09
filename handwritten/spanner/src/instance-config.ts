@@ -403,7 +403,8 @@ class InstanceConfig extends common.GrpcServiceObject {
   ): void;
   delete(
     optionsOrCallback?:
-      DeleteInstanceConfigRequest | DeleteInstanceConfigCallback,
+      | DeleteInstanceConfigRequest
+      | DeleteInstanceConfigCallback,
     cb?: DeleteInstanceConfigCallback,
   ): void | Promise<DeleteInstanceConfigResponse> {
     const config =

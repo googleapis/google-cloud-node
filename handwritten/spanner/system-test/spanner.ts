@@ -7023,8 +7023,8 @@ describe('Spanner', () => {
           err.message.includes('UNIMPLEMENTED')
         ) {
           gsqlQueueSupported = false;
-        } else if (err.code == 6) { 
-          // ALREADY_EXISTS. Continue testing. 
+        } else if (err.code === 6) {
+          // ALREADY_EXISTS. Continue testing.
           gsqlQueueSupported = true;
         } else {
           throw err;
@@ -7046,8 +7046,8 @@ describe('Spanner', () => {
           err.message.includes('UNIMPLEMENTED')
         ) {
           pgQueueSupported = false;
-        } else if (err.code == 6) {
-          // ALREADY_EXISTS. Continue testing. 
+        } else if (err.code === 6) {
+          // ALREADY_EXISTS. Continue testing.
           pgQueueSupported = true;
         } else {
           throw err;
@@ -7207,7 +7207,7 @@ describe('Spanner', () => {
       if (gsqlQueueSupported) {
         try {
           const [gsqlOperation] = await DATABASE.updateSchema(
-            "DROP QUEUE " + QUEUE_NAME
+            'DROP QUEUE ' + QUEUE_NAME,
           );
           await gsqlOperation.promise();
         } catch (err) {
@@ -7217,7 +7217,7 @@ describe('Spanner', () => {
       if (pgQueueSupported) {
         try {
           const [pgOperation] = await PG_DATABASE.updateSchema(
-            "DROP QUEUE " + QUEUE_NAME
+            'DROP QUEUE ' + QUEUE_NAME,
           );
           await pgOperation.promise();
         } catch (err) {

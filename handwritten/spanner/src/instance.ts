@@ -128,7 +128,9 @@ export type GetDatabaseOperationsCallback = RequestCallback<
   databaseAdmin.spanner.admin.database.v1.IListDatabaseOperationsResponse
 >;
 export interface GetInstanceConfig
-  extends GetConfig, CreateInstanceRequest, GetInstanceMetadataOptions {}
+  extends GetConfig,
+    CreateInstanceRequest,
+    GetInstanceMetadataOptions {}
 
 interface InstanceRequest {
   (
@@ -595,7 +597,8 @@ class Instance extends common.GrpcServiceObject {
    */
   getBackupOperations(
     optionsOrCallback?:
-      GetBackupOperationsOptions | GetBackupOperationsCallback,
+      | GetBackupOperationsOptions
+      | GetBackupOperationsCallback,
     cb?: GetBackupOperationsCallback,
   ): void | Promise<GetBackupOperationsResponse> {
     const callback =
@@ -721,7 +724,8 @@ class Instance extends common.GrpcServiceObject {
    */
   getDatabaseOperations(
     optionsOrCallback?:
-      GetDatabaseOperationsOptions | GetDatabaseOperationsCallback,
+      | GetDatabaseOperationsOptions
+      | GetDatabaseOperationsCallback,
     cb?: GetDatabaseOperationsCallback,
   ): void | Promise<GetDatabaseOperationsResponse> {
     const callback =
@@ -1520,7 +1524,8 @@ class Instance extends common.GrpcServiceObject {
   ): void;
   getMetadata(
     optionsOrCallback?:
-      GetInstanceMetadataOptions | GetInstanceMetadataCallback,
+      | GetInstanceMetadataOptions
+      | GetInstanceMetadataCallback,
     cb?: GetInstanceMetadataCallback,
   ): Promise<GetInstanceMetadataResponse> | void {
     const callback =

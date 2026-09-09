@@ -1852,7 +1852,9 @@ export class Snapshot extends EventEmitter {
    */
   protected _getDirectedReadOptions(
     directedReadOptions:
-      google.spanner.v1.IDirectedReadOptions | null | undefined,
+      | google.spanner.v1.IDirectedReadOptions
+      | null
+      | undefined,
   ) {
     if (
       !directedReadOptions &&
@@ -2909,7 +2911,8 @@ export class Transaction extends Dml {
   ): void;
   rollback(
     gaxOptionsOrCallback?:
-      CallOptions | spannerClient.spanner.v1.Spanner.RollbackCallback,
+      | CallOptions
+      | spannerClient.spanner.v1.Spanner.RollbackCallback,
     cb?: spannerClient.spanner.v1.Spanner.RollbackCallback,
   ): void | Promise<void> {
     let gaxOpts =
