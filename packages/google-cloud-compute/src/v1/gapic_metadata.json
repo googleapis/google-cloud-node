@@ -9475,6 +9475,11 @@
                 "get"
               ]
             },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
             "GetVersion": {
               "methods": [
                 "getVersion"
@@ -9500,6 +9505,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
               ]
             },
             "GetVersion": {

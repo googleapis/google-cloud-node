@@ -15404,6 +15404,7 @@
                         "ConfidentialInstanceType": {
                           "values": {
                             "UNDEFINED_CONFIDENTIAL_INSTANCE_TYPE": 0,
+                            "BMSAI": 63328144,
                             "CCA": 66529,
                             "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED": 115021829,
                             "SEV": 81988,
@@ -25469,6 +25470,7 @@
                         "ConfidentialComputeType": {
                           "values": {
                             "UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE": 0,
+                            "CONFIDENTIAL_COMPUTE_TYPE_BMSAI": 103738250,
                             "CONFIDENTIAL_COMPUTE_TYPE_TDX": 301241954,
                             "CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED": 42227601
                           }
@@ -27588,6 +27590,128 @@
                         }
                       }
                     },
+                    "GetHealthOperationMetadata": {
+                      "oneofs": {
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthInfo": {
+                          "type": "GetHealthOperationMetadataHealthInfo",
+                          "id": 235287729,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "GetHealthOperationMetadataHealthInfo": {
+                      "oneofs": {
+                        "_availabilitySloStatus": {
+                          "oneof": [
+                            "availabilitySloStatus"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_repairCategory": {
+                          "oneof": [
+                            "repairCategory"
+                          ]
+                        },
+                        "_unhealthyReason": {
+                          "oneof": [
+                            "unhealthyReason"
+                          ]
+                        },
+                        "_updateTime": {
+                          "oneof": [
+                            "updateTime"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "availabilitySloStatus": {
+                          "type": "string",
+                          "id": 255971455,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "repairCategory": {
+                          "type": "string",
+                          "id": 113376624,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unhealthyReason": {
+                          "type": "string",
+                          "id": 448838143,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateTime": {
+                          "type": "string",
+                          "id": 500295811,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AvailabilitySloStatus": {
+                          "values": {
+                            "UNDEFINED_AVAILABILITY_SLO_STATUS": 0,
+                            "AVAILABILITY_SLO_STATUS_IN_SLO": 142966428,
+                            "AVAILABILITY_SLO_STATUS_OUT_OF_SLO": 112099455,
+                            "AVAILABILITY_SLO_STATUS_SLO_UNKNOWN": 280579681,
+                            "AVAILABILITY_SLO_STATUS_UNSPECIFIED": 481084279
+                          }
+                        },
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "HEALTH_STATUS_HEALTHY": 281715315,
+                            "HEALTH_STATUS_UNHEALTHY": 476038202,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
+                          }
+                        },
+                        "RepairCategory": {
+                          "values": {
+                            "UNDEFINED_REPAIR_CATEGORY": 0,
+                            "REPAIR_CATEGORY_CRITICAL_FAILURE": 58241977,
+                            "REPAIR_CATEGORY_EMERGENT_MAINTENANCE": 400869148,
+                            "REPAIR_CATEGORY_PLANNED_MAINTENANCE": 489286537,
+                            "REPAIR_CATEGORY_UNSPECIFIED": 287264456,
+                            "REPAIR_CATEGORY_USER_REPORTED_FAULT": 227760443
+                          }
+                        },
+                        "UnhealthyReason": {
+                          "values": {
+                            "UNDEFINED_UNHEALTHY_REASON": 0,
+                            "UNHEALTHY_REASON_PENDING_USER_APPROVAL": 315397455,
+                            "UNHEALTHY_REASON_REPAIRING": 199320309,
+                            "UNHEALTHY_REASON_UNSCHEDULABLE": 118083439,
+                            "UNHEALTHY_REASON_UNSPECIFIED": 337725687
+                          }
+                        }
+                      }
+                    },
                     "GetHealthRegionBackendServiceRequest": {
                       "fields": {
                         "backendService": {
@@ -27666,6 +27790,54 @@
                           "id": 138946292,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetHealthReservationSlotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSlot": {
+                          "type": "string",
+                          "id": 277470865,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
                           }
                         }
                       }
@@ -33144,6 +33316,7 @@
                             "SEV_LIVE_MIGRATABLE_V2": 168551983,
                             "SEV_SNP_CAPABLE": 426919,
                             "SNP_SVSM_CAPABLE": 52921460,
+                            "SUSPEND_SAFE_FPR": 223956441,
                             "TDX_CAPABLE": 240446133,
                             "UEFI_COMPATIBLE": 195865408,
                             "VIRTIO_SCSI_MULTIQUEUE": 201597069,
@@ -46516,6 +46689,11 @@
                             "selfLink"
                           ]
                         },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
                         "_state": {
                           "oneof": [
                             "state"
@@ -46748,6 +46926,13 @@
                         "selfLink": {
                           "type": "string",
                           "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
                           "options": {
                             "proto3_optional": true
                           }
@@ -50215,12 +50400,36 @@
                           "oneof": [
                             "city"
                           ]
+                        },
+                        "_maxDynamicPathBandwidthGbps": {
+                          "oneof": [
+                            "maxDynamicPathBandwidthGbps"
+                          ]
+                        },
+                        "_maxFixedPathBandwidthGbps": {
+                          "oneof": [
+                            "maxFixedPathBandwidthGbps"
+                          ]
                         }
                       },
                       "fields": {
                         "city": {
                           "type": "string",
                           "id": 3053931,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxDynamicPathBandwidthGbps": {
+                          "type": "int64",
+                          "id": 378021355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxFixedPathBandwidthGbps": {
+                          "type": "int64",
+                          "id": 346138080,
                           "options": {
                             "proto3_optional": true
                           }
@@ -64418,6 +64627,11 @@
                             "shutdownDetails"
                           ]
                         },
+                        "_targetStatus": {
+                          "oneof": [
+                            "targetStatus"
+                          ]
+                        },
                         "_version": {
                           "oneof": [
                             "version"
@@ -64507,6 +64721,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "targetStatus": {
+                          "type": "string",
+                          "id": 307799648,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "version": {
                           "type": "ManagedInstanceVersion",
                           "id": 351608024,
@@ -64547,6 +64768,14 @@
                             "SUSPENDED": 51223995,
                             "SUSPENDING": 514206246,
                             "TERMINATED": 250018339
+                          }
+                        },
+                        "TargetStatus": {
+                          "values": {
+                            "UNDEFINED_TARGET_STATUS": 0,
+                            "ABANDONED": 81797556,
+                            "DELETED": 120962041,
+                            "INVALID": 530283991
                           }
                         }
                       }
@@ -66472,6 +66701,7 @@
                           "values": {
                             "UNDEFINED_NETWORK_ENDPOINT_TYPE": 0,
                             "GCE_VM_IP": 401880793,
+                            "GCE_VM_IP_DEDICATED_BACKEND": 321618974,
                             "GCE_VM_IP_PORT": 501838375,
                             "GCE_VM_IP_PORTMAP": 22819253,
                             "INTERNET_FQDN_PORT": 404154477,
@@ -71100,6 +71330,11 @@
                             "error"
                           ]
                         },
+                        "_getHealthOperationMetadata": {
+                          "oneof": [
+                            "getHealthOperationMetadata"
+                          ]
+                        },
                         "_getVersionOperationMetadata": {
                           "oneof": [
                             "getVersionOperationMetadata"
@@ -71238,6 +71473,13 @@
                         "error": {
                           "type": "Error",
                           "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "getHealthOperationMetadata": {
+                          "type": "GetHealthOperationMetadata",
+                          "id": 303911457,
                           "options": {
                             "proto3_optional": true
                           }
@@ -81406,6 +81648,7 @@
                         "ConfidentialComputeType": {
                           "values": {
                             "UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE": 0,
+                            "CONFIDENTIAL_COMPUTE_TYPE_BMSAI": 103738250,
                             "CONFIDENTIAL_COMPUTE_TYPE_TDX": 301241954,
                             "CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED": 42227601
                           }
@@ -100894,6 +101137,8 @@
                           "values": {
                             "UNDEFINED_RESOLVE_SUBNET_MASK": 0,
                             "ARP_ALL_RANGES": 445655380,
+                            "ARP_BROADCAST_PRIMARY_RANGE": 123887458,
+                            "ARP_BROADCAST_PRIMARY_RANGE_WITH_LEARNING": 425592922,
                             "ARP_PRIMARY_RANGE": 120210048
                           }
                         },
@@ -128823,6 +129068,28 @@
                             }
                           ]
                         },
+                        "GetHealth": {
+                          "requestType": "GetHealthReservationSlotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*/reservationSubBlocks/*}/reservationSlots/{reservation_slot}/getHealth",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_slot",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*/reservationSubBlocks/*}/reservationSlots/{reservation_slot}/getHealth"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_slot"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
                         "GetVersion": {
                           "requestType": "GetVersionReservationSlotRequest",
                           "responseType": "Operation",
@@ -150928,6 +151195,7 @@
                         "ConfidentialInstanceType": {
                           "values": {
                             "UNDEFINED_CONFIDENTIAL_INSTANCE_TYPE": 0,
+                            "BMSAI": 63328144,
                             "CCA": 66529,
                             "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED": 115021829,
                             "SEV": 81988,
@@ -152152,6 +152420,47 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDhcpOptionsConfigRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dhcpOptionsConfig": {
+                          "type": "string",
+                          "id": 513823249,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
                           }
                         },
                         "requestId": {
@@ -153981,6 +154290,39 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRecoverableSnapshotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "recoverableSnapshot": {
+                          "type": "string",
+                          "id": 57183269,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "requestId": {
@@ -156643,6 +156985,326 @@
                         "requestId": {
                           "type": "string",
                           "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DhcpOptionsConfig": {
+                      "oneofs": {
+                        "_bootFileIpv4Name": {
+                          "oneof": [
+                            "bootFileIpv4Name"
+                          ]
+                        },
+                        "_bootFileIpv6Url": {
+                          "oneof": [
+                            "bootFileIpv6Url"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_domainName": {
+                          "oneof": [
+                            "domainName"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_leaseTimeSec": {
+                          "oneof": [
+                            "leaseTimeSec"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_tftpServerIpv4Name": {
+                          "oneof": [
+                            "tftpServerIpv4Name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "associations": {
+                          "keyType": "string",
+                          "type": "DhcpOptionsConfigAssociation",
+                          "id": 508736530
+                        },
+                        "bootFileIpv4Name": {
+                          "type": "string",
+                          "id": 403612303,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "bootFileIpv6Parameters": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 523313580
+                        },
+                        "bootFileIpv6Url": {
+                          "type": "string",
+                          "id": 66829293,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "dnsSearchPaths": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 233396973
+                        },
+                        "domainName": {
+                          "type": "string",
+                          "id": 104118566,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "leaseTimeSec": {
+                          "type": "int64",
+                          "id": 450918436,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ntpServerIpv4Addresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 484383535
+                        },
+                        "ntpServerIpv6Addresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 111706289
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "tftpServerIpv4Addresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 299261235
+                        },
+                        "tftpServerIpv4Name": {
+                          "type": "string",
+                          "id": 237576794,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DhcpOptionsConfigAssociation": {
+                      "oneofs": {
+                        "_network": {
+                          "oneof": [
+                            "network"
+                          ]
+                        },
+                        "_networkId": {
+                          "oneof": [
+                            "networkId"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "network": {
+                          "type": "string",
+                          "id": 232872494,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "networkId": {
+                          "type": "uint64",
+                          "id": 58638540,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNDEFINED_STATE": 0,
+                            "ACTIVE": 314733318,
+                            "ORPHANED": 215276327,
+                            "STATE_UNSPECIFIED": 470755401
+                          }
+                        }
+                      }
+                    },
+                    "DhcpOptionsConfigList": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "DhcpOptionsConfig",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
                           "options": {
                             "proto3_optional": true
                           }
@@ -161610,6 +162272,7 @@
                         "ConfidentialComputeType": {
                           "values": {
                             "UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE": 0,
+                            "CONFIDENTIAL_COMPUTE_TYPE_BMSAI": 103738250,
                             "CONFIDENTIAL_COMPUTE_TYPE_TDX": 301241954,
                             "CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED": 42227601
                           }
@@ -163249,6 +163912,31 @@
                         }
                       }
                     },
+                    "GetDhcpOptionsConfigRequest": {
+                      "fields": {
+                        "dhcpOptionsConfig": {
+                          "type": "string",
+                          "id": 513823249,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetDiagnosticsInterconnectRequest": {
                       "fields": {
                         "interconnect": {
@@ -163404,6 +164092,24 @@
                         "region": {
                           "type": "string",
                           "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetEffectiveRecycleBinRuleSnapshotRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "string",
+                          "id": 284874180,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -163625,6 +164331,17 @@
                         }
                       }
                     },
+                    "GetGlobalFrontendSettingRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetGlobalNetworkEndpointGroupRequest": {
                       "fields": {
                         "networkEndpointGroup": {
@@ -163818,6 +164535,128 @@
                         }
                       }
                     },
+                    "GetHealthOperationMetadata": {
+                      "oneofs": {
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthInfo": {
+                          "type": "GetHealthOperationMetadataHealthInfo",
+                          "id": 235287729,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "GetHealthOperationMetadataHealthInfo": {
+                      "oneofs": {
+                        "_availabilitySloStatus": {
+                          "oneof": [
+                            "availabilitySloStatus"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_repairCategory": {
+                          "oneof": [
+                            "repairCategory"
+                          ]
+                        },
+                        "_unhealthyReason": {
+                          "oneof": [
+                            "unhealthyReason"
+                          ]
+                        },
+                        "_updateTime": {
+                          "oneof": [
+                            "updateTime"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "availabilitySloStatus": {
+                          "type": "string",
+                          "id": 255971455,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "repairCategory": {
+                          "type": "string",
+                          "id": 113376624,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unhealthyReason": {
+                          "type": "string",
+                          "id": 448838143,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateTime": {
+                          "type": "string",
+                          "id": 500295811,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AvailabilitySloStatus": {
+                          "values": {
+                            "UNDEFINED_AVAILABILITY_SLO_STATUS": 0,
+                            "AVAILABILITY_SLO_STATUS_IN_SLO": 142966428,
+                            "AVAILABILITY_SLO_STATUS_OUT_OF_SLO": 112099455,
+                            "AVAILABILITY_SLO_STATUS_SLO_UNKNOWN": 280579681,
+                            "AVAILABILITY_SLO_STATUS_UNSPECIFIED": 481084279
+                          }
+                        },
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "HEALTH_STATUS_HEALTHY": 281715315,
+                            "HEALTH_STATUS_UNHEALTHY": 476038202,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
+                          }
+                        },
+                        "RepairCategory": {
+                          "values": {
+                            "UNDEFINED_REPAIR_CATEGORY": 0,
+                            "REPAIR_CATEGORY_CRITICAL_FAILURE": 58241977,
+                            "REPAIR_CATEGORY_EMERGENT_MAINTENANCE": 400869148,
+                            "REPAIR_CATEGORY_PLANNED_MAINTENANCE": 489286537,
+                            "REPAIR_CATEGORY_UNSPECIFIED": 287264456,
+                            "REPAIR_CATEGORY_USER_REPORTED_FAULT": 227760443
+                          }
+                        },
+                        "UnhealthyReason": {
+                          "values": {
+                            "UNDEFINED_UNHEALTHY_REASON": 0,
+                            "UNHEALTHY_REASON_PENDING_USER_APPROVAL": 315397455,
+                            "UNHEALTHY_REASON_REPAIRING": 199320309,
+                            "UNHEALTHY_REASON_UNSCHEDULABLE": 118083439,
+                            "UNHEALTHY_REASON_UNSPECIFIED": 337725687
+                          }
+                        }
+                      }
+                    },
                     "GetHealthRegionBackendServiceRequest": {
                       "fields": {
                         "backendService": {
@@ -163896,6 +164735,54 @@
                           "id": 138946292,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetHealthReservationSlotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSlot": {
+                          "type": "string",
+                          "id": 277470865,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
                           }
                         }
                       }
@@ -164569,6 +165456,38 @@
                         "region": {
                           "type": "string",
                           "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetIamPolicyRecoverableSnapshotRequest": {
+                      "oneofs": {
+                        "_optionsRequestedPolicyVersion": {
+                          "oneof": [
+                            "optionsRequestedPolicyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "optionsRequestedPolicyVersion": {
+                          "type": "int32",
+                          "id": 499220029,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -166209,6 +167128,17 @@
                         }
                       }
                     },
+                    "GetOrganizationSnapshotRecycleBinPolicyRequest": {
+                      "fields": {
+                        "organization": {
+                          "type": "string",
+                          "id": 105180467,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetPacketMirroringRequest": {
                       "fields": {
                         "packetMirroring": {
@@ -166414,6 +167344,24 @@
                         "region": {
                           "type": "string",
                           "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRecoverableSnapshotRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "recoverableSnapshot": {
+                          "type": "string",
+                          "id": 57183269,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -168061,6 +169009,17 @@
                         }
                       }
                     },
+                    "GetSnapshotRecycleBinPolicyRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetSnapshotRequest": {
                       "fields": {
                         "project": {
@@ -168668,6 +169627,38 @@
                         }
                       }
                     },
+                    "GetVmExtensionStateInstanceRequest": {
+                      "fields": {
+                        "extensionName": {
+                          "type": "string",
+                          "id": 54781579,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 18257045,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetVpnGatewayRequest": {
                       "fields": {
                         "project": {
@@ -168920,6 +169911,124 @@
                         "destinationAddress": {
                           "type": "string",
                           "id": 371693763,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "GlobalFrontendSettings": {
+                      "oneofs": {
+                        "_bundleType": {
+                          "oneof": [
+                            "bundleType"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bundleType": {
+                          "type": "string",
+                          "id": 291903703,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BundleType": {
+                          "values": {
+                            "UNDEFINED_BUNDLE_TYPE": 0,
+                            "BUNDLE_TYPE_UNSPECIFIED": 466587567,
+                            "GLOBAL_FRONT_END": 182122473,
+                            "INDIVIDUAL": 438800025
+                          }
+                        }
+                      }
+                    },
+                    "GlobalFrontendSettingsPatchResponse": {
+                      "oneofs": {
+                        "_operation": {
+                          "oneof": [
+                            "operation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "operation": {
+                          "type": "Operation",
+                          "id": 52090215,
                           "options": {
                             "proto3_optional": true
                           }
@@ -169821,6 +170930,7 @@
                             "SEV_LIVE_MIGRATABLE_V2": 168551983,
                             "SEV_SNP_CAPABLE": 426919,
                             "SNP_SVSM_CAPABLE": 52921460,
+                            "SUSPEND_SAFE_FPR": 223956441,
                             "TDX_CAPABLE": 240446133,
                             "UEFI_COMPATIBLE": 195865408,
                             "VIRTIO_SCSI_MULTIQUEUE": 201597069,
@@ -173979,6 +175089,47 @@
                         "validateOnly": {
                           "type": "bool",
                           "id": 242744629,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InsertDhcpOptionsConfigRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dhcpOptionsConfigResource": {
+                          "type": "DhcpOptionsConfig",
+                          "id": 93152892,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
                           "options": {
                             "proto3_optional": true
                           }
@@ -184134,6 +185285,11 @@
                             "selfLink"
                           ]
                         },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
                         "_state": {
                           "oneof": [
                             "state"
@@ -184366,6 +185522,13 @@
                         "selfLink": {
                           "type": "string",
                           "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
                           "options": {
                             "proto3_optional": true
                           }
@@ -187833,12 +188996,36 @@
                           "oneof": [
                             "city"
                           ]
+                        },
+                        "_maxDynamicPathBandwidthGbps": {
+                          "oneof": [
+                            "maxDynamicPathBandwidthGbps"
+                          ]
+                        },
+                        "_maxFixedPathBandwidthGbps": {
+                          "oneof": [
+                            "maxFixedPathBandwidthGbps"
+                          ]
                         }
                       },
                       "fields": {
                         "city": {
                           "type": "string",
                           "id": 3053931,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxDynamicPathBandwidthGbps": {
+                          "type": "int64",
+                          "id": 378021355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxFixedPathBandwidthGbps": {
+                          "type": "int64",
+                          "id": 346138080,
                           "options": {
                             "proto3_optional": true
                           }
@@ -190328,6 +191515,86 @@
                         "project": {
                           "type": "string",
                           "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListDhcpOptionsConfigsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -195726,6 +196993,79 @@
                         "region": {
                           "type": "string",
                           "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListRecoverableSnapshotsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -201318,6 +202658,181 @@
                         }
                       }
                     },
+                    "ListVmExtensionStatesInstancesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 18257045,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListVmExtensionStatesResponse": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "VmExtensionState",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListVpnGatewaysRequest": {
                       "oneofs": {
                         "_filter": {
@@ -202990,7 +204505,8 @@
                           "values": {
                             "UNDEFINED_TARGET_STATUS": 0,
                             "ABANDONED": 81797556,
-                            "DELETED": 120962041
+                            "DELETED": 120962041,
+                            "INVALID": 530283991
                           }
                         }
                       }
@@ -205689,6 +207205,7 @@
                           "values": {
                             "UNDEFINED_NETWORK_ENDPOINT_TYPE": 0,
                             "GCE_VM_IP": 401880793,
+                            "GCE_VM_IP_DEDICATED_BACKEND": 321618974,
                             "GCE_VM_IP_PORT": 501838375,
                             "GCE_VM_IP_PORTMAP": 22819253,
                             "INTERNET_FQDN_PORT": 404154477,
@@ -211074,6 +212591,11 @@
                             "error"
                           ]
                         },
+                        "_getHealthOperationMetadata": {
+                          "oneof": [
+                            "getHealthOperationMetadata"
+                          ]
+                        },
                         "_getVersionOperationMetadata": {
                           "oneof": [
                             "getVersionOperationMetadata"
@@ -211212,6 +212734,13 @@
                         "error": {
                           "type": "Error",
                           "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "getHealthOperationMetadata": {
+                          "type": "GetHealthOperationMetadata",
+                          "id": 303911457,
                           "options": {
                             "proto3_optional": true
                           }
@@ -212675,6 +214204,66 @@
                         }
                       }
                     },
+                    "PatchDhcpOptionsConfigRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        },
+                        "_updateMask": {
+                          "oneof": [
+                            "updateMask"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dhcpOptionsConfig": {
+                          "type": "string",
+                          "id": 513823249,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dhcpOptionsConfigResource": {
+                          "type": "DhcpOptionsConfig",
+                          "id": 93152892,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateMask": {
+                          "type": "string",
+                          "id": 500079778,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "PatchDiskSettingRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -212882,6 +214471,50 @@
                         "requestId": {
                           "type": "string",
                           "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PatchGlobalFrontendSettingRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        },
+                        "_updateMask": {
+                          "oneof": [
+                            "updateMask"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "globalFrontendSettingsResource": {
+                          "type": "GlobalFrontendSettings",
+                          "id": 233377241,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateMask": {
+                          "type": "string",
+                          "id": 500079778,
                           "options": {
                             "proto3_optional": true
                           }
@@ -213637,6 +215270,38 @@
                           "id": 500079778,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PatchOrganizationSnapshotRecycleBinPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "organization": {
+                          "type": "string",
+                          "id": 105180467,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "snapshotRecycleBinPolicyResource": {
+                          "type": "SnapshotRecycleBinPolicy",
+                          "id": 80406940,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -215458,6 +217123,39 @@
                         "serviceAttachmentResource": {
                           "type": "ServiceAttachment",
                           "id": 472980256,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PatchSnapshotRecycleBinPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "snapshotRecycleBinPolicyResource": {
+                          "type": "SnapshotRecycleBinPolicy",
+                          "id": 80406940,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -219065,6 +220763,765 @@
                         }
                       }
                     },
+                    "RecoverRecoverableSnapshotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        },
+                        "_snapshotName": {
+                          "oneof": [
+                            "snapshotName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "recoverableSnapshot": {
+                          "type": "string",
+                          "id": 57183269,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "snapshotName": {
+                          "type": "string",
+                          "id": 124147750,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RecoverableSnapshot": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_originalResource": {
+                          "oneof": [
+                            "originalResource"
+                          ]
+                        },
+                        "_purgeTimestamp": {
+                          "oneof": [
+                            "purgeTimestamp"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
+                          ]
+                        },
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "originalResource": {
+                          "type": "RecoverableSnapshotOriginalSnapshot",
+                          "id": 345892540,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "purgeTimestamp": {
+                          "type": "string",
+                          "id": 32684674,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 480964257,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 480964267,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Status": {
+                          "values": {
+                            "UNDEFINED_STATUS": 0,
+                            "CREATING": 455564985,
+                            "DELETING": 528602024,
+                            "FAILED": 455706685,
+                            "READY": 77848963,
+                            "RECOVERING": 262581246,
+                            "UNKNOWN": 433141802
+                          }
+                        }
+                      }
+                    },
+                    "RecoverableSnapshotList": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "RecoverableSnapshot",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RecoverableSnapshotOriginalSnapshot": {
+                      "oneofs": {
+                        "_architecture": {
+                          "oneof": [
+                            "architecture"
+                          ]
+                        },
+                        "_autoCreated": {
+                          "oneof": [
+                            "autoCreated"
+                          ]
+                        },
+                        "_chainName": {
+                          "oneof": [
+                            "chainName"
+                          ]
+                        },
+                        "_creationSizeBytes": {
+                          "oneof": [
+                            "creationSizeBytes"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_deletionTimestamp": {
+                          "oneof": [
+                            "deletionTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_diskSizeGb": {
+                          "oneof": [
+                            "diskSizeGb"
+                          ]
+                        },
+                        "_downloadBytes": {
+                          "oneof": [
+                            "downloadBytes"
+                          ]
+                        },
+                        "_enableConfidentialCompute": {
+                          "oneof": [
+                            "enableConfidentialCompute"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_labelFingerprint": {
+                          "oneof": [
+                            "labelFingerprint"
+                          ]
+                        },
+                        "_maxRetentionDays": {
+                          "oneof": [
+                            "maxRetentionDays"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
+                          ]
+                        },
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
+                        "_snapshotEncryptionKey": {
+                          "oneof": [
+                            "snapshotEncryptionKey"
+                          ]
+                        },
+                        "_snapshotGroupId": {
+                          "oneof": [
+                            "snapshotGroupId"
+                          ]
+                        },
+                        "_snapshotGroupName": {
+                          "oneof": [
+                            "snapshotGroupName"
+                          ]
+                        },
+                        "_snapshotType": {
+                          "oneof": [
+                            "snapshotType"
+                          ]
+                        },
+                        "_sourceDisk": {
+                          "oneof": [
+                            "sourceDisk"
+                          ]
+                        },
+                        "_sourceDiskEncryptionKey": {
+                          "oneof": [
+                            "sourceDiskEncryptionKey"
+                          ]
+                        },
+                        "_sourceDiskForRecoveryCheckpoint": {
+                          "oneof": [
+                            "sourceDiskForRecoveryCheckpoint"
+                          ]
+                        },
+                        "_sourceDiskId": {
+                          "oneof": [
+                            "sourceDiskId"
+                          ]
+                        },
+                        "_sourceInstantSnapshot": {
+                          "oneof": [
+                            "sourceInstantSnapshot"
+                          ]
+                        },
+                        "_sourceInstantSnapshotEncryptionKey": {
+                          "oneof": [
+                            "sourceInstantSnapshotEncryptionKey"
+                          ]
+                        },
+                        "_sourceInstantSnapshotId": {
+                          "oneof": [
+                            "sourceInstantSnapshotId"
+                          ]
+                        },
+                        "_sourceSnapshotSchedulePolicy": {
+                          "oneof": [
+                            "sourceSnapshotSchedulePolicy"
+                          ]
+                        },
+                        "_sourceSnapshotSchedulePolicyId": {
+                          "oneof": [
+                            "sourceSnapshotSchedulePolicyId"
+                          ]
+                        },
+                        "_storageBytes": {
+                          "oneof": [
+                            "storageBytes"
+                          ]
+                        },
+                        "_storageBytesStatus": {
+                          "oneof": [
+                            "storageBytesStatus"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "architecture": {
+                          "type": "string",
+                          "id": 302803283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "autoCreated": {
+                          "type": "bool",
+                          "id": 463922264,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "chainName": {
+                          "type": "string",
+                          "id": 68644169,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationSizeBytes": {
+                          "type": "int64",
+                          "id": 125400077,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "deletionTimestamp": {
+                          "type": "string",
+                          "id": 3022309,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "diskSizeGb": {
+                          "type": "int64",
+                          "id": 316263735,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "downloadBytes": {
+                          "type": "int64",
+                          "id": 435054068,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableConfidentialCompute": {
+                          "type": "bool",
+                          "id": 102135228,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "guestOsFeatures": {
+                          "rule": "repeated",
+                          "type": "GuestOsFeature",
+                          "id": 79294545
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labelFingerprint": {
+                          "type": "string",
+                          "id": 178124825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 500195327
+                        },
+                        "licenseCodes": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 45482664
+                        },
+                        "licenses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 337642578
+                        },
+                        "maxRetentionDays": {
+                          "type": "int32",
+                          "id": 324296979,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 480964257,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 480964267,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "snapshotEncryptionKey": {
+                          "type": "CustomerEncryptionKey",
+                          "id": 43334526,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "snapshotGroupId": {
+                          "type": "string",
+                          "id": 255004406,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "snapshotGroupName": {
+                          "type": "string",
+                          "id": 246247846,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "snapshotType": {
+                          "type": "string",
+                          "id": 124349653,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceDisk": {
+                          "type": "string",
+                          "id": 451753793,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceDiskEncryptionKey": {
+                          "type": "CustomerEncryptionKey",
+                          "id": 531501153,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceDiskForRecoveryCheckpoint": {
+                          "type": "string",
+                          "id": 359837950,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceDiskId": {
+                          "type": "string",
+                          "id": 454190809,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstantSnapshot": {
+                          "type": "string",
+                          "id": 219202054,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstantSnapshotEncryptionKey": {
+                          "type": "CustomerEncryptionKey",
+                          "id": 436536060,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstantSnapshotId": {
+                          "type": "string",
+                          "id": 287582708,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceSnapshotSchedulePolicy": {
+                          "type": "string",
+                          "id": 235756291,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceSnapshotSchedulePolicyId": {
+                          "type": "string",
+                          "id": 70489047,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storageBytes": {
+                          "type": "int64",
+                          "id": 424631719,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storageBytesStatus": {
+                          "type": "string",
+                          "id": 490739082,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storageLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 328005274
+                        }
+                      },
+                      "nested": {
+                        "Architecture": {
+                          "values": {
+                            "UNDEFINED_ARCHITECTURE": 0,
+                            "ARCHITECTURE_UNSPECIFIED": 394750507,
+                            "ARM64": 62547450,
+                            "X86_64": 425300551
+                          }
+                        },
+                        "SnapshotType": {
+                          "values": {
+                            "UNDEFINED_SNAPSHOT_TYPE": 0,
+                            "ARCHIVE": 506752162,
+                            "STANDARD": 484642493
+                          }
+                        },
+                        "StorageBytesStatus": {
+                          "values": {
+                            "UNDEFINED_STORAGE_BYTES_STATUS": 0,
+                            "UPDATING": 494614342,
+                            "UP_TO_DATE": 101306702
+                          }
+                        }
+                      }
+                    },
                     "RecreateInstancesInstanceGroupManagerRequest": {
                       "oneofs": {
                         "_noGracefulShutdown": {
@@ -222333,6 +224790,7 @@
                         "ConfidentialComputeType": {
                           "values": {
                             "UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE": 0,
+                            "CONFIDENTIAL_COMPUTE_TYPE_BMSAI": 103738250,
                             "CONFIDENTIAL_COMPUTE_TYPE_TDX": 301241954,
                             "CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED": 42227601
                           }
@@ -234833,6 +237291,31 @@
                         }
                       }
                     },
+                    "SetIamPolicyRecoverableSnapshotRequest": {
+                      "fields": {
+                        "globalSetPolicyRequestResource": {
+                          "type": "GlobalSetPolicyRequest",
+                          "id": 337048498,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetIamPolicyRegionBackendBucketRequest": {
                       "fields": {
                         "project": {
@@ -239348,6 +241831,56 @@
                         }
                       }
                     },
+                    "SnapshotRecycleBinPolicy": {
+                      "fields": {
+                        "rules": {
+                          "keyType": "string",
+                          "type": "SnapshotRecycleBinPolicyRule",
+                          "id": 108873975
+                        },
+                        "systemRules": {
+                          "keyType": "string",
+                          "type": "SnapshotRecycleBinPolicyRule",
+                          "id": 190676711
+                        }
+                      }
+                    },
+                    "SnapshotRecycleBinPolicyRule": {
+                      "oneofs": {
+                        "_standardSnapshots": {
+                          "oneof": [
+                            "standardSnapshots"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "standardSnapshots": {
+                          "type": "SnapshotRecycleBinPolicyRuleRuleConfig",
+                          "id": 359167021,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SnapshotRecycleBinPolicyRuleRuleConfig": {
+                      "oneofs": {
+                        "_retentionDurationDays": {
+                          "oneof": [
+                            "retentionDurationDays"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "retentionDurationDays": {
+                          "type": "int64",
+                          "id": 2989249,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "SnapshotSettings": {
                       "oneofs": {
                         "_accessLocation": {
@@ -239493,6 +242026,24 @@
                         "kmsKeyName": {
                           "type": "string",
                           "id": 484373913,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SnapshotsGetEffectiveRecycleBinRuleResponse": {
+                      "oneofs": {
+                        "_retentionDurationDays": {
+                          "oneof": [
+                            "retentionDurationDays"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "retentionDurationDays": {
+                          "type": "int64",
+                          "id": 2989249,
                           "options": {
                             "proto3_optional": true
                           }
@@ -243075,6 +245626,8 @@
                           "values": {
                             "UNDEFINED_RESOLVE_SUBNET_MASK": 0,
                             "ARP_ALL_RANGES": 445655380,
+                            "ARP_BROADCAST_PRIMARY_RANGE": 123887458,
+                            "ARP_BROADCAST_PRIMARY_RANGE_WITH_LEARNING": 425592922,
                             "ARP_PRIMARY_RANGE": 120210048
                           }
                         },
@@ -246917,6 +249470,38 @@
                         }
                       }
                     },
+                    "TestIamPermissionsDhcpOptionsConfigRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsDiskRequest": {
                       "fields": {
                         "project": {
@@ -247706,6 +250291,31 @@
                         "region": {
                           "type": "string",
                           "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsRecoverableSnapshotRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -253148,6 +255758,125 @@
                         }
                       }
                     },
+                    "VmExtensionState": {
+                      "oneofs": {
+                        "_enforcementMsg": {
+                          "oneof": [
+                            "enforcementMsg"
+                          ]
+                        },
+                        "_enforcementState": {
+                          "oneof": [
+                            "enforcementState"
+                          ]
+                        },
+                        "_healthMsg": {
+                          "oneof": [
+                            "healthMsg"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_policyId": {
+                          "oneof": [
+                            "policyId"
+                          ]
+                        },
+                        "_version": {
+                          "oneof": [
+                            "version"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enforcementMsg": {
+                          "type": "string",
+                          "id": 5311234,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enforcementState": {
+                          "type": "string",
+                          "id": 277826514,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthMsg": {
+                          "type": "string",
+                          "id": 371280670,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "policyId": {
+                          "type": "string",
+                          "id": 311191368,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 351608024,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EnforcementState": {
+                          "values": {
+                            "UNDEFINED_ENFORCEMENT_STATE": 0,
+                            "APPLYING_CONFIG": 414661677,
+                            "ENFORCEMENT_STATE_UNSPECIFIED": 76558826,
+                            "INCOMPATIBLE": 436692409,
+                            "INSTALLED": 131286874,
+                            "INSTALLING": 311800935,
+                            "INSTALL_FAILED": 204948353,
+                            "REMOVING": 269808705,
+                            "ROLLBACK_FAILED": 376622584,
+                            "ROLLED_BACK": 176597354,
+                            "ROLLING_BACK": 259411649,
+                            "SERVICE_DISABLED": 419242214
+                          }
+                        },
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "CRASHED": 132755046,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925,
+                            "RUNNING": 121282975,
+                            "STARTING": 488820800,
+                            "STOPPED": 444276141,
+                            "STOPPING": 350791796
+                          }
+                        }
+                      }
+                    },
                     "VpnGateway": {
                       "oneofs": {
                         "_creationTimestamp": {
@@ -256888,6 +259617,140 @@
                         }
                       }
                     },
+                    "DhcpOptionsConfigs": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Delete": {
+                          "requestType": "DeleteDhcpOptionsConfigRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcp_options_config}",
+                            "(google.api.method_signature)": "project,region,dhcp_options_config",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcp_options_config}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,dhcp_options_config"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetDhcpOptionsConfigRequest",
+                          "responseType": "DhcpOptionsConfig",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcp_options_config}",
+                            "(google.api.method_signature)": "project,region,dhcp_options_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcp_options_config}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,dhcp_options_config"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertDhcpOptionsConfigRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "dhcp_options_config_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs",
+                            "(google.api.method_signature)": "project,region,dhcp_options_config_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "dhcp_options_config_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,dhcp_options_config_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListDhcpOptionsConfigsRequest",
+                          "responseType": "DhcpOptionsConfigList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchDhcpOptionsConfigRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "dhcp_options_config_resource",
+                            "(google.api.http).patch": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcp_options_config}",
+                            "(google.api.method_signature)": "project,region,dhcp_options_config,dhcp_options_config_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "dhcp_options_config_resource",
+                                "patch": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcp_options_config}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,dhcp_options_config,dhcp_options_config_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsDhcpOptionsConfigRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/dhcpOptionsConfigs/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "DiskSettingsService": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -258907,6 +261770,52 @@
                             },
                             {
                               "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GlobalFrontendSettingsService": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetGlobalFrontendSettingRequest",
+                          "responseType": "GlobalFrontendSettings",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/globalFrontendSettings",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/globalFrontendSettings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchGlobalFrontendSettingRequest",
+                          "responseType": "GlobalFrontendSettingsPatchResponse",
+                          "options": {
+                            "(google.api.http).body": "global_frontend_settings_resource",
+                            "(google.api.http).patch": "/compute/beta/projects/{project}/global/globalFrontendSettings",
+                            "(google.api.method_signature)": "project,global_frontend_settings_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_frontend_settings_resource",
+                                "patch": "/compute/beta/projects/{project}/global/globalFrontendSettings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,global_frontend_settings_resource"
                             }
                           ]
                         }
@@ -261638,6 +264547,24 @@
                             }
                           ]
                         },
+                        "GetVmExtensionState": {
+                          "requestType": "GetVmExtensionStateInstanceRequest",
+                          "responseType": "VmExtensionState",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/zones/{zone}/instances/{instance}/vmExtensionStates/{extension_name}",
+                            "(google.api.method_signature)": "project,zone,instance,extension_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/zones/{zone}/instances/{instance}/vmExtensionStates/{extension_name}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,instance,extension_name"
+                            }
+                          ]
+                        },
                         "Insert": {
                           "requestType": "InsertInstanceRequest",
                           "responseType": "Operation",
@@ -261691,6 +264618,24 @@
                             {
                               "(google.api.http)": {
                                 "get": "/compute/beta/projects/{project}/zones/{zone}/instances/{instance}/referrers"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,instance"
+                            }
+                          ]
+                        },
+                        "ListVmExtensionStates": {
+                          "requestType": "ListVmExtensionStatesInstancesRequest",
+                          "responseType": "ListVmExtensionStatesResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/zones/{zone}/instances/{instance}/vmExtensionStates",
+                            "(google.api.method_signature)": "project,zone,instance"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/zones/{zone}/instances/{instance}/vmExtensionStates"
                               }
                             },
                             {
@@ -266674,6 +269619,56 @@
                         }
                       }
                     },
+                    "OrganizationSnapshotRecycleBinPolicy": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetOrganizationSnapshotRecycleBinPolicyRequest",
+                          "responseType": "SnapshotRecycleBinPolicy",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/{organization=organizations/*}/global/snapshotRecycleBinPolicy",
+                            "(google.api.method_signature)": "organization"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/{organization=organizations/*}/global/snapshotRecycleBinPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "organization"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchOrganizationSnapshotRecycleBinPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "snapshot_recycle_bin_policy_resource",
+                            "(google.api.http).patch": "/compute/beta/{organization=organizations/*}/global/snapshotRecycleBinPolicy",
+                            "(google.api.method_signature)": "organization,snapshot_recycle_bin_policy_resource",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "snapshot_recycle_bin_policy_resource",
+                                "patch": "/compute/beta/{organization=organizations/*}/global/snapshotRecycleBinPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "organization,snapshot_recycle_bin_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "PacketMirrorings": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -267591,6 +270586,152 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RecoverableSnapshots": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Delete": {
+                          "requestType": "DeleteRecoverableSnapshotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/beta/projects/{project}/global/recoverableSnapshots/{recoverable_snapshot}",
+                            "(google.api.method_signature)": "project,recoverable_snapshot",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/beta/projects/{project}/global/recoverableSnapshots/{recoverable_snapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,recoverable_snapshot"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRecoverableSnapshotRequest",
+                          "responseType": "RecoverableSnapshot",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/recoverableSnapshots/{recoverable_snapshot}",
+                            "(google.api.method_signature)": "project,recoverable_snapshot"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/recoverableSnapshots/{recoverable_snapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,recoverable_snapshot"
+                            }
+                          ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "GetIamPolicyRecoverableSnapshotRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/recoverableSnapshots/{resource}/getIamPolicy",
+                            "(google.api.method_signature)": "project,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/recoverableSnapshots/{resource}/getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRecoverableSnapshotsRequest",
+                          "responseType": "RecoverableSnapshotList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/recoverableSnapshots",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/recoverableSnapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Recover": {
+                          "requestType": "RecoverRecoverableSnapshotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/recoverableSnapshots/{recoverable_snapshot}/recover",
+                            "(google.api.method_signature)": "project,recoverable_snapshot",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/beta/projects/{project}/global/recoverableSnapshots/{recoverable_snapshot}/recover"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,recoverable_snapshot"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "SetIamPolicyRecoverableSnapshotRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).body": "global_set_policy_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/recoverableSnapshots/{resource}/setIamPolicy",
+                            "(google.api.method_signature)": "project,resource,global_set_policy_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_set_policy_request_resource",
+                                "post": "/compute/beta/projects/{project}/global/recoverableSnapshots/{resource}/setIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,global_set_policy_request_resource"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRecoverableSnapshotRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/recoverableSnapshots/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/beta/projects/{project}/global/recoverableSnapshots/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
                             }
                           ]
                         }
@@ -273766,6 +276907,28 @@
                             }
                           ]
                         },
+                        "GetHealth": {
+                          "requestType": "GetHealthReservationSlotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*/reservationSubBlocks/*}/reservationSlots/{reservation_slot}/getHealth",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_slot",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name=reservations/*/reservationBlocks/*/reservationSubBlocks/*}/reservationSlots/{reservation_slot}/getHealth"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_slot"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
                         "GetVersion": {
                           "requestType": "GetVersionReservationSlotRequest",
                           "responseType": "Operation",
@@ -275888,6 +279051,56 @@
                         }
                       }
                     },
+                    "SnapshotRecycleBinPolicyService": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetSnapshotRecycleBinPolicyRequest",
+                          "responseType": "SnapshotRecycleBinPolicy",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/snapshotRecycleBinPolicy",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/snapshotRecycleBinPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchSnapshotRecycleBinPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "snapshot_recycle_bin_policy_resource",
+                            "(google.api.http).patch": "/compute/beta/projects/{project}/global/snapshotRecycleBinPolicy",
+                            "(google.api.method_signature)": "project,snapshot_recycle_bin_policy_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "snapshot_recycle_bin_policy_resource",
+                                "patch": "/compute/beta/projects/{project}/global/snapshotRecycleBinPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,snapshot_recycle_bin_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "SnapshotSettingsService": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -275995,6 +279208,24 @@
                             {
                               "(google.api.http)": {
                                 "get": "/compute/beta/projects/{project}/global/snapshots/{snapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,snapshot"
+                            }
+                          ]
+                        },
+                        "GetEffectiveRecycleBinRule": {
+                          "requestType": "GetEffectiveRecycleBinRuleSnapshotRequest",
+                          "responseType": "SnapshotsGetEffectiveRecycleBinRuleResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/global/snapshots/{snapshot}/getEffectiveRecycleBinRule",
+                            "(google.api.method_signature)": "project,snapshot"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/global/snapshots/{snapshot}/getEffectiveRecycleBinRule"
                               }
                             },
                             {
@@ -281093,10 +284324,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "libraryPackage": {
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -281206,10 +284433,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
-                },
-                "batching": {
-                  "type": "BatchingConfigProto",
-                  "id": 4
                 }
               },
               "nested": {
@@ -281264,79 +284487,6 @@
                 "generateOmittedAsInternal": {
                   "type": "bool",
                   "id": 2
-                }
-              }
-            },
-            "BatchingConfigProto": {
-              "fields": {
-                "thresholds": {
-                  "type": "BatchingSettingsProto",
-                  "id": 1
-                },
-                "batchDescriptor": {
-                  "type": "BatchingDescriptorProto",
-                  "id": 2
-                }
-              }
-            },
-            "BatchingSettingsProto": {
-              "fields": {
-                "elementCountThreshold": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "requestByteThreshold": {
-                  "type": "int64",
-                  "id": 2
-                },
-                "delayThreshold": {
-                  "type": "google.protobuf.Duration",
-                  "id": 3
-                },
-                "elementCountLimit": {
-                  "type": "int32",
-                  "id": 4
-                },
-                "requestByteLimit": {
-                  "type": "int32",
-                  "id": 5
-                },
-                "flowControlElementLimit": {
-                  "type": "int32",
-                  "id": 6
-                },
-                "flowControlByteLimit": {
-                  "type": "int32",
-                  "id": 7
-                },
-                "flowControlLimitExceededBehavior": {
-                  "type": "FlowControlLimitExceededBehaviorProto",
-                  "id": 8
-                }
-              }
-            },
-            "FlowControlLimitExceededBehaviorProto": {
-              "values": {
-                "UNSET_BEHAVIOR": 0,
-                "THROW_EXCEPTION": 1,
-                "BLOCK": 2,
-                "IGNORE": 3
-              }
-            },
-            "BatchingDescriptorProto": {
-              "fields": {
-                "batchedField": {
-                  "type": "string",
-                  "id": 1
-                },
-                "discriminatorFields": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "subresponseField": {
-                  "type": "string",
-                  "id": 3
                 }
               }
             },
@@ -281489,8 +284639,6 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
-                "EDITION_2026": 1002,
-                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -281685,10 +284833,6 @@
                 }
               },
               "extensions": [
-                [
-                  990,
-                  998
-                ],
                 [
                   1000,
                   536870911
@@ -281964,10 +285108,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "feature_support.edition_introduced": "EDITION_PROTO2",
-                    "feature_support.edition_removed": "EDITION_2024",
-                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
+                    "default": false
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -282027,9 +285168,7 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true,
-                    "feature_support.edition_removed": "EDITION_2026",
-                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
+                    "default": true
                   }
                 },
                 "objcClassPrefix": {
@@ -282071,10 +285210,6 @@
                 }
               },
               "extensions": [
-                [
-                  990,
-                  998
-                ],
                 [
                   1000,
                   536870911
@@ -282147,10 +285282,6 @@
                 }
               },
               "extensions": [
-                [
-                  990,
-                  998
-                ],
                 [
                   1000,
                   536870911
@@ -282266,10 +285397,6 @@
               },
               "extensions": [
                 [
-                  990,
-                  998
-                ],
-                [
                   1000,
                   536870911
                 ]
@@ -282349,10 +285476,6 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
-                    },
-                    "removalError": {
-                      "type": "string",
-                      "id": 5
                     }
                   }
                 }
@@ -282372,10 +285495,6 @@
                 }
               },
               "extensions": [
-                [
-                  990,
-                  998
-                ],
                 [
                   1000,
                   536870911
@@ -282414,10 +285533,6 @@
                 }
               },
               "extensions": [
-                [
-                  990,
-                  998
-                ],
                 [
                   1000,
                   536870911
@@ -282463,10 +285578,6 @@
               },
               "extensions": [
                 [
-                  990,
-                  998
-                ],
-                [
                   1000,
                   536870911
                 ]
@@ -282493,10 +285604,6 @@
                 }
               },
               "extensions": [
-                [
-                  990,
-                  998
-                ],
                 [
                   1000,
                   536870911
@@ -282531,10 +285638,6 @@
                 }
               },
               "extensions": [
-                [
-                  990,
-                  998
-                ],
                 [
                   1000,
                   536870911
@@ -282676,8 +285779,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2026",
-                    "edition_defaults.value": "STYLE2026"
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -282689,17 +285792,6 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
-                  }
-                },
-                "enforceProtoLimits": {
-                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
-                  "id": 9,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_ONEOF",
-                    "feature_support.edition_introduced": "EDITION_2026",
-                    "edition_defaults.edition": "EDITION_2026",
-                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -282777,8 +285869,7 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2,
-                    "STYLE2026": 3
+                    "STYLE_LEGACY": 2
                   }
                 },
                 "VisibilityFeature": {
@@ -282797,18 +285888,6 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
-                      }
-                    }
-                  }
-                },
-                "ProtoLimitsFeature": {
-                  "fields": {},
-                  "nested": {
-                    "EnforceProtoLimits": {
-                      "values": {
-                        "PROTO_LIMITS_UNKNOWN": 0,
-                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
-                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }

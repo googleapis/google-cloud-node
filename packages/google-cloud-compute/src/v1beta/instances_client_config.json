@@ -115,6 +115,11 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "GetVmExtensionState": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "Insert": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
@@ -126,6 +131,11 @@
           "retry_params_name": "default"
         },
         "ListReferrers": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListVmExtensionStates": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"

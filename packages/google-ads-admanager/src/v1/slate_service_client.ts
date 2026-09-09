@@ -232,6 +232,9 @@ export class SlateServiceClient {
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
       ),
+      breakTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/breakTemplates/{break_template}',
+      ),
       browserPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browsers/{browser}',
       ),
@@ -2145,6 +2148,44 @@ export class SlateServiceClient {
     return this.pathTemplates.bandwidthGroupPathTemplate.match(
       bandwidthGroupName,
     ).bandwidth_group;
+  }
+
+  /**
+   * Return a fully-qualified breakTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} break_template
+   * @returns {string} Resource name string.
+   */
+  breakTemplatePath(networkCode: string, breakTemplate: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.render({
+      network_code: networkCode,
+      break_template: breakTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from BreakTemplate resource.
+   *
+   * @param {string} breakTemplateName
+   *   A fully-qualified path representing BreakTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBreakTemplateName(breakTemplateName: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.match(breakTemplateName)
+      .network_code;
+  }
+
+  /**
+   * Parse the break_template from BreakTemplate resource.
+   *
+   * @param {string} breakTemplateName
+   *   A fully-qualified path representing BreakTemplate resource.
+   * @returns {string} A string representing the break_template.
+   */
+  matchBreakTemplateFromBreakTemplateName(breakTemplateName: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.match(breakTemplateName)
+      .break_template;
   }
 
   /**
