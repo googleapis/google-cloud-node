@@ -204,14 +204,33 @@ describe('TracerHelper', () => {
       assert.strictEqual(spans[0].ended, true);
     });
 
-    it('supports custom thenables that do not inherit from Promise', async () => {
+    it('supports Promise subclasses', async () => {
+      class CustomPromise<T> extends Promise<T> {}
+      const customPromise = new CustomPromise<string>(resolve => {
+        setTimeout(() => {
+          resolve('custom-result');
+        }, 10);
+      });
+
+      const result = traceAttempt(dynamicArgs, staticArgs, () => customPromise);
+      assert.strictEqual(result, customPromise);
+
+      const initialSpans = harness.getSpans('google-gax');
+      assert.strictEqual(initialSpans.length, 0);
+
+      await new Promise(resolve => setTimeout(resolve, 25));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('does not manage promise lifecycle if result does not inherit from Promise', async () => {
       const customThenable = {
         then(onfulfilled?: (val: unknown) => void) {
-          setTimeout(() => {
-            if (onfulfilled) {
-              onfulfilled('custom-result');
-            }
-          }, 10);
+          if (onfulfilled) {
+            onfulfilled('custom-result');
+          }
         },
       };
 
@@ -222,14 +241,10 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(result, customThenable);
 
-      const initialSpans = harness.getSpans('google-gax');
-      assert.strictEqual(initialSpans.length, 0);
-
-      await new Promise(resolve => setTimeout(resolve, 25));
-
+      await new Promise(resolve => setTimeout(resolve, 20));
+      // Span is not ended because result is not an instanceof Promise
       const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 1);
-      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans.length, 0);
     });
 
     it('does not end span prematurely until asynchronous promise rejects', async () => {
@@ -305,7 +320,7 @@ describe('TracerHelper', () => {
 
     it('does not end span prematurely until stream emits close event', () => {
       const emitter = new EventEmitter();
-      traceAttempt(dynamicArgs, staticArgs, () => emitter, 'stream');
+      traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
 
       assert.strictEqual(harness.getSpans('google-gax').length, 0);
 
@@ -316,6 +331,33 @@ describe('TracerHelper', () => {
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
       assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports isStreamCall explicitly set to false', async () => {
+      const result = await traceAttempt(
+        dynamicArgs,
+        staticArgs,
+        () => Promise.resolve('explicit-false'),
+        false,
+      );
+      assert.strictEqual(result, 'explicit-false');
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('does not manage stream lifecycle if isStreamCall is true but result is not an EventEmitter', () => {
+      const nonEmitter = {data: 'not-an-emitter'};
+      const result = traceAttempt(
+        dynamicArgs,
+        staticArgs,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        () => nonEmitter as any,
+        true,
+      );
+      assert.strictEqual(result, nonEmitter);
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 0);
     });
   });
 
@@ -386,7 +428,7 @@ describe('TracerHelper', () => {
   });
 
   describe('handleStream', () => {
-    it('manages stream events and ends span on end', () => {
+    it('manages stream events, ends span, and cleans up listeners on end', () => {
       let ended = false;
       const emitter = new EventEmitter();
       handleStream(
@@ -398,14 +440,21 @@ describe('TracerHelper', () => {
       );
 
       assert.strictEqual(ended, false);
+      assert.strictEqual(emitter.listenerCount('end'), 1);
+      assert.strictEqual(emitter.listenerCount('close'), 1);
+      assert.strictEqual(emitter.listenerCount('error'), 1);
+
       emitter.emit('data', 'chunk');
       assert.strictEqual(ended, false);
 
       emitter.emit('end');
       assert.strictEqual(ended, true);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
     });
 
-    it('ends span on stream close', () => {
+    it('ends span and cleans up listeners on stream close', () => {
       let ended = false;
       const emitter = new EventEmitter();
       handleStream(
@@ -417,30 +466,44 @@ describe('TracerHelper', () => {
       );
 
       assert.strictEqual(ended, false);
+      assert.strictEqual(emitter.listenerCount('close'), 1);
+
       emitter.emit('close');
       assert.strictEqual(ended, true);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
     });
 
-    it('records error and ends span on stream error', () => {
+    it('records error, ends span, and cleans up listeners on stream error', () => {
       let ended = false;
       let recordedError: unknown;
+      const order: string[] = [];
       const error = new Error('stream failure');
       const emitter = new EventEmitter();
 
       handleStream(
         emitter,
         err => {
+          order.push('recordError');
           recordedError = err;
         },
         () => {
+          order.push('endSpan');
           ended = true;
         },
       );
 
       assert.strictEqual(ended, false);
+      assert.strictEqual(emitter.listenerCount('error'), 1);
+
       emitter.emit('error', error);
       assert.strictEqual(ended, true);
       assert.strictEqual(recordedError, error);
+      assert.deepStrictEqual(order, ['recordError', 'endSpan']);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
     });
   });
 });
