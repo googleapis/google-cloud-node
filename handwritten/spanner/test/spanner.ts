@@ -257,6 +257,44 @@ class XGoogRequestHeaderInterceptor {
 }
 describe('Spanner with mock server', () => {
   let sandbox: sinon.SinonSandbox;
+
+  interface FakeChannelRef {
+    channelId: number;
+    getActiveStreamsCount(): number;
+  }
+
+  interface FakeGcpChannelFactory {
+    channelRefs: FakeChannelRef[];
+    maxSize: number;
+    addChannel(): FakeChannelRef;
+    getChannelRef(affinityKey?: string): FakeChannelRef;
+  }
+
+  interface SpannerGaxClient {
+    spannerStub: Promise<Record<symbol, unknown>>;
+  }
+
+  async function getGcpChannelFactory(
+    spannerInstance: Spanner,
+  ): Promise<FakeGcpChannelFactory> {
+    const gaxClient = spannerInstance.clients_.get(
+      'SpannerClient',
+    ) as unknown as SpannerGaxClient;
+    assert.ok(gaxClient, 'SpannerClient should be created');
+    const stub = await gaxClient.spannerStub;
+    const symbols = Object.getOwnPropertySymbols(stub);
+    const channelFactory = symbols
+      .map(s => stub[s])
+      .find(
+        (v): v is FakeGcpChannelFactory =>
+          typeof v === 'object' &&
+          v !== null &&
+          v.constructor?.name === 'GcpChannelFactory',
+      );
+    assert.ok(channelFactory, 'GcpChannelFactory should exist on stub');
+    return channelFactory!;
+  }
+
   const selectSql = 'SELECT NUM, NAME FROM NUMBERS';
   const select1 = 'SELECT 1';
   const invalidSql = 'SELECT * FROM FOO';
@@ -2046,6 +2084,297 @@ describe('Spanner with mock server', () => {
         });
       });
 
+      it('should distribute single-use queries across multiple gRPC channels when using multiplexed session', async () => {
+        const database = newTestDatabase();
+        // Warm up the database and client so SpannerClient is instantiated and multiplexed session is created
+        await database.run(selectSql);
+
+        const channelFactory = await getGcpChannelFactory(spanner);
+
+        // Ensure channel pool has multiple channels available (up to maxSize = 10)
+        while (channelFactory.channelRefs.length < channelFactory.maxSize) {
+          channelFactory.addChannel();
+        }
+        assert.strictEqual(channelFactory.channelRefs.length, 10);
+
+        // Record channel selection for queries
+        const selectedChannelIndices: number[] = [];
+        const originalGetChannelRef =
+          channelFactory.getChannelRef.bind(channelFactory);
+        const getChannelRefStub = sandbox
+          .stub(channelFactory, 'getChannelRef')
+          .callsFake(affinityKey => {
+            const channelReference = originalGetChannelRef(affinityKey);
+            selectedChannelIndices.push(channelReference.channelId);
+            return channelReference;
+          });
+
+        try {
+          // Execute multiple concurrent single-use queries
+          const queryCount = 5;
+          const promises: Promise<RunResponse>[] = [];
+          for (let i = 0; i < queryCount; i++) {
+            promises.push(database.run(selectSql));
+          }
+          await Promise.all(promises);
+
+          const uniqueChannels = new Set(selectedChannelIndices);
+          assert.strictEqual(
+            uniqueChannels.size > 1,
+            true,
+            `Expected ${queryCount} queries to be distributed across multiple channels, but all were sent to channelId ${Array.from(uniqueChannels)[0]}`,
+          );
+        } finally {
+          getChannelRefStub.restore();
+        }
+      });
+
+      it('should scale up the gRPC channel pool when single-use queries exceed watermark', async () => {
+        const testSpanner = new Spanner({
+          servicePath: 'localhost',
+          port,
+          sslCreds: grpc.credentials.createInsecure(),
+        });
+
+        try {
+          const testInstance = testSpanner.instance('instance');
+          const database = testInstance.database('scale-up-db');
+          // Warm up the database and client so SpannerClient is instantiated and multiplexed session is created
+          await database.run(selectSql);
+
+          const channelFactory = await getGcpChannelFactory(testSpanner);
+          // Initially, the channel pool has 1 channel
+          assert.strictEqual(channelFactory.channelRefs.length, 1);
+
+          // Freeze the mock server so active streams accumulate on the channel
+          spannerMock.freeze();
+          const queryPromises: Promise<RunResponse>[] = [];
+          try {
+            // Send 26 concurrent queries to exceed maxConcurrentStreamsLowWatermark (25)
+            for (let i = 0; i < 26; i++) {
+              queryPromises.push(database.run(selectSql));
+            }
+
+            // Busy-wait for requests to be dispatched and for the channel pool to scale up
+            const deadline = Date.now() + 5000;
+            while (
+              channelFactory.channelRefs.length <= 1 &&
+              Date.now() < deadline
+            ) {
+              await new Promise(resolve => setImmediate(resolve));
+            }
+
+            // Verify that the pool scaled up from 1 to 2 channels
+            assert.strictEqual(
+              channelFactory.channelRefs.length > 1,
+              true,
+              `Expected channel pool to scale up beyond 1 channel, but got ${channelFactory.channelRefs.length}`,
+            );
+          } finally {
+            spannerMock.unfreeze();
+            await Promise.all(queryPromises);
+          }
+        } finally {
+          await testSpanner.close();
+        }
+      });
+
+      it('should distribute single-use streaming queries across multiple gRPC channels when using multiplexed session', async () => {
+        const database = newTestDatabase();
+        await database.run(selectSql);
+
+        const channelFactory = await getGcpChannelFactory(spanner);
+        while (channelFactory.channelRefs.length < channelFactory.maxSize) {
+          channelFactory.addChannel();
+        }
+        assert.strictEqual(channelFactory.channelRefs.length, 10);
+
+        const selectedChannelIndices: number[] = [];
+        const originalGetChannelRef =
+          channelFactory.getChannelRef.bind(channelFactory);
+        const getChannelRefStub = sandbox
+          .stub(channelFactory, 'getChannelRef')
+          .callsFake(affinityKey => {
+            const channelReference = originalGetChannelRef(affinityKey);
+            selectedChannelIndices.push(channelReference.channelId);
+            return channelReference;
+          });
+
+        try {
+          const queryCount = 5;
+          const streamPromises: Promise<void>[] = [];
+          for (let i = 0; i < queryCount; i++) {
+            streamPromises.push(
+              new Promise((resolve, reject) => {
+                database
+                  .runStream(selectSql)
+                  .on('data', () => {})
+                  .on('error', reject)
+                  .on('end', resolve);
+              }),
+            );
+          }
+          await Promise.all(streamPromises);
+
+          const uniqueChannels = new Set(selectedChannelIndices);
+          assert.strictEqual(
+            uniqueChannels.size > 1,
+            true,
+            `Expected ${queryCount} streaming queries to be distributed across multiple channels, but all were sent to channelId ${Array.from(uniqueChannels)[0]}`,
+          );
+        } finally {
+          getChannelRefStub.restore();
+        }
+      });
+
+      it('should keep multi-use snapshot queries pinned to the same channel when using multiplexed session', async () => {
+        const database = newTestDatabase();
+        await database.run(selectSql);
+
+        const channelFactory = await getGcpChannelFactory(spanner);
+
+        const selectedChannelIndices: number[] = [];
+        const originalGetChannelRef =
+          channelFactory.getChannelRef.bind(channelFactory);
+        const getChannelRefStub = sandbox
+          .stub(channelFactory, 'getChannelRef')
+          .callsFake(affinityKey => {
+            const channelReference = originalGetChannelRef(affinityKey);
+            selectedChannelIndices.push(channelReference.channelId);
+            return channelReference;
+          });
+
+        try {
+          const [snapshot] = await database.getSnapshot();
+          await snapshot.run(selectSql);
+          await snapshot.run(selectSql);
+          snapshot.end();
+
+          const uniqueChannels = new Set(selectedChannelIndices);
+          assert.strictEqual(
+            uniqueChannels.size,
+            1,
+            'Expected all queries in multi-use snapshot to stick to the same channel',
+          );
+        } finally {
+          getChannelRefStub.restore();
+        }
+      });
+
+      it('should keep multi-statement read-write transaction pinned to the same channel when using multiplexed session', async () => {
+        const database = newTestDatabase();
+        await database.run(selectSql);
+
+        const channelFactory = await getGcpChannelFactory(spanner);
+
+        const selectedChannelIndices: number[] = [];
+        const originalGetChannelRef =
+          channelFactory.getChannelRef.bind(channelFactory);
+        const getChannelRefStub = sandbox
+          .stub(channelFactory, 'getChannelRef')
+          .callsFake(affinityKey => {
+            const channelReference = originalGetChannelRef(affinityKey);
+            selectedChannelIndices.push(channelReference.channelId);
+            return channelReference;
+          });
+
+        try {
+          await database.runTransactionAsync(async transaction => {
+            await transaction.run(selectSql);
+            await transaction.run(selectSql);
+            await transaction.commit();
+          });
+
+          const uniqueChannels = new Set(selectedChannelIndices);
+          assert.strictEqual(
+            uniqueChannels.size,
+            1,
+            'Expected all statements in read-write transaction to stick to the same channel',
+          );
+        } finally {
+          getChannelRefStub.restore();
+        }
+      });
+
+      it('should keep table.read pinned to the same channel as snapshot.begin', async () => {
+        const fields = [
+          protobuf.StructType.Field.create({
+            name: 'C1',
+            type: protobuf.Type.create({code: protobuf.TypeCode.STRING}),
+          }),
+        ];
+        const metadata = new protobuf.ResultSetMetadata({
+          rowType: new protobuf.StructType({
+            fields,
+          }),
+        });
+        const results: PartialResultSet[] = [
+          PartialResultSet.create({
+            metadata,
+            values: [{stringValue: 'V1'}],
+          }),
+        ];
+        const request = {
+          table: 'TestTable',
+          columns: ['C1'],
+          keySet: {
+            keys: [],
+            all: true,
+            ranges: [],
+          },
+        };
+        spannerMock.putReadRequestResult(
+          request,
+          mock.ReadRequestResult.resultSet(results),
+        );
+
+        const database = newTestDatabase();
+        await database.run(selectSql);
+
+        const channelFactory = await getGcpChannelFactory(spanner);
+        const selectedChannelIndices: number[] = [];
+        const originalGetChannelRef =
+          channelFactory.getChannelRef.bind(channelFactory);
+        const getChannelRefStub = sandbox
+          .stub(channelFactory, 'getChannelRef')
+          .callsFake(affinityKey => {
+            const channelReference = originalGetChannelRef(affinityKey);
+            selectedChannelIndices.push(channelReference.channelId);
+            return channelReference;
+          });
+
+        try {
+          const table = database.table('TestTable');
+          const [rows] = await table.read({columns: ['C1']});
+          assert.strictEqual(rows.length, 1);
+
+          const uniqueChannels = new Set(selectedChannelIndices);
+          assert.strictEqual(
+            uniqueChannels.size,
+            1,
+            'Expected table.read (which uses database.getSnapshot) to stick to the same channel',
+          );
+        } finally {
+          getChannelRefStub.restore();
+        }
+      });
+
+      it('should propagate errors on single-use queries cleanly through transformed channel pipeline', async () => {
+        const database = newTestDatabase();
+        const invalidSql = 'SELECT * FROM NonExistentTable';
+        const error = new Error('Table not found: NonExistentTable');
+        (error as grpc.ServiceError).code = grpc.status.NOT_FOUND;
+        spannerMock.putStatementResult(
+          invalidSql,
+          mock.StatementResult.error(error as grpc.ServiceError),
+        );
+
+        await assert.rejects(
+          database.run(invalidSql),
+          /Table not found: NonExistentTable/,
+        );
+      });
+
       it('should execute the transaction(database.getSnapshot) successfully using multiplexed session', done => {
         const database = newTestDatabase();
         const pool = (database.sessionFactory_ as SessionFactory)
@@ -2181,6 +2510,46 @@ describe('Spanner with mock server', () => {
           assert.strictEqual(resp.length, 3);
           done();
         });
+      });
+
+      it('should distribute single-use queries across multiple gRPC channels when using regular sessions', async () => {
+        const database = newTestDatabase();
+        await database.run(selectSql);
+
+        const channelFactory = await getGcpChannelFactory(spanner);
+        while (channelFactory.channelRefs.length < channelFactory.maxSize) {
+          channelFactory.addChannel();
+        }
+        assert.strictEqual(channelFactory.channelRefs.length, 10);
+
+        const selectedChannelIndices: number[] = [];
+        const originalGetChannelRef =
+          channelFactory.getChannelRef.bind(channelFactory);
+        const getChannelRefStub = sandbox
+          .stub(channelFactory, 'getChannelRef')
+          .callsFake(affinityKey => {
+            const channelReference = originalGetChannelRef(affinityKey);
+            selectedChannelIndices.push(channelReference.channelId);
+            return channelReference;
+          });
+
+        try {
+          const queryCount = 5;
+          const promises: Promise<RunResponse>[] = [];
+          for (let i = 0; i < queryCount; i++) {
+            promises.push(database.run(selectSql));
+          }
+          await Promise.all(promises);
+
+          const uniqueChannels = new Set(selectedChannelIndices);
+          assert.strictEqual(
+            uniqueChannels.size > 1,
+            true,
+            `Expected ${queryCount} queries on regular sessions to distribute across channels, but got ${Array.from(uniqueChannels)}`,
+          );
+        } finally {
+          getChannelRefStub.restore();
+        }
       });
 
       it('should execute the transaction(database.getSnapshot) successfully using regular session', done => {

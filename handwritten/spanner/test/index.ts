@@ -39,6 +39,10 @@ import {
 } from '../src';
 import {Duplex} from 'stream';
 import {CLOUD_RESOURCE_HEADER, AFE_SERVER_TIMING_HEADER} from '../src/common';
+import {
+  spannerCallInvocationTransformer,
+  spannerChannelFactoryOverride,
+} from '../src/channel-factory';
 import {MetricsTracerFactory} from '../src/metrics/metrics-tracer-factory';
 import IsolationLevel = protos.google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = protos.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
@@ -176,7 +180,6 @@ class FakeInstanceConfig {
 }
 
 describe('Spanner', () => {
-  // tslint:disable-next-line variable-name
   let Spanner: typeof spnr.Spanner;
   let spanner: spnr.Spanner;
   let sandbox: sinon.SinonSandbox;
@@ -184,6 +187,8 @@ describe('Spanner', () => {
   const OPTIONS = {
     projectId: 'project-id',
   };
+
+  let EXPECTED_OPTIONS;
 
   before(() => {
     Spanner = proxyquire('../src', {
@@ -203,6 +208,19 @@ describe('Spanner', () => {
       './instance-config.js': {InstanceConfig: FakeInstanceConfig},
       './v1': fakeV1,
     }).Spanner;
+
+    EXPECTED_OPTIONS = Object.assign({}, OPTIONS, {
+      libName: 'gccl',
+      libVersion: require('../../package.json').version,
+      scopes: [],
+      grpc,
+      'grpc.keepalive_time_ms': 120000,
+      'grpc.callInvocationTransformer': spannerCallInvocationTransformer,
+      'grpc.channelFactoryOverride': spannerChannelFactoryOverride,
+      'grpc.gcpApiConfig': {
+        calledWith_: apiConfig,
+      },
+    });
   });
 
   beforeEach(async () => {
@@ -224,20 +242,6 @@ describe('Spanner', () => {
   afterEach(() => sandbox.restore());
 
   describe('instantiation', () => {
-    const EXPECTED_OPTIONS = Object.assign({}, OPTIONS, {
-      libName: 'gccl',
-      libVersion: require('../../package.json').version,
-      scopes: [],
-      grpc,
-      'grpc.keepalive_time_ms': 120000,
-      'grpc.callInvocationTransformer':
-        fakeGrpcGcp().gcpCallInvocationTransformer,
-      'grpc.channelFactoryOverride': fakeGrpcGcp().gcpChannelFactoryOverride,
-      'grpc.gcpApiConfig': {
-        calledWith_: apiConfig,
-      },
-    });
-
     it('should localize a cached gapic client map', () => {
       assert(spanner.clients_ instanceof Map);
       assert.strictEqual(spanner.clients_.size, 0);
