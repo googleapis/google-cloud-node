@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/datalabeling-v6.0.0...datalabeling-v6.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/datalabeling-v5.1.2...datalabeling-v6.0.0) (2026-08-04)
 
 

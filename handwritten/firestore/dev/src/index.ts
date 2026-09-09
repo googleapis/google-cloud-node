@@ -617,8 +617,6 @@ export class Firestore implements firestore.Firestore {
       MAX_CONCURRENT_REQUESTS_PER_CLIENT,
       maxIdleChannels,
       /* clientFactory= */ (requiresGrpc: boolean) => {
-        let client: GapicClient;
-
         // Use the rest fallback if enabled and if the method does not require GRPC
         const useFallback =
           !this._settings.preferRest || requiresGrpc ? false : 'rest';
@@ -661,8 +659,10 @@ export class Firestore implements firestore.Firestore {
           }
         }
 
-        const v1Client = (module.exports.v1 && module.exports.v1.FirestoreClient) || module.exports.v1;
-        client = new v1Client(settings, gax);
+        const v1Client =
+          (module.exports.v1 && module.exports.v1.FirestoreClient) ||
+          module.exports.v1;
+        const client = new v1Client(settings, gax);
 
         logger(
           'clientFactory',
@@ -1473,8 +1473,9 @@ export class Firestore implements firestore.Firestore {
    * ```
    */
   recursiveDelete(
-    ref: // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    | firestore.CollectionReference<any, any>
+    ref:
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      | firestore.CollectionReference<any, any>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       | firestore.DocumentReference<any, any>,
     bulkWriter?: BulkWriter,
@@ -2035,7 +2036,7 @@ Object.defineProperty(module.exports, 'v1beta1', {
   get: () => {
     if (!cachedV1beta1) {
       const api = require('@google-cloud/firestore-api').v1beta1;
-      const fn = function(this: any, ...args: any[]) {
+      const fn = function (this: any, ...args: any[]): any {
         return new (api.FirestoreClient as any)(...args);
       };
       cachedV1beta1 = Object.assign(fn, api);
@@ -2060,7 +2061,7 @@ Object.defineProperty(module.exports, 'v1', {
   get: () => {
     if (!cachedV1) {
       const api = require('@google-cloud/firestore-api').v1;
-      const fn = function(this: any, ...args: any[]) {
+      const fn = function (this: any, ...args: any[]): any {
         return new (api.FirestoreClient as any)(...args);
       };
       cachedV1 = Object.assign(fn, api);
@@ -2068,7 +2069,6 @@ Object.defineProperty(module.exports, 'v1', {
     return cachedV1;
   },
 });
-
 
 /**
  * {@link Status} factory function.
