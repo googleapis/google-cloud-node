@@ -225,26 +225,15 @@ describe('TracerHelper', () => {
       assert.strictEqual(spans[0].ended, true);
     });
 
-    it('does not manage promise lifecycle if result does not inherit from Promise', async () => {
-      const customThenable = {
-        then(onfulfilled?: (val: unknown) => void) {
-          if (onfulfilled) {
-            onfulfilled('custom-result');
-          }
-        },
-      };
+    it('ends span synchronously if result is not a Promise', () => {
+      const syncResult = {data: 'sync-data'};
 
-      const result = traceAttempt(
-        dynamicArgs,
-        staticArgs,
-        () => customThenable,
-      );
-      assert.strictEqual(result, customThenable);
+      const result = traceAttempt(dynamicArgs, staticArgs, () => syncResult);
+      assert.strictEqual(result, syncResult);
 
-      await new Promise(resolve => setTimeout(resolve, 20));
-      // Span is not ended because result is not an instanceof Promise
       const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 0);
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
     });
 
     it('does not end span prematurely until asynchronous promise rejects', async () => {
@@ -346,7 +335,7 @@ describe('TracerHelper', () => {
       assert.strictEqual(spans[0].ended, true);
     });
 
-    it('does not manage stream lifecycle if isStreamCall is true but result is not an EventEmitter', () => {
+    it('ends span synchronously if isStreamCall is true but result is not an EventEmitter', () => {
       const nonEmitter = {data: 'not-an-emitter'};
       const result = traceAttempt(
         dynamicArgs,
@@ -357,7 +346,8 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(result, nonEmitter);
       const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 0);
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
     });
   });
 
