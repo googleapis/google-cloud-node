@@ -366,6 +366,51 @@ export function replaceProjectIdToken(value: any, projectId: string): any {
 }
 
 /**
+ * Checks whether an input value contains the `{{projectId}}` placeholder.
+ *
+ * @param {*} value - The value to inspect.
+ * @return {boolean} - `true` if any placeholder is found, otherwise `false`.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function hasProjectIdToken(value: any): boolean {
+  if (typeof value === 'string') {
+    return value.includes(PROJECT_ID_TOKEN);
+  }
+
+  if (
+    value === null ||
+    typeof value !== 'object' ||
+    value instanceof Buffer ||
+    value instanceof Stream ||
+    isDate(value)
+  ) {
+    return false;
+  }
+
+  if (Array.isArray(value)) {
+    for (let i = 0; i < value.length; i++) {
+      if (hasProjectIdToken(value[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  for (const key in value) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      if (!KEYS_TO_SCAN.has(key)) {
+        continue;
+      }
+      if (hasProjectIdToken(value[key])) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+/**
  * Custom error type for missing project ID errors.
  */
 class MissingProjectIdError extends Error {
