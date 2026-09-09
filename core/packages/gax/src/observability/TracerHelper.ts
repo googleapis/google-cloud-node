@@ -15,9 +15,7 @@
  */
 
 import {EventEmitter} from 'events';
-import {Span, trace, Tracer} from '@opentelemetry/api';
-import { CancellableStream } from '../apitypes';
-import { CancellablePromise } from '../call';
+import { Span, trace, Tracer } from '@opentelemetry/api';
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -146,13 +144,13 @@ export function handleStream(
 export function traceAttempt<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => CancellableStream,
+  fn: () => T,
   isStreamCall: true,
 ): T;
 export function traceAttempt<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
-  fn: () => CancellablePromise<T>,
+  fn: () => T,
   isStreamCall?: false,
 ): T;
 export function traceAttempt(
