@@ -181,10 +181,10 @@ export function createApiCall(
   if (tracingEnabled) {
     const staticArgs: StaticTraceContext = {
       gcpClientService:
-        settings.otherArgs?.internalTelemetryInfo.gcpClientService,
-      gcpVersion: settings.otherArgs?.internalTelemetryInfo.gcpVersion,
-      gcpRepo: settings.otherArgs?.internalTelemetryInfo.gcpRepo,
-      gcpArtifact: settings.otherArgs?.internalTelemetryInfo.gcpArtifact,
+        settings.otherArgs.internalTelemetryInfo?.gcpClientService,
+      gcpVersion: settings.otherArgs.internalTelemetryInfo?.gcpVersion,
+      gcpRepo: settings.otherArgs.internalTelemetryInfo?.gcpRepo,
+      gcpArtifact: settings.otherArgs.internalTelemetryInfo?.gcpArtifact,
     };
 
     const serviceName = settings.apiName?.split('.').pop() ?? '';
