@@ -5,7 +5,7 @@
   "core/dev-packages/pack-n-play": "5.1.0",
   "core/generator/gapic-generator-typescript": "5.2.0",
   "core/packages/gapic-node-processing": "0.2.2",
-  "core/packages/gax": "6.2.0",
+  "core/packages/gax": "6.3.0",
   "core/packages/gaxios": "8.0.0",
   "core/packages/gcp-metadata": "9.0.3",
   "core/packages/google-auth-library-nodejs": "11.0.2",

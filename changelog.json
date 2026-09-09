@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "65450ab4e7f9f1f17e1566ac30b8846bc38e0dd9",
+          "message": "Attach internalMethodName to otherArgs in constructSettings",
+          "issues": [
+            "9266"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "9763a229-272f-44b0-9ed6-092707122009",
+      "createTime": "2026-09-09T14:19:19.821Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
           "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
           "issues": []
