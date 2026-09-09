@@ -253,6 +253,7 @@ describe('grpc-fallback', () => {
     const metadataBuilder = settings.echo.otherArgs.metadataBuilder;
     const headers = metadataBuilder();
     assert(headers['x-goog-api-client'][0].match('grpc-web/'));
+    assert.strictEqual(settings.echo.otherArgs.internalMethodName, undefined);
   });
 
   it('constructSettings should accept enableTelemetryTracing and internalTelemetryInfo', () => {
@@ -288,6 +289,7 @@ describe('grpc-fallback', () => {
       settings.echo.otherArgs.internalTelemetryInfo,
       telemetryInfo,
     );
+    assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
   });
 
   it('should make a request', async () => {
