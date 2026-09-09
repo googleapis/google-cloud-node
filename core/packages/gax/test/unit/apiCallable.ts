@@ -27,6 +27,7 @@ import {StreamType} from '../../src/streamingCalls/streaming';
 import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {OtelHarness} from './otelHarness';
+import * as tracerHelper from '../../src/observability/TracerHelper';
 import {StaticTraceContext} from '../../src/observability/TracerHelper';
 import * as utils from './utils';
 import * as retries from '../../src/normalCalls/retries';
@@ -356,23 +357,138 @@ describe('createApiCall', () => {
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
     });
 
-    it('creates an api call when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED and CallSettings field is set', () => {
+    it('calls traceAttempt with dynamicArgs, staticArgs, and isStreamingCall when tracing is enabled', async () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-      const mockCallOptions: gax.CallOptions = {
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: {
-            gcpClientService: 'test.googleapis.com',
-          },
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
         },
-      };
-      const apiCall = createApiCall(() => {}, {settings: mockCallOptions});
-      assert.strictEqual(typeof apiCall, 'function');
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({param: 'test'}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [dynamicArgs, staticArgs, fn, isStreamingCall] =
+        traceAttemptSpy.firstCall.args;
+
+      assert.deepStrictEqual(dynamicArgs, {
+        clientName: 'EchoClient',
+        methodName: 'Echo',
+        rpcType: 'grpc',
+      });
+      assert.deepStrictEqual(staticArgs, telemetryInfo);
+      assert.strictEqual(typeof fn, 'function');
+      assert.strictEqual(isStreamingCall, false);
     });
 
-    it('creates an api call when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set', () => {
-      const apiCall = createApiCall(() => {});
-      assert.strictEqual(typeof apiCall, 'function');
+    it('passes isStreamingCall as true to traceAttempt for streaming calls when tracing is enabled', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const spy = sinon.spy(() => {
+        const s = new PassThrough({objectMode: true});
+        s.push(null);
+        return Object.assign(s, {cancel: () => {}});
+      });
+
+      const apiCall = realCreateApiCall(
+        spy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      void apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [, , , isStreamingCall] = traceAttemptSpy.firstCall.args;
+      assert.strictEqual(isStreamingCall, true);
+    });
+
+    it('gracefully handles missing apiName and internalMethodName when tracing is enabled', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [dynamicArgs] = traceAttemptSpy.firstCall.args;
+      assert.deepStrictEqual(dynamicArgs, {
+        clientName: '',
+        methodName: '',
+        rpcType: 'grpc',
+      });
+    });
+
+    it('returns invokeCall directly without calling traceAttempt when tracing is disabled', async () => {
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: false,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.called, false);
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
     });
 
     it('correctly pipes telemetry information into the active span for gRPC calls', async () => {
