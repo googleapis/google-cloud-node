@@ -122,6 +122,22 @@ export interface Row extends Array<Field> {
 }
 
 /**
+ * Row implementation extending Array to provide a shared, non-enumerable
+ * toJSON method without per-row closures or Object.setPrototypeOf overhead.
+ */
+class RowImpl extends Array<Field> implements Row {
+  toJSON(options?: JSONOptions): Json {
+    return codec.convertFieldsToJson(this, options);
+  }
+}
+Object.defineProperty(RowImpl.prototype, 'constructor', {
+  value: Array,
+  writable: true,
+  configurable: true,
+  enumerable: false,
+});
+
+/**
  * @callback PartialResultStream~rowCallback
  * @param {Row|object} row The row data.
  */
@@ -463,7 +479,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
    */
   private _createRow(values: Value[]): Row {
     const len = values.length;
-    const fields = new Array(len);
+    const fields = new RowImpl(len);
     const decoders = this._decoders;
     const classFields = this._fields;
 
@@ -474,13 +490,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
       };
     }
 
-    Object.defineProperty(fields, 'toJSON', {
-      value: (options?: JSONOptions): Json => {
-        return codec.convertFieldsToJson(fields, options);
-      },
-    });
-
-    return fields as Row;
+    return fields;
   }
   /**
    * Attempts to merge chunked values together.

@@ -200,6 +200,45 @@ describe('PartialResultStream', () => {
       stream.write(RESULT);
     });
 
+    it('should create rows with shared prototype and non-enumerable toJSON', done => {
+      const rows: prs.Row[] = [];
+      stream.on('error', done).on('data', row => {
+        rows.push(row);
+        if (rows.length === 2) {
+          try {
+            const [row1, row2] = rows;
+            assert.strictEqual(Array.isArray(row1), true);
+            assert.strictEqual(row1 instanceof Array, true);
+            assert.strictEqual(row1.constructor, Array);
+            assert.strictEqual(Array.isArray(row2), true);
+            assert.strictEqual(row2 instanceof Array, true);
+            assert.strictEqual(row2.constructor, Array);
+
+            // toJSON must be non-enumerable
+            assert.strictEqual(Object.keys(row1).includes('toJSON'), false);
+            assert.strictEqual(
+              Object.prototype.propertyIsEnumerable.call(row1, 'toJSON'),
+              false,
+            );
+
+            // toJSON must be shared on the prototype, not created as a per-row closure
+            assert.strictEqual(row1.toJSON, row2.toJSON);
+
+            // toJSON should correctly serialize the row
+            const json1 = row1.toJSON();
+            const expectedJson = codec.convertFieldsToJson(row1);
+            assert.deepStrictEqual(json1, expectedJson);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        }
+      });
+
+      stream.write(RESULT);
+      stream.write({values: [convertToIValue(VALUE)]});
+    });
+
     it('should emit rows as JSON', done => {
       const jsonOptions = {};
       const stream = new PartialResultStream({json: true, jsonOptions});
