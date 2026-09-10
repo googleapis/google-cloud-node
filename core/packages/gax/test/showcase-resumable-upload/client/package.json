@@ -1,0 +1,28 @@
+{
+  "name": "showcase-resumable-upload-client",
+  "version": "0.1.0",
+  "description": "Generated client for the gapic-showcase ResumableUploadService, used by the showcase resumable upload test harness.",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "main": "build/src/index.js",
+  "files": [
+    "build/src",
+    "build/protos"
+  ],
+  "scripts": {
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile-protos && npm run compile"
+  },
+  "dependencies": {
+    "google-gax": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.12",
+    "gapic-tools": "^2.0.0",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
