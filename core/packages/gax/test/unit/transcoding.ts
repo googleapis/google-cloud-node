@@ -382,7 +382,7 @@ describe('gRPC to HTTP transcoding', () => {
     assert.strictEqual(encodeWithSlashes(unreserved), unreserved);
 
     // Reserved and special characters: should be percent encoded, including !\'()*
-    const specialChars = "!\'()*";
+    const specialChars = "!'()*";
     const encoded = encodeWithSlashes(specialChars);
     // ! -> %21, ' -> %27, ( -> %28, ) -> %29, * -> %2A
     assert.strictEqual(encoded, '%21%27%28%29%2A');
@@ -440,7 +440,7 @@ describe('gRPC to HTTP transcoding', () => {
       applyPattern(
         'projects/*/locations/*/agents/*/sessions/**',
         'projects/p/locations/l/agents/a/sessions/agents/../subagent',
-        'session'
+        'session',
       );
     }, /Value for session must not contain segments that are exactly \. or \.\./);
   });
@@ -450,7 +450,7 @@ describe('gRPC to HTTP transcoding', () => {
       applyPattern(
         'projects/*/locations/*/agents/*/sessions/**',
         'projects/p/locations/l/agents/a/sessions/agents/./subagent',
-        'session'
+        'session',
       );
     }, /Value for session must not contain segments that are exactly \. or \.\./);
   });
@@ -459,9 +459,12 @@ describe('gRPC to HTTP transcoding', () => {
     const res = applyPattern(
       'projects/*/locations/*/agents/*/sessions/**',
       'projects/p/locations/l/agents/a/sessions/..?$foo=BAR#',
-      'session'
+      'session',
     );
-    assert.strictEqual(res, 'projects/p/locations/l/agents/a/sessions/..%3F%24foo%3DBAR%23');
+    assert.strictEqual(
+      res,
+      'projects/p/locations/l/agents/a/sessions/..%3F%24foo%3DBAR%23',
+    );
   });
 
   it('applyPattern should handle optional unmatched groups gracefully without throwing TypeErrors', () => {
