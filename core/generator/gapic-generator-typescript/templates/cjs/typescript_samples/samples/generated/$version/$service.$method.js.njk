@@ -41,8 +41,7 @@ function main({%- for comment in filteredComments -%}
   {{ "\n" }}
   // Imports the {{ api.naming.productName }} library
   const { {{- service.name.toPascalCase() }}Client} = require('{{ api.publishName }}').{{ api.naming.version }};
-{% if method.resumableUpload %}
-{% endif %}
+
   // Instantiates a client
   const {{ (api.naming.productName).toCamelCase() }}Client = new {{ service.name.toPascalCase() }}Client();
 
