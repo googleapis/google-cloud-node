@@ -23,4 +23,4 @@ dist/
 *.tgz
 **/*.tgz
 test/showcase-echo-client/protos/protos.*
-test/showcase-resumable-upload/client/protos/protos.*
+test/showcase-resumable-upload/fixtures/protos/protos.*

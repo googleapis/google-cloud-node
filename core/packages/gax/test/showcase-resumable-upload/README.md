@@ -3,10 +3,14 @@
 This directory contains a small end-to-end example of the resumable upload
 support added in the `scotty-1` work:
 
-* `client/` — a generated `ResumableUploadServiceClient` for the real
+* `fixtures/` — a generated `ResumableUploadServiceClient` for the real
   [gapic-showcase](https://github.com/googleapis/gapic-showcase)
   `ResumableUploadService`, produced by the generator in this repo with
-  `--resumable_upload_methods=ResumableUploadService.UploadMedia`.
+  `--resumable_upload_methods=ResumableUploadService.UploadMedia`. It is a
+  fixture rather than client source, so it lives under `fixtures/` and keeps
+  its `tsconfig.client.json`: the monorepo presubmit linter skips both, since
+  the generated client needs the resumable upload APIs from this checkout and
+  protos that only `run.sh` compiles.
 * `sample.js` — example code using `client.uploadMedia()`,
   `client.getResumableSource()`, and `session.start()`.
 * `run.sh` — downloads/starts a gapic-showcase server, builds the local
