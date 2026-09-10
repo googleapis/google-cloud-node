@@ -16,7 +16,14 @@
 
 /* This file describes the gRPC-streaming. */
 
-import {Duplex, DuplexOptions, Readable, Stream, Writable} from 'stream';
+import {
+  Duplex,
+  DuplexOptions,
+  Readable,
+  Stream,
+  Writable,
+  PassThrough,
+} from 'stream';
 
 import {
   APICallback,
@@ -24,6 +31,7 @@ import {
   GRPCCallResult,
   RequestType,
   SimpleCallbackFunction,
+  ResponseType,
 } from '../apitypes';
 import {
   RetryOptions,
@@ -32,8 +40,6 @@ import {
 } from '../gax';
 import {GoogleError} from '../googleError';
 import {Status} from '../status';
-import {PassThrough} from 'stream';
-import {ResponseType} from '../apitypes';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const duplexify: DuplexifyConstructor = require('duplexify');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
