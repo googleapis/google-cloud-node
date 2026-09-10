@@ -725,7 +725,10 @@ export class ResumableUploadSession {
 
   private async runTransmission(sessionUrl: string): Promise<void> {
     try {
-      let buffer = Buffer.alloc(0);
+      // Annotated rather than inferred: Buffer.alloc() narrows to
+      // Buffer<ArrayBuffer>, while the remainder returned by readNextChunk()
+      // and skipBytes() is the wider Buffer<ArrayBufferLike>.
+      let buffer: Buffer = Buffer.alloc(0);
       let offset = this.committedBytes_;
       let previousChunk: Buffer | null = null;
       let response: {} | null = null;
