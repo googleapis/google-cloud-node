@@ -52,7 +52,7 @@ export const DEFAULT_PER_REQUEST_TIMEOUT_MS = 60 * 1000;
 export const DEFAULT_STALL_TIMEOUT_MS = 15 * 1000;
 // Assumed sustained upload throughput, in bytes per millisecond, used to
 // scale the global deadline when `uploadSize` is provided (~5 MB/s).
-const DEFAULT_UPLOAD_RATE_BYTES_PER_MS = 5 * 1024 * 1024;
+const DEFAULT_UPLOAD_RATE_BYTES_PER_MS = (5 * 1024 * 1024) / 1000;
 
 // Resumable upload protocol headers.
 const UPLOAD_PROTOCOL_HEADER = 'x-goog-upload-protocol';
