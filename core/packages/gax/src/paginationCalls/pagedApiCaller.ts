@@ -21,8 +21,8 @@ import {
   SimpleCallbackFunction,
   UnaryCall,
   RequestType,
+  APICallback,
 } from '../apitypes';
-import {APICallback} from '../apitypes';
 import {OngoingCall, OngoingCallPromise} from '../call';
 import {CallOptions} from '../gax';
 import {GoogleError} from '../googleError';

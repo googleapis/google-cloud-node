@@ -35,10 +35,7 @@ export interface GRPCCallResult {
 // when it might be useful for users.
 export interface RequestType {
   [index: string]:
-    | string
-    | number
-    | RequestType
-    | Array<string | number | RequestType>;
+    string | number | RequestType | Array<string | number | RequestType>;
 }
 export type ResponseType = {} | null;
 export type NextPageRequestType = {
@@ -85,10 +82,7 @@ export type BiDiStreamingCall = (
   options: {},
 ) => Duplex & GRPCCallResult;
 export type GRPCCall =
-  | UnaryCall
-  | ServerStreamingCall
-  | ClientStreamingCall
-  | BiDiStreamingCall;
+  UnaryCall | ServerStreamingCall | ClientStreamingCall | BiDiStreamingCall;
 
 // GAX wraps gRPC calls so that the wrapper functions return either a
 // cancellable promise, or a stream (also cancellable!)
