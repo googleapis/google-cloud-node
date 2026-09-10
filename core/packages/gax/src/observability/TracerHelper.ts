@@ -70,6 +70,45 @@ export function getGaxTracer(): Tracer {
 }
 
 /**
+ * Checks if a value behaves like a Promise or Thenable.
+ *
+ * Note: It is not sufficient to check `result instanceof Promise` because:
+ * 1. Custom classes implementing `CancellablePromise` or Thenables may not
+ *    inherit directly from the native JavaScript `Promise` prototype.
+ * 2. GAX callers or custom callers may return objects such as `OngoingCallPromise`
+ *    that hold the actual promise on a `.promise` property.
+ * 3. Promises originating from different execution realms (such as Node.js vm
+ *    contexts or different package bundles) fail `instanceof Promise` checks.
+ */
+function isPromiseLike<T = unknown>(value: unknown): value is PromiseLike<T> {
+  return (
+    value instanceof Promise ||
+    (value !== null &&
+      (typeof value === 'object' || typeof value === 'function') &&
+      typeof (value as {then?: unknown}).then === 'function')
+  );
+}
+
+/**
+ * Extracts a PromiseLike target from a value, supporting native Promises,
+ * custom Thenables, classes implementing CancellablePromise, and OngoingCallPromise wrappers.
+ */
+function getPromiseTarget<T = unknown>(value: unknown): PromiseLike<T> | null {
+  if (isPromiseLike<T>(value)) {
+    return value;
+  }
+  if (
+    value !== null &&
+    (typeof value === 'object' || typeof value === 'function') &&
+    'promise' in (value as object) &&
+    isPromiseLike<T>((value as {promise?: unknown}).promise)
+  ) {
+    return (value as {promise: PromiseLike<T>}).promise;
+  }
+  return null;
+}
+
+/**
  * Manages span lifecycle for Promise-based operations.
  *
  * @template T
@@ -82,14 +121,25 @@ export function handlePromise<T>(
   recordError: (err: unknown) => void,
   endSpan: () => void,
 ): void {
-  Promise.resolve(promise)
-    .then(() => {
+  let spanEnded = false;
+  const endSpanOnce = () => {
+    if (!spanEnded) {
+      spanEnded = true;
       endSpan();
+    }
+  };
+
+  const target = getPromiseTarget(promise) ?? promise;
+  Promise.resolve(target)
+    .then(() => {
+      endSpanOnce();
       return null;
     })
     .catch(err => {
-      recordError(err);
-      endSpan();
+      if (!spanEnded) {
+        recordError(err);
+        endSpanOnce();
+      }
     });
 }
 
@@ -105,26 +155,35 @@ export function handleStream(
   recordError: (err: unknown) => void,
   endSpan: () => void,
 ): void {
+  let spanEnded = false;
+
   const cleanup = () => {
     stream.removeListener('error', onError);
     stream.removeListener('end', onEnd);
     stream.removeListener('close', onClose);
   };
 
+  const endSpanOnce = () => {
+    if (!spanEnded) {
+      spanEnded = true;
+      cleanup();
+      endSpan();
+    }
+  };
+
   const onError = (err: unknown) => {
-    cleanup();
-    recordError(err);
-    endSpan();
+    if (!spanEnded) {
+      recordError(err);
+      endSpanOnce();
+    }
   };
 
   const onEnd = () => {
-    cleanup();
-    endSpan();
+    endSpanOnce();
   };
 
   const onClose = () => {
-    cleanup();
-    endSpan();
+    endSpanOnce();
   };
 
   stream.on('error', onError);
@@ -207,10 +266,14 @@ export function traceAttempt(
 
     try {
       const result = fn();
+      // Use getPromiseTarget instead of `result instanceof Promise` to ensure custom
+      // thenables, CancellablePromise implementations, and OngoingCallPromise wrappers
+      // are properly tracked rather than leaving spans unclosed or ending them prematurely.
+      const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
       if (isStreamCall && result instanceof EventEmitter) {
         handleStream(result, recordError, endSpan);
-      } else if (!isStreamCall && result instanceof Promise) {
-        handlePromise(result, recordError, endSpan);
+      } else if (promiseTarget) {
+        handlePromise(promiseTarget, recordError, endSpan);
       } else {
         endSpan();
       }
