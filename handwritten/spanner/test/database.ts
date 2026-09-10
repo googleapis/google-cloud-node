@@ -3254,16 +3254,7 @@ describe('Database', () => {
       });
     });
 
-    let restoreProcessListeners: (() => void) | null = null;
-
-    afterEach(() => {
-      if (restoreProcessListeners) {
-        restoreProcessListeners();
-        restoreProcessListeners = null;
-      }
-    });
-
-    it('should not treat an error in release as a transaction runner failure', done => {
+    it('should emit an error on database when session release fails after successful run', done => {
       const releaseError = new Error('release failed');
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
@@ -3275,31 +3266,64 @@ describe('Database', () => {
 
       const runFunction = sandbox.spy();
 
-      const originalListeners = process.listeners('uncaughtException');
-      process.removeAllListeners('uncaughtException');
-      restoreProcessListeners = () => {
-        process.removeAllListeners('uncaughtException');
-        for (const listener of originalListeners) {
-          process.on('uncaughtException', listener);
-        }
-      };
-
-      process.once('uncaughtException', (error: Error) => {
-        if (restoreProcessListeners) {
-          restoreProcessListeners();
-          restoreProcessListeners = null;
-        }
+      database.on('error', error => {
         try {
           assert.strictEqual(error, releaseError);
           assert.strictEqual(releaseStub.callCount, 1);
           sinon.assert.notCalled(runFunction);
           done();
-        } catch (err) {
-          done(err);
+        } catch (assertionError) {
+          done(assertionError);
         }
       });
 
       database.runTransaction(runFunction);
+    });
+
+    it('should emit an error on database when session release fails after runner failure', done => {
+      const runnerError = new Error('transaction failed');
+      const releaseError = new Error('release failed');
+      const releaseStub = (
+        sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
+      )
+        .withArgs(SESSION)
+        .throws(releaseError);
+
+      sandbox.stub(FakeTransactionRunner.prototype, 'run').rejects(runnerError);
+
+      let databaseErrorReceived = false;
+      let runnerCallbackReceived = false;
+
+      const checkBoth = () => {
+        if (databaseErrorReceived && runnerCallbackReceived) {
+          try {
+            assert.strictEqual(releaseStub.callCount, 1);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        }
+      };
+
+      database.on('error', error => {
+        try {
+          assert.strictEqual(error, releaseError);
+          databaseErrorReceived = true;
+          checkBoth();
+        } catch (assertionError) {
+          done(assertionError);
+        }
+      });
+
+      database.runTransaction(error => {
+        try {
+          assert.strictEqual(error, runnerError);
+          runnerCallbackReceived = true;
+          checkBoth();
+        } catch (assertionError) {
+          done(assertionError);
+        }
+      });
     });
   });
 

@@ -3428,9 +3428,9 @@ class Database extends common.GrpcServiceObject {
         },
       )
       .catch(err => {
-        process.nextTick(() => {
-          throw err;
-        });
+        setSpanErrorAndException(span, err as Error);
+        span.end();
+        this.emit('error', err);
       });
   }
 
