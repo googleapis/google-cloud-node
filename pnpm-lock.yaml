@@ -1984,8 +1984,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.6
       tmp:
-        specifier: 0.2.6
-        version: 0.2.6
+        specifier: 0.2.7
+        version: 0.2.7
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -2232,6 +2232,9 @@ importers:
       '@googleapis/cloudtrace':
         specifier: ^3.0.1
         version: 3.0.1
+      '@js-temporal/polyfill':
+        specifier: ^0.5.1
+        version: 0.5.1
       '@opentelemetry/context-async-hooks':
         specifier: ^2.0.1
         version: 2.10.0(@opentelemetry/api@1.9.1)
@@ -2972,15 +2975,9 @@ importers:
       big.js:
         specifier: ^7.0.0
         version: 7.0.1
-      checkpoint-stream:
-        specifier: ^0.1.2
-        version: 0.1.2
       duplexify:
         specifier: ^4.1.3
         version: 4.1.3
-      events-intercept:
-        specifier: ^2.0.0
-        version: 2.0.0
       extend:
         specifier: ^3.0.2
         version: 3.0.2
@@ -2996,9 +2993,6 @@ importers:
       lodash.snakecase:
         specifier: ^4.1.1
         version: 4.1.1
-      merge-stream:
-        specifier: ^2.0.0
-        version: 2.0.0
       p-queue:
         specifier: ^6.0.2
         version: 6.6.2
@@ -3008,9 +3002,6 @@ importers:
       retry-request:
         specifier: ^8.0.0
         version: 8.0.3
-      split-array-stream:
-        specifier: ^2.0.0
-        version: 2.0.0
       stack-trace:
         specifier: 0.0.10
         version: 0.0.10
@@ -3048,9 +3039,6 @@ importers:
       '@types/lodash.snakecase':
         specifier: ^4.1.9
         version: 4.1.9
-      '@types/merge-stream':
-        specifier: ^2.0.0
-        version: 2.0.0
       '@types/mocha':
         specifier: ^10.0.10
         version: 10.0.10
@@ -4747,6 +4735,55 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
+
+  packages/google-cloud-apptopology:
+    dependencies:
+      google-gax:
+        specifier: ^5.0.0
+        version: 5.0.6
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.18.12
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^20.0.0
+        version: 20.0.0
+      c8:
+        specifier: ^10.1.3
+        version: 10.1.3
+      gapic-tools:
+        specifier: ^1.0.3
+        version: 1.1.0(protobufjs@7.6.5)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.8.3)
+      jsdoc:
+        specifier: ^4.0.5
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^5.0.2
+        version: 5.0.4
+      jsdoc-region-tag:
+        specifier: ^4.0.1
+        version: 4.0.1
+      long:
+        specifier: ^5.3.2
+        version: 5.3.2
+      mocha:
+        specifier: ^11.7.4
+        version: 11.8.0
+      pack-n-play:
+        specifier: ^4.2.1
+        version: 4.2.1
+      sinon:
+        specifier: ^20.0.0
+        version: 20.0.0
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
 
   packages/google-cloud-asset:
     dependencies:
@@ -14945,6 +14982,55 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  packages/google-shopping-merchant-loyaltycustomers:
+    dependencies:
+      google-gax:
+        specifier: ^5.0.0
+        version: 5.0.6
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.18.12
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^20.0.0
+        version: 20.0.0
+      c8:
+        specifier: ^10.1.3
+        version: 10.1.3
+      gapic-tools:
+        specifier: ^1.0.3
+        version: 1.1.0(protobufjs@7.6.5)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.8.3)
+      jsdoc:
+        specifier: ^4.0.5
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^5.0.2
+        version: 5.0.4
+      jsdoc-region-tag:
+        specifier: ^4.0.1
+        version: 4.0.1
+      long:
+        specifier: ^5.3.2
+        version: 5.3.2
+      mocha:
+        specifier: ^11.7.4
+        version: 11.8.0
+      pack-n-play:
+        specifier: ^4.2.1
+        version: 4.2.1
+      sinon:
+        specifier: ^20.0.0
+        version: 20.0.0
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+
   packages/google-shopping-merchant-notifications:
     dependencies:
       google-gax:
@@ -16666,6 +16752,10 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
+  '@js-temporal/polyfill@0.5.1':
+    resolution: {integrity: sha512-hloP58zRVCRSpgDxmqCWJNlizAlUgJFqG2ypq79DCvyv9tHjRYMDOcPFjzfl/A1/YxDvRCZz8wvZvmapQnKwFQ==}
+    engines: {node: '>=12'}
+
   '@jsdoc/salty@0.2.12':
     resolution: {integrity: sha512-TuB0x50EoAvEX/UEWITd8Mkn3WhiTjSvbTMCLj0BhsQEl5iUzjXdA0bETEVpTk+5TGTLR6QktI9H4hLviVeaAQ==}
     engines: {node: '>=v12.0.0'}
@@ -17544,9 +17634,6 @@ packages:
 
   '@types/mdurl@2.0.0':
     resolution: {integrity: sha512-RGdgjQUZba5p6QEFAVx2OGb8rQDL/cPRG7GiedRzMcJ1tYnUANBncjbSB1NRGwbvjcPeikRABz2nshyPk1bhWg==}
-
-  '@types/merge-stream@2.0.0':
-    resolution: {integrity: sha512-tGBsvypku7sAw6RAkpPDgFKZOGIALHM7P+NJt79monj2OrKhlfyvstNofMPLzi2CQ+rsecV3+/hYfXDnktrA5Q==}
 
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
@@ -21298,6 +21385,9 @@ packages:
 
   js2xmlparser@4.0.2:
     resolution: {integrity: sha512-6n4D8gLlLf1n5mNLQPRfViYzu9RATblzPEtm1SthMX1Pjao0r9YI9nw7ZIfRxQMERS87mcswrg+r/OYrPRX6jA==}
+
+  jsbi@4.3.2:
+    resolution: {integrity: sha512-9fqMSQbhJykSeii05nxKl4m6Eqn2P6rOlYiS+C5Dr/HPIU/7yZxu5qzbs40tgaFORiw2Amd0mirjxatXYMkIew==}
 
   jsbn@0.1.1:
     resolution: {integrity: sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==}
@@ -26516,6 +26606,10 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
+  '@js-temporal/polyfill@0.5.1':
+    dependencies:
+      jsbi: 4.3.2
+
   '@jsdoc/salty@0.2.12':
     dependencies:
       lodash: 4.18.1
@@ -27598,10 +27692,6 @@ snapshots:
       '@types/mdurl': 2.0.0
 
   '@types/mdurl@2.0.0': {}
-
-  '@types/merge-stream@2.0.0':
-    dependencies:
-      '@types/node': 22.20.1
 
   '@types/mime@1.3.5': {}
 
@@ -32606,6 +32696,8 @@ snapshots:
   js2xmlparser@4.0.2:
     dependencies:
       xmlcreate: 2.0.4
+
+  jsbi@4.3.2: {}
 
   jsbn@0.1.1: {}
 
