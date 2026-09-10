@@ -41,7 +41,8 @@ function main({%- for comment in filteredComments -%}
   {{ "\n" }}
   // Imports the {{ api.naming.productName }} library
   const { {{- service.name.toPascalCase() }}Client} = require('{{ api.publishName }}').{{ api.naming.version }};
-
+{% if method.resumableUpload %}
+{% endif %}
   // Instantiates a client
   const {{ (api.naming.productName).toCamelCase() }}Client = new {{ service.name.toPascalCase() }}Client();
 
@@ -93,6 +94,14 @@ function main({%- for comment in filteredComments -%}
     const stream = await {{ (api.naming.productName).toCamelCase() }}Client.{{ method.name.toCamelCase() }}((response) => console.log(response));
     stream.write(request);
     stream.end();
+  }
+{% elif method.resumableUpload %}
+    // Run request
+    const session = await {{ (api.naming.productName).toCamelCase() }}Client.{{ method.name.toCamelCase() }}(request);
+    const uploadSource = {{ (api.naming.productName).toCamelCase() }}Client.getResumableSource('/path/to/file');
+    await session.start({uploadSource});
+    const response = await session.finished();
+    console.log(response);
   }
 {% else %}
     // Run request
