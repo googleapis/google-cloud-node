@@ -10,7 +10,7 @@
     "build/protos"
   ],
   "scripts": {
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p tsconfig.client.json && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile-protos && npm run compile"
   },
