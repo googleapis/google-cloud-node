@@ -67,6 +67,19 @@ The following steps will regenerate new Echo and Sequence clients from the lates
 1. Once you have verified that nothing is broken, commit these changes and make a PR from the `regenerate-showcase-client` branch in your fork to the main gax-nodejs repo.
 
 
+## [showcase-resumable-upload](./showcase-resumable-upload/)
+### About
+A small end-to-end harness for the resumable upload API. It downloads the
+[gapic-showcase](https://github.com/googleapis/gapic-showcase) server, compiles
+the checked-in generated client for the showcase `ResumableUploadService`, and runs
+[`sample.js`](./showcase-resumable-upload/sample.js) against it:
+
+```sh
+./test/showcase-resumable-upload/run.sh
+```
+
+See the [harness README](./showcase-resumable-upload/README.md) for details.
+
 #### Update the showcase server
 See [showcase server maintenance info](#maintenance-2) for more details. 
 
