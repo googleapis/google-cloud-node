@@ -480,6 +480,81 @@ describe('TracerHelper', () => {
       assert.strictEqual(spans.length, 1);
       assert.strictEqual(spans[0].ended, true);
     });
+
+    it('correctly creates separate spans and cleans up listeners across retried stream attempts', () => {
+      const attempt1Stream = new EventEmitter();
+      const attempt2Stream = new EventEmitter();
+      const retryableError = new Error('transient stream failure');
+
+      let attempt = 0;
+      const executeStreamingCall = () => {
+        attempt++;
+        const currentStream = attempt === 1 ? attempt1Stream : attempt2Stream;
+        return traceAttempt(dynamicArgs, staticArgs, () => currentStream, true);
+      };
+
+      // Attempt 1
+      const stream1 = executeStreamingCall();
+      assert.strictEqual(stream1, attempt1Stream);
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Attempt 1 fails with transient error
+      attempt1Stream.emit('error', retryableError);
+
+      const spansAfterAttempt1 = harness.getSpans('google-gax');
+      assert.strictEqual(spansAfterAttempt1.length, 1);
+      assert.strictEqual(spansAfterAttempt1[0].ended, true);
+      assert.strictEqual(
+        spansAfterAttempt1[0].attributes['error.message'],
+        'transient stream failure',
+      );
+      assert.strictEqual(spansAfterAttempt1[0].events.length, 1);
+      assert.strictEqual(attempt1Stream.listenerCount('error'), 0);
+
+      // Attempt 2 (retry)
+      const stream2 = executeStreamingCall();
+      assert.strictEqual(stream2, attempt2Stream);
+      assert.strictEqual(harness.getSpans('google-gax').length, 1);
+
+      // Data chunks received on attempt 2
+      attempt2Stream.emit('data', 'retry chunk 1');
+      assert.strictEqual(harness.getSpans('google-gax').length, 1);
+
+      // Attempt 2 completes successfully
+      attempt2Stream.emit('end');
+
+      const spansAfterAttempt2 = harness.getSpans('google-gax');
+      assert.strictEqual(spansAfterAttempt2.length, 2);
+      assert.strictEqual(spansAfterAttempt2[1].ended, true);
+      assert.strictEqual(spansAfterAttempt2[1].events.length, 0);
+      assert.strictEqual(attempt2Stream.listenerCount('end'), 0);
+    });
+
+    it('keeps span active when a stream handles retries internally before completing', () => {
+      const outerStream = new EventEmitter();
+      const result = traceAttempt(
+        dynamicArgs,
+        staticArgs,
+        () => outerStream,
+        true,
+      );
+      assert.strictEqual(result, outerStream);
+
+      // Initial chunk before internal retry
+      outerStream.emit('data', 'chunk-before-retry');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Internal retry transparently recovers and delivers more data
+      outerStream.emit('data', 'chunk-after-retry');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Final completion
+      outerStream.emit('end');
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans[0].events.length, 0);
+    });
   });
 
   describe('handlePromise', () => {
@@ -738,6 +813,37 @@ describe('TracerHelper', () => {
       assert.strictEqual(emitter.listenerCount('end'), 0);
       assert.strictEqual(emitter.listenerCount('close'), 0);
       assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('does not remove other error or event listeners (such as retry handlers) on cleanup', () => {
+      let ended = false;
+      let otherErrorHandled = false;
+      const error = new Error('retryable error');
+      const emitter = new EventEmitter();
+
+      // Simulate an external retry handler or middleware attached to the stream
+      emitter.on('error', err => {
+        assert.strictEqual(err, error);
+        otherErrorHandled = true;
+      });
+
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+
+      // Verify two error listeners are present (external retry listener and handleStream listener)
+      assert.strictEqual(emitter.listenerCount('error'), 2);
+
+      emitter.emit('error', error);
+
+      assert.strictEqual(ended, true);
+      assert.strictEqual(otherErrorHandled, true);
+      // handleStream removed its own listener, but the external retry listener is preserved
+      assert.strictEqual(emitter.listenerCount('error'), 1);
     });
   });
 });
