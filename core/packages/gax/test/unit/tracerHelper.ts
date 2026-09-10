@@ -30,6 +30,7 @@ import {
   CancellableStream,
   ResultTuple,
 } from '../../src/apitypes';
+import {OngoingCallPromise} from '../../src/call';
 import {OtelHarness} from './otelHarness';
 
 describe('TracerHelper', () => {
@@ -228,6 +229,94 @@ describe('TracerHelper', () => {
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
       assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports custom thenables implementing CancellablePromise without inheriting from Promise', async () => {
+      class CustomCancellablePromise {
+        private readonly promise: Promise<string>;
+        constructor(executor: (resolve: (val: string) => void) => void) {
+          this.promise = new Promise(executor);
+        }
+        cancel(): void {}
+        then<TResult1 = string, TResult2 = never>(
+          onfulfilled?:
+            ((value: string) => TResult1 | PromiseLike<TResult1>) | null,
+          onrejected?:
+            ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null,
+        ): Promise<TResult1 | TResult2> {
+          return this.promise.then(onfulfilled, onrejected);
+        }
+        catch<TResult = never>(
+          onrejected?:
+            ((reason: unknown) => TResult | PromiseLike<TResult>) | null,
+        ): Promise<string | TResult> {
+          return this.promise.catch(onrejected);
+        }
+      }
+
+      let resolvePromise: (val: string) => void;
+      const customPromise = new CustomCancellablePromise(resolve => {
+        resolvePromise = resolve;
+      });
+
+      // Verify it is NOT an instance of native Promise
+      assert.strictEqual(customPromise instanceof Promise, false);
+
+      const result = traceAttempt(dynamicArgs, staticArgs, () => customPromise);
+      assert.strictEqual(result, customPromise);
+
+      // Verify the span is NOT closed while the custom promise is pending
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      resolvePromise!('custom-success');
+      await new Promise(resolve => setTimeout(resolve, 20));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports OngoingCallPromise objects whose promise property resolves', async () => {
+      const ongoingCall = new OngoingCallPromise();
+      assert.strictEqual(ongoingCall instanceof Promise, false);
+
+      const result = traceAttempt(dynamicArgs, staticArgs, () => ongoingCall);
+      assert.strictEqual(result, ongoingCall);
+
+      // Verify the span is NOT closed while ongoingCall is in flight
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Complete the call via callback
+      ongoingCall.callback!(null, {data: 'result'});
+      await new Promise(resolve => setTimeout(resolve, 20));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports OngoingCallPromise objects whose promise property rejects', async () => {
+      const ongoingCall = new OngoingCallPromise();
+      assert.strictEqual(ongoingCall instanceof Promise, false);
+
+      const error = new Error('ongoing call failed');
+      const result = traceAttempt(dynamicArgs, staticArgs, () => ongoingCall);
+      assert.strictEqual(result, ongoingCall);
+
+      // Verify the span is NOT closed while ongoingCall is in flight
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Fail the call via callback
+      ongoingCall.callback!(error);
+      await new Promise(resolve => setTimeout(resolve, 20));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(
+        spans[0].attributes['error.message'],
+        'ongoing call failed',
+      );
     });
 
     it('ends span synchronously if result is not a Promise', () => {
@@ -457,6 +546,48 @@ describe('TracerHelper', () => {
       await new Promise(resolve => setTimeout(resolve, 20));
       assert.strictEqual(ended, true);
     });
+
+    it('supports OngoingCallPromise wrappers in handlePromise', async () => {
+      let ended = false;
+      const ongoingCall = new OngoingCallPromise();
+
+      handlePromise(
+        ongoingCall,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+      assert.strictEqual(ended, false);
+
+      ongoingCall.callback!(null, {data: 'hello'});
+      await new Promise(resolve => setTimeout(resolve, 20));
+      assert.strictEqual(ended, true);
+    });
+
+    it('ensures endSpan is called only once even with thenables that trigger both resolve and reject', async () => {
+      let endSpanCount = 0;
+      const buggyThenable = {
+        then(
+          onfulfilled?: (val?: unknown) => unknown,
+          onrejected?: (err: unknown) => unknown,
+        ) {
+          onfulfilled?.();
+          onrejected?.(new Error('buggy error'));
+        },
+      };
+
+      handlePromise(
+        buggyThenable,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      await new Promise(resolve => setTimeout(resolve, 20));
+      assert.strictEqual(endSpanCount, 1);
+    });
   });
 
   describe('handleStream', () => {
@@ -533,6 +664,77 @@ describe('TracerHelper', () => {
       assert.strictEqual(ended, true);
       assert.strictEqual(recordedError, error);
       assert.deepStrictEqual(order, ['recordError', 'endSpan']);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('ensures endSpan is called only once if stream emits error followed by close', () => {
+      let endSpanCount = 0;
+      let recordedError: unknown;
+      const error = new Error('stream error');
+      const emitter = new EventEmitter();
+
+      handleStream(
+        emitter,
+        err => {
+          recordedError = err;
+        },
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      assert.strictEqual(endSpanCount, 0);
+      emitter.emit('error', error);
+      emitter.emit('close');
+
+      assert.strictEqual(endSpanCount, 1);
+      assert.strictEqual(recordedError, error);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('ensures endSpan is called only once if stream emits end followed by close', () => {
+      let endSpanCount = 0;
+      const emitter = new EventEmitter();
+
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      assert.strictEqual(endSpanCount, 0);
+      emitter.emit('end');
+      emitter.emit('close');
+
+      assert.strictEqual(endSpanCount, 1);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('ensures endSpan is called only once if stream emits close followed by end', () => {
+      let endSpanCount = 0;
+      const emitter = new EventEmitter();
+
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      assert.strictEqual(endSpanCount, 0);
+      emitter.emit('close');
+      emitter.emit('end');
+
+      assert.strictEqual(endSpanCount, 1);
       assert.strictEqual(emitter.listenerCount('end'), 0);
       assert.strictEqual(emitter.listenerCount('close'), 0);
       assert.strictEqual(emitter.listenerCount('error'), 0);
