@@ -13,14 +13,14 @@
 // limitations under the License.
 
 // Runs a resumable upload against the gapic-showcase ResumableUploadService
-// using the generated client in ./client.
+// using the generated client in ./fixtures.
 
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
 const {GoogleAuth, googleAuthLibrary} = require('google-gax');
-const {ResumableUploadServiceClient} = require('./client');
+const {ResumableUploadServiceClient} = require('./fixtures');
 
 async function main() {
   const filePath = process.env.UPLOAD_FILE;

@@ -25,7 +25,7 @@
 set -euo pipefail
 
 HARNESS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLIENT_DIR="$HARNESS_DIR/client"
+CLIENT_DIR="$HARNESS_DIR/fixtures"
 GAX_DIR="$(cd "$HARNESS_DIR/../.." && pwd)"
 REPO_ROOT="$(cd "$GAX_DIR/../../.." && pwd)"
 TOOLS_DIR="$REPO_ROOT/core/packages/tools"
@@ -48,7 +48,7 @@ fi
 
 echo "Compiling the generated showcase client"
 (cd "$CLIENT_DIR" && node "$TOOLS_DIR/build/src/compileProtos.js" src)
-(cd "$CLIENT_DIR" && "$GAX_DIR/node_modules/.bin/tsc" -p .)
+(cd "$CLIENT_DIR" && "$GAX_DIR/node_modules/.bin/tsc" -p tsconfig.client.json)
 (cd "$CLIENT_DIR" && cp -R protos build/)
 
 DOWNLOAD_DIR="${TMPDIR:-/tmp}/gapic-showcase-$SHOWCASE_VERSION"
