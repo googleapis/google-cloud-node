@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as artifactregistryModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -284,7 +284,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.artifactRegistryStub, undefined);
@@ -292,12 +292,12 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(client.artifactRegistryStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.artifactRegistryStub);
@@ -306,14 +306,14 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.artifactRegistryStub, undefined);
@@ -322,7 +322,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -330,7 +330,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -342,7 +342,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -365,7 +365,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('getRepository', () => {
     it('invokes getRepository without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getRepository without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getRepository with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getRepository with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRepository(request), expectedError);
@@ -497,7 +497,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('updateRepository', () => {
     it('invokes updateRepository without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateRepository without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateRepository with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateRepository with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.repository.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRepository(request), expectedError);
@@ -633,7 +633,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('getPackage', () => {
     it('invokes getPackage without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getPackage without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getPackage with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getPackage with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -755,7 +755,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPackage(request), expectedError);
@@ -765,7 +765,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('getVersion', () => {
     it('invokes getVersion without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getVersion without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getVersion with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getVersion with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVersion(request), expectedError);
@@ -897,7 +897,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('getFile', () => {
     it('invokes getFile without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getFile without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getFile with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getFile with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFile(request), expectedError);
@@ -1026,7 +1026,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('getTag', () => {
     it('invokes getTag without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1057,7 +1057,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getTag without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getTag with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getTag with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1145,7 +1145,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTag(request), expectedError);
@@ -1155,7 +1155,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('createTag', () => {
     it('invokes createTag without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1186,7 +1186,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes createTag without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1233,7 +1233,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes createTag with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,7 +1261,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes createTag with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1274,7 +1274,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTag(request), expectedError);
@@ -1284,7 +1284,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('updateTag', () => {
     it('invokes updateTag without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1316,7 +1316,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateTag without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateTag with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1393,7 +1393,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateTag with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.tag.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTag(request), expectedError);
@@ -1417,7 +1417,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('deleteTag', () => {
     it('invokes deleteTag without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteTag without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteTag with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1523,7 +1523,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteTag with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1536,7 +1536,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTag(request), expectedError);
@@ -1546,7 +1546,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1577,7 +1577,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1668,7 +1668,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1678,7 +1678,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1709,7 +1709,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1756,7 +1756,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1787,7 +1787,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1810,7 +1810,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1842,7 +1842,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1920,7 +1920,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1933,7 +1933,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1943,7 +1943,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('getProjectSettings', () => {
     it('invokes getProjectSettings without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1975,7 +1975,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getProjectSettings without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2022,7 +2022,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getProjectSettings with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,7 +2053,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes getProjectSettings with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProjectSettings(request), expectedError);
@@ -2076,7 +2076,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('updateProjectSettings', () => {
     it('invokes updateProjectSettings without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2109,7 +2109,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateProjectSettings without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2157,7 +2157,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateProjectSettings with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2192,7 +2192,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes updateProjectSettings with closed client', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2206,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.projectSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2219,7 +2219,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('importAptArtifacts', () => {
     it('invokes importAptArtifacts without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2252,7 +2252,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes importAptArtifacts without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2306,7 +2306,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes importAptArtifacts with call error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2337,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes importAptArtifacts with LRO error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2370,7 +2370,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkImportAptArtifactsProgress without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2378,8 +2378,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportAptArtifactsProgress(
@@ -2392,7 +2392,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkImportAptArtifactsProgress with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2413,7 +2413,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('importYumArtifacts', () => {
     it('invokes importYumArtifacts without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2446,7 +2446,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes importYumArtifacts without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2500,7 +2500,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes importYumArtifacts with call error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,7 +2531,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes importYumArtifacts with LRO error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2564,7 +2564,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkImportYumArtifactsProgress without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2572,8 +2572,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportYumArtifactsProgress(
@@ -2586,7 +2586,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkImportYumArtifactsProgress with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2607,7 +2607,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('createRepository', () => {
     it('invokes createRepository without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2640,7 +2640,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes createRepository without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2694,7 +2694,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes createRepository with call error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2725,7 +2725,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes createRepository with LRO error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2758,7 +2758,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkCreateRepositoryProgress without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2766,8 +2766,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRepositoryProgress(
@@ -2780,7 +2780,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkCreateRepositoryProgress with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2801,7 +2801,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('deleteRepository', () => {
     it('invokes deleteRepository without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2834,7 +2834,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteRepository without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,7 +2888,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteRepository with call error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2919,7 +2919,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteRepository with LRO error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2952,7 +2952,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkDeleteRepositoryProgress without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2960,8 +2960,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRepositoryProgress(
@@ -2974,7 +2974,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkDeleteRepositoryProgress with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2995,7 +2995,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('deletePackage', () => {
     it('invokes deletePackage without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3028,7 +3028,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deletePackage without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3082,7 +3082,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deletePackage with call error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3113,7 +3113,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deletePackage with LRO error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3146,7 +3146,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkDeletePackageProgress without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3154,8 +3154,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePackageProgress(
@@ -3168,7 +3168,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkDeletePackageProgress with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3189,7 +3189,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('deleteVersion', () => {
     it('invokes deleteVersion without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3222,7 +3222,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteVersion without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3276,7 +3276,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteVersion with call error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3307,7 +3307,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes deleteVersion with LRO error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3340,7 +3340,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkDeleteVersionProgress without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3348,8 +3348,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteVersionProgress(
@@ -3362,7 +3362,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes checkDeleteVersionProgress with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3383,7 +3383,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('listRepositories', () => {
     it('invokes listRepositories without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3422,7 +3422,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listRepositories without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3479,7 +3479,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listRepositories with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3510,7 +3510,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listRepositoriesStream without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3565,15 +3565,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRepositoriesStream with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3617,15 +3617,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRepositories without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3667,15 +3667,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRepositories with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3708,9 +3708,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3718,7 +3718,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('listPackages', () => {
     it('invokes listPackages without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3757,7 +3757,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listPackages without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3789,8 +3789,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devtools.artifactregistry.v1beta2.IPackage[]
-              | null,
+              protos.google.devtools.artifactregistry.v1beta2.IPackage[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3814,7 +3813,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listPackages with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3845,7 +3844,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listPackagesStream without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3900,15 +3899,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listPackages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPackagesStream with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3954,15 +3953,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listPackages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPackages without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4004,15 +4003,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listPackages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPackages with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4045,9 +4044,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listPackages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4055,7 +4054,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('listVersions', () => {
     it('invokes listVersions without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4094,7 +4093,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listVersions without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4126,8 +4125,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devtools.artifactregistry.v1beta2.IVersion[]
-              | null,
+              protos.google.devtools.artifactregistry.v1beta2.IVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4151,7 +4149,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listVersions with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4182,7 +4180,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listVersionsStream without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4237,15 +4235,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVersionsStream with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4291,15 +4289,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVersions without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4341,15 +4339,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVersions with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4382,9 +4380,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4392,7 +4390,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('listFiles', () => {
     it('invokes listFiles without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4431,7 +4429,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listFiles without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4463,8 +4461,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devtools.artifactregistry.v1beta2.IFile[]
-              | null,
+              protos.google.devtools.artifactregistry.v1beta2.IFile[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4488,7 +4485,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listFiles with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4516,7 +4513,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listFilesStream without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4569,15 +4566,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFilesStream with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4621,15 +4618,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFiles without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4670,15 +4667,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFiles with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4712,9 +4709,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4722,7 +4719,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('listTags', () => {
     it('invokes listTags without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4761,7 +4758,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listTags without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4793,8 +4790,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devtools.artifactregistry.v1beta2.ITag[]
-              | null,
+              protos.google.devtools.artifactregistry.v1beta2.ITag[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4818,7 +4814,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listTags with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4846,7 +4842,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
 
     it('invokes listTagsStream without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4899,15 +4895,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listTags.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTagsStream with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4951,15 +4947,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listTags.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTags without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5000,15 +4996,15 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listTags.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTags with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5042,16 +5038,16 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listTags.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5081,7 +5077,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5125,7 +5121,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5160,7 +5156,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5208,7 +5204,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5257,7 +5253,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         apt_artifact: 'aptArtifactValue',
       };
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5333,7 +5329,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         file: 'fileValue',
       };
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5406,7 +5402,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         project: 'projectValue',
       };
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5446,7 +5442,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         repository: 'repositoryValue',
       };
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5512,7 +5508,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         tag: 'tagValue',
       };
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5600,7 +5596,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         version: 'versionValue',
       };
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5687,7 +5683,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         yum_artifact: 'yumArtifactValue',
       };
       const client = new artifactregistryModule.v1beta2.ArtifactRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

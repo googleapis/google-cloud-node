@@ -4488,6 +4488,18 @@
                         }
                       }
                     },
+                    "AvroSchema": {
+                      "fields": {
+                        "jsonSchemas": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SchemaBundle": {
                       "options": {
                         "(google.api.resource).type": "bigtableadmin.googleapis.com/SchemaBundle",
@@ -4498,7 +4510,8 @@
                       "oneofs": {
                         "type": {
                           "oneof": [
-                            "protoSchema"
+                            "protoSchema",
+                            "avroSchema"
                           ]
                         }
                       },
@@ -4513,6 +4526,13 @@
                         "protoSchema": {
                           "type": "ProtoSchema",
                           "id": 2
+                        },
+                        "avroSchema": {
+                          "type": "AvroSchema",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "etag": {
                           "type": "string",

@@ -1,6 +1,20 @@
 # Changelog
 
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.1.1...gapic-generator-v5.2.0) (2026-09-03)
+
+
+### Features
+
+* **generator:** Add internalTelemetryInfo configuration to nunjucks templates ([#9174](https://github.com/googleapis/google-cloud-node/issues/9174)) ([9320305](https://github.com/googleapis/google-cloud-node/commit/932030548323f0181bb175b0519a6e77cbe64cad))
+
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.1.0...gapic-generator-v5.1.1) (2026-09-03)
+
+
+### Bug Fixes
+
+* **gapic-generator-typescript:** Update prettier formatting guidelines ([#9239](https://github.com/googleapis/google-cloud-node/issues/9239)) ([0725ed9](https://github.com/googleapis/google-cloud-node/commit/0725ed96195258b45de6b77f36a07d187f677fe3))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.0.1...gapic-generator-v5.1.0) (2026-08-21)
 
 

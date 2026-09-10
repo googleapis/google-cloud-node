@@ -20,14 +20,14 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as complianceModule from '../src/index.js';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -54,7 +54,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -140,7 +140,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.complianceStub, undefined);
@@ -148,12 +148,12 @@ describe('v1beta1.ComplianceClient', () => {
       assert(client.complianceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.complianceStub);
@@ -162,14 +162,14 @@ describe('v1beta1.ComplianceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.complianceStub, undefined);
@@ -178,7 +178,7 @@ describe('v1beta1.ComplianceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -186,7 +186,7 @@ describe('v1beta1.ComplianceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -198,7 +198,7 @@ describe('v1beta1.ComplianceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -221,7 +221,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('repeatDataBody', () => {
     it('invokes repeatDataBody without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -238,7 +238,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBody without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -271,7 +271,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBody with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -288,7 +288,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBody with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -296,7 +296,7 @@ describe('v1beta1.ComplianceClient', () => {
         new protos.google.showcase.v1beta1.RepeatRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.repeatDataBody(request), expectedError);
@@ -306,7 +306,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('repeatDataBodyInfo', () => {
     it('invokes repeatDataBodyInfo without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -324,7 +324,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyInfo without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -357,7 +357,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyInfo with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -374,7 +374,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyInfo with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -382,7 +382,7 @@ describe('v1beta1.ComplianceClient', () => {
         new protos.google.showcase.v1beta1.RepeatRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.repeatDataBodyInfo(request), expectedError);
@@ -392,7 +392,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('repeatDataQuery', () => {
     it('invokes repeatDataQuery without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataQuery without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataQuery with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataQuery with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1beta1.ComplianceClient', () => {
         new protos.google.showcase.v1beta1.RepeatRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.repeatDataQuery(request), expectedError);
@@ -477,7 +477,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('repeatDataSimplePath', () => {
     it('invokes repeatDataSimplePath without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataSimplePath without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataSimplePath with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataSimplePath with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1beta1.ComplianceClient', () => {
       );
       request.info.fKingdom = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.repeatDataSimplePath(request), expectedError);
@@ -710,7 +710,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('repeatDataPathResource', () => {
     it('invokes repeatDataPathResource without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataPathResource without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -817,7 +817,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataPathResource with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataPathResource with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -892,7 +892,7 @@ describe('v1beta1.ComplianceClient', () => {
       );
       request.info.fBool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -905,7 +905,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('repeatDataPathTrailingResource', () => {
     it('invokes repeatDataPathTrailingResource without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -945,7 +945,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataPathTrailingResource without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataPathTrailingResource with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataPathTrailingResource with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1beta1.ComplianceClient', () => {
       );
       request.info.fChild.fString = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1076,7 +1076,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('repeatDataBodyPut', () => {
     it('invokes repeatDataBodyPut without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyPut without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1126,7 +1126,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyPut with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyPut with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v1beta1.ComplianceClient', () => {
         new protos.google.showcase.v1beta1.RepeatRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.repeatDataBodyPut(request), expectedError);
@@ -1161,7 +1161,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('repeatDataBodyPatch', () => {
     it('invokes repeatDataBodyPatch without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,7 +1179,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyPatch without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1212,7 +1212,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyPatch with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes repeatDataBodyPatch with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1237,7 +1237,7 @@ describe('v1beta1.ComplianceClient', () => {
         new protos.google.showcase.v1beta1.RepeatRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.repeatDataBodyPatch(request), expectedError);
@@ -1247,7 +1247,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('getEnum', () => {
     it('invokes getEnum without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1264,7 +1264,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes getEnum without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1297,7 +1297,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes getEnum with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1311,7 +1311,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes getEnum with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1319,7 +1319,7 @@ describe('v1beta1.ComplianceClient', () => {
         new protos.google.showcase.v1beta1.EnumRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEnum(request), expectedError);
@@ -1329,7 +1329,7 @@ describe('v1beta1.ComplianceClient', () => {
   describe('verifyEnum', () => {
     it('invokes verifyEnum without error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1346,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes verifyEnum without error using callback', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes verifyEnum with error', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v1beta1.ComplianceClient', () => {
 
     it('invokes verifyEnum with closed client', async () => {
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1404,7 +1404,7 @@ describe('v1beta1.ComplianceClient', () => {
         new protos.google.showcase.v1beta1.EnumResponse(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.verifyEnum(request), expectedError);
@@ -1420,10 +1420,10 @@ describe('v1beta1.ComplianceClient', () => {
         blueprint: 'blueprintValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.blueprintPathTemplate.render = sinon
@@ -1484,10 +1484,10 @@ describe('v1beta1.ComplianceClient', () => {
         room: 'roomValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.roomPathTemplate.render = sinon
@@ -1525,10 +1525,10 @@ describe('v1beta1.ComplianceClient', () => {
         blurb: 'blurbValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.roomBlurbPathTemplate.render = sinon
@@ -1577,10 +1577,10 @@ describe('v1beta1.ComplianceClient', () => {
         blurb: 'blurbValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.render = sinon
@@ -1656,10 +1656,10 @@ describe('v1beta1.ComplianceClient', () => {
         sequence: 'sequenceValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.sequencePathTemplate.render = sinon
@@ -1696,10 +1696,10 @@ describe('v1beta1.ComplianceClient', () => {
         sequence: 'sequenceValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.sequenceReportPathTemplate.render = sinon
@@ -1736,10 +1736,10 @@ describe('v1beta1.ComplianceClient', () => {
         session: 'sessionValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.sessionPathTemplate.render = sinon
@@ -1777,10 +1777,10 @@ describe('v1beta1.ComplianceClient', () => {
         test: 'testValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.testPathTemplate.render = sinon
@@ -1827,10 +1827,10 @@ describe('v1beta1.ComplianceClient', () => {
         user: 'userValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.userPathTemplate.render = sinon
@@ -1868,10 +1868,10 @@ describe('v1beta1.ComplianceClient', () => {
         blurb: 'blurbValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.userProfileBlurbPathTemplate.render = sinon
@@ -1923,10 +1923,10 @@ describe('v1beta1.ComplianceClient', () => {
         blurb: 'blurbValue',
       };
       const client = new complianceModule.v1beta1.ComplianceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.render =

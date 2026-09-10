@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as contactserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.ContactServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.ContactServiceClient', () => {
       assert(client.contactServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new contactserviceModule.v1.ContactServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.contactServiceStub);
@@ -274,12 +274,12 @@ describe('v1.ContactServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new contactserviceModule.v1.ContactServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.ContactServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -455,7 +455,7 @@ describe('v1.ContactServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getContact(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.ContactServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createContact(request), expectedError);
@@ -720,7 +720,7 @@ describe('v1.ContactServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateContacts(request), expectedError);
@@ -856,7 +856,7 @@ describe('v1.ContactServiceClient', () => {
       );
       request.contact.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateContact(request), expectedError);
@@ -989,7 +989,7 @@ describe('v1.ContactServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateContacts(request), expectedError);
@@ -999,7 +999,7 @@ describe('v1.ContactServiceClient', () => {
   describe('listContacts', () => {
     it('invokes listContacts without error', async () => {
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1032,7 +1032,7 @@ describe('v1.ContactServiceClient', () => {
 
     it('invokes listContacts without error using callback', async () => {
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1081,7 +1081,7 @@ describe('v1.ContactServiceClient', () => {
 
     it('invokes listContacts with error', async () => {
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v1.ContactServiceClient', () => {
 
     it('invokes listContactsStream without error', async () => {
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1158,15 +1158,15 @@ describe('v1.ContactServiceClient', () => {
       assert(
         (client.descriptors.page.listContacts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listContactsStream with error', async () => {
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1209,9 +1209,9 @@ describe('v1.ContactServiceClient', () => {
       assert(
         (client.descriptors.page.listContacts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1252,15 +1252,15 @@ describe('v1.ContactServiceClient', () => {
       assert(
         (client.descriptors.page.listContacts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listContacts with error', async () => {
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1292,9 +1292,9 @@ describe('v1.ContactServiceClient', () => {
       assert(
         (client.descriptors.page.listContacts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1308,7 +1308,7 @@ describe('v1.ContactServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1.ContactServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v1.ContactServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1.ContactServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,7 +1539,7 @@ describe('v1.ContactServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1588,7 +1588,7 @@ describe('v1.ContactServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1640,7 +1640,7 @@ describe('v1.ContactServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1693,7 +1693,7 @@ describe('v1.ContactServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1746,7 +1746,7 @@ describe('v1.ContactServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1795,7 +1795,7 @@ describe('v1.ContactServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1848,7 +1848,7 @@ describe('v1.ContactServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1900,7 +1900,7 @@ describe('v1.ContactServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1953,7 +1953,7 @@ describe('v1.ContactServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2006,7 +2006,7 @@ describe('v1.ContactServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2063,7 +2063,7 @@ describe('v1.ContactServiceClient', () => {
         company: 'companyValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2112,7 +2112,7 @@ describe('v1.ContactServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2161,7 +2161,7 @@ describe('v1.ContactServiceClient', () => {
         content: 'contentValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2210,7 +2210,7 @@ describe('v1.ContactServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2262,7 +2262,7 @@ describe('v1.ContactServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2314,7 +2314,7 @@ describe('v1.ContactServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2363,7 +2363,7 @@ describe('v1.ContactServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2415,7 +2415,7 @@ describe('v1.ContactServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2472,7 +2472,7 @@ describe('v1.ContactServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v1.ContactServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2577,7 +2577,7 @@ describe('v1.ContactServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2640,7 +2640,7 @@ describe('v1.ContactServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2705,7 +2705,7 @@ describe('v1.ContactServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2770,7 +2770,7 @@ describe('v1.ContactServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2832,7 +2832,7 @@ describe('v1.ContactServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2879,7 +2879,7 @@ describe('v1.ContactServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2936,7 +2936,7 @@ describe('v1.ContactServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2989,7 +2989,7 @@ describe('v1.ContactServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3052,7 +3052,7 @@ describe('v1.ContactServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3117,7 +3117,7 @@ describe('v1.ContactServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3169,7 +3169,7 @@ describe('v1.ContactServiceClient', () => {
         label: 'labelValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3218,7 +3218,7 @@ describe('v1.ContactServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3267,7 +3267,7 @@ describe('v1.ContactServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3319,7 +3319,7 @@ describe('v1.ContactServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3371,7 +3371,7 @@ describe('v1.ContactServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3424,7 +3424,7 @@ describe('v1.ContactServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3476,7 +3476,7 @@ describe('v1.ContactServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3528,7 +3528,7 @@ describe('v1.ContactServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3593,7 +3593,7 @@ describe('v1.ContactServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3644,7 +3644,7 @@ describe('v1.ContactServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3683,7 +3683,7 @@ describe('v1.ContactServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3736,7 +3736,7 @@ describe('v1.ContactServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3801,7 +3801,7 @@ describe('v1.ContactServiceClient', () => {
         order: 'orderValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3850,7 +3850,7 @@ describe('v1.ContactServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3899,7 +3899,7 @@ describe('v1.ContactServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3951,7 +3951,7 @@ describe('v1.ContactServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4004,7 +4004,7 @@ describe('v1.ContactServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4067,7 +4067,7 @@ describe('v1.ContactServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4130,7 +4130,7 @@ describe('v1.ContactServiceClient', () => {
         report: 'reportValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4179,7 +4179,7 @@ describe('v1.ContactServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4242,7 +4242,7 @@ describe('v1.ContactServiceClient', () => {
         role: 'roleValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4291,7 +4291,7 @@ describe('v1.ContactServiceClient', () => {
         site: 'siteValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4340,7 +4340,7 @@ describe('v1.ContactServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4389,7 +4389,7 @@ describe('v1.ContactServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4442,7 +4442,7 @@ describe('v1.ContactServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4495,7 +4495,7 @@ describe('v1.ContactServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4552,7 +4552,7 @@ describe('v1.ContactServiceClient', () => {
         team: 'teamValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4601,7 +4601,7 @@ describe('v1.ContactServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4664,7 +4664,7 @@ describe('v1.ContactServiceClient', () => {
         user: 'userValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4713,7 +4713,7 @@ describe('v1.ContactServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4776,7 +4776,7 @@ describe('v1.ContactServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new contactserviceModule.v1.ContactServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

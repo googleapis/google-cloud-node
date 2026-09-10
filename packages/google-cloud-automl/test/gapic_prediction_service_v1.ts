@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as predictionserviceModule from '../src';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -168,7 +168,7 @@ describe('v1.PredictionServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new predictionserviceModule.v1.PredictionServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'automl.configured.example.com');
@@ -209,7 +209,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.predictionServiceStub, undefined);
@@ -217,12 +217,12 @@ describe('v1.PredictionServiceClient', () => {
       assert(client.predictionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.predictionServiceStub);
@@ -231,14 +231,14 @@ describe('v1.PredictionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.predictionServiceStub, undefined);
@@ -247,7 +247,7 @@ describe('v1.PredictionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -255,7 +255,7 @@ describe('v1.PredictionServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -267,7 +267,7 @@ describe('v1.PredictionServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -290,7 +290,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('predict', () => {
     it('invokes predict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -321,7 +321,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes predict without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -368,7 +368,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes predict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes predict with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.predict(request), expectedError);
@@ -419,7 +419,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('batchPredict', () => {
     it('invokes batchPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -451,7 +451,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes batchPredict without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -505,7 +505,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes batchPredict with call error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -536,7 +536,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes batchPredict with LRO error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes checkBatchPredictProgress without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,8 +577,8 @@ describe('v1.PredictionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchPredictProgress(
@@ -591,7 +591,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes checkBatchPredictProgress with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.PredictionServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v1.PredictionServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.PredictionServiceClient', () => {
         model: 'modelValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -821,7 +821,7 @@ describe('v1.PredictionServiceClient', () => {
         model_evaluation: 'modelEvaluationValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

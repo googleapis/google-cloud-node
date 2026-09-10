@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as webriskserviceModule from '../src';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -109,9 +109,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -231,7 +231,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.webRiskServiceStub, undefined);
@@ -239,12 +239,12 @@ describe('v1.WebRiskServiceClient', () => {
       assert(client.webRiskServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.webRiskServiceStub);
@@ -253,14 +253,14 @@ describe('v1.WebRiskServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.webRiskServiceStub, undefined);
@@ -269,7 +269,7 @@ describe('v1.WebRiskServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -277,7 +277,7 @@ describe('v1.WebRiskServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -289,7 +289,7 @@ describe('v1.WebRiskServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -312,7 +312,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('computeThreatListDiff', () => {
     it('invokes computeThreatListDiff without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -330,7 +330,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes computeThreatListDiff without error using callback', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -363,7 +363,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes computeThreatListDiff with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes computeThreatListDiff with closed client', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.WebRiskServiceClient', () => {
         new protos.google.cloud.webrisk.v1.ComputeThreatListDiffRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -404,7 +404,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('searchUris', () => {
     it('invokes searchUris without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -421,7 +421,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes searchUris without error using callback', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -454,7 +454,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes searchUris with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes searchUris with closed client', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.WebRiskServiceClient', () => {
         new protos.google.cloud.webrisk.v1.SearchUrisRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchUris(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('searchHashes', () => {
     it('invokes searchHashes without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -506,7 +506,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes searchHashes without error using callback', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -539,7 +539,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes searchHashes with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes searchHashes with closed client', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.WebRiskServiceClient', () => {
         new protos.google.cloud.webrisk.v1.SearchHashesRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchHashes(request), expectedError);
@@ -574,7 +574,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('createSubmission', () => {
     it('invokes createSubmission without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes createSubmission without error using callback', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes createSubmission with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -683,7 +683,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes createSubmission with closed client', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.WebRiskServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSubmission(request), expectedError);
@@ -706,7 +706,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('submitUri', () => {
     it('invokes submitUri without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes submitUri without error using callback', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -792,7 +792,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes submitUri with call error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -823,7 +823,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes submitUri with LRO error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes checkSubmitUriProgress without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,8 +864,8 @@ describe('v1.WebRiskServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSubmitUriProgress(
@@ -878,7 +878,7 @@ describe('v1.WebRiskServiceClient', () => {
 
     it('invokes checkSubmitUriProgress with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v1.WebRiskServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -944,7 +944,7 @@ describe('v1.WebRiskServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -954,7 +954,7 @@ describe('v1.WebRiskServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -978,7 +978,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1.WebRiskServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1028,7 +1028,7 @@ describe('v1.WebRiskServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1038,7 +1038,7 @@ describe('v1.WebRiskServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1062,7 +1062,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v1.WebRiskServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1112,7 +1112,7 @@ describe('v1.WebRiskServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1122,7 +1122,7 @@ describe('v1.WebRiskServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1146,7 +1146,7 @@ describe('v1.WebRiskServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1181,7 +1181,7 @@ describe('v1.WebRiskServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1215,7 +1215,7 @@ describe('v1.WebRiskServiceClient', () => {
         project: 'projectValue',
       };
       const client = new webriskserviceModule.v1.WebRiskServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

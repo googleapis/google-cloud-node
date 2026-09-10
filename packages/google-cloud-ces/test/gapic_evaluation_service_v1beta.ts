@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as evaluationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -204,7 +204,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'ces.example.com');
@@ -212,7 +212,7 @@ describe('v1beta.EvaluationServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'ces.example.com');
@@ -284,7 +284,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -293,14 +293,14 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(client.evaluationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.evaluationServiceStub);
@@ -309,15 +309,15 @@ describe('v1beta.EvaluationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -327,7 +327,7 @@ describe('v1beta.EvaluationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -336,7 +336,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -350,7 +350,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -375,7 +375,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes uploadEvaluationAudio without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -409,7 +409,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes uploadEvaluationAudio without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -458,7 +458,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes uploadEvaluationAudio with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -494,7 +494,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes uploadEvaluationAudio with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -508,7 +508,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -522,7 +522,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -555,7 +555,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -604,7 +604,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -637,7 +637,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluation with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -651,7 +651,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEvaluation(request), expectedError);
@@ -662,7 +662,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluationDataset without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -696,7 +696,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluationDataset without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -745,7 +745,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluationDataset with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -781,7 +781,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluationDataset with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -795,7 +795,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -809,7 +809,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -843,7 +843,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -893,7 +893,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -927,7 +927,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluation with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -942,7 +942,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.evaluation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEvaluation(request), expectedError);
@@ -953,7 +953,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluationDataset without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -988,7 +988,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluationDataset without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1038,7 +1038,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluationDataset with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1075,7 +1075,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluationDataset with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1090,7 +1090,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.evaluationDataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1104,7 +1104,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1137,7 +1137,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1186,7 +1186,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1219,7 +1219,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluation with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1233,7 +1233,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEvaluation(request), expectedError);
@@ -1244,7 +1244,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationResult without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1278,7 +1278,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationResult without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1327,7 +1327,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationResult with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1363,7 +1363,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationResult with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1377,7 +1377,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1391,7 +1391,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationDataset without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1425,7 +1425,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationDataset without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1474,7 +1474,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationDataset with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1510,7 +1510,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationDataset with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1524,7 +1524,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1538,7 +1538,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1571,7 +1571,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1620,7 +1620,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1653,7 +1653,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluation with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1667,7 +1667,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluation(request), expectedError);
@@ -1678,7 +1678,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationResult without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1712,7 +1712,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationResult without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1761,7 +1761,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationResult with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1794,7 +1794,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationResult with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1808,7 +1808,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluationResult(request), expectedError);
@@ -1819,7 +1819,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationDataset without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1853,7 +1853,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationDataset without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1902,7 +1902,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationDataset with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1935,7 +1935,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationDataset with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1949,7 +1949,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluationDataset(request), expectedError);
@@ -1960,7 +1960,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationRun without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1993,7 +1993,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationRun without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2042,7 +2042,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationRun with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2075,7 +2075,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationRun with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2089,7 +2089,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluationRun(request), expectedError);
@@ -2100,7 +2100,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationExpectation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2134,7 +2134,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationExpectation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2183,7 +2183,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationExpectation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2219,7 +2219,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getEvaluationExpectation with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2233,7 +2233,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2247,7 +2247,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluationExpectation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2281,7 +2281,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluationExpectation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2330,7 +2330,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluationExpectation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2366,7 +2366,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createEvaluationExpectation with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2380,7 +2380,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2394,7 +2394,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluationExpectation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2429,7 +2429,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluationExpectation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2479,7 +2479,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluationExpectation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2516,7 +2516,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateEvaluationExpectation with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2531,7 +2531,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.evaluationExpectation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2545,7 +2545,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationExpectation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2579,7 +2579,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationExpectation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2628,7 +2628,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationExpectation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2664,7 +2664,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationExpectation with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2678,7 +2678,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2692,7 +2692,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createScheduledEvaluationRun without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2726,7 +2726,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createScheduledEvaluationRun without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2775,7 +2775,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createScheduledEvaluationRun with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2811,7 +2811,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes createScheduledEvaluationRun with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2825,7 +2825,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2839,7 +2839,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getScheduledEvaluationRun without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2873,7 +2873,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getScheduledEvaluationRun without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2922,7 +2922,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getScheduledEvaluationRun with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2958,7 +2958,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getScheduledEvaluationRun with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2972,7 +2972,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2986,7 +2986,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateScheduledEvaluationRun without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3021,7 +3021,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateScheduledEvaluationRun without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3071,7 +3071,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateScheduledEvaluationRun with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3108,7 +3108,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes updateScheduledEvaluationRun with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3123,7 +3123,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.scheduledEvaluationRun.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3137,7 +3137,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteScheduledEvaluationRun without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3171,7 +3171,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteScheduledEvaluationRun without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3220,7 +3220,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteScheduledEvaluationRun with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3256,7 +3256,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteScheduledEvaluationRun with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3270,7 +3270,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3284,7 +3284,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes testPersonaVoice without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3317,7 +3317,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes testPersonaVoice without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3366,7 +3366,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes testPersonaVoice with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3399,7 +3399,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes testPersonaVoice with closed client', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3413,7 +3413,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       );
       request.app = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testPersonaVoice(request), expectedError);
@@ -3424,7 +3424,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes runEvaluation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3459,7 +3459,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes runEvaluation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3515,7 +3515,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes runEvaluation with call error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3548,7 +3548,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes runEvaluation with LRO error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3583,7 +3583,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkRunEvaluationProgress without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3592,8 +3592,8 @@ describe('v1beta.EvaluationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunEvaluationProgress(
@@ -3607,7 +3607,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkRunEvaluationProgress with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3630,7 +3630,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes generateEvaluation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3665,7 +3665,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes generateEvaluation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3721,7 +3721,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes generateEvaluation with call error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3754,7 +3754,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes generateEvaluation with LRO error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3789,7 +3789,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkGenerateEvaluationProgress without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3798,8 +3798,8 @@ describe('v1beta.EvaluationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkGenerateEvaluationProgress(
@@ -3813,7 +3813,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkGenerateEvaluationProgress with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3836,7 +3836,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes importEvaluations without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3871,7 +3871,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes importEvaluations without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3927,7 +3927,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes importEvaluations with call error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3960,7 +3960,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes importEvaluations with LRO error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3995,7 +3995,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkImportEvaluationsProgress without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4004,8 +4004,8 @@ describe('v1beta.EvaluationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportEvaluationsProgress(
@@ -4019,7 +4019,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkImportEvaluationsProgress with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4042,7 +4042,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationRun without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4077,7 +4077,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationRun without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4133,7 +4133,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationRun with call error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4166,7 +4166,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteEvaluationRun with LRO error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4201,7 +4201,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkDeleteEvaluationRunProgress without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4210,8 +4210,8 @@ describe('v1beta.EvaluationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEvaluationRunProgress(
@@ -4225,7 +4225,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkDeleteEvaluationRunProgress with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4248,7 +4248,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluations without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4283,7 +4283,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluations without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4339,7 +4339,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluations with call error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4372,7 +4372,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluations with LRO error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4407,7 +4407,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkExportEvaluationsProgress without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4416,8 +4416,8 @@ describe('v1beta.EvaluationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportEvaluationsProgress(
@@ -4431,7 +4431,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkExportEvaluationsProgress with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4454,7 +4454,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluationRuns without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4489,7 +4489,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluationRuns without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4545,7 +4545,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluationRuns with call error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4578,7 +4578,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluationRuns with LRO error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4613,7 +4613,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkExportEvaluationRunsProgress without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4622,8 +4622,8 @@ describe('v1beta.EvaluationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportEvaluationRunsProgress(
@@ -4637,7 +4637,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkExportEvaluationRunsProgress with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4660,7 +4660,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluationResults without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4695,7 +4695,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluationResults without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4751,7 +4751,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluationResults with call error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4787,7 +4787,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes exportEvaluationResults with LRO error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4822,7 +4822,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkExportEvaluationResultsProgress without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4831,8 +4831,8 @@ describe('v1beta.EvaluationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4847,7 +4847,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkExportEvaluationResultsProgress with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4870,7 +4870,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes runEvaluationResultMetrics without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4905,7 +4905,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes runEvaluationResultMetrics without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4961,7 +4961,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes runEvaluationResultMetrics with call error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4997,7 +4997,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes runEvaluationResultMetrics with LRO error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5032,7 +5032,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkRunEvaluationResultMetricsProgress without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5041,8 +5041,8 @@ describe('v1beta.EvaluationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5057,7 +5057,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes checkRunEvaluationResultMetricsProgress with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5080,7 +5080,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluations without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5115,7 +5115,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluations without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5166,7 +5166,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluations with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5199,7 +5199,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationsStream without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5246,16 +5246,16 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEvaluationsStream with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5297,16 +5297,16 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluations without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5342,16 +5342,16 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluations with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5384,9 +5384,9 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5395,7 +5395,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationResults without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5437,7 +5437,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationResults without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5494,7 +5494,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationResults with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5530,7 +5530,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationResultsStream without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5598,7 +5598,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationResultsStream with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5655,7 +5655,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listEvaluationResults without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5710,7 +5710,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listEvaluationResults with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5759,7 +5759,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationDatasets without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5801,7 +5801,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationDatasets without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5858,7 +5858,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationDatasets with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5894,7 +5894,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationDatasetsStream without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5963,7 +5963,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationDatasetsStream with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6021,7 +6021,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listEvaluationDatasets without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6076,7 +6076,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listEvaluationDatasets with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6125,7 +6125,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationRuns without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6167,7 +6167,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationRuns without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6224,7 +6224,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationRuns with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6257,7 +6257,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationRunsStream without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6310,16 +6310,16 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEvaluationRunsStream with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6361,16 +6361,16 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluationRuns without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6412,16 +6412,16 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluationRuns with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6454,9 +6454,9 @@ describe('v1beta.EvaluationServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6465,7 +6465,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationExpectations without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6507,7 +6507,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationExpectations without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6540,8 +6540,7 @@ describe('v1beta.EvaluationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.ces.v1beta.IEvaluationExpectation[]
-              | null,
+              protos.google.cloud.ces.v1beta.IEvaluationExpectation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6566,7 +6565,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationExpectations with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6602,7 +6601,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationExpectationsStream without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6671,7 +6670,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listEvaluationExpectationsStream with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6729,7 +6728,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listEvaluationExpectations without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6785,7 +6784,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listEvaluationExpectations with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6834,7 +6833,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listScheduledEvaluationRuns without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6876,7 +6875,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listScheduledEvaluationRuns without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6909,8 +6908,7 @@ describe('v1beta.EvaluationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.ces.v1beta.IScheduledEvaluationRun[]
-              | null,
+              protos.google.cloud.ces.v1beta.IScheduledEvaluationRun[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6935,7 +6933,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listScheduledEvaluationRuns with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6971,7 +6969,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listScheduledEvaluationRunsStream without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7043,7 +7041,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes listScheduledEvaluationRunsStream with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7104,7 +7102,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listScheduledEvaluationRuns without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7160,7 +7158,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listScheduledEvaluationRuns with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7208,7 +7206,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7240,7 +7238,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7286,7 +7284,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7323,7 +7321,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7373,7 +7371,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7416,7 +7414,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7439,7 +7437,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7468,7 +7466,7 @@ describe('v1beta.EvaluationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7479,7 +7477,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7505,7 +7503,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7529,7 +7527,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7558,7 +7556,7 @@ describe('v1beta.EvaluationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7569,7 +7567,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7595,7 +7593,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7619,7 +7617,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7648,7 +7646,7 @@ describe('v1beta.EvaluationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7659,7 +7657,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7685,7 +7683,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7722,7 +7720,7 @@ describe('v1beta.EvaluationServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7761,7 +7759,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7838,7 +7836,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7905,7 +7903,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7983,7 +7981,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8061,7 +8059,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8139,7 +8137,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8217,7 +8215,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8295,7 +8293,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8389,7 +8387,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8488,7 +8486,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8581,7 +8579,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8659,7 +8657,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8737,7 +8735,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8813,7 +8811,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8865,7 +8863,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8929,7 +8927,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8972,7 +8970,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9068,7 +9066,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9127,7 +9125,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9205,7 +9203,7 @@ describe('v1beta.EvaluationServiceClient', () => {
       };
       const client = new evaluationserviceModule.v1beta.EvaluationServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

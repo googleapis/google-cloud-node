@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { EdgeContainerClient } from '@google-cloud/edgecontainer';
+import {EdgeContainerClient} from '@google-cloud/edgecontainer';
 
 // check that the client class type name can be used
 function doStuffWithEdgeContainerClient(client: EdgeContainerClient) {

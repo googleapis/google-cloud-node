@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as configModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -249,7 +249,7 @@ describe('v1.ConfigClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configStub, undefined);
@@ -257,12 +257,12 @@ describe('v1.ConfigClient', () => {
       assert(client.configStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.configStub);
@@ -271,14 +271,14 @@ describe('v1.ConfigClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configStub, undefined);
@@ -287,7 +287,7 @@ describe('v1.ConfigClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -295,7 +295,7 @@ describe('v1.ConfigClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -307,7 +307,7 @@ describe('v1.ConfigClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -330,7 +330,7 @@ describe('v1.ConfigClient', () => {
   describe('getFramework', () => {
     it('invokes getFramework without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -361,7 +361,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getFramework without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -408,7 +408,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getFramework with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getFramework with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFramework(request), expectedError);
@@ -462,7 +462,7 @@ describe('v1.ConfigClient', () => {
   describe('createFramework', () => {
     it('invokes createFramework without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -493,7 +493,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createFramework without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -540,7 +540,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createFramework with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createFramework with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -584,7 +584,7 @@ describe('v1.ConfigClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFramework(request), expectedError);
@@ -594,7 +594,7 @@ describe('v1.ConfigClient', () => {
   describe('updateFramework', () => {
     it('invokes updateFramework without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -626,7 +626,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateFramework without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -674,7 +674,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateFramework with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateFramework with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -720,7 +720,7 @@ describe('v1.ConfigClient', () => {
       );
       request.framework.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFramework(request), expectedError);
@@ -730,7 +730,7 @@ describe('v1.ConfigClient', () => {
   describe('deleteFramework', () => {
     it('invokes deleteFramework without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -761,7 +761,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteFramework without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -808,7 +808,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteFramework with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteFramework with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -852,7 +852,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteFramework(request), expectedError);
@@ -862,7 +862,7 @@ describe('v1.ConfigClient', () => {
   describe('getCloudControl', () => {
     it('invokes getCloudControl without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -893,7 +893,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getCloudControl without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -940,7 +940,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getCloudControl with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getCloudControl with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -984,7 +984,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCloudControl(request), expectedError);
@@ -994,7 +994,7 @@ describe('v1.ConfigClient', () => {
   describe('createCloudControl', () => {
     it('invokes createCloudControl without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1026,7 +1026,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createCloudControl without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1073,7 +1073,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createCloudControl with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createCloudControl with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1117,7 +1117,7 @@ describe('v1.ConfigClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCloudControl(request), expectedError);
@@ -1127,7 +1127,7 @@ describe('v1.ConfigClient', () => {
   describe('updateCloudControl', () => {
     it('invokes updateCloudControl without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1160,7 +1160,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateCloudControl without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1208,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateCloudControl with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateCloudControl with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1.ConfigClient', () => {
       );
       request.cloudControl.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCloudControl(request), expectedError);
@@ -1264,7 +1264,7 @@ describe('v1.ConfigClient', () => {
   describe('deleteCloudControl', () => {
     it('invokes deleteCloudControl without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1296,7 +1296,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteCloudControl without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1343,7 +1343,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteCloudControl with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteCloudControl with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,7 +1387,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCloudControl(request), expectedError);
@@ -1397,7 +1397,7 @@ describe('v1.ConfigClient', () => {
   describe('listFrameworks', () => {
     it('invokes listFrameworks without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1436,7 +1436,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listFrameworks without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,7 +1493,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listFrameworks with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1524,7 +1524,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listFrameworksStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1579,15 +1579,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listFrameworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFrameworksStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1631,15 +1631,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listFrameworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFrameworks without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1681,15 +1681,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listFrameworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFrameworks with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1722,9 +1722,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listFrameworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1732,7 +1732,7 @@ describe('v1.ConfigClient', () => {
   describe('listCloudControls', () => {
     it('invokes listCloudControls without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1771,7 +1771,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listCloudControls without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1828,7 +1828,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listCloudControls with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1859,7 +1859,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listCloudControlsStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1914,15 +1914,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listCloudControls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCloudControlsStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1966,15 +1966,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listCloudControls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCloudControls without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2016,15 +2016,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listCloudControls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCloudControls with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2057,16 +2057,16 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listCloudControls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2096,7 +2096,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2175,7 +2175,7 @@ describe('v1.ConfigClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2223,7 +2223,7 @@ describe('v1.ConfigClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2271,7 +2271,7 @@ describe('v1.ConfigClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2352,7 +2352,7 @@ describe('v1.ConfigClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2459,7 +2459,7 @@ describe('v1.ConfigClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2547,7 +2547,7 @@ describe('v1.ConfigClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2632,7 +2632,7 @@ describe('v1.ConfigClient', () => {
         organization: 'organizationValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2671,7 +2671,7 @@ describe('v1.ConfigClient', () => {
         location: 'locationValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2736,7 +2736,7 @@ describe('v1.ConfigClient', () => {
         cloud_control_deployment: 'cloudControlDeploymentValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2823,7 +2823,7 @@ describe('v1.ConfigClient', () => {
         cloud_control: 'cloudControlValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2905,7 +2905,7 @@ describe('v1.ConfigClient', () => {
         location: 'locationValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2971,7 +2971,7 @@ describe('v1.ConfigClient', () => {
         control: 'controlValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3050,7 +3050,7 @@ describe('v1.ConfigClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3139,7 +3139,7 @@ describe('v1.ConfigClient', () => {
           'generateFrameworkAuditScopeReportResponseValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3230,7 +3230,7 @@ describe('v1.ConfigClient', () => {
         framework_audit: 'frameworkAuditValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3315,7 +3315,7 @@ describe('v1.ConfigClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3422,7 +3422,7 @@ describe('v1.ConfigClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3511,7 +3511,7 @@ describe('v1.ConfigClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3600,7 +3600,7 @@ describe('v1.ConfigClient', () => {
         framework_deployment: 'frameworkDeploymentValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3687,7 +3687,7 @@ describe('v1.ConfigClient', () => {
         framework: 'frameworkValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3766,7 +3766,7 @@ describe('v1.ConfigClient', () => {
         cloud_control_deployment: 'cloudControlDeploymentValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3853,7 +3853,7 @@ describe('v1.ConfigClient', () => {
         cloud_control: 'cloudControlValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3931,7 +3931,7 @@ describe('v1.ConfigClient', () => {
         location: 'locationValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3994,7 +3994,7 @@ describe('v1.ConfigClient', () => {
         control: 'controlValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4073,7 +4073,7 @@ describe('v1.ConfigClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4154,7 +4154,7 @@ describe('v1.ConfigClient', () => {
           'generateFrameworkAuditScopeReportResponseValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4244,7 +4244,7 @@ describe('v1.ConfigClient', () => {
         framework_audit: 'frameworkAuditValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4325,7 +4325,7 @@ describe('v1.ConfigClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4432,7 +4432,7 @@ describe('v1.ConfigClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4520,7 +4520,7 @@ describe('v1.ConfigClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4607,7 +4607,7 @@ describe('v1.ConfigClient', () => {
         framework_deployment: 'frameworkDeploymentValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4690,7 +4690,7 @@ describe('v1.ConfigClient', () => {
         framework: 'frameworkValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -5,6 +5,3550 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "65450ab4e7f9f1f17e1566ac30b8846bc38e0dd9",
+          "message": "Attach internalMethodName to otherArgs in constructSettings",
+          "issues": [
+            "9266"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "9763a229-272f-44b0-9ed6-092707122009",
+      "createTime": "2026-09-09T14:19:19.821Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "fb690675-0f94-4f81-8335-e0b683a5798f",
+      "createTime": "2026-09-09T14:40:18.857Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "084318e4922f48b5de9e135b292986ab26ccde85",
+          "message": "Support conversion and serialization for Temporal.Instant",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "6540d48099f44cbdfc75d170bf8cd16e1ef5e7b5",
+          "message": "Configure grpc.use_local_subchannel_pool to prevent stream queuing",
+          "issues": [],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "55a238c7-3455-4af5-b637-983e615e796e",
+      "createTime": "2026-09-09T14:40:18.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "6499b205-f5f7-490b-8021-f8705b1f61f5",
+      "createTime": "2026-09-08T16:07:57.731Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "659aa22a-0479-4a35-9e6a-d4b9995321ce",
+      "createTime": "2026-09-08T16:07:57.707Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "fe434626-f8c1-48c4-8286-b39266abefff",
+      "createTime": "2026-09-08T16:07:57.686Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "e4f2f6fb-b559-4e61-a427-37be5f99fd8c",
+      "createTime": "2026-09-08T16:07:57.663Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "571f97cc-0255-405f-87e1-f0526a235169",
+      "createTime": "2026-09-08T16:07:57.641Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "a657fa5f-b793-4fd1-93f3-a298c765745a",
+      "createTime": "2026-09-08T16:07:57.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadmanager",
+      "id": "ff0015e3-4c47-433e-9e29-5bb908d20d77",
+      "createTime": "2026-09-08T16:07:57.596Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadidentity",
+      "id": "250bec8e-718a-4ab1-9945-15b88c5e4bc8",
+      "createTime": "2026-09-08T16:07:57.571Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "ce85122f-c1d2-44f0-a19f-5fac71c232d9",
+      "createTime": "2026-09-08T16:07:57.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "83720e39-0498-4698-a6a0-e46e5e68f94f",
+      "createTime": "2026-09-08T16:07:57.523Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "388b5831-d3ae-4b1b-ad3a-e17aace09156",
+      "createTime": "2026-09-08T16:07:57.501Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "bead9b46-1142-4231-905b-3892e305fe61",
+      "createTime": "2026-09-08T16:07:57.472Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "5b3b8f13-671d-43a7-aa7b-80091af05ca8",
+      "createTime": "2026-09-08T16:07:57.449Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "a484ddca-9455-492e-89c5-be75a16d5d98",
+      "createTime": "2026-09-08T16:07:57.424Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/visionai",
+      "id": "a266e187-8008-4fc2-b672-7eaf85befeed",
+      "createTime": "2026-09-08T16:07:57.402Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "93c42be4-b290-4ca6-8669-0726384402f5",
+      "createTime": "2026-09-08T16:07:57.377Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "6a9e8a36-c353-497e-9965-0ff5bbe081a0",
+      "createTime": "2026-09-08T16:07:57.353Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "0625ed74-2646-4161-85a8-249da76ec0a8",
+      "createTime": "2026-09-08T16:07:57.327Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "b220f544-71c6-4de7-933b-bd1990bffafa",
+      "createTime": "2026-09-08T16:07:57.303Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "13d305ca-8673-428b-a1c9-067174f31d0a",
+      "createTime": "2026-09-08T16:07:57.274Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "81cbca81-8410-4ba1-acce-fe5c2e3b1d16",
+      "createTime": "2026-09-08T16:07:57.249Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "10.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "ec4311e1-7ac0-4e30-8edf-3f196eb1cca8",
+      "createTime": "2026-09-08T16:07:57.223Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "e862f59c-1846-4ac6-85b1-ff03ea3479b2",
+      "createTime": "2026-09-08T16:07:57.201Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "6f5160d9-d1cd-4068-8a36-9ca6930bfb9e",
+      "createTime": "2026-09-08T16:07:57.174Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/telcoautomation",
+      "id": "3a9919c4-eed4-4377-a30e-180b61113dde",
+      "createTime": "2026-09-08T16:07:57.152Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "569b5681-27c6-4239-aa13-7e78ece33149",
+      "createTime": "2026-09-08T16:07:57.127Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "95d661b7-e83e-41df-8503-2cbd8d64d29b",
+      "createTime": "2026-09-08T16:07:57.101Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "488ef3b0-7b62-4e9c-8783-3af66fc54bd3",
+      "createTime": "2026-09-08T16:07:57.072Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "bd607609-46e0-443a-a608-2d216c7ca542",
+      "createTime": "2026-09-08T16:07:57.049Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storagebatchoperations",
+      "id": "4a84e553-4083-4b6e-af87-46f07c2f3bfe",
+      "createTime": "2026-09-08T16:07:57.024Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.28.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "a8154fca-cc0c-4b96-936c-8ddb53bb56c8",
+      "createTime": "2026-09-08T16:07:57.002Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "3166240e-8189-405f-bb8c-a7894d84e27f",
+      "createTime": "2026-09-08T16:07:56.974Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-api",
+      "id": "4cfdadae-4c15-48cf-b38d-c1580eec91a9",
+      "createTime": "2026-09-08T16:07:56.952Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "e6917d79-5d5c-4fd5-a684-6bc71f708f2d",
+      "createTime": "2026-09-08T16:07:56.927Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "962d43a0-8b00-4663-9a46-b65712235d22",
+      "createTime": "2026-09-08T16:07:56.905Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "b317f7d0-7f16-4dd2-93b9-fb9915a81d37",
+      "createTime": "2026-09-08T16:07:56.880Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "afa6c689-5f29-43d3-9540-34f96a547431",
+      "createTime": "2026-09-08T16:07:56.859Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "10.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "58897a09-5136-4d77-a94e-1378b7b3a818",
+      "createTime": "2026-09-08T16:07:56.835Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "7122f4f0-16aa-4121-926d-e25e72a52633",
+      "createTime": "2026-09-08T16:07:56.814Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "81a16468-2f96-4a4c-8809-fa0d2529656d",
+      "createTime": "2026-09-08T16:07:56.791Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "787eebf3-ade5-4fc0-8a1a-e33311f62268",
+      "createTime": "2026-09-08T16:07:56.769Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "62b938c0-8635-42e5-a615-de272ca6e6b2",
+      "createTime": "2026-09-08T16:07:56.746Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "18320b97-a96d-4e20-9fc0-bf00cf496b46",
+      "createTime": "2026-09-08T16:07:56.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/saasservicemgmt",
+      "id": "d4342415-c392-4d1c-bf50-36c42eef9123",
+      "createTime": "2026-09-08T16:07:56.700Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "225733fe-3212-400f-91cd-36b8dc7a3e17",
+      "createTime": "2026-09-08T16:07:56.678Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "c493121a-923c-4a9b-bccd-b078ad7b5ddb",
+      "createTime": "2026-09-08T16:07:56.654Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "bd61e381-6dbf-41eb-bb69-83ca61bac304",
+      "createTime": "2026-09-08T16:07:56.633Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "0fb1dded-affb-4788-aca9-8cb1e25d0bbe",
+      "createTime": "2026-09-08T16:07:56.610Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "921a3898-aa3c-460c-863d-be0bd11e4be1",
+      "createTime": "2026-09-08T16:07:56.587Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "f2b0fbcc-4aaf-4a88-bf06-6988e3727783",
+      "createTime": "2026-09-08T16:07:56.561Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "debbd948-665c-4dbf-9d4d-caf7cddcd1be",
+      "createTime": "2026-09-08T16:07:56.540Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "f7cf382b-ca12-4c34-a65e-0a6e5412a64b",
+      "createTime": "2026-09-08T16:07:56.514Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "31e52d20-1c31-47b7-a4bf-263662b383ff",
+      "createTime": "2026-09-08T16:07:56.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/productregistry",
+      "id": "42ae1da0-999d-4991-9ce9-f62cca5ba616",
+      "createTime": "2026-09-08T16:07:56.464Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "6ea97b7b-913a-4495-b6ab-4c8bfa0ee434",
+      "createTime": "2026-09-08T16:07:56.443Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "d8c5498c-b580-4d6b-8be4-b3effa14fd0a",
+      "createTime": "2026-09-08T16:07:56.418Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "8fb5a678-6ec1-4a69-b3e4-78ab08076bdc",
+      "createTime": "2026-09-08T16:07:56.397Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "84eee6ac-8f4c-4ed3-81eb-18f9821ff5a6",
+      "createTime": "2026-09-08T16:07:56.371Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "1db78efe-89e1-4d4d-b70e-dc3945980f03",
+      "createTime": "2026-09-08T16:07:56.350Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "1d071841-3c7d-445a-816e-a4ec060c99d5",
+      "createTime": "2026-09-08T16:07:56.323Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "21486008-574c-4ed9-9d32-04e435721cc3",
+      "createTime": "2026-09-08T16:07:56.303Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "68aea8a9-51e6-43e8-9d6f-b2877af77541",
+      "createTime": "2026-09-08T16:07:56.276Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "6b85c505-7f9c-470b-bfba-64a0f54de362",
+      "createTime": "2026-09-08T16:07:56.255Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "7fdec332-531b-4ec5-bada-2d8a128ae220",
+      "createTime": "2026-09-08T16:07:56.230Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "9a355dff-51a9-4d0a-9cc3-53bddb3f18a7",
+      "createTime": "2026-09-08T16:07:56.209Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "ea228e74-0b84-4520-9d36-d0a8b4e042d6",
+      "createTime": "2026-09-08T16:07:56.184Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "b87be9f7-bd44-453c-8ded-b0215521a9b7",
+      "createTime": "2026-09-08T16:07:56.163Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "a869b2df-e20a-45ef-b777-d4020528858f",
+      "createTime": "2026-09-08T16:07:56.139Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "c65d4468-5cf5-49d8-925d-eea5e7bcde96",
+      "createTime": "2026-09-08T16:07:56.117Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "49de4782-4572-4a01-86d2-17ebeef7fe30",
+      "createTime": "2026-09-08T16:07:56.089Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "87d648b1-4893-41b3-9636-c6c7cd1bfc4d",
+      "createTime": "2026-09-08T16:07:56.065Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "59cef4e4-1a63-49ab-ba51-4078d90d1859",
+      "createTime": "2026-09-08T16:07:56.039Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.20.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "ecd99122-7f26-4677-9b1d-e51f40e80a7d",
+      "createTime": "2026-09-08T16:07:56.017Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "7d68b63a-7aa3-4928-94c1-8aa9035318b7",
+      "createTime": "2026-09-08T16:07:55.990Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "15140ee2-659e-4110-bed0-3823ea6cd7f7",
+      "createTime": "2026-09-08T16:07:55.967Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "ceb1f55c-af1d-4f80-8fcd-f6bf4d9222da",
+      "createTime": "2026-09-08T16:07:55.941Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "44c83ed2-d228-42f1-91cf-6d578b89c6a5",
+      "createTime": "2026-09-08T16:07:55.920Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "5603f2b9-d350-4180-a6e7-7dc4321e115e",
+      "createTime": "2026-09-08T16:07:55.891Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "a8eb7908-6da0-421f-8893-dcb451556bdc",
+      "createTime": "2026-09-08T16:07:55.867Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "0e734a11-4dff-4df0-9adb-f84a0aa109d0",
+      "createTime": "2026-09-08T16:07:55.843Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka-schemaregistry",
+      "id": "126fcb9d-76cb-43dd-9b1c-a308e41b399b",
+      "createTime": "2026-09-08T16:07:55.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "c80a0110-1a6f-4d4a-9520-384bd6a6a102",
+      "createTime": "2026-09-08T16:07:55.796Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "c6076459-f653-4f4f-a102-4a13e61435a1",
+      "createTime": "2026-09-08T16:07:55.770Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/maintenance-api",
+      "id": "a21f7946-5bca-45fc-ba45-542157ffb9f3",
+      "createTime": "2026-09-08T16:07:55.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lustre",
+      "id": "ff831934-29d1-4298-9b86-2ba9ac0a3d46",
+      "createTime": "2026-09-08T16:07:55.717Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-api",
+      "id": "b4927431-a20f-4423-9cca-d145504517fc",
+      "createTime": "2026-09-08T16:07:55.691Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/locationfinder",
+      "id": "ad81e1cc-9dba-4a5a-94d7-a15f1299a308",
+      "createTime": "2026-09-08T16:07:55.668Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "bb2b1890-4299-4a11-8dbd-228afcdf774d",
+      "createTime": "2026-09-08T16:07:55.642Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/licensemanager",
+      "id": "6a4ad3f7-cc92-42eb-b4a1-427d477e9578",
+      "createTime": "2026-09-08T16:07:55.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "8ab1e5e8-008c-4dd4-957d-0b69c93a5a75",
+      "createTime": "2026-09-08T16:07:55.590Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "b07da448-ce0c-42a1-9190-3d925e8d9bb7",
+      "createTime": "2026-09-08T16:07:55.562Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "0ebf86ad-8730-4419-832a-47d69f4b9229",
+      "createTime": "2026-09-08T16:07:55.535Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "f141107e-d5a2-456a-8b1a-8f14062bd2c1",
+      "createTime": "2026-09-08T16:07:55.514Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "001fa277-b7fb-463d-8048-1b75c51eb846",
+      "createTime": "2026-09-08T16:07:55.485Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "66084193-4266-4d98-b310-d30035d16961",
+      "createTime": "2026-09-08T16:07:55.461Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/hypercomputecluster",
+      "id": "ae1689f5-8e94-452b-a995-ba8e8d703277",
+      "createTime": "2026-09-08T16:07:55.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "1c88910d-0dc0-4b19-a109-6ef1ccc373cf",
+      "createTime": "2026-09-08T16:07:55.414Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkerecommender",
+      "id": "8eedac7b-f5ee-4de7-947c-d75e69b0d795",
+      "createTime": "2026-09-08T16:07:55.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "ced1b6d8-edfb-4ba2-9ec2-4e8d1100d2ef",
+      "createTime": "2026-09-08T16:07:55.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "f85ee93c-32d9-4cbc-a655-746cb78f4ffc",
+      "createTime": "2026-09-08T16:07:55.339Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "b0645929-09f9-42f9-b0f2-b30f863ede1c",
+      "createTime": "2026-09-08T16:07:55.316Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "e1122740-6fc8-49a6-a5ed-0ea43d45c149",
+      "createTime": "2026-09-08T16:07:55.290Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "83c3cc23-ef58-421e-91a5-5550c39d9b36",
+      "createTime": "2026-09-08T16:07:55.268Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "f3fc0bd6-617a-4c5a-b7b9-8d35925fde6d",
+      "createTime": "2026-09-08T16:07:55.241Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "e523aafc-c16c-4481-9331-7f507b68ef74",
+      "createTime": "2026-09-08T16:07:55.192Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ftp",
+      "id": "31f43397-b7ad-4723-9ed1-57f9477b2e27",
+      "createTime": "2026-09-08T16:07:55.144Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore-api",
+      "id": "3d0b7427-e9b6-4535-943c-b7bd832072a7",
+      "createTime": "2026-09-08T16:07:55.123Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "4504df12-15aa-4a2f-ba97-f6fdf06e691f",
+      "createTime": "2026-09-08T16:07:55.093Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "8030f2f9-2c1e-4f96-9f41-03f189dc2fc3",
+      "createTime": "2026-09-08T16:07:55.068Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "7c16fb9b-aab9-4c90-a44d-599af2013d29",
+      "createTime": "2026-09-08T16:07:55.043Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "b3bb1146-aaf7-41c4-826c-5090b73e831d",
+      "createTime": "2026-09-08T16:07:55.022Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "47d9d7bd-1901-4170-97ab-27cab30b3a81",
+      "createTime": "2026-09-08T16:07:54.994Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "3bfb6e0c-f86d-494c-8944-d0baeada585e",
+      "createTime": "2026-09-08T16:07:54.971Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "053c31bb-48d2-441d-bba6-716af154bd9f",
+      "createTime": "2026-09-08T16:07:54.945Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "69733021-4e2e-4f49-91c8-7184f2f280b7",
+      "createTime": "2026-09-08T16:07:54.924Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "10.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "ec869fa6-5ee3-498f-96a7-c4e58ed46b06",
+      "createTime": "2026-09-08T16:07:54.897Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "29e099eb-fc39-4238-9670-c4e002d0bc95",
+      "createTime": "2026-09-08T16:07:54.870Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "b26c19c1-7327-41e6-8189-22a5675f4058",
+      "createTime": "2026-09-08T16:07:54.844Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "1fb67bf4-c415-49c9-8774-13f6b812dbfd",
+      "createTime": "2026-09-08T16:07:54.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/devicestreaming",
+      "id": "8563dcad-5760-4b13-bc6b-d6fcff4510f3",
+      "createTime": "2026-09-08T16:07:54.800Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "7171b50a-1ca5-4a73-b7ce-b4466c08b237",
+      "createTime": "2026-09-08T16:07:54.769Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "9205fd65-cb09-4e5c-ab59-d0078a0b9ef7",
+      "createTime": "2026-09-08T16:07:54.745Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "10c340e9-abef-449c-8f49-3c793243a6f8",
+      "createTime": "2026-09-08T16:07:54.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore-api",
+      "id": "01f86cc0-829e-4810-9c20-783b7d1c8d37",
+      "createTime": "2026-09-08T16:07:54.694Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "f2250a96-c894-4452-8a9b-34f7997adaeb",
+      "createTime": "2026-09-08T16:07:54.667Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "c015437a-acdd-4024-9b96-c3d054e17e75",
+      "createTime": "2026-09-08T16:07:54.644Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "962d0b10-f3e9-4784-a6ca-eeb3f383c605",
+      "createTime": "2026-09-08T16:07:54.618Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "be2649dd-9b65-48d2-b70d-61247a295179",
+      "createTime": "2026-09-08T16:07:54.569Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "09753617-b5a1-4e87-90f5-03307f0622bd",
+      "createTime": "2026-09-08T16:07:54.530Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "93772768-1579-4b54-87a9-ec142af88d5d",
+      "createTime": "2026-09-08T16:07:54.506Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/configmanagement",
+      "id": "67a8fd2a-728a-40f8-aa9d-f7cd748ae744",
+      "createTime": "2026-09-08T16:07:54.485Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "a096a23e-4d0e-44c3-8f35-1912e66ca404",
+      "createTime": "2026-09-08T16:07:54.459Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "620a41e7-6eb8-47d1-9b8c-d631013fd411",
+      "createTime": "2026-09-08T16:07:54.432Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/databasecenter",
+      "id": "a87a8932-62f8-4a2a-b4b2-bfaaba7c95ef",
+      "createTime": "2026-09-08T16:07:54.409Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "6b8f25a2-ec77-47a0-b671-3b4467b805bf",
+      "createTime": "2026-09-08T16:07:54.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "82203049-ef31-4082-8cf7-b9cfdb099a02",
+      "createTime": "2026-09-08T16:07:54.359Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/connectors",
+      "id": "e927e32f-48de-48e0-9f81-53d08a712f37",
+      "createTime": "2026-09-08T16:07:54.333Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/configdelivery",
+      "id": "405891fe-778f-4653-9912-e68dea75aa2d",
+      "createTime": "2026-09-08T16:07:54.308Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "746e9879-e2dd-4f47-9584-a02d62754032",
+      "createTime": "2026-09-08T16:07:54.281Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "485d8bbf-bfed-408e-b130-693fcced15cb",
+      "createTime": "2026-09-08T16:07:54.252Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "2b2d5551-c920-4ee1-91f3-ea1b49363f99",
+      "createTime": "2026-09-08T16:07:54.229Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/commerceproducer",
+      "id": "f78e1037-4b1f-4b60-822a-c866603faf61",
+      "createTime": "2026-09-08T16:07:54.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "76cb944c-8c19-4d7c-b214-28b61770ef8d",
+      "createTime": "2026-09-08T16:07:54.183Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudsecuritycompliance",
+      "id": "17944edf-e585-4ca7-9174-96a1fb01432d",
+      "createTime": "2026-09-08T16:07:54.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "37e7b252-8125-4ac4-a9b0-4ddbbede0a7f",
+      "createTime": "2026-09-08T16:07:54.131Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "cff4451c-a668-48f0-bbd0-64d86f746370",
+      "createTime": "2026-09-08T16:07:54.092Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "96d77c26-c6e9-4e26-8552-48970d2104c5",
+      "createTime": "2026-09-08T16:07:54.060Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "9cdab743-afbd-41a6-aa72-21d8c0ff33e3",
+      "createTime": "2026-09-08T16:07:54.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "f35e06f2-b84e-4437-a6c4-34eb81a22404",
+      "createTime": "2026-09-08T16:07:54.008Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "f06c879f-3955-47f4-bb03-0f7c4a5db83f",
+      "createTime": "2026-09-08T16:07:53.985Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "620603c9-5f56-4c70-a39e-a7bba20a7a56",
+      "createTime": "2026-09-08T16:07:53.955Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "b0e11a9b-87d0-44de-87b5-82481a3f67e2",
+      "createTime": "2026-09-08T16:07:53.931Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "d24d06e7-b181-4f17-b584-59c84c9d7de1",
+      "createTime": "2026-09-08T16:07:53.910Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "8e075de6-3a0c-45b5-a2ea-2fd505b429f2",
+      "createTime": "2026-09-08T16:07:53.885Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "848034fb-c18c-46f2-8c22-28dae2f88686",
+      "createTime": "2026-09-08T16:07:53.858Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage-api",
+      "id": "49dfa6d7-11fc-487e-ab75-ca310bdc2d99",
+      "createTime": "2026-09-08T16:07:53.836Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "248ad02a-be6f-4d12-b823-f6b56bd499fe",
+      "createTime": "2026-09-08T16:07:53.810Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "d89da0bf-cb17-4e64-812b-864c7ceefc6b",
+      "createTime": "2026-09-08T16:07:53.789Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "b94b4899-5a1e-4429-b72b-23d6bd47aad1",
+      "createTime": "2026-09-08T16:07:53.766Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "1bd7fa14-1a4c-4348-b625-150366d2fbb7",
+      "createTime": "2026-09-08T16:07:53.735Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "2c86a64c-fe57-4859-8dde-3b02c556ea2f",
+      "createTime": "2026-09-08T16:07:53.713Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "076ca813-5bb2-4966-9f21-2e6a2d7c6fc2",
+      "createTime": "2026-09-08T16:07:53.689Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "82fc20f9-61fd-4f64-8244-1b30e3145d01",
+      "createTime": "2026-09-08T16:07:53.659Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "81a20ef2-dd2e-4a16-96b8-a0e158c8c4ed",
+      "createTime": "2026-09-08T16:07:53.636Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "558f7aea-0a3f-423a-8ab7-207b5e2f01da",
+      "createTime": "2026-09-08T16:07:53.614Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "b99b6df8-b7be-403d-a83d-f9149b85ac65",
+      "createTime": "2026-09-08T16:07:53.587Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "f9ebcb57-cea8-4a30-bba3-75bfef92102d",
+      "createTime": "2026-09-08T16:07:53.562Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "f884859e-42d8-430b-b8d7-77110e80f0cc",
+      "createTime": "2026-09-08T16:07:53.537Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "218c53ca-b38c-4dab-995a-958e0af017cb",
+      "createTime": "2026-09-08T16:07:53.509Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "4a4bddff-6cd2-4dc9-a83e-ff92d4188988",
+      "createTime": "2026-09-08T16:07:53.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "1ee31254-cfb4-41c0-a7be-aac4d7b38057",
+      "createTime": "2026-09-08T16:07:53.459Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "227dfda4-b440-4194-9fc7-5cc38b64246b",
+      "createTime": "2026-09-08T16:07:53.433Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/auditmanager",
+      "id": "f3e6f4da-97de-4947-ae56-0bb002fc0cb3",
+      "createTime": "2026-09-08T16:07:53.411Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "9adb9b5f-71ff-4612-97b7-ae007b93b74d",
+      "createTime": "2026-09-08T16:07:53.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "0bab437c-ccb9-4ea2-82d5-19ce039c1234",
+      "createTime": "2026-09-08T16:07:53.354Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apptopology",
+      "id": "4661ae42-1776-436a-b9af-1b1f4aad3648",
+      "createTime": "2026-09-08T16:07:53.333Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appoptimize",
+      "id": "1648dc37-2f78-41d8-8ee2-1ab8db7861f3",
+      "createTime": "2026-09-08T16:07:53.311Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "97b1c0e1-4b66-4b14-936c-30a60ab680e7",
+      "createTime": "2026-09-08T16:07:53.284Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apiregistry",
+      "id": "8122ce3c-47a9-4be3-aa71-e97fca4041ce",
+      "createTime": "2026-09-08T16:07:53.257Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "085cad0d-c70f-4688-9ff9-84a05a187c63",
+      "createTime": "2026-09-08T16:07:53.233Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "0fc0ef4b-d0a4-4446-a976-c10c8d8c71d2",
+      "createTime": "2026-09-08T16:07:53.208Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "e6f9bc22-bc59-4d9a-987f-559c828d8285",
+      "createTime": "2026-09-08T16:07:53.164Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "2e989a2f-0e8a-46fc-b865-7998db92d842",
+      "createTime": "2026-09-08T16:07:53.121Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "adac3818-9a47-4060-96de-3c1631c69713",
+      "createTime": "2026-09-08T16:07:53.094Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentregistry",
+      "id": "fbd48e8b-e33b-4116-86cc-0c272f321ec5",
+      "createTime": "2026-09-08T16:07:53.059Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentidentity",
+      "id": "423ed407-379b-42d4-a8ba-3ab218c22597",
+      "createTime": "2026-09-08T16:07:53.027Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "ae1aae76-5630-4f99-b29f-e5afdbeacf67",
+      "createTime": "2026-09-08T16:07:53.004Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "3871529d-618b-4323-a4d1-58d714519438",
+      "createTime": "2026-09-08T16:07:52.982Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.31.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "f0be883f-f62f-4459-bc42-8e8dce04c55f",
+      "createTime": "2026-09-08T16:07:52.950Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "b9915167-c282-4237-ab8f-dcb88ebdba03",
+      "createTime": "2026-09-08T16:07:52.928Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "fc233663-4cbb-4e0f-841e-889794c02cf0",
+      "createTime": "2026-09-08T16:07:52.905Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/subscriptions",
+      "id": "7e56fc75-88d0-40ed-b221-23338217575d",
+      "createTime": "2026-09-08T16:07:52.864Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "cbd317c2-3e2e-4678-ba13-64f70e41396a",
+      "createTime": "2026-09-08T16:07:52.842Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "89a3e586-63e3-42e6-b97c-3e738de9e932",
+      "createTime": "2026-09-08T16:07:52.815Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "05945b95-3da4-4cf0-8bb2-10e0829c26b1",
+      "createTime": "2026-09-08T16:07:52.784Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "b84f0337-e993-45b5-899b-90ea213196c8",
+      "createTime": "2026-09-08T16:07:52.754Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "9bd1dc2a-d7d8-4316-b029-90923d987706",
+      "createTime": "2026-09-08T16:07:52.730Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "3d6b93aa-a11e-43c5-8a1c-b1f6f8f2348e",
+      "createTime": "2026-09-08T16:07:52.703Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "b79e5a3d-af1b-4cd5-9e88-88daf95cc4bc",
+      "createTime": "2026-09-08T16:07:52.677Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "10.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "4978dc30-69c7-4ee5-8acf-4ca674518386",
+      "createTime": "2026-09-08T16:07:52.652Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "59ae9630-a712-4b26-9453-bc4ba6f29e89",
+      "createTime": "2026-09-08T16:07:52.626Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c249594c6ef41e4b36f1ef8869341a4c98c092b0",
+          "message": "Upgrade librarian gapic-generator-typescript to v5.2.0",
+          "issues": []
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "3a29f63a-03e3-4a6a-a6ea-a813469e28ff",
+      "createTime": "2026-09-08T16:07:52.578Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0df2e55ff8c6f2b6f5d73459af079e8d77f5958d",
+          "message": "Add x-goog-gcs-idempotency-token header",
+          "issues": [
+            "8837"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "30c91c80701dd65da44fc29402b5463f7849c42d",
+          "message": "Add IpFilter support to bucket metadata",
+          "issues": [
+            "8623"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "953328f5bd42302785f55c15f1feed857a71e6a7",
+          "message": "Support copying CSEK-encrypted files to non-CSEK destinations",
+          "issues": [
+            "8771"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "fix",
+          "sha": "cee5338a16e6c7063bc8fe9f6a853e39811df947",
+          "message": "Resolve strict linter and TypeScript errors",
+          "issues": [
+            "9198"
+          ],
+          "scope": "storage"
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "a7d9c81e-151f-4fb6-8dba-f7b6a0074441",
+      "createTime": "2026-09-08T07:06:02.501Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6a606a123b34d8826e72b4d31abc1dae1f05d4f1",
+          "message": "Add google-shopping-merchant-loyaltycustomers",
+          "issues": [
+            "9245"
+          ],
+          "scope": "google/shopping/merchant/loyaltycustomers/v1"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "75f2b787-2345-4a54-861d-2b118a84e937",
+      "createTime": "2026-09-03T21:26:39.377Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "932030548323f0181bb175b0519a6e77cbe64cad",
+          "message": "Add internalTelemetryInfo configuration to nunjucks templates",
+          "issues": [
+            "9174"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "bbfcb12e-bae2-4c7a-aa08-eb3dd312bbc8",
+      "createTime": "2026-09-03T17:34:39.944Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "932030548323f0181bb175b0519a6e77cbe64cad",
+          "message": "Add internalTelemetryInfo configuration to nunjucks templates",
+          "issues": [
+            "9174"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "02c3aa4b-03b0-475a-b1da-77375f7ffd3b",
+      "createTime": "2026-09-03T17:34:39.919Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "2d9e0148-c51e-4de4-a04c-35de70412995",
+      "createTime": "2026-09-03T10:07:08.447Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "3b651cc1-05b6-47ce-ada1-5cd0840fa391",
+      "createTime": "2026-09-03T10:07:08.412Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "09d72919-7ef2-4f2d-8b3f-f9bfc5001ab1",
+      "createTime": "2026-09-03T10:07:08.372Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "63657996-5cd6-4529-b196-7a6ff24a33aa",
+      "createTime": "2026-09-03T10:07:08.334Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "505d6800-0a0d-46f1-ad31-394ef28969df",
+      "createTime": "2026-09-03T10:07:08.278Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "a6e817b3-51b7-4123-8629-d1049c06b149",
+      "createTime": "2026-09-03T10:07:08.239Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2bc9510562e753340276ff5b21e1f18c71e7b2",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9238"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "8c7a4143-91ef-4f84-8912-681a697fcd22",
+      "createTime": "2026-09-03T10:07:08.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0725ed96195258b45de6b77f36a07d187f677fe3",
+          "message": "Update prettier formatting guidelines",
+          "issues": [
+            "9239"
+          ],
+          "scope": "gapic-generator-typescript"
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "ccea466d-53d7-489b-a422-43441482f607",
+      "createTime": "2026-09-03T10:07:08.147Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "8d913501-1bf9-4890-a02a-6f05aa4b2fc4",
+      "createTime": "2026-09-02T03:18:07.331Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "6683235b-886a-4706-a7bc-7647f94c3698",
+      "createTime": "2026-09-02T03:18:07.301Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "1bf9c80f-1736-4673-bca2-8ae10b3db6f6",
+      "createTime": "2026-09-02T03:18:07.274Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "3a651f27-b7a0-407b-9829-2840b5565004",
+      "createTime": "2026-09-02T03:18:07.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "a879d682-cde0-414b-9ee8-7174d8d72d6f",
+      "createTime": "2026-09-02T03:18:07.217Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "e0767d3a-396a-4371-ba17-55504fc1b1c7",
+      "createTime": "2026-09-02T03:18:07.190Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "a701c065-29db-42ba-a416-b398f92eee21",
+      "createTime": "2026-09-02T03:18:07.162Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "c52ed076-9737-4ede-a25a-747346c98d25",
+      "createTime": "2026-09-02T03:18:07.131Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "4153df75-faa5-481f-ba72-b08d995abeb7",
+      "createTime": "2026-09-02T03:18:07.105Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3e0e66f16e53586e24345756e103a42d8b3a4ae3",
+          "message": "Onboard a new library",
+          "issues": [
+            "9228"
+          ],
+          "scope": "google/cloud/apptopology/v1"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apptopology",
+      "id": "f8f9292a-dad1-42a4-9350-653da889afda",
+      "createTime": "2026-09-02T03:18:07.078Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "5db7abf8-13fd-4cbe-bce2-4ec118fee1c9",
+      "createTime": "2026-09-02T03:18:07.047Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09ff86ef811de9215c587496ece57ff8b5fb2b77",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9219"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "02d3aeb0-0086-49c0-bfc5-54e63c1cca2a",
+      "createTime": "2026-09-02T03:18:07.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fad57ff4b9164712426a041fc61db035859f9043",
+          "message": "Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries",
+          "issues": [
+            "9116"
+          ]
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "3f2b5de6-0296-4cba-a3ac-b13ca74af052",
+      "createTime": "2026-09-01T12:41:10.557Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a0cbc510dd45db2232a909a0b8c225771cfbcf18",
           "message": "Bundle backstory UDM protos into @google-cloud/chronicle",
           "issues": [
@@ -90526,5 +94070,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-28T08:19:43.503Z"
+  "updateTime": "2026-09-09T14:40:18.857Z"
 }

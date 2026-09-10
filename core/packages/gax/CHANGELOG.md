@@ -6,6 +6,20 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.2.0...google-gax-v6.3.0) (2026-09-09)
+
+
+### Features
+
+* **gax:** Attach internalMethodName to otherArgs in constructSettings ([#9266](https://github.com/googleapis/google-cloud-node/issues/9266)) ([65450ab](https://github.com/googleapis/google-cloud-node/commit/65450ab4e7f9f1f17e1566ac30b8846bc38e0dd9))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.1.0...google-gax-v6.2.0) (2026-09-03)
+
+
+### Features
+
+* **generator:** Add internalTelemetryInfo configuration to nunjucks templates ([#9174](https://github.com/googleapis/google-cloud-node/issues/9174)) ([9320305](https://github.com/googleapis/google-cloud-node/commit/932030548323f0181bb175b0519a6e77cbe64cad))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.3...google-gax-v6.1.0) (2026-08-26)
 
 

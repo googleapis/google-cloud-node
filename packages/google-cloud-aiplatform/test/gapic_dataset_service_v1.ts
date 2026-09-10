@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datasetserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.datasetServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.DatasetServiceClient', () => {
       assert(client.datasetServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.datasetServiceStub);
@@ -299,14 +299,14 @@ describe('v1.DatasetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.datasetServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.DatasetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.DatasetServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.DatasetServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('getDataset', () => {
     it('invokes getDataset without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getDataset without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getDataset with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getDataset with closed client', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1.DatasetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataset(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('updateDataset', () => {
     it('invokes updateDataset without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes updateDataset without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes updateDataset with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes updateDataset with closed client', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.DatasetServiceClient', () => {
       );
       request.dataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataset(request), expectedError);
@@ -626,7 +626,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('updateDatasetVersion', () => {
     it('invokes updateDatasetVersion without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -659,7 +659,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes updateDatasetVersion without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes updateDatasetVersion with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes updateDatasetVersion with closed client', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.DatasetServiceClient', () => {
       );
       request.datasetVersion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDatasetVersion(request), expectedError);
@@ -763,7 +763,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('getDatasetVersion', () => {
     it('invokes getDatasetVersion without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getDatasetVersion without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,7 +841,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getDatasetVersion with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getDatasetVersion with closed client', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1.DatasetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDatasetVersion(request), expectedError);
@@ -895,7 +895,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('getAnnotationSpec', () => {
     it('invokes getAnnotationSpec without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getAnnotationSpec without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getAnnotationSpec with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes getAnnotationSpec with closed client', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v1.DatasetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnnotationSpec(request), expectedError);
@@ -1027,7 +1027,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('createDataset', () => {
     it('invokes createDataset without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,7 +1060,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes createDataset without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes createDataset with call error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1145,7 +1145,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes createDataset with LRO error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1178,7 +1178,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkCreateDatasetProgress without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1186,8 +1186,8 @@ describe('v1.DatasetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatasetProgress(
@@ -1200,7 +1200,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkCreateDatasetProgress with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('deleteDataset', () => {
     it('invokes deleteDataset without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteDataset without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteDataset with call error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1339,7 +1339,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteDataset with LRO error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkDeleteDatasetProgress without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1380,8 +1380,8 @@ describe('v1.DatasetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDatasetProgress(
@@ -1394,7 +1394,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkDeleteDatasetProgress with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('importData', () => {
     it('invokes importData without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1447,7 +1447,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes importData without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,7 +1501,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes importData with call error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1532,7 +1532,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes importData with LRO error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkImportDataProgress without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1573,8 +1573,8 @@ describe('v1.DatasetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDataProgress(
@@ -1587,7 +1587,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkImportDataProgress with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1605,7 +1605,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('exportData', () => {
     it('invokes exportData without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,7 +1637,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes exportData without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1691,7 +1691,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes exportData with call error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1722,7 +1722,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes exportData with LRO error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1755,7 +1755,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkExportDataProgress without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,8 +1763,8 @@ describe('v1.DatasetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportDataProgress(
@@ -1777,7 +1777,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkExportDataProgress with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1795,7 +1795,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('createDatasetVersion', () => {
     it('invokes createDatasetVersion without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1828,7 +1828,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes createDatasetVersion without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1882,7 +1882,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes createDatasetVersion with call error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1913,7 +1913,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes createDatasetVersion with LRO error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1946,7 +1946,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkCreateDatasetVersionProgress without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1954,8 +1954,8 @@ describe('v1.DatasetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatasetVersionProgress(
@@ -1968,7 +1968,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkCreateDatasetVersionProgress with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1989,7 +1989,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('deleteDatasetVersion', () => {
     it('invokes deleteDatasetVersion without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2022,7 +2022,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteDatasetVersion without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2076,7 +2076,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteDatasetVersion with call error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2107,7 +2107,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteDatasetVersion with LRO error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkDeleteDatasetVersionProgress without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2148,8 +2148,8 @@ describe('v1.DatasetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDatasetVersionProgress(
@@ -2162,7 +2162,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkDeleteDatasetVersionProgress with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2183,7 +2183,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('restoreDatasetVersion', () => {
     it('invokes restoreDatasetVersion without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2216,7 +2216,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes restoreDatasetVersion without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2270,7 +2270,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes restoreDatasetVersion with call error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2304,7 +2304,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes restoreDatasetVersion with LRO error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2337,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkRestoreDatasetVersionProgress without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2345,8 +2345,8 @@ describe('v1.DatasetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreDatasetVersionProgress(
@@ -2359,7 +2359,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkRestoreDatasetVersionProgress with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2380,7 +2380,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('deleteSavedQuery', () => {
     it('invokes deleteSavedQuery without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2413,7 +2413,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteSavedQuery without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2467,7 +2467,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteSavedQuery with call error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2498,7 +2498,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes deleteSavedQuery with LRO error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,7 +2531,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkDeleteSavedQueryProgress without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2539,8 +2539,8 @@ describe('v1.DatasetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSavedQueryProgress(
@@ -2553,7 +2553,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes checkDeleteSavedQueryProgress with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2574,7 +2574,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('listDatasets', () => {
     it('invokes listDatasets without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2607,7 +2607,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDatasets without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2656,7 +2656,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDatasets with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2687,7 +2687,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDatasetsStream without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2733,15 +2733,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatasetsStream with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2784,15 +2784,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2827,15 +2827,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2867,9 +2867,9 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2877,7 +2877,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('listDatasetVersions', () => {
     it('invokes listDatasetVersions without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2917,7 +2917,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDatasetVersions without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2972,7 +2972,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDatasetVersions with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3003,7 +3003,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDatasetVersionsStream without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3056,15 +3056,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatasetVersionsStream with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3106,15 +3106,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasetVersions without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3155,15 +3155,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasetVersions with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3196,9 +3196,9 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3206,7 +3206,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('listDataItems', () => {
     it('invokes listDataItems without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3239,7 +3239,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDataItems without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3288,7 +3288,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDataItems with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3319,7 +3319,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listDataItemsStream without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3365,15 +3365,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataItemsStream with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3414,15 +3414,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataItems without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3457,15 +3457,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataItems with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3497,9 +3497,9 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3507,7 +3507,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('searchDataItems', () => {
     it('invokes searchDataItems without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3546,7 +3546,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes searchDataItems without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3601,7 +3601,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes searchDataItems with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3632,7 +3632,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes searchDataItemsStream without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3684,15 +3684,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchDataItemsStream with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3733,15 +3733,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchDataItems without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3782,15 +3782,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchDataItems with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3822,9 +3822,9 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3832,7 +3832,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('listSavedQueries', () => {
     it('invokes listSavedQueries without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3871,7 +3871,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listSavedQueries without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3926,7 +3926,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listSavedQueries with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3957,7 +3957,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listSavedQueriesStream without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4009,15 +4009,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSavedQueriesStream with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4058,15 +4058,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSavedQueries without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4107,15 +4107,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSavedQueries with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4147,9 +4147,9 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4157,7 +4157,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('listAnnotations', () => {
     it('invokes listAnnotations without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4196,7 +4196,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listAnnotations without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4251,7 +4251,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listAnnotations with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4282,7 +4282,7 @@ describe('v1.DatasetServiceClient', () => {
 
     it('invokes listAnnotationsStream without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4334,15 +4334,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAnnotationsStream with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4383,15 +4383,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnnotations without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4432,15 +4432,15 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnnotations with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4472,16 +4472,16 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4511,7 +4511,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4549,7 +4549,7 @@ describe('v1.DatasetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4559,7 +4559,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4591,7 +4591,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4621,7 +4621,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4659,7 +4659,7 @@ describe('v1.DatasetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4669,7 +4669,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4701,7 +4701,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4734,7 +4734,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4772,7 +4772,7 @@ describe('v1.DatasetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4782,7 +4782,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4817,7 +4817,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4847,7 +4847,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4891,7 +4891,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4926,7 +4926,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4974,7 +4974,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5015,7 +5015,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5036,7 +5036,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5064,7 +5064,7 @@ describe('v1.DatasetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5074,7 +5074,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5098,7 +5098,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5120,7 +5120,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5148,7 +5148,7 @@ describe('v1.DatasetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5158,7 +5158,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5182,7 +5182,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5204,7 +5204,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5232,7 +5232,7 @@ describe('v1.DatasetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5242,7 +5242,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5266,7 +5266,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5301,7 +5301,7 @@ describe('v1.DatasetServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5339,7 +5339,7 @@ describe('v1.DatasetServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5426,7 +5426,7 @@ describe('v1.DatasetServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5503,7 +5503,7 @@ describe('v1.DatasetServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5578,7 +5578,7 @@ describe('v1.DatasetServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5655,7 +5655,7 @@ describe('v1.DatasetServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5720,7 +5720,7 @@ describe('v1.DatasetServiceClient', () => {
         context: 'contextValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5795,7 +5795,7 @@ describe('v1.DatasetServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5860,7 +5860,7 @@ describe('v1.DatasetServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5935,7 +5935,7 @@ describe('v1.DatasetServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6000,7 +6000,7 @@ describe('v1.DatasetServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6065,7 +6065,7 @@ describe('v1.DatasetServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6141,7 +6141,7 @@ describe('v1.DatasetServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6223,7 +6223,7 @@ describe('v1.DatasetServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6299,7 +6299,7 @@ describe('v1.DatasetServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6374,7 +6374,7 @@ describe('v1.DatasetServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6438,7 +6438,7 @@ describe('v1.DatasetServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6516,7 +6516,7 @@ describe('v1.DatasetServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6593,7 +6593,7 @@ describe('v1.DatasetServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6669,7 +6669,7 @@ describe('v1.DatasetServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6733,7 +6733,7 @@ describe('v1.DatasetServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6814,7 +6814,7 @@ describe('v1.DatasetServiceClient', () => {
         index: 'indexValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6878,7 +6878,7 @@ describe('v1.DatasetServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6941,7 +6941,7 @@ describe('v1.DatasetServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6992,7 +6992,7 @@ describe('v1.DatasetServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7069,7 +7069,7 @@ describe('v1.DatasetServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7133,7 +7133,7 @@ describe('v1.DatasetServiceClient', () => {
         model: 'modelValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7197,7 +7197,7 @@ describe('v1.DatasetServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7277,7 +7277,7 @@ describe('v1.DatasetServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7354,7 +7354,7 @@ describe('v1.DatasetServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7461,7 +7461,7 @@ describe('v1.DatasetServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7526,7 +7526,7 @@ describe('v1.DatasetServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7602,7 +7602,7 @@ describe('v1.DatasetServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7683,7 +7683,7 @@ describe('v1.DatasetServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7748,7 +7748,7 @@ describe('v1.DatasetServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7829,7 +7829,7 @@ describe('v1.DatasetServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7906,7 +7906,7 @@ describe('v1.DatasetServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7970,7 +7970,7 @@ describe('v1.DatasetServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8050,7 +8050,7 @@ describe('v1.DatasetServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8153,7 +8153,7 @@ describe('v1.DatasetServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8277,7 +8277,7 @@ describe('v1.DatasetServiceClient', () => {
         model: 'modelValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8368,7 +8368,7 @@ describe('v1.DatasetServiceClient', () => {
         model: 'modelValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8421,7 +8421,7 @@ describe('v1.DatasetServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8484,7 +8484,7 @@ describe('v1.DatasetServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8538,7 +8538,7 @@ describe('v1.DatasetServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8613,7 +8613,7 @@ describe('v1.DatasetServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8679,7 +8679,7 @@ describe('v1.DatasetServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8754,7 +8754,7 @@ describe('v1.DatasetServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8819,7 +8819,7 @@ describe('v1.DatasetServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8896,7 +8896,7 @@ describe('v1.DatasetServiceClient', () => {
         event: 'eventValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8983,7 +8983,7 @@ describe('v1.DatasetServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9048,7 +9048,7 @@ describe('v1.DatasetServiceClient', () => {
         study: 'studyValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9112,7 +9112,7 @@ describe('v1.DatasetServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9177,7 +9177,7 @@ describe('v1.DatasetServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9273,7 +9273,7 @@ describe('v1.DatasetServiceClient', () => {
         run: 'runValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9362,7 +9362,7 @@ describe('v1.DatasetServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9485,7 +9485,7 @@ describe('v1.DatasetServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9554,7 +9554,7 @@ describe('v1.DatasetServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9629,7 +9629,7 @@ describe('v1.DatasetServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

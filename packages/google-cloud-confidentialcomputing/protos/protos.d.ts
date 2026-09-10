@@ -3068,6 +3068,9 @@ export namespace google {
 
                     /** VerifyConfidentialGkeRequest options */
                     options?: (google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions|null);
+
+                    /** VerifyConfidentialGkeRequest platformType */
+                    platformType?: (google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.PlatformType|keyof typeof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.PlatformType|null);
                 }
 
                 /** Represents a VerifyConfidentialGkeRequest. */
@@ -3087,6 +3090,9 @@ export namespace google {
 
                     /** VerifyConfidentialGkeRequest options. */
                     public options?: (google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions|null);
+
+                    /** VerifyConfidentialGkeRequest platformType. */
+                    public platformType: (google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.PlatformType|keyof typeof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.PlatformType);
 
                     /** VerifyConfidentialGkeRequest teeAttestation. */
                     public teeAttestation?: "tpmAttestation";
@@ -3278,6 +3284,13 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** PlatformType enum. */
+                    enum PlatformType {
+                        PLATFORM_TYPE_UNSPECIFIED = 0,
+                        VIRTUALIZED_CVM = 1,
+                        BARE_METAL_VTPM = 2
                     }
                 }
 

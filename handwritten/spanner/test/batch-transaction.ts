@@ -23,8 +23,7 @@ import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 
-import {Session, Database, Spanner} from '../src';
-import {protos} from '../src';
+import {Session, Database, Spanner, protos} from '../src';
 import * as bt from '../src/batch-transaction';
 import {PartialResultStream} from '../src/partial-result-stream';
 import {

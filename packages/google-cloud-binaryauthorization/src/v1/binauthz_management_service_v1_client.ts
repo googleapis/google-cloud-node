@@ -28,10 +28,10 @@ import type {
   IamClient,
   IamProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class BinauthzManagementServiceV1Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('binary-authorization');
@@ -72,10 +72,10 @@ export class BinauthzManagementServiceV1Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  binauthzManagementServiceV1Stub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  binauthzManagementServiceV1Stub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of BinauthzManagementServiceV1Client.
@@ -152,7 +152,7 @@ export class BinauthzManagementServiceV1Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -243,7 +243,7 @@ export class BinauthzManagementServiceV1Client {
       'google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -284,7 +284,7 @@ export class BinauthzManagementServiceV1Client {
             .BinauthzManagementServiceV1,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -299,7 +299,7 @@ export class BinauthzManagementServiceV1Client {
     ];
     for (const methodName of binauthzManagementServiceV1StubMethods) {
       const callPromise = this.binauthzManagementServiceV1Stub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -508,7 +508,7 @@ export class BinauthzManagementServiceV1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPolicy request %j', request);
@@ -660,7 +660,7 @@ export class BinauthzManagementServiceV1Client {
       this._gaxModule.routingHeader.fromParams({
         'policy.name': request.policy!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updatePolicy request %j', request);
@@ -817,7 +817,7 @@ export class BinauthzManagementServiceV1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAttestor request %j', request);
@@ -964,7 +964,7 @@ export class BinauthzManagementServiceV1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAttestor request %j', request);
@@ -1113,7 +1113,7 @@ export class BinauthzManagementServiceV1Client {
       this._gaxModule.routingHeader.fromParams({
         'attestor.name': request.attestor!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAttestor request %j', request);
@@ -1260,7 +1260,7 @@ export class BinauthzManagementServiceV1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAttestor request %j', request);
@@ -1412,7 +1412,7 @@ export class BinauthzManagementServiceV1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1485,7 +1485,7 @@ export class BinauthzManagementServiceV1Client {
       });
     const defaultCallSettings = this._defaults['listAttestors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAttestors stream %j', request);
@@ -1540,7 +1540,7 @@ export class BinauthzManagementServiceV1Client {
       });
     const defaultCallSettings = this._defaults['listAttestors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAttestors iterate %j', request);
@@ -1808,11 +1808,11 @@ export class BinauthzManagementServiceV1Client {
    */
   close(): Promise<void> {
     if (this.binauthzManagementServiceV1Stub && !this._terminated) {
-      return this.binauthzManagementServiceV1Stub.then((stub) => {
+      return this.binauthzManagementServiceV1Stub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
       });

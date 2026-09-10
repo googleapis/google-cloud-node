@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { AppGatewaysServiceClient } from '@google-cloud/appgateways';
+import {AppGatewaysServiceClient} from '@google-cloud/appgateways';
 
 // check that the client class type name can be used
 function doStuffWithAppGatewaysServiceClient(client: AppGatewaysServiceClient) {

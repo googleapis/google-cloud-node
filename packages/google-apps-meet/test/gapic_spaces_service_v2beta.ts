@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as spacesserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.spacesServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v2beta.SpacesServiceClient', () => {
       assert(client.spacesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.spacesServiceStub);
@@ -261,14 +261,14 @@ describe('v2beta.SpacesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.spacesServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v2beta.SpacesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2beta.SpacesServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2beta.SpacesServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('createSpace', () => {
     it('invokes createSpace without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -337,7 +337,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes createSpace without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes createSpace with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes createSpace with closed client', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -395,7 +395,7 @@ describe('v2beta.SpacesServiceClient', () => {
         new protos.google.apps.meet.v2beta.CreateSpaceRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSpace(request), expectedError);
@@ -405,7 +405,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('getSpace', () => {
     it('invokes getSpace without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes getSpace without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes getSpace with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -511,7 +511,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes getSpace with closed client', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSpace(request), expectedError);
@@ -534,7 +534,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('updateSpace', () => {
     it('invokes updateSpace without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes updateSpace without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes updateSpace with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes updateSpace with closed client', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.space.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSpace(request), expectedError);
@@ -670,7 +670,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('connectActiveConference', () => {
     it('invokes connectActiveConference without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes connectActiveConference without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes connectActiveConference with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes connectActiveConference with closed client', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -809,7 +809,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('endActiveConference', () => {
     it('invokes endActiveConference without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,7 +841,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes endActiveConference without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes endActiveConference with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes endActiveConference with closed client', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.endActiveConference(request), expectedError);
@@ -942,7 +942,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('createMember', () => {
     it('invokes createMember without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes createMember without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes createMember with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes createMember with closed client', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1064,7 +1064,7 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createMember(request), expectedError);
@@ -1074,7 +1074,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('getMember', () => {
     it('invokes getMember without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes getMember without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes getMember with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1180,7 +1180,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes getMember with closed client', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1193,7 +1193,7 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMember(request), expectedError);
@@ -1203,7 +1203,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('deleteMember', () => {
     it('invokes deleteMember without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1234,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes deleteMember without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1281,7 +1281,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes deleteMember with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes deleteMember with closed client', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v2beta.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteMember(request), expectedError);
@@ -1335,7 +1335,7 @@ describe('v2beta.SpacesServiceClient', () => {
   describe('listMembers', () => {
     it('invokes listMembers without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1368,7 +1368,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes listMembers without error using callback', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes listMembers with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v2beta.SpacesServiceClient', () => {
 
     it('invokes listMembersStream without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1491,15 +1491,15 @@ describe('v2beta.SpacesServiceClient', () => {
       assert(
         (client.descriptors.page.listMembers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMembersStream with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,15 +1539,15 @@ describe('v2beta.SpacesServiceClient', () => {
       assert(
         (client.descriptors.page.listMembers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMembers without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1582,15 +1582,15 @@ describe('v2beta.SpacesServiceClient', () => {
       assert(
         (client.descriptors.page.listMembers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMembers with error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,9 +1624,9 @@ describe('v2beta.SpacesServiceClient', () => {
       assert(
         (client.descriptors.page.listMembers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1638,7 +1638,7 @@ describe('v2beta.SpacesServiceClient', () => {
         conference_record: 'conferenceRecordValue',
       };
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1681,7 +1681,7 @@ describe('v2beta.SpacesServiceClient', () => {
         member: 'memberValue',
       };
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1730,7 +1730,7 @@ describe('v2beta.SpacesServiceClient', () => {
         participant: 'participantValue',
       };
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1784,7 @@ describe('v2beta.SpacesServiceClient', () => {
         participant_session: 'participantSessionValue',
       };
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1862,7 +1862,7 @@ describe('v2beta.SpacesServiceClient', () => {
         recording: 'recordingValue',
       };
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1913,7 +1913,7 @@ describe('v2beta.SpacesServiceClient', () => {
         space: 'spaceValue',
       };
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1952,7 +1952,7 @@ describe('v2beta.SpacesServiceClient', () => {
         transcript: 'transcriptValue',
       };
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2005,7 +2005,7 @@ describe('v2beta.SpacesServiceClient', () => {
         entry: 'entryValue',
       };
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

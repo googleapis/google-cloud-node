@@ -80,7 +80,7 @@ async function renderFile(
     }
   }
 
-  // Format generated TypeScript files using Prettier
+  // Format generated TypeScript files using Prettier with GTS standards
   if (targetFilename.match(/\.ts$/i)) {
     try {
       processed = await prettier.format(processed, {
@@ -88,6 +88,8 @@ async function renderFile(
         singleQuote: true,
         trailingComma: 'all',
         semi: true,
+        bracketSpacing: false,
+        arrowParens: 'avoid',
       });
     } catch (err) {
       if (err instanceof Error) {

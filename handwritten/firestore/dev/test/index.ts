@@ -796,7 +796,7 @@ describe('instantiation', () => {
     ).to.be.false;
   });
 
-  describe('grpcOptions flow control window size', () => {
+  describe('grpcOptions flow control window size and subchannel pool', () => {
     let createStubSpy: sinon.SinonSpy;
 
     beforeEach(() => {
@@ -807,7 +807,7 @@ describe('instantiation', () => {
       createStubSpy.restore();
     });
 
-    it('defaults flow_control_window to 256 KB', async () => {
+    it('defaults flow_control_window to 256 KB and use_local_subchannel_pool to 1', async () => {
       const firestore = new Firestore.Firestore(DEFAULT_SETTINGS);
       // Trigger client creation & initialize() which calls createStub
       await firestore['_clientPool'].run(
@@ -824,13 +824,17 @@ describe('instantiation', () => {
       expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
         256 * 1024, // 256 KB
       );
+      expect(clientOpts.grpcOptions['grpc.use_local_subchannel_pool']).to.equal(
+        1,
+      );
     });
 
-    it('allows user to override flow_control_window default', async () => {
+    it('allows user to override flow_control_window and use_local_subchannel_pool defaults', async () => {
       const firestore = new Firestore.Firestore({
         ...DEFAULT_SETTINGS,
         grpcOptions: {
           'grpc-node.flow_control_window': 512 * 1024,
+          'grpc.use_local_subchannel_pool': 0,
         },
       });
       // Trigger client creation & initialize() which calls createStub
@@ -847,6 +851,9 @@ describe('instantiation', () => {
       expect(clientOpts.grpcOptions).to.exist;
       expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
         512 * 1024,
+      );
+      expect(clientOpts.grpcOptions['grpc.use_local_subchannel_pool']).to.equal(
+        0,
       );
     });
   });

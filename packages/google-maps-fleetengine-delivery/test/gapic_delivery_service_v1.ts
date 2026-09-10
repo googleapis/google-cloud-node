@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as deliveryserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.deliveryServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.DeliveryServiceClient', () => {
       assert(client.deliveryServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.deliveryServiceStub);
@@ -261,14 +261,14 @@ describe('v1.DeliveryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.deliveryServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.DeliveryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.DeliveryServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.DeliveryServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('createDeliveryVehicle', () => {
     it('invokes createDeliveryVehicle without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes createDeliveryVehicle without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -393,7 +393,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes createDeliveryVehicle with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes createDeliveryVehicle with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.parent = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -447,7 +447,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('getDeliveryVehicle', () => {
     it('invokes getDeliveryVehicle without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -476,7 +476,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getDeliveryVehicle without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getDeliveryVehicle with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -548,7 +548,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getDeliveryVehicle with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeliveryVehicle(request), expectedError);
@@ -568,7 +568,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('deleteDeliveryVehicle', () => {
     it('invokes deleteDeliveryVehicle without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes deleteDeliveryVehicle without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -641,7 +641,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes deleteDeliveryVehicle with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -672,7 +672,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes deleteDeliveryVehicle with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -682,7 +682,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -695,7 +695,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('updateDeliveryVehicle', () => {
     it('invokes updateDeliveryVehicle without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes updateDeliveryVehicle without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -770,7 +770,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes updateDeliveryVehicle with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes updateDeliveryVehicle with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -813,7 +813,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.deliveryVehicle.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -826,7 +826,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('batchCreateTasks', () => {
     it('invokes batchCreateTasks without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -854,7 +854,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes batchCreateTasks without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -898,7 +898,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes batchCreateTasks with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes batchCreateTasks with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -936,7 +936,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.parent = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateTasks(request), expectedError);
@@ -946,7 +946,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('createTask', () => {
     it('invokes createTask without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes createTask without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes createTask with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes createTask with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1056,7 +1056,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.parent = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTask(request), expectedError);
@@ -1066,7 +1066,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('getTask', () => {
     it('invokes getTask without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,7 +1094,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getTask without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getTask with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1163,7 +1163,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getTask with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1173,7 +1173,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTask(request), expectedError);
@@ -1183,7 +1183,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('deleteTask', () => {
     it('invokes deleteTask without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1211,7 +1211,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes deleteTask without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1255,7 +1255,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes deleteTask with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes deleteTask with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1293,7 +1293,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTask(request), expectedError);
@@ -1303,7 +1303,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('updateTask', () => {
     it('invokes updateTask without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1332,7 +1332,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes updateTask without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes updateTask with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes updateTask with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.task.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTask(request), expectedError);
@@ -1427,7 +1427,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('getTaskTrackingInfo', () => {
     it('invokes getTaskTrackingInfo without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1456,7 +1456,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getTaskTrackingInfo without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,7 +1500,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getTaskTrackingInfo with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1528,7 +1528,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes getTaskTrackingInfo with closed client', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1538,7 +1538,7 @@ describe('v1.DeliveryServiceClient', () => {
       // path template: {provider_id=providers/*}
       request.name = 'providers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTaskTrackingInfo(request), expectedError);
@@ -1548,7 +1548,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('listTasks', () => {
     it('invokes listTasks without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1578,7 +1578,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes listTasks without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes listTasks with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1649,7 +1649,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes listTasksStream without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1692,15 +1692,15 @@ describe('v1.DeliveryServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTasksStream with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,15 +1740,15 @@ describe('v1.DeliveryServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTasks without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1779,15 +1779,15 @@ describe('v1.DeliveryServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTasks with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1817,9 +1817,9 @@ describe('v1.DeliveryServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1827,7 +1827,7 @@ describe('v1.DeliveryServiceClient', () => {
   describe('listDeliveryVehicles', () => {
     it('invokes listDeliveryVehicles without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1864,7 +1864,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes listDeliveryVehicles without error using callback', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1893,8 +1893,7 @@ describe('v1.DeliveryServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.maps.fleetengine.delivery.v1.IDeliveryVehicle[]
-              | null,
+              protos.maps.fleetengine.delivery.v1.IDeliveryVehicle[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1918,7 +1917,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes listDeliveryVehicles with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1946,7 +1945,7 @@ describe('v1.DeliveryServiceClient', () => {
 
     it('invokes listDeliveryVehiclesStream without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,15 +1995,15 @@ describe('v1.DeliveryServiceClient', () => {
       assert(
         (client.descriptors.page.listDeliveryVehicles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeliveryVehiclesStream with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2043,15 +2042,15 @@ describe('v1.DeliveryServiceClient', () => {
       assert(
         (client.descriptors.page.listDeliveryVehicles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeliveryVehicles without error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2090,15 +2089,15 @@ describe('v1.DeliveryServiceClient', () => {
       assert(
         (client.descriptors.page.listDeliveryVehicles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeliveryVehicles with error', async () => {
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2128,9 +2127,9 @@ describe('v1.DeliveryServiceClient', () => {
       assert(
         (client.descriptors.page.listDeliveryVehicles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2143,7 +2142,7 @@ describe('v1.DeliveryServiceClient', () => {
         vehicle: 'vehicleValue',
       };
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2194,7 +2193,7 @@ describe('v1.DeliveryServiceClient', () => {
         provider: 'providerValue',
       };
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2233,7 +2232,7 @@ describe('v1.DeliveryServiceClient', () => {
         task: 'taskValue',
       };
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2282,7 +2281,7 @@ describe('v1.DeliveryServiceClient', () => {
         tracking: 'trackingValue',
       };
       const client = new deliveryserviceModule.v1.DeliveryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

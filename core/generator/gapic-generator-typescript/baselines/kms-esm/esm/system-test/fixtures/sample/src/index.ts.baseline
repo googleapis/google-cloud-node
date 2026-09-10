@@ -17,7 +17,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { KeyManagementServiceClient } from 'kms';
+import {KeyManagementServiceClient} from 'kms';
 
 // check that the client class type name can be used
 function doStuffWithKeyManagementServiceClient(

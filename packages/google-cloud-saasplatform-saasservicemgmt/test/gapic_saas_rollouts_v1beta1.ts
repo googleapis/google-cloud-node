@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as saasrolloutsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.saasRolloutsStub, undefined);
@@ -250,12 +250,12 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(client.saasRolloutsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.saasRolloutsStub);
@@ -264,14 +264,14 @@ describe('v1beta1.SaasRolloutsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.saasRolloutsStub, undefined);
@@ -280,7 +280,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('getRollout', () => {
     it('invokes getRollout without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes getRollout without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes getRollout with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes getRollout with closed client', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRollout(request), expectedError);
@@ -455,7 +455,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('createRollout', () => {
     it('invokes createRollout without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes createRollout without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes createRollout with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes createRollout with closed client', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRollout(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('updateRollout', () => {
     it('invokes updateRollout without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes updateRollout without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes updateRollout with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes updateRollout with closed client', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
       );
       request.rollout.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRollout(request), expectedError);
@@ -723,7 +723,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('deleteRollout', () => {
     it('invokes deleteRollout without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes deleteRollout without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes deleteRollout with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes deleteRollout with closed client', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRollout(request), expectedError);
@@ -855,7 +855,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('getRolloutKind', () => {
     it('invokes getRolloutKind without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes getRolloutKind without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -933,7 +933,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes getRolloutKind with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes getRolloutKind with closed client', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRolloutKind(request), expectedError);
@@ -987,7 +987,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('createRolloutKind', () => {
     it('invokes createRolloutKind without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes createRolloutKind without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1065,7 +1065,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes createRolloutKind with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,7 +1096,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes createRolloutKind with closed client', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRolloutKind(request), expectedError);
@@ -1119,7 +1119,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('updateRolloutKind', () => {
     it('invokes updateRolloutKind without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes updateRolloutKind without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1199,7 +1199,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes updateRolloutKind with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes updateRolloutKind with closed client', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
       );
       request.rolloutKind.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRolloutKind(request), expectedError);
@@ -1255,7 +1255,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('deleteRolloutKind', () => {
     it('invokes deleteRolloutKind without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1286,7 +1286,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes deleteRolloutKind without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1333,7 +1333,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes deleteRolloutKind with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes deleteRolloutKind with closed client', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRolloutKind(request), expectedError);
@@ -1387,7 +1387,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('listRollouts', () => {
     it('invokes listRollouts without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1426,7 +1426,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes listRollouts without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,7 +1483,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes listRollouts with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1514,7 +1514,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes listRolloutsStream without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1569,15 +1569,15 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(
         (client.descriptors.page.listRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRolloutsStream with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1623,15 +1623,15 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(
         (client.descriptors.page.listRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRollouts without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1673,15 +1673,15 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(
         (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRollouts with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1714,9 +1714,9 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(
         (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1724,7 +1724,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('listRolloutKinds', () => {
     it('invokes listRolloutKinds without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,7 +1763,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes listRolloutKinds without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes listRolloutKinds with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1851,7 +1851,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
 
     it('invokes listRolloutKindsStream without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1906,15 +1906,15 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(
         (client.descriptors.page.listRolloutKinds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRolloutKindsStream with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1958,15 +1958,15 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(
         (client.descriptors.page.listRolloutKinds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRolloutKinds without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2008,15 +2008,15 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(
         (client.descriptors.page.listRolloutKinds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRolloutKinds with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2049,16 +2049,16 @@ describe('v1beta1.SaasRolloutsClient', () => {
       assert(
         (client.descriptors.page.listRolloutKinds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,7 +2088,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2132,7 +2132,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2167,7 +2167,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2215,7 +2215,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2262,7 +2262,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         location: 'locationValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2310,7 +2310,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         project: 'projectValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2350,7 +2350,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         release: 'releaseValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2414,7 +2414,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         rollout_id: 'rolloutIdValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2478,7 +2478,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         rollout_kind_id: 'rolloutKindIdValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2542,7 +2542,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         saas: 'saasValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2606,7 +2606,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         tenant: 'tenantValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2670,7 +2670,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         unit: 'unitValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2734,7 +2734,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         unitKind: 'unitKindValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2798,7 +2798,7 @@ describe('v1beta1.SaasRolloutsClient', () => {
         unitOperation: 'unitOperationValue',
       };
       const client = new saasrolloutsModule.v1beta1.SaasRolloutsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

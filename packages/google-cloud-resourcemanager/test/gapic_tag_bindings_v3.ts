@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as tagbindingsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -272,7 +272,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tagBindingsStub, undefined);
@@ -280,12 +280,12 @@ describe('v3.TagBindingsClient', () => {
       assert(client.tagBindingsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.tagBindingsStub);
@@ -294,14 +294,14 @@ describe('v3.TagBindingsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tagBindingsStub, undefined);
@@ -310,7 +310,7 @@ describe('v3.TagBindingsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v3.TagBindingsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v3.TagBindingsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v3.TagBindingsClient', () => {
   describe('createTagBinding', () => {
     it('invokes createTagBinding without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes createTagBinding without error using callback', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -412,7 +412,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes createTagBinding with call error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes createTagBinding with LRO error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes checkCreateTagBindingProgress without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -456,8 +456,8 @@ describe('v3.TagBindingsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTagBindingProgress(
@@ -470,7 +470,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes checkCreateTagBindingProgress with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v3.TagBindingsClient', () => {
   describe('deleteTagBinding', () => {
     it('invokes deleteTagBinding without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes deleteTagBinding without error using callback', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -578,7 +578,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes deleteTagBinding with call error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes deleteTagBinding with LRO error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -642,7 +642,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes checkDeleteTagBindingProgress without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,8 +650,8 @@ describe('v3.TagBindingsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTagBindingProgress(
@@ -664,7 +664,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes checkDeleteTagBindingProgress with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -685,7 +685,7 @@ describe('v3.TagBindingsClient', () => {
   describe('listTagBindings', () => {
     it('invokes listTagBindings without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes listTagBindings without error using callback', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,8 +736,7 @@ describe('v3.TagBindingsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.resourcemanager.v3.ITagBinding[]
-              | null,
+              protos.google.cloud.resourcemanager.v3.ITagBinding[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -753,7 +752,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes listTagBindings with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -770,7 +769,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes listTagBindingsStream without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -818,7 +817,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes listTagBindingsStream with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -855,7 +854,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('uses async iteration with listTagBindings without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -892,7 +891,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('uses async iteration with listTagBindings with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -922,7 +921,7 @@ describe('v3.TagBindingsClient', () => {
   describe('listEffectiveTags', () => {
     it('invokes listEffectiveTags without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +946,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes listEffectiveTags without error using callback', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,8 +972,7 @@ describe('v3.TagBindingsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.resourcemanager.v3.IEffectiveTag[]
-              | null,
+              protos.google.cloud.resourcemanager.v3.IEffectiveTag[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -990,7 +988,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes listEffectiveTags with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1005,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes listEffectiveTagsStream without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1055,7 +1053,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('invokes listEffectiveTagsStream with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1092,7 +1090,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('uses async iteration with listEffectiveTags without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1127,7 @@ describe('v3.TagBindingsClient', () => {
 
     it('uses async iteration with listEffectiveTags with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1158,7 +1156,7 @@ describe('v3.TagBindingsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,7 +1177,7 @@ describe('v3.TagBindingsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1207,7 +1205,7 @@ describe('v3.TagBindingsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1217,7 +1215,7 @@ describe('v3.TagBindingsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1241,7 +1239,7 @@ describe('v3.TagBindingsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1263,7 +1261,7 @@ describe('v3.TagBindingsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1291,7 +1289,7 @@ describe('v3.TagBindingsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1301,7 +1299,7 @@ describe('v3.TagBindingsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1325,7 +1323,7 @@ describe('v3.TagBindingsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1347,7 +1345,7 @@ describe('v3.TagBindingsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1375,7 +1373,7 @@ describe('v3.TagBindingsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1385,7 +1383,7 @@ describe('v3.TagBindingsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1409,7 +1407,7 @@ describe('v3.TagBindingsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1444,7 +1442,7 @@ describe('v3.TagBindingsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1478,7 +1476,7 @@ describe('v3.TagBindingsClient', () => {
         folder: 'folderValue',
       };
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,7 +1514,7 @@ describe('v3.TagBindingsClient', () => {
         organization: 'organizationValue',
       };
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1554,7 +1552,7 @@ describe('v3.TagBindingsClient', () => {
         project: 'projectValue',
       };
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1592,7 +1590,7 @@ describe('v3.TagBindingsClient', () => {
         tag_binding: 'tagBindingValue',
       };
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1631,7 +1629,7 @@ describe('v3.TagBindingsClient', () => {
         tag_hold: 'tagHoldValue',
       };
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1679,7 +1677,7 @@ describe('v3.TagBindingsClient', () => {
         tag_key: 'tagKeyValue',
       };
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1717,7 +1715,7 @@ describe('v3.TagBindingsClient', () => {
         tag_value: 'tagValueValue',
       };
       const client = new tagbindingsModule.v3.TagBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

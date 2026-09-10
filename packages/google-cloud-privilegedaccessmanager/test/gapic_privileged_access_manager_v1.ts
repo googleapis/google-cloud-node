@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as privilegedaccessmanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -300,7 +300,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.privilegedAccessManagerStub, undefined);
@@ -308,13 +308,13 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(client.privilegedAccessManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.privilegedAccessManagerStub);
@@ -323,15 +323,15 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.privilegedAccessManagerStub, undefined);
@@ -340,7 +340,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -349,7 +349,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -362,7 +362,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -386,7 +386,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkOnboardingStatus without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -419,7 +419,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkOnboardingStatus without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkOnboardingStatus with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkOnboardingStatus with closed client', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -529,7 +529,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getEntitlement without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getEntitlement without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getEntitlement with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -641,7 +641,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getEntitlement with closed client', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntitlement(request), expectedError);
@@ -665,7 +665,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getGrant without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getGrant without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getGrant with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -774,7 +774,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getGrant with closed client', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGrant(request), expectedError);
@@ -798,7 +798,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes createGrant without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes createGrant without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes createGrant with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -910,7 +910,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes createGrant with closed client', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -923,7 +923,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createGrant(request), expectedError);
@@ -934,7 +934,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes approveGrant without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes approveGrant without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes approveGrant with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes approveGrant with closed client', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.approveGrant(request), expectedError);
@@ -1070,7 +1070,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes denyGrant without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes denyGrant without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1150,7 +1150,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes denyGrant with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1179,7 +1179,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes denyGrant with closed client', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1192,7 +1192,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.denyGrant(request), expectedError);
@@ -1203,7 +1203,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes createEntitlement without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1237,7 +1237,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes createEntitlement without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1292,7 +1292,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes createEntitlement with call error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1324,7 +1324,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes createEntitlement with LRO error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkCreateEntitlementProgress without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1366,8 +1366,8 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEntitlementProgress(
@@ -1381,7 +1381,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkCreateEntitlementProgress with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1403,7 +1403,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes deleteEntitlement without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1437,7 +1437,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes deleteEntitlement without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1492,7 +1492,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes deleteEntitlement with call error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1524,7 +1524,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes deleteEntitlement with LRO error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1558,7 +1558,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkDeleteEntitlementProgress without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1566,8 +1566,8 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEntitlementProgress(
@@ -1581,7 +1581,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkDeleteEntitlementProgress with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1603,7 +1603,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes updateEntitlement without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes updateEntitlement without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1694,7 +1694,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes updateEntitlement with call error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1727,7 +1727,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes updateEntitlement with LRO error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1762,7 +1762,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkUpdateEntitlementProgress without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1770,8 +1770,8 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEntitlementProgress(
@@ -1785,7 +1785,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkUpdateEntitlementProgress with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1807,7 +1807,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes revokeGrant without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1840,7 +1840,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes revokeGrant without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes revokeGrant with call error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1927,7 +1927,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes revokeGrant with LRO error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1961,7 +1961,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkRevokeGrantProgress without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1969,8 +1969,8 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRevokeGrantProgress(
@@ -1984,7 +1984,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes checkRevokeGrantProgress with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2003,7 +2003,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes listEntitlements without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2043,7 +2043,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes listEntitlements without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2101,7 +2101,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes listEntitlements with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2133,7 +2133,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes listEntitlementsStream without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2188,16 +2188,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEntitlementsStream with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2241,16 +2241,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntitlements without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2292,16 +2292,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntitlements with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2334,9 +2334,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2345,7 +2345,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes searchEntitlements without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2386,7 +2386,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes searchEntitlements without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2444,7 +2444,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes searchEntitlements with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2476,7 +2476,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes searchEntitlementsStream without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2531,16 +2531,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchEntitlementsStream with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2584,16 +2584,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchEntitlements without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2635,16 +2635,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchEntitlements with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2677,9 +2677,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2688,7 +2688,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes listGrants without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2728,7 +2728,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes listGrants without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2760,8 +2760,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.privilegedaccessmanager.v1.IGrant[]
-              | null,
+              protos.google.cloud.privilegedaccessmanager.v1.IGrant[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2786,7 +2785,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes listGrants with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2818,7 +2817,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes listGrantsStream without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2871,16 +2870,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listGrants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGrantsStream with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2924,16 +2923,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listGrants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGrants without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2975,16 +2974,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listGrants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGrants with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3019,9 +3018,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.listGrants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3030,7 +3029,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes searchGrants without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3070,7 +3069,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes searchGrants without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3102,8 +3101,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.privilegedaccessmanager.v1.IGrant[]
-              | null,
+              protos.google.cloud.privilegedaccessmanager.v1.IGrant[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3128,7 +3126,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes searchGrants with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3160,7 +3158,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes searchGrantsStream without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3213,16 +3211,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchGrants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchGrantsStream with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3266,16 +3264,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchGrants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchGrants without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3317,16 +3315,16 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchGrants with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3359,9 +3357,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       assert(
         (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3369,7 +3367,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3400,7 +3398,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3445,7 +3443,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3481,7 +3479,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3530,7 +3528,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3572,7 +3570,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3594,7 +3592,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3622,7 +3620,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3633,7 +3631,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3658,7 +3656,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3681,7 +3679,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3709,7 +3707,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3720,7 +3718,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3745,7 +3743,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3768,7 +3766,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3796,7 +3794,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3807,7 +3805,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3832,7 +3830,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3868,7 +3866,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3906,7 +3904,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       };
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4001,7 +3999,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       };
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4080,7 +4078,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       };
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4132,7 +4130,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       };
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4238,7 +4236,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       };
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4320,7 +4318,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       };
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4362,7 +4360,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       };
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4459,7 +4457,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       };
       const client =
         new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

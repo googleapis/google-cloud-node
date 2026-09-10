@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sqldataserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -84,9 +84,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -207,7 +207,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sqlDataServiceStub, undefined);
@@ -215,12 +215,12 @@ describe('v1beta4.SqlDataServiceClient', () => {
       assert(client.sqlDataServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sqlDataServiceStub);
@@ -229,14 +229,14 @@ describe('v1beta4.SqlDataServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sqlDataServiceStub, undefined);
@@ -245,7 +245,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -253,7 +253,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -265,7 +265,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -288,7 +288,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
   describe('streamSqlData', () => {
     it('invokes streamSqlData without error', async () => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -331,7 +331,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
 
     it('invokes streamSqlData with error', async () => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -373,7 +373,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
         backup: 'backupValue',
       };
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -626,7 +626,7 @@ describe('v1beta4.SqlDataServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

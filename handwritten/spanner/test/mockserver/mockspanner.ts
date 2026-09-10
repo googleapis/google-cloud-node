@@ -108,9 +108,7 @@ export class ReadRequestResult {
   }
 
   private readonly _resultSet:
-    | protobuf.ResultSet
-    | protobuf.PartialResultSet[]
-    | null;
+    protobuf.ResultSet | protobuf.PartialResultSet[] | null;
 
   /**
    * The result set associated with the result, if any.
@@ -177,9 +175,7 @@ export class StatementResult {
     throw new Error('The StatementResult does not contain an Error');
   }
   private readonly _resultSet:
-    | protobuf.ResultSet
-    | protobuf.PartialResultSet[]
-    | null;
+    protobuf.ResultSet | protobuf.PartialResultSet[] | null;
   get resultSet(): protobuf.ResultSet | protobuf.PartialResultSet[] {
     if (this._resultSet) {
       return this._resultSet;
@@ -859,9 +855,7 @@ export class MockSpanner {
 
   private static emptyPartialResultSet(
     precommitToken:
-      | protobuf.IMultiplexedSessionPrecommitToken
-      | null
-      | undefined,
+      protobuf.IMultiplexedSessionPrecommitToken | null | undefined,
     resumeToken: Uint8Array,
   ): protobuf.PartialResultSet {
     return protobuf.PartialResultSet.create({
@@ -872,9 +866,7 @@ export class MockSpanner {
 
   private static toPartialResultSet(
     precommitToken:
-      | protobuf.IMultiplexedSessionPrecommitToken
-      | null
-      | undefined,
+      protobuf.IMultiplexedSessionPrecommitToken | null | undefined,
     rowCount: number,
   ): protobuf.PartialResultSet {
     const stats = {

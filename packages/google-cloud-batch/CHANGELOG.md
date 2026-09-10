@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/batch-v3.1.0...batch-v3.2.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/batch-v3.0.0...batch-v3.1.0) (2026-09-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9238](https://github.com/googleapis/google-cloud-node/issues/9238)) ([4c2bc95](https://github.com/googleapis/google-cloud-node/commit/4c2bc9510562e753340276ff5b21e1f18c71e7b2))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/batch-v2.5.0...batch-v3.0.0) (2026-08-04)
 
 

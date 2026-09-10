@@ -82,8 +82,11 @@ async function main() {
 
   // generate test output
   try {
-    console.log('Running npm test...');
-    await execp('npm test');
+    console.log('Running tests...');
+    await execp(
+      'node ./node_modules/mocha/bin/mocha.js "build/typescript/test/unit/**/*.js" --timeout 300000 --reporter min',
+      {maxBuffer: 50 * 1024 * 1024},
+    );
     console.log('Tests passed! No need to update baselines.');
     return;
   } catch (err) {

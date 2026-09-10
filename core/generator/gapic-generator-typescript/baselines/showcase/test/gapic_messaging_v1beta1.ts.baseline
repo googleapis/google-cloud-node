@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as messagingModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -199,9 +199,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -272,7 +272,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.messagingStub, undefined);
@@ -280,12 +280,12 @@ describe('v1beta1.MessagingClient', () => {
       assert(client.messagingStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.messagingStub);
@@ -294,14 +294,14 @@ describe('v1beta1.MessagingClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.messagingStub, undefined);
@@ -310,7 +310,7 @@ describe('v1beta1.MessagingClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v1beta1.MessagingClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v1beta1.MessagingClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('createRoom', () => {
     it('invokes createRoom without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes createRoom without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes createRoom with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes createRoom with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v1beta1.MessagingClient', () => {
         new protos.google.showcase.v1beta1.CreateRoomRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRoom(request), expectedError);
@@ -438,7 +438,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('getRoom', () => {
     it('invokes getRoom without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes getRoom without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes getRoom with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -544,7 +544,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes getRoom with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v1beta1.MessagingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRoom(request), expectedError);
@@ -567,7 +567,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('updateRoom', () => {
     it('invokes updateRoom without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes updateRoom without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -647,7 +647,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes updateRoom with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes updateRoom with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1beta1.MessagingClient', () => {
       );
       request.room.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRoom(request), expectedError);
@@ -703,7 +703,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('deleteRoom', () => {
     it('invokes deleteRoom without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes deleteRoom without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes deleteRoom with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -812,7 +812,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes deleteRoom with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -825,7 +825,7 @@ describe('v1beta1.MessagingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRoom(request), expectedError);
@@ -835,7 +835,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('createBlurb', () => {
     it('invokes createBlurb without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes createBlurb without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes createBlurb with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -944,7 +944,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes createBlurb with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +957,7 @@ describe('v1beta1.MessagingClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createBlurb(request), expectedError);
@@ -967,7 +967,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('getBlurb', () => {
     it('invokes getBlurb without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes getBlurb without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1045,7 +1045,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes getBlurb with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1073,7 +1073,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes getBlurb with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1086,7 +1086,7 @@ describe('v1beta1.MessagingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBlurb(request), expectedError);
@@ -1096,7 +1096,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('updateBlurb', () => {
     it('invokes updateBlurb without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1128,7 +1128,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes updateBlurb without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes updateBlurb with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1208,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes updateBlurb with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1222,7 +1222,7 @@ describe('v1beta1.MessagingClient', () => {
       );
       request.blurb.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBlurb(request), expectedError);
@@ -1232,7 +1232,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('deleteBlurb', () => {
     it('invokes deleteBlurb without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes deleteBlurb without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes deleteBlurb with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1341,7 +1341,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes deleteBlurb with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1354,7 +1354,7 @@ describe('v1beta1.MessagingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBlurb(request), expectedError);
@@ -1364,7 +1364,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('searchBlurbs', () => {
     it('invokes searchBlurbs without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes searchBlurbs without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes searchBlurbs with call error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1481,7 +1481,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes searchBlurbs with LRO error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1514,7 +1514,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes checkSearchBlurbsProgress without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1522,8 +1522,8 @@ describe('v1beta1.MessagingClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSearchBlurbsProgress(
@@ -1536,7 +1536,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes checkSearchBlurbsProgress with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1554,7 +1554,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('streamBlurbs', () => {
     it('invokes streamBlurbs without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1598,7 +1598,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes streamBlurbs without error and gaxServerStreamingRetries enabled', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1643,7 +1643,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes streamBlurbs with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1686,7 +1686,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes streamBlurbs with closed client', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1699,11 +1699,11 @@ describe('v1beta1.MessagingClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.streamBlurbs(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1729,7 +1729,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('connect', () => {
     it('invokes connect without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes connect with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1810,7 +1810,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('sendBlurbs', () => {
     it('invokes sendBlurbs without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,7 +1855,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes sendBlurbs with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1896,7 +1896,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('listRooms', () => {
     it('invokes listRooms without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes listRooms without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes listRooms with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,7 +1964,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes listRoomsStream without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2002,7 +2002,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes listRoomsStream with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2037,7 +2037,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('uses async iteration with listRooms without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('uses async iteration with listRooms with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2096,7 +2096,7 @@ describe('v1beta1.MessagingClient', () => {
   describe('listBlurbs', () => {
     it('invokes listBlurbs without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2129,7 +2129,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes listBlurbs without error using callback', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2178,7 +2178,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes listBlurbs with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2209,7 +2209,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes listBlurbsStream without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2260,7 +2260,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('invokes listBlurbsStream with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2308,7 +2308,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('uses async iteration with listBlurbs without error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2351,7 +2351,7 @@ describe('v1beta1.MessagingClient', () => {
 
     it('uses async iteration with listBlurbs with error', async () => {
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2401,7 +2401,7 @@ describe('v1beta1.MessagingClient', () => {
         blueprint: 'blueprintValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2463,7 +2463,7 @@ describe('v1beta1.MessagingClient', () => {
         room: 'roomValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2502,7 +2502,7 @@ describe('v1beta1.MessagingClient', () => {
         blurb: 'blurbValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2552,7 +2552,7 @@ describe('v1beta1.MessagingClient', () => {
         blurb: 'blurbValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2629,7 +2629,7 @@ describe('v1beta1.MessagingClient', () => {
         sequence: 'sequenceValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2667,7 +2667,7 @@ describe('v1beta1.MessagingClient', () => {
         sequence: 'sequenceValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2705,7 +2705,7 @@ describe('v1beta1.MessagingClient', () => {
         session: 'sessionValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2744,7 +2744,7 @@ describe('v1beta1.MessagingClient', () => {
         test: 'testValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2792,7 +2792,7 @@ describe('v1beta1.MessagingClient', () => {
         user: 'userValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2831,7 +2831,7 @@ describe('v1beta1.MessagingClient', () => {
         blurb: 'blurbValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2884,7 +2884,7 @@ describe('v1beta1.MessagingClient', () => {
         blurb: 'blurbValue',
       };
       const client = new messagingModule.v1beta1.MessagingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

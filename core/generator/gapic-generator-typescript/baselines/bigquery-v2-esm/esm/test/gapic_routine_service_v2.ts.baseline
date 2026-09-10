@@ -20,16 +20,16 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as routineserviceModule from '../src/index.js';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -128,9 +128,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -250,7 +250,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.routineServiceStub, undefined);
@@ -258,12 +258,12 @@ describe('v2.RoutineServiceClient', () => {
       assert(client.routineServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.routineServiceStub);
@@ -272,14 +272,14 @@ describe('v2.RoutineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.routineServiceStub, undefined);
@@ -288,7 +288,7 @@ describe('v2.RoutineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -296,7 +296,7 @@ describe('v2.RoutineServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -308,7 +308,7 @@ describe('v2.RoutineServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -331,7 +331,7 @@ describe('v2.RoutineServiceClient', () => {
   describe('getRoutine', () => {
     it('invokes getRoutine without error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes getRoutine without error using callback', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes getRoutine with error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -470,7 +470,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes getRoutine with closed client', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -493,7 +493,7 @@ describe('v2.RoutineServiceClient', () => {
       );
       request.routineId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRoutine(request), expectedError);
@@ -503,7 +503,7 @@ describe('v2.RoutineServiceClient', () => {
   describe('insertRoutine', () => {
     it('invokes insertRoutine without error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -539,7 +539,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes insertRoutine without error using callback', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes insertRoutine with error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -627,7 +627,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes insertRoutine with closed client', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -645,7 +645,7 @@ describe('v2.RoutineServiceClient', () => {
       );
       request.datasetId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insertRoutine(request), expectedError);
@@ -655,7 +655,7 @@ describe('v2.RoutineServiceClient', () => {
   describe('updateRoutine', () => {
     it('invokes updateRoutine without error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes updateRoutine without error using callback', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes updateRoutine with error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes updateRoutine with closed client', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -817,7 +817,7 @@ describe('v2.RoutineServiceClient', () => {
       );
       request.routineId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRoutine(request), expectedError);
@@ -827,7 +827,7 @@ describe('v2.RoutineServiceClient', () => {
   describe('patchRoutine', () => {
     it('invokes patchRoutine without error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes patchRoutine without error using callback', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes patchRoutine with error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes patchRoutine with closed client', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -902,7 +902,7 @@ describe('v2.RoutineServiceClient', () => {
         new protos.google.cloud.bigquery.v2.PatchRoutineRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.patchRoutine(request), expectedError);
@@ -912,7 +912,7 @@ describe('v2.RoutineServiceClient', () => {
   describe('deleteRoutine', () => {
     it('invokes deleteRoutine without error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -953,7 +953,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes deleteRoutine without error using callback', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes deleteRoutine with error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes deleteRoutine with closed client', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1074,7 +1074,7 @@ describe('v2.RoutineServiceClient', () => {
       );
       request.routineId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRoutine(request), expectedError);
@@ -1084,7 +1084,7 @@ describe('v2.RoutineServiceClient', () => {
   describe('listRoutines', () => {
     it('invokes listRoutines without error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1122,7 +1122,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes listRoutines without error using callback', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes listRoutines with error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1212,7 +1212,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes listRoutinesStream without error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('invokes listRoutinesStream with error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1327,7 +1327,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('uses async iteration with listRoutines without error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v2.RoutineServiceClient', () => {
 
     it('uses async iteration with listRoutines with error', async () => {
       const client = new routineserviceModule.v2.RoutineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

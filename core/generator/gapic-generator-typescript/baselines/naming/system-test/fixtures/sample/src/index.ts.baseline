@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { NamingClient } from 'naming';
+import {NamingClient} from 'naming';
 
 // check that the client class type name can be used
 function doStuffWithNamingClient(client: NamingClient) {

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as generatorevaluationsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -286,7 +286,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.generatorEvaluationsStub, undefined);
@@ -294,13 +294,13 @@ describe('v2.GeneratorEvaluationsClient', () => {
       assert(client.generatorEvaluationsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.generatorEvaluationsStub);
@@ -309,15 +309,15 @@ describe('v2.GeneratorEvaluationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.generatorEvaluationsStub, undefined);
@@ -326,7 +326,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -348,7 +348,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -372,7 +372,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getGeneratorEvaluation without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -405,7 +405,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getGeneratorEvaluation without error using callback', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getGeneratorEvaluation with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getGeneratorEvaluation with closed client', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -501,7 +501,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -515,7 +515,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes deleteGeneratorEvaluation without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -548,7 +548,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes deleteGeneratorEvaluation without error using callback', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes deleteGeneratorEvaluation with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes deleteGeneratorEvaluation with closed client', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -644,7 +644,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -658,7 +658,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes createGeneratorEvaluation without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes createGeneratorEvaluation without error using callback', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes createGeneratorEvaluation with call error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes createGeneratorEvaluation with LRO error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -816,7 +816,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes checkCreateGeneratorEvaluationProgress without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -824,8 +824,8 @@ describe('v2.GeneratorEvaluationsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -840,7 +840,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes checkCreateGeneratorEvaluationProgress with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes listGeneratorEvaluations without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -903,7 +903,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes listGeneratorEvaluations without error using callback', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -935,8 +935,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2.IGeneratorEvaluation[]
-              | null,
+              protos.google.cloud.dialogflow.v2.IGeneratorEvaluation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -961,7 +960,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes listGeneratorEvaluations with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -996,7 +995,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes listGeneratorEvaluationsStream without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1064,7 +1063,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes listGeneratorEvaluationsStream with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1121,7 +1120,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('uses async iteration with listGeneratorEvaluations without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1176,7 +1175,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('uses async iteration with listGeneratorEvaluations with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1223,7 +1222,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1254,7 +1253,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1299,7 +1298,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1335,7 +1334,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1384,7 +1383,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1426,7 +1425,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1448,7 +1447,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1476,7 +1475,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1487,7 +1486,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1512,7 +1511,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1535,7 +1534,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1563,7 +1562,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1574,7 +1573,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1599,7 +1598,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1622,7 +1621,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1650,7 +1649,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1661,7 +1660,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1686,7 +1685,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1722,7 +1721,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1759,7 +1758,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1837,7 +1836,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1891,7 +1890,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1957,7 +1956,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2050,7 +2049,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2099,7 +2098,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2138,7 +2137,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2178,7 +2177,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2242,7 +2241,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2310,7 +2309,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2437,7 +2436,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2559,7 +2558,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2606,7 +2605,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2669,7 +2668,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2749,7 +2748,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2826,7 +2825,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2888,7 +2887,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2952,7 +2951,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3031,7 +3030,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3098,7 +3097,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3182,7 +3181,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3263,7 +3262,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3329,7 +3328,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3393,7 +3392,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3458,7 +3457,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3537,7 +3536,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3602,7 +3601,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3682,7 +3681,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3766,7 +3765,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3913,7 +3912,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4055,7 +4054,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4118,7 +4117,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4199,7 +4198,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4301,7 +4300,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4407,7 +4406,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4486,7 +4485,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4566,7 +4565,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4667,7 +4666,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4751,7 +4750,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4858,7 +4857,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4964,7 +4963,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5048,7 +5047,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5128,7 +5127,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5209,7 +5208,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5315,7 +5314,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5380,7 +5379,7 @@ describe('v2.GeneratorEvaluationsClient', () => {
       };
       const client =
         new generatorevaluationsModule.v2.GeneratorEvaluationsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

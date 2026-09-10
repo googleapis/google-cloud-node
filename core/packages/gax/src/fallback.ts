@@ -32,6 +32,7 @@ import {isNodeJS} from './featureDetection';
 import {generateServiceStub} from './fallbackServiceStub';
 import {StreamType} from './streamingCalls/streaming';
 import {toLowerCamelCase} from './util';
+import {StaticTraceContext} from './observability/TracerHelper';
 import {google} from '../protos/http';
 import * as IamProtos from '../protos/iam_service';
 import * as LocationProtos from '../protos/locations';
@@ -188,14 +189,16 @@ export class GrpcClient {
 
   /**
    * gRPC-fallback version of constructSettings
-   * A wrapper of {@link constructSettings} function under the gRPC context.
+   * A wrapper of {@link constructSettings} function under the gRPC-fallback context.
    *
    * Most of parameters are common among constructSettings, please take a look.
-   * @param {string} serviceName - The fullly-qualified name of the service.
+   * @param {string} serviceName - The fully-qualified name of the service.
    * @param {Object} clientConfig - A dictionary of the client config.
    * @param {Object} configOverrides - A dictionary of overriding configs.
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
+   * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+   * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -203,6 +206,8 @@ export class GrpcClient {
     clientConfig: gax.ClientConfig,
     configOverrides: gax.ClientConfig,
     headers: OutgoingHttpHeaders,
+    enableTelemetryTracing?: boolean,
+    internalTelemetryInfo?: StaticTraceContext,
   ) {
     function buildMetadata(abTests: {}, moreHeaders: OutgoingHttpHeaders) {
       const metadata: OutgoingHttpHeaders = {};
@@ -267,6 +272,8 @@ export class GrpcClient {
       configOverrides,
       Status,
       {metadataBuilder: buildMetadata},
+      enableTelemetryTracing,
+      internalTelemetryInfo,
     );
   }
 

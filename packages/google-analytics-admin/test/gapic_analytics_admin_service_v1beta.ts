@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as analyticsadminserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -254,7 +254,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.analyticsAdminServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(client.analyticsAdminServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.analyticsAdminServiceStub);
@@ -277,15 +277,15 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.analyticsAdminServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getAccount without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getAccount without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getAccount with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getAccount with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAccount(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteAccount without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -508,7 +508,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteAccount without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteAccount with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteAccount with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAccount(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateAccount without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -645,7 +645,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateAccount without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateAccount with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -727,7 +727,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateAccount with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.account.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAccount(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes provisionAccountTicket without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -771,7 +771,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes provisionAccountTicket without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -805,7 +805,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes provisionAccountTicket with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes provisionAccountTicket with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ProvisionAccountTicketRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -848,7 +848,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getProperty without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getProperty without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getProperty with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getProperty with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProperty(request), expectedError);
@@ -984,7 +984,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createProperty without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createProperty without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1036,7 +1036,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createProperty with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createProperty with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1062,7 +1062,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreatePropertyRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createProperty(request), expectedError);
@@ -1073,7 +1073,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteProperty without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteProperty without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1153,7 +1153,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteProperty with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteProperty with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteProperty(request), expectedError);
@@ -1209,7 +1209,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateProperty without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateProperty without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1291,7 +1291,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateProperty with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1324,7 +1324,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateProperty with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1338,7 +1338,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.property.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateProperty(request), expectedError);
@@ -1349,7 +1349,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createFirebaseLink without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1382,7 +1382,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createFirebaseLink without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1430,7 +1430,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createFirebaseLink with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1462,7 +1462,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createFirebaseLink with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1475,7 +1475,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFirebaseLink(request), expectedError);
@@ -1486,7 +1486,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteFirebaseLink without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1519,7 +1519,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteFirebaseLink without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1567,7 +1567,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteFirebaseLink with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1599,7 +1599,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteFirebaseLink with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1612,7 +1612,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteFirebaseLink(request), expectedError);
@@ -1623,7 +1623,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createGoogleAdsLink without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1656,7 +1656,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createGoogleAdsLink without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1704,7 +1704,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createGoogleAdsLink with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1736,7 +1736,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createGoogleAdsLink with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1749,7 +1749,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createGoogleAdsLink(request), expectedError);
@@ -1760,7 +1760,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateGoogleAdsLink without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1794,7 +1794,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateGoogleAdsLink without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1843,7 +1843,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateGoogleAdsLink with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateGoogleAdsLink with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.googleAdsLink.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateGoogleAdsLink(request), expectedError);
@@ -1901,7 +1901,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteGoogleAdsLink without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1934,7 +1934,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteGoogleAdsLink without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1982,7 +1982,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteGoogleAdsLink with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2014,7 +2014,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteGoogleAdsLink with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2027,7 +2027,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteGoogleAdsLink(request), expectedError);
@@ -2038,7 +2038,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataSharingSettings without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2071,7 +2071,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataSharingSettings without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2119,7 +2119,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataSharingSettings with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2154,7 +2154,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataSharingSettings with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2167,7 +2167,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2181,7 +2181,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getMeasurementProtocolSecret without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2214,7 +2214,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getMeasurementProtocolSecret without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2262,7 +2262,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getMeasurementProtocolSecret with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2297,7 +2297,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getMeasurementProtocolSecret with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2310,7 +2310,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2324,7 +2324,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createMeasurementProtocolSecret without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2357,7 +2357,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createMeasurementProtocolSecret without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2405,7 +2405,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createMeasurementProtocolSecret with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2440,7 +2440,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createMeasurementProtocolSecret with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2453,7 +2453,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2467,7 +2467,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteMeasurementProtocolSecret without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2500,7 +2500,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteMeasurementProtocolSecret without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2548,7 +2548,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteMeasurementProtocolSecret with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2583,7 +2583,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteMeasurementProtocolSecret with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2596,7 +2596,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2610,7 +2610,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateMeasurementProtocolSecret without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2644,7 +2644,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateMeasurementProtocolSecret without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2693,7 +2693,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateMeasurementProtocolSecret with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2729,7 +2729,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateMeasurementProtocolSecret with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2743,7 +2743,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.measurementProtocolSecret.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2757,7 +2757,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes acknowledgeUserDataCollection without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2790,7 +2790,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes acknowledgeUserDataCollection without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2838,7 +2838,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes acknowledgeUserDataCollection with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2873,7 +2873,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes acknowledgeUserDataCollection with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2886,7 +2886,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2900,7 +2900,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createConversionEvent without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2935,7 +2935,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createConversionEvent without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2985,7 +2985,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createConversionEvent with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3022,7 +3022,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createConversionEvent with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3036,7 +3036,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3051,7 +3051,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateConversionEvent without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3087,7 +3087,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateConversionEvent without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3138,7 +3138,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateConversionEvent with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3176,7 +3176,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateConversionEvent with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3191,7 +3191,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.conversionEvent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3206,7 +3206,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getConversionEvent without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3241,7 +3241,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getConversionEvent without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3291,7 +3291,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getConversionEvent with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3325,7 +3325,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getConversionEvent with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3339,7 +3339,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConversionEvent(request), expectedError);
@@ -3351,7 +3351,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteConversionEvent without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3386,7 +3386,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteConversionEvent without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3436,7 +3436,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteConversionEvent with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3473,7 +3473,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteConversionEvent with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -3487,7 +3487,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3502,7 +3502,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createKeyEvent without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3534,7 +3534,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createKeyEvent without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3582,7 +3582,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createKeyEvent with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3614,7 +3614,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createKeyEvent with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3627,7 +3627,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createKeyEvent(request), expectedError);
@@ -3638,7 +3638,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateKeyEvent without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3671,7 +3671,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateKeyEvent without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3720,7 +3720,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateKeyEvent with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3753,7 +3753,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateKeyEvent with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3767,7 +3767,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.keyEvent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateKeyEvent(request), expectedError);
@@ -3778,7 +3778,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getKeyEvent without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3810,7 +3810,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getKeyEvent without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3858,7 +3858,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getKeyEvent with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3890,7 +3890,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getKeyEvent with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3903,7 +3903,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getKeyEvent(request), expectedError);
@@ -3914,7 +3914,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteKeyEvent without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3946,7 +3946,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteKeyEvent without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3994,7 +3994,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteKeyEvent with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4026,7 +4026,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteKeyEvent with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4039,7 +4039,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteKeyEvent(request), expectedError);
@@ -4050,7 +4050,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createCustomDimension without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4083,7 +4083,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createCustomDimension without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4131,7 +4131,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createCustomDimension with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4166,7 +4166,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createCustomDimension with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4179,7 +4179,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4193,7 +4193,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateCustomDimension without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4227,7 +4227,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateCustomDimension without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4276,7 +4276,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateCustomDimension with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4312,7 +4312,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateCustomDimension with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4326,7 +4326,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.customDimension.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4340,7 +4340,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes archiveCustomDimension without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4373,7 +4373,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes archiveCustomDimension without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4421,7 +4421,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes archiveCustomDimension with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4456,7 +4456,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes archiveCustomDimension with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4469,7 +4469,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4483,7 +4483,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getCustomDimension without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4516,7 +4516,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getCustomDimension without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4564,7 +4564,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getCustomDimension with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4596,7 +4596,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getCustomDimension with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4609,7 +4609,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomDimension(request), expectedError);
@@ -4620,7 +4620,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createCustomMetric without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4653,7 +4653,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createCustomMetric without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4701,7 +4701,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createCustomMetric with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4733,7 +4733,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createCustomMetric with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4746,7 +4746,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCustomMetric(request), expectedError);
@@ -4757,7 +4757,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateCustomMetric without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4791,7 +4791,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateCustomMetric without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4840,7 +4840,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateCustomMetric with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4873,7 +4873,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateCustomMetric with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4887,7 +4887,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.customMetric.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCustomMetric(request), expectedError);
@@ -4898,7 +4898,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes archiveCustomMetric without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4931,7 +4931,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes archiveCustomMetric without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4979,7 +4979,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes archiveCustomMetric with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5011,7 +5011,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes archiveCustomMetric with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5024,7 +5024,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.archiveCustomMetric(request), expectedError);
@@ -5035,7 +5035,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getCustomMetric without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5067,7 +5067,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getCustomMetric without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5115,7 +5115,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getCustomMetric with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5147,7 +5147,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getCustomMetric with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5160,7 +5160,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomMetric(request), expectedError);
@@ -5171,7 +5171,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataRetentionSettings without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5204,7 +5204,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataRetentionSettings without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5252,7 +5252,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataRetentionSettings with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5287,7 +5287,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataRetentionSettings with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5300,7 +5300,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -5314,7 +5314,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateDataRetentionSettings without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5348,7 +5348,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateDataRetentionSettings without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5397,7 +5397,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateDataRetentionSettings with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5433,7 +5433,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateDataRetentionSettings with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5447,7 +5447,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.dataRetentionSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -5461,7 +5461,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createDataStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5493,7 +5493,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createDataStream without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5541,7 +5541,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createDataStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5573,7 +5573,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes createDataStream with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5586,7 +5586,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataStream(request), expectedError);
@@ -5597,7 +5597,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteDataStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5629,7 +5629,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteDataStream without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5677,7 +5677,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteDataStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5709,7 +5709,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes deleteDataStream with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5722,7 +5722,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataStream(request), expectedError);
@@ -5733,7 +5733,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateDataStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5766,7 +5766,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateDataStream without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5815,7 +5815,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateDataStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5848,7 +5848,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes updateDataStream with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5862,7 +5862,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.dataStream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataStream(request), expectedError);
@@ -5873,7 +5873,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5905,7 +5905,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataStream without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5953,7 +5953,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5985,7 +5985,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes getDataStream with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5998,7 +5998,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataStream(request), expectedError);
@@ -6009,7 +6009,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes runAccessReport without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6041,7 +6041,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes runAccessReport without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6089,7 +6089,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes runAccessReport with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6121,7 +6121,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes runAccessReport with closed client', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6134,7 +6134,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.entity = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runAccessReport(request), expectedError);
@@ -6145,7 +6145,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccounts without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6171,7 +6171,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccounts without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6213,7 +6213,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccounts with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6231,7 +6231,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccountsStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6279,7 +6279,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccountsStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6318,7 +6318,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with listAccounts without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6355,7 +6355,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with listAccounts with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6385,7 +6385,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccountSummaries without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6412,7 +6412,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccountSummaries without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6438,8 +6438,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1beta.IAccountSummary[]
-              | null,
+              protos.google.analytics.admin.v1beta.IAccountSummary[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6456,7 +6455,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccountSummaries with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6474,7 +6473,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccountSummariesStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6523,7 +6522,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listAccountSummariesStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6561,7 +6560,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with listAccountSummaries without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6599,7 +6598,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with listAccountSummaries with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6630,7 +6629,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listProperties without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6656,7 +6655,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listProperties without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6698,7 +6697,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listProperties with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6716,7 +6715,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listPropertiesStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6764,7 +6763,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listPropertiesStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6801,7 +6800,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with listProperties without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6838,7 +6837,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with listProperties with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6868,7 +6867,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listFirebaseLinks without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6908,7 +6907,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listFirebaseLinks without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6940,8 +6939,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1beta.IFirebaseLink[]
-              | null,
+              protos.google.analytics.admin.v1beta.IFirebaseLink[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6966,7 +6964,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listFirebaseLinks with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6998,7 +6996,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listFirebaseLinksStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7051,16 +7049,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFirebaseLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFirebaseLinksStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7102,16 +7100,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFirebaseLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFirebaseLinks without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7153,16 +7151,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFirebaseLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFirebaseLinks with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7195,9 +7193,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listFirebaseLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7206,7 +7204,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listGoogleAdsLinks without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7247,7 +7245,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listGoogleAdsLinks without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7279,8 +7277,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1beta.IGoogleAdsLink[]
-              | null,
+              protos.google.analytics.admin.v1beta.IGoogleAdsLink[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7305,7 +7302,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listGoogleAdsLinks with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7337,7 +7334,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listGoogleAdsLinksStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7390,16 +7387,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listGoogleAdsLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGoogleAdsLinksStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7441,16 +7438,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listGoogleAdsLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGoogleAdsLinks without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7492,16 +7489,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listGoogleAdsLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGoogleAdsLinks with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7534,9 +7531,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listGoogleAdsLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7545,7 +7542,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listMeasurementProtocolSecrets without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7586,7 +7583,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listMeasurementProtocolSecrets without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7644,7 +7641,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listMeasurementProtocolSecrets with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7679,7 +7676,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listMeasurementProtocolSecretsStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7752,7 +7749,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listMeasurementProtocolSecretsStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7814,7 +7811,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with listMeasurementProtocolSecrets without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7869,7 +7866,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with listMeasurementProtocolSecrets with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7917,7 +7914,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes searchChangeHistoryEvents without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7958,7 +7955,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes searchChangeHistoryEvents without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7990,8 +7987,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1beta.IChangeHistoryEvent[]
-              | null,
+              protos.google.analytics.admin.v1beta.IChangeHistoryEvent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8016,7 +8012,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes searchChangeHistoryEvents with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8051,7 +8047,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes searchChangeHistoryEventsStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8121,7 +8117,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes searchChangeHistoryEventsStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8180,7 +8176,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with searchChangeHistoryEvents without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8235,7 +8231,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('uses async iteration with searchChangeHistoryEvents with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8283,7 +8279,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listConversionEvents without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -8326,7 +8322,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listConversionEvents without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -8359,8 +8355,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1beta.IConversionEvent[]
-              | null,
+              protos.google.analytics.admin.v1beta.IConversionEvent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8386,7 +8381,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listConversionEvents with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -8420,7 +8415,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listConversionEventsStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -8475,16 +8470,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listConversionEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConversionEventsStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -8528,16 +8523,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listConversionEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversionEvents without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -8581,16 +8576,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listConversionEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversionEvents with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -8625,9 +8620,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listConversionEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8636,7 +8631,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listKeyEvents without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8676,7 +8671,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listKeyEvents without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8732,7 +8727,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listKeyEvents with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8764,7 +8759,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listKeyEventsStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8816,16 +8811,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listKeyEventsStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8866,16 +8861,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKeyEvents without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8916,16 +8911,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKeyEvents with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8957,9 +8952,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8968,7 +8963,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listCustomDimensions without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9009,7 +9004,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listCustomDimensions without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9041,8 +9036,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1beta.ICustomDimension[]
-              | null,
+              protos.google.analytics.admin.v1beta.ICustomDimension[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9067,7 +9061,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listCustomDimensions with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9099,7 +9093,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listCustomDimensionsStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9152,16 +9146,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomDimensions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCustomDimensionsStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9203,16 +9197,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomDimensions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomDimensions without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9254,16 +9248,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomDimensions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomDimensions with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9296,9 +9290,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomDimensions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9307,7 +9301,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listCustomMetrics without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9347,7 +9341,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listCustomMetrics without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9379,8 +9373,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.admin.v1beta.ICustomMetric[]
-              | null,
+              protos.google.analytics.admin.v1beta.ICustomMetric[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9405,7 +9398,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listCustomMetrics with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9437,7 +9430,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listCustomMetricsStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9490,16 +9483,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomMetrics.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCustomMetricsStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9541,16 +9534,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomMetrics.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomMetrics without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9592,16 +9585,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomMetrics.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomMetrics with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9634,9 +9627,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomMetrics.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9645,7 +9638,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listDataStreams without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9685,7 +9678,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listDataStreams without error using callback', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9741,7 +9734,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listDataStreams with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9773,7 +9766,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     it('invokes listDataStreamsStream without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9825,16 +9818,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataStreamsStream with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9875,16 +9868,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataStreams without error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9925,16 +9918,16 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataStreams with error', async () => {
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9967,9 +9960,9 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9982,7 +9975,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10021,7 +10014,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10062,7 +10055,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10116,7 +10109,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10170,7 +10163,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10222,7 +10215,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10268,7 +10261,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10314,7 +10307,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10367,7 +10360,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10420,7 +10413,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10473,7 +10466,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10524,7 +10517,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10604,7 +10597,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       };
       const client =
         new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

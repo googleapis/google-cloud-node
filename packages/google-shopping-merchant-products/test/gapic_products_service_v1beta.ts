@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as productsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1beta.ProductsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new productsserviceModule.v1beta.ProductsServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
@@ -240,7 +240,7 @@ describe('v1beta.ProductsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.productsServiceStub, undefined);
@@ -248,12 +248,12 @@ describe('v1beta.ProductsServiceClient', () => {
       assert(client.productsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.productsServiceStub);
@@ -262,14 +262,14 @@ describe('v1beta.ProductsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.productsServiceStub, undefined);
@@ -278,7 +278,7 @@ describe('v1beta.ProductsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1beta.ProductsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1beta.ProductsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1beta.ProductsServiceClient', () => {
   describe('getProduct', () => {
     it('invokes getProduct without error', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1beta.ProductsServiceClient', () => {
 
     it('invokes getProduct without error using callback', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1beta.ProductsServiceClient', () => {
 
     it('invokes getProduct with error', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1beta.ProductsServiceClient', () => {
 
     it('invokes getProduct with closed client', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1beta.ProductsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProduct(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1beta.ProductsServiceClient', () => {
   describe('listProducts', () => {
     it('invokes listProducts without error', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -492,7 +492,7 @@ describe('v1beta.ProductsServiceClient', () => {
 
     it('invokes listProducts without error using callback', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,8 +524,7 @@ describe('v1beta.ProductsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.products.v1beta.IProduct[]
-              | null,
+              protos.google.shopping.merchant.products.v1beta.IProduct[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -549,7 +548,7 @@ describe('v1beta.ProductsServiceClient', () => {
 
     it('invokes listProducts with error', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -580,7 +579,7 @@ describe('v1beta.ProductsServiceClient', () => {
 
     it('invokes listProductsStream without error', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -635,15 +634,15 @@ describe('v1beta.ProductsServiceClient', () => {
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProductsStream with error', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -689,15 +688,15 @@ describe('v1beta.ProductsServiceClient', () => {
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProducts without error', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,15 +738,15 @@ describe('v1beta.ProductsServiceClient', () => {
       assert(
         (client.descriptors.page.listProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProducts with error', async () => {
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,9 +779,9 @@ describe('v1beta.ProductsServiceClient', () => {
       assert(
         (client.descriptors.page.listProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -794,7 +793,7 @@ describe('v1beta.ProductsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +832,7 @@ describe('v1beta.ProductsServiceClient', () => {
         product: 'productValue',
       };
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +881,7 @@ describe('v1beta.ProductsServiceClient', () => {
         productinput: 'productinputValue',
       };
       const client = new productsserviceModule.v1beta.ProductsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

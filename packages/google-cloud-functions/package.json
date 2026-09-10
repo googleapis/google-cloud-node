@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/functions",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Functions client for Node.js",
   "repository": {
     "type": "git",

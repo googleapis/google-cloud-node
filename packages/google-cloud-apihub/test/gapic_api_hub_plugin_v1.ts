@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as apihubpluginModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   GoogleAuth,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -172,7 +172,7 @@ describe('v1.ApiHubPluginClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -298,12 +298,12 @@ describe('v1.ApiHubPluginClient', () => {
       assert(client.apiHubPluginStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.apiHubPluginStub);
@@ -312,12 +312,12 @@ describe('v1.ApiHubPluginClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -328,7 +328,7 @@ describe('v1.ApiHubPluginClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -490,7 +490,7 @@ describe('v1.ApiHubPluginClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPlugin(request), expectedError);
@@ -622,7 +622,7 @@ describe('v1.ApiHubPluginClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.enablePlugin(request), expectedError);
@@ -754,7 +754,7 @@ describe('v1.ApiHubPluginClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.disablePlugin(request), expectedError);
@@ -886,7 +886,7 @@ describe('v1.ApiHubPluginClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPlugin(request), expectedError);
@@ -1018,7 +1018,7 @@ describe('v1.ApiHubPluginClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPluginInstance(request), expectedError);
@@ -1155,7 +1155,7 @@ describe('v1.ApiHubPluginClient', () => {
       );
       request.pluginInstance.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePluginInstance(request), expectedError);
@@ -1323,8 +1323,8 @@ describe('v1.ApiHubPluginClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePluginProgress(
@@ -1514,8 +1514,8 @@ describe('v1.ApiHubPluginClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePluginInstanceProgress(
@@ -1711,8 +1711,8 @@ describe('v1.ApiHubPluginClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1909,8 +1909,8 @@ describe('v1.ApiHubPluginClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2107,8 +2107,8 @@ describe('v1.ApiHubPluginClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2302,8 +2302,8 @@ describe('v1.ApiHubPluginClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePluginInstanceProgress(
@@ -2337,7 +2337,7 @@ describe('v1.ApiHubPluginClient', () => {
   describe('listPlugins', () => {
     it('invokes listPlugins without error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2370,7 +2370,7 @@ describe('v1.ApiHubPluginClient', () => {
 
     it('invokes listPlugins without error using callback', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2419,7 +2419,7 @@ describe('v1.ApiHubPluginClient', () => {
 
     it('invokes listPlugins with error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2450,7 +2450,7 @@ describe('v1.ApiHubPluginClient', () => {
 
     it('invokes listPluginsStream without error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2493,15 +2493,15 @@ describe('v1.ApiHubPluginClient', () => {
       assert(
         (client.descriptors.page.listPlugins.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPluginsStream with error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2541,9 +2541,9 @@ describe('v1.ApiHubPluginClient', () => {
       assert(
         (client.descriptors.page.listPlugins.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2584,15 +2584,15 @@ describe('v1.ApiHubPluginClient', () => {
       assert(
         (client.descriptors.page.listPlugins.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPlugins with error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2626,9 +2626,9 @@ describe('v1.ApiHubPluginClient', () => {
       assert(
         (client.descriptors.page.listPlugins.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2636,7 +2636,7 @@ describe('v1.ApiHubPluginClient', () => {
   describe('listPluginInstances', () => {
     it('invokes listPluginInstances without error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2676,7 +2676,7 @@ describe('v1.ApiHubPluginClient', () => {
 
     it('invokes listPluginInstances without error using callback', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2731,7 +2731,7 @@ describe('v1.ApiHubPluginClient', () => {
 
     it('invokes listPluginInstances with error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2762,7 +2762,7 @@ describe('v1.ApiHubPluginClient', () => {
 
     it('invokes listPluginInstancesStream without error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2814,15 +2814,15 @@ describe('v1.ApiHubPluginClient', () => {
       assert(
         (client.descriptors.page.listPluginInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPluginInstancesStream with error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2863,9 +2863,9 @@ describe('v1.ApiHubPluginClient', () => {
       assert(
         (client.descriptors.page.listPluginInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -2912,15 +2912,15 @@ describe('v1.ApiHubPluginClient', () => {
       assert(
         (client.descriptors.page.listPluginInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPluginInstances with error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2952,9 +2952,9 @@ describe('v1.ApiHubPluginClient', () => {
       assert(
         (client.descriptors.page.listPluginInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3118,7 +3118,7 @@ describe('v1.ApiHubPluginClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3208,7 +3208,7 @@ describe('v1.ApiHubPluginClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3292,7 +3292,7 @@ describe('v1.ApiHubPluginClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3376,7 +3376,7 @@ describe('v1.ApiHubPluginClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3445,7 +3445,7 @@ describe('v1.ApiHubPluginClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3481,7 +3481,7 @@ describe('v1.ApiHubPluginClient', () => {
         api: 'apiValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3545,7 +3545,7 @@ describe('v1.ApiHubPluginClient', () => {
         api_hub_instance: 'apiHubInstanceValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3612,7 +3612,7 @@ describe('v1.ApiHubPluginClient', () => {
         operation: 'operationValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3698,7 +3698,7 @@ describe('v1.ApiHubPluginClient', () => {
         attribute: 'attributeValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3762,7 +3762,7 @@ describe('v1.ApiHubPluginClient', () => {
         curation: 'curationValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3828,7 +3828,7 @@ describe('v1.ApiHubPluginClient', () => {
         definition: 'definitionValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3914,7 +3914,7 @@ describe('v1.ApiHubPluginClient', () => {
         dependency: 'dependencyValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3978,7 +3978,7 @@ describe('v1.ApiHubPluginClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4042,7 +4042,7 @@ describe('v1.ApiHubPluginClient', () => {
         discovered_api_observation: 'discoveredApiObservationValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4124,7 +4124,7 @@ describe('v1.ApiHubPluginClient', () => {
         discovered_api_operation: 'discoveredApiOperationValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4222,7 +4222,7 @@ describe('v1.ApiHubPluginClient', () => {
         external_api: 'externalApiValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4286,7 +4286,7 @@ describe('v1.ApiHubPluginClient', () => {
         host_project_registration: 'hostProjectRegistrationValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4366,7 +4366,7 @@ describe('v1.ApiHubPluginClient', () => {
         location: 'locationValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4416,7 +4416,7 @@ describe('v1.ApiHubPluginClient', () => {
         plugin: 'pluginValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4481,7 +4481,7 @@ describe('v1.ApiHubPluginClient', () => {
         instance: 'instanceValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4554,7 +4554,7 @@ describe('v1.ApiHubPluginClient', () => {
         project: 'projectValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4594,7 +4594,7 @@ describe('v1.ApiHubPluginClient', () => {
         runtime_project_attachment: 'runtimeProjectAttachmentValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4677,7 +4677,7 @@ describe('v1.ApiHubPluginClient', () => {
         spec: 'specValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4763,7 +4763,7 @@ describe('v1.ApiHubPluginClient', () => {
         plugin: 'pluginValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4828,7 +4828,7 @@ describe('v1.ApiHubPluginClient', () => {
         version: 'versionValue',
       };
       const client = new apihubpluginModule.v1.ApiHubPluginClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

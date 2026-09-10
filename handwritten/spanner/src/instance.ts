@@ -22,7 +22,7 @@ import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import snakeCase = require('lodash.snakecase');
 import {Database, SessionPoolConstructor} from './database';
-import {Spanner, RequestConfig} from '.';
+import {Spanner, RequestConfig, CreateInstanceRequest} from '.';
 import {
   RequestCallback,
   PagedOptions,
@@ -51,7 +51,6 @@ import {protos} from '@google-cloud/spanner-api';
 import databaseAdmin = protos.google;
 import instanceAdmin = protos.google;
 import spannerClient = protos.google;
-import {CreateInstanceRequest} from './index';
 import {ObservabilityOptions} from './instrument';
 
 export type IBackup = databaseAdmin.spanner.admin.database.v1.IBackup;
@@ -129,9 +128,7 @@ export type GetDatabaseOperationsCallback = RequestCallback<
   databaseAdmin.spanner.admin.database.v1.IListDatabaseOperationsResponse
 >;
 export interface GetInstanceConfig
-  extends GetConfig,
-    CreateInstanceRequest,
-    GetInstanceMetadataOptions {}
+  extends GetConfig, CreateInstanceRequest, GetInstanceMetadataOptions {}
 
 interface InstanceRequest {
   (
@@ -598,8 +595,7 @@ class Instance extends common.GrpcServiceObject {
    */
   getBackupOperations(
     optionsOrCallback?:
-      | GetBackupOperationsOptions
-      | GetBackupOperationsCallback,
+      GetBackupOperationsOptions | GetBackupOperationsCallback,
     cb?: GetBackupOperationsCallback,
   ): void | Promise<GetBackupOperationsResponse> {
     const callback =
@@ -725,8 +721,7 @@ class Instance extends common.GrpcServiceObject {
    */
   getDatabaseOperations(
     optionsOrCallback?:
-      | GetDatabaseOperationsOptions
-      | GetDatabaseOperationsCallback,
+      GetDatabaseOperationsOptions | GetDatabaseOperationsCallback,
     cb?: GetDatabaseOperationsCallback,
   ): void | Promise<GetDatabaseOperationsResponse> {
     const callback =
@@ -1525,8 +1520,7 @@ class Instance extends common.GrpcServiceObject {
   ): void;
   getMetadata(
     optionsOrCallback?:
-      | GetInstanceMetadataOptions
-      | GetInstanceMetadataCallback,
+      GetInstanceMetadataOptions | GetInstanceMetadataCallback,
     cb?: GetInstanceMetadataCallback,
   ): Promise<GetInstanceMetadataResponse> | void {
     const callback =
