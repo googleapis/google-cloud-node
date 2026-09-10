@@ -64,7 +64,7 @@ export function createApiCall(
   settings: CallSettings,
   descriptor?: Descriptor,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _fallback?: boolean | 'proto' | 'rest' | 'false' | string,
+  _fallback?: boolean | 'proto' | 'rest', // unused here, used in fallback.ts implementation
 ): GaxCall {
   // we want to be able to accept both promise resolving to a function and a
   // function. Currently client librares are only calling this method with a
@@ -188,7 +188,7 @@ export function createApiCall(
     };
 
     const serviceName = settings.apiName?.split('.').pop() ?? '';
-    const isFallback = Boolean(_fallback && _fallback !== 'false');
+    const isFallback = Boolean(_fallback);
     const dynamicArgs: DynamicTraceContext = {
       clientName: serviceName ? `${serviceName}Client` : '',
       methodName: settings.otherArgs?.internalMethodName ?? '',

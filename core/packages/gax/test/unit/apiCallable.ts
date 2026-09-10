@@ -607,7 +607,7 @@ describe('createApiCall', () => {
       assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
     });
 
-    it('sets rpcType to grpc when _fallback is string "false"', async () => {
+    it('sets rpcType to http when _fallback is "rest"', async () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
@@ -630,13 +630,45 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = realCreateApiCall(func, settings, undefined, 'false');
+      const apiCall = realCreateApiCall(func, settings, undefined, 'rest');
       await apiCall({}, undefined);
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
       const span = spans[0];
-      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+    });
+
+    it('sets rpcType to http when _fallback is "proto"', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(func, settings, undefined, 'proto');
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
     });
 
     it('pipes telemetry information configured via constructSettings', async () => {
