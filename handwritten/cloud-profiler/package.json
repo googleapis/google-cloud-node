@@ -68,7 +68,7 @@
     "node-gyp": "^11.5.0",
     "sinon": "^18.0.0",
     "source-map": "^0.7.0",
-    "tmp": "0.2.6",
+    "tmp": "0.2.7",
     "typescript": "5.1.6"
   },
   "files": [

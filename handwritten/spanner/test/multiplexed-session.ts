@@ -21,7 +21,6 @@ import * as sinon from 'sinon';
 import {Database} from '../src/database';
 import {Session} from '../src/session';
 import {MultiplexedSession} from '../src/multiplexed-session';
-import {Transaction} from '../src/transaction';
 import {FakeTransaction} from './session-pool';
 import {grpc} from 'google-gax';
 
@@ -171,6 +170,15 @@ describe('MultiplexedSession', () => {
   });
 
   describe('getSession', () => {
+    let restoreProcessListeners: (() => void) | null = null;
+
+    afterEach(() => {
+      if (restoreProcessListeners) {
+        restoreProcessListeners();
+        restoreProcessListeners = null;
+      }
+    });
+
     it('should acquire a session', done => {
       sandbox.stub(multiplexedSession, '_getSession').resolves(fakeMuxSession);
       multiplexedSession.getSession((err, session) => {
@@ -189,16 +197,66 @@ describe('MultiplexedSession', () => {
       });
     });
 
-    it('should pass back the session and txn with affinity key', done => {
+    it('should pass back the session', done => {
       sandbox.stub(multiplexedSession, '_getSession').resolves(fakeMuxSession);
-      multiplexedSession.getSession((err, session, txn) => {
-        assert.ifError(err);
+      multiplexedSession.getSession((error, session) => {
+        assert.ifError(error);
         assert.strictEqual(session, fakeMuxSession);
-        assert(txn);
-        assert(txn._affinityKey);
-        assert.strictEqual(typeof txn._affinityKey, 'string');
-        assert(txn._affinityKey.length > 0);
         done();
+      });
+    });
+
+    it('should asynchronously return session when session is cached', done => {
+      multiplexedSession._multiplexedSession = fakeMuxSession;
+      const getSessionStub = sandbox.stub(multiplexedSession, '_getSession');
+      let callbackInvoked = false;
+
+      multiplexedSession.getSession((error, session) => {
+        assert.ifError(error);
+        assert.strictEqual(session, fakeMuxSession);
+        callbackInvoked = true;
+        sinon.assert.notCalled(getSessionStub);
+        done();
+      });
+
+      assert.strictEqual(
+        callbackInvoked,
+        false,
+        'callback should be invoked asynchronously on nextTick even on cache hit',
+      );
+    });
+
+    it('should not invoke callback twice if callback throws synchronously', done => {
+      sandbox.stub(multiplexedSession, '_getSession').resolves(fakeMuxSession);
+      let callbackInvocationCount = 0;
+      const callbackError = new Error('error in user callback');
+
+      const originalListeners = process.listeners('uncaughtException');
+      process.removeAllListeners('uncaughtException');
+      restoreProcessListeners = () => {
+        process.removeAllListeners('uncaughtException');
+        for (const listener of originalListeners) {
+          process.on('uncaughtException', listener);
+        }
+      };
+
+      process.once('uncaughtException', (error: Error) => {
+        if (restoreProcessListeners) {
+          restoreProcessListeners();
+          restoreProcessListeners = null;
+        }
+        try {
+          assert.strictEqual(error, callbackError);
+          assert.strictEqual(callbackInvocationCount, 1);
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+
+      multiplexedSession.getSession(() => {
+        callbackInvocationCount++;
+        throw callbackError;
       });
     });
   });

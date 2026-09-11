@@ -21,7 +21,7 @@ import {before, beforeEach, afterEach, describe, it} from 'mocha';
 const concat = require('concat-stream');
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import {Transform} from 'stream';
+import {Transform, finished} from 'stream';
 import * as through from 'through2';
 
 import {codec} from '../src/codec';
@@ -198,6 +198,45 @@ describe('PartialResultStream', () => {
       });
 
       stream.write(RESULT);
+    });
+
+    it('should create rows with shared prototype and non-enumerable toJSON', done => {
+      const rows: prs.Row[] = [];
+      stream.on('error', done).on('data', row => {
+        rows.push(row);
+        if (rows.length === 2) {
+          try {
+            const [row1, row2] = rows;
+            assert.strictEqual(Array.isArray(row1), true);
+            assert.strictEqual(row1 instanceof Array, true);
+            assert.strictEqual(row1.constructor, Array);
+            assert.strictEqual(Array.isArray(row2), true);
+            assert.strictEqual(row2 instanceof Array, true);
+            assert.strictEqual(row2.constructor, Array);
+
+            // toJSON must be non-enumerable
+            assert.strictEqual(Object.keys(row1).includes('toJSON'), false);
+            assert.strictEqual(
+              Object.prototype.propertyIsEnumerable.call(row1, 'toJSON'),
+              false,
+            );
+
+            // toJSON must be shared on the prototype, not created as a per-row closure
+            assert.strictEqual(row1.toJSON, row2.toJSON);
+
+            // toJSON should correctly serialize the row
+            const json1 = row1.toJSON();
+            const expectedJson = codec.convertFieldsToJson(row1);
+            assert.deepStrictEqual(json1, expectedJson);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        }
+      });
+
+      stream.write(RESULT);
+      stream.write({values: [convertToIValue(VALUE)]});
     });
 
     it('should emit rows as JSON', done => {
@@ -1039,6 +1078,408 @@ describe('PartialResultStream', () => {
             done(e);
           }
         });
+    });
+
+    it('should immediately flush rows and emit end when chunk.last is true without waiting for gRPC stream end', done => {
+      let dataEmitted = false;
+
+      stream
+        .on('data', () => {
+          dataEmitted = true;
+        })
+        .on('end', () => {
+          try {
+            assert.strictEqual(dataEmitted, true);
+            // Underlying fakeRequestStream has NOT received null/end yet (simulating pending trailers)
+            // and MUST NOT be destroyed!
+            assert.strictEqual(fakeRequestStream.destroyed, false);
+            // Now simulate trailers arriving asynchronously
+            fakeRequestStream.push(null);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        })
+        .on('error', done);
+
+      // Push chunk with last: true but NO resumeToken and without ending fakeRequestStream
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: true,
+        }),
+      );
+    });
+
+    it('should not destroy request stream when user stream closes after chunk.last is true', done => {
+      stream
+        .on('data', () => {})
+        .on('end', () => {
+          stream.destroy();
+        })
+        .on('close', () => {
+          setImmediate(() => {
+            try {
+              // The request stream must remain open to drain trailers asynchronously
+              assert.strictEqual(
+                fakeRequestStream.destroyed,
+                false,
+                'Request stream should not be destroyed when chunk.last is true',
+              );
+              fakeRequestStream.push(null);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          });
+        })
+        .on('error', done);
+
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: true,
+        }),
+      );
+    });
+
+    it('should clean up request stream when error occurs after chunk.last without retrying', done => {
+      let dataEmitted = false;
+
+      stream
+        .on('data', () => {
+          dataEmitted = true;
+        })
+        .on('end', () => {
+          try {
+            assert.strictEqual(dataEmitted, true);
+            // Simulate transport error occurring while trailers were in flight
+            fakeRequestStream.emit('error', new Error('Late transport error'));
+            setImmediate(() => {
+              // Should not throw unhandled error and should have detached listeners
+              done();
+            });
+          } catch (error) {
+            done(error);
+          }
+        })
+        .on('error', err => {
+          done(
+            new Error(
+              `Stream should not emit error after chunk.last: ${err.message}`,
+            ),
+          );
+        });
+
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: true,
+        }),
+      );
+    });
+
+    it('should automatically clean up request stream on stream end without explicit destroy()', done => {
+      const resumeSpy = sandbox.spy(fakeRequestStream, 'resume');
+
+      stream
+        .on('data', () => {})
+        .on('end', () => {
+          setImmediate(() => {
+            try {
+              // resume() must be called to drain background trailers without requiring stream.destroy()
+              assert.strictEqual(
+                resumeSpy.called,
+                true,
+                'resume() should be called on fakeRequestStream',
+              );
+              fakeRequestStream.push(null);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          });
+        })
+        .on('error', done);
+
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: true,
+        }),
+      );
+    });
+
+    it('should emit finish and close, and resolve stream.finished() naturally on chunk.last without manual destroy', done => {
+      let finishedCalled = false;
+      let closeEmitted = false;
+      let finishEmitted = false;
+
+      finished(stream, err => {
+        try {
+          assert.ifError(err);
+          finishedCalled = true;
+          if (closeEmitted && finishEmitted) {
+            done();
+          }
+        } catch (error) {
+          done(error);
+        }
+      });
+
+      stream
+        .on('data', () => {})
+        .on('finish', () => {
+          finishEmitted = true;
+        })
+        .on('close', () => {
+          closeEmitted = true;
+          if (finishedCalled && finishEmitted) {
+            done();
+          }
+        })
+        .on('error', done);
+
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: true,
+        }),
+      );
+    });
+
+    it('should correctly handle zero-row result set with chunk.last', done => {
+      let dataEmitted = false;
+
+      stream
+        .on('data', () => {
+          dataEmitted = true;
+        })
+        .on('end', () => {
+          try {
+            assert.strictEqual(
+              dataEmitted,
+              false,
+              'No rows should be emitted for empty result set',
+            );
+            done();
+          } catch (error) {
+            done(error);
+          }
+        })
+        .on('error', done);
+
+      fakeRequestStream.push({
+        metadata: {
+          rowType: {
+            fields: [{name: 'col1', type: {code: 'STRING'}}],
+          },
+        },
+        values: [],
+        last: true,
+      });
+    });
+
+    it('should handle multi-chunk stream ending with chunk.last', done => {
+      const receivedRows: Row[] = [];
+
+      stream
+        .on('data', (row: Row) => {
+          receivedRows.push(row);
+        })
+        .on('end', () => {
+          try {
+            assert.strictEqual(receivedRows.length, 2);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        })
+        .on('error', done);
+
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: false,
+          resumeToken: 'token1',
+        }),
+      );
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: true,
+        }),
+      );
+    });
+
+    it('should emit stats event before end when chunk.last contains stats', done => {
+      let statsEmitted = false;
+      let endEmitted = false;
+      const fakeStats = {queryStats: {rowsReturned: '1'}};
+
+      stream
+        .on('data', () => {})
+        .on('stats', (stats: any) => {
+          statsEmitted = true;
+          assert.strictEqual(
+            endEmitted,
+            false,
+            'stats must be emitted before end',
+          );
+          assert.deepStrictEqual(stats, fakeStats);
+        })
+        .on('end', () => {
+          endEmitted = true;
+          try {
+            assert.strictEqual(statsEmitted, true);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        })
+        .on('error', done);
+
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          stats: fakeStats,
+          last: true,
+        }),
+      );
+    });
+
+    it('should clean up request stream when error occurs on request stream while receivedLast is true before stream ends', done => {
+      let dataEmitted = false;
+
+      stream
+        .on('data', () => {
+          dataEmitted = true;
+          // Emit error on the request stream while receivedLast is true and before stream ends
+          fakeRequestStream.emit(
+            'error',
+            new Error('Immediate transport error'),
+          );
+        })
+        .on('end', () => {
+          try {
+            assert.strictEqual(dataEmitted, true);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        })
+        .on('error', err => {
+          done(
+            new Error(
+              `Stream should not emit error after chunk.last: ${err.message}`,
+            ),
+          );
+        });
+
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: true,
+        }),
+      );
+    });
+
+    it('should flush all uncheckpointed chunks queued in CheckpointStream when chunk.last is true', done => {
+      const receivedRows: Row[] = [];
+
+      stream
+        .on('data', (row: Row) => {
+          receivedRows.push(row);
+        })
+        .on('end', () => {
+          try {
+            assert.strictEqual(receivedRows.length, 2);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        })
+        .on('error', done);
+
+      // Chunk 1 has NO resumeToken and last: false (gets buffered in CheckpointStream)
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: false,
+          resumeToken: undefined,
+        }),
+      );
+      // Chunk 2 has last: true and NO resumeToken (must trigger flush of chunk 1 and chunk 2)
+      fakeRequestStream.push(
+        Object.assign({}, RESULT, {
+          last: true,
+          resumeToken: undefined,
+        }),
+      );
+    });
+
+    it('should successfully retry on retryable error and complete on chunk.last', done => {
+      const unavailableError = new Error('Unavailable') as grpc.ServiceError;
+      unavailableError.code = grpc.status.UNAVAILABLE;
+
+      let attempts = 0;
+      const retryRequestFunction = () => {
+        const requestStream = through.obj();
+        attempts++;
+        if (attempts === 1) {
+          setImmediate(() => requestStream.emit('error', unavailableError));
+        } else {
+          setImmediate(() => {
+            requestStream.push(Object.assign({}, RESULT, {last: true}));
+          });
+        }
+        return requestStream;
+      };
+
+      const retryStream = partialResultStream(retryRequestFunction);
+      let rowsCount = 0;
+      retryStream
+        .on('data', () => rowsCount++)
+        .on('end', () => {
+          try {
+            assert.strictEqual(attempts, 2);
+            assert.strictEqual(rowsCount, 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        })
+        .on('error', done);
+    });
+
+    it('should emit error when decoding fails on chunk.last', done => {
+      const failingStream = partialResultStream(() => fakeRequestStream, {
+        json: true,
+        jsonOptions: {wrapNumbers: false},
+      });
+
+      failingStream
+        .on('data', () => {})
+        .on('end', () => {
+          done(new Error('Stream should not emit end when decoding fails'));
+        })
+        .on('error', error => {
+          try {
+            assert(
+              error.message.includes(
+                'Serializing column "large_id" encountered an error:',
+              ),
+            );
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+      fakeRequestStream.push({
+        metadata: {
+          rowType: {
+            fields: [
+              {
+                name: 'large_id',
+                type: {code: 'INT64'},
+              },
+            ],
+          },
+        },
+        values: [convertToIValue('9223372036854775807')],
+        last: true,
+      });
     });
   });
 });

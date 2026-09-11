@@ -122,6 +122,22 @@ export interface Row extends Array<Field> {
 }
 
 /**
+ * Row implementation extending Array to provide a shared, non-enumerable
+ * toJSON method without per-row closures or Object.setPrototypeOf overhead.
+ */
+class RowImpl extends Array<Field> implements Row {
+  toJSON(options?: JSONOptions): Json {
+    return codec.convertFieldsToJson(this, options);
+  }
+}
+Object.defineProperty(RowImpl.prototype, 'constructor', {
+  value: Array,
+  writable: true,
+  configurable: true,
+  enumerable: false,
+});
+
+/**
  * @callback PartialResultStream~rowCallback
  * @param {Row|object} row The row data.
  */
@@ -275,6 +291,11 @@ export class PartialResultStream extends Transform implements ResultEvents {
 
     if (chunk.last) {
       this.push(null);
+      // Calling next() notifies Node's stream machinery that processing of this
+      // chunk is complete on the Writable side of this Transform stream.
+      // This is a local, synchronous callback to Node's internal buffer; it does
+      // not block the event loop or wait for upstream network I/O or gRPC trailers.
+      next();
       return;
     }
 
@@ -458,7 +479,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
    */
   private _createRow(values: Value[]): Row {
     const len = values.length;
-    const fields = new Array(len);
+    const fields = new RowImpl(len);
     const decoders = this._decoders;
     const classFields = this._fields;
 
@@ -469,13 +490,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
       };
     }
 
-    Object.defineProperty(fields, 'toJSON', {
-      value: (options?: JSONOptions): Json => {
-        return codec.convertFieldsToJson(fields, options);
-      },
-    });
-
-    return fields as Row;
+    return fields;
   }
   /**
    * Attempts to merge chunked values together.
@@ -667,7 +682,7 @@ export function partialResultStream(
   const retryableCodes = [grpc.status.UNAVAILABLE];
   const maxQueued = 10;
   let lastResumeToken: ResumeToken;
-  let lastRequestStream: Readable;
+  let lastRequestStream: Readable | undefined;
   let errorListener: (err: grpc.ServiceError) => void;
   const startTime = Date.now();
   const timeout = options?.gaxOptions?.timeout ?? Infinity;
@@ -686,10 +701,16 @@ export function partialResultStream(
   // resume token, as that is an indication whether it is safe to retry the
   // stream halfway.
   let withoutCheckpointCount = 0;
+  let receivedLast = false;
   const batchAndSplitOnTokenStream = new CheckpointStream({
     maxQueued,
     isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet): boolean => {
-      const withCheckpoint = _hasResumeToken(chunk);
+      if (chunk.last) {
+        receivedLast = true;
+        destroyRequestStream();
+        requestsStream.end();
+      }
+      const withCheckpoint = _hasResumeToken(chunk) || Boolean(chunk.last);
       if (withCheckpoint) {
         withoutCheckpointCount = 0;
       } else {
@@ -702,7 +723,13 @@ export function partialResultStream(
   // This listener ensures that the last request that executed successfully
   // after one or more retries will end the requestsStream.
   const endListener = () => {
+    if (receivedLast) {
+      return;
+    }
     setImmediate(() => {
+      if (receivedLast) {
+        return;
+      }
       // Push a fake PartialResultSet without any values but with a resume token
       // into the stream to ensure that the checkpoint stream is emptied, and
       // then push `null` to end the stream.
@@ -713,11 +740,22 @@ export function partialResultStream(
 
   const destroyRequestStream = (): void => {
     if (lastRequestStream) {
-      lastRequestStream.removeListener('end', endListener);
-      lastRequestStream.removeAllListeners('error');
-      lastRequestStream.on('error', () => {});
-      lastRequestStream.unpipe(requestsStream);
-      lastRequestStream.destroy();
+      const streamToClean = lastRequestStream;
+      lastRequestStream = undefined;
+      streamToClean.removeListener('end', endListener);
+      if (errorListener) {
+        streamToClean.removeListener('error', errorListener);
+      }
+      streamToClean.on('error', () => {});
+      streamToClean.unpipe(requestsStream);
+      if (receivedLast) {
+        // Query completed successfully. Do not cancel the gRPC call; allow it
+        // to drain remaining trailers/EOF in the background so it is not marked
+        // CANCELLED by Spanner or Cloud Monitoring.
+        streamToClean.resume();
+      } else {
+        streamToClean.destroy();
+      }
     }
   };
 
@@ -728,6 +766,9 @@ export function partialResultStream(
     lastRequestStream = requestFn(lastResumeToken);
     lastRequestStream.on('end', endListener);
     errorListener = (err: grpc.ServiceError) => {
+      if (receivedLast) {
+        return;
+      }
       destroyRequestStream();
       setImmediate(() => retry(err));
     };

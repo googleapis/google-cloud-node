@@ -318,6 +318,11 @@ describe('getActiveOrNoopSpan', () => {
     assert.strictEqual(!span, false, 'the span MUST not be null regardless');
     span.updateName('aSpan should not crash');
     span.setStatus({message: 'done here'});
+    assert.strictEqual(
+      span,
+      getActiveOrNoopSpan(),
+      'repeated calls to getActiveOrNoopSpan must return the same singleton NOOP_SPAN instance',
+    );
   });
 
   it('with a started span should return the currently active one', () => {
