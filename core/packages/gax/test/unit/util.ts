@@ -25,8 +25,8 @@ import {
   decodeProtobufAny,
   decodeAnyProtosInArray,
   checkTelemetryEnabled,
-  StaticTraceContext,
 } from '../../src/util';
+import {StaticTraceContext} from '../../src/observability/TracerHelper';
 import {CallSettings} from '../../src/gax';
 import * as protobuf from 'protobufjs';
 import protosJson from '../../protos/status.json';

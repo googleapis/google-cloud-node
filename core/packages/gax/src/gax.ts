@@ -22,7 +22,8 @@ import type {Message} from 'protobufjs';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
-import {toLowerCamelCase, StaticTraceContext} from './util';
+import {toLowerCamelCase} from './util';
+import {StaticTraceContext} from './observability/TracerHelper';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -863,7 +864,10 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs,
+      otherArgs:
+        internalTelemetryInfo || enableTelemetryTracing
+          ? {...otherArgs, internalMethodName: methodName}
+          : otherArgs,
       apiName,
       enableTelemetryTracing,
     });
