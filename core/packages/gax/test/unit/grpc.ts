@@ -155,6 +155,10 @@ describe('grpc', () => {
         settings.method.otherArgs.internalTelemetryInfo,
         undefined,
       );
+      assert.strictEqual(
+        settings.method.otherArgs.internalMethodName,
+        undefined,
+      );
     });
 
     it('constructs settings with enableTelemetryTracing and internalTelemetryInfo', () => {
@@ -177,6 +181,10 @@ describe('grpc', () => {
       assert.deepStrictEqual(
         settings.method.otherArgs.internalTelemetryInfo,
         telemetryInfo,
+      );
+      assert.strictEqual(
+        settings.method.otherArgs.internalMethodName,
+        'method',
       );
     });
   });
