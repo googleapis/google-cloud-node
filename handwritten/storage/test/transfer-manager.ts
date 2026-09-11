@@ -34,7 +34,7 @@ import {
 import assert from 'assert';
 import {describe, it, beforeEach, before, afterEach, after} from 'mocha';
 import * as path from 'path';
-import {GaxiosOptions, GaxiosResponse} from 'gaxios';
+import {GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {AuthClient, GoogleAuth} from 'google-auth-library';
 import {tmpdir} from 'os';
@@ -884,17 +884,20 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
-          return {};
+        async getRequestHeaders(): Promise<Headers> {
+          return new Headers({});
         }
 
-        async request(opts: GaxiosOptions) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        async request(opts: any): Promise<any> {
           called = true;
-
-          assert(opts.headers);
-          assert('x-goog-api-client' in opts.headers);
+          const headers = Object.fromEntries(
+            (opts.headers as Headers).entries()
+          );
+          assert(headers);
+          assert('x-goog-api-client' in headers);
           assert.match(
-            opts.headers['x-goog-api-client'],
+            headers['x-goog-api-client'],
             /gccl-gcs-cmd\/tm.upload_sharded/
           );
 
@@ -910,7 +913,7 @@ describe('Transfer Manager', () => {
       }
 
       transferManager.bucket.storage.authClient = new GoogleAuth({
-        authClient: new TestAuthClient(),
+        authClient: new TestAuthClient() as unknown as AuthClient,
       });
 
       await transferManager.uploadFileInChunks(filePath);
@@ -925,16 +928,19 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
-          return {};
+        async getRequestHeaders(): Promise<Headers> {
+          return new Headers({});
         }
 
-        async request(opts: GaxiosOptions) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        async request(opts: any): Promise<any> {
           called = true;
-
-          assert(opts.headers);
-          assert('User-Agent' in opts.headers);
-          assert.match(opts.headers['User-Agent'], /gcloud-node/);
+          const headers = Object.fromEntries(
+            (opts.headers as Headers).entries()
+          );
+          assert(headers);
+          assert('user-agent' in headers);
+          assert.match(headers['user-agent'], /gcloud-node/);
 
           return {
             data: Buffer.from(
@@ -948,7 +954,7 @@ describe('Transfer Manager', () => {
       }
 
       transferManager.bucket.storage.authClient = new GoogleAuth({
-        authClient: new TestAuthClient(),
+        authClient: new TestAuthClient() as unknown as AuthClient,
       });
 
       await transferManager.uploadFileInChunks(filePath);

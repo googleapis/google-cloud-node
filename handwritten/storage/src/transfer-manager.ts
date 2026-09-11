@@ -32,7 +32,7 @@ import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 import AsyncRetry from 'async-retry';
 import {ApiError} from './nodejs-common/index.js';
-import {GaxiosResponse, Headers} from 'gaxios';
+import {GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {getRuntimeTrackingString, getUserAgentString} from './util.js';
@@ -133,6 +133,10 @@ export interface UploadFileInChunksOptions {
   headers?: {[key: string]: string};
 }
 
+interface MultiPartUploadErrorResponse {
+  error?: object;
+}
+
 export interface MultiPartUploadHelper {
   bucket: Bucket;
   fileName: string;
@@ -220,34 +224,39 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     };
   }
 
-  #setGoogApiClientHeaders(headers: Headers = {}): Headers {
+  #setGoogApiClientHeaders(headers = new Headers()): Headers {
     let headerFound = false;
     let userAgentFound = false;
 
-    for (const [key, value] of Object.entries(headers)) {
+    headers.forEach((value, key) => {
       if (key.toLocaleLowerCase().trim() === 'x-goog-api-client') {
         headerFound = true;
 
         // Prepend command feature to value, if not already there
         if (!value.includes(GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED)) {
-          headers[key] =
-            `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
+          headers.set(
+            key,
+            `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`
+          );
         }
       } else if (key.toLocaleLowerCase().trim() === 'user-agent') {
         userAgentFound = true;
       }
-    }
+    });
 
     // If the header isn't present, add it
     if (!headerFound) {
-      headers['x-goog-api-client'] = `${getRuntimeTrackingString()} gccl/${
-        packageJson.version
-      } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
+      headers.set(
+        'x-goog-api-client',
+        `${getRuntimeTrackingString()} gccl/${
+          packageJson.version
+        } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`
+      );
     }
 
     // If the User-Agent isn't present, add it
     if (!userAgentFound) {
-      headers['User-Agent'] = getUserAgentString();
+      headers.set('User-Agent', getUserAgentString());
     }
 
     return headers;
@@ -258,21 +267,26 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    *
    * @returns {Promise<void>}
    */
-  async initiateUpload(headers: Headers = {}): Promise<void> {
+  async initiateUpload(headers?: {[key: string]: string}): Promise<void> {
+    const headersObject = new Headers(headers);
     const url = `${this.baseUrl}?uploads`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
-          headers: this.#setGoogApiClientHeaders(headers),
+        const res = await this.authClient.request<
+          string | MultiPartUploadErrorResponse
+        >({
+          headers: this.#setGoogApiClientHeaders(headersObject),
           method: 'POST',
           url,
         });
 
-        if (res.data && res.data.error) {
-          throw res.data.error;
+        if ((res?.data as MultiPartUploadErrorResponse)?.error) {
+          throw (res.data as MultiPartUploadErrorResponse).error;
         }
-        const parsedXML = this.xmlParser.parse(res.data);
-        this.uploadId = parsedXML.InitiateMultipartUploadResult.UploadId;
+        if (typeof res.data === 'string') {
+          const parsedXML = this.xmlParser.parse(res.data);
+          this.uploadId = parsedXML.InitiateMultipartUploadResult.UploadId;
+        }
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
       }
@@ -294,31 +308,32 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     validation?: 'md5' | 'crc32c' | false
   ): Promise<void> {
     const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
-    let headers: Headers = this.#setGoogApiClientHeaders();
+    const headers: Headers = this.#setGoogApiClientHeaders();
 
     if (validation === 'md5') {
       const hash = createHash('md5').update(chunk).digest('base64');
-      headers = {
-        'Content-MD5': hash,
-      };
+      headers.set('Content-MD5', hash);
     } else if (validation === 'crc32c') {
       const crc = new CRC32C();
       crc.update(chunk);
-      headers['x-goog-hash'] = `crc32c=${crc.toString()}`;
+      headers.set('x-goog-hash', `crc32c=${crc.toString()}`);
     }
 
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
-          url,
-          method: 'PUT',
-          body: chunk,
-          headers,
-        });
+        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
+          {
+            url,
+            method: 'PUT',
+            body: chunk,
+            headers,
+          }
+        );
         if (res.data && res.data.error) {
           throw res.data.error;
         }
-        this.partsMap.set(partNumber, res.headers['etag']);
+        const resHeaders = new Headers(res.headers);
+        this.partsMap.set(partNumber, resHeaders.get('etag')!);
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
       }
@@ -344,16 +359,18 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     )}</CompleteMultipartUpload>`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
-          headers: this.#setGoogApiClientHeaders(),
-          url,
-          method: 'POST',
-          body,
-        });
+        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
+          {
+            headers: this.#setGoogApiClientHeaders(),
+            url,
+            method: 'POST',
+            body,
+          }
+        );
         if (res.data && res.data.error) {
           throw res.data.error;
         }
-        return res;
+        return res as unknown as GaxiosResponse;
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
         return;
@@ -371,16 +388,17 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
-          url,
-          method: 'DELETE',
-        });
+        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
+          {
+            url,
+            method: 'DELETE',
+          }
+        );
         if (res.data && res.data.error) {
           throw res.data.error;
         }
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
-        return;
       }
     }, this.retryOptions);
   }
@@ -398,7 +416,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     ) {
       throw err;
     } else {
-      bail(err as Error);
+      bail(err);
     }
   }
 }
