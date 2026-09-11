@@ -16,21 +16,15 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
 import * as libraryMethods from './libraryMethods.js';
-import {
-  Bucket,
-  File,
-  GaxiosOptions,
-  GaxiosOptionsPrepared,
-  HmacKey,
-  Notification,
-  Storage,
-} from '../src';
+import {Bucket, File, HmacKey, Notification, Storage} from '../src';
+import * as gaxios from 'gaxios';
 import * as crypto from 'crypto';
 import * as assert from 'assert';
-import {
-  StorageRequestOptions,
-  StorageTransport,
-} from '../src/storage-transport.js';
+import {StorageTransport} from '../src/storage-transport.js';
+import {getDirName} from '../src/util.js';
+import path from 'path';
+import * as fs from 'fs';
+import {GoogleAuth} from 'google-auth-library';
 interface RetryCase {
   instructions: String[];
 }
@@ -60,7 +54,7 @@ interface ConformanceTestResult {
 
 type LibraryMethodsModuleType = typeof import('./libraryMethods');
 const methodMap: Map<String, String[]> = new Map(
-  Object.entries({}), // TODO: replace with Object.entries(jsonToNodeApiMapping)
+  Object.entries(jsonToNodeApiMapping),
 );
 
 const DURATION_SECONDS = 600; // 10 mins.
@@ -70,6 +64,27 @@ const TESTBENCH_HOST =
 const CONF_TEST_PROJECT_ID = 'my-project-id';
 const TIMEOUT_FOR_INDIVIDUAL_TEST = 20000;
 const RETRY_MULTIPLIER_FOR_CONFORMANCE_TESTS = 0.01;
+const SERVICE_ACCOUNT = path.join(
+  getDirName(),
+  '../../../conformance-test/fixtures/signing-service-account.json',
+);
+
+const authClient = new GoogleAuth({
+  keyFilename: SERVICE_ACCOUNT,
+  scopes: ['https://www.googleapis.com/auth/devstorage.full_control'],
+}).fromJSON(JSON.parse(fs.readFileSync(SERVICE_ACCOUNT, 'utf8')));
+
+authClient.getAccessToken = async () => ({token: 'unauthenticated-test-token'});
+authClient.request = async (opts: unknown) => {
+  const options = opts as gaxios.GaxiosOptions & {
+    adapter?: (opts: unknown) => Promise<unknown>;
+  };
+  if (typeof options.adapter === 'function') {
+    return options.adapter(opts) as Promise<gaxios.GaxiosResponse>;
+  }
+  const defaultGaxios = gaxios as unknown as {instance: gaxios.Gaxios};
+  return defaultGaxios.instance.request(options);
+};
 
 export function executeScenario(testCase: RetryTestCase) {
   for (
@@ -89,16 +104,22 @@ export function executeScenario(testCase: RetryTestCase) {
         let bucket: Bucket;
         let file: File;
         let notification: Notification;
-        let creationResult: {id: string};
+        let creationResult: ConformanceTestCreationResult;
         let storage: Storage;
         let hmacKey: HmacKey;
         let storageTransport: StorageTransport;
 
         describe(`${storageMethodString}`, async () => {
           beforeEach(async () => {
-            storageTransport = new StorageTransport({
+            const defaultGaxios = gaxios as unknown as {
+              instance?: gaxios.Gaxios;
+            };
+            defaultGaxios.instance?.interceptors?.request?.clear();
+
+            const rawTransport = new StorageTransport({
               apiEndpoint: TESTBENCH_HOST,
-              authClient: undefined,
+              authClient: authClient,
+              keyFilename: SERVICE_ACCOUNT,
               baseUrl: TESTBENCH_HOST,
               packageJson: {name: 'test-package', version: '1.0.0'},
               retryOptions: {
@@ -117,92 +138,120 @@ export function executeScenario(testCase: RetryTestCase) {
               timeout: DURATION_SECONDS,
             });
 
+            creationResult = await createTestBenchRetryTest(
+              instructionSet.instructions,
+              jsonMethod?.name.toString(),
+              rawTransport,
+            );
+
             storage = new Storage({
               apiEndpoint: TESTBENCH_HOST,
               projectId: CONF_TEST_PROJECT_ID,
+              keyFilename: SERVICE_ACCOUNT,
+              authClient: authClient,
               retryOptions: {
                 retryDelayMultiplier: RETRY_MULTIPLIER_FOR_CONFORMANCE_TESTS,
               },
             });
 
-            creationResult = await createTestBenchRetryTest(
-              instructionSet.instructions,
-              jsonMethod?.name.toString(),
-              storageTransport,
+            bucket = await createBucketForTest(
+              storage,
+              testCase.preconditionProvided &&
+                !storageMethodString.includes('combine'),
+              storageMethodString,
             );
-            if (storageMethodString.includes('InstancePrecondition')) {
-              bucket = await createBucketForTest(
-                storage,
-                testCase.preconditionProvided,
-                storageMethodString,
-              );
-              file = await createFileForTest(
-                testCase.preconditionProvided,
-                storageMethodString,
-                bucket,
-              );
-            } else {
-              bucket = await createBucketForTest(
-                storage,
-                false,
-                storageMethodString,
-              );
-              file = await createFileForTest(
-                false,
-                storageMethodString,
-                bucket,
+            file = await createFileForTest(
+              testCase.preconditionProvided,
+              storageMethodString,
+              bucket,
+            );
+            if (
+              storageMethodString !== 'createNotification' &&
+              storageMethodString !== 'notificationCreate'
+            ) {
+              notification = bucket.notification(TESTS_PREFIX);
+              await notification.create();
+            }
+
+            if (
+              storageMethodString === 'deleteHMAC' ||
+              storageMethodString === 'getHMAC' ||
+              storageMethodString === 'getMetadataHMAC' ||
+              storageMethodString === 'setMetadataHMAC'
+            ) {
+              [hmacKey] = await storage.createHmacKey(
+                `${TESTS_PREFIX}@email.com`,
               );
             }
-            notification = bucket.notification(TESTS_PREFIX);
-            await notification.create();
 
-            [hmacKey] = await storage.createHmacKey(
-              `${TESTS_PREFIX}@email.com`,
-            );
-
-            storage.interceptors.push({
-              resolved: (
-                requestConfig: GaxiosOptionsPrepared,
-              ): Promise<GaxiosOptionsPrepared> => {
-                const config = requestConfig as GaxiosOptions;
-                config.headers = config.headers || {};
-                Object.assign(config.headers, {
-                  'x-retry-test-id': creationResult.id,
-                });
-                return Promise.resolve(config as GaxiosOptionsPrepared);
-              },
-              rejected: error => {
-                return Promise.reject(error);
-              },
-            });
+            storageTransport = storage.storageTransport;
           });
 
           it(`${instructionNumber}`, async () => {
             const methodParameters: libraryMethods.ConformanceTestOptions = {
-              storage: storage,
-              bucket: bucket,
-              file: file,
-              storageTransport: storageTransport,
-              notification: notification,
-              hmacKey: hmacKey,
-            };
-            if (testCase.preconditionProvided) {
-              methodParameters.preconditionRequired = true;
-            }
-
-            if (testCase.expectSuccess) {
-              assert.ifError(await storageMethodObject(methodParameters));
-            } else {
-              await assert.rejects(async () => {
-                await storageMethodObject(methodParameters);
-              }, undefined);
-            }
-
-            const testBenchResult = await getTestBenchRetryTest(
-              creationResult.id,
+              storage,
+              bucket,
+              file,
               storageTransport,
+              notification,
+              hmacKey,
+              projectId: CONF_TEST_PROJECT_ID,
+              preconditionRequired: testCase.preconditionProvided,
+            };
+
+            const injectHeader = async (
+              reqOpts: gaxios.GaxiosOptionsPrepared,
+            ): Promise<gaxios.GaxiosOptionsPrepared> => {
+              const url = reqOpts.url?.toString() || '';
+              if (url.includes('retry_test') || !creationResult?.id) {
+                return reqOpts;
+              }
+              if (typeof reqOpts.headers?.set === 'function') {
+                reqOpts.headers.set('x-retry-test-id', creationResult.id);
+              } else if (reqOpts.headers) {
+                (reqOpts.headers as unknown as Record<string, unknown>)[
+                  'x-retry-test-id'
+                ] = creationResult.id;
+              }
+              return reqOpts;
+            };
+
+            const interceptor: gaxios.GaxiosInterceptor<gaxios.GaxiosOptionsPrepared> =
+              {
+                resolved: injectHeader,
+              };
+
+            const defaultGaxios = gaxios as unknown as {
+              instance: gaxios.Gaxios;
+            };
+
+            storage.interceptors = [interceptor];
+            storage.storageTransport.gaxiosInstance?.interceptors?.request?.clear();
+            defaultGaxios.instance?.interceptors?.request?.clear();
+
+            storage.storageTransport.gaxiosInstance.interceptors.request.add(
+              interceptor,
             );
-            assert.strictEqual(testBenchResult.completed, true);
+            defaultGaxios.instance.interceptors.request.add(interceptor);
+
+            try {
+              if (testCase.expectSuccess) {
+                await storageMethodObject(methodParameters);
+                const testBenchResult = await getTestBenchRetryTest(
+                  creationResult.id,
+                  storageTransport,
+                );
+                assert.strictEqual(testBenchResult.completed, true);
+              } else {
+                await assert.rejects(async () => {
+                  await storageMethodObject(methodParameters);
+                }, undefined);
+              }
+            } finally {
+              storage.interceptors = [];
+              storage.storageTransport.gaxiosInstance?.interceptors?.request?.clear();
+              defaultGaxios.instance?.interceptors?.request?.clear();
+            }
           }).timeout(TIMEOUT_FOR_INDIVIDUAL_TEST);
         });
       });
@@ -212,78 +261,81 @@ export function executeScenario(testCase: RetryTestCase) {
 
 async function createBucketForTest(
   storage: Storage,
-  preconditionShouldBeOnInstance: boolean,
-  storageMethodString: String,
+  withPrecondition: boolean,
+  method: String,
 ) {
-  const name = generateName(storageMethodString, 'bucket');
-  const bucket = storage.bucket(name);
+  const bucket = storage.bucket(generateName(method, 'bucket'));
   await bucket.create();
-  await bucket.setRetentionPeriod(DURATION_SECONDS);
-
-  if (preconditionShouldBeOnInstance) {
-    return new Bucket(storage, bucket.name, {
+  const [metadata] = await bucket.setRetentionPeriod(DURATION_SECONDS);
+  bucket.metadata = metadata;
+  if (withPrecondition) {
+    const newBucket = new Bucket(storage, bucket.name, {
       preconditionOpts: {
-        ifMetagenerationMatch: 2,
+        ifMetagenerationMatch: metadata.metageneration || 2,
       },
     });
+    newBucket.metadata = metadata;
+    return newBucket;
   }
   return bucket;
 }
 
 async function createFileForTest(
-  preconditionShouldBeOnInstance: boolean,
-  storageMethodString: String,
+  withPrecondition: boolean,
+  method: String,
   bucket: Bucket,
 ) {
-  const name = generateName(storageMethodString, 'file');
-  const file = bucket.file(name);
-  await file.save(name);
-  if (preconditionShouldBeOnInstance) {
-    return new File(bucket, file.name, {
+  const file = bucket.file(generateName(method, 'file'));
+  if (method === 'deleteBucket') {
+    return file;
+  }
+  await file.save('test-content');
+  const [metadata] = await file.getMetadata();
+  file.metadata = metadata;
+  if (method === 'isPublic') {
+    await file.makePublic();
+  }
+  if (withPrecondition) {
+    const newFile = new File(bucket, file.name, {
       preconditionOpts: {
-        ifMetagenerationMatch: file.metadata.metageneration,
-        ifGenerationMatch: file.metadata.generation,
+        ifMetagenerationMatch: metadata.metageneration,
+        ifGenerationMatch: metadata.generation,
       },
     });
+    newFile.metadata = metadata;
+    return newFile;
   }
   return file;
-}
-
-function generateName(storageMethodString: String, bucketOrFile: string) {
-  return `${TESTS_PREFIX}${storageMethodString.toLowerCase()}${bucketOrFile}.${shortUUID()}`;
 }
 
 async function createTestBenchRetryTest(
   instructions: String[],
   methodName: string,
-  storageTransport: StorageTransport,
+  transport: StorageTransport,
 ): Promise<ConformanceTestCreationResult> {
-  const requestBody = {instructions: {[methodName]: instructions}};
-
-  const requestOptions: StorageRequestOptions = {
+  const response = await transport.makeRequest({
     method: 'POST',
     url: 'retry_test',
-    body: JSON.stringify(requestBody),
+    body: JSON.stringify({instructions: {[methodName]: instructions}}),
     headers: {'Content-Type': 'application/json'},
-  };
-
-  const response = await storageTransport.makeRequest(requestOptions);
-  return response as unknown as ConformanceTestCreationResult;
+  });
+  return response.data as ConformanceTestCreationResult;
 }
 
 async function getTestBenchRetryTest(
   testId: string,
-  storageTransport: StorageTransport,
+  transport: StorageTransport,
 ): Promise<ConformanceTestResult> {
-  const response = await storageTransport.makeRequest({
+  const response = await transport.makeRequest({
     url: `retry_test/${testId}`,
     method: 'GET',
-    retry: true,
-    headers: {
-      'x-retry-test-id': testId,
-    },
+    headers: {'x-retry-test-id': testId},
   });
-  return response as unknown as ConformanceTestResult;
+  return response.data as ConformanceTestResult;
+}
+
+function generateName(method: String, type: string) {
+  return `${TESTS_PREFIX}${method.toLowerCase()}${type}.${shortUUID()}`;
 }
 
 function shortUUID() {
