@@ -20,14 +20,13 @@
 import assert from 'assert';
 import * as pumpify from 'pumpify';
 import * as sinon from 'sinon';
-import {PassThrough} from 'stream';
+import {PassThrough, Stream} from 'stream';
 import streamEvents from 'stream-events';
 import {PageDescriptor} from '../../src/paginationCalls/pageDescriptor';
 import {APICallback, GaxCall, RequestType} from '../../src/apitypes';
 import {describe, it, beforeEach} from 'mocha';
 
 import * as util from './utils';
-import {Stream} from 'stream';
 import * as gax from '../../src/gax';
 import * as warnings from '../../src/warnings';
 
