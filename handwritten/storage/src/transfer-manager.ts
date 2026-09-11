@@ -228,7 +228,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     let headerFound = false;
     let userAgentFound = false;
 
-    for (const [key, value] of Object.entries(headers)) {
+    headers.forEach((value, key) => {
       if (key.toLocaleLowerCase().trim() === 'x-goog-api-client') {
         headerFound = true;
 
@@ -242,7 +242,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       } else if (key.toLocaleLowerCase().trim() === 'user-agent') {
         userAgentFound = true;
       }
-    }
+    });
 
     // If the header isn't present, add it
     if (!headerFound) {
