@@ -32,7 +32,7 @@ import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 import AsyncRetry from 'async-retry';
 import {ApiError} from './nodejs-common/index.js';
-import {GaxiosError, GaxiosResponse} from 'gaxios';
+import {GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {getRuntimeTrackingString, getUserAgentString} from './util.js';
@@ -398,8 +398,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
           throw res.data.error;
         }
       } catch (e) {
-        this.#handleErrorResponse(e as GaxiosError, bail);
-        return;
+        this.#handleErrorResponse(e as Error, bail);
       }
     }, this.retryOptions);
   }
@@ -417,7 +416,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     ) {
       throw err;
     } else {
-      bail(err as Error);
+      bail(err);
     }
   }
 }
