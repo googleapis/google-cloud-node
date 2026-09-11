@@ -495,6 +495,20 @@ export namespace google {
                     public fetchBlob(request: google.cloud.securesourcemanager.v1.IFetchBlobRequest): Promise<google.cloud.securesourcemanager.v1.FetchBlobResponse>;
 
                     /**
+                     * Calls FetchRefs.
+                     * @param request FetchRefsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchRefsResponse
+                     */
+                    public fetchRefs(request: google.cloud.securesourcemanager.v1.IFetchRefsRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.FetchRefsCallback): void;
+
+                    /**
+                     * Calls FetchRefs.
+                     * @param request FetchRefsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchRefs(request: google.cloud.securesourcemanager.v1.IFetchRefsRequest): Promise<google.cloud.securesourcemanager.v1.FetchRefsResponse>;
+
+                    /**
                      * Calls CreateIssue.
                      * @param request CreateIssueRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -1002,6 +1016,13 @@ export namespace google {
                     type FetchBlobCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.FetchBlobResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|fetchRefs}.
+                     * @param error Error, if any
+                     * @param [response] FetchRefsResponse
+                     */
+                    type FetchRefsCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.FetchRefsResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|createIssue}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -1174,6 +1195,12 @@ export namespace google {
 
                     /** Instance workforceIdentityFederationConfig */
                     workforceIdentityFederationConfig?: (google.cloud.securesourcemanager.v1.Instance.IWorkforceIdentityFederationConfig|null);
+
+                    /** Instance satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
+                    /** Instance satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
                 }
 
                 /** Represents an Instance. */
@@ -1214,6 +1241,12 @@ export namespace google {
 
                     /** Instance workforceIdentityFederationConfig. */
                     public workforceIdentityFederationConfig?: (google.cloud.securesourcemanager.v1.Instance.IWorkforceIdentityFederationConfig|null);
+
+                    /** Instance satisfiesPzi. */
+                    public satisfiesPzi: boolean;
+
+                    /** Instance satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -2508,7 +2541,8 @@ export namespace google {
                     enum HookEventType {
                         UNSPECIFIED = 0,
                         PUSH = 1,
-                        PULL_REQUEST = 2
+                        PULL_REQUEST = 2,
+                        PULL_REQUEST_COMMENT = 3
                     }
 
                     /** Properties of a PushOption. */
@@ -4122,6 +4156,125 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Ref. */
+                interface IRef {
+
+                    /** Ref name */
+                    name?: (string|null);
+
+                    /** Ref target */
+                    target?: (string|null);
+
+                    /** Ref type */
+                    type?: (google.cloud.securesourcemanager.v1.Ref.RefType|keyof typeof google.cloud.securesourcemanager.v1.Ref.RefType|null);
+                }
+
+                /** Represents a Ref. */
+                class Ref implements IRef {
+
+                    /**
+                     * Constructs a new Ref.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IRef);
+
+                    /** Ref name. */
+                    public name: string;
+
+                    /** Ref target. */
+                    public target: string;
+
+                    /** Ref type. */
+                    public type: (google.cloud.securesourcemanager.v1.Ref.RefType|keyof typeof google.cloud.securesourcemanager.v1.Ref.RefType);
+
+                    /**
+                     * Creates a new Ref instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Ref instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IRef): google.cloud.securesourcemanager.v1.Ref;
+
+                    /**
+                     * Encodes the specified Ref message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Ref.verify|verify} messages.
+                     * @param message Ref message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IRef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Ref message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Ref.verify|verify} messages.
+                     * @param message Ref message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IRef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Ref message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Ref
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Ref;
+
+                    /**
+                     * Decodes a Ref message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Ref
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Ref;
+
+                    /**
+                     * Verifies a Ref message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Ref message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Ref
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Ref;
+
+                    /**
+                     * Creates a plain object from a Ref message. Also converts values to other types if specified.
+                     * @param message Ref
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.Ref, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Ref to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Ref
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Ref {
+
+                    /** RefType enum. */
+                    enum RefType {
+                        REF_TYPE_UNSPECIFIED = 0,
+                        REF_TYPE_BRANCH = 1,
+                        REF_TYPE_TAG = 2
                     }
                 }
 
@@ -9103,6 +9256,224 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FetchBlobResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchRefsRequest. */
+                interface IFetchRefsRequest {
+
+                    /** FetchRefsRequest repository */
+                    repository?: (string|null);
+
+                    /** FetchRefsRequest type */
+                    type?: (google.cloud.securesourcemanager.v1.Ref.RefType|keyof typeof google.cloud.securesourcemanager.v1.Ref.RefType|null);
+
+                    /** FetchRefsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchRefsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchRefsRequest. */
+                class FetchRefsRequest implements IFetchRefsRequest {
+
+                    /**
+                     * Constructs a new FetchRefsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IFetchRefsRequest);
+
+                    /** FetchRefsRequest repository. */
+                    public repository: string;
+
+                    /** FetchRefsRequest type. */
+                    public type: (google.cloud.securesourcemanager.v1.Ref.RefType|keyof typeof google.cloud.securesourcemanager.v1.Ref.RefType);
+
+                    /** FetchRefsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchRefsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchRefsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchRefsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IFetchRefsRequest): google.cloud.securesourcemanager.v1.FetchRefsRequest;
+
+                    /**
+                     * Encodes the specified FetchRefsRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchRefsRequest.verify|verify} messages.
+                     * @param message FetchRefsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IFetchRefsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchRefsRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchRefsRequest.verify|verify} messages.
+                     * @param message FetchRefsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IFetchRefsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchRefsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchRefsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.FetchRefsRequest;
+
+                    /**
+                     * Decodes a FetchRefsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchRefsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.FetchRefsRequest;
+
+                    /**
+                     * Verifies a FetchRefsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchRefsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchRefsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.FetchRefsRequest;
+
+                    /**
+                     * Creates a plain object from a FetchRefsRequest message. Also converts values to other types if specified.
+                     * @param message FetchRefsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.FetchRefsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchRefsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchRefsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchRefsResponse. */
+                interface IFetchRefsResponse {
+
+                    /** FetchRefsResponse refs */
+                    refs?: (google.cloud.securesourcemanager.v1.IRef[]|null);
+
+                    /** FetchRefsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchRefsResponse. */
+                class FetchRefsResponse implements IFetchRefsResponse {
+
+                    /**
+                     * Constructs a new FetchRefsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IFetchRefsResponse);
+
+                    /** FetchRefsResponse refs. */
+                    public refs: google.cloud.securesourcemanager.v1.IRef[];
+
+                    /** FetchRefsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchRefsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchRefsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IFetchRefsResponse): google.cloud.securesourcemanager.v1.FetchRefsResponse;
+
+                    /**
+                     * Encodes the specified FetchRefsResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchRefsResponse.verify|verify} messages.
+                     * @param message FetchRefsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IFetchRefsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchRefsResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchRefsResponse.verify|verify} messages.
+                     * @param message FetchRefsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IFetchRefsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchRefsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchRefsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.FetchRefsResponse;
+
+                    /**
+                     * Decodes a FetchRefsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchRefsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.FetchRefsResponse;
+
+                    /**
+                     * Verifies a FetchRefsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchRefsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchRefsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.FetchRefsResponse;
+
+                    /**
+                     * Creates a plain object from a FetchRefsResponse message. Also converts values to other types if specified.
+                     * @param message FetchRefsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.FetchRefsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchRefsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchRefsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

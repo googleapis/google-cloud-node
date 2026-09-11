@@ -933,11 +933,25 @@
                       "fields": {
                         "externalKeyUri": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "ekmConnectionKeyPath": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ekmConnectionBackendOverride": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/EkmConnection"
+                          }
                         }
                       }
                     },

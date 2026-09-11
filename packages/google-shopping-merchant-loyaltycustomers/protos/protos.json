@@ -10,10 +10,13 @@
                   "nested": {
                     "v1": {
                       "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.LoyaltyCustomers.V1",
                         "go_package": "cloud.google.com/go/shopping/merchant/loyaltycustomers/apiv1/loyaltycustomerspb;loyaltycustomerspb",
                         "java_multiple_files": true,
                         "java_outer_classname": "LoyaltyCustomerProto",
                         "java_package": "com.google.shopping.merchant.loyaltycustomers.v1",
+                        "php_namespace": "Google\\Shopping\\Merchant\\LoyaltyCustomers\\V1",
+                        "ruby_package": "Google::Shopping::Merchant::LoyaltyCustomers::V1",
                         "(google.api.resource_definition).type": "merchantapi.googleapis.com/Account",
                         "(google.api.resource_definition).pattern": "accounts/{account}"
                       },

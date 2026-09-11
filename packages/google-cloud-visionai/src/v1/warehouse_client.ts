@@ -10347,7 +10347,7 @@ export class WarehouseClient {
    *   Sort by the value under the data schema key.
    * @param {string} request.corpus
    *   Required. The parent corpus to search.
-   *   Format: `projects/{project_id}/locations/{location_id}/corpora/{corpus_id}'
+   *   Format: `projects/{project_id}/locations/{location_id}/corpora/{corpus_id}`
    * @param {number} request.pageSize
    *   The number of results to be returned in this page. If it's 0, the server
    *   will decide the appropriate page_size.
@@ -10491,7 +10491,7 @@ export class WarehouseClient {
    *   Sort by the value under the data schema key.
    * @param {string} request.corpus
    *   Required. The parent corpus to search.
-   *   Format: `projects/{project_id}/locations/{location_id}/corpora/{corpus_id}'
+   *   Format: `projects/{project_id}/locations/{location_id}/corpora/{corpus_id}`
    * @param {number} request.pageSize
    *   The number of results to be returned in this page. If it's 0, the server
    *   will decide the appropriate page_size.
@@ -10564,7 +10564,7 @@ export class WarehouseClient {
    *   Sort by the value under the data schema key.
    * @param {string} request.corpus
    *   Required. The parent corpus to search.
-   *   Format: `projects/{project_id}/locations/{location_id}/corpora/{corpus_id}'
+   *   Format: `projects/{project_id}/locations/{location_id}/corpora/{corpus_id}`
    * @param {number} request.pageSize
    *   The number of results to be returned in this page. If it's 0, the server
    *   will decide the appropriate page_size.
@@ -10639,7 +10639,7 @@ export class WarehouseClient {
    * @param {string} request.indexEndpoint
    *   Required. The index endpoint to search.
    *   Format:
-   *   `projects/{project_id}/locations/{location_id}/indexEndpoints/{index_endpoint_id}'
+   *   `projects/{project_id}/locations/{location_id}/indexEndpoints/{index_endpoint_id}`
    * @param {number[]} request.criteria
    *   Criteria applied to search results.
    * @param {number[]} request.exclusionCriteria
@@ -10780,7 +10780,7 @@ export class WarehouseClient {
    * @param {string} request.indexEndpoint
    *   Required. The index endpoint to search.
    *   Format:
-   *   `projects/{project_id}/locations/{location_id}/indexEndpoints/{index_endpoint_id}'
+   *   `projects/{project_id}/locations/{location_id}/indexEndpoints/{index_endpoint_id}`
    * @param {number[]} request.criteria
    *   Criteria applied to search results.
    * @param {number[]} request.exclusionCriteria
@@ -10844,7 +10844,7 @@ export class WarehouseClient {
    * @param {string} request.indexEndpoint
    *   Required. The index endpoint to search.
    *   Format:
-   *   `projects/{project_id}/locations/{location_id}/indexEndpoints/{index_endpoint_id}'
+   *   `projects/{project_id}/locations/{location_id}/indexEndpoints/{index_endpoint_id}`
    * @param {number[]} request.criteria
    *   Criteria applied to search results.
    * @param {number[]} request.exclusionCriteria

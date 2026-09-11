@@ -7100,6 +7100,70 @@ describe('v2.BigtableTableAdminClient', () => {
       });
     });
 
+    describe('memoryLayer', async () => {
+      const fakePath = '/rendered/path/memoryLayer';
+      const expectedParameters = {
+        project: 'projectValue',
+        instance: 'instanceValue',
+        cluster: 'clusterValue',
+      };
+      const client = new bigtabletableadminModule.v2.BigtableTableAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.memoryLayerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.memoryLayerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('memoryLayerPath', () => {
+        const result = client.memoryLayerPath(
+          'projectValue',
+          'instanceValue',
+          'clusterValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.memoryLayerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromMemoryLayerName', () => {
+        const result = client.matchProjectFromMemoryLayerName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.memoryLayerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromMemoryLayerName', () => {
+        const result = client.matchInstanceFromMemoryLayerName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.memoryLayerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchClusterFromMemoryLayerName', () => {
+        const result = client.matchClusterFromMemoryLayerName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.memoryLayerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {

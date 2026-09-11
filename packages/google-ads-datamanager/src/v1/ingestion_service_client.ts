@@ -409,13 +409,14 @@ export class IngestionServiceClient {
    *   Optional. For testing purposes. If `true`, the request is validated but not
    *   executed. Only errors are returned, not results.
    * @param {google.ads.datamanager.v1.Encoding} [request.encoding]
-   *   Optional. Required for {@link protos.google.ads.datamanager.v1.UserData|UserData}
-   *   uploads. The encoding type of the user identifiers. For hashed user
-   *   identifiers, this is the encoding type of the hashed string. For encrypted
-   *   hashed user identifiers, this is the encoding type of the outer encrypted
-   *   string, but not necessarily the inner hashed string, meaning the inner
-   *   hashed string could be encoded in a different way than the outer encrypted
-   *   string. For non `UserData` uploads, this field is ignored.
+   *   Optional. Must be provided for
+   *   {@link protos.google.ads.datamanager.v1.UserData|UserData} uploads. The encoding type
+   *   of the user identifiers. For hashed user identifiers, this is the encoding
+   *   type of the hashed string. For encrypted hashed user identifiers, this is
+   *   the encoding type of the outer encrypted string, but not necessarily the
+   *   inner hashed string, meaning the inner hashed string could be encoded in a
+   *   different way than the outer encrypted string. For non `UserData` uploads,
+   *   this field is ignored.
    * @param {google.ads.datamanager.v1.EncryptionInfo} [request.encryptionInfo]
    *   Optional. Encryption information for
    *   {@link protos.google.ads.datamanager.v1.UserData|UserData} uploads. If not set, it's
@@ -570,10 +571,10 @@ export class IngestionServiceClient {
    *   Optional. For testing purposes. If `true`, the request is validated but not
    *   executed. Only errors are returned, not results.
    * @param {google.ads.datamanager.v1.Encoding} [request.encoding]
-   *   Optional. Required for {@link protos.google.ads.datamanager.v1.UserData|UserData}
-   *   uploads. The encoding type of the user identifiers. Applies to only the
-   *   outer encoding for encrypted user identifiers. For non `UserData` uploads,
-   *   this field is ignored.
+   *   Optional. Must be provided for
+   *   {@link protos.google.ads.datamanager.v1.UserData|UserData} uploads. The encoding type
+   *   of the user identifiers. Applies to only the outer encoding for encrypted
+   *   user identifiers. For non `UserData` uploads, this field is ignored.
    * @param {google.ads.datamanager.v1.EncryptionInfo} [request.encryptionInfo]
    *   Optional. Encryption information for
    *   {@link protos.google.ads.datamanager.v1.UserData|UserData} uploads. If not set, it's
@@ -878,13 +879,14 @@ export class IngestionServiceClient {
    *   Optional. For testing purposes. If `true`, the request is validated but not
    *   executed. Only errors are returned, not results.
    * @param {google.ads.datamanager.v1.Encoding} [request.encoding]
-   *   Optional. Required for {@link protos.google.ads.datamanager.v1.UserData|UserData}
-   *   uploads. The encoding type of the user identifiers. For hashed user
-   *   identifiers, this is the encoding type of the hashed string. For encrypted
-   *   hashed user identifiers, this is the encoding type of the outer encrypted
-   *   string, but not necessarily the inner hashed string, meaning the inner
-   *   hashed string could be encoded in a different way than the outer encrypted
-   *   string. For non `UserData` uploads, this field is ignored.
+   *   Optional. Must be provided for
+   *   {@link protos.google.ads.datamanager.v1.UserData|UserData} uploads. The encoding type
+   *   of the user identifiers. For hashed user identifiers, this is the encoding
+   *   type of the hashed string. For encrypted hashed user identifiers, this is
+   *   the encoding type of the outer encrypted string, but not necessarily the
+   *   inner hashed string, meaning the inner hashed string could be encoded in a
+   *   different way than the outer encrypted string. For non `UserData` uploads,
+   *   this field is ignored.
    * @param {google.ads.datamanager.v1.EncryptionInfo} [request.encryptionInfo]
    *   Optional. Encryption information for
    *   {@link protos.google.ads.datamanager.v1.UserData|UserData} uploads. If not set, it's
@@ -1018,9 +1020,10 @@ export class IngestionServiceClient {
    *   The request object that will be sent.
    * @param {number[]} request.adEvents
    *   Required. Required (at least 1). A list of ad events.
-   * @param {google.ads.datamanager.v1.EncryptionInfo} request.encryptionInfo
-   *   Required. Information about encryption keys which are used to encrypt the
-   *   data.
+   * @param {google.ads.datamanager.v1.EncryptionInfo} [request.encryptionInfo]
+   *   Optional. Information about encryption keys which are used to encrypt the
+   *   data. This field must be provided when ad events contain
+   *   {@link protos.google.ads.datamanager.v1.UserData|UserData}.
    * @param {boolean} [request.validateOnly]
    *   Optional. If true, the request is validated, but not executed.
    * @param {object} [options]

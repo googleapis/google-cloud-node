@@ -1332,6 +1332,275 @@ describe('v2beta.SpacesServiceClient', () => {
     });
   });
 
+  describe('updateMember', () => {
+    it('invokes updateMember without error', async () => {
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.UpdateMemberRequest(),
+      );
+      request.member ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2beta.UpdateMemberRequest',
+        ['member', 'name'],
+      );
+      request.member.name = defaultValue1;
+      const expectedHeaderRequestParams = `member.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.Member(),
+      );
+      client.innerApiCalls.updateMember = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateMember(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMember without error using callback', async () => {
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.UpdateMemberRequest(),
+      );
+      request.member ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2beta.UpdateMemberRequest',
+        ['member', 'name'],
+      );
+      request.member.name = defaultValue1;
+      const expectedHeaderRequestParams = `member.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.Member(),
+      );
+      client.innerApiCalls.updateMember =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateMember(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.apps.meet.v2beta.IMember | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMember with error', async () => {
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.UpdateMemberRequest(),
+      );
+      request.member ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2beta.UpdateMemberRequest',
+        ['member', 'name'],
+      );
+      request.member.name = defaultValue1;
+      const expectedHeaderRequestParams = `member.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMember = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateMember(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMember as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMember as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMember with closed client', async () => {
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.UpdateMemberRequest(),
+      );
+      request.member ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2beta.UpdateMemberRequest',
+        ['member', 'name'],
+      );
+      request.member.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateMember(request), expectedError);
+    });
+  });
+
+  describe('batchUpdateMembers', () => {
+    it('invokes batchUpdateMembers without error', async () => {
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.BatchUpdateMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2beta.BatchUpdateMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.BatchUpdateMembersResponse(),
+      );
+      client.innerApiCalls.batchUpdateMembers =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchUpdateMembers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateMembers without error using callback', async () => {
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.BatchUpdateMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2beta.BatchUpdateMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.BatchUpdateMembersResponse(),
+      );
+      client.innerApiCalls.batchUpdateMembers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchUpdateMembers(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.apps.meet.v2beta.IBatchUpdateMembersResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateMembers with error', async () => {
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.BatchUpdateMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2beta.BatchUpdateMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUpdateMembers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.batchUpdateMembers(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateMembers with closed client', async () => {
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2beta.BatchUpdateMembersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2beta.BatchUpdateMembersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.batchUpdateMembers(request), expectedError);
+    });
+  });
+
   describe('listMembers', () => {
     it('invokes listMembers without error', async () => {
       const client = new spacesserviceModule.v2beta.SpacesServiceClient({
@@ -1901,6 +2170,58 @@ describe('v2beta.SpacesServiceClient', () => {
         assert.strictEqual(result, 'recordingValue');
         assert(
           (client.pathTemplates.recordingPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('smartNote', async () => {
+      const fakePath = '/rendered/path/smartNote';
+      const expectedParameters = {
+        conference_record: 'conferenceRecordValue',
+        smart_note: 'smartNoteValue',
+      };
+      const client = new spacesserviceModule.v2beta.SpacesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.smartNotePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.smartNotePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('smartNotePath', () => {
+        const result = client.smartNotePath(
+          'conferenceRecordValue',
+          'smartNoteValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchConferenceRecordFromSmartNoteName', () => {
+        const result = client.matchConferenceRecordFromSmartNoteName(fakePath);
+        assert.strictEqual(result, 'conferenceRecordValue');
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSmartNoteFromSmartNoteName', () => {
+        const result = client.matchSmartNoteFromSmartNoteName(fakePath);
+        assert.strictEqual(result, 'smartNoteValue');
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

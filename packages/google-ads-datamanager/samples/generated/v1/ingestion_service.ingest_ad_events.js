@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(adEvents, encryptionInfo) {
+function main(adEvents) {
   // [START datamanager_v1_generated_IngestionService_IngestAdEvents_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -33,8 +33,9 @@ function main(adEvents, encryptionInfo) {
    */
   // const adEvents = [1,2,3,4]
   /**
-   *  Required. Information about encryption keys which are used to encrypt the
-   *  data.
+   *  Optional. Information about encryption keys which are used to encrypt the
+   *  data. This field must be provided when ad events contain
+   *  UserData google.ads.datamanager.v1.UserData.
    */
   // const encryptionInfo = {}
   /**
@@ -52,7 +53,6 @@ function main(adEvents, encryptionInfo) {
     // Construct request
     const request = {
       adEvents,
-      encryptionInfo,
     };
 
     // Run request

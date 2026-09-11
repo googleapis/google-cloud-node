@@ -42,6 +42,11 @@ function main(name, offer) {
    *  createAnswer() methods.
    */
   // const offer = 'abc123'
+  /**
+   *  Optional. Additional configuration options for a Media API session.
+   *  If unset, default values will be provided for the session.
+   */
+  // const config = {}
 
   // Imports the Meet library
   const {SpacesServiceClient} = require('@google-apps/meet').v2beta;

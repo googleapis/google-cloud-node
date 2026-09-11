@@ -2525,6 +2525,9 @@ export namespace google {
 
                     /** ExternalProtectionLevelOptions ekmConnectionKeyPath */
                     ekmConnectionKeyPath?: (string|null);
+
+                    /** ExternalProtectionLevelOptions ekmConnectionBackendOverride */
+                    ekmConnectionBackendOverride?: (string|null);
                 }
 
                 /** Represents an ExternalProtectionLevelOptions. */
@@ -2541,6 +2544,9 @@ export namespace google {
 
                     /** ExternalProtectionLevelOptions ekmConnectionKeyPath. */
                     public ekmConnectionKeyPath: string;
+
+                    /** ExternalProtectionLevelOptions ekmConnectionBackendOverride. */
+                    public ekmConnectionBackendOverride: string;
 
                     /**
                      * Creates a new ExternalProtectionLevelOptions instance using the specified properties.

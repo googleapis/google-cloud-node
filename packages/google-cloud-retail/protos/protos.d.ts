@@ -36560,6 +36560,9 @@ export namespace google {
 
                     /** CompleteQueryResponse attributeResults */
                     attributeResults?: ({ [k: string]: google.cloud.retail.v2alpha.CompleteQueryResponse.IAttributeResult }|null);
+
+                    /** CompleteQueryResponse agentPrompts */
+                    agentPrompts?: (google.cloud.retail.v2alpha.CompleteQueryResponse.IAgentPrompt[]|null);
                 }
 
                 /** Represents a CompleteQueryResponse. */
@@ -36582,6 +36585,9 @@ export namespace google {
 
                     /** CompleteQueryResponse attributeResults. */
                     public attributeResults: { [k: string]: google.cloud.retail.v2alpha.CompleteQueryResponse.IAttributeResult };
+
+                    /** CompleteQueryResponse agentPrompts. */
+                    public agentPrompts: google.cloud.retail.v2alpha.CompleteQueryResponse.IAgentPrompt[];
 
                     /**
                      * Creates a new CompleteQueryResponse instance using the specified properties.
@@ -36677,6 +36683,9 @@ export namespace google {
 
                         /** CompletionResult totalProductCount */
                         totalProductCount?: (number|null);
+
+                        /** CompletionResult agentPrompts */
+                        agentPrompts?: (google.cloud.retail.v2alpha.CompleteQueryResponse.IAgentPrompt[]|null);
                     }
 
                     /** Represents a CompletionResult. */
@@ -36699,6 +36708,9 @@ export namespace google {
 
                         /** CompletionResult totalProductCount. */
                         public totalProductCount: number;
+
+                        /** CompletionResult agentPrompts. */
+                        public agentPrompts: google.cloud.retail.v2alpha.CompleteQueryResponse.IAgentPrompt[];
 
                         /**
                          * Creates a new CompletionResult instance using the specified properties.
@@ -36966,6 +36978,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for AttributeResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AgentPrompt. */
+                    interface IAgentPrompt {
+
+                        /** AgentPrompt prompt */
+                        prompt?: (string|null);
+                    }
+
+                    /** Represents an AgentPrompt. */
+                    class AgentPrompt implements IAgentPrompt {
+
+                        /**
+                         * Constructs a new AgentPrompt.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2alpha.CompleteQueryResponse.IAgentPrompt);
+
+                        /** AgentPrompt prompt. */
+                        public prompt: string;
+
+                        /**
+                         * Creates a new AgentPrompt instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AgentPrompt instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2alpha.CompleteQueryResponse.IAgentPrompt): google.cloud.retail.v2alpha.CompleteQueryResponse.AgentPrompt;
+
+                        /**
+                         * Encodes the specified AgentPrompt message. Does not implicitly {@link google.cloud.retail.v2alpha.CompleteQueryResponse.AgentPrompt.verify|verify} messages.
+                         * @param message AgentPrompt message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2alpha.CompleteQueryResponse.IAgentPrompt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AgentPrompt message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.CompleteQueryResponse.AgentPrompt.verify|verify} messages.
+                         * @param message AgentPrompt message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2alpha.CompleteQueryResponse.IAgentPrompt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AgentPrompt message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AgentPrompt
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.CompleteQueryResponse.AgentPrompt;
+
+                        /**
+                         * Decodes an AgentPrompt message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AgentPrompt
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.CompleteQueryResponse.AgentPrompt;
+
+                        /**
+                         * Verifies an AgentPrompt message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AgentPrompt message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AgentPrompt
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.CompleteQueryResponse.AgentPrompt;
+
+                        /**
+                         * Creates a plain object from an AgentPrompt message. Also converts values to other types if specified.
+                         * @param message AgentPrompt
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2alpha.CompleteQueryResponse.AgentPrompt, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AgentPrompt to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AgentPrompt
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

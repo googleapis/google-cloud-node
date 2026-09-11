@@ -1158,6 +1158,142 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     });
   });
 
+  describe('getSmartNote', () => {
+    it('invokes getSmartNote without error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.GetSmartNoteRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.GetSmartNoteRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.apps.meet.v2.SmartNote(),
+      );
+      client.innerApiCalls.getSmartNote = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSmartNote(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSmartNote without error using callback', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.GetSmartNoteRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.GetSmartNoteRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.apps.meet.v2.SmartNote(),
+      );
+      client.innerApiCalls.getSmartNote =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSmartNote(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.apps.meet.v2.ISmartNote | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSmartNote with error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.GetSmartNoteRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.GetSmartNoteRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSmartNote = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getSmartNote(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSmartNote as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSmartNote with closed client', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.GetSmartNoteRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.GetSmartNoteRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getSmartNote(request), expectedError);
+    });
+  });
+
   describe('listConferenceRecords', () => {
     it('invokes listConferenceRecords without error', async () => {
       const client =
@@ -3008,6 +3144,308 @@ describe('v2.ConferenceRecordsServiceClient', () => {
     });
   });
 
+  describe('listSmartNotes', () => {
+    it('invokes listSmartNotes without error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+      ];
+      client.innerApiCalls.listSmartNotes = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSmartNotes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSmartNotes without error using callback', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+      ];
+      client.innerApiCalls.listSmartNotes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSmartNotes(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.apps.meet.v2.ISmartNote[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSmartNotes with error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSmartNotes = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listSmartNotes(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSmartNotes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSmartNotesStream without error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+      ];
+      client.descriptors.page.listSmartNotes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSmartNotesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.apps.meet.v2.SmartNote[] = [];
+        stream.on('data', (response: protos.google.apps.meet.v2.SmartNote) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSmartNotes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSmartNotes, request),
+      );
+      assert(
+        (client.descriptors.page.listSmartNotes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listSmartNotesStream with error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSmartNotes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSmartNotesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.apps.meet.v2.SmartNote[] = [];
+        stream.on('data', (response: protos.google.apps.meet.v2.SmartNote) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSmartNotes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSmartNotes, request),
+      );
+      assert(
+        (client.descriptors.page.listSmartNotes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listSmartNotes without error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+        generateSampleMessage(new protos.google.apps.meet.v2.SmartNote()),
+      ];
+      client.descriptors.page.listSmartNotes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.apps.meet.v2.ISmartNote[] = [];
+      const iterable = client.listSmartNotesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSmartNotes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listSmartNotes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listSmartNotes with error', async () => {
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.apps.meet.v2.ListSmartNotesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.apps.meet.v2.ListSmartNotesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSmartNotes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSmartNotesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.apps.meet.v2.ISmartNote[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSmartNotes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listSmartNotes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('conferenceRecord', async () => {
       const fakePath = '/rendered/path/conferenceRecord';
@@ -3046,6 +3484,56 @@ describe('v2.ConferenceRecordsServiceClient', () => {
         assert.strictEqual(result, 'conferenceRecordValue');
         assert(
           (client.pathTemplates.conferenceRecordPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('member', async () => {
+      const fakePath = '/rendered/path/member';
+      const expectedParameters = {
+        space: 'spaceValue',
+        member: 'memberValue',
+      };
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.memberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.memberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('memberPath', () => {
+        const result = client.memberPath('spaceValue', 'memberValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.memberPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchSpaceFromMemberName', () => {
+        const result = client.matchSpaceFromMemberName(fakePath);
+        assert.strictEqual(result, 'spaceValue');
+        assert(
+          (client.pathTemplates.memberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMemberFromMemberName', () => {
+        const result = client.matchMemberFromMemberName(fakePath);
+        assert.strictEqual(result, 'memberValue');
+        assert(
+          (client.pathTemplates.memberPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3233,6 +3721,59 @@ describe('v2.ConferenceRecordsServiceClient', () => {
         assert.strictEqual(result, 'recordingValue');
         assert(
           (client.pathTemplates.recordingPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('smartNote', async () => {
+      const fakePath = '/rendered/path/smartNote';
+      const expectedParameters = {
+        conference_record: 'conferenceRecordValue',
+        smart_note: 'smartNoteValue',
+      };
+      const client =
+        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.smartNotePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.smartNotePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('smartNotePath', () => {
+        const result = client.smartNotePath(
+          'conferenceRecordValue',
+          'smartNoteValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchConferenceRecordFromSmartNoteName', () => {
+        const result = client.matchConferenceRecordFromSmartNoteName(fakePath);
+        assert.strictEqual(result, 'conferenceRecordValue');
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSmartNoteFromSmartNoteName', () => {
+        const result = client.matchSmartNoteFromSmartNoteName(fakePath);
+        assert.strictEqual(result, 'smartNoteValue');
+        assert(
+          (client.pathTemplates.smartNotePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

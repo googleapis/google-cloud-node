@@ -120,6 +120,14 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "mobileDeviceId": {
                           "type": "string",
                           "id": 9,
@@ -1051,7 +1059,7 @@
                           "type": "string",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1090,7 +1098,8 @@
                             "DATA_PARTNER": 4,
                             "GOOGLE_ANALYTICS_PROPERTY": 5,
                             "GOOGLE_AD_MANAGER_AUDIENCE_LINK": 6,
-                            "FLOODLIGHT_CONFIG": 7
+                            "FLOODLIGHT_CONFIG": 7,
+                            "GOOGLE_AD_MANAGER": 8
                           }
                         }
                       }
@@ -1406,7 +1415,9 @@
                         "BASELINE_LOCATION_AUTO_DETECTION_FAILED": 122,
                         "INSIGHTS_MISSING_FOR_DIMENSION": 123,
                         "REQUIRED_PREREQUISITE_LINK_MISSING": 124,
-                        "INVALID_REMOVE_AS_OF_TIME": 125
+                        "INVALID_REMOVE_AS_OF_TIME": 125,
+                        "REQUEST_TOO_OLD": 126,
+                        "CONVERSION_ACTION_TOO_RECENTLY_CREATED": 127
                       }
                     },
                     "Event": {
@@ -1661,6 +1672,20 @@
                           "rule": "repeated",
                           "type": "EncryptedUserId",
                           "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ppid": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "visitorPpid": {
+                          "type": "string",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2182,7 +2207,7 @@
                           "type": "EncryptionInfo",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "validateOnly": {

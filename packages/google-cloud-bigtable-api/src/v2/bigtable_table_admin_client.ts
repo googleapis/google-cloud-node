@@ -233,6 +233,9 @@ export class BigtableTableAdminClient {
       materializedViewPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/instances/{instance}/materializedViews/{materialized_view}',
       ),
+      memoryLayerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer',
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
@@ -7148,6 +7151,58 @@ export class BigtableTableAdminClient {
     return this.pathTemplates.materializedViewPathTemplate.match(
       materializedViewName,
     ).materialized_view;
+  }
+
+  /**
+   * Return a fully-qualified memoryLayer resource name string.
+   *
+   * @param {string} project
+   * @param {string} instance
+   * @param {string} cluster
+   * @returns {string} Resource name string.
+   */
+  memoryLayerPath(project: string, instance: string, cluster: string) {
+    return this.pathTemplates.memoryLayerPathTemplate.render({
+      project: project,
+      instance: instance,
+      cluster: cluster,
+    });
+  }
+
+  /**
+   * Parse the project from MemoryLayer resource.
+   *
+   * @param {string} memoryLayerName
+   *   A fully-qualified path representing MemoryLayer resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMemoryLayerName(memoryLayerName: string) {
+    return this.pathTemplates.memoryLayerPathTemplate.match(memoryLayerName)
+      .project;
+  }
+
+  /**
+   * Parse the instance from MemoryLayer resource.
+   *
+   * @param {string} memoryLayerName
+   *   A fully-qualified path representing MemoryLayer resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromMemoryLayerName(memoryLayerName: string) {
+    return this.pathTemplates.memoryLayerPathTemplate.match(memoryLayerName)
+      .instance;
+  }
+
+  /**
+   * Parse the cluster from MemoryLayer resource.
+   *
+   * @param {string} memoryLayerName
+   *   A fully-qualified path representing MemoryLayer resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromMemoryLayerName(memoryLayerName: string) {
+    return this.pathTemplates.memoryLayerPathTemplate.match(memoryLayerName)
+      .cluster;
   }
 
   /**
