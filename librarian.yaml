@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.42.0
+version: v0.42.1-0.20260910203819-8f349d616bd7
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -52,6 +52,20 @@ default:
     - CHANGELOG.md
     - .readme-partials.yaml
   output: packages
+  nodejs:
+    custom_package_prefixes:
+      google/ads: '@google-ads'
+      google/ai: '@google-ai'
+      google/analytics: '@google-analytics'
+      google/apps: '@google-apps'
+      google/area120: '@google/area120'
+      google/chat: '@google-apps/chat'
+      google/developers: '@google/developer'
+      google/maps: '@googlemaps'
+      google/maps/isochrones: '@google-maps/isochrones'
+      google/marketingplatform: '@google-ads/marketing-platform'
+      google/shopping: '@google-shopping'
+      google/shopping/merchant: '@google-shopping'
 libraries:
   - name: google-ads-admanager
     version: 0.12.0
