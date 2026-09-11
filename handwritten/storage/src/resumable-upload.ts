@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import AbortController from 'abort-controller';
 import {createHash} from 'crypto';
 import {
   GaxiosOptions,
@@ -99,9 +98,8 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    * emulator context is detected.
    */
   authClient?: {
-    request: <T>(
-      opts: GaxiosOptions
-    ) => Promise<GaxiosResponse<T>> | GaxiosPromise<T>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    request(opts: any): Promise<any>;
   };
 
   /**
@@ -301,9 +299,8 @@ export class Upload extends Writable {
    * emulator context is detected.
    */
   authClient: {
-    request: <T>(
-      opts: GaxiosOptions
-    ) => Promise<GaxiosResponse<T>> | GaxiosPromise<T>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    request(opts: any): Promise<any>;
   };
   cacheKey: string;
   chunkSize?: number;
@@ -1335,9 +1332,9 @@ export class Upload extends Writable {
       }
     }
 
-    const res = await this.authClient.request<{error?: object}>(
+    const res = (await this.authClient.request(
       combinedReqOpts
-    );
+    )) as GaxiosResponse<{error?: object}>;
     if (res.data && res.data.error) {
       throw res.data.error;
     }
@@ -1378,7 +1375,9 @@ export class Upload extends Writable {
       }
     }
 
-    const res = await this.authClient.request(combinedReqOpts);
+    const res = (await this.authClient.request(
+      combinedReqOpts
+    )) as GaxiosResponse;
     const successfulRequest = this.onResponse(res);
     this.removeListener('error', errorCallback);
 
