@@ -34,12 +34,15 @@ import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as fs from 'fs';
 import * as http from 'http';
-import mime from 'mime';
 import * as path from 'path';
-import pLimit from 'p-limit';
 import {promisify} from 'util';
 import AsyncRetry from 'async-retry';
-import {convertObjKeysToSnakeCase, handleContextValidation} from './util.js';
+import {
+  convertObjKeysToSnakeCase,
+  handleContextValidation,
+  getMime,
+  getPLimit,
+} from './util.js';
 
 import {Acl, AclMetadata} from './acl.js';
 import {Channel} from './channel.js';
@@ -1733,118 +1736,128 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     const destinationFile = convertToFile(destination);
     callback = callback || util.noop;
 
-    if (!destinationFile.metadata.contentType) {
-      const destinationContentType =
-        mime.getType(destinationFile.name) || undefined;
+    void (async () => {
+      try {
+        if (!destinationFile.metadata.contentType) {
+          const mime = await getMime();
+          const destinationContentType =
+            mime.getType(destinationFile.name) || undefined;
 
-      if (destinationContentType) {
-        destinationFile.metadata.contentType = destinationContentType;
-      }
-    }
-
-    let maxRetries = this.storage.retryOptions.maxRetries;
-    if (
-      (destinationFile?.instancePreconditionOpts?.ifGenerationMatch ===
-        undefined &&
-        options.ifGenerationMatch === undefined &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
-      this.storage.retryOptions.idempotencyStrategy ===
-        IdempotencyStrategy.RetryNever
-    ) {
-      maxRetries = 0;
-    }
-
-    const deleteSourceObjects = options.deleteSourceObjects;
-
-    const requestQueryObject = Object.assign({}, options);
-    delete requestQueryObject.deleteSourceObjects;
-
-    if (requestQueryObject.ifGenerationMatch === undefined) {
-      Object.assign(
-        requestQueryObject,
-        destinationFile.instancePreconditionOpts,
-        requestQueryObject
-      );
-    }
-
-    // Make the request from the destination File object.
-    destinationFile.request(
-      {
-        method: 'POST',
-        uri: '/compose',
-        maxRetries,
-        json: {
-          destination: {
-            contentType: destinationFile.metadata.contentType,
-            contentEncoding: destinationFile.metadata.contentEncoding,
-            contexts:
-              requestQueryObject.contexts || destinationFile.metadata.contexts,
-          },
-          sourceObjects: (sources as File[]).map(source => {
-            const sourceObject = {
-              name: source.name,
-            } as SourceObject;
-
-            const generation = source.generation ?? source.metadata?.generation;
-            if (generation !== undefined) {
-              sourceObject.generation = parseInt(generation.toString());
-            }
-
-            return sourceObject;
-          }),
-        },
-        qs: requestQueryObject,
-      },
-      (err, resp) => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-        if (err) {
-          callback!(err, null, resp);
-          return;
+          if (destinationContentType) {
+            destinationFile.metadata.contentType = destinationContentType;
+          }
         }
 
-        if (deleteSourceObjects) {
-          const deletePromises = (sources as File[]).map(source => {
-            const deleteOptions: DeleteOptions = {
-              ignoreNotFound: true,
-              userProject: options.userProject,
-            };
+        let maxRetries = this.storage.retryOptions.maxRetries;
+        if (
+          (destinationFile?.instancePreconditionOpts?.ifGenerationMatch ===
+            undefined &&
+            options.ifGenerationMatch === undefined &&
+            this.storage.retryOptions.idempotencyStrategy ===
+              IdempotencyStrategy.RetryConditional) ||
+          this.storage.retryOptions.idempotencyStrategy ===
+            IdempotencyStrategy.RetryNever
+        ) {
+          maxRetries = 0;
+        }
 
-            const generation = source.generation ?? source.metadata?.generation;
-            if (generation !== undefined) {
-              deleteOptions.ifGenerationMatch = generation;
-            }
+        const deleteSourceObjects = options.deleteSourceObjects;
 
-            return source
-              .delete(deleteOptions)
-              .catch(deleteErr => deleteErr as Error);
-          });
+        const requestQueryObject = Object.assign({}, options);
+        delete requestQueryObject.deleteSourceObjects;
 
-          void (async () => {
-            // eslint-disable-next-line promise/no-promise-in-callback
-            const results = await Promise.all(deletePromises);
-            const errors = results.filter(
-              (res): res is Error => res instanceof Error
-            );
+        if (requestQueryObject.ifGenerationMatch === undefined) {
+          Object.assign(
+            requestQueryObject,
+            destinationFile.instancePreconditionOpts,
+            requestQueryObject
+          );
+        }
 
-            if (errors.length > 0) {
-              const cleanupErr = new ComposeCleanupError(
-                `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
-                errors,
-                destinationFile,
-                resp
-              );
-              callback!(cleanupErr, destinationFile, resp);
+        // Make the request from the destination File object.
+        destinationFile.request(
+          {
+            method: 'POST',
+            uri: '/compose',
+            maxRetries,
+            json: {
+              destination: {
+                contentType: destinationFile.metadata.contentType,
+                contentEncoding: destinationFile.metadata.contentEncoding,
+                contexts:
+                  requestQueryObject.contexts ||
+                  destinationFile.metadata.contexts,
+              },
+              sourceObjects: (sources as File[]).map(source => {
+                const sourceObject = {
+                  name: source.name,
+                } as SourceObject;
+
+                const generation =
+                  source.generation ?? source.metadata?.generation;
+                if (generation !== undefined) {
+                  sourceObject.generation = parseInt(generation.toString());
+                }
+
+                return sourceObject;
+              }),
+            },
+            qs: requestQueryObject,
+          },
+          (err, resp) => {
+            this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+            if (err) {
+              callback!(err, null, resp);
               return;
             }
 
-            callback!(null, destinationFile, resp);
-          })();
-        } else {
-          callback!(null, destinationFile, resp);
-        }
+            if (deleteSourceObjects) {
+              const deletePromises = (sources as File[]).map(source => {
+                const deleteOptions: DeleteOptions = {
+                  ignoreNotFound: true,
+                  userProject: options.userProject,
+                };
+
+                const generation =
+                  source.generation ?? source.metadata?.generation;
+                if (generation !== undefined) {
+                  deleteOptions.ifGenerationMatch = generation;
+                }
+
+                return source
+                  .delete(deleteOptions)
+                  .catch(deleteErr => deleteErr as Error);
+              });
+
+              void (async () => {
+                // eslint-disable-next-line promise/no-promise-in-callback
+                const results = await Promise.all(deletePromises);
+                const errors = results.filter(
+                  (res): res is Error => res instanceof Error
+                );
+
+                if (errors.length > 0) {
+                  const cleanupErr = new ComposeCleanupError(
+                    `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
+                    errors,
+                    destinationFile,
+                    resp
+                  );
+                  callback!(cleanupErr, destinationFile, resp);
+                  return;
+                }
+
+                callback!(null, destinationFile, resp);
+              })();
+            } else {
+              callback!(null, destinationFile, resp);
+            }
+          }
+        );
+      } catch (err) {
+        callback!(err as Error, null, null);
       }
-    );
+    })();
   }
 
   createChannel(
@@ -2288,6 +2301,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     void (async () => {
       try {
         let promises = [];
+        const pLimit = await getPLimit();
         const limit = pLimit(MAX_PARALLEL_LIMIT);
         const filesStream = this.getFilesStream(query);
 
@@ -4721,6 +4735,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     void (async () => {
       try {
         const [files] = await this.getFiles(options);
+        const pLimit = await getPLimit();
         const limit = pLimit(MAX_PARALLEL_LIMIT);
         const promises = files.map(file => {
           return limit(() => processFile(file));

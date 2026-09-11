@@ -318,3 +318,66 @@ export function handleContextValidation(
     return Promise.reject(err);
   }
 }
+
+export interface Mime {
+  getType(path: string): string | null;
+  getExtension?(mime: string): string | null;
+  define?(typeMap: {[key: string]: string[]}, force?: boolean): void;
+}
+
+export type Limit = import('p-limit').Limit;
+export type PLimit = (concurrency: number) => Limit;
+
+let mimePromise: Promise<Mime> | undefined;
+
+/**
+ * Lazily loads and returns the `mime` module instance.
+ * Caches the resolved module so dynamic import is evaluated only once.
+ *
+ * @internal
+ */
+export function getMime(): Promise<Mime> {
+  if (!mimePromise) {
+    mimePromise = import('mime')
+      .then(mod => {
+        const modObj = mod as unknown as {default?: Mime} & Partial<Mime>;
+        const mime: Mime =
+          modObj.default && typeof modObj.default.getType === 'function'
+            ? modObj.default
+            : (modObj as Mime);
+        return mime;
+      })
+      .catch(err => {
+        mimePromise = undefined;
+        throw err;
+      });
+  }
+  return mimePromise;
+}
+
+let pLimitPromise: Promise<PLimit> | undefined;
+
+/**
+ * Lazily loads and returns the `p-limit` limiter function.
+ * Caches the resolved module so dynamic import is evaluated only once.
+ *
+ * @internal
+ */
+export function getPLimit(): Promise<PLimit> {
+  if (!pLimitPromise) {
+    pLimitPromise = import('p-limit')
+      .then(mod => {
+        const modObj = mod as unknown as {default?: PLimit};
+        const pLimit: PLimit =
+          typeof mod === 'function'
+            ? (mod as PLimit)
+            : modObj.default || (modObj as PLimit);
+        return pLimit;
+      })
+      .catch(err => {
+        pLimitPromise = undefined;
+        throw err;
+      });
+  }
+  return pLimitPromise;
+}
