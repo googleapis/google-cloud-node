@@ -46,6 +46,7 @@ import {
   ParsedHttpRespMessage,
   ParsedHttpResponseBody,
   Util,
+  joinURIComponents,
 } from '../src/util';
 import {DEFAULT_PROJECT_ID_TOKEN} from '../src/service';
 
@@ -1920,6 +1921,42 @@ describe('common/util', () => {
       );
       assert.strictEqual(opts, optionsOrCallback);
       assert.strictEqual(cb, callback);
+    });
+  });
+
+  describe('joinURIComponents', () => {
+    it('should preserve DEFAULT_PROJECT_ID_TOKEN so replaceProjectIdToken can substitute it', () => {
+      // Regression: #9188 caused {{projectId}} to be encoded as %7B%7BprojectId%7D%7D,
+      // breaking ADC / lazy project-ID resolution. See #9256.
+      const joined = joinURIComponents([
+        'https://bigquery.googleapis.com/bigquery/v2',
+        'projects',
+        DEFAULT_PROJECT_ID_TOKEN,
+        'queries',
+      ]);
+      const substituted = replaceProjectIdToken(joined, 'my-project');
+      assert.strictEqual(
+        substituted,
+        'https://bigquery.googleapis.com/bigquery/v2/projects/my-project/queries',
+      );
+    });
+
+    it('should still reject path traversal in non-token components', () => {
+      assert.throws(() => {
+        joinURIComponents(['https://example.com/v1', '{{../../admin}}', 'child']);
+      });
+    });
+
+    it('should encode special characters in non-token path segments', () => {
+      const result = joinURIComponents([
+        'https://example.com/v1',
+        'resource with spaces',
+        'child',
+      ]);
+      assert.strictEqual(
+        result,
+        'https://example.com/v1/resource%20with%20spaces/child',
+      );
     });
   });
 });
