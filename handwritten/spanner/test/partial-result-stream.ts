@@ -193,7 +193,14 @@ describe('PartialResultStream', () => {
 
     it('should emit rows', done => {
       stream.on('error', done).on('data', row => {
-        assert.deepStrictEqual(row, EXPECTED_ROW);
+        // Node 18's assert.deepStrictEqual strictly requires prototype equality,
+        // which fails when comparing RowImpl (an Array subclass) with a plain Array literal.
+        // Node 20+ relaxed this for Array subclasses with constructor = Array.
+        if (parseInt(process.versions.node.split('.')[0], 10) < 20) {
+          assert.deepStrictEqual([...row], EXPECTED_ROW);
+        } else {
+          assert.deepStrictEqual(row, EXPECTED_ROW);
+        }
         done();
       });
 
@@ -250,7 +257,14 @@ describe('PartialResultStream', () => {
         assert.deepStrictEqual(json, fakeJson);
 
         const [row, options] = stub.lastCall.args;
-        assert.deepStrictEqual(row, EXPECTED_ROW);
+        // Node 18's assert.deepStrictEqual strictly requires prototype equality,
+        // which fails when comparing RowImpl (an Array subclass) with a plain Array literal.
+        // Node 20+ relaxed this for Array subclasses with constructor = Array.
+        if (parseInt(process.versions.node.split('.')[0], 10) < 20) {
+          assert.deepStrictEqual([...row], EXPECTED_ROW);
+        } else {
+          assert.deepStrictEqual(row, EXPECTED_ROW);
+        }
         assert.strictEqual(options, jsonOptions);
         done();
       });
