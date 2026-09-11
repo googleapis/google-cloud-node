@@ -17,8 +17,11 @@ import * as os from 'os';
 import * as process from 'process';
 import {MeterProvider, MetricReader} from '@opentelemetry/sdk-metrics';
 import {Counter, Histogram, context, ROOT_CONTEXT} from '@opentelemetry/api';
-import {detectResources, Resource} from '@opentelemetry/resources';
-import {GcpDetectorSync} from '@google-cloud/opentelemetry-resource-util';
+import {
+  detectResources,
+  resourceFromAttributes,
+} from '@opentelemetry/resources';
+import {gcpDetector} from '@opentelemetry/resource-detector-gcp';
 import * as Constants from './constants';
 import {MetricsTracer} from './metrics-tracer';
 const version = require('../../../package.json').version;
@@ -122,7 +125,7 @@ export class MetricsTracerFactory {
    */
   public getMeterProvider(readers: MetricReader[] = []): MeterProvider {
     if (this._meterProvider === null) {
-      const resource = new Resource({
+      const resource = resourceFromAttributes({
         [Constants.MONITORED_RES_LABEL_KEY_PROJECT]: this._projectId,
         [Constants.MONITORED_RES_LABEL_KEY_CLIENT_HASH]: this._clientHash,
         [Constants.MONITORED_RES_LABEL_KEY_LOCATION]: this._location,
@@ -454,14 +457,14 @@ export class MetricsTracerFactory {
 
   /**
    * Gets the location (region) of the client, otherwise returns to the "global" region.
-   * Uses GcpDetectorSync to detect the region from the environment.
+   * Uses the GCP resource detector to detect the region from the environment.
    * @returns The detected region string, or "global" if not found.
    */
   private static async _detectClientLocation(): Promise<string> {
     const defaultRegion = 'global';
     try {
       const resource = await detectResources({
-        detectors: [new GcpDetectorSync()],
+        detectors: [gcpDetector],
       });
 
       await resource?.waitForAsyncAttributes?.();
