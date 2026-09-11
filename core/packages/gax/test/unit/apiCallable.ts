@@ -15,13 +15,20 @@
  */
 
 import assert from 'assert';
+import {PassThrough} from 'stream';
 import {status} from '@grpc/grpc-js';
-import {afterEach, describe, it} from 'mocha';
+import {afterEach, beforeEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
 
-import {RequestType} from '../../src/apitypes';
+import {CancellableStream, GRPCCall, RequestType} from '../../src/apitypes';
+import {createApiCall as realCreateApiCall} from '../../src/createApiCall';
+import {StreamDescriptor} from '../../src/descriptor';
+import {StreamType} from '../../src/streamingCalls/streaming';
 import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
+import {OtelHarness} from './otelHarness';
+import * as tracerHelper from '../../src/observability/TracerHelper';
+import {StaticTraceContext} from '../../src/observability/TracerHelper';
 import * as utils from './utils';
 import * as retries from '../../src/normalCalls/retries';
 
@@ -331,27 +338,658 @@ describe('createApiCall', () => {
   });
 
   describe('in regards to OpenTelemetry Tracing', () => {
+    let harness: OtelHarness;
+
+    const telemetryInfo: StaticTraceContext = {
+      gcpClientService: 'echo.googleapis.com',
+      gcpVersion: '1.2.3',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '@google-cloud/echo',
+    };
+
+    beforeEach(() => {
+      harness = new OtelHarness();
+      harness.setup();
+    });
+
     afterEach(() => {
+      harness.teardown();
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
     });
 
-    it('creates an api call when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED and CallSettings field is set', () => {
+    it('calls traceAttempt with dynamicArgs, staticArgs, and isStreamingCall when tracing is enabled', async () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-      const mockCallOptions: gax.CallOptions = {
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: {
-            gcpClientService: 'test.googleapis.com',
-          },
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
         },
-      };
-      const apiCall = createApiCall(() => {}, {settings: mockCallOptions});
-      assert.strictEqual(typeof apiCall, 'function');
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({param: 'test'}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [dynamicArgs, staticArgs, fn, isStreamingCall] =
+        traceAttemptSpy.firstCall.args;
+
+      assert.deepStrictEqual(dynamicArgs, {
+        clientName: 'EchoClient',
+        methodName: 'Echo',
+        rpcType: 'grpc',
+      });
+      assert.deepStrictEqual(staticArgs, telemetryInfo);
+      assert.strictEqual(typeof fn, 'function');
+      assert.strictEqual(isStreamingCall, false);
     });
 
-    it('creates an api call when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set', () => {
-      const apiCall = createApiCall(() => {});
-      assert.strictEqual(typeof apiCall, 'function');
+    it('passes isStreamingCall as true to traceAttempt for streaming calls when tracing is enabled', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const spy = sinon.spy(() => {
+        const s = new PassThrough({objectMode: true});
+        s.push(null);
+        return Object.assign(s, {cancel: () => {}});
+      });
+
+      const apiCall = realCreateApiCall(
+        spy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      void apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [, , , isStreamingCall] = traceAttemptSpy.firstCall.args;
+      assert.strictEqual(isStreamingCall, true);
+    });
+
+    it('gracefully handles missing apiName and internalMethodName when tracing is enabled', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      const [dynamicArgs] = traceAttemptSpy.firstCall.args;
+      assert.deepStrictEqual(dynamicArgs, {
+        clientName: '',
+        methodName: '',
+        rpcType: 'grpc',
+      });
+    });
+
+    it('returns invokeCall directly without calling traceAttempt when tracing is disabled', async () => {
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: false,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      assert.strictEqual(traceAttemptSpy.called, false);
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+    });
+
+    it('correctly pipes telemetry information into the active span for gRPC calls', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      const [response] = (await apiCall({}, undefined)) as [
+        {data: string},
+        unknown,
+        unknown,
+      ];
+      assert.deepStrictEqual(response, {data: 'hello'});
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.name, 'EchoClient.Echo');
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(
+        span.attributes['gcp.client.service'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
+      assert.strictEqual(
+        span.attributes['gcp.repo'],
+        'googleapis/google-cloud-node',
+      );
+      assert.strictEqual(span.attributes['gcp.artifact'], '@google-cloud/echo');
+      assert.strictEqual(span.attributes['gcp.method.name'], 'Echo');
+      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+    });
+
+    it('correctly pipes telemetry information for HTTP fallback calls', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(func, settings, undefined, true);
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.name, 'EchoClient.Echo');
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+    });
+
+    it('sets rpcType to grpc when _fallback is boolean false', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(func, settings, undefined, false);
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+    });
+
+    it('sets rpcType to http when _fallback is "rest"', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(func, settings, undefined, 'rest');
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+    });
+
+    it('sets rpcType to http when _fallback is "proto"', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(func, settings, undefined, 'proto');
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+    });
+
+    it('pipes telemetry information configured via constructSettings', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const serviceName = 'google.example.v1.Echo';
+      const defaults = gax.constructSettings(
+        serviceName,
+        {
+          interfaces: {
+            [serviceName]: {
+              methods: {
+                Echo: {},
+              },
+            },
+          },
+        },
+        {},
+        {},
+        undefined,
+        true,
+        telemetryInfo,
+      );
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(func, defaults.echo);
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.name, 'EchoClient.Echo');
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(
+        span.attributes['gcp.client.service'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
+      assert.strictEqual(
+        span.attributes['gcp.repo'],
+        'googleapis/google-cloud-node',
+      );
+      assert.strictEqual(span.attributes['gcp.artifact'], '@google-cloud/echo');
+      assert.strictEqual(span.attributes['gcp.method.name'], 'Echo');
+      assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+    });
+
+    it('records error details on the span when the API call fails', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function failingFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        const error = new GoogleError('RPC test failure');
+        setImmediate(() => {
+          callback(error);
+        });
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(failingFunc, settings);
+      const promise = apiCall({}, undefined);
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      await assert.rejects(
+        async () => {
+          await promise;
+        },
+        (err: GoogleError) => {
+          assert.strictEqual(err.message, 'RPC test failure');
+          return true;
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(span.attributes['error.message'], 'RPC test failure');
+      assert.strictEqual(span.events.length, 1);
+      assert.strictEqual(span.events[0].name, 'exception');
+    });
+
+    it('does not end span prematurely for successful asynchronous API calls', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function asyncFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        setImmediate(() => {
+          callback(null, {data: 'hello'});
+        });
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(asyncFunc, settings);
+      const promise = apiCall({}, undefined);
+
+      // Verify the span is not ended prematurely while the call is in flight
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      const [response] = (await promise) as [{data: string}, unknown, unknown];
+      assert.deepStrictEqual(response, {data: 'hello'});
+
+      // Span must only be ended after completion
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(span.name, 'EchoClient.Echo');
+    });
+
+    it('cancels the call and ends the span', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function cancellableFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        const timeoutId = setTimeout(() => {
+          callback(null, {data: 'done'});
+        }, 5000);
+        return {
+          cancel: () => {
+            clearTimeout(timeoutId);
+            const err = new GoogleError('cancelled');
+            err.code = status.CANCELLED;
+            callback(err);
+          },
+        };
+      }
+
+      const apiCall = realCreateApiCall(cancellableFunc, settings);
+      const promise = apiCall({}, undefined);
+      assert.strictEqual(typeof promise.cancel, 'function');
+      promise.cancel();
+
+      await assert.rejects(async () => {
+        await promise;
+      });
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.ended, true);
+    });
+
+    it('does not create any spans when tracing is disabled', async () => {
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: false,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 0);
+    });
+
+    it('manages span lifetime for streaming API calls until stream ends', done => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const spy = sinon.spy(() => {
+        const s = new PassThrough({
+          objectMode: true,
+        });
+        s.push({data: 'chunk1'});
+        s.push({data: 'chunk2'});
+        s.push(null);
+        return Object.assign(s, {cancel: () => {}});
+      });
+
+      const apiCall = realCreateApiCall(
+        spy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      const stream = apiCall({}, undefined) as CancellableStream;
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      const received: unknown[] = [];
+      stream.on('data', chunk => {
+        received.push(chunk);
+        // Span must remain active while streaming chunks
+        assert.strictEqual(harness.getSpans('google-gax').length, 0);
+      });
+      stream.on('end', () => {
+        try {
+          assert.strictEqual(received.length, 2);
+          const spans = harness.getSpans('google-gax');
+          assert.strictEqual(spans.length, 1);
+          const span = spans[0];
+          assert.strictEqual(span.ended, true);
+          assert.strictEqual(span.name, 'EchoClient.Echo');
+          assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+          done();
+        } catch (e) {
+          done(e);
+        }
+      });
+    });
+
+    it('records error details on the span when a streaming API call errors', done => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const spy = sinon.spy(() => {
+        const s = new PassThrough({
+          objectMode: true,
+        });
+        setImmediate(() => {
+          s.emit('error', new GoogleError('streaming test failure'));
+        });
+        return Object.assign(s, {cancel: () => {}});
+      });
+
+      const apiCall = realCreateApiCall(
+        spy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      const stream = apiCall({}, undefined) as CancellableStream;
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      stream.on('error', (err: GoogleError) => {
+        try {
+          assert.strictEqual(err.message, 'streaming test failure');
+          const spans = harness.getSpans('google-gax');
+          assert.strictEqual(spans.length, 1);
+          const span = spans[0];
+          assert.strictEqual(span.ended, true);
+          assert.strictEqual(
+            span.attributes['error.message'],
+            'streaming test failure',
+          );
+          assert.strictEqual(span.events.length, 1);
+          assert.strictEqual(span.events[0].name, 'exception');
+          done();
+        } catch (e) {
+          done(e);
+        }
+      });
     });
   });
 });
