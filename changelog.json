@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "17382056-89a2-4738-9a89-f662808c563d",
+      "createTime": "2026-09-11T18:10:21.220Z"
+    },
+    {
+      "changes": [
+        {
           "type": "perf",
           "sha": "5da6e08b8cb3bb5a7b307d565c1e8a32705aa7d7",
           "message": "Eliminate throwaway transactions",
@@ -94123,5 +94140,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-11T14:56:40.618Z"
+  "updateTime": "2026-09-11T18:10:21.220Z"
 }
