@@ -357,6 +357,408 @@ describe('v1.AuditManagerClient', () => {
     });
   });
 
+  describe('createAuditSchedule', () => {
+    it('invokes createAuditSchedule without error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.CreateAuditScheduleRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.CreateAuditScheduleRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+      );
+      client.innerApiCalls.createAuditSchedule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createAuditSchedule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAuditSchedule without error using callback', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.CreateAuditScheduleRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.CreateAuditScheduleRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+      );
+      client.innerApiCalls.createAuditSchedule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAuditSchedule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.auditmanager.v1.IAuditSchedule | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAuditSchedule with error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.CreateAuditScheduleRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.CreateAuditScheduleRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAuditSchedule = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createAuditSchedule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAuditSchedule with closed client', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.CreateAuditScheduleRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.CreateAuditScheduleRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createAuditSchedule(request), expectedError);
+    });
+  });
+
+  describe('updateAuditSchedule', () => {
+    it('invokes updateAuditSchedule without error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.UpdateAuditScheduleRequest(),
+      );
+      request.auditSchedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.UpdateAuditScheduleRequest',
+        ['auditSchedule', 'name'],
+      );
+      request.auditSchedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `audit_schedule.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+      );
+      client.innerApiCalls.updateAuditSchedule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAuditSchedule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAuditSchedule without error using callback', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.UpdateAuditScheduleRequest(),
+      );
+      request.auditSchedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.UpdateAuditScheduleRequest',
+        ['auditSchedule', 'name'],
+      );
+      request.auditSchedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `audit_schedule.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+      );
+      client.innerApiCalls.updateAuditSchedule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAuditSchedule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.auditmanager.v1.IAuditSchedule | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAuditSchedule with error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.UpdateAuditScheduleRequest(),
+      );
+      request.auditSchedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.UpdateAuditScheduleRequest',
+        ['auditSchedule', 'name'],
+      );
+      request.auditSchedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `audit_schedule.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAuditSchedule = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateAuditSchedule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAuditSchedule with closed client', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.UpdateAuditScheduleRequest(),
+      );
+      request.auditSchedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.UpdateAuditScheduleRequest',
+        ['auditSchedule', 'name'],
+      );
+      request.auditSchedule.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateAuditSchedule(request), expectedError);
+    });
+  });
+
+  describe('getAuditSchedule', () => {
+    it('invokes getAuditSchedule without error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.GetAuditScheduleRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.GetAuditScheduleRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+      );
+      client.innerApiCalls.getAuditSchedule = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAuditSchedule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuditSchedule without error using callback', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.GetAuditScheduleRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.GetAuditScheduleRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+      );
+      client.innerApiCalls.getAuditSchedule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAuditSchedule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.auditmanager.v1.IAuditSchedule | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuditSchedule with error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.GetAuditScheduleRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.GetAuditScheduleRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAuditSchedule = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAuditSchedule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAuditSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuditSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuditSchedule with closed client', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.GetAuditScheduleRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.GetAuditScheduleRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getAuditSchedule(request), expectedError);
+    });
+  });
+
   describe('enrollResource', () => {
     it('invokes enrollResource without error', async () => {
       const client = new auditmanagerModule.v1.AuditManagerClient({
@@ -1090,6 +1492,337 @@ describe('v1.AuditManagerClient', () => {
         expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listAuditSchedules', () => {
+    it('invokes listAuditSchedules without error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.ListAuditSchedulesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.ListAuditSchedulesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+      ];
+      client.innerApiCalls.listAuditSchedules =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAuditSchedules(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAuditSchedules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuditSchedules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuditSchedules without error using callback', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.ListAuditSchedulesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.ListAuditSchedulesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+      ];
+      client.innerApiCalls.listAuditSchedules =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAuditSchedules(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.auditmanager.v1.IAuditSchedule[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAuditSchedules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuditSchedules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuditSchedules with error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.ListAuditSchedulesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.ListAuditSchedulesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAuditSchedules = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listAuditSchedules(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAuditSchedules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuditSchedules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuditSchedulesStream without error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.ListAuditSchedulesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.ListAuditSchedulesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+      ];
+      client.descriptors.page.listAuditSchedules.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAuditSchedulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.auditmanager.v1.AuditSchedule[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.auditmanager.v1.AuditSchedule) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAuditSchedules.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAuditSchedules, request),
+      );
+      assert(
+        (client.descriptors.page.listAuditSchedules.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listAuditSchedulesStream with error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.ListAuditSchedulesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.ListAuditSchedulesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAuditSchedules.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAuditSchedulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.auditmanager.v1.AuditSchedule[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.auditmanager.v1.AuditSchedule) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAuditSchedules.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAuditSchedules, request),
+      );
+      assert(
+        (client.descriptors.page.listAuditSchedules.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAuditSchedules without error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.ListAuditSchedulesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.ListAuditSchedulesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.auditmanager.v1.AuditSchedule(),
+        ),
+      ];
+      client.descriptors.page.listAuditSchedules.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.auditmanager.v1.IAuditSchedule[] =
+        [];
+      const iterable = client.listAuditSchedulesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAuditSchedules.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAuditSchedules.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listAuditSchedules with error', async () => {
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.auditmanager.v1.ListAuditSchedulesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.auditmanager.v1.ListAuditSchedulesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAuditSchedules.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAuditSchedulesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.auditmanager.v1.IAuditSchedule[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAuditSchedules.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAuditSchedules.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
     });
   });
 
@@ -2756,6 +3489,85 @@ describe('v1.AuditManagerClient', () => {
       });
     });
 
+    describe('folderLocationAuditSchedules', async () => {
+      const fakePath = '/rendered/path/folderLocationAuditSchedules';
+      const expectedParameters = {
+        folder: 'folderValue',
+        location: 'locationValue',
+        audit_schedule: 'auditScheduleValue',
+      };
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.folderLocationAuditSchedulesPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderLocationAuditSchedulesPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderLocationAuditSchedulesPath', () => {
+        const result = client.folderLocationAuditSchedulesPath(
+          'folderValue',
+          'locationValue',
+          'auditScheduleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderLocationAuditSchedulesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchFolderFromFolderLocationAuditSchedulesName', () => {
+        const result =
+          client.matchFolderFromFolderLocationAuditSchedulesName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationAuditSchedulesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFolderLocationAuditSchedulesName', () => {
+        const result =
+          client.matchLocationFromFolderLocationAuditSchedulesName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationAuditSchedulesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAuditScheduleFromFolderLocationAuditSchedulesName', () => {
+        const result =
+          client.matchAuditScheduleFromFolderLocationAuditSchedulesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'auditScheduleValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationAuditSchedulesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('folderLocationAuditScopeReports', async () => {
       const fakePath = '/rendered/path/folderLocationAuditScopeReports';
       const expectedParameters = {
@@ -3276,6 +4088,89 @@ describe('v1.AuditManagerClient', () => {
       });
     });
 
+    describe('organizationLocationAuditSchedules', async () => {
+      const fakePath = '/rendered/path/organizationLocationAuditSchedules';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        audit_schedule: 'auditScheduleValue',
+      };
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationLocationAuditSchedulesPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationAuditSchedulesPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationAuditSchedulesPath', () => {
+        const result = client.organizationLocationAuditSchedulesPath(
+          'organizationValue',
+          'locationValue',
+          'auditScheduleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationAuditSchedulesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationAuditSchedulesName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationAuditSchedulesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAuditSchedulesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationAuditSchedulesName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationAuditSchedulesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAuditSchedulesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAuditScheduleFromOrganizationLocationAuditSchedulesName', () => {
+        const result =
+          client.matchAuditScheduleFromOrganizationLocationAuditSchedulesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'auditScheduleValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationAuditSchedulesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('organizationLocationAuditScopeReports', async () => {
       const fakePath = '/rendered/path/organizationLocationAuditScopeReports';
       const expectedParameters = {
@@ -3720,6 +4615,85 @@ describe('v1.AuditManagerClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationAuditReportsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationAuditSchedules', async () => {
+      const fakePath = '/rendered/path/projectLocationAuditSchedules';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        audit_schedule: 'auditScheduleValue',
+      };
+      const client = new auditmanagerModule.v1.AuditManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationAuditSchedulesPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAuditSchedulesPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAuditSchedulesPath', () => {
+        const result = client.projectLocationAuditSchedulesPath(
+          'projectValue',
+          'locationValue',
+          'auditScheduleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationAuditSchedulesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationAuditSchedulesName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAuditSchedulesName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAuditSchedulesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationAuditSchedulesName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAuditSchedulesName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAuditSchedulesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAuditScheduleFromProjectLocationAuditSchedulesName', () => {
+        const result =
+          client.matchAuditScheduleFromProjectLocationAuditSchedulesName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'auditScheduleValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationAuditSchedulesPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

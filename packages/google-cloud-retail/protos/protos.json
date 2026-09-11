@@ -8859,6 +8859,11 @@
                           "keyType": "string",
                           "type": "AttributeResult",
                           "id": 4
+                        },
+                        "agentPrompts": {
+                          "rule": "repeated",
+                          "type": "AgentPrompt",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -8881,6 +8886,14 @@
                             "totalProductCount": {
                               "type": "int32",
                               "id": 4
+                            },
+                            "agentPrompts": {
+                              "rule": "repeated",
+                              "type": "AgentPrompt",
+                              "id": 6,
+                              "options": {
+                                "deprecated": true
+                              }
                             }
                           }
                         },
@@ -8899,6 +8912,14 @@
                           "fields": {
                             "suggestions": {
                               "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AgentPrompt": {
+                          "fields": {
+                            "prompt": {
                               "type": "string",
                               "id": 1
                             }

@@ -24,6 +24,7 @@ export {AdUnitServiceClient} from './ad_unit_service_client';
 export {ApplicationServiceClient} from './application_service_client';
 export {AudienceSegmentServiceClient} from './audience_segment_service_client';
 export {BandwidthGroupServiceClient} from './bandwidth_group_service_client';
+export {BreakTemplateServiceClient} from './break_template_service_client';
 export {BrowserLanguageServiceClient} from './browser_language_service_client';
 export {BrowserServiceClient} from './browser_service_client';
 export {CdnConfigServiceClient} from './cdn_config_service_client';

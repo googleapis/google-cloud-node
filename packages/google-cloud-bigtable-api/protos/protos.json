@@ -285,6 +285,70 @@
                             }
                           ]
                         },
+                        "UpdateMemoryLayer": {
+                          "requestType": "UpdateMemoryLayerRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{memory_layer.name=projects/*/instances/*/clusters/*/memoryLayer}",
+                            "(google.api.http).body": "memory_layer",
+                            "(google.api.method_signature)": "memory_layer,update_mask",
+                            "(google.longrunning.operation_info).response_type": "MemoryLayer",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateMemoryLayerMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{memory_layer.name=projects/*/instances/*/clusters/*/memoryLayer}",
+                                "body": "memory_layer"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "memory_layer,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MemoryLayer",
+                                "metadata_type": "UpdateMemoryLayerMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListMemoryLayers": {
+                          "requestType": "ListMemoryLayersRequest",
+                          "responseType": "ListMemoryLayersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/instances/*/clusters/*}/memoryLayers",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/instances/*/clusters/*}/memoryLayers"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetMemoryLayer": {
+                          "requestType": "GetMemoryLayerRequest",
+                          "responseType": "MemoryLayer",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/instances/*/clusters/*/memoryLayer}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/instances/*/clusters/*/memoryLayer}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "CreateAppProfile": {
                           "requestType": "CreateAppProfileRequest",
                           "responseType": "AppProfile",
@@ -1052,6 +1116,96 @@
                         }
                       }
                     },
+                    "UpdateMemoryLayerRequest": {
+                      "fields": {
+                        "memoryLayer": {
+                          "type": "MemoryLayer",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateMemoryLayerMetadata": {
+                      "fields": {
+                        "originalRequest": {
+                          "type": "UpdateMemoryLayerRequest",
+                          "id": 1
+                        },
+                        "requestTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "finishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListMemoryLayersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "bigtableadmin.googleapis.com/MemoryLayer"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMemoryLayersResponse": {
+                      "fields": {
+                        "memoryLayers": {
+                          "rule": "repeated",
+                          "type": "MemoryLayer",
+                          "id": 1
+                        },
+                        "failedLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetMemoryLayerRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "bigtableadmin.googleapis.com/MemoryLayer"
+                          }
+                        }
+                      }
+                    },
                     "CreateAppProfileRequest": {
                       "fields": {
                         "parent": {
@@ -1769,6 +1923,63 @@
                         }
                       }
                     },
+                    "MemoryLayer": {
+                      "options": {
+                        "(google.api.resource).type": "bigtableadmin.googleapis.com/MemoryLayer",
+                        "(google.api.resource).pattern": "projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer",
+                        "(google.api.resource).plural": "memoryLayers",
+                        "(google.api.resource).singular": "memoryLayer"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "memoryConfig": {
+                          "type": "MemoryConfig",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MemoryConfig": {
+                          "fields": {
+                            "storageSizeGib": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_NOT_KNOWN": 0,
+                            "READY": 1,
+                            "ENABLING": 2,
+                            "RESIZING": 3,
+                            "DISABLED": 4
+                          }
+                        }
+                      }
+                    },
                     "AppProfile": {
                       "options": {
                         "(google.api.resource).type": "bigtableadmin.googleapis.com/AppProfile",
@@ -1879,6 +2090,18 @@
                             "priority": {
                               "type": "Priority",
                               "id": 1
+                            },
+                            "memoryConfig": {
+                              "type": "MemoryConfig",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MemoryConfig": {
+                              "fields": {}
                             }
                           }
                         },

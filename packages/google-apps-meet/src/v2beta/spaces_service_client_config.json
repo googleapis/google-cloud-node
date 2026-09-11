@@ -57,7 +57,7 @@
           "retry_params_name": "default"
         },
         "CreateMember": {
-          "timeout_millis": 60000,
+          "timeout_millis": 80000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -72,6 +72,16 @@
           "retry_params_name": "default"
         },
         "DeleteMember": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateMember": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchUpdateMembers": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

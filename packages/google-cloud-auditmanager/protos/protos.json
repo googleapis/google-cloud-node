@@ -25,6 +25,124 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-auditmanager,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "CreateAuditSchedule": {
+                          "requestType": "CreateAuditScheduleRequest",
+                          "responseType": "AuditSchedule",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/auditSchedules",
+                            "(google.api.http).body": "audit_schedule",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=organizations/*/locations/*}/auditSchedules",
+                            "(google.api.http).additional_bindings.body": "audit_schedule",
+                            "(google.api.method_signature)": "parent,audit_schedule,audit_schedule_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/auditSchedules",
+                                "body": "audit_schedule",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*/locations/*}/auditSchedules",
+                                    "body": "audit_schedule"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=organizations/*/locations/*}/auditSchedules",
+                                    "body": "audit_schedule"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,audit_schedule,audit_schedule_id"
+                            }
+                          ]
+                        },
+                        "UpdateAuditSchedule": {
+                          "requestType": "UpdateAuditScheduleRequest",
+                          "responseType": "AuditSchedule",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{audit_schedule.name=projects/*/locations/*/auditSchedules/*}",
+                            "(google.api.http).body": "audit_schedule",
+                            "(google.api.http).additional_bindings.patch": "/v1/{audit_schedule.name=organizations/*/locations/*/auditSchedules/*}",
+                            "(google.api.http).additional_bindings.body": "audit_schedule",
+                            "(google.api.method_signature)": "audit_schedule,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{audit_schedule.name=projects/*/locations/*/auditSchedules/*}",
+                                "body": "audit_schedule",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{audit_schedule.name=folders/*/locations/*/auditSchedules/*}",
+                                    "body": "audit_schedule"
+                                  },
+                                  {
+                                    "patch": "/v1/{audit_schedule.name=organizations/*/locations/*/auditSchedules/*}",
+                                    "body": "audit_schedule"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "audit_schedule,update_mask"
+                            }
+                          ]
+                        },
+                        "GetAuditSchedule": {
+                          "requestType": "GetAuditScheduleRequest",
+                          "responseType": "AuditSchedule",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/auditSchedules/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/locations/*/auditSchedules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/auditSchedules/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/locations/*/auditSchedules/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=organizations/*/locations/*/auditSchedules/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAuditSchedules": {
+                          "requestType": "ListAuditSchedulesRequest",
+                          "responseType": "ListAuditSchedulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/auditSchedules",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=organizations/*/locations/*}/auditSchedules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/auditSchedules",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/locations/*}/auditSchedules"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=organizations/*/locations/*}/auditSchedules"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "EnrollResource": {
                           "requestType": "EnrollResourceRequest",
                           "responseType": "Enrollment",
@@ -284,6 +402,17 @@
                         "AUDIT_NOT_SUPPORTED": 5
                       }
                     },
+                    "ScheduleState": {
+                      "values": {
+                        "SCHEDULE_STATE_UNSPECIFIED": 0,
+                        "SCHEDULE_STATE_ACTIVE": 1,
+                        "SCHEDULE_STATE_PAUSED": 2,
+                        "SCHEDULE_STATE_COMPLETED": 3,
+                        "SCHEDULE_STATE_FAILED_SETUP": 4,
+                        "SCHEDULE_STATE_ERROR": 5,
+                        "SCHEDULE_STATE_DELETED": 6
+                      }
+                    },
                     "EnrollResourceRequest": {
                       "fields": {
                         "scope": {
@@ -299,6 +428,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -349,6 +485,13 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -1049,6 +1192,266 @@
                         "controlReportSummary": {
                           "type": "ReportSummary",
                           "id": 3
+                        }
+                      }
+                    },
+                    "CreateAuditScheduleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "auditmanager.googleapis.com/AuditSchedule"
+                          }
+                        },
+                        "auditSchedule": {
+                          "type": "AuditSchedule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "auditScheduleId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAuditScheduleRequest": {
+                      "fields": {
+                        "auditSchedule": {
+                          "type": "AuditSchedule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetAuditScheduleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "auditmanager.googleapis.com/AuditSchedule"
+                          }
+                        }
+                      }
+                    },
+                    "ListAuditSchedulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "auditmanager.googleapis.com/AuditSchedule"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAuditSchedulesResponse": {
+                      "fields": {
+                        "auditSchedules": {
+                          "rule": "repeated",
+                          "type": "AuditSchedule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AuditSchedule": {
+                      "options": {
+                        "(google.api.resource).type": "auditmanager.googleapis.com/AuditSchedule",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/auditSchedules/{audit_schedule}",
+                        "(google.api.resource).plural": "auditSchedules",
+                        "(google.api.resource).singular": "auditSchedule"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "complianceFramework": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reportFormat": {
+                          "type": "AuditReportFormat",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scheduleConfig": {
+                          "type": "ScheduleConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "ScheduleState",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextRunTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastTriggerTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AuditReportFormat": {
+                          "values": {
+                            "AUDIT_REPORT_FORMAT_UNSPECIFIED": 0,
+                            "AUDIT_REPORT_FORMAT_ODF": 1
+                          }
+                        }
+                      }
+                    },
+                    "ScheduleConfig": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "frequency": {
+                          "type": "Frequency",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Frequency": {
+                          "values": {
+                            "FREQUENCY_UNSPECIFIED": 0,
+                            "DAILY": 1,
+                            "WEEKLY": 2,
+                            "MONTHLY": 3,
+                            "QUARTERLY": 4,
+                            "ANNUALLY": 5
+                          }
                         }
                       }
                     }
@@ -3227,6 +3630,15 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
             },
             "Timestamp": {
               "fields": {

@@ -15060,7 +15060,8 @@ export namespace google {
                     POSTGRES_15 = 3,
                     POSTGRES_16 = 4,
                     POSTGRES_17 = 5,
-                    POSTGRES_18 = 6
+                    POSTGRES_18 = 6,
+                    POSTGRES_19 = 7
                 }
 
                 /** SubscriptionType enum. */
@@ -30694,7 +30695,8 @@ export namespace google {
                     POSTGRES_15 = 3,
                     POSTGRES_16 = 4,
                     POSTGRES_17 = 5,
-                    POSTGRES_18 = 6
+                    POSTGRES_18 = 6,
+                    POSTGRES_19 = 7
                 }
 
                 /** SubscriptionType enum. */

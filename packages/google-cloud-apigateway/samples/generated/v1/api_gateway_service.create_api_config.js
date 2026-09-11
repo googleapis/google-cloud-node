@@ -34,8 +34,8 @@ function main(parent, apiConfigId, apiConfig) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Identifier to assign to the API Config. Must be unique within scope of
-   *  the parent resource.
+   *  Required. Identifier to assign to the API Config. Must be unique within
+   *  scope of the parent resource.
    */
   // const apiConfigId = 'abc123'
   /**

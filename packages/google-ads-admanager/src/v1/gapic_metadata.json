@@ -537,6 +537,16 @@
                 "getAudienceSegment"
               ]
             },
+            "CreateAudienceSegment": {
+              "methods": [
+                "createAudienceSegment"
+              ]
+            },
+            "BatchCreateAudienceSegments": {
+              "methods": [
+                "batchCreateAudienceSegments"
+              ]
+            },
             "BatchActivateAudienceSegments": {
               "methods": [
                 "batchActivateAudienceSegments"
@@ -577,6 +587,16 @@
             "GetAudienceSegment": {
               "methods": [
                 "getAudienceSegment"
+              ]
+            },
+            "CreateAudienceSegment": {
+              "methods": [
+                "createAudienceSegment"
+              ]
+            },
+            "BatchCreateAudienceSegments": {
+              "methods": [
+                "batchCreateAudienceSegments"
               ]
             },
             "BatchActivateAudienceSegments": {
@@ -647,6 +667,84 @@
                 "listBandwidthGroups",
                 "listBandwidthGroupsStream",
                 "listBandwidthGroupsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BreakTemplateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BreakTemplateServiceClient",
+          "rpcs": {
+            "GetBreakTemplate": {
+              "methods": [
+                "getBreakTemplate"
+              ]
+            },
+            "CreateBreakTemplate": {
+              "methods": [
+                "createBreakTemplate"
+              ]
+            },
+            "BatchCreateBreakTemplates": {
+              "methods": [
+                "batchCreateBreakTemplates"
+              ]
+            },
+            "UpdateBreakTemplate": {
+              "methods": [
+                "updateBreakTemplate"
+              ]
+            },
+            "BatchUpdateBreakTemplates": {
+              "methods": [
+                "batchUpdateBreakTemplates"
+              ]
+            },
+            "ListBreakTemplates": {
+              "methods": [
+                "listBreakTemplates",
+                "listBreakTemplatesStream",
+                "listBreakTemplatesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BreakTemplateServiceClient",
+          "rpcs": {
+            "GetBreakTemplate": {
+              "methods": [
+                "getBreakTemplate"
+              ]
+            },
+            "CreateBreakTemplate": {
+              "methods": [
+                "createBreakTemplate"
+              ]
+            },
+            "BatchCreateBreakTemplates": {
+              "methods": [
+                "batchCreateBreakTemplates"
+              ]
+            },
+            "UpdateBreakTemplate": {
+              "methods": [
+                "updateBreakTemplate"
+              ]
+            },
+            "BatchUpdateBreakTemplates": {
+              "methods": [
+                "batchUpdateBreakTemplates"
+              ]
+            },
+            "ListBreakTemplates": {
+              "methods": [
+                "listBreakTemplates",
+                "listBreakTemplatesStream",
+                "listBreakTemplatesAsync"
               ]
             }
           }
