@@ -25,6 +25,7 @@ import {
 const common = require('./common-grpc/service-object');
 import {promisify, promisifyAll, callbackifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
+// eslint-disable-next-line import/namespace
 import * as r from 'teeny-request';
 import * as streamEvents from 'stream-events';
 import * as through from 'through2';
@@ -3341,69 +3342,96 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
         transactionTag: options.requestOptions?.transactionTag,
       },
-      span => {
-        this.sessionFactory_.getSessionForReadWrite(
-          (err, session?, transaction?) => {
-            if (err) {
-              setSpanError(span, err);
-            }
+      span => this._runTransaction(span, options, runFn!),
+    );
+  }
 
-            if (err && isSessionNotFoundError(err as grpc.ServiceError)) {
-              span.addEvent('No session available', {
-                'session.id': session?.id,
-              });
-              span.end();
-              this.runTransaction(options, runFn!);
-              return;
-            }
-
-            if (err) {
-              span.end();
-              runFn!(err as grpc.ServiceError);
-              return;
-            }
-
-            transaction!._observabilityOptions = this._observabilityOptions;
-
-            transaction!.requestOptions = Object.assign(
-              transaction!.requestOptions || {},
-              options.requestOptions,
-            );
-
-            transaction!.setReadWriteTransactionOptions(
-              options as RunTransactionOptions,
-            );
-
-            const release = () => {
-              this.sessionFactory_.release(session!);
-              span.end();
-            };
-
-            const runner = new TransactionRunner(
-              session!,
-              transaction!,
-              runFn!,
-              options,
-            );
-
-            runner.run().then(release, err => {
-              setSpanError(span, err!);
-
-              if (isSessionNotFoundError(err)) {
-                span.addEvent('No session available', {
-                  'session.id': session?.id,
-                });
-                release();
-                this.runTransaction(options, runFn!);
-              } else {
-                setImmediate(runFn!, err);
-                release();
-              }
+  private _runTransaction(
+    span: Span,
+    options: RunTransactionOptions,
+    runFn: RunTransactionCallback,
+  ): void {
+    this.sessionFactory_.getSessionForReadWrite(
+      (err, session?, transaction?) => {
+        if (err) {
+          setSpanError(span, err);
+          if (isSessionNotFoundError(err as grpc.ServiceError)) {
+            span.addEvent('No session available', {
+              'session.id': session?.id,
             });
-          },
+            span.end();
+            this.runTransaction(options, runFn);
+            return;
+          }
+          span.end();
+          runFn(err as grpc.ServiceError);
+          return;
+        }
+
+        this._executeTransactionRunner(
+          session!,
+          transaction!,
+          span,
+          options,
+          runFn,
         );
       },
     );
+  }
+
+  private _executeTransactionRunner(
+    session: Session,
+    transaction: Transaction,
+    span: Span,
+    options: RunTransactionOptions,
+    runFn: RunTransactionCallback,
+  ): void {
+    transaction._observabilityOptions = this._observabilityOptions;
+
+    transaction.requestOptions = Object.assign(
+      transaction.requestOptions || {},
+      options.requestOptions,
+    );
+
+    transaction.setReadWriteTransactionOptions(
+      options as RunTransactionOptions,
+    );
+
+    const release = () => {
+      this.sessionFactory_.release(session);
+      span.end();
+    };
+
+    const runner = new TransactionRunner(session, transaction, runFn, options);
+
+    runner
+      .run()
+      .then(
+        () => {
+          release();
+          return null;
+        },
+        err => {
+          setSpanError(span, err!);
+
+          if (isSessionNotFoundError(err)) {
+            span.addEvent('No session available', {
+              'session.id': session.id,
+            });
+            release();
+            this.runTransaction(options, runFn);
+          } else {
+            setImmediate(runFn, err);
+            release();
+          }
+          return null;
+        },
+      )
+      .catch(err => {
+        setSpanErrorAndException(span, err as Error);
+        span.end();
+        this.emit('error', err);
+      });
   }
 
   runTransactionAsync<T = {}>(
@@ -3782,13 +3810,22 @@ class Database extends common.GrpcServiceObject {
           return;
         }
         span.addEvent('Using Session', {'session.id': session?.id});
-        this._releaseOnEnd(session!, transaction!, span);
+        const activeTransaction =
+          transaction ?? session?.transaction(this.queryOptions_);
+        if (!activeTransaction) {
+          const error = new Error('No transaction available to commit');
+          setSpanError(span, error);
+          span.end();
+          cb!(error as grpc.ServiceError);
+          return;
+        }
+        this._releaseOnEnd(session!, activeTransaction, span);
         try {
-          transaction!.setReadWriteTransactionOptions(
+          activeTransaction.setReadWriteTransactionOptions(
             options as RunTransactionOptions,
           );
-          transaction?.setQueuedMutations(mutations.proto());
-          return transaction?.commit(options, (err, resp) => {
+          activeTransaction.setQueuedMutations(mutations.proto());
+          return activeTransaction.commit(options, (err, resp) => {
             if (err) {
               setSpanError(span, err);
             }

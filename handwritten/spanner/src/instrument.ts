@@ -197,7 +197,7 @@ export function startTrace<T>(
   cb: (span: Span) => T,
 ): T {
   if (!isTracingEnabled(config?.opts)) {
-    return cb(new noopSpan());
+    return cb(NOOP_SPAN);
   }
 
   if (!config) {
@@ -317,18 +317,18 @@ export function getActiveOrNoopSpan(): Span {
   if (span) {
     return span;
   }
-  return new noopSpan();
+  return NOOP_SPAN;
 }
 
 /**
- * noopSpan is a pass-through Span that does nothing and shall not
+ * NoopSpan is a pass-through Span that does nothing and shall not
  * be exported, nor added into any context. It serves as a placeholder
  * to allow calls in sensitive areas like sessionPools to transparently
  * add attributes to spans without lots of ugly null checks.
  *
  * It exists because OpenTelemetry-JS does not seem to export the NoopSpan.
  */
-class noopSpan implements Span {
+class NoopSpan implements Span {
   constructor() {}
 
   spanContext(): SpanContext {
@@ -371,3 +371,5 @@ class noopSpan implements Span {
     return this;
   }
 }
+
+const NOOP_SPAN: Span = new NoopSpan();
