@@ -86,35 +86,50 @@ jobs:
         set -ex
         cp ../../../.mocharc.cjs .
         unzip ~/artifacts/outputs.zip -d library
+        FAIL=0
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
-          echo "--- Testing library $lib ---"
-          cd library/.test-out-$lib
-          npm install
-          npm test
-          npm run fix
-          rm -rf build
-          npm run compile
-          npm run system-test
-          npm run docs
-          cd ../..
+          (
+            set -ex
+            echo "--- Testing library $lib ---"
+            cd library/.test-out-$lib
+            npm install --prefer-offline --no-audit --no-fund --quiet
+            npm test
+            npm run compile
+            npm run system-test
+          ) &
         done
+        for job in $(jobs -p); do
+          wait "$job" || FAIL=1
+        done
+        if [ "$FAIL" -ne 0 ]; then
+          echo "Some library tests failed!"
+          exit 1
+        fi
 
     - name: Test generated ESM libraries
       working-directory: core/generator/gapic-generator-typescript
       run: |
         set -ex
         cp ../../../.mocharc.cjs .
+        FAIL=0
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
-          echo "--- Testing ESM library $lib ---"
-          cd library/.test-out-$lib-esm
-          npm install
-          npm test
-          npm run fix
-          rm -rf build
-          npm run compile
-          npm run system-test
-          cd ../..
+          (
+            set -ex
+            echo "--- Testing ESM library $lib ---"
+            cd library/.test-out-$lib-esm
+            npm install --prefer-offline --no-audit --no-fund --quiet
+            npm test
+            npm run compile
+            npm run system-test
+          ) &
         done
+        for job in $(jobs -p); do
+          wait "$job" || FAIL=1
+        done
+        if [ "$FAIL" -ne 0 ]; then
+          echo "Some ESM library tests failed!"
+          exit 1
+        fi
     - name: Test combined library (Speech)
       if: steps.generator-changes.outputs.changes == 'true'
       env:
@@ -126,7 +141,7 @@ jobs:
       run: |
         set -ex
         cd generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
-        npm install
+        npm install --prefer-offline --no-audit --no-fund --quiet
         npm test
         npm run system-test
 
@@ -141,6 +156,6 @@ jobs:
       run: |
         set -ex
         cd generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
-        npm install
+        npm install --prefer-offline --no-audit --no-fund --quiet
         npm test
         npm run system-test
