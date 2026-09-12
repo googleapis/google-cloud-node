@@ -46,6 +46,7 @@ export interface BaselineOptions {
   diregapic?: boolean;
   restNumericEnums?: boolean;
   mixins?: string;
+  resumableUploadMethods?: string;
   format?: string;
 }
 
@@ -146,6 +147,9 @@ export function runBaselineTest(options: BaselineOptions) {
     }
     if (options.mixins) {
       commandLine += ` --mixins="${options.mixins}"`;
+    }
+    if (options.resumableUploadMethods) {
+      commandLine += ` --resumable_upload_methods="${options.resumableUploadMethods}"`;
     }
     execSync(commandLine);
     assert(equalToBaseline(outputDir, baselineDir));

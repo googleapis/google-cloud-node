@@ -136,6 +136,12 @@ async function main(processArgv: string[]) {
       'Override the list of mixins to use. Semicolon-separated list of API names to mixin, e.g. google.longrunning.Operations. Use "none" to disable all mixins.',
     )
     .string('mixins')
+    .describe(
+      'resumable_upload_methods',
+      'Semicolon-separated list of ServiceName.MethodName pairs that should be treated as resumable upload methods, e.g. ResumableUploadService.CreateResumableUpload.',
+    )
+    .string('resumable_upload_methods')
+    .alias('resumable_upload_methods', 'resumable-upload-methods')
     .describe('protoc', 'Path to protoc binary')
     .usage('Usage: $0 -I /path/to/googleapis')
     .usage('  --output_dir /path/to/output_directory')
@@ -158,6 +164,9 @@ async function main(processArgv: string[]) {
   const legacyProtoLoad = argv.legacyProtoLoad as boolean | undefined;
   const restNumericEnums = argv.restNumericEnums as boolean | undefined;
   const mixins = argv.mixins as string | undefined;
+  const resumableUploadMethods = argv.resumableUploadMethods as
+    | string
+    | undefined;
 
   // --protoc can be taken from environment or from the command line
   let protocParameter = argv.protoc as string | string[] | undefined;
@@ -246,6 +255,11 @@ async function main(processArgv: string[]) {
   }
   if (mixins) {
     protocCommand.push(`--typescript_gapic_opt="mixins=${mixins}"`);
+  }
+  if (resumableUploadMethods) {
+    protocCommand.push(
+      `--typescript_gapic_opt="resumable-upload-methods=${resumableUploadMethods}"`,
+    );
   }
   protocCommand.push(...protoDirsArg);
   protocCommand.push(...protoFiles);
