@@ -21,6 +21,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const common = require('./common-grpc/service-object');
 import {promisifyAll} from '@google-cloud/promisify';
+// eslint-disable-next-line import/namespace
 import * as r from 'teeny-request';
 import {
   Snapshot,
@@ -28,6 +29,7 @@ import {
   PartitionedDml,
   TimestampBounds,
 } from './transaction';
+import {TransactionAffinity} from './channel-pool';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
 import {
@@ -495,8 +497,9 @@ export class Session extends common.GrpcServiceObject {
   snapshot(
     options?: TimestampBounds,
     queryOptions?: google.spanner.v1.ExecuteSqlRequest.IQueryOptions,
+    affinity?: TransactionAffinity,
   ) {
-    return new Snapshot(this, options, queryOptions);
+    return new Snapshot(this, options, queryOptions, affinity);
   }
   /**
    * Create a read write Transaction.

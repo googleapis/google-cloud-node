@@ -45,6 +45,7 @@ import {
 } from '../src/transaction';
 import {Row} from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
+import {TransactionAffinity} from '../src/channel-pool/affinity';
 import * as through from 'through2';
 
 import {convertToIValue} from './partial-result-stream';
@@ -171,43 +172,62 @@ describe('Transaction', () => {
         assert.strictEqual(REQUEST_STREAM.callCount, 1);
       });
 
-      it('should generate _affinityKey for multiplexed sessions', () => {
+      it('should not initialize TransactionAffinity for single-use snapshots by default', () => {
+        const txn = new Snapshot(SESSION);
+        assert.strictEqual(txn.affinity, undefined);
+        assert.strictEqual(txn._bindGaxOpts, undefined);
+      });
+
+      it('should initialize TransactionAffinity (ReadOnly) when explicitly provided', () => {
         const multiplexedSession = Object.assign({}, SESSION, {
           metadata: {multiplexed: true},
         });
-        const txn = new Snapshot(multiplexedSession);
-        assert.ok(txn._affinityKey);
-        assert.ok(txn._affinityKey.startsWith('mux-affinity-'));
-        assert.ok(txn._bindGaxOpts.otherArgs.options.affinityKey);
-        assert.strictEqual(
-          txn._bindGaxOpts.otherArgs.options.affinityKey,
-          txn._affinityKey,
+        const affinity = TransactionAffinity.newReadOnly();
+        const txn = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          affinity,
         );
+        assert.strictEqual(txn.affinity, affinity);
+        assert.strictEqual(txn.affinity.isReadOnly(), true);
+        assert.strictEqual(txn.affinity.isReadWrite(), false);
         assert.strictEqual(
-          txn._unbindGaxOpts.otherArgs.options.affinityKey,
-          txn._affinityKey,
+          txn._bindGaxOpts!.otherArgs.options.affinity,
+          affinity,
         );
-        assert.strictEqual(txn._unbindGaxOpts.otherArgs.options.unbind, true);
       });
 
-      it('should inject affinity key in `Session#request` if multiplexed', () => {
+      it('should inject affinity in `Session#request` when affinity is configured', () => {
         REQUEST.resetHistory();
         const multiplexedSession = Object.assign({}, SESSION, {
           metadata: {multiplexed: true},
         });
-        const txn = new Snapshot(multiplexedSession);
+        const affinity = TransactionAffinity.newReadOnly();
+        const txn = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          affinity,
+        );
         txn.request({client: 'SpannerClient'}, () => {});
         assert.strictEqual(REQUEST.callCount, 1);
         const arg = REQUEST.lastCall.args[0];
         assert.deepStrictEqual(arg.gaxOpts, txn._bindGaxOpts);
       });
 
-      it('should inject affinity key in `Session#requestStream` if multiplexed', () => {
+      it('should inject affinity in `Session#requestStream` when affinity is configured', () => {
         REQUEST_STREAM.resetHistory();
         const multiplexedSession = Object.assign({}, SESSION, {
           metadata: {multiplexed: true},
         });
-        const txn = new Snapshot(multiplexedSession);
+        const affinity = TransactionAffinity.newReadOnly();
+        const txn = new Snapshot(
+          multiplexedSession,
+          undefined,
+          undefined,
+          affinity,
+        );
         txn.requestStream({client: 'SpannerClient'});
         assert.strictEqual(REQUEST_STREAM.callCount, 1);
         const arg = REQUEST_STREAM.lastCall.args[0];
@@ -592,29 +612,12 @@ describe('Transaction', () => {
         snapshot.end();
       });
 
-      it('should unbind affinity key on end if multiplexed', done => {
-        const fakeUnbind = sandbox.stub();
-        const fakeStub = {getChannel: () => ({unbind: fakeUnbind})};
-        const fakeClient = {spannerStub: Promise.resolve(fakeStub)};
-        const fakeSpanner = {
-          clients_: new Map([['SpannerClient', fakeClient]]),
-        };
-        const fakeDatabase = {parent: {parent: fakeSpanner}};
-
-        const multiplexedSession = Object.assign({}, SESSION, {
-          parent: fakeDatabase,
-          metadata: {multiplexed: true},
-        });
-        const txn = new Snapshot(multiplexedSession);
-
-        txn.on('end', () => {
-          setTimeout(() => {
-            assert.strictEqual(fakeUnbind.callCount, 1);
-            assert.strictEqual(fakeUnbind.lastCall.args[0], txn._affinityKey);
-            done();
-          }, 10);
-        });
+      it('should release TransactionAffinity on end when configured', () => {
+        const affinity = TransactionAffinity.newReadOnly();
+        const txn = new Snapshot(SESSION, undefined, undefined, affinity);
+        const releaseSpy = sandbox.spy(affinity, 'release');
         txn.end();
+        assert.strictEqual(releaseSpy.callCount, 1);
       });
     });
 
@@ -2222,6 +2225,23 @@ describe('Transaction', () => {
       it('should inherit from Dml', () => {
         assert(transaction instanceof Dml);
       });
+
+      it('should initialize TransactionAffinity (ReadWrite) for multiplexed sessions', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Transaction(multiplexedSession);
+        assert.ok(txn.affinity instanceof TransactionAffinity);
+        assert.strictEqual(txn.affinity.isReadOnly(), false);
+        assert.strictEqual(txn.affinity.isReadWrite(), true);
+      });
+
+      it('should initialize TransactionAffinity (ReadWrite) for regular sessions', () => {
+        const txn = new Transaction(SESSION);
+        assert.ok(txn.affinity instanceof TransactionAffinity);
+        assert.strictEqual(txn.affinity.isReadOnly(), false);
+        assert.strictEqual(txn.affinity.isReadWrite(), true);
+      });
     });
 
     describe('batchUpdate', () => {
@@ -2761,16 +2781,20 @@ describe('Transaction', () => {
         );
       });
 
-      it('should inject _unbindGaxOpts for commit if _affinityKey is present', () => {
-        const stub = sandbox.stub(transaction, 'request');
-        (transaction as any)._affinityKey = 'mux-affinity-1';
-        const unbindOpts = {otherArgs: {options: {unbind: true}}};
-        (transaction as any)._unbindGaxOpts = unbindOpts;
-
-        transaction.commit();
-
-        const {gaxOpts} = stub.lastCall.args[0];
-        assert.deepStrictEqual(gaxOpts, unbindOpts);
+      it('should release TransactionAffinity when commit finishes', done => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Transaction(multiplexedSession);
+        const releaseSpy = sandbox.spy(txn.affinity!, 'release');
+        sandbox.stub(txn, 'request').callsFake((config: any, callback: any) => {
+          callback(null, {});
+        });
+        txn.commit((err: Error | null) => {
+          assert.ifError(err);
+          assert.strictEqual(releaseSpy.callCount, 1);
+          done();
+        });
       });
 
       it('should accept gaxOptions as CallOptions', done => {
@@ -3390,16 +3414,21 @@ describe('Transaction', () => {
         );
       });
 
-      it('should inject _unbindGaxOpts for rollback if _affinityKey is present', () => {
-        const stub = sandbox.stub(transaction, 'request');
-        (transaction as any)._affinityKey = 'mux-affinity-1';
-        const unbindOpts = {otherArgs: {options: {unbind: true}}};
-        (transaction as any)._unbindGaxOpts = unbindOpts;
-
-        transaction.rollback();
-
-        const {gaxOpts} = stub.lastCall.args[0];
-        assert.deepStrictEqual(gaxOpts, unbindOpts);
+      it('should release TransactionAffinity when rollback finishes', done => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Transaction(multiplexedSession);
+        txn.id = ID;
+        const releaseSpy = sandbox.spy(txn.affinity!, 'release');
+        sandbox.stub(txn, 'request').callsFake((config: any, callback: any) => {
+          callback(null);
+        });
+        txn.rollback((err: Error | null) => {
+          assert.ifError(err);
+          assert.strictEqual(releaseSpy.callCount, 1);
+          done();
+        });
       });
 
       it('should accept gaxOptions', done => {

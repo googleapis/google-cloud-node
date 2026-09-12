@@ -118,11 +118,23 @@ function injectRequestIDIntoError(config: any, err: Error) {
   }
 }
 
+/**
+ * Injects x-goog-spanner-request-id into the headers object.
+ *
+ * Note on dynamic channel pooling (P1):
+ * For the first statement of a multi-use read/write transaction, the affinity handle is not yet
+ * pinned to a physical channel until P2C selection executes at call invocation time. Therefore, the first RPC
+ * reports channel 1 (or the database's default channel ID) in the diagnostic request ID header, while subsequent
+ * statements within the transaction report the pinned logical channel ID. This trade-off preserves Power of Two
+ * Choices (P2C) least-busy load balancing at execution time rather than prematurely binding at transaction
+ * construction.
+ */
 function injectRequestIDIntoHeaders(
   headers: {[k: string]: string},
   session: any,
   nthRequest?: number,
   attempt?: number,
+  channelId?: number,
 ) {
   if (!session) {
     return headers;
@@ -135,12 +147,17 @@ function injectRequestIDIntoHeaders(
     nthRequest = database._nextNthRequest();
   }
   const clientId = database ? database._nthClientId || 1 : 1;
-  const channelId = database ? database._channelId || 1 : 1;
+  const resolvedChannelId =
+    channelId !== undefined
+      ? channelId
+      : database
+        ? database._channelId || 1
+        : 1;
 
   const withReqId = {...headers};
   withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
     clientId,
-    channelId,
+    resolvedChannelId,
     nthRequest || 1,
     attempt || 1,
   );

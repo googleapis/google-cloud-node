@@ -75,7 +75,6 @@
     "extend": "^3.0.2",
     "google-auth-library": "^10.0.0-rc.1",
     "google-gax": "5.0.6",
-    "grpc-gcp": "^1.0.1",
     "lodash.snakecase": "^4.1.1",
     "p-queue": "^6.0.2",
     "protobufjs": "^7.4.0",

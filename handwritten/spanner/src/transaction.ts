@@ -66,14 +66,13 @@ import {
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
 } from './request_id_header';
+import {TransactionAffinity} from './channel-pool';
 
 export type Rows = Array<Row | Json>;
 type ResultStats = ResultSetStats | IResultSetStats;
 type ResultMetadata = ResultSetMetadata | IResultSetMetadata;
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
-
-let nextAffinityId = 0;
 
 /**
  * Injects a key-value pair into the gaxOpts.otherArgs.options object
@@ -342,9 +341,8 @@ export class Snapshot extends EventEmitter {
     | undefined
     | null;
   id?: Uint8Array | string;
-  protected _affinityKey?: string;
+  protected _affinity?: TransactionAffinity;
   protected _bindGaxOpts?: CallOptions;
-  protected _unbindGaxOpts?: CallOptions;
   multiplexedSessionPreviousTransactionId?: Uint8Array | string;
   ended: boolean;
   metadata?: spannerClient.spanner.v1.ITransaction;
@@ -360,6 +358,10 @@ export class Snapshot extends EventEmitter {
   _traceConfig: traceConfig;
   protected _dbName?: string;
   protected _mutationKey: spannerClient.spanner.v1.Mutation | null;
+
+  get affinity(): TransactionAffinity | undefined {
+    return this._affinity;
+  }
 
   /**
    * The transaction ID.
@@ -408,68 +410,24 @@ export class Snapshot extends EventEmitter {
     session: Session,
     options?: TimestampBounds,
     queryOptions?: IQueryOptions,
+    affinity?: TransactionAffinity,
   ) {
     super();
 
     this.ended = false;
     this.session = session;
     this.queryOptions = Object.assign({}, queryOptions);
-    // If the session is multiplexed, generate a unique affinity key for this
-    // specific transaction/snapshot. This allows requests using the same shared
-    // multiplexed session to be distributed across different gRPC channels.
-    if (session.metadata && session.metadata.multiplexed) {
-      this._affinityKey = `mux-affinity-${process.pid}-${nextAffinityId++}`;
+    this._affinity = affinity;
+    if (this._affinity) {
       // Pre-construct and cache the bind gax options to avoid creating
       // a new object on every request, which improves performance.
       this._bindGaxOpts = {
         otherArgs: {
           options: {
-            affinityKey: this._affinityKey,
+            affinity: this._affinity,
           },
         },
       };
-      // Pre-construct and cache the unbind gax options. This explicitly signals
-      // the channel factory to release the affinity mapping when the transaction ends.
-      this._unbindGaxOpts = {
-        otherArgs: {
-          options: {
-            affinityKey: this._affinityKey,
-            unbind: true,
-          },
-        },
-      };
-      this.request = (config: any, callback?: Function) => {
-        let gaxOpts;
-        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
-          gaxOpts = this._bindGaxOpts as any;
-        } else {
-          gaxOpts = injectGaxOpt(
-            config.gaxOpts,
-            'affinityKey',
-            this._affinityKey,
-          );
-        }
-        config = Object.assign({}, config, {gaxOpts});
-        return session.request(config, callback);
-      };
-
-      this.requestStream = (config: any) => {
-        let gaxOpts;
-        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
-          gaxOpts = this._bindGaxOpts as any;
-        } else {
-          gaxOpts = injectGaxOpt(
-            config.gaxOpts,
-            'affinityKey',
-            this._affinityKey,
-          );
-        }
-        config = Object.assign({}, config, {gaxOpts});
-        return session.requestStream(config);
-      };
-    } else {
-      this.request = session.request.bind(session);
-      this.requestStream = session.requestStream.bind(session);
     }
 
     const readOnly = Snapshot.encodeTimestampBounds(options || {});
@@ -485,6 +443,42 @@ export class Snapshot extends EventEmitter {
     };
     this._latestPreCommitToken = null;
     this._mutationKey = null;
+
+    if (this._affinity) {
+      this.request = (config: any, callback?: Function) => {
+        return session.request(this._injectAffinity(config), callback);
+      };
+
+      this.requestStream = (config: any) => {
+        return session.requestStream(this._injectAffinity(config));
+      };
+    } else {
+      this.request = session.request.bind(session);
+      this.requestStream = session.requestStream.bind(session);
+    }
+  }
+
+  protected _injectAffinity(config: any): any {
+    if (!this._affinity) {
+      return config;
+    }
+    const targetConfig = config || {};
+    let hasCustomGaxOpts = false;
+    if (targetConfig.gaxOpts) {
+      for (const key in targetConfig.gaxOpts) {
+        if (Object.prototype.hasOwnProperty.call(targetConfig.gaxOpts, key)) {
+          hasCustomGaxOpts = true;
+          break;
+        }
+      }
+    }
+    const gaxOpts = hasCustomGaxOpts
+      ? injectGaxOpt(targetConfig.gaxOpts, 'affinity', this._affinity)
+      : this._bindGaxOpts;
+    if (targetConfig.gaxOpts === gaxOpts) {
+      return targetConfig;
+    }
+    return {...targetConfig, gaxOpts};
   }
 
   protected _updatePrecommitToken(resp: PrecommitTokenProvider): void {
@@ -721,7 +715,13 @@ export class Snapshot extends EventEmitter {
             method: 'beginTransaction',
             reqOpts,
             gaxOpts,
-            headers: injectRequestIDIntoHeaders(headers, this.session),
+            headers: injectRequestIDIntoHeaders(
+              headers,
+              this.session,
+              undefined,
+              undefined,
+              this._affinity?.logicalChannelId() ?? undefined,
+            ),
           },
           (
             err: null | grpc.ServiceError,
@@ -1025,6 +1025,7 @@ export class Snapshot extends EventEmitter {
             this.session,
             nthRequest,
             attempt,
+            this._affinity?.logicalChannelId() ?? undefined,
           ),
         });
       };
@@ -1131,21 +1132,10 @@ export class Snapshot extends EventEmitter {
     }
 
     this.ended = true;
-    this._releaseWaitingRequests();
     process.nextTick(() => this.emit('end'));
 
-    if (this._affinityKey) {
-      const database = this.session?.parent as Database;
-      const spanner = database?.parent?.parent as Spanner;
-      const client = spanner?.clients_?.get('SpannerClient') as any;
-
-      if (client?.spannerStub) {
-        Promise.resolve(client.spannerStub)
-          .then((stub: any) => {
-            return stub?.getChannel?.()?.unbind?.(this._affinityKey);
-          })
-          .catch(() => {});
-      }
+    if (this._affinity) {
+      this._affinity.release();
     }
   }
 
@@ -1627,6 +1617,7 @@ export class Snapshot extends EventEmitter {
           this.session,
           nthRequest,
           attempt,
+          this._affinity?.logicalChannelId() ?? undefined,
         );
         const requestId = injectedHeaders[X_GOOG_SPANNER_REQUEST_ID_HEADER];
         if (runSpan && requestId) {
@@ -2040,6 +2031,7 @@ export class Snapshot extends EventEmitter {
             this.session,
             nthRequest,
             attempt,
+            this._affinity?.logicalChannelId() ?? undefined,
           ),
         });
       };
@@ -2546,7 +2538,7 @@ export class Transaction extends Dml {
     queryOptions?: IQueryOptions,
     requestOptions?: Pick<IRequestOptions, 'transactionTag'>,
   ) {
-    super(session, undefined, queryOptions);
+    super(session, undefined, queryOptions, TransactionAffinity.newReadWrite());
 
     this._queuedMutations = [];
     this._options = {readWrite: options};
@@ -2706,6 +2698,7 @@ export class Transaction extends Dml {
       this.session,
       nextNthRequest(database),
       1,
+      this._affinity?.logicalChannelId() ?? undefined,
     );
     if (this._getSpanner().routeToLeaderEnabled) {
       addLeaderAwareRoutingHeader(headers);
@@ -2879,7 +2872,7 @@ export class Transaction extends Dml {
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
-    let gaxOpts =
+    const gaxOpts =
       'gaxOptions' in options ? (options as CommitOptions).gaxOptions : options;
 
     const mutations = this._queuedMutations;
@@ -2954,13 +2947,6 @@ export class Transaction extends Dml {
         span.addEvent('Starting Commit');
 
         const database = this.session.parent as Database;
-        if (this._affinityKey) {
-          if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
-            gaxOpts = this._unbindGaxOpts as any;
-          } else {
-            gaxOpts = injectGaxOpt(gaxOpts, 'unbind', true);
-          }
-        }
 
         this.request(
           {
@@ -2973,6 +2959,7 @@ export class Transaction extends Dml {
               this.session,
               nextNthRequest(database),
               1,
+              this._affinity?.logicalChannelId() ?? undefined,
             ),
           },
           (
@@ -3321,7 +3308,7 @@ export class Transaction extends Dml {
       CallOptions | spannerClient.spanner.v1.Spanner.RollbackCallback,
     cb?: spannerClient.spanner.v1.Spanner.RollbackCallback,
   ): void | Promise<void> {
-    let gaxOpts =
+    const gaxOpts =
       typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
     const callback =
       typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
@@ -3344,14 +3331,6 @@ export class Transaction extends Dml {
       const headers = this.commonHeaders_;
       if (this._getSpanner().routeToLeaderEnabled) {
         addLeaderAwareRoutingHeader(headers);
-      }
-
-      if (this._affinityKey) {
-        if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
-          gaxOpts = this._unbindGaxOpts as any;
-        } else {
-          gaxOpts = injectGaxOpt(gaxOpts, 'unbind', true);
-        }
       }
 
       this.request(
@@ -3892,7 +3871,7 @@ export class PartitionedDml extends Dml {
     session: Session,
     options = {} as spannerClient.spanner.v1.TransactionOptions.PartitionedDml,
   ) {
-    super(session);
+    super(session, undefined, undefined, TransactionAffinity.newReadWrite());
     this._options = {partitionedDml: options};
   }
   /**
