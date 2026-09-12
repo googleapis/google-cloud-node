@@ -15,6 +15,7 @@
 import {execFileSync, execFile} from 'child_process';
 import {existsSync} from 'fs';
 import path from 'path';
+import {fileURLToPath} from 'url';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
 
@@ -65,6 +66,7 @@ async function run() {
 
 // --- Git Changed Files Logic ---
 
+const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 let repoRoot;
 
 /**
@@ -78,7 +80,7 @@ function getRepoRoot() {
         stdio: 'pipe',
       }).trim();
     } catch (_err) {
-      repoRoot = process.cwd();
+      repoRoot = REPO_ROOT;
     }
   }
   return repoRoot;
@@ -92,6 +94,10 @@ function runGit(args, options = {}) {
     encoding: 'utf8',
     stdio: 'pipe',
     cwd: getRepoRoot(),
+    env: {
+      ...process.env,
+      GIT_TERMINAL_PROMPT: '0',
+    },
     ...options,
   });
 }
@@ -259,7 +265,7 @@ async function checkEslint(filesToCheck) {
   // Group files by package directory to set tsconfigRootDir properly for typescript-eslint
   const filesByPkg = new Map();
   for (const file of filesToProcess) {
-    const pkgDir = findTsconfigDir(file) || process.cwd();
+    const pkgDir = findTsconfigDir(file) || getRepoRoot();
     if (!filesByPkg.has(pkgDir)) {
       filesByPkg.set(pkgDir, []);
     }
@@ -368,7 +374,13 @@ async function ensurePackageDependencies(packages) {
       const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
       await execFileAsync(
         npmCmd,
-        ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
+        [
+          'install',
+          '--no-audit',
+          '--no-fund',
+          '--ignore-scripts',
+          '--prefer-offline',
+        ],
         {
           cwd: pkg,
         },
@@ -393,7 +405,7 @@ async function checkTypeSafety(packagesToCheck) {
   const checks = Array.from(packagesToCheck).map(async pkg => {
     try {
       console.log(`  Type checking ${pkg}...`);
-      await execFileAsync('node', [
+      await execFileAsync(process.execPath, [
         path.join(getRepoRoot(), 'node_modules/typescript/bin/tsc'),
         '--noEmit',
         '--project',
