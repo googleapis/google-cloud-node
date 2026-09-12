@@ -3990,6 +3990,32 @@ describe('Transaction', () => {
           last: true,
         });
       });
+
+      it('should discard waiting queries and not dispatch them if transaction ends before inline begin finishes', done => {
+        const fakeRequestStream1 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          return fakeRequestStream1;
+        });
+
+        transaction.run({sql: 'SELECT 1'}, () => {});
+        transaction.run({sql: 'SELECT 2'}, () => {});
+
+        assert.strictEqual(requestCount, 1);
+
+        transaction.end();
+
+        setImmediate(() => {
+          try {
+            assert.strictEqual(requestCount, 1);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+      });
     });
 
     describe('runStream', () => {

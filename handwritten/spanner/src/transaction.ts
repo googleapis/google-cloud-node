@@ -1131,7 +1131,7 @@ export class Snapshot extends EventEmitter {
     }
 
     this.ended = true;
-    this._releaseWaitingRequests();
+    this._waitingRequests = [];
     process.nextTick(() => this.emit('end'));
 
     if (this._affinityKey) {
