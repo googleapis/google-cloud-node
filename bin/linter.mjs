@@ -73,7 +73,10 @@ let repoRoot;
 function getRepoRoot() {
   if (!repoRoot) {
     try {
-      repoRoot = runGit(['rev-parse', '--show-toplevel']).trim();
+      repoRoot = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+        encoding: 'utf8',
+        stdio: 'pipe',
+      }).trim();
     } catch (_err) {
       repoRoot = process.cwd();
     }
@@ -88,6 +91,7 @@ function runGit(args, options = {}) {
   return execFileSync('git', args, {
     encoding: 'utf8',
     stdio: 'pipe',
+    cwd: getRepoRoot(),
     ...options,
   });
 }
@@ -126,7 +130,7 @@ function getChangedFilesStrict() {
     return output
       .split('\n')
       .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
+      .filter(f => f.length > 0 && existsSync(path.resolve(getRepoRoot(), f)));
   } catch (err) {
     if (err.status !== 1) {
       throw new Error(
@@ -166,7 +170,9 @@ function getChangedFiles() {
       return output
         .split('\n')
         .map(f => f.trim())
-        .filter(f => f.length > 0 && existsSync(f));
+        .filter(
+          f => f.length > 0 && existsSync(path.resolve(getRepoRoot(), f)),
+        );
     } catch {
       // Continue to the next fallback ref
     }
@@ -185,7 +191,7 @@ function getChangedFiles() {
     return output
       .split('\n')
       .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
+      .filter(f => f.length > 0 && existsSync(path.resolve(getRepoRoot(), f)));
   } catch {
     return [];
   }
@@ -225,7 +231,7 @@ function shouldLintFile(filePath) {
     return false;
   }
   const relPath = path
-    .relative(getRepoRoot(), path.resolve(filePath))
+    .relative(getRepoRoot(), path.resolve(getRepoRoot(), filePath))
     .replace(/\\/g, '/');
   const segments = relPath.split('/');
 
@@ -267,7 +273,7 @@ async function checkEslint(filesToCheck) {
       const absPkgDir = path.resolve(pkgDir);
       const eslint = new ESLint({
         cwd: absPkgDir,
-        resolvePluginsRelativeTo: process.cwd(),
+        resolvePluginsRelativeTo: getRepoRoot(),
         overrideConfig: {
           parserOptions: {
             tsconfigRootDir: absPkgDir,
@@ -276,7 +282,7 @@ async function checkEslint(filesToCheck) {
       });
 
       const relativeFiles = files.map(f =>
-        path.relative(absPkgDir, path.resolve(f)),
+        path.relative(absPkgDir, path.resolve(getRepoRoot(), f)),
       );
       const results = await eslint.lintFiles(relativeFiles);
       const formatter = await eslint.loadFormatter('stylish');
@@ -317,7 +323,7 @@ async function checkEslint(filesToCheck) {
  * Caches directories to avoid redundant disk operations.
  */
 function findTsconfigDir(filePath) {
-  let currentDir = path.resolve(path.dirname(filePath));
+  let currentDir = path.resolve(getRepoRoot(), path.dirname(filePath));
   const root = path.parse(currentDir).root;
 
   while (currentDir && currentDir !== root) {
@@ -388,7 +394,7 @@ async function checkTypeSafety(packagesToCheck) {
     try {
       console.log(`  Type checking ${pkg}...`);
       await execFileAsync('node', [
-        'node_modules/typescript/bin/tsc',
+        path.join(getRepoRoot(), 'node_modules/typescript/bin/tsc'),
         '--noEmit',
         '--project',
         path.join(pkg, 'tsconfig.json'),
