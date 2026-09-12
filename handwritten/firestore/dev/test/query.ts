@@ -771,6 +771,29 @@ describe('query interface', () => {
     expect(attempts).to.equal(5);
   });
 
+  it('handles stream exception whose stack is not writable', async () => {
+    // google-auth-library builds errors whose `stack` property is not
+    // writable. Appending the callsite stack to such an error must not replace
+    // it with a TypeError, and must not escape the stream error handler as an
+    // uncaught exception.
+    const overrides: ApiOverride = {
+      runQuery: () => {
+        const err = new Error('Expected error');
+        Object.defineProperty(err, 'stack', {
+          value: 'Error: Expected error\n    at origin',
+          writable: false,
+          enumerable: true,
+        });
+        return stream(err);
+      },
+    };
+
+    firestore = await createInstance(overrides);
+    await expect(
+      firestore.collection('collectionId').get(),
+    ).to.eventually.be.rejectedWith('Expected error');
+  });
+
   it('handles stream exception after initialization (with get())', async () => {
     const responses = [
       () => stream(result('first'), new Error('Expected error')),
