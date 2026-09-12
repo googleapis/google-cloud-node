@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.12.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.12.0...spanner-v8.12.1) (2026-09-12)
+
+
+### Performance Improvements
+
+* **spanner:** Bypass stream pipeline for single-chunk query results ([#9279](https://github.com/googleapis/google-cloud-node/issues/9279)) ([e46a407](https://github.com/googleapis/google-cloud-node/commit/e46a4076dcfea61104fcb99bf6f5d834fa0c1896))
+
 ## [8.12.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.11.0...spanner-v8.12.0) (2026-09-11)
 
 
