@@ -21,6 +21,7 @@
   "core/precise-date": "6.0.1",
   "core/projectify": "6.0.1",
   "core/promisify": "6.0.1",
+  "core/test-utils": "0.1.0",
   "handwritten/bigquery": "9.0.3",
   "handwritten/bigquery-storage": "6.0.1",
   "handwritten/bigtable": "7.2.0",
