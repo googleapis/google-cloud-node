@@ -47,6 +47,9 @@ function convertSingleValue(value: JSONValue | object): JSONValue {
     if (value?.constructor?.name === 'Long') {
       return (value as LongStub).toString();
     }
+    if (Buffer.isBuffer(value) || value instanceof Uint8Array) {
+      return bytesToProto3JSON(value);
+    }
     throw new Error(`toProto3JSON: don't know how to convert value ${value}`);
   }
   return value;
@@ -198,10 +201,6 @@ export function toProto3JSON(
         continue;
       }
       result[key] = value;
-      continue;
-    }
-    if (Buffer.isBuffer(value) || value instanceof Uint8Array) {
-      result[key] = bytesToProto3JSON(value);
       continue;
     }
     result[key] = convertSingleValue(value);
