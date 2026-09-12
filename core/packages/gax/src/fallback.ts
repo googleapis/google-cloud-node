@@ -55,6 +55,18 @@ export {
   PageDescriptor,
   StreamDescriptor,
 } from './descriptor';
+export {
+  ResumableUploadDescriptor,
+  ResumableUploadSession,
+  ResumableUploadState,
+  resumableUploadStub,
+} from './resumableUpload';
+export type {
+  ResumableUploadContext,
+  ResumableUploadProgress,
+  ResumableUploadStartParams,
+  ResumableSource,
+} from './resumableUpload';
 
 export {StreamType} from './streamingCalls/streaming';
 
