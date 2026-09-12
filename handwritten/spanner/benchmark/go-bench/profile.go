@@ -110,12 +110,27 @@ type ScenarioResult struct {
 	FileSizeKB  float64
 }
 
+// BenchmarkRow represents the full row schema for AsyncBenchmarkTable (id + 10 data columns)
+type BenchmarkRow struct {
+	ID     string `spanner:"id"`
+	Field0 string `spanner:"field0"`
+	Field1 string `spanner:"field1"`
+	Field2 string `spanner:"field2"`
+	Field3 string `spanner:"field3"`
+	Field4 string `spanner:"field4"`
+	Field5 string `spanner:"field5"`
+	Field6 string `spanner:"field6"`
+	Field7 string `spanner:"field7"`
+	Field8 string `spanner:"field8"`
+	Field9 string `spanner:"field9"`
+}
+
 func executeQuery(ctx context.Context, client *spanner.Client, queryType string, table string) error {
 	var stmt spanner.Statement
 	if queryType == "pointSelect" {
 		randomID := fmt.Sprintf("user-%d", rand.Intn(100000))
 		stmt = spanner.Statement{
-			SQL: fmt.Sprintf("SELECT id, field0, field1 FROM %s WHERE id = @id", table),
+			SQL: fmt.Sprintf("SELECT * FROM %s WHERE id = @id", table),
 			Params: map[string]interface{}{
 				"id": randomID,
 			},
@@ -135,10 +150,13 @@ func executeQuery(ctx context.Context, client *spanner.Client, queryType string,
 		if err != nil {
 			return err
 		}
-		// Consume columns to simulate full row consumption
-		if queryType == "limit1000" {
-			var id string
-			_ = row.ColumnByName("id", &id)
+		// Full row deserialization for exact parity with Node's rows.map(r => r.toJSON())
+		var data BenchmarkRow
+		if err := row.ToStructLenient(&data); err != nil {
+			for i := 0; i < row.Size(); i++ {
+				var genericVal spanner.GenericColumnValue
+				_ = row.Column(i, &genericVal)
+			}
 		}
 	}
 	return nil
@@ -216,6 +234,7 @@ func main() {
 	scenarioArg := flag.String("scenario", "all", "Scenario to run: 1, 2, 3, or all")
 	warmupSec := flag.Int("warmup", 5, "Warmup duration in seconds per scenario")
 	durationSec := flag.Int("duration", 15, "Profiling duration in seconds per scenario")
+	sampleRate := flag.Int("sample-rate", 2000, "CPU profiling sample rate in Hz (2000 = 500us interval matching Node.js V8 profiler, 100 = default Go pprof)")
 	outputDir := flag.String("output-dir", "profiles", "Output directory to save .pprof profiles")
 	enableTrace := flag.Bool("trace", true, "Collect runtime execution trace (.trace)")
 	flag.Parse()
@@ -237,6 +256,11 @@ func main() {
 	}())
 	fmt.Printf("Warmup Duration   : %ds per scenario\n", *warmupSec)
 	fmt.Printf("Profile Duration  : %ds per scenario\n", *durationSec)
+	if *sampleRate > 0 {
+		fmt.Printf("Profile Rate      : %d Hz (~%d μs sampling interval)\n", *sampleRate, 1000000/(*sampleRate))
+	} else {
+		fmt.Printf("Profile Rate      : Default (100 Hz / 10ms)\n")
+	}
 	fmt.Printf("Output Directory  : %s\n", *outputDir)
 	fmt.Println(strings.Repeat("=", 80))
 
@@ -326,6 +350,9 @@ func main() {
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Failed to create CPU profile file: %v\n", err)
 			continue
+		}
+		if *sampleRate > 0 {
+			runtime.SetCPUProfileRate(*sampleRate)
 		}
 		if err := pprof.StartCPUProfile(cpuFile); err != nil {
 			fmt.Fprintf(os.Stderr, "Failed to start CPU profile: %v\n", err)
