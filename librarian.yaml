@@ -68,7 +68,7 @@ default:
       google/shopping/merchant: '@google-shopping'
 libraries:
   - name: google-ads-admanager
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -183,7 +183,7 @@ libraries:
       package_name: '@google-cloud/subscriptions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/workspaceevents/latest
   - name: google-apps-meet
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/apps/meet/v2
       - path: google/apps/meet/v2beta
@@ -338,7 +338,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-alloydb
-    version: 3.2.0
+    version: 3.3.0
     apis:
       - path: google/cloud/alloydb/v1
       - path: google/cloud/alloydb/v1beta
@@ -347,7 +347,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-apigateway
-    version: 5.1.0
+    version: 5.2.0
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
@@ -426,7 +426,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/assured-workloads'
   - name: google-cloud-auditmanager
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/auditmanager/v1
     copyright_year: "2026"
@@ -578,7 +578,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -646,7 +646,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/cloud/chronicle/v1
         nodejs:
@@ -698,7 +698,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.3.0
+    version: 7.4.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -1041,7 +1041,7 @@ libraries:
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
       - path: google/cloud/geminidataanalytics/v1beta
@@ -1134,14 +1134,14 @@ libraries:
       default_version: v1
       main_service: iot
   - name: google-cloud-kms
-    version: 6.1.0
+    version: 6.2.0
     apis:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-kms-inventory
-    version: 3.1.0
+    version: 3.2.0
     apis:
       - path: google/cloud/kms/inventory/v1
     copyright_year: "2026"
@@ -1452,7 +1452,7 @@ libraries:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
   - name: google-cloud-pubsub-api
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/pubsub/v1
     nodejs:
@@ -1509,7 +1509,7 @@ libraries:
       default_version: v3
       package_name: '@google-cloud/resource-manager'
   - name: google-cloud-retail
-    version: 5.2.0
+    version: 5.3.0
     apis:
       - path: google/cloud/retail/v2
         nodejs:
@@ -1557,7 +1557,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/secret-manager'
   - name: google-cloud-securesourcemanager
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/cloud/securesourcemanager/v1
     copyright_year: "2026"
@@ -1760,7 +1760,7 @@ libraries:
         extend: ^3.0.2
         is-html: ^2.0.0
   - name: google-cloud-vectorsearch
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/vectorsearch/v1
       - path: google/cloud/vectorsearch/v1beta
@@ -1832,7 +1832,7 @@ libraries:
         '@google-cloud/promisify': ^5.0.0
       main_service: vision
   - name: google-cloud-visionai
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/visionai/v1
     copyright_year: "2026"
@@ -2228,7 +2228,7 @@ libraries:
       package_name: '@google-shopping/lfp'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-loyaltycustomers
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/shopping/merchant/loyaltycustomers/v1
     copyright_year: "2026"
