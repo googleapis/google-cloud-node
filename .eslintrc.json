@@ -88,10 +88,17 @@
         "@typescript-eslint/no-explicit-any": ["off"],
         "@typescript-eslint/no-floating-promises": ["off"]
       }
+    },
+    {
+      "files": ["bin/**/*.mjs"],
+      "parserOptions": {
+        "ecmaVersion": 2020
+      }
     }
   ],
   // LINT.IfChange(ignorePatterns)
   "ignorePatterns": [
+    "packages/**",
     "**/node_modules",
     "**/build",
     "**/dist",
