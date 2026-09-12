@@ -28,7 +28,7 @@ import {
   OAuthErrorResponse,
   getErrorFromOAuthErrorResponse,
 } from '../src/auth/oauth2common';
-import {GaxiosError} from 'gaxios';
+import {Gaxios, GaxiosError} from 'gaxios';
 import {
   assertGaxiosResponsePresent,
   getAudience,
@@ -86,6 +86,21 @@ describe('BaseExternalAccountClient', () => {
       file: '/var/run/secrets/goog.id/token',
     },
   };
+
+  it('should pass the configured transporter to STS credentials', () => {
+    const transporter = new Gaxios();
+    const client = new TestExternalAccountClient({
+      ...externalAccountOptions,
+      transporter,
+    });
+
+    assert.strictEqual(
+      (client as unknown as {stsCredential: {transporter: Gaxios}})
+        .stsCredential.transporter,
+      transporter,
+    );
+  });
+
   const externalAccountOptionsWithCreds = {
     type: 'external_account',
     audience,
