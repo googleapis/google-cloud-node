@@ -21,6 +21,7 @@ import api = protos.google.firestore.v1;
 import {FilterInternal} from './filter-internal';
 import {Serializer} from '../serializer';
 import {FieldPath} from '../path';
+import {Decimal128Value} from '../field-value';
 
 /**
  * A field constraint for a Query where clause.
@@ -79,7 +80,15 @@ export class FieldFilterInternal extends FilterInternal {
    * @internal
    */
   isNanChecking(): boolean {
-    return typeof this.value === 'number' && isNaN(this.value);
+    if (typeof this.value === 'number' && isNaN(this.value)) {
+      return true;
+    }
+
+    if (this.value instanceof Decimal128Value) {
+      return this.value.value === 'NaN';
+    }
+
+    return false;
   }
 
   /**

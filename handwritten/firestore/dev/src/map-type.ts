@@ -17,3 +17,28 @@
 export const RESERVED_MAP_KEY = '__type__';
 export const RESERVED_MAP_KEY_VECTOR_VALUE = '__vector__';
 export const VECTOR_MAP_VECTORS_KEY = 'value';
+
+export const RESERVED_MIN_KEY = '__min__';
+export const RESERVED_MAX_KEY = '__max__';
+
+// For Regex type
+export const RESERVED_REGEX_KEY = '__regex__';
+export const RESERVED_REGEX_PATTERN_KEY = 'pattern';
+export const RESERVED_REGEX_OPTIONS_KEY = 'options';
+
+// For BSON ObjectId type
+export const RESERVED_BSON_OBJECT_ID_KEY = '__oid__';
+
+// For Int32 type
+export const RESERVED_INT32_KEY = '__int__';
+
+// For Decimal128 type
+export const RESERVED_DECIMAL128_KEY = '__decimal128__';
+
+// For BSON Timestamp
+export const RESERVED_BSON_TIMESTAMP_KEY = '__request_timestamp__';
+export const RESERVED_BSON_TIMESTAMP_SECONDS_KEY = 'seconds';
+export const RESERVED_BSON_TIMESTAMP_INCREMENT_KEY = 'increment';
+
+// For BSON Binary Data
+export const RESERVED_BSON_BINARY_KEY = '__binary__';
