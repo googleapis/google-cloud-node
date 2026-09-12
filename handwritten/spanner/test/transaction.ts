@@ -41,8 +41,13 @@ import {
   BatchUpdateOptions,
   ExecuteSqlRequest,
   ReadRequest,
+  RunCallback,
 } from '../src/transaction';
+import {Row} from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
+import * as through from 'through2';
+
+import {convertToIValue} from './partial-result-stream';
 
 describe('Transaction', () => {
   const sandbox = sinon.createSandbox();
@@ -109,7 +114,10 @@ describe('Transaction', () => {
     const txns = proxyquire('../src/transaction', {
       '@google-cloud/promisify': {promisifyAll: PROMISIFY_ALL},
       './codec': {codec},
-      './partial-result-stream': {partialResultStream: PARTIAL_RESULT_STREAM},
+      './partial-result-stream': {
+        ...require('../src/partial-result-stream'),
+        partialResultStream: PARTIAL_RESULT_STREAM,
+      },
     });
 
     Snapshot = txns.Snapshot;
@@ -716,6 +724,805 @@ describe('Transaction', () => {
 
         fakeStream.emit('stats', fakeStats);
         fakeStream.emit('end');
+      });
+    });
+
+    describe('run fast-path', () => {
+      const QUERY = {sql: 'SELECT * FROM `MyTable`'};
+
+      beforeEach(() => {
+        REQUEST_STREAM.resetHistory();
+        PARTIAL_RESULT_STREAM.resetHistory();
+      });
+
+      it('should execute single-chunk query via fast-path without partialResultStream', done => {
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 1);
+            const row = rows[0] as Row;
+            assert.strictEqual(row[0].name, 'col1');
+            assert.strictEqual(row[0].value, 'val1');
+            assert.deepStrictEqual(row.toJSON(), {col1: 'val1'});
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, false);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('val1')],
+          last: true,
+        });
+      });
+
+      it('should accept plain SQL string input on fast-path', done => {
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run('SELECT 1', (error, rows) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            const row = rows![0] as Row;
+            assert.strictEqual(row[0].name, 'col1');
+            assert.strictEqual(row[0].value, 'val1');
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, false);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('val1')],
+          last: true,
+        });
+      });
+
+      it('should seamlessly fall back to streaming for multi-chunk query', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 2);
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, true);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        // Chunk 1: last = false
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('val1')],
+          last: false,
+          resumeToken: 'token1',
+        });
+
+        // Chunk 2: last = true
+        fakeRequestStream.push({
+          values: [convertToIValue('val2')],
+          last: true,
+        });
+        fakeRequestStream.push(null);
+      });
+
+      it('should fall back to streaming when first chunk has chunkedValue=true', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (error, rows) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, true);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'hello world');
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('hello ')],
+          chunkedValue: true,
+          last: false,
+        });
+
+        setImmediate(() => {
+          fakeRequestStream.push({
+            values: [convertToIValue('world')],
+            last: true,
+          });
+          fakeRequestStream.push(null);
+        });
+      });
+
+      it('should update inline transaction ID and precommitToken on fast-path', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+        const fakeTxId = Buffer.from('tx-id-123');
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(snapshot.id, fakeTxId);
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, false);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            transaction: {id: fakeTxId},
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          precommitToken: {precommitToken: 'token-abc'},
+          values: [convertToIValue('val1')],
+          last: true,
+        });
+      });
+
+      it('should drain trailers in background without canceling request stream on chunk.last', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        const resumeSpy = sandbox.spy(fakeRequestStream, 'resume');
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 1);
+            assert.strictEqual(resumeSpy.called, true);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('val1')],
+          last: true,
+        });
+      });
+
+      it('should return decorated error with UNKNOWN code if decoding throws', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(
+          {sql: 'SELECT * FROM `MyTable`', json: true},
+          (err, rows) => {
+            try {
+              assert(err);
+              assert.strictEqual((err as any).code, grpc.status.UNKNOWN);
+              assert.strictEqual(rows.length, 0);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          },
+        );
+
+        // Push chunk that causes integer overflow decoding error
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'INT64'}}],
+            },
+          },
+          values: [{stringValue: '9223372036854775807', kind: 'stringValue'}],
+          last: true,
+        });
+      });
+
+      it('should return error for invalid parameters', done => {
+        const fakeQuery = {
+          sql: 'SELECT * FROM `MyTable`',
+          params: {a: undefined},
+        };
+
+        snapshot.run(fakeQuery, (error, rows) => {
+          try {
+            assert(error);
+            assert.strictEqual(
+              error!.message,
+              'Value of type undefined not recognized.',
+            );
+            assert.strictEqual(rows!.length, 0);
+            assert.strictEqual(REQUEST_STREAM.called, false);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+      });
+
+      it('should return error on non-retryable gRPC error', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        const testError = Object.assign(new Error('Invalid SQL syntax'), {
+          code: grpc.status.INVALID_ARGUMENT,
+        });
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.strictEqual(err, testError);
+            assert.strictEqual(rows.length, 0);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.emit('error', testError);
+      });
+
+      it('should trigger begin when non-aborted error occurs without transaction id in runner', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.id = undefined;
+        snapshot._useInRunner = true;
+        const beginStub = sandbox.stub(snapshot, 'begin').resolves();
+
+        const testError = Object.assign(new Error('Internal server error'), {
+          code: grpc.status.INTERNAL,
+        });
+
+        snapshot.run(QUERY, (error, rows) => {
+          try {
+            assert.strictEqual(error, testError);
+            assert.strictEqual(rows!.length, 0);
+            assert.strictEqual(beginStub.calledOnce, true);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream.emit('error', testError);
+      });
+
+      it('should retry retryable error up to maxResumeRetries', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempt = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempt++;
+          const stream = through.obj();
+          setImmediate(() => {
+            if (attempt === 1) {
+              stream.emit(
+                'error',
+                Object.assign(new Error('Unavailable'), {
+                  code: grpc.status.UNAVAILABLE,
+                }),
+              );
+            } else {
+              stream.push({
+                metadata: {
+                  rowType: {
+                    fields: [{name: 'col1', type: {code: 'STRING'}}],
+                  },
+                },
+                values: [convertToIValue('success')],
+                last: true,
+              });
+            }
+          });
+          return stream;
+        });
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(attempt, 2);
+            assert.strictEqual(rows.length, 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+      });
+
+      it('should handle empty result set when stream ends without chunks', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 0);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.end();
+      });
+
+      it('should preserve the same seqno across retries', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempt = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempt++;
+          const stream = through.obj();
+          setImmediate(() => {
+            if (attempt === 1) {
+              stream.emit(
+                'error',
+                Object.assign(new Error('Unavailable'), {
+                  code: grpc.status.UNAVAILABLE,
+                }),
+              );
+            } else {
+              stream.push({
+                metadata: {
+                  rowType: {
+                    fields: [{name: 'col1', type: {code: 'STRING'}}],
+                  },
+                },
+                values: [convertToIValue('success')],
+                last: true,
+              });
+            }
+          });
+          return stream;
+        });
+
+        const initialSeqno = snapshot._seqno;
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(attempt, 2);
+            assert.strictEqual(rows.length, 1);
+            const firstSeqno = REQUEST_STREAM.firstCall.args[0].reqOpts.seqno;
+            const secondSeqno = REQUEST_STREAM.secondCall.args[0].reqOpts.seqno;
+            assert.strictEqual(firstSeqno, secondSeqno);
+            assert.strictEqual(firstSeqno, initialSeqno);
+            assert.strictEqual(snapshot._seqno, initialSeqno + 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+      });
+
+      it('should fall back to multi-chunk partialResultStream when result spans multiple chunks', done => {
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 2);
+            assert.strictEqual(rows[0][0].value, 'first');
+            assert.strictEqual(rows[1][0].value, 'second');
+            assert.strictEqual(PARTIAL_RESULT_STREAM.callCount, 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: false,
+          resumeToken: 'tok1',
+        });
+        fakeRequestStream.push({
+          values: [convertToIValue('second')],
+          last: true,
+        });
+        fakeRequestStream.push(null);
+      });
+
+      it('should propagate error from multi-chunk fallback stream', done => {
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        const testError = Object.assign(new Error('Mid-stream error'), {
+          code: grpc.status.CANCELLED,
+        });
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert(err);
+            assert.strictEqual((err as any).code, grpc.status.CANCELLED);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: false,
+        });
+        fakeRequestStream.destroy(testError);
+      });
+
+      it('should retry multi-chunk fallback stream with resumeToken on retryable error', done => {
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream1 = through.obj();
+        const fakeRequestStream2 = through.obj();
+        let requestAttempt = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestAttempt++;
+          if (requestAttempt === 1) {
+            return fakeRequestStream1;
+          }
+          return fakeRequestStream2;
+        });
+
+        snapshot.run(QUERY, (error, rows) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(requestAttempt, 2);
+            assert.strictEqual(rows!.length, 2);
+            assert.strictEqual((rows![0] as Row)[0].value, 'first');
+            assert.strictEqual((rows![1] as Row)[0].value, 'second');
+            const secondCallReqOpts = REQUEST_STREAM.secondCall.args[0].reqOpts;
+            assert.strictEqual(secondCallReqOpts.resumeToken, 'resume-token-1');
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream1.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: false,
+          resumeToken: 'resume-token-1',
+        });
+
+        setImmediate(() => {
+          fakeRequestStream1.emit(
+            'error',
+            Object.assign(new Error('Unavailable'), {
+              code: grpc.status.UNAVAILABLE,
+            }),
+          );
+
+          setImmediate(() => {
+            fakeRequestStream2.push({
+              values: [convertToIValue('second')],
+              last: true,
+            });
+            fakeRequestStream2.push(null);
+          });
+        });
+      });
+
+      it('should retry when isRetryableInternalError occurs', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempt = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempt++;
+          const stream = through.obj();
+          setImmediate(() => {
+            if (attempt === 1) {
+              stream.emit(
+                'error',
+                Object.assign(
+                  new Error(
+                    'Received unexpected EOS on DATA frame from server',
+                  ),
+                  {code: grpc.status.INTERNAL},
+                ),
+              );
+            } else {
+              stream.push({
+                metadata: {
+                  rowType: {
+                    fields: [{name: 'col1', type: {code: 'STRING'}}],
+                  },
+                },
+                values: [convertToIValue('recovered')],
+                last: true,
+              });
+            }
+          });
+          return stream;
+        });
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(attempt, 2);
+            assert.strictEqual(rows.length, 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+      });
+
+      it('should stop retrying when attempts exceed maxResumeRetries', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempts = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempts++;
+          const stream = through.obj();
+          setImmediate(() => {
+            stream.emit(
+              'error',
+              Object.assign(new Error('Unavailable'), {
+                code: grpc.status.UNAVAILABLE,
+              }),
+            );
+          });
+          return stream;
+        });
+
+        snapshot.run({sql: 'SELECT 1', maxResumeRetries: 1}, (err, rows) => {
+          try {
+            assert(err);
+            assert.strictEqual((err as any).code, grpc.status.UNAVAILABLE);
+            assert.strictEqual(attempts, 2); // attempt 1 + 1 retry
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+      });
+
+      it('should not retry when elapsed time exceeds timeout', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempts = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempts++;
+          const stream = through.obj();
+          setImmediate(() => {
+            stream.emit(
+              'error',
+              Object.assign(new Error('Unavailable'), {
+                code: grpc.status.UNAVAILABLE,
+              }),
+            );
+          });
+          return stream;
+        });
+
+        snapshot.run(
+          {sql: 'SELECT 1', gaxOptions: {timeout: -1}},
+          (error, rows) => {
+            try {
+              assert(error);
+              assert.strictEqual(
+                (error as any).code,
+                grpc.status.DEADLINE_EXCEEDED,
+              );
+              assert.strictEqual(attempts, 1); // no retries allowed because elapsed > timeout
+              done();
+            } catch (assertionError) {
+              done(assertionError);
+            }
+          },
+        );
+      });
+
+      it('should fall back to _runLegacy when runStream is overridden on Snapshot', done => {
+        snapshot.runStream = () => through.obj() as any;
+        const runLegacyStub = sandbox
+          .stub(snapshot as any, '_runLegacy')
+          .callsFake((query, callback: any) => {
+            assert.strictEqual(query, QUERY);
+            callback(null, [{id: 'from_stream'}]);
+          });
+
+        snapshot.run(QUERY, (err, rows) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(rows, [{id: 'from_stream'}]);
+          assert.strictEqual(runLegacyStub.callCount, 1);
+          done();
+        });
+      });
+
+      it('should support options.startRunSpan = false', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot._run(
+          QUERY,
+          (err, rows) => {
+            try {
+              assert.ifError(err);
+              assert.strictEqual(rows.length, 1);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          },
+          {startRunSpan: false},
+        );
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('ok')],
+          last: true,
+        });
+      });
+
+      it('should ensure complete is idempotent in fallbackStream path', done => {
+        let callbackCalls = 0;
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        const fakeFallbackStream = through.obj();
+        PARTIAL_RESULT_STREAM.returns(fakeFallbackStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          callbackCalls++;
+          try {
+            assert(err);
+            assert.strictEqual((err as any).message, 'Stream failure');
+            assert.strictEqual(callbackCalls, 1);
+          } catch (e) {
+            done(e);
+          }
+        });
+
+        // First chunk triggers fallback path
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'id', type: {code: 'INT64'}}],
+            },
+          },
+          values: [convertToIValue(1)],
+          last: false,
+        });
+
+        setImmediate(() => {
+          // Emit error, then end
+          fakeFallbackStream.emit('error', new Error('Stream failure'));
+          fakeFallbackStream.emit('end');
+
+          setImmediate(() => {
+            assert.strictEqual(callbackCalls, 1);
+            done();
+          });
+        });
+      });
+
+      it('should allow retries beyond 10 attempts as long as elapsed time is within timeout', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempts = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempts++;
+          const stream = through.obj();
+          setImmediate(() => {
+            if (attempts < 15) {
+              stream.emit(
+                'error',
+                Object.assign(new Error('Unavailable'), {
+                  code: grpc.status.UNAVAILABLE,
+                }),
+              );
+            } else {
+              stream.push({
+                metadata: {
+                  rowType: {
+                    fields: [{name: 'id', type: {code: 'INT64'}}],
+                  },
+                },
+                values: [convertToIValue(42)],
+                last: true,
+              });
+            }
+          });
+          return stream;
+        });
+
+        snapshot.run(
+          {sql: 'SELECT 1', gaxOptions: {timeout: 5000}},
+          (err, rows) => {
+            try {
+              assert.ifError(err);
+              assert.strictEqual(attempts, 15);
+              assert.strictEqual(rows!.length, 1);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          },
+        );
       });
     });
 
@@ -1364,6 +2171,32 @@ describe('Transaction', () => {
 
         assert.strictEqual(callback.callCount, 1);
         assert.strictEqual(callback.args[0][1], Math.floor(fakeRowCount));
+      });
+
+      it('should execute end-to-end via fast-path and return rowCountExact', done => {
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        dml.runUpdate(SQL, (error, rowCount) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rowCount, 42);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {fields: []},
+          },
+          stats: {
+            rowCount: 'rowCountExact',
+            rowCountExact: 42,
+          },
+          last: true,
+        });
       });
     });
   });
@@ -2887,6 +3720,275 @@ describe('Transaction', () => {
         const keys = Transaction.getUniqueKeys(rows);
 
         assert.deepStrictEqual(keys, expectedKeys);
+      });
+    });
+
+    describe('run', () => {
+      beforeEach(() => {
+        REQUEST_STREAM.reset();
+        REQUEST_STREAM.resetHistory();
+        PARTIAL_RESULT_STREAM.reset();
+        PARTIAL_RESULT_STREAM.resetHistory();
+      });
+
+      it('should handle parallel queries on an un-begun read-write transaction', done => {
+        const fakeRequestStream1 = through.obj();
+        const fakeRequestStream2 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          if (requestCount === 1) {
+            return fakeRequestStream1;
+          }
+          return fakeRequestStream2;
+        });
+
+        const fakeTransactionId = Buffer.from('tx-id-parallel');
+        let query1Done = false;
+        let query2Done = false;
+
+        const checkBothDone = () => {
+          if (query1Done && query2Done) {
+            try {
+              assert.strictEqual(transaction.id, fakeTransactionId);
+              assert.strictEqual(PARTIAL_RESULT_STREAM.called, false);
+              assert.strictEqual(requestCount, 2);
+              const firstCallReqOpts = REQUEST_STREAM.firstCall.args[0].reqOpts;
+              const secondCallReqOpts =
+                REQUEST_STREAM.secondCall.args[0].reqOpts;
+              assert.deepStrictEqual(firstCallReqOpts.transaction, {
+                begin: {
+                  readWrite: {},
+                  isolationLevel: IsolationLevel.ISOLATION_LEVEL_UNSPECIFIED,
+                },
+              });
+              assert.deepStrictEqual(secondCallReqOpts.transaction, {
+                id: fakeTransactionId,
+              });
+              done();
+            } catch (error) {
+              done(error);
+            }
+          }
+        };
+
+        transaction.run({sql: 'SELECT 1'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'first');
+            query1Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        transaction.run({sql: 'SELECT 2'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'second');
+            query2Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream1.push({
+          metadata: {
+            transaction: {id: fakeTransactionId},
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: true,
+        });
+
+        fakeRequestStream2.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('second')],
+          last: true,
+        });
+      });
+
+      it('should fall back to stream for queued parallel request returning multiple chunks', done => {
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream1 = through.obj();
+        const fakeRequestStream2 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          if (requestCount === 1) {
+            return fakeRequestStream1;
+          }
+          return fakeRequestStream2;
+        });
+
+        const fakeTransactionId = Buffer.from('tx-id-queued-multi-chunk');
+        let query1Done = false;
+        let query2Done = false;
+
+        const checkBothDone = () => {
+          if (query1Done && query2Done) {
+            try {
+              assert.strictEqual(transaction.id, fakeTransactionId);
+              assert.strictEqual(requestCount, 2);
+              done();
+            } catch (assertionError) {
+              done(assertionError);
+            }
+          }
+        };
+
+        transaction.run({sql: 'SELECT 1'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'first');
+            query1Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        transaction.run({sql: 'SELECT 2'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 2);
+            assert.strictEqual((rows![0] as Row)[0].value, 'chunk1-val');
+            assert.strictEqual((rows![1] as Row)[0].value, 'chunk2-val');
+            query2Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        // Query 1 completes via fast-path with inline transaction id
+        fakeRequestStream1.push({
+          metadata: {
+            transaction: {id: fakeTransactionId},
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: true,
+        });
+
+        // Query 2 is released from queue and returns multiple chunks, falling back to stream
+        setImmediate(() => {
+          fakeRequestStream2.push({
+            metadata: {
+              rowType: {
+                fields: [{name: 'col2', type: {code: 'STRING'}}],
+              },
+            },
+            values: [convertToIValue('chunk1-val')],
+            last: false,
+            resumeToken: 'resume-token-query2',
+          });
+          setImmediate(() => {
+            fakeRequestStream2.push({
+              values: [convertToIValue('chunk2-val')],
+              last: true,
+            });
+            fakeRequestStream2.push(null);
+          });
+        });
+      });
+
+      it('should update inline transaction ID and release waiting queries even if row decoding throws', done => {
+        const fakeRequestStream1 = through.obj();
+        const fakeRequestStream2 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          if (requestCount === 1) {
+            return fakeRequestStream1;
+          }
+          return fakeRequestStream2;
+        });
+
+        const fakeTransactionId = Buffer.from('tx-id-decode-error');
+        let query1Done = false;
+        let query2Done = false;
+
+        const checkBothDone = () => {
+          if (query1Done && query2Done) {
+            try {
+              assert.strictEqual(transaction.id, fakeTransactionId);
+              assert.strictEqual(requestCount, 2);
+              done();
+            } catch (assertionError) {
+              done(assertionError);
+            }
+          }
+        };
+
+        transaction.run(
+          {sql: 'SELECT 1', json: true},
+          (error: any, rows: any) => {
+            try {
+              assert(error);
+              assert.strictEqual((error as any).code, grpc.status.UNKNOWN);
+              assert.strictEqual(rows!.length, 0);
+              query1Done = true;
+              checkBothDone();
+            } catch (assertionError) {
+              done(assertionError);
+            }
+          },
+        );
+
+        transaction.run({sql: 'SELECT 2'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'second');
+            query2Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream1.push({
+          metadata: {
+            transaction: {id: fakeTransactionId},
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'INT64'}}],
+            },
+          },
+          values: [{stringValue: '9223372036854775807', kind: 'stringValue'}],
+          last: true,
+        });
+
+        fakeRequestStream2.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('second')],
+          last: true,
+        });
       });
     });
 
