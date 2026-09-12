@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/google-ads-datamanager-v1.1.0...google-ads-datamanager-v1.2.0) (2026-09-12)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/google-ads-datamanager-v1.0.0...google-ads-datamanager-v1.1.0) (2026-09-09)
 
 
