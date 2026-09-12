@@ -32,6 +32,8 @@ async function run() {
       changedTsFiles = getChangedFiles();
     }
 
+    changedTsFiles = changedTsFiles.filter(shouldLintFile);
+
     if (changedTsFiles.length === 0) {
       console.log('No TypeScript files changed. Skipping checks.');
       return;
@@ -62,6 +64,22 @@ async function run() {
 }
 
 // --- Git Changed Files Logic ---
+
+let repoRoot;
+
+/**
+ * Resolves and caches the repository root path.
+ */
+function getRepoRoot() {
+  if (!repoRoot) {
+    try {
+      repoRoot = runGit(['rev-parse', '--show-toplevel']).trim();
+    } catch (_err) {
+      repoRoot = process.cwd();
+    }
+  }
+  return repoRoot;
+}
 
 /**
  * Executes a Git command synchronously.
@@ -175,8 +193,12 @@ function getChangedFiles() {
 
 // --- ESLint Checker ---
 
+// Top-level repository directories that the linter ignores (e.g. generated packages)
+const IGNORED_ROOT_DIRS = new Set(['packages']);
+
+// Recursive path segments ignored anywhere in any package (build artifacts, fixtures, etc.)
 // LINT.IfChange(ignored_path_segments)
-const IGNORED_PATH_SEGMENTS = [
+const IGNORED_PATH_SEGMENTS = new Set([
   'node_modules',
   'build',
   'dist',
@@ -190,19 +212,30 @@ const IGNORED_PATH_SEGMENTS = [
   'coverage',
   '.nyc_output',
   'protos',
-];
+]);
 // LINT.ThenChange(.eslintrc.json:ignorePatterns)
 
 /**
  * Determines whether a file should undergo ESLint checks.
- * Excludes declaration files (*.d.ts), auto-generated artifacts, and test baselines/fixtures.
+ * Excludes declaration files (*.d.ts), auto-generated artifacts, test baselines/fixtures,
+ * and top-level ignored directories.
  */
 function shouldLintFile(filePath) {
   if (filePath.endsWith('.d.ts')) {
     return false;
   }
-  const segments = filePath.split(/[\\/]/);
-  return !segments.some(seg => IGNORED_PATH_SEGMENTS.includes(seg));
+  const relPath = path
+    .relative(getRepoRoot(), path.resolve(filePath))
+    .replace(/\\/g, '/');
+  const segments = relPath.split('/');
+
+  // 1. Ignore if inside an ignored top-level directory (e.g. packages/)
+  if (IGNORED_ROOT_DIRS.has(segments[0])) {
+    return false;
+  }
+
+  // 2. Ignore if any segment matches an artifact or fixture folder
+  return !segments.some(seg => IGNORED_PATH_SEGMENTS.has(seg));
 }
 
 /**

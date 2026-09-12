@@ -92,6 +92,7 @@
   ],
   // LINT.IfChange(ignorePatterns)
   "ignorePatterns": [
+    "packages/**",
     "**/node_modules",
     "**/build",
     "**/dist",
