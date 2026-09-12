@@ -180,3 +180,119 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
     );
   });
 });
+
+describe('PipelineSource reference validation', () => {
+  it('accepts a DocumentReference before the project ID is detected', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance(
+      {
+        getProjectId: () => Promise.resolve('detected-project'),
+        executePipeline: spy,
+      },
+      {projectId: undefined},
+    );
+
+    // The project ID is only detected when the first request is issued, so
+    // building a pipeline from a reference must not depend on it.
+    const pipeline = firestore.pipeline().documents([firestore.doc('foo/bar')]);
+
+    await pipeline.execute();
+
+    const executePipelineRequest: IExecutePipelineRequest = {
+      database: 'projects/detected-project/databases/(default)',
+      structuredPipeline: {
+        options: {},
+        pipeline: {
+          stages: [
+            {
+              args: [
+                {
+                  referenceValue: '/foo/bar',
+                },
+              ],
+              name: 'documents',
+              options: {},
+            },
+          ],
+        },
+      },
+    };
+    expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
+      executePipelineRequest,
+    );
+  });
+
+  it('accepts a CollectionReference before the project ID is detected', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance(
+      {
+        getProjectId: () => Promise.resolve('detected-project'),
+        executePipeline: spy,
+      },
+      {projectId: undefined},
+    );
+
+    const pipeline = firestore
+      .pipeline()
+      .collection(firestore.collection('foo'));
+
+    await pipeline.execute();
+
+    const executePipelineRequest: IExecutePipelineRequest = {
+      database: 'projects/detected-project/databases/(default)',
+      structuredPipeline: {
+        options: {},
+        pipeline: {
+          stages: [
+            {
+              args: [
+                {
+                  referenceValue: '/foo',
+                },
+              ],
+              name: 'collection',
+              options: {},
+            },
+          ],
+        },
+      },
+    };
+    expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
+      executePipelineRequest,
+    );
+  });
+
+  it('rejects a DocumentReference that targets a different database', async () => {
+    const firestore = await createInstance();
+    const otherFirestore = await createInstance(undefined, {
+      databaseId: 'other-db',
+    });
+
+    expect(() =>
+      firestore.pipeline().documents([otherFirestore.doc('foo/bar')]),
+    ).to.throw(
+      'Invalid DocumentReference. The database name ' +
+        '("projects/test-project/databases/other-db") of this reference ' +
+        'does not match the database name ' +
+        '("projects/test-project/databases/(default)") of the target ' +
+        'database of this Pipeline.',
+    );
+  });
+
+  it('rejects a CollectionReference that targets a different database', async () => {
+    const firestore = await createInstance();
+    const otherFirestore = await createInstance(undefined, {
+      databaseId: 'other-db',
+    });
+
+    expect(() =>
+      firestore.pipeline().collection(otherFirestore.collection('foo')),
+    ).to.throw(
+      'Invalid CollectionReference. The database name ' +
+        '("projects/test-project/databases/other-db") of this reference ' +
+        'does not match the database name ' +
+        '("projects/test-project/databases/(default)") of the target ' +
+        'database of this Pipeline.',
+    );
+  });
+});
