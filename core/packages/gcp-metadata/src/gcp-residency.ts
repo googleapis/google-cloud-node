@@ -47,11 +47,16 @@ export function isGoogleCloudServerless(): boolean {
    * `K_SERVICE` is used in Cloud Run and newer Cloud Functions environments:
    * - See {@link https://cloud.google.com/run/docs/container-contract#env-vars Cloud Run environment variables}.
    * - See {@link https://cloud.google.com/functions/docs/env-var Cloud Functions newer runtimes}.
+   *
+   * `CLOUD_RUN_WORKER_POOL` is used in Cloud Run and newer Cloud Functions environments:
+   * - See {@link https://cloud.google.com/run/docs/container-contract#env-vars Cloud Run environment variables}.
+   * - See {@link http://cloud/run/docs/deploy-worker-pools Deploy Worker Pools to Cloud Run}.
    */
   const isGFEnvironment =
     process.env.CLOUD_RUN_JOB ||
     process.env.FUNCTION_NAME ||
-    process.env.K_SERVICE;
+    process.env.K_SERVICE || 
+    process.env.CLOUD_RUN_WORKER_POOL;
 
   return !!isGFEnvironment;
 }
