@@ -4,6 +4,295 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "a151af6d-3a27-42ef-adb1-caff4e8629a4",
+      "createTime": "2026-09-12T15:11:22.727Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/visionai",
+      "id": "84d3b6c9-e89f-4f15-a23c-a3d89a43699a",
+      "createTime": "2026-09-12T15:11:22.703Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "1919eb4c-435b-4a93-a0a9-4a221d2f8da0",
+      "createTime": "2026-09-12T15:11:22.669Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "8930af29-6621-4f59-b31b-b9d2b1674afb",
+      "createTime": "2026-09-12T15:11:22.637Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "036361f7-006a-4ae3-9588-0b9711eae016",
+      "createTime": "2026-09-12T15:11:22.610Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "5adccd99-c286-451a-a99f-ca7ce6a6fc1e",
+      "createTime": "2026-09-12T15:11:22.580Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "b6e86225-3681-4cbe-abea-bb56984f21f6",
+      "createTime": "2026-09-12T15:11:22.554Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "12370c2d-6649-4fcd-8eb3-e5a90ea13ce3",
+      "createTime": "2026-09-12T15:11:22.527Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "af53f554-39e9-47c3-9152-eff5d76310fc",
+      "createTime": "2026-09-12T15:11:22.503Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "7.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "03166405-d54f-4d40-b411-c4c17e349946",
+      "createTime": "2026-09-12T15:11:22.477Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "9ffb4cf7-ed5b-42f0-9325-1968bc588dbc",
+      "createTime": "2026-09-12T15:11:22.453Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "b166b74d-560b-4367-9399-a12cce76d9dd",
+      "createTime": "2026-09-12T15:11:22.426Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/auditmanager",
+      "id": "658cdc1e-d202-41fe-9d5a-786a874d76cb",
+      "createTime": "2026-09-12T15:11:22.399Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "03fd2aaa-b03c-46fb-9b78-1591d50d39a5",
+      "createTime": "2026-09-12T15:11:22.368Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "54106338-0ee5-44c1-afe8-fb96388e564a",
+      "createTime": "2026-09-12T15:11:22.342Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "45a6c8b7-adc5-4068-8a8e-60cc5817ff64",
+      "createTime": "2026-09-12T15:11:22.315Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "23a6fd06-a7a1-4473-a05c-8051f5dc92c4",
+      "createTime": "2026-09-12T15:11:22.276Z"
+    },
+    {
+      "changes": [
+        {
           "type": "perf",
           "sha": "5da6e08b8cb3bb5a7b307d565c1e8a32705aa7d7",
           "message": "Eliminate throwaway transactions",
@@ -94123,5 +94412,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-11T14:56:40.618Z"
+  "updateTime": "2026-09-12T15:11:22.727Z"
 }
