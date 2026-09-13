@@ -142,7 +142,7 @@ describe('common/util', () => {
         return {token: '', res: undefined};
       }
 
-      async getRequestHeaders() {
+      async getRequestHeaders(): Promise<any> {
         return {};
       }
 

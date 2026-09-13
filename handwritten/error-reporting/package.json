@@ -21,14 +21,14 @@
   "scripts": {
     "docs": "compodoc src/",
     "lint": "gts check",
-    "presystem-test": "npm run compile",
+    "presystem-test": "pnpm run compile",
     "system-test": "MOCHA_THROW_DEPRECATION=false c8 mocha build/system-test",
     "test": "c8 mocha --recursive build/test/unit",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "pnpm run compile",
     "license-check": "jsgl --local .",
     "precompile": "gts clean"
   },

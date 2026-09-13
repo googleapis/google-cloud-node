@@ -1,5 +1,9 @@
 {
-  "include": ["src/**/*.ts"],
-  "reporter": ["text", "lcov"],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "reporter": [
+    "lcov"
+  ],
   "all": true
 }

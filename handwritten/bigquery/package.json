@@ -31,22 +31,22 @@
     "bigquery"
   ],
   "scripts": {
-    "prebenchmark": "npm run compile",
+    "prebenchmark": "pnpm run compile",
     "benchmark": "node build/benchmark/bench.js benchmark/queries.json",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "samples-test": "cd samples/ && pnpm link ../ && pnpm test && cd ../",
     "test": "c8 mocha build/test",
     "system-test": "mocha build/system-test --timeout 600000",
-    "presystem-test": "npm run compile",
+    "presystem-test": "pnpm run compile",
     "clean": "gts clean",
     "compile": "tsc -p . && cp src/types.d.ts build/src/",
     "fix": "gts fix",
-    "predocs": "npm run compile",
+    "predocs": "pnpm run compile",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "pnpm run compile",
     "types": "node scripts/gen-types.js",
-    "prelint": "cd samples; npm link ../; npm install",
+    "prelint": "cd samples; pnpm link ../; pnpm install",
     "precompile": "gts clean"
   },
   "dependencies": {

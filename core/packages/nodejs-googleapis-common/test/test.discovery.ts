@@ -37,7 +37,7 @@ describe(__filename, () => {
     scope.done();
   });
   it('should discover an API through second weird path', async () => {
-    const discoUrl = 'http://test.local';
+    const discoUrl = 'http://test.local:80';
     const scope = nock(discoUrl)
       .get('/')
       .replyWithFile(200, './test/fixtures/compute-v1.json', {

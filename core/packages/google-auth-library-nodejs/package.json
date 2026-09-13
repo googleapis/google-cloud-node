@@ -75,15 +75,15 @@
     "lint": "gts check --no-inline-config",
     "compile": "tsc -p .",
     "fix": "gts fix",
-    "pretest": "npm run compile -- --sourceMap",
+    "pretest": "pnpm run compile --sourceMap",
     "docs": "jsdoc -c .jsdoc.js",
-    "samples-setup": "cd samples/ && npm link ../ && npm run setup && cd ../",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "samples-setup": "cd samples/ && pnpm link ../ && pnpm run setup && cd ../",
+    "samples-test": "cd samples/ && pnpm link ../ && pnpm test && cd ../",
     "system-test": "mocha build/system-test --timeout 60000",
-    "presystem-test": "npm run compile -- --sourceMap",
+    "presystem-test": "pnpm run compile --sourceMap",
     "webpack": "webpack",
     "browser-test": "karma start",
-    "prelint": "cd samples; npm link ../; npm install"
+    "prelint": "cd samples; pnpm link ../; pnpm install"
   },
   "license": "Apache-2.0",
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/google-auth-library-nodejs"

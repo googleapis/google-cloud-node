@@ -5,6 +5,7 @@
   "main": "build/src/compileProtos.js",
   "files": [
     "build/src",
+    "bin",
     "!build/src/**/*.map"
   ],
   "scripts": {
@@ -21,10 +22,10 @@
     "docs": "echo no docs needed"
   },
   "bin": {
-    "compileProtos": "./build/src/compileProtos.js",
-    "minifyProtoJson": "./build/src/minify.js",
-    "prepublishProtos": "./build/src/prepublish.js",
-    "listProtos": "./build/src/listProtos.js"
+    "compileProtos": "./bin/compileProtos.js",
+    "minifyProtoJson": "./bin/minifyProtoJson.js",
+    "prepublishProtos": "./bin/prepublishProtos.js",
+    "listProtos": "./bin/listProtos.js"
   },
   "author": "Google API Authors",
   "license": "Apache-2.0",

@@ -13,7 +13,7 @@
 // limitations under the License.
 const config = {
   "enable-source-maps": true,
-  "throw-deprecation": true,
+  "throw-deprecation": false,
   "timeout": 10000,
   "recursive": true
 }

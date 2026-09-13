@@ -16,7 +16,7 @@
     "compile": "tsc -p .",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "pnpm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "echo 'no system test'",
     "precompile": "gts clean"

@@ -33,7 +33,7 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
     -o /bin/flakybot -s -L \
     && chmod +x /bin/flakybot
 
-ENV PNPM_VERSION=7.32.2
+ENV PNPM_VERSION=10.0.0
 RUN npm install -g pnpm@${PNPM_VERSION}
 
 FROM node:${NODE_VERSION}-slim
@@ -44,7 +44,7 @@ COPY --from=build /bin/flakybot /bin/flakybot
 RUN apt-get update && apt-get install -y git bash python3 jq \
   && ln -s /usr/bin/python3 /usr/bin/python
 
-ENV PNPM_VERSION=7.32.2
+ENV PNPM_VERSION=10.0.0
 RUN npm install -g pnpm@${PNPM_VERSION}
 
 ENV PATH=/usr/local/gcloud/google-cloud-sdk/bin:$PATH

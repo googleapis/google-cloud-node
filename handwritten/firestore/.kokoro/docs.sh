@@ -20,6 +20,7 @@ export NPM_CONFIG_PREFIX=/home/node/.npm-global
 
 cd $(dirname $0)/..
 
-npm install
+npm install -g pnpm@9
+pnpm install
 
-npm run docs-test
+pnpm run docs-test
