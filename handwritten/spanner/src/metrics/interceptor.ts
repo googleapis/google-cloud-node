@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,7 +48,11 @@ export const MetricInterceptor = (options, nextCall) => {
           // GFE/AFE latency if available,
           // or else increase the GFE/AFE connectivity error count
           if (metricsTracer) {
-            const serverTimingHeader = metadata.getMap()['server-timing'];
+            const serverTimingEntries = metadata.get('server-timing');
+            const serverTimingHeader =
+              serverTimingEntries.length > 0
+                ? String(serverTimingEntries[0])
+                : undefined;
             const gfeTiming =
               metricsTracer?.extractGfeLatency(serverTimingHeader);
             metricsTracer.gfeLatency = gfeTiming ?? null;
