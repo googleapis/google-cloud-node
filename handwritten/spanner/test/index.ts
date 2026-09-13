@@ -24,7 +24,7 @@ import * as proxyquire from 'proxyquire';
 import * as through from 'through2';
 import {util} from '@google-cloud/common';
 import {PreciseDate} from '@google-cloud/precise-date';
-import {replaceProjectIdToken} from '../src/helper';
+import {hasProjectIdToken, replaceProjectIdToken} from '../src/helper';
 import * as pfy from '@google-cloud/promisify';
 import {grpc} from 'google-gax';
 import * as sinon from 'sinon';
@@ -50,6 +50,10 @@ assert.strictEqual(CLOUD_RESOURCE_HEADER, 'google-cloud-resource-prefix');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const apiConfig = require('../src/spanner_grpc_config.json');
+
+if (!('SPANNER_DISABLE_BUILTIN_METRICS' in process.env)) {
+  process.env.SPANNER_DISABLE_BUILTIN_METRICS = 'false';
+}
 
 async function disableMetrics(sandbox: sinon.SinonSandbox) {
   sandbox.stub(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS').value('true');
@@ -193,6 +197,7 @@ describe('Spanner', () => {
       '@google-cloud/promisify': fakePfy,
       './helper.js': {
         replaceProjectIdToken: fakeReplaceProjectIdToken,
+        hasProjectIdToken,
       },
       'google-auth-library': {
         GoogleAuth: fakeGoogleAuth,
@@ -2201,11 +2206,6 @@ describe('Spanner', () => {
       replaceProjectIdTokenOverride = reqOpts => {
         return reqOpts;
       };
-      const expectedGaxOpts = extend(true, {}, CONFIG.gaxOpts, {
-        otherArgs: {
-          headers: CONFIG.headers,
-        },
-      });
 
       FAKE_GAPIC_CLIENT[CONFIG.method] = function (reqOpts, gaxOpts, arg) {
         assert.strictEqual(this, FAKE_GAPIC_CLIENT);
@@ -2221,6 +2221,560 @@ describe('Spanner', () => {
 
       spanner.prepareGapicRequest_(CONFIG, (err, requestFn) => {
         requestFn(done); // (FAKE_GAPIC_CLIENT[CONFIG.method])
+      });
+    });
+
+    it('should synchronously return requestFn when project ID is already cached and replaced', done => {
+      spanner.projectId = PROJECT_ID;
+      spanner.projectIdReplaced_ = true;
+      asAny(spanner).auth.getProjectId = sinon.stub().callsFake(() => {
+        done(
+          new Error(
+            'auth.getProjectId should not be called when project ID is replaced',
+          ),
+        );
+      });
+
+      let called = false;
+      spanner.prepareGapicRequest_(CONFIG, (err, requestFn) => {
+        assert.ifError(err);
+        assert.strictEqual(typeof requestFn, 'function');
+        called = true;
+      });
+
+      assert.strictEqual(called, true);
+      assert.strictEqual(asAny(spanner).auth.getProjectId.called, false);
+      done();
+    });
+
+    it('should not clone reqOpts when projectIdReplaced_ is already true', done => {
+      spanner.projectId = PROJECT_ID;
+      spanner.projectIdReplaced_ = true;
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (reqOpts) {
+        assert.strictEqual(reqOpts, CONFIG.reqOpts);
+        done();
+      };
+
+      spanner.prepareGapicRequest_(CONFIG, (err, requestFn) => {
+        assert.ifError(err);
+        requestFn();
+      });
+    });
+
+    it('should not call requestFn twice in promise mode', async () => {
+      let callCount = 0;
+      FAKE_GAPIC_CLIENT[CONFIG.method] = sinon.spy(async () => {
+        callCount++;
+        return 'response-data';
+      });
+
+      return new Promise<void>((resolve, reject) => {
+        spanner.prepareGapicRequest_(CONFIG, async (err, requestFn) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          try {
+            const result = await requestFn();
+            assert.strictEqual(result, 'response-data');
+            assert.strictEqual(callCount, 1);
+            assert.strictEqual(FAKE_GAPIC_CLIENT[CONFIG.method].callCount, 1);
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        });
+      });
+    });
+
+    it('should inject request ID and re-throw on promise rejection', async () => {
+      const apiError = new Error('API failure');
+      FAKE_GAPIC_CLIENT[CONFIG.method] = sinon.spy(async () => {
+        throw apiError;
+      });
+
+      return new Promise<void>((resolve, reject) => {
+        spanner.prepareGapicRequest_(CONFIG, async (err, requestFn) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          try {
+            await requestFn();
+            reject(new Error('Expected requestFn to reject'));
+          } catch (caughtError) {
+            assert.strictEqual(caughtError, apiError);
+            assert.strictEqual(FAKE_GAPIC_CLIENT[CONFIG.method].callCount, 1);
+            resolve();
+          }
+        });
+      });
+    });
+
+    it('should inject request ID and re-throw on synchronous exception in requestFn', done => {
+      const syncError = new Error('Synchronous failure');
+      FAKE_GAPIC_CLIENT[CONFIG.method] = sinon.spy(() => {
+        throw syncError;
+      });
+
+      spanner.prepareGapicRequest_(CONFIG, (err, requestFn) => {
+        assert.ifError(err);
+        assert.throws(
+          () => {
+            requestFn();
+          },
+          caughtError => caughtError === syncError,
+        );
+        done();
+      });
+    });
+
+    it('should preserve existing headers and options in gaxOpts without deep cloning', done => {
+      const customConfig = {
+        ...CONFIG,
+        gaxOpts: {
+          timeout: 5000,
+          otherArgs: {
+            headers: {
+              'x-custom-header': 'custom-val',
+            },
+            options: {
+              customOption: true,
+            },
+          },
+        },
+      };
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (reqOpts, gaxOpts) {
+        assert.strictEqual(gaxOpts.timeout, 5000);
+        assert.strictEqual(
+          gaxOpts.otherArgs.headers['x-custom-header'],
+          'custom-val',
+        );
+        assert.strictEqual(
+          gaxOpts.otherArgs.headers[CLOUD_RESOURCE_HEADER],
+          'header',
+        );
+        assert.strictEqual(gaxOpts.otherArgs.options.customOption, true);
+        assert.ok(Array.isArray(gaxOpts.otherArgs.options.interceptors));
+        done();
+      };
+
+      spanner.prepareGapicRequest_(customConfig, (err, requestFn) => {
+        assert.ifError(err);
+        requestFn();
+      });
+    });
+
+    it('should coalesce concurrent auth.getProjectId calls and replace tokens for both requests', done => {
+      let getProjectIdCalls = 0;
+      let authCallback: Function;
+      asAny(spanner).auth.getProjectId = (callback: Function) => {
+        getProjectIdCalls++;
+        authCallback = callback;
+      };
+
+      const requestConfig1 = {
+        client: 'SpannerClient',
+        method: 'methodName',
+        reqOpts: {
+          database: 'projects/{{projectId}}/instances/inst/databases/db1',
+        },
+      };
+
+      const requestConfig2 = {
+        client: 'SpannerClient',
+        method: 'methodName',
+        reqOpts: {
+          database: 'projects/{{projectId}}/instances/inst/databases/db2',
+        },
+      };
+
+      let completed = 0;
+      const onComplete = () => {
+        completed++;
+        if (completed === 2) {
+          assert.strictEqual(getProjectIdCalls, 1);
+          done();
+        }
+      };
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (reqOpts: {
+        database: string;
+      }) {
+        assert.ok(!reqOpts.database.includes('{{projectId}}'));
+        assert.ok(reqOpts.database.includes(PROJECT_ID));
+      };
+
+      spanner.prepareGapicRequest_(
+        requestConfig1 as unknown as spnr.RequestConfig,
+        (err, requestFn) => {
+          assert.ifError(err);
+          requestFn();
+          onComplete();
+        },
+      );
+
+      spanner.prepareGapicRequest_(
+        requestConfig2 as unknown as spnr.RequestConfig,
+        (err, requestFn) => {
+          assert.ifError(err);
+          requestFn();
+          onComplete();
+        },
+      );
+
+      assert.strictEqual(getProjectIdCalls, 1);
+      authCallback!(null, PROJECT_ID);
+    });
+
+    it('should propagate auth error to both initial and coalesced requests', done => {
+      const authError = new Error('Auth failed');
+      let authCallback: Function;
+      asAny(spanner).auth.getProjectId = (callback: Function) => {
+        authCallback = callback;
+      };
+
+      let errorCount = 0;
+      const onError = (error: Error | null) => {
+        assert.strictEqual(error, authError);
+        errorCount++;
+        if (errorCount === 2) {
+          done();
+        }
+      };
+
+      spanner.prepareGapicRequest_(CONFIG, onError);
+      spanner.prepareGapicRequest_(CONFIG, onError);
+
+      authCallback!(authError);
+    });
+
+    it('should not call callback a second time if the callback throws synchronously', done => {
+      spanner.projectId = PROJECT_ID;
+      spanner.projectIdReplaced_ = true;
+
+      let callCount = 0;
+      const throwingCallback = () => {
+        callCount++;
+        throw new Error('Callback throws synchronously');
+      };
+
+      assert.throws(() => {
+        spanner.prepareGapicRequest_(CONFIG, throwingCallback);
+      }, /Callback throws synchronously/);
+
+      assert.strictEqual(callCount, 1);
+      done();
+    });
+
+    it('should isolate exceptions in pending callbacks so all pending callbacks are called on success', done => {
+      let authCallback: Function;
+      asAny(spanner).auth.getProjectId = (callback: Function) => {
+        authCallback = callback;
+      };
+
+      let secondCallbackCalled = false;
+      let thirdCallbackCalled = false;
+
+      // First callback (initiator)
+      spanner.prepareGapicRequest_(CONFIG, () => {
+        // Initiator succeeds
+      });
+
+      // Second callback (throws synchronously)
+      spanner.prepareGapicRequest_(CONFIG, () => {
+        secondCallbackCalled = true;
+        throw new Error('Explosion in user callback');
+      });
+
+      // Third callback (must still be called!)
+      spanner.prepareGapicRequest_(CONFIG, (err, requestFn) => {
+        assert.ifError(err);
+        assert.strictEqual(typeof requestFn, 'function');
+        thirdCallbackCalled = true;
+        assert.ok(secondCallbackCalled);
+        assert.ok(thirdCallbackCalled);
+        done();
+      });
+
+      authCallback!(null, PROJECT_ID);
+    });
+
+    it('should isolate exceptions in pending callbacks so all pending callbacks are called on auth error', done => {
+      const authError = new Error('Auth failure');
+      let authCallback: Function;
+      asAny(spanner).auth.getProjectId = (callback: Function) => {
+        authCallback = callback;
+      };
+
+      let firstCallbackCalled = false;
+      let secondCallbackCalled = false;
+      let thirdCallbackCalled = false;
+
+      // First callback (throws synchronously)
+      spanner.prepareGapicRequest_(CONFIG, () => {
+        firstCallbackCalled = true;
+        throw new Error('First callback throws');
+      });
+
+      // Second callback (throws synchronously)
+      spanner.prepareGapicRequest_(CONFIG, () => {
+        secondCallbackCalled = true;
+        throw new Error('Second callback throws');
+      });
+
+      // Third callback (must still be called with authError!)
+      spanner.prepareGapicRequest_(CONFIG, error => {
+        assert.strictEqual(error, authError);
+        thirdCallbackCalled = true;
+        assert.ok(firstCallbackCalled);
+        assert.ok(secondCallbackCalled);
+        assert.ok(thirdCallbackCalled);
+        done();
+      });
+
+      authCallback!(authError);
+    });
+
+    it('should replace tokens if reqOpts contains placeholder even when projectIdReplaced_ is true', done => {
+      spanner.projectId = PROJECT_ID;
+      spanner.projectIdReplaced_ = true;
+
+      const configWithLateToken = {
+        client: 'SpannerClient',
+        method: 'methodName',
+        reqOpts: {
+          database: 'projects/{{projectId}}/instances/inst/databases/db-late',
+        },
+      };
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (reqOpts: {
+        database: string;
+      }) {
+        assert.strictEqual(
+          reqOpts.database,
+          `projects/${PROJECT_ID}/instances/inst/databases/db-late`,
+        );
+        done();
+      };
+
+      spanner.prepareGapicRequest_(
+        configWithLateToken as unknown as spnr.RequestConfig,
+        (err, requestFn) => {
+          assert.ifError(err);
+          requestFn();
+        },
+      );
+    });
+
+    it('should preserve custom interceptors in gaxOpts options', done => {
+      const customInterceptor = () => {};
+      const configWithInterceptors = {
+        ...CONFIG,
+        gaxOpts: {
+          otherArgs: {
+            options: {
+              interceptors: [customInterceptor],
+            },
+          },
+        },
+      };
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (
+        reqOpts: unknown,
+        gaxOpts: {otherArgs: {options: {interceptors: Function[]}}},
+      ) {
+        assert.ok(
+          gaxOpts.otherArgs.options.interceptors.includes(customInterceptor),
+        );
+        done();
+      };
+
+      spanner.prepareGapicRequest_(
+        configWithInterceptors as unknown as spnr.RequestConfig,
+        (err, requestFn) => {
+          assert.ifError(err);
+          requestFn();
+        },
+      );
+    });
+
+    it('should handle config without headers without error', done => {
+      const configWithoutHeaders = {
+        client: 'SpannerClient',
+        method: 'methodName',
+        reqOpts: {a: 'b'},
+      };
+
+      spanner.prepareGapicRequest_(
+        configWithoutHeaders as unknown as spnr.RequestConfig,
+        (err, requestFn) => {
+          assert.ifError(err);
+          assert.strictEqual(typeof requestFn, 'function');
+          done();
+        },
+      );
+    });
+
+    it('should replace {{projectId}} in CLOUD_RESOURCE_HEADER', done => {
+      const configWithHeaderToken = {
+        client: 'SpannerClient',
+        method: 'methodName',
+        reqOpts: {},
+        headers: {
+          [CLOUD_RESOURCE_HEADER]:
+            'projects/{{projectId}}/instances/inst/databases/db',
+        },
+      };
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (
+        reqOpts: unknown,
+        gaxOpts: {otherArgs: {headers: {[k: string]: string}}},
+      ) {
+        assert.strictEqual(
+          gaxOpts.otherArgs.headers[CLOUD_RESOURCE_HEADER],
+          `projects/${PROJECT_ID}/instances/inst/databases/db`,
+        );
+        done();
+      };
+
+      spanner.prepareGapicRequest_(configWithHeaderToken, (err, requestFn) => {
+        assert.ifError(err);
+        requestFn();
+      });
+    });
+
+    it('should shallow copy headers so modifying gaxOpts headers does not mutate commonHeaders_ or config.headers', done => {
+      const initialCommonHeaders = {
+        'x-goog-spanner-route-to-leader': 'true',
+      };
+      const config = {
+        ...CONFIG,
+        headers: initialCommonHeaders,
+      };
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (
+        reqOpts: unknown,
+        gaxOpts: {otherArgs: {headers: {[k: string]: string}}},
+      ) {
+        // Mutate the headers passed to GAPIC
+        gaxOpts.otherArgs.headers['x-goog-api-client'] = 'gax/1.0.0';
+        gaxOpts.otherArgs.headers['x-goog-spanner-route-to-leader'] = 'false';
+
+        // Verify initialCommonHeaders was not mutated
+        assert.strictEqual(
+          initialCommonHeaders['x-goog-spanner-route-to-leader'],
+          'true',
+        );
+        assert.strictEqual(
+          (initialCommonHeaders as Record<string, string>)['x-goog-api-client'],
+          undefined,
+        );
+        done();
+      };
+
+      spanner.prepareGapicRequest_(config, (err, requestFn) => {
+        assert.ifError(err);
+        requestFn();
+      });
+    });
+
+    it('should attach request ID to stream errors', done => {
+      const {EventEmitter} = require('events');
+      const fakeStream = new EventEmitter();
+      FAKE_GAPIC_CLIENT[CONFIG.method] = () => fakeStream;
+
+      const config = {
+        ...CONFIG,
+        headers: {
+          'x-goog-spanner-request-id': 'req-12345',
+        },
+      };
+
+      spanner.prepareGapicRequest_(config, (err, requestFn) => {
+        assert.ifError(err);
+        const stream = requestFn();
+        stream.on('error', (error: Error & {requestID?: string}) => {
+          assert.strictEqual(error.message, 'Stream failed');
+          assert.strictEqual(error.requestID, 'req-12345');
+          done();
+        });
+        fakeStream.emit('error', new Error('Stream failed'));
+      });
+    });
+
+    it('should attach request ID to callback errors', done => {
+      const apiError = new Error('Callback failed');
+      FAKE_GAPIC_CLIENT[CONFIG.method] = (
+        reqOpts: unknown,
+        gaxOpts: unknown,
+        callback: Function,
+      ) => {
+        callback(apiError);
+      };
+
+      const config = {
+        ...CONFIG,
+        headers: {
+          'x-goog-spanner-request-id': 'req-67890',
+        },
+      };
+
+      spanner.prepareGapicRequest_(config, (err, requestFn) => {
+        assert.ifError(err);
+        requestFn((error: Error & {requestID?: string}) => {
+          assert.strictEqual(error, apiError);
+          assert.strictEqual(error.requestID, 'req-67890');
+          done();
+        });
+      });
+    });
+
+    it('should update formattedName_ and commonHeaders_ on cached instances and databases', done => {
+      const fakeDatabase = {
+        formattedName_: 'projects/{{projectId}}/instances/inst/databases/db',
+        commonHeaders_: {
+          [CLOUD_RESOURCE_HEADER]:
+            'projects/{{projectId}}/instances/inst/databases/db',
+        },
+      };
+      const fakeInstance = {
+        formattedName_: 'projects/{{projectId}}/instances/inst',
+        commonHeaders_: {
+          [CLOUD_RESOURCE_HEADER]: 'projects/{{projectId}}/instances/inst',
+        },
+        databases_: new Map([['db', fakeDatabase]]),
+      };
+      spanner.instances_.set('inst', fakeInstance as unknown as spnr.Instance);
+      spanner.commonHeaders_ = {
+        [CLOUD_RESOURCE_HEADER]: 'projects/{{projectId}}',
+      };
+
+      spanner.prepareGapicRequest_(CONFIG, err => {
+        assert.ifError(err);
+        assert.strictEqual(
+          spanner.commonHeaders_[CLOUD_RESOURCE_HEADER],
+          `projects/${PROJECT_ID}`,
+        );
+        assert.strictEqual(
+          fakeInstance.formattedName_,
+          `projects/${PROJECT_ID}/instances/inst`,
+        );
+        assert.strictEqual(
+          fakeInstance.commonHeaders_[CLOUD_RESOURCE_HEADER],
+          `projects/${PROJECT_ID}/instances/inst`,
+        );
+        assert.strictEqual(
+          fakeDatabase.formattedName_,
+          `projects/${PROJECT_ID}/instances/inst/databases/db`,
+        );
+        assert.strictEqual(
+          fakeDatabase.commonHeaders_[CLOUD_RESOURCE_HEADER],
+          `projects/${PROJECT_ID}/instances/inst/databases/db`,
+        );
+        done();
       });
     });
   });
@@ -2301,7 +2855,7 @@ describe('Spanner', () => {
         });
       });
 
-      it('should resolve the promise with the request fn', () => {
+      it('should resolve the promise with the request fn', async () => {
         const gapicRequestFnResult = {};
 
         function gapicRequestFn() {
@@ -2312,9 +2866,24 @@ describe('Spanner', () => {
           callback(null, gapicRequestFn);
         };
 
-        return spanner.request(CONFIG).then(result => {
-          assert.strictEqual(result, gapicRequestFnResult);
-        });
+        const result = await spanner.request(CONFIG);
+        assert.strictEqual(result, gapicRequestFnResult);
+      });
+
+      it('should handle config without headers when metrics are enabled', async () => {
+        asAny(spanner)._metricsEnabled = true;
+        asAny(spanner).projectId_ = 'project-id';
+        const configWithoutHeaders = {
+          client: 'SpannerClient',
+          method: 'executeSql',
+          reqOpts: {database: 'db'},
+        };
+        spanner.prepareGapicRequest_ = (config, callback) => {
+          callback(null, () => 'ok');
+        };
+
+        const result = await spanner.request(configWithoutHeaders);
+        assert.strictEqual(result, 'ok');
       });
     });
   });
@@ -2392,6 +2961,26 @@ describe('Spanner', () => {
         .requestStream(CONFIG)
         .on('error', err => {
           assert.strictEqual(err, error);
+          done();
+        })
+        .emit('reading');
+    });
+
+    it('should handle config without headers when metrics are enabled', done => {
+      asAny(spanner)._metricsEnabled = true;
+      asAny(spanner).projectId_ = 'project-id';
+      const configWithoutHeaders = {
+        client: 'SpannerClient',
+        method: 'executeStreamingSql',
+        reqOpts: {session: 'session-name'},
+      };
+      spanner.prepareGapicRequest_ = (config, callback) => {
+        callback(null, () => through.obj());
+      };
+
+      spanner
+        .requestStream(configWithoutHeaders)
+        .on('pipe', () => {
           done();
         })
         .emit('reading');
