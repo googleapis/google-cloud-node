@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
 
 import {grpc} from 'google-gax';
 import {MetricsTracerFactory} from './metrics-tracer-factory';
+
+const PROJECT_ID_REGEX = /^projects\/([^/]+)\//;
 
 /**
  * Interceptor for recording metrics on gRPC calls.
@@ -33,7 +35,10 @@ export const MetricInterceptor = (options, nextCall) => {
       const resourcePrefix = metadata.get(
         'google-cloud-resource-prefix',
       )[0] as string;
-      const match = resourcePrefix?.match(/^projects\/([^/]+)\//);
+      const match =
+        typeof resourcePrefix === 'string'
+          ? PROJECT_ID_REGEX.exec(resourcePrefix)
+          : null;
       const projectId = match ? match[1] : undefined;
       let factory;
       if (projectId) {
@@ -67,12 +72,12 @@ export const MetricInterceptor = (options, nextCall) => {
 
           // Record attempt metric completion
           metricsTracer?.recordAttemptCompletion(status.code);
-          if (metricsTracer?.gfeLatency) {
+          if (typeof metricsTracer?.gfeLatency === 'number') {
             metricsTracer?.recordGfeLatency(status.code);
           } else {
             metricsTracer?.recordGfeConnectivityErrorCount(status.code);
           }
-          if (metricsTracer?.afeLatency) {
+          if (typeof metricsTracer?.afeLatency === 'number') {
             metricsTracer?.recordAfeLatency(status.code);
           } else {
             metricsTracer?.recordAfeConnectivityErrorCount(status.code);
