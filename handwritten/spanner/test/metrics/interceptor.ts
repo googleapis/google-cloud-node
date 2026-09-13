@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,14 +16,12 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {grpc} from 'google-gax';
 import {status as Status} from '@grpc/grpc-js';
-import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
 import {MetricsTracer} from '../../src/metrics/metrics-tracer';
 import {MetricInterceptor} from '../../src/metrics/interceptor';
 
 describe('MetricInterceptor', () => {
   let sandbox: sinon.SinonSandbox;
   let mockMetricsTracer: sinon.SinonStubbedInstance<MetricsTracer>;
-  let mockFactory: sinon.SinonStubbedInstance<MetricsTracerFactory>;
   let mockNextCall: sinon.SinonStub;
   let mockInterceptingCall: any;
   let mockListener: any;
@@ -69,21 +67,16 @@ describe('MetricInterceptor', () => {
       void
     >();
 
-    // Mock MetricsTracerFactory
-    mockFactory = sandbox.createStubInstance(MetricsTracerFactory);
-    mockFactory.getCurrentTracer = sandbox
-      .stub()
-      .returns(mockMetricsTracer) as sinon.SinonStub<
-      [string],
-      MetricsTracer | null
-    >;
-    sandbox.stub(MetricsTracerFactory, 'getInstance').returns(mockFactory);
-
     // Mock GRPC call components
     mockInterceptingCall = {
       start: sinon.spy((metadata: grpc.Metadata, listener: grpc.Listener) => {
         capturedListener = listener;
       }),
+      sendMessageWithContext: sandbox.stub(),
+      sendMessage: sandbox.stub(),
+      halfClose: sandbox.stub(),
+      cancel: sandbox.stub(),
+      cancelWithStatus: sandbox.stub(),
     };
 
     mockNextCall = sinon.stub().returns(mockInterceptingCall);
@@ -115,6 +108,7 @@ describe('MetricInterceptor', () => {
       method_definition: {
         path: '/google.spanner.v1.Spanner/ExecuteSql',
       },
+      metricsTracer: mockMetricsTracer,
     };
     testMetadata = new grpc.Metadata();
     testMetadata.set(
@@ -179,6 +173,38 @@ describe('MetricInterceptor', () => {
       );
     });
 
+    it('GFE and AFE Metrics - Latency when duration is 0ms', () => {
+      const zeroLatencyMetadata = new grpc.Metadata();
+      zeroLatencyMetadata.set('server-timing', 'gfet4t7; dur=0, afe; dur=0');
+      (mockMetricsTracer.extractGfeLatency as sinon.SinonStub).returns(0);
+      (mockMetricsTracer.extractAfeLatency as sinon.SinonStub).returns(0);
+
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(zeroLatencyMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordGfeLatency.getCall(0).args[0],
+        Status.OK,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordGfeConnectivityErrorCount.callCount,
+        0,
+      );
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeLatency.getCall(0).args[0],
+        Status.OK,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
+      );
+    });
+
     it('GFE Metrics - Connectivity Error Count', () => {
       const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
       interceptingCall.start(testMetadata, mockListener);
@@ -213,6 +239,184 @@ describe('MetricInterceptor', () => {
         mockMetricsTracer.recordAfeConnectivityErrorCount.getCall(0).args,
         Status.OK,
       );
+    });
+  });
+
+  describe('Tracer resolution', () => {
+    it('should use options.metricsTracer when provided on call options', () => {
+      const customTracer = sandbox.createStubInstance(MetricsTracer);
+      customTracer.recordAttemptStart = sandbox.stub<[], void>();
+
+      const optionsWithTracer = {
+        ...mockOptions,
+        metricsTracer: customTracer,
+      };
+      const interceptingCall = MetricInterceptor(
+        optionsWithTracer,
+        mockNextCall,
+      );
+      interceptingCall.start(testMetadata, mockListener);
+
+      assert.strictEqual(customTracer.recordAttemptStart.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.recordAttemptStart.callCount, 0);
+    });
+
+    it('should safely proceed with null tracer if options.metricsTracer is not provided', () => {
+      const optionsWithoutTracer = {
+        method_definition: {
+          path: '/google.spanner.v1.Spanner/ExecuteSql',
+        },
+      };
+      const interceptingCall = MetricInterceptor(
+        optionsWithoutTracer,
+        mockNextCall,
+      );
+      interceptingCall.start(testMetadata, mockListener);
+
+      assert.strictEqual(mockMetricsTracer.recordAttemptStart.callCount, 0);
+    });
+  });
+
+  describe('Unhappy paths and error handling', () => {
+    it('should handle undefined call options and proceed cleanly without tracer', () => {
+      const interceptingCall = MetricInterceptor(
+        undefined as any,
+        mockNextCall,
+      );
+      const metadata = new grpc.Metadata();
+      interceptingCall.start(metadata, mockListener);
+
+      assert.strictEqual(mockMetricsTracer.recordAttemptStart.callCount, 0);
+
+      assert.doesNotThrow(() => {
+        capturedListener.onReceiveMetadata(serverTimingMetadata);
+        capturedListener.onReceiveMessage({data: 'payload'});
+        capturedListener.onReceiveStatus(mockStatus);
+      });
+
+      assert.strictEqual(mockListener.onReceiveMetadata.callCount, 1);
+      assert.strictEqual(mockListener.onReceiveMessage.callCount, 1);
+      assert.strictEqual(mockListener.onReceiveStatus.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordGfeConnectivityErrorCount.callCount,
+        0,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
+      );
+    });
+
+    it('should record attempt completion before invoking downstream listener in onReceiveStatus', () => {
+      let attemptCompletionRecorded = false;
+      mockMetricsTracer.recordAttemptCompletion.callsFake(() => {
+        attemptCompletionRecorded = true;
+      });
+      mockListener.onReceiveStatus.callsFake(() => {
+        assert.strictEqual(
+          attemptCompletionRecorded,
+          true,
+          'Attempt completion must be recorded before downstream next(status) is invoked',
+        );
+      });
+
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockListener.onReceiveStatus.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordAttemptCompletion.callCount,
+        1,
+      );
+    });
+
+    it('should record non-OK status codes when status is PERMISSION_DENIED', () => {
+      const errorStatus = {
+        code: Status.PERMISSION_DENIED,
+        details: 'Permission denied on table',
+        metadata: new grpc.Metadata(),
+      };
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(emptyMetadata);
+      capturedListener.onReceiveStatus(errorStatus);
+
+      assert.strictEqual(
+        mockMetricsTracer.recordAttemptCompletion.callCount,
+        1,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordAttemptCompletion.getCall(0).args[0],
+        Status.PERMISSION_DENIED,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordGfeConnectivityErrorCount.callCount,
+        1,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordGfeConnectivityErrorCount.getCall(0).args[0],
+        Status.PERMISSION_DENIED,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        1,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.getCall(0).args[0],
+        Status.PERMISSION_DENIED,
+      );
+    });
+
+    it('should record non-OK status codes with latency metrics when server-timing is present', () => {
+      const errorStatus = {
+        code: Status.UNAVAILABLE,
+        details: 'Service unavailable',
+        metadata: new grpc.Metadata(),
+      };
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(serverTimingMetadata);
+      capturedListener.onReceiveStatus(errorStatus);
+
+      assert.strictEqual(
+        mockMetricsTracer.recordAttemptCompletion.callCount,
+        1,
+      );
+      assert.strictEqual(
+        mockMetricsTracer.recordAttemptCompletion.getCall(0).args[0],
+        Status.UNAVAILABLE,
+      );
+      assert.strictEqual(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordGfeLatency.getCall(0).args[0],
+        Status.UNAVAILABLE,
+      );
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeLatency.getCall(0).args[0],
+        Status.UNAVAILABLE,
+      );
+    });
+
+    it('should pass through sendMessage, halfClose, and cancel calls cleanly', () => {
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.sendMessage('test-payload');
+      interceptingCall.halfClose();
+      interceptingCall.cancelWithStatus(Status.CANCELLED, 'Cancelled');
+
+      assert.strictEqual(
+        mockInterceptingCall.sendMessageWithContext.callCount,
+        1,
+      );
+      assert.strictEqual(
+        mockInterceptingCall.sendMessageWithContext.getCall(0).args[1],
+        'test-payload',
+      );
+      assert.strictEqual(mockInterceptingCall.halfClose.callCount, 1);
+      assert.strictEqual(mockInterceptingCall.cancelWithStatus.callCount, 1);
     });
   });
 });
