@@ -133,10 +133,13 @@ const CACHE_TTL_MS = 10000; // 10 seconds TTL
  * @returns {boolean} True if global tracing is enabled.
  */
 function isGlobalTracingEnabled(): boolean {
+  if (globalTracingEnabled === true) {
+    return true;
+  }
   const now = Date.now();
   if (
     globalTracingEnabled !== undefined &&
-    (globalTracingEnabled || now - lastCheckTime < CACHE_TTL_MS)
+    now - lastCheckTime < CACHE_TTL_MS
   ) {
     return globalTracingEnabled;
   }
