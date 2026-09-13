@@ -278,10 +278,18 @@ function teenyRequest(
     let responseStream: any;
     requestStream.once('reading', () => {
       if (responseStream) {
-        pipeline(responseStream, requestStream, () => {});
+        if (!requestStream.destroyed) {
+          pipeline(responseStream, requestStream, () => {});
+        } else if (responseStream && typeof responseStream.destroy === 'function') {
+          responseStream.destroy();
+        }
       } else {
         requestStream.once('response', () => {
-          pipeline(responseStream, requestStream, () => {});
+          if (!requestStream.destroyed) {
+            pipeline(responseStream, requestStream, () => {});
+          } else if (responseStream && typeof responseStream.destroy === 'function') {
+            responseStream.destroy();
+          }
         });
       }
     });
