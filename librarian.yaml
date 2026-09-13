@@ -16,8 +16,8 @@ version: v0.42.1-0.20260910203819-8f349d616bd7
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 00ff8fcb95cafbac573cc449b0d1a039244f1b4b
-    sha256: 4adc70162aadcea34de8e9ec269851bca7486fa8dca31d70dc43cdeb1e7a2617
+    commit: 0fad50179076be3c908551df3c7cd388e0928df1
+    sha256: 077e42e858aa0b2ad7e67cb90f6d1d1b1381ce47593f6c7361e6ad299d1cab94
 tools:
   pnpm:
     - name: gapic-generator-typescript
