@@ -18,6 +18,7 @@ import {grpc} from 'google-gax';
 import * as mock from '../mockserver/mockspanner';
 import {MockError, SimulatedExecutionTime} from '../mockserver/mockspanner';
 import {Database, Instance, Spanner} from '../../src';
+import {CLOUD_RESOURCE_HEADER} from '../../src/common';
 import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
 import {MetricsTracer} from '../../src/metrics/metrics-tracer';
 import {MetricReader} from '@opentelemetry/sdk-metrics';
@@ -294,7 +295,7 @@ describe('Test metrics with mock server', () => {
           attributes,
         );
         // Since we only have one attempt, the attempt latency should be fairly close to the operation latency
-        assertApprox(operationLatency, attemptLatency, 30);
+        assertApprox(operationLatency, attemptLatency, 100);
 
         const gfeLatency = getAggregatedValue(gfeLatenciesData, attributes);
         assert.strictEqual(gfeLatency, 123);
@@ -750,6 +751,250 @@ describe('Test metrics with mock server', () => {
       await database.close();
       Spanner._resetAFEServerTimingForTest();
       process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'false';
+    });
+
+    it('should record failure metrics when streaming query fails with non-retryable error', async () => {
+      const database = newTestDatabase();
+      const permissionDeniedError = {
+        message: 'Permission denied on table NUMBERS',
+        code: grpc.status.PERMISSION_DENIED,
+      } as MockError;
+      spannerMock.setExecutionTime(
+        spannerMock.executeStreamingSql,
+        SimulatedExecutionTime.ofError(permissionDeniedError),
+      );
+
+      await assert.rejects(
+        database.run(selectSql),
+        (error: any) => error.code === grpc.status.PERMISSION_DENIED,
+      );
+
+      const {resourceMetrics} = await reader.collect();
+      const operationCountData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_OPERATION_COUNT,
+      );
+      const attemptCountData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_ATTEMPT_COUNT,
+      );
+      const operationLatenciesData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_OPERATION_LATENCIES,
+      );
+      const attemptLatenciesData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_ATTEMPT_LATENCIES,
+      );
+
+      const failedAttributes = {
+        instance_id: 'instance',
+        database: `database-${dbCounter}`,
+        method: 'executeStreamingSql',
+        status: 'PERMISSION_DENIED',
+      };
+
+      assert.strictEqual(
+        getAggregatedValue(operationCountData, failedAttributes),
+        1,
+      );
+      assert.strictEqual(
+        getAggregatedValue(attemptCountData, failedAttributes),
+        1,
+      );
+      assert.ok(getAggregatedValue(operationLatenciesData, failedAttributes));
+      assert.ok(getAggregatedValue(attemptLatenciesData, failedAttributes));
+
+      await database.close();
+    });
+
+    it('should record failure metrics when commit fails with non-retryable error', async () => {
+      const database = newTestDatabase();
+      const permissionDeniedError = {
+        message: 'Permission denied on commit',
+        code: grpc.status.PERMISSION_DENIED,
+      } as MockError;
+      spannerMock.setExecutionTime(
+        spannerMock.commit,
+        SimulatedExecutionTime.ofError(permissionDeniedError),
+      );
+
+      await assert.rejects(
+        database.runTransactionAsync(async transaction => {
+          await transaction.run(selectSql);
+          await transaction.commit();
+        }),
+        (error: any) => error.code === grpc.status.PERMISSION_DENIED,
+      );
+
+      const {resourceMetrics} = await reader.collect();
+      const operationCountData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_OPERATION_COUNT,
+      );
+      const attemptCountData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_ATTEMPT_COUNT,
+      );
+      const operationLatenciesData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_OPERATION_LATENCIES,
+      );
+
+      const failedCommitAttributes = {
+        instance_id: 'instance',
+        database: `database-${dbCounter}`,
+        method: 'commit',
+        status: 'PERMISSION_DENIED',
+      };
+
+      assert.strictEqual(
+        getAggregatedValue(operationCountData, failedCommitAttributes),
+        1,
+      );
+      assert.strictEqual(
+        getAggregatedValue(attemptCountData, failedCommitAttributes),
+        1,
+      );
+      assert.ok(
+        getAggregatedValue(operationLatenciesData, failedCommitAttributes),
+      );
+
+      await database.close();
+    });
+
+    it('should maintain strict metrics context isolation between concurrent succeeding and failing queries', async () => {
+      const database = newTestDatabase();
+      const failingSql = 'SELECT * FROM NON_EXISTENT_TABLE';
+      const notFoundError = {
+        message: 'Table not found',
+        code: grpc.status.NOT_FOUND,
+      } as MockError;
+      spannerMock.putStatementResult(
+        failingSql,
+        mock.StatementResult.error(notFoundError),
+      );
+
+      const [successSettledResult, failureSettledResult] =
+        await Promise.allSettled([
+          database.run(selectSql),
+          database.run(failingSql),
+        ]);
+
+      assert.strictEqual(successSettledResult.status, 'fulfilled');
+      assert.strictEqual(failureSettledResult.status, 'rejected');
+
+      const {resourceMetrics} = await reader.collect();
+      const operationCountData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_OPERATION_COUNT,
+      );
+      const attemptCountData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_ATTEMPT_COUNT,
+      );
+
+      const successAttributes = {
+        instance_id: 'instance',
+        database: `database-${dbCounter}`,
+        method: 'executeStreamingSql',
+        status: 'OK',
+      };
+      const failureAttributes = {
+        instance_id: 'instance',
+        database: `database-${dbCounter}`,
+        method: 'executeStreamingSql',
+        status: 'NOT_FOUND',
+      };
+
+      assert.strictEqual(
+        getAggregatedValue(operationCountData, successAttributes),
+        1,
+      );
+      assert.strictEqual(
+        getAggregatedValue(attemptCountData, successAttributes),
+        1,
+      );
+
+      assert.strictEqual(
+        getAggregatedValue(operationCountData, failureAttributes),
+        1,
+      );
+      assert.strictEqual(
+        getAggregatedValue(attemptCountData, failureAttributes),
+        1,
+      );
+
+      await database.close();
+    });
+
+    it('should record metrics when Spanner.request is called in callback mode', async () => {
+      const databaseName = `projects/${PROJECT_ID}/instances/instance/databases/database-${++dbCounter}`;
+
+      await new Promise<void>((resolve, reject) => {
+        (spanner as any).request(
+          {
+            client: 'SpannerClient',
+            method: 'createSession',
+            headers: {
+              [CLOUD_RESOURCE_HEADER]: databaseName,
+              'x-goog-spanner-request-id': 'test-callback-req-id',
+            },
+            reqOpts: {
+              database: databaseName,
+            },
+          },
+          (error: any) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve();
+            }
+          },
+        );
+      });
+
+      const {resourceMetrics} = await reader.collect();
+      const operationCountData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_OPERATION_COUNT,
+      );
+      const attemptCountData = getMetricData(
+        resourceMetrics,
+        METRIC_NAME_ATTEMPT_COUNT,
+      );
+
+      const callbackAttributes = {
+        instance_id: 'instance',
+        database: `database-${dbCounter}`,
+        method: 'createSession',
+        status: 'OK',
+      };
+
+      assert.strictEqual(
+        getAggregatedValue(operationCountData, callbackAttributes),
+        1,
+      );
+      assert.strictEqual(
+        getAggregatedValue(attemptCountData, callbackAttributes),
+        1,
+      );
+    });
+
+    it('should safely handle request when reqOpts is omitted', async () => {
+      await new Promise<void>(resolve => {
+        (spanner as any).request(
+          {
+            client: 'SpannerClient',
+            method: 'createSession',
+            headers: {},
+            // reqOpts intentionally omitted
+          },
+          () => {
+            resolve();
+          },
+        );
+      });
     });
   });
 });

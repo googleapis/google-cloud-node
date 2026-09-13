@@ -19,8 +19,13 @@ import {
 export const SPANNER_METER_NAME = 'spanner-nodejs';
 export const CLIENT_METRICS_PREFIX = 'spanner.googleapis.com/internal/client';
 export const SPANNER_RESOURCE_TYPE = 'spanner_instance_client';
-// Maximum time to keep MetricsTracers before considering them stale, and stop tracking them.
+/**
+ * @deprecated No longer used after eliminating the background tracer cleanup timer.
+ */
 export const TRACER_CLEANUP_THRESHOLD_MS = 60 * 60 * 1000; // 60 minutes
+/**
+ * @deprecated No longer used after eliminating the background tracer cleanup timer.
+ */
 export const TRACER_CLEANUP_INTERVAL_MS = 30 * 60 * 1000; // 30 Minutes
 // OTel semantic conventions
 // See https://github.com/open-telemetry/opentelemetry-js/blob/main/semantic-conventions/README.md#unstable-semconv

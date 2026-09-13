@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import {grpc} from 'google-gax';
-import {MetricsTracerFactory} from './metrics-tracer-factory';
 
 /**
  * Interceptor for recording metrics on gRPC calls.
@@ -29,18 +28,9 @@ import {MetricsTracerFactory} from './metrics-tracer-factory';
 export const MetricInterceptor = (options, nextCall) => {
   return new grpc.InterceptingCall(nextCall(options), {
     start: function (metadata, listener, next) {
-      // Record attempt metric on request start
-      const resourcePrefix = metadata.get(
-        'google-cloud-resource-prefix',
-      )[0] as string;
-      const match = resourcePrefix?.match(/^projects\/([^/]+)\//);
-      const projectId = match ? match[1] : undefined;
-      let factory;
-      if (projectId) {
-        factory = MetricsTracerFactory.getInstance(projectId);
-      }
-      const requestId = metadata.get('x-goog-spanner-request-id')[0] as string;
-      const metricsTracer = factory?.getCurrentTracer(requestId);
+      // Record attempt metric on request start.
+      // The tracer is carried directly on the call options.
+      const metricsTracer = options?.metricsTracer ?? null;
       metricsTracer?.recordAttemptStart();
       const newListener = {
         onReceiveMetadata: function (metadata, next) {
@@ -63,20 +53,30 @@ export const MetricInterceptor = (options, nextCall) => {
           next(message);
         },
         onReceiveStatus: function (status, next) {
-          next(status);
+          if (metricsTracer) {
+            // Record attempt metric completion before notifying downstream listener
+            metricsTracer.recordAttemptCompletion(status?.code);
+            if (
+              typeof metricsTracer.gfeLatency === 'number' &&
+              Number.isFinite(metricsTracer.gfeLatency) &&
+              metricsTracer.gfeLatency >= 0
+            ) {
+              metricsTracer.recordGfeLatency(status?.code);
+            } else {
+              metricsTracer.recordGfeConnectivityErrorCount(status?.code);
+            }
+            if (
+              typeof metricsTracer.afeLatency === 'number' &&
+              Number.isFinite(metricsTracer.afeLatency) &&
+              metricsTracer.afeLatency >= 0
+            ) {
+              metricsTracer.recordAfeLatency(status?.code);
+            } else {
+              metricsTracer.recordAfeConnectivityErrorCount(status?.code);
+            }
+          }
 
-          // Record attempt metric completion
-          metricsTracer?.recordAttemptCompletion(status.code);
-          if (metricsTracer?.gfeLatency) {
-            metricsTracer?.recordGfeLatency(status.code);
-          } else {
-            metricsTracer?.recordGfeConnectivityErrorCount(status.code);
-          }
-          if (metricsTracer?.afeLatency) {
-            metricsTracer?.recordAfeLatency(status.code);
-          } else {
-            metricsTracer?.recordAfeConnectivityErrorCount(status.code);
-          }
+          next(status);
         },
       };
       next(metadata, newListener);
