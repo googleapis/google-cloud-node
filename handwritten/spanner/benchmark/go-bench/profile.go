@@ -150,9 +150,9 @@ func executeQuery(ctx context.Context, client *spanner.Client, queryType string,
 		if err != nil {
 			return err
 		}
-		// Full row deserialization for exact parity with Node's rows.map(r => r.toJSON())
-		var data BenchmarkRow
-		if err := row.ToStructLenient(&data); err != nil {
+		// Zero-reflection positional decoding of all 11 columns
+		var id, f0, f1, f2, f3, f4, f5, f6, f7, f8, f9 string
+		if err := row.Columns(&id, &f0, &f1, &f2, &f3, &f4, &f5, &f6, &f7, &f8, &f9); err != nil {
 			for i := 0; i < row.Size(); i++ {
 				var genericVal spanner.GenericColumnValue
 				_ = row.Column(i, &genericVal)
