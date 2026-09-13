@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -128,6 +128,92 @@ describe('MetricInterceptor', () => {
   });
 
   describe('Metrics recorded from interceptor', () => {
+    it('does not define redundant requester hooks and passes a direct InterceptingListener to next()', () => {
+      const originalInterceptingCall = grpc.InterceptingCall;
+      let capturedRequester: grpc.Requester | undefined;
+
+      Object.defineProperty(grpc, 'InterceptingCall', {
+        value: class extends originalInterceptingCall {
+          constructor(nextCall: Function, requester: grpc.Requester) {
+            super(nextCall as unknown as grpc.InterceptingCall, requester);
+            capturedRequester = requester;
+          }
+        },
+        configurable: true,
+        writable: true,
+      });
+
+      try {
+        const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+
+        // Verify that custom sendMessage, halfClose, or cancel hooks are NOT defined on the requester
+        assert.strictEqual(capturedRequester?.sendMessage, undefined);
+        assert.strictEqual(capturedRequester?.halfClose, undefined);
+        assert.strictEqual(capturedRequester?.cancel, undefined);
+        assert.strictEqual(typeof capturedRequester?.start, 'function');
+
+        // Verify that the listener passed to next() conforms to InterceptingListener (methods take 1 argument)
+        interceptingCall.start(testMetadata, mockListener);
+
+        // capturedListener is what nextCall.start received; since it is an InterceptingListener,
+        // @grpc/grpc-js bypasses InterceptingListenerImpl and forwards it directly
+        assert.strictEqual(capturedListener.onReceiveMetadata.length, 1);
+        assert.strictEqual(capturedListener.onReceiveMessage.length, 1);
+        assert.strictEqual(capturedListener.onReceiveStatus.length, 1);
+
+        // Verify that incoming messages forward directly to mockListener
+        const message = {test: 'row-data'};
+        capturedListener.onReceiveMessage(message);
+        assert.strictEqual(mockListener.onReceiveMessage.callCount, 1);
+        assert.strictEqual(
+          mockListener.onReceiveMessage.firstCall.args[0],
+          message,
+        );
+      } finally {
+        Object.defineProperty(grpc, 'InterceptingCall', {
+          value: originalInterceptingCall,
+          configurable: true,
+          writable: true,
+        });
+      }
+    });
+
+    it('transparently passes through messages, halfClose, and cancelWithStatus to the underlying call', () => {
+      const mockUnderlyingCall = {
+        start: sandbox.stub(),
+        sendMessageWithContext: sandbox.stub(),
+        halfClose: sandbox.stub(),
+        cancelWithStatus: sandbox.stub(),
+      };
+      const mockNextCallFn = sandbox.stub().returns(mockUnderlyingCall);
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCallFn);
+
+      const message = {values: ['test-row']};
+      interceptingCall.sendMessage(message);
+      assert.strictEqual(
+        mockUnderlyingCall.sendMessageWithContext.callCount,
+        1,
+      );
+      assert.strictEqual(
+        mockUnderlyingCall.sendMessageWithContext.firstCall.args[1],
+        message,
+      );
+
+      interceptingCall.halfClose();
+      assert.strictEqual(mockUnderlyingCall.halfClose.callCount, 1);
+
+      interceptingCall.cancelWithStatus(Status.CANCELLED, 'cancelled');
+      assert.strictEqual(mockUnderlyingCall.cancelWithStatus.callCount, 1);
+      assert.strictEqual(
+        mockUnderlyingCall.cancelWithStatus.firstCall.args[0],
+        Status.CANCELLED,
+      );
+      assert.strictEqual(
+        mockUnderlyingCall.cancelWithStatus.firstCall.args[1],
+        'cancelled',
+      );
+    });
+
     it('AttemptMetrics', () => {
       const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
 
