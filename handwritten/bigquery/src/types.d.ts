@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260731
+ * Discovery Revision: 20260811
  */
 
 /**
@@ -2009,7 +2009,7 @@ declare namespace bigquery {
      */
     errorStats?: IGenAiErrorStats;
     /**
-     * Function level stats for GenAi Functions. See https://docs.cloud.google.com/bigquery/docs/generative-ai-overview
+     * Function level stats for GenAI Functions. For more information, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview).
      */
     functionStats?: Array<IGenAiFunctionStats>;
   };
