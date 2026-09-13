@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 
 import {grpc} from 'google-gax';
 import {MetricsTracerFactory} from './metrics-tracer-factory';
+import {Spanner} from '../index';
 
 /**
  * Interceptor for recording metrics on gRPC calls.
@@ -42,6 +43,7 @@ export const MetricInterceptor = (options, nextCall) => {
       const requestId = metadata.get('x-goog-spanner-request-id')[0] as string;
       const metricsTracer = factory?.getCurrentTracer(requestId);
       metricsTracer?.recordAttemptStart();
+      const isAfeServerTimingEnabled = Spanner.isAFEServerTimingEnabled();
       const newListener = {
         onReceiveMetadata: function (metadata, next) {
           // Record GFE/AFE Metrics
@@ -52,9 +54,11 @@ export const MetricInterceptor = (options, nextCall) => {
             const gfeTiming =
               metricsTracer?.extractGfeLatency(serverTimingHeader);
             metricsTracer.gfeLatency = gfeTiming ?? null;
-            const afeTiming =
-              metricsTracer?.extractAfeLatency(serverTimingHeader);
-            metricsTracer.afeLatency = afeTiming ?? null;
+            if (isAfeServerTimingEnabled) {
+              const afeTiming =
+                metricsTracer?.extractAfeLatency(serverTimingHeader);
+              metricsTracer.afeLatency = afeTiming ?? null;
+            }
           }
 
           next(metadata);
@@ -72,10 +76,12 @@ export const MetricInterceptor = (options, nextCall) => {
           } else {
             metricsTracer?.recordGfeConnectivityErrorCount(status.code);
           }
-          if (metricsTracer?.afeLatency) {
-            metricsTracer?.recordAfeLatency(status.code);
-          } else {
-            metricsTracer?.recordAfeConnectivityErrorCount(status.code);
+          if (isAfeServerTimingEnabled) {
+            if (metricsTracer?.afeLatency) {
+              metricsTracer?.recordAfeLatency(status.code);
+            } else {
+              metricsTracer?.recordAfeConnectivityErrorCount(status.code);
+            }
           }
         },
       };

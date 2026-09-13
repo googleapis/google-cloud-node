@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import {status as Status} from '@grpc/grpc-js';
 import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
 import {MetricsTracer} from '../../src/metrics/metrics-tracer';
 import {MetricInterceptor} from '../../src/metrics/interceptor';
+import {Spanner} from '../../src/index';
 
 describe('MetricInterceptor', () => {
   let sandbox: sinon.SinonSandbox;
@@ -65,6 +66,14 @@ describe('MetricInterceptor', () => {
       void
     >();
     mockMetricsTracer.recordGfeConnectivityErrorCount = sandbox.stub<
+      [statusCode: number],
+      void
+    >();
+    mockMetricsTracer.recordAfeLatency = sandbox.stub<
+      [latency: number],
+      void
+    >();
+    mockMetricsTracer.recordAfeConnectivityErrorCount = sandbox.stub<
       [statusCode: number],
       void
     >();
@@ -125,6 +134,8 @@ describe('MetricInterceptor', () => {
 
   afterEach(() => {
     sandbox.restore();
+    Spanner._resetAFEServerTimingForTest();
+    delete process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'];
   });
 
   describe('Metrics recorded from interceptor', () => {
@@ -212,6 +223,23 @@ describe('MetricInterceptor', () => {
       assert.equal(
         mockMetricsTracer.recordAfeConnectivityErrorCount.getCall(0).args,
         Status.OK,
+      );
+    });
+
+    it('AFE Metrics - Disabled when AFE server timing is disabled', () => {
+      Spanner._resetAFEServerTimingForTest();
+      process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'true';
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(emptyMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockMetricsTracer.extractAfeLatency.callCount, 0);
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 0);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
       );
     });
   });

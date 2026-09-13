@@ -318,7 +318,7 @@ export class MetricsTracer {
    * @param latency The GFE latency in milliseconds.
    */
   public recordGfeLatency(statusCode: Status) {
-    if (!this.enabled) return;
+    if (!this.enabled || !this._instrumentGfeLatency) return;
     if (!this.gfeLatency) {
       console.error(
         'ERROR: Attempted to record GFE metric with no latency value.',
@@ -329,7 +329,7 @@ export class MetricsTracer {
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
 
-    this._instrumentGfeLatency?.record(this.gfeLatency, attributes);
+    this._instrumentGfeLatency.record(this.gfeLatency, attributes);
     this.gfeLatency = null; // Reset latency value
   }
 
@@ -337,20 +337,26 @@ export class MetricsTracer {
    * Increments the GFE connectivity error count metric.
    */
   public recordGfeConnectivityErrorCount(statusCode: Status) {
-    if (!this.enabled) return;
+    if (!this.enabled || !this._instrumentGfeConnectivityErrorCount) return;
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
-    this._instrumentGfeConnectivityErrorCount?.add(1, attributes);
+    this._instrumentGfeConnectivityErrorCount.add(1, attributes);
   }
 
   /**
    * Increments the AFE connectivity error count metric.
    */
   public recordAfeConnectivityErrorCount(statusCode: Status) {
-    if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
+    if (
+      !this.enabled ||
+      !this._instrumentAfeConnectivityErrorCount ||
+      !Spanner.isAFEServerTimingEnabled()
+    ) {
+      return;
+    }
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
-    this._instrumentAfeConnectivityErrorCount?.add(1, attributes);
+    this._instrumentAfeConnectivityErrorCount.add(1, attributes);
   }
 
   /**
@@ -358,7 +364,13 @@ export class MetricsTracer {
    * @param latency The AFE latency in milliseconds.
    */
   public recordAfeLatency(statusCode: Status) {
-    if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
+    if (
+      !this.enabled ||
+      !this._instrumentAfeLatency ||
+      !Spanner.isAFEServerTimingEnabled()
+    ) {
+      return;
+    }
     if (!this.afeLatency) {
       console.error(
         'ERROR: Attempted to record AFE metric with no latency value.',
@@ -369,7 +381,7 @@ export class MetricsTracer {
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
 
-    this._instrumentAfeLatency?.record(this.afeLatency, attributes);
+    this._instrumentAfeLatency.record(this.afeLatency, attributes);
     this.afeLatency = null; // Reset latency value
   }
 
