@@ -71,6 +71,7 @@ export class Generator {
   paramMap: OptionsMap;
   // This field is for users passing proper publish package name like @google-cloud/text-to-speech.
   publishName?: string;
+  directory?: string;
   // For historical reasons, Webpack library name matches "the main" service of the client library.
   // Sometimes it's hard to figure out automatically, so making this an option.
   mainServiceName?: string;
@@ -187,6 +188,7 @@ export class Generator {
 
   private readPublishPackageName() {
     this.publishName = this.paramMap['package-name'];
+    this.directory = this.paramMap['directory'];
   }
 
   private readMainServiceName() {
@@ -334,6 +336,7 @@ export class Generator {
       grpcServiceConfig: this.grpcServiceConfig,
       bundleConfigs: this.bundleConfigs,
       publishName: this.publishName,
+      directory: this.directory,
       mainServiceName: this.mainServiceName,
       serviceYaml: this.serviceYaml,
       rest: this.rest,

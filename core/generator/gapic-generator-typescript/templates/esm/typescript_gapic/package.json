@@ -4,11 +4,11 @@
   "description": "{{ api.naming.productName }} client for Node.js",
   "repository": {
     "type": "git",
-    "directory": "packages/{{ api.naming.namePath }}",
+    "directory": "{{ api.directory or ('packages/' + api.naming.namePath) }}",
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/{{ api.naming.namePath }}",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/{{ api.directory or ('packages/' + api.naming.namePath) }}",
   "author": "Google LLC",
   "main": "./build/cjs/src/index.cjs",
   "types": "./build/cjs/src/index.d.ts",
