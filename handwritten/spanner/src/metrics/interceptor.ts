@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {grpc} from 'google-gax';
+import {InterceptingListener, Metadata, StatusObject} from '@grpc/grpc-js';
 import {MetricsTracerFactory} from './metrics-tracer-factory';
 
 /**
@@ -42,8 +43,9 @@ export const MetricInterceptor = (options, nextCall) => {
       const requestId = metadata.get('x-goog-spanner-request-id')[0] as string;
       const metricsTracer = factory?.getCurrentTracer(requestId);
       metricsTracer?.recordAttemptStart();
-      const newListener = {
-        onReceiveMetadata: function (metadata, next) {
+
+      const interceptingListener: InterceptingListener = {
+        onReceiveMetadata: function (metadata: Metadata) {
           // Record GFE/AFE Metrics
           // GFE/AFE latency if available,
           // or else increase the GFE/AFE connectivity error count
@@ -57,13 +59,13 @@ export const MetricInterceptor = (options, nextCall) => {
             metricsTracer.afeLatency = afeTiming ?? null;
           }
 
-          next(metadata);
+          listener.onReceiveMetadata(metadata);
         },
-        onReceiveMessage: function (message, next) {
-          next(message);
+        onReceiveMessage: function (message: unknown) {
+          listener.onReceiveMessage(message);
         },
-        onReceiveStatus: function (status, next) {
-          next(status);
+        onReceiveStatus: function (status: StatusObject) {
+          listener.onReceiveStatus(status);
 
           // Record attempt metric completion
           metricsTracer?.recordAttemptCompletion(status.code);
@@ -79,18 +81,8 @@ export const MetricInterceptor = (options, nextCall) => {
           }
         },
       };
-      next(metadata, newListener);
-    },
-    sendMessage: function (message, next) {
-      next(message);
-    },
 
-    halfClose: function (next) {
-      next();
-    },
-
-    cancel: function (next) {
-      next();
+      next(metadata, interceptingListener);
     },
   });
 };
