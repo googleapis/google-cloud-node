@@ -46,7 +46,6 @@ default:
     - package.json
     - samples/package.json
     - samples/quickstart.js
-    - samples/test/quickstart.js
     - samples/README.md
     - README.md
     - CHANGELOG.md
