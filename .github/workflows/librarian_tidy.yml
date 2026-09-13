@@ -37,10 +37,10 @@ jobs:
         if: steps.changes.outputs.librarian == 'true'
         run: |
           if ! git diff --exit-code; then
-            V=$(librarian config get version 2>/dev/null || echo "latest")
+            V=$(sed -n 's/^version: //p' librarian.yaml)
             echo "librarian.yaml is not tidy. Please run:"
             echo ""
-            echo "  librarian tidy"
+            echo "  go run github.com/googleapis/librarian/cmd/librarian@$V tidy"
             echo ""
             echo "to tidy librarian.yaml and commit the changes."
             exit 1
