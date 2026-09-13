@@ -21,7 +21,7 @@ import {
   METRIC_LABEL_KEY_STATUS,
   MONITORED_RES_LABEL_KEY_INSTANCE,
 } from './constants';
-import {Spanner} from '..';
+import {isAFEServerTimingEnabled} from '../common';
 
 /**
  * MetricAttemptTracer tracks the start time and status of a single gRPC attempt.
@@ -305,7 +305,7 @@ export class MetricsTracer {
    * @returns The extracted AFE latency in milliseconds, or null if not found.
    */
   public extractAfeLatency(header: string): number | null {
-    if (!Spanner.isAFEServerTimingEnabled()) return null;
+    if (!isAFEServerTimingEnabled()) return null;
     const regex = /afe; dur=([0-9]+).*/;
     if (header === undefined) return null;
     const match = header.match(regex);
@@ -314,12 +314,12 @@ export class MetricsTracer {
   }
 
   /**
-   * Records the provided GFE latency.
-   * @param latency The GFE latency in milliseconds.
+   * Records the GFE latency for this attempt.
+   * @param statusCode The gRPC status code of the attempt.
    */
   public recordGfeLatency(statusCode: Status) {
-    if (!this.enabled) return;
-    if (!this.gfeLatency) {
+    if (!this.enabled || !this._instrumentGfeLatency) return;
+    if (this.gfeLatency === null || this.gfeLatency === undefined) {
       console.error(
         'ERROR: Attempted to record GFE metric with no latency value.',
       );
@@ -329,7 +329,7 @@ export class MetricsTracer {
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
 
-    this._instrumentGfeLatency?.record(this.gfeLatency, attributes);
+    this._instrumentGfeLatency.record(this.gfeLatency, attributes);
     this.gfeLatency = null; // Reset latency value
   }
 
@@ -337,29 +337,41 @@ export class MetricsTracer {
    * Increments the GFE connectivity error count metric.
    */
   public recordGfeConnectivityErrorCount(statusCode: Status) {
-    if (!this.enabled) return;
+    if (!this.enabled || !this._instrumentGfeConnectivityErrorCount) return;
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
-    this._instrumentGfeConnectivityErrorCount?.add(1, attributes);
+    this._instrumentGfeConnectivityErrorCount.add(1, attributes);
   }
 
   /**
    * Increments the AFE connectivity error count metric.
    */
   public recordAfeConnectivityErrorCount(statusCode: Status) {
-    if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
+    if (
+      !this.enabled ||
+      !this._instrumentAfeConnectivityErrorCount ||
+      !isAFEServerTimingEnabled()
+    ) {
+      return;
+    }
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
-    this._instrumentAfeConnectivityErrorCount?.add(1, attributes);
+    this._instrumentAfeConnectivityErrorCount.add(1, attributes);
   }
 
   /**
-   * Records the provided AFE latency.
-   * @param latency The AFE latency in milliseconds.
+   * Records the AFE latency for this attempt.
+   * @param statusCode The gRPC status code of the attempt.
    */
   public recordAfeLatency(statusCode: Status) {
-    if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
-    if (!this.afeLatency) {
+    if (
+      !this.enabled ||
+      !this._instrumentAfeLatency ||
+      !isAFEServerTimingEnabled()
+    ) {
+      return;
+    }
+    if (this.afeLatency === null || this.afeLatency === undefined) {
       console.error(
         'ERROR: Attempted to record AFE metric with no latency value.',
       );
@@ -369,7 +381,7 @@ export class MetricsTracer {
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
 
-    this._instrumentAfeLatency?.record(this.afeLatency, attributes);
+    this._instrumentAfeLatency.record(this.afeLatency, attributes);
     this.afeLatency = null; // Reset latency value
   }
 
