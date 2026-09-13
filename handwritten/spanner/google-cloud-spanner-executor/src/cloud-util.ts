@@ -21,7 +21,7 @@ import {SpannerOptions} from '../../src';
 import {trace} from '@opentelemetry/api';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
 import {OTLPTraceExporter} from '@opentelemetry/exporter-trace-otlp-grpc';
-import {Resource} from '@opentelemetry/resources';
+import {resourceFromAttributes} from '@opentelemetry/resources';
 import {ATTR_SERVICE_NAME} from '@opentelemetry/semantic-conventions';
 import {
   BatchSpanProcessor,
@@ -50,7 +50,7 @@ export class CloudUtil {
     });
 
     const provider = new NodeTracerProvider({
-      resource: new Resource({
+      resource: resourceFromAttributes({
         [ATTR_SERVICE_NAME]: 'spanner-node-worker-proxy',
         'gcp.project_id': WorkerProxy.PROJECT_ID,
       }) as any,

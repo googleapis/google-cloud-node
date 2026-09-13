@@ -21,9 +21,8 @@ import {
   ResourceMetrics,
 } from '@opentelemetry/sdk-metrics';
 import {Resource} from '@opentelemetry/resources';
-import {MonitoredResource} from '@google-cloud/opentelemetry-resource-util';
 import * as path from 'path';
-import {MetricKind, ValueType} from './external-types';
+import {MetricKind, MonitoredResource, ValueType} from './external-types';
 import {
   SPANNER_METER_NAME,
   CLIENT_METRICS_PREFIX,
