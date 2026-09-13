@@ -1091,6 +1091,44 @@ describe('oauth2', () => {
       scopes.forEach(s => s.done());
     });
 
+    it('should keep old stale credentials if refreshing fails on request', async () => {
+      const client = new OAuth2Client({
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        redirectUri: REDIRECT_URI,
+        eagerRefreshThresholdMillis: 100000,
+      });
+      const expiryDate = Date.now() + 50000;
+      client.credentials = {
+        access_token: 'initial-access-token',
+        refresh_token: 'refresh-token-placeholder',
+        expiry_date: expiryDate,
+      };
+
+      const scopes = [
+        nock(baseUrl, {
+          reqheaders: {
+            'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+        })
+          .post('/token')
+          .times(4)
+          .reply(500, 'Internal Server Error'),
+      ];
+
+      await assert.rejects(
+        client.request({url: 'http://example.com'}),
+        /Internal Server Error/
+      );
+
+      // Verify the credentials were not wiped/cleared
+      assert.strictEqual(client.credentials.access_token, 'initial-access-token');
+      assert.strictEqual(client.credentials.refresh_token, 'refresh-token-placeholder');
+      assert.strictEqual(client.credentials.expiry_date, expiryDate);
+
+      scopes.forEach(s => s.done());
+    });
+
     it('should not refresh if access token will not expire soon and time to refresh before expiration is set', async () => {
       const client = new OAuth2Client({
         clientId: CLIENT_ID,
