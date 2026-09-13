@@ -316,6 +316,117 @@ export class FieldValue implements firestore.FieldValue {
   }
 
   /**
+   * Returns `true` if the provided value is a sentinel returned by
+   * {@link FieldValue.serverTimestamp}.
+   *
+   * @param value The value to check.
+   * @returns `true` if `value` is a server-timestamp sentinel.
+   *
+   * @example
+   * ```
+   * const sentinel = Firestore.FieldValue.serverTimestamp();
+   * Firestore.FieldValue.isServerTimestamp(sentinel); // true
+   * Firestore.FieldValue.isServerTimestamp(new Date()); // false
+   * ```
+   */
+  static isServerTimestamp(value: unknown): value is FieldValue {
+    return value instanceof ServerTimestampTransform;
+  }
+
+  /**
+   * Returns `true` if the provided value is a sentinel returned by
+   * {@link FieldValue.increment}. This includes sentinels produced with a
+   * negative operand; use {@link FieldValue.isDecrement} to narrow further
+   * to decrement-style operations.
+   *
+   * @param value The value to check.
+   * @returns `true` if `value` is an increment sentinel.
+   *
+   * @example
+   * ```
+   * Firestore.FieldValue.isIncrement(Firestore.FieldValue.increment(1));  // true
+   * Firestore.FieldValue.isIncrement(Firestore.FieldValue.increment(-1)); // true
+   * Firestore.FieldValue.isIncrement(1); // false
+   * ```
+   */
+  static isIncrement(value: unknown): value is FieldValue {
+    return value instanceof NumericIncrementTransform;
+  }
+
+  /**
+   * Returns `true` if the provided value is a sentinel returned by
+   * {@link FieldValue.increment} with a negative operand. Every value that
+   * satisfies `isDecrement` also satisfies {@link FieldValue.isIncrement}.
+   *
+   * @param value The value to check.
+   * @returns `true` if `value` is an increment sentinel with a negative
+   * operand.
+   *
+   * @example
+   * ```
+   * Firestore.FieldValue.isDecrement(Firestore.FieldValue.increment(-1)); // true
+   * Firestore.FieldValue.isDecrement(Firestore.FieldValue.increment(1));  // false
+   * Firestore.FieldValue.isDecrement(Firestore.FieldValue.increment(0));  // false
+   * ```
+   */
+  static isDecrement(value: unknown): value is FieldValue {
+    return (
+      value instanceof NumericIncrementTransform && value.isDecrementSentinel
+    );
+  }
+
+  /**
+   * Returns `true` if the provided value is a sentinel returned by
+   * {@link FieldValue.arrayUnion}.
+   *
+   * @param value The value to check.
+   * @returns `true` if `value` is an array-union sentinel.
+   *
+   * @example
+   * ```
+   * Firestore.FieldValue.isArrayUnion(Firestore.FieldValue.arrayUnion('a')); // true
+   * Firestore.FieldValue.isArrayUnion(['a']); // false
+   * ```
+   */
+  static isArrayUnion(value: unknown): value is FieldValue {
+    return value instanceof ArrayUnionTransform;
+  }
+
+  /**
+   * Returns `true` if the provided value is a sentinel returned by
+   * {@link FieldValue.arrayRemove}.
+   *
+   * @param value The value to check.
+   * @returns `true` if `value` is an array-remove sentinel.
+   *
+   * @example
+   * ```
+   * Firestore.FieldValue.isArrayRemove(Firestore.FieldValue.arrayRemove('a')); // true
+   * Firestore.FieldValue.isArrayRemove(['a']); // false
+   * ```
+   */
+  static isArrayRemove(value: unknown): value is FieldValue {
+    return value instanceof ArrayRemoveTransform;
+  }
+
+  /**
+   * Returns `true` if the provided value is a sentinel returned by
+   * {@link FieldValue.delete}.
+   *
+   * @param value The value to check.
+   * @returns `true` if `value` is a delete sentinel.
+   *
+   * @example
+   * ```
+   * Firestore.FieldValue.isDelete(Firestore.FieldValue.delete()); // true
+   * Firestore.FieldValue.isDelete(null); // false
+   * ```
+   */
+  static isDelete(value: unknown): value is FieldValue {
+    return value instanceof DeleteTransform;
+  }
+
+  /**
    * Returns true if this `FieldValue` is equal to the provided value.
    *
    * @param {*} other The value to compare against.
@@ -507,6 +618,16 @@ class ServerTimestampTransform extends FieldTransform {
 abstract class NumericFieldTransform extends FieldTransform {
   constructor(protected readonly operand: number) {
     super();
+  }
+
+  /**
+   * Whether this increment sentinel was constructed with a negative operand.
+   *
+   * @private
+   * @internal
+   */
+  get isDecrementSentinel(): boolean {
+    return this.operand < 0;
   }
 
   /**
