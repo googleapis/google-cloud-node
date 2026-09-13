@@ -114,6 +114,7 @@ import {
   setSpanError,
   setSpanErrorAndException,
   traceConfig,
+  getQueryTraceConfig,
 } from './instrument';
 import {
   AtomicCounter,
@@ -2930,8 +2931,8 @@ class Database extends common.GrpcServiceObject {
     startTrace(
       'Database.run',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.runStream(query, options)
@@ -3112,10 +3113,8 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.runPartitionedUpdate',
       {
-        ...(query as RunPartitionedUpdateOptions),
         ...this._traceConfig,
-        requestTag: (query as RunPartitionedUpdateOptions)?.requestOptions
-          ?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.sessionFactory_.getSessionForPartitionedOps((err, session) => {
@@ -3305,9 +3304,8 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.runStream',
       {
-        ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
-        requestTag: (query as ExecuteSqlRequest)?.requestOptions?.requestTag,
+        ...getQueryTraceConfig(query),
       },
       span => {
         this.sessionFactory_.getSession((err, session) => {
