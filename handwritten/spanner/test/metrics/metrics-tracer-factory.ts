@@ -18,6 +18,7 @@ import {
 } from '@opentelemetry/sdk-metrics';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
+import {status as Status} from '@grpc/grpc-js';
 import * as Constants from '../../src/metrics/constants';
 import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
 import {CloudMonitoringMetricsExporter} from '../../src/metrics/spanner-metrics-exporter';
@@ -193,6 +194,118 @@ describe('MetricsTracerFactory', () => {
       tracer!.clientAttributes[Constants.MONITORED_RES_LABEL_KEY_INSTANCE],
       'instance',
     );
+  });
+
+  it('should share attributes cache across tracers for the same method and resource', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    const tracer1 = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    const tracer2 = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.2.1',
+    );
+
+    const attributes1 = (tracer1 as any)._getAttributesForStatus(Status.OK);
+    const attributes2 = (tracer2 as any)._getAttributesForStatus(Status.OK);
+
+    assert.strictEqual(attributes1, attributes2);
+    assert.deepStrictEqual(attributes1, {
+      [Constants.METRIC_LABEL_KEY_DATABASE]: 'database',
+      [Constants.METRIC_LABEL_KEY_METHOD]: 'ExecuteSql',
+      [Constants.MONITORED_RES_LABEL_KEY_INSTANCE]: 'instance',
+      [Constants.METRIC_LABEL_KEY_STATUS]: 'OK',
+    });
+  });
+
+  it('should use distinct attributes caches for different methods or resources', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    const sqlTracer = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    const commitTracer = factory.createMetricsTracer(
+      'Commit',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.2.1',
+    );
+
+    const sqlAttributes = (sqlTracer as any)._getAttributesForStatus(Status.OK);
+    const commitAttributes = (commitTracer as any)._getAttributesForStatus(
+      Status.OK,
+    );
+
+    assert.notStrictEqual(sqlAttributes, commitAttributes);
+    assert.strictEqual(
+      sqlAttributes[Constants.METRIC_LABEL_KEY_METHOD],
+      'ExecuteSql',
+    );
+    assert.strictEqual(
+      commitAttributes[Constants.METRIC_LABEL_KEY_METHOD],
+      'Commit',
+    );
+  });
+
+  it('should use distinct attributes caches for different databases', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    const databaseOneTracer = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database-1',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    const databaseTwoTracer = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database-2',
+      '1.1a2bc3d4.1.1.2.1',
+    );
+
+    const databaseOneAttributes = (
+      databaseOneTracer as any
+    )._getAttributesForStatus(Status.OK);
+    const databaseTwoAttributes = (
+      databaseTwoTracer as any
+    )._getAttributesForStatus(Status.OK);
+
+    assert.notStrictEqual(databaseOneAttributes, databaseTwoAttributes);
+    assert.strictEqual(
+      databaseOneAttributes[Constants.METRIC_LABEL_KEY_DATABASE],
+      'database-1',
+    );
+    assert.strictEqual(
+      databaseTwoAttributes[Constants.METRIC_LABEL_KEY_DATABASE],
+      'database-2',
+    );
+  });
+
+  it('should reset attributes cache when resetMeterProvider is called', async () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    assert.strictEqual(factory['_attributesCache'].size, 1);
+
+    await factory.resetMeterProvider();
+    assert.strictEqual(factory['_attributesCache'].size, 0);
+  });
+
+  it('should reset attributes cache when resetInstance is called', async () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    assert.strictEqual(factory['_attributesCache'].size, 1);
+
+    await MetricsTracerFactory.resetInstance();
+    const newFactory = MetricsTracerFactory.getInstance('project-id')!;
+    assert.strictEqual(newFactory['_attributesCache'].size, 0);
   });
 });
 
