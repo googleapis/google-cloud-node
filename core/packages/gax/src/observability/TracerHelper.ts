@@ -84,10 +84,19 @@ export function getGaxTracer(): Tracer {
  * consistent across both transports, so it is preferred. Node system errors
  * (`ECONNREFUSED`, `ETIMEDOUT`, ...) already carry a suitable string code and
  * are used as-is. The class name remains a last-resort fallback.
+ *
+ * A zero code is treated as absent rather than as `OK`, matching
+ * `GoogleError.parseHttpError`, which deletes the field because zero is the
+ * proto3 default for an unset value. Without this a failed call could be
+ * labelled `error.type: 'OK'`.
  */
 function resolveErrorType(e: Error): string {
   const code = (e as {code?: unknown}).code;
-  if (typeof code === 'number' && Status[code] !== undefined) {
+  if (
+    typeof code === 'number' &&
+    code !== Status.OK &&
+    Status[code] !== undefined
+  ) {
     return Status[code];
   }
   if (typeof code === 'string' && code.length > 0) {
