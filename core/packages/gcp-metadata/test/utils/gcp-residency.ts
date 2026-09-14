@@ -109,6 +109,7 @@ export class GCPResidencyUtil {
     delete customEnv.CLOUD_RUN_JOB;
     delete customEnv.FUNCTION_NAME;
     delete customEnv.K_SERVICE;
+    delete customEnv.CLOUD_RUN_WORKER_POOL;
 
     this.stubs.processEnv ??= this.sandbox.stub(process, 'env');
     this.stubs.processEnv.value(customEnv);

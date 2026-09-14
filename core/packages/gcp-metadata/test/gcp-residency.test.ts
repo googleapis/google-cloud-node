@@ -57,6 +57,12 @@ describe('gcp-residency', () => {
       assert(gcpResidency.isGoogleCloudServerless());
     });
 
+    it('should return `true` if `CLOUD_RUN_WORKER_POOL` env is set', () => {
+      process.env.CLOUD_RUN_WORKER_POOL = '1';
+
+      assert(gcpResidency.isGoogleCloudServerless());
+    });
+
     it('should return `false` if none of the envs are set', () => {
       assert.equal(gcpResidency.isGoogleCloudServerless(), false);
     });
