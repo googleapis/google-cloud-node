@@ -3428,6 +3428,199 @@ describe('v1beta.InstancesClient', () => {
     });
   });
 
+  describe('getVmExtensionState', () => {
+    it('invokes getVmExtensionState without error', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['extensionName'],
+      );
+      request.extensionName = defaultValue4;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}&extension_name=${defaultValue4 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.VmExtensionState(),
+      );
+      client.innerApiCalls.getVmExtensionState =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getVmExtensionState(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getVmExtensionState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getVmExtensionState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getVmExtensionState without error using callback', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['extensionName'],
+      );
+      request.extensionName = defaultValue4;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}&extension_name=${defaultValue4 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.VmExtensionState(),
+      );
+      client.innerApiCalls.getVmExtensionState =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getVmExtensionState(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1beta.IVmExtensionState | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getVmExtensionState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getVmExtensionState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getVmExtensionState with error', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['extensionName'],
+      );
+      request.extensionName = defaultValue4;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}&extension_name=${defaultValue4 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getVmExtensionState = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getVmExtensionState(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getVmExtensionState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getVmExtensionState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getVmExtensionState with closed client', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.GetVmExtensionStateInstanceRequest',
+        ['extensionName'],
+      );
+      request.extensionName = defaultValue4;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getVmExtensionState(request), expectedError);
+    });
+  });
+
   describe('insert', () => {
     it('invokes insert without error', async () => {
       const client = new instancesModule.v1beta.InstancesClient({
@@ -10310,6 +10503,430 @@ describe('v1beta.InstancesClient', () => {
       );
       assert(
         (client.descriptors.page.listReferrers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listVmExtensionStates', () => {
+    it('invokes listVmExtensionStates without error', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+      ];
+      client.innerApiCalls.listVmExtensionStates =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listVmExtensionStates(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listVmExtensionStates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listVmExtensionStates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listVmExtensionStates without error using callback', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+      ];
+      client.innerApiCalls.listVmExtensionStates =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listVmExtensionStates(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.compute.v1beta.IVmExtensionState[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listVmExtensionStates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listVmExtensionStates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listVmExtensionStates with error', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listVmExtensionStates = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listVmExtensionStates(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listVmExtensionStates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listVmExtensionStates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listVmExtensionStatesStream without error', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+      ];
+      client.descriptors.page.listVmExtensionStates.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listVmExtensionStatesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1beta.VmExtensionState[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1beta.VmExtensionState) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listVmExtensionStates
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listVmExtensionStates, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listVmExtensionStates
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listVmExtensionStatesStream with error', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listVmExtensionStates.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listVmExtensionStatesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1beta.VmExtensionState[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1beta.VmExtensionState) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listVmExtensionStates
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listVmExtensionStates, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listVmExtensionStates
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listVmExtensionStates without error', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1beta.VmExtensionState(),
+        ),
+      ];
+      client.descriptors.page.listVmExtensionStates.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.compute.v1beta.IVmExtensionState[] =
+        [];
+      const iterable = client.listVmExtensionStatesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listVmExtensionStates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listVmExtensionStates
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listVmExtensionStates with error', async () => {
+      const client = new instancesModule.v1beta.InstancesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['zone'],
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ListVmExtensionStatesInstancesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&zone=${defaultValue2 ?? ''}&instance=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listVmExtensionStates.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listVmExtensionStatesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.compute.v1beta.IVmExtensionState[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listVmExtensionStates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listVmExtensionStates
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams,

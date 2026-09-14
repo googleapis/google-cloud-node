@@ -9531,6 +9531,9 @@ export namespace google {
 
                     /** TextSearch filter */
                     filter?: (google.protobuf.IStruct|null);
+
+                    /** TextSearch structuredQuery */
+                    structuredQuery?: (google.cloud.vectorsearch.v1beta.IStructuredQuery|null);
                 }
 
                 /** Represents a TextSearch. */
@@ -9556,6 +9559,9 @@ export namespace google {
 
                     /** TextSearch filter. */
                     public filter?: (google.protobuf.IStruct|null);
+
+                    /** TextSearch structuredQuery. */
+                    public structuredQuery?: (google.cloud.vectorsearch.v1beta.IStructuredQuery|null);
 
                     /**
                      * Creates a new TextSearch instance using the specified properties.
@@ -9633,6 +9639,577 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StructuredQuery. */
+                interface IStructuredQuery {
+
+                    /** StructuredQuery text */
+                    text?: (google.cloud.vectorsearch.v1beta.ITextQuery|null);
+
+                    /** StructuredQuery unary */
+                    unary?: (google.cloud.vectorsearch.v1beta.IUnaryQuery|null);
+
+                    /** StructuredQuery combine */
+                    combine?: (google.cloud.vectorsearch.v1beta.ICombinedQuery|null);
+
+                    /** StructuredQuery boost */
+                    boost?: (number|null);
+                }
+
+                /** Represents a StructuredQuery. */
+                class StructuredQuery implements IStructuredQuery {
+
+                    /**
+                     * Constructs a new StructuredQuery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IStructuredQuery);
+
+                    /** StructuredQuery text. */
+                    public text?: (google.cloud.vectorsearch.v1beta.ITextQuery|null);
+
+                    /** StructuredQuery unary. */
+                    public unary?: (google.cloud.vectorsearch.v1beta.IUnaryQuery|null);
+
+                    /** StructuredQuery combine. */
+                    public combine?: (google.cloud.vectorsearch.v1beta.ICombinedQuery|null);
+
+                    /** StructuredQuery boost. */
+                    public boost: number;
+
+                    /** StructuredQuery queryType. */
+                    public queryType?: ("text"|"unary"|"combine");
+
+                    /**
+                     * Creates a new StructuredQuery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StructuredQuery instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IStructuredQuery): google.cloud.vectorsearch.v1beta.StructuredQuery;
+
+                    /**
+                     * Encodes the specified StructuredQuery message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.StructuredQuery.verify|verify} messages.
+                     * @param message StructuredQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IStructuredQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StructuredQuery message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.StructuredQuery.verify|verify} messages.
+                     * @param message StructuredQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IStructuredQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StructuredQuery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StructuredQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.StructuredQuery;
+
+                    /**
+                     * Decodes a StructuredQuery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StructuredQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.StructuredQuery;
+
+                    /**
+                     * Verifies a StructuredQuery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StructuredQuery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StructuredQuery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.StructuredQuery;
+
+                    /**
+                     * Creates a plain object from a StructuredQuery message. Also converts values to other types if specified.
+                     * @param message StructuredQuery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.StructuredQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StructuredQuery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StructuredQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TextQuery. */
+                interface ITextQuery {
+
+                    /** TextQuery text */
+                    text?: (string|null);
+
+                    /** TextQuery fields */
+                    fields?: (string[]|null);
+
+                    /** TextQuery matchType */
+                    matchType?: (google.cloud.vectorsearch.v1beta.TextQuery.MatchType|keyof typeof google.cloud.vectorsearch.v1beta.TextQuery.MatchType|null);
+
+                    /** TextQuery queryEnhancement */
+                    queryEnhancement?: (google.cloud.vectorsearch.v1beta.IQueryEnhancement|null);
+                }
+
+                /** Represents a TextQuery. */
+                class TextQuery implements ITextQuery {
+
+                    /**
+                     * Constructs a new TextQuery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.ITextQuery);
+
+                    /** TextQuery text. */
+                    public text: string;
+
+                    /** TextQuery fields. */
+                    public fields: string[];
+
+                    /** TextQuery matchType. */
+                    public matchType: (google.cloud.vectorsearch.v1beta.TextQuery.MatchType|keyof typeof google.cloud.vectorsearch.v1beta.TextQuery.MatchType);
+
+                    /** TextQuery queryEnhancement. */
+                    public queryEnhancement?: (google.cloud.vectorsearch.v1beta.IQueryEnhancement|null);
+
+                    /**
+                     * Creates a new TextQuery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextQuery instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.ITextQuery): google.cloud.vectorsearch.v1beta.TextQuery;
+
+                    /**
+                     * Encodes the specified TextQuery message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.TextQuery.verify|verify} messages.
+                     * @param message TextQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.ITextQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextQuery message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.TextQuery.verify|verify} messages.
+                     * @param message TextQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.ITextQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextQuery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.TextQuery;
+
+                    /**
+                     * Decodes a TextQuery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.TextQuery;
+
+                    /**
+                     * Verifies a TextQuery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextQuery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextQuery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.TextQuery;
+
+                    /**
+                     * Creates a plain object from a TextQuery message. Also converts values to other types if specified.
+                     * @param message TextQuery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.TextQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextQuery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TextQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TextQuery {
+
+                    /** MatchType enum. */
+                    enum MatchType {
+                        MATCH_TYPE_UNSPECIFIED = 0,
+                        TEXT = 1,
+                        EXACT = 2
+                    }
+                }
+
+                /** Properties of a QueryEnhancement. */
+                interface IQueryEnhancement {
+
+                    /** QueryEnhancement enabled */
+                    enabled?: (boolean|null);
+
+                    /** QueryEnhancement languageCode */
+                    languageCode?: (string|null);
+                }
+
+                /** Represents a QueryEnhancement. */
+                class QueryEnhancement implements IQueryEnhancement {
+
+                    /**
+                     * Constructs a new QueryEnhancement.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IQueryEnhancement);
+
+                    /** QueryEnhancement enabled. */
+                    public enabled: boolean;
+
+                    /** QueryEnhancement languageCode. */
+                    public languageCode: string;
+
+                    /**
+                     * Creates a new QueryEnhancement instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryEnhancement instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IQueryEnhancement): google.cloud.vectorsearch.v1beta.QueryEnhancement;
+
+                    /**
+                     * Encodes the specified QueryEnhancement message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.QueryEnhancement.verify|verify} messages.
+                     * @param message QueryEnhancement message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IQueryEnhancement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryEnhancement message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.QueryEnhancement.verify|verify} messages.
+                     * @param message QueryEnhancement message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IQueryEnhancement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryEnhancement message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryEnhancement
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.QueryEnhancement;
+
+                    /**
+                     * Decodes a QueryEnhancement message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryEnhancement
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.QueryEnhancement;
+
+                    /**
+                     * Verifies a QueryEnhancement message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryEnhancement message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryEnhancement
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.QueryEnhancement;
+
+                    /**
+                     * Creates a plain object from a QueryEnhancement message. Also converts values to other types if specified.
+                     * @param message QueryEnhancement
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.QueryEnhancement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryEnhancement to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryEnhancement
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UnaryQuery. */
+                interface IUnaryQuery {
+
+                    /** UnaryQuery op */
+                    op?: (google.cloud.vectorsearch.v1beta.UnaryQuery.Operator|keyof typeof google.cloud.vectorsearch.v1beta.UnaryQuery.Operator|null);
+
+                    /** UnaryQuery subQuery */
+                    subQuery?: (google.cloud.vectorsearch.v1beta.IStructuredQuery|null);
+                }
+
+                /** Represents an UnaryQuery. */
+                class UnaryQuery implements IUnaryQuery {
+
+                    /**
+                     * Constructs a new UnaryQuery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IUnaryQuery);
+
+                    /** UnaryQuery op. */
+                    public op: (google.cloud.vectorsearch.v1beta.UnaryQuery.Operator|keyof typeof google.cloud.vectorsearch.v1beta.UnaryQuery.Operator);
+
+                    /** UnaryQuery subQuery. */
+                    public subQuery?: (google.cloud.vectorsearch.v1beta.IStructuredQuery|null);
+
+                    /**
+                     * Creates a new UnaryQuery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UnaryQuery instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IUnaryQuery): google.cloud.vectorsearch.v1beta.UnaryQuery;
+
+                    /**
+                     * Encodes the specified UnaryQuery message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.UnaryQuery.verify|verify} messages.
+                     * @param message UnaryQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IUnaryQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UnaryQuery message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.UnaryQuery.verify|verify} messages.
+                     * @param message UnaryQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IUnaryQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UnaryQuery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UnaryQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.UnaryQuery;
+
+                    /**
+                     * Decodes an UnaryQuery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UnaryQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.UnaryQuery;
+
+                    /**
+                     * Verifies an UnaryQuery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UnaryQuery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UnaryQuery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.UnaryQuery;
+
+                    /**
+                     * Creates a plain object from an UnaryQuery message. Also converts values to other types if specified.
+                     * @param message UnaryQuery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.UnaryQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UnaryQuery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UnaryQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UnaryQuery {
+
+                    /** Operator enum. */
+                    enum Operator {
+                        OPERATOR_UNSPECIFIED = 0,
+                        NOT = 1
+                    }
+                }
+
+                /** Properties of a CombinedQuery. */
+                interface ICombinedQuery {
+
+                    /** CombinedQuery op */
+                    op?: (google.cloud.vectorsearch.v1beta.CombinedQuery.Operator|keyof typeof google.cloud.vectorsearch.v1beta.CombinedQuery.Operator|null);
+
+                    /** CombinedQuery subQueries */
+                    subQueries?: (google.cloud.vectorsearch.v1beta.IStructuredQuery[]|null);
+                }
+
+                /** Represents a CombinedQuery. */
+                class CombinedQuery implements ICombinedQuery {
+
+                    /**
+                     * Constructs a new CombinedQuery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.ICombinedQuery);
+
+                    /** CombinedQuery op. */
+                    public op: (google.cloud.vectorsearch.v1beta.CombinedQuery.Operator|keyof typeof google.cloud.vectorsearch.v1beta.CombinedQuery.Operator);
+
+                    /** CombinedQuery subQueries. */
+                    public subQueries: google.cloud.vectorsearch.v1beta.IStructuredQuery[];
+
+                    /**
+                     * Creates a new CombinedQuery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CombinedQuery instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.ICombinedQuery): google.cloud.vectorsearch.v1beta.CombinedQuery;
+
+                    /**
+                     * Encodes the specified CombinedQuery message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.CombinedQuery.verify|verify} messages.
+                     * @param message CombinedQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.ICombinedQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CombinedQuery message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.CombinedQuery.verify|verify} messages.
+                     * @param message CombinedQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.ICombinedQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CombinedQuery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CombinedQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.CombinedQuery;
+
+                    /**
+                     * Decodes a CombinedQuery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CombinedQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.CombinedQuery;
+
+                    /**
+                     * Verifies a CombinedQuery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CombinedQuery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CombinedQuery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.CombinedQuery;
+
+                    /**
+                     * Creates a plain object from a CombinedQuery message. Also converts values to other types if specified.
+                     * @param message CombinedQuery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.CombinedQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CombinedQuery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CombinedQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CombinedQuery {
+
+                    /** Operator enum. */
+                    enum Operator {
+                        OPERATOR_UNSPECIFIED = 0,
+                        AND = 1,
+                        OR = 2
+                    }
                 }
 
                 /** Properties of a SearchDataObjectsRequest. */

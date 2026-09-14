@@ -999,8 +999,8 @@ export class ApiGatewayServiceClient {
    *   Required. Parent resource of the Gateway, of the form:
    *   `projects/* /locations/*`
    * @param {string} request.gatewayId
-   *   Required. Identifier to assign to the Gateway. Must be unique within scope of
-   *   the parent resource.
+   *   Required. Identifier to assign to the Gateway. Must be unique within scope
+   *   of the parent resource.
    * @param {google.cloud.apigateway.v1.Gateway} request.gateway
    *   Required. Gateway resource.
    * @param {object} [options]
@@ -2039,8 +2039,8 @@ export class ApiGatewayServiceClient {
    *   Required. Parent resource of the API Config, of the form:
    *   `projects/* /locations/global/apis/*`
    * @param {string} request.apiConfigId
-   *   Required. Identifier to assign to the API Config. Must be unique within scope of
-   *   the parent resource.
+   *   Required. Identifier to assign to the API Config. Must be unique within
+   *   scope of the parent resource.
    * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
    *   Required. API resource.
    * @param {object} [options]
