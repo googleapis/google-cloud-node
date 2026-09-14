@@ -79,13 +79,11 @@ describe('MetricsTracerFactory', () => {
     MetricsTracerFactory.enabled = true;
     sandbox.resetHistory();
     await MetricsTracerFactory.resetInstance();
-    const provider =
-      MetricsTracerFactory.getInstance('project-id')!.getMeterProvider();
     const reader = new PeriodicExportingMetricReader({
       exporter: mockExporter,
       exportIntervalMillis: 60000,
     });
-    provider.addMetricReader(reader);
+    MetricsTracerFactory.getInstance('project-id')!.getMeterProvider([reader]);
   });
 
   afterEach(async () => {
