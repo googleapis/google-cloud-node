@@ -58,6 +58,7 @@ import {TEST_BUNDLE_ID, verifyMetadata} from '../test/bundle';
 import {
   bundleToElementArray,
   isEnterprise,
+  isPreferRest,
   Post,
   postConverter,
   postConverterMerge,
@@ -8740,6 +8741,10 @@ describe.skipClassic('non-native Firestore types', () => {
   afterEach(() => verifyInstance(firestore));
 
   async function getFirstSnapshot(query: Query): Promise<QuerySnapshot> {
+    if (query.firestore._settings.preferRest || isPreferRest()) {
+      return query.get();
+    }
+
     const deferred = new DeferredPromise<QuerySnapshot>();
     deferred.promise = new Promise((resolve, reject) => {
       deferred.resolve = resolve;
@@ -8924,7 +8929,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
     error = null;
@@ -8936,7 +8941,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
   });
 
@@ -8950,7 +8955,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
 
     error = null;
@@ -8962,7 +8967,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer (0-4294967295).",
     );
   });
 
