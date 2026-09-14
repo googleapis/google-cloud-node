@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
+	"net"
 	"os"
 	"sync/atomic"
 
@@ -14,6 +15,7 @@ import (
 	"google.golang.org/api/option"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 const (
@@ -93,11 +95,38 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 	_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
 	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
 
-	// 3. Configure TLS matching standard GFE endpoint
-	tlsConfig := &tls.Config{
-		ServerName: spannerDomain,
+	// 3. Resolve the target endpoint. Production (GFE + TLS) is the default;
+	// SPANNER_EMULATOR_HOST selects a plaintext local emulator and
+	// SPANNER_NATIVE_ENDPOINT overrides the host while keeping TLS. Neither is
+	// set in benchmark runs, so the production path is byte-for-byte unchanged.
+	endpoint := spannerEndpoint
+	serverName := spannerDomain
+	plaintext := false
+
+	if h := os.Getenv("SPANNER_EMULATOR_HOST"); h != "" {
+		endpoint = h
+		plaintext = true
+	} else if h := os.Getenv("SPANNER_NATIVE_ENDPOINT"); h != "" {
+		endpoint = h
+		if host, _, splitErr := net.SplitHostPort(h); splitErr == nil {
+			serverName = host
+		} else {
+			serverName = h
+		}
 	}
-	creds := credentials.NewTLS(tlsConfig)
+
+	var creds credentials.TransportCredentials
+	if plaintext {
+		creds = insecure.NewCredentials()
+	} else {
+		creds = credentials.NewTLS(&tls.Config{ServerName: serverName})
+	}
+
+	if os.Getenv("SPANNER_NATIVE_DEBUG") != "" {
+		fmt.Fprintf(os.Stderr,
+			"[spanner-core] endpoint=%s plaintext=%v serverName=%s channels=%d\n",
+			endpoint, plaintext, serverName, limit)
+	}
 
 	dialOpts := []grpc.DialOption{
 		grpc.WithTransportCredentials(creds),
@@ -116,10 +145,10 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 	// 4. Create multiplexed gRPC connection pool matching the requested channelCount
 	conns := make([]*grpc.ClientConn, limit)
 	for i := 0; i < limit; i++ {
-		conn, err := grpc.DialContext(ctx, spannerEndpoint, dialOpts...)
+		conn, err := grpc.DialContext(ctx, endpoint, dialOpts...)
 		if err != nil {
 			cancel()
-			return nil, fmt.Errorf("failed to connect to Spanner endpoint %s: %w", spannerEndpoint, err)
+			return nil, fmt.Errorf("failed to connect to Spanner endpoint %s: %w", endpoint, err)
 		}
 		conns[i] = conn
 	}

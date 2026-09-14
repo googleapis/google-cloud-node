@@ -35,6 +35,10 @@ typedef struct {
     char* error_msg;
     int error_code;
     int is_last;
+    // Serialized google.spanner.v1.ResultSetMetadata, present only on the
+    // first batch of a stream. Must stay in sync with spanner-go/main.go.
+    void* metadata_pb;
+    int metadata_len;
 } CSpannerBatch;
 
 typedef void (*StreamDataCallback)(void* user_data, CSpannerBatch* batch);
@@ -70,6 +74,7 @@ extern "C" void OnGoStreamData(void* user_data, CSpannerBatch* batch) {
             if (batch->json_rows) free(batch->json_rows);
             if (batch->server_timing) free(batch->server_timing);
             if (batch->error_msg) free(batch->error_msg);
+            if (batch->metadata_pb) free(batch->metadata_pb);
             free(batch);
         }
         return;
@@ -93,15 +98,21 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
         if (batch->error_msg != nullptr) {
             napi_value err_obj, err_msg_val, err_code_val;
             napi_create_string_utf8(env, batch->error_msg, NAPI_AUTO_LENGTH, &err_msg_val);
+            // NOTE: napi_create_error's `code` parameter must be a JS *string*
+            // (or nullptr). Passing a number makes the call fail and leaves
+            // err_obj uninitialised, which destroys the real error message.
+            // Attach the numeric gRPC status as a `code` property instead so
+            // the object matches the grpc ServiceError shape callers expect.
+            napi_create_error(env, nullptr, err_msg_val, &err_obj);
             napi_create_int32(env, batch->error_code, &err_code_val);
-            napi_create_error(env, err_code_val, err_msg_val, &err_obj);
+            napi_set_named_property(env, err_obj, "code", err_code_val);
 
-            napi_value argv[3] = { err_obj, null_val, null_val };
-            napi_call_function(env, global, js_cb, 3, argv, nullptr);
+            napi_value argv[4] = { err_obj, null_val, null_val, null_val };
+            napi_call_function(env, global, js_cb, 4, argv, nullptr);
         } else if (batch->is_last && batch->row_count == 0) {
             // End of stream signal
-            napi_value argv[3] = { null_val, null_val, null_val };
-            napi_call_function(env, global, js_cb, 3, argv, nullptr);
+            napi_value argv[4] = { null_val, null_val, null_val, null_val };
+            napi_call_function(env, global, js_cb, 4, argv, nullptr);
         } else {
             napi_value rows_val = null_val;
 
@@ -166,13 +177,25 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
             napi_create_uint32(env, (uint32_t)batch->attempt_count, &attempt_val);
             napi_set_named_property(env, telemetry_obj, "attemptCount", attempt_val);
 
-            napi_value argv[3] = { null_val, rows_val, telemetry_obj };
-            napi_call_function(env, global, js_cb, 3, argv, nullptr);
+            // Serialized ResultSetMetadata, present only on the first batch of
+            // the stream. Copied once per stream; not on the per-row path.
+            napi_value metadata_val = null_val;
+            if (batch->metadata_pb != nullptr && batch->metadata_len > 0) {
+                void* copy_data = nullptr;
+                napi_create_buffer_copy(env,
+                                        (size_t)batch->metadata_len,
+                                        batch->metadata_pb,
+                                        &copy_data,
+                                        &metadata_val);
+            }
+
+            napi_value argv[4] = { null_val, rows_val, telemetry_obj, metadata_val };
+            napi_call_function(env, global, js_cb, 4, argv, nullptr);
 
             if (batch->is_last) {
                 // If this was the final batch with data, send EOF after it
-                napi_value eof_argv[3] = { null_val, null_val, null_val };
-                napi_call_function(env, global, js_cb, 3, eof_argv, nullptr);
+                napi_value eof_argv[4] = { null_val, null_val, null_val, null_val };
+                napi_call_function(env, global, js_cb, 4, eof_argv, nullptr);
             }
         }
     }
@@ -183,6 +206,7 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
         if (batch->json_rows != nullptr) free(batch->json_rows);
         if (batch->server_timing != nullptr) free(batch->server_timing);
         if (batch->error_msg != nullptr) free(batch->error_msg);
+        if (batch->metadata_pb != nullptr) free(batch->metadata_pb);
         bool is_final = (batch->is_last != 0) || (batch->error_msg != nullptr);
         free(batch);
 

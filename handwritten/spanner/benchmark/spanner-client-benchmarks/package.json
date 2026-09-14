@@ -1,0 +1,28 @@
+{
+  "name": "spanner-node-benchmark",
+  "version": "1.0.0",
+  "description": "Spanner Node.js Client Benchmark in TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node index.ts",
+    "lint": "gts check",
+    "format": "gts fix"
+  },
+  "dependencies": {
+    "@google-cloud/opentelemetry-cloud-monitoring-exporter": "^0.21.0",
+    "@google-cloud/spanner": "file:../..",
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/core": "^2.7.1",
+    "@opentelemetry/resources": "^2.7.1",
+    "@opentelemetry/sdk-metrics": "^2.7.1",
+    "@opentelemetry/semantic-conventions": "^1.28.0",
+    "commander": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "gts": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}

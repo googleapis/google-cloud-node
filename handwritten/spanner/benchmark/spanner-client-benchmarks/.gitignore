@@ -1,0 +1,5 @@
+# Build outputs and dependencies for the vendored benchmark app.
+# Upstream keeps these rules in its repository-root .gitignore, which is not
+# part of the vendored `node/` subtree.
+dist/
+node_modules/

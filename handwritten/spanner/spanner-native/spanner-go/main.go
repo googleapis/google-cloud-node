@@ -32,6 +32,11 @@ typedef struct {
     char* error_msg;
     int error_code;
     int is_last;
+    // Serialized google.spanner.v1.ResultSetMetadata. Emitted exactly once per
+    // stream (on the first batch) so the Node layer can build column decoders
+    // and produce stock-compatible Row objects. Zero per-row cost.
+    void* metadata_pb;
+    int metadata_len;
 } CSpannerBatch;
 
 typedef void (*StreamDataCallback)(void* user_data, CSpannerBatch* batch);
@@ -163,6 +168,7 @@ func sendBatch(
 	errMsg string,
 	errCode int,
 	isLast bool,
+	metadataBytes []byte,
 ) {
 	cBatch := (*C.CSpannerBatch)(C.malloc(C.size_t(unsafe.Sizeof(C.CSpannerBatch{}))))
 	*cBatch = C.CSpannerBatch{}
@@ -178,6 +184,13 @@ func sendBatch(
 	}
 	if serverTiming != "" {
 		cBatch.server_timing = C.CString(serverTiming)
+	}
+
+	// Attach the serialized ResultSetMetadata if this is the first batch of the
+	// stream. C.CBytes allocates with malloc; the N-API layer frees it.
+	if len(metadataBytes) > 0 {
+		cBatch.metadata_pb = C.CBytes(metadataBytes)
+		cBatch.metadata_len = C.int(len(metadataBytes))
 	}
 
 	rowCount := len(batch)
@@ -277,7 +290,7 @@ func ExecuteStreamingSqlGo(
 ) {
 	client := getClient(uintptr(handle))
 	if client == nil {
-		sendBatch(cb, userData, nil, nil, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true)
+		sendBatch(cb, userData, nil, nil, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true, nil)
 		return
 	}
 
@@ -310,13 +323,26 @@ func ExecuteStreamingSqlGo(
 		var currentRow []*structpb.Value
 		batch := make([][]*structpb.Value, 0, 100)
 
+		// Serialized ResultSetMetadata, handed to Node on the first batch only.
+		// takeMetadata() returns it once and then always returns nil, so the
+		// per-row streaming path stays untouched.
+		var pendingMetadata []byte
+		takeMetadata := func() []byte {
+			if pendingMetadata == nil {
+				return nil
+			}
+			md := pendingMetadata
+			pendingMetadata = nil
+			return md
+		}
+
 		for {
 			attemptCount++
 
 			// 1. Decode ExecuteSqlRequest protobuf bytes
 			var req spannerpb.ExecuteSqlRequest
 			if err := proto.Unmarshal(rawBytes, &req); err != nil {
-				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true)
+				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true, nil)
 				return
 			}
 
@@ -331,7 +357,7 @@ func ExecuteStreamingSqlGo(
 			// Fetch OAuth2 bearer token from memory cache
 			token, err := client.GetToken()
 			if err != nil {
-				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
+				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true, nil)
 				return
 			}
 			if token != nil && token.AccessToken != "" {
@@ -347,7 +373,7 @@ func ExecuteStreamingSqlGo(
 				if (st.Code() == codes.Unavailable || st.Code() == codes.Internal) && len(lastResumeToken) > 0 {
 					continue // Retry loop
 				}
-				sendBatch(cb, userData, nil, nil, "", attemptCount, st.Message(), int(st.Code()), true)
+				sendBatch(cb, userData, nil, nil, "", attemptCount, st.Message(), int(st.Code()), true, nil)
 				return
 			}
 
@@ -373,7 +399,7 @@ func ExecuteStreamingSqlGo(
 						shouldRetry = true
 						break
 					}
-					sendBatch(cb, userData, nil, nil, serverTiming, attemptCount, st.Message(), int(st.Code()), true)
+					sendBatch(cb, userData, nil, nil, serverTiming, attemptCount, st.Message(), int(st.Code()), true, nil)
 					return
 				}
 
@@ -383,6 +409,12 @@ func ExecuteStreamingSqlGo(
 
 				if rowType == nil && chunk.Metadata != nil && chunk.Metadata.RowType != nil {
 					rowType = chunk.Metadata.RowType.Fields
+					// Serialize the full ResultSetMetadata exactly once so the
+					// Node layer can construct column names + Spanner types
+					// with full fidelity (including type annotations).
+					if mdBytes, mdErr := proto.Marshal(chunk.Metadata); mdErr == nil {
+						pendingMetadata = mdBytes
+					}
 				}
 
 				numFields := len(rowType)
@@ -402,7 +434,7 @@ func ExecuteStreamingSqlGo(
 							batch = append(batch, currentRow)
 							currentRow = make([]*structpb.Value, 0, numFields)
 							if len(batch) >= 100 {
-								sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false)
+								sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false, takeMetadata())
 								batch = make([][]*structpb.Value, 0, 100)
 							}
 						}
@@ -422,7 +454,7 @@ func ExecuteStreamingSqlGo(
 						batch = append(batch, currentRow)
 						currentRow = make([]*structpb.Value, 0, numFields)
 						if len(batch) >= 100 {
-							sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false)
+							sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, false, takeMetadata())
 							batch = make([][]*structpb.Value, 0, 100)
 						}
 					}
@@ -451,7 +483,7 @@ func ExecuteStreamingSqlGo(
 			}
 
 			// Send final batch and EOF signal
-			sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, true)
+			sendBatch(cb, userData, batch, rowType, serverTiming, attemptCount, "", 0, true, takeMetadata())
 			break
 		}
 	}()
