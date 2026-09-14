@@ -37,6 +37,7 @@ import {
   RawResponseType,
 } from '../../src/apitypes';
 import {GoogleError} from '../../src/googleError';
+import {Status} from '../../src/status';
 import {OngoingCallPromise} from '../../src/call';
 import {
   OtelHarness,
@@ -132,14 +133,75 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.name, 'StorageClient.GetObject');
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['error.message'], 'RPC Failed');
+      // No status code on this error, so error.type falls back to the class.
       assert.strictEqual(span.attributes['error.type'], 'Error');
-      assert.strictEqual(span.attributes['exception.type'], 'CustomRpcError');
+      // exception.* belongs on the exception event, not on the span.
+      assert.strictEqual(span.attributes['exception.type'], undefined);
       assert.strictEqual(span.events.length, 1);
       assert.strictEqual(span.events[0].name, 'exception');
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.type'],
+        'CustomRpcError',
+      );
       assert.strictEqual(
         span.events[0].attributes?.['exception.message'],
         'RPC Failed',
       );
+    });
+
+    // The three shapes below are what actually reach recordError in
+    // production. grpc-js builds failures as a plain Error, so the class name
+    // carries no information; the status code is the only stable identifier.
+    it('derives error.type from the gRPC status code on a grpc-js error', async () => {
+      // Shape produced by grpc-js callErrorFromStatus:
+      // Object.assign(new Error(message), status).
+      const error = Object.assign(
+        new Error('5 NOT_FOUND: object does not exist'),
+        {code: 5},
+      );
+
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw error;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(error.constructor.name, 'Error');
+      assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
+      assert.strictEqual(span.attributes['exception.type'], undefined);
+    });
+
+    it('derives the same error.type from an equivalent REST GoogleError', async () => {
+      // The REST path builds a real GoogleError, so the class name differs
+      // from the gRPC case above even though the failure is identical.
+      const error = new GoogleError('object does not exist');
+      error.code = Status.NOT_FOUND;
+
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw error;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(error.constructor.name, 'GoogleError');
+      assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
+    });
+
+    it('uses the string code for Node system errors', async () => {
+      const error = Object.assign(new Error('connect ECONNREFUSED'), {
+        code: 'ECONNREFUSED',
+      });
+
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw error;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.attributes['error.type'], 'ECONNREFUSED');
     });
 
     it('handles missing optional static arguments gracefully', async () => {
@@ -620,10 +682,14 @@ describe('TracerHelper', () => {
             );
             assert.strictEqual(
               spans[0].attributes['exception.type'],
-              'CustomRpcError',
+              undefined,
             );
             assert.strictEqual(spans[0].events.length, 1);
             assert.strictEqual(spans[0].events[0].name, 'exception');
+            assert.strictEqual(
+              spans[0].events[0].attributes?.['exception.type'],
+              'CustomRpcError',
+            );
             done();
           },
         );
