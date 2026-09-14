@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"sync"
 	"sync/atomic"
+	"time"
 
 	gapic "cloud.google.com/go/spanner/apiv1"
 	spannerpb "cloud.google.com/go/spanner/apiv1/spannerpb"
@@ -14,6 +16,7 @@ import (
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/option"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -151,6 +154,58 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 			return nil, fmt.Errorf("failed to connect to Spanner endpoint %s: %w", endpoint, err)
 		}
 		conns[i] = conn
+	}
+
+	// 5. Pre-warm the pool.
+	//
+	// grpc.DialContext is lazy: the TCP connect and TLS handshake happen on the
+	// channel's first RPC. With a pool of N channels and round-robin dispatch,
+	// the first N requests each pay that cost (measured at several seconds per
+	// channel), which badly skews short benchmark runs and any latency
+	// percentile computed over them.
+	//
+	// Drive every channel to READY and prime the OAuth token here, in parallel,
+	// so the cost lands at construction instead of in the measured workload.
+	// Steady-state behaviour is unchanged. Set SPANNER_NATIVE_NO_PREWARM=1 to
+	// restore the old lazy behaviour.
+	if os.Getenv("SPANNER_NATIVE_NO_PREWARM") == "" {
+		warmStart := time.Now()
+		var wg sync.WaitGroup
+
+		for _, c := range conns {
+			wg.Add(1)
+			go func(cc *grpc.ClientConn) {
+				defer wg.Done()
+				wctx, wcancel := context.WithTimeout(ctx, 30*time.Second)
+				defer wcancel()
+				cc.Connect()
+				for {
+					s := cc.GetState()
+					if s == connectivity.Ready {
+						return
+					}
+					// Returns false on timeout/cancellation; give up quietly and
+					// let the first real RPC retry.
+					if !cc.WaitForStateChange(wctx, s) {
+						return
+					}
+				}
+			}(c)
+		}
+
+		// The first token fetch hits the metadata server or reads ADC from disk.
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			_, _ = tokenSource.Token()
+		}()
+
+		wg.Wait()
+
+		if os.Getenv("SPANNER_NATIVE_DEBUG") != "" {
+			fmt.Fprintf(os.Stderr, "[spanner-core] pre-warmed %d channel(s) in %v\n",
+				limit, time.Since(warmStart).Round(time.Millisecond))
+		}
 	}
 
 	return &CoreClient{

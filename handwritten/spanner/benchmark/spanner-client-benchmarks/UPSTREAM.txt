@@ -1,3 +1,31 @@
 repo: https://github.com/olavloite/spanner-client-benchmarks
 commit: cfc9b49a9651c6930d06062002ac68a2882028ae
 vendored: 2026-09-14T18:57:27Z
+
+LOCAL DEVIATIONS FROM UPSTREAM
+------------------------------
+Everything else in this tree is byte-identical to the upstream commit above.
+
+1. package.json
+   dependency "@google-cloud/spanner" changed from "^8.11.0" to "file:../.."
+   so the benchmark exercises the local client build (which routes through the
+   Go shared core when SPANNER_NATIVE_CORE=go).
+
+2. src/benchmarks/point-select.ts
+   The bound `id` parameter is now formatted as a STRING key `user-<n>` instead
+   of an INT64. Upstream assumes a reference table with `id INT64`; the target
+   table benchmark_db_async.AsyncBenchmarkTable has a STRING(36) primary key
+   (user-0 .. user-99999), against which the unmodified workload fails with
+   INVALID_ARGUMENT (STRING vs INT64).
+
+   Only the parameter shape changed. The SQL text, the random key selection,
+   the measured region and the result handling are untouched, so this is still
+   a single-row primary-key point lookup.
+
+   Escape hatches:
+     POINT_SELECT_ID_FORMAT=int64   restore upstream behaviour
+     POINT_SELECT_ID_PREFIX=<p>     change the key prefix (default "user-")
+
+3. .gitignore (added)
+   Ignores dist/ and node_modules/. Upstream keeps the equivalent rules in its
+   repository-root .gitignore, which is not part of the vendored node/ subtree.
