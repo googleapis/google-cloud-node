@@ -628,6 +628,89 @@ describe('PartialResultStream', () => {
         stream.resume();
       });
     });
+
+    it('should emit paused event when downstream backpressure is triggered during single-chunk decode', done => {
+      const stream = new PartialResultStream({});
+      let pausedEmitted = false;
+      stream.on('paused', () => {
+        pausedEmitted = true;
+      });
+
+      sandbox.stub(stream, 'push').callsFake(data => {
+        if (data === undefined || data === null) {
+          return true;
+        }
+        return false;
+      });
+
+      const fields = [{name: NAME, type: {code: 'STRING'}}];
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue('row1')],
+        last: true,
+      });
+
+      assert.strictEqual(pausedEmitted, true);
+      done();
+    });
+
+    it('should route first chunk with last=true to _addSingleChunk', done => {
+      const stream = new PartialResultStream({});
+      const addSingleChunkSpy = sandbox.spy(stream as any, '_addSingleChunk');
+      const rows: any[] = [];
+      stream
+        .on('data', row => rows.push(row))
+        .on('end', () => {
+          try {
+            assert.strictEqual(addSingleChunkSpy.calledOnce, true);
+            assert.strictEqual(rows.length, 1);
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
+
+      const fields = [{name: NAME, type: {code: 'STRING'}}];
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue('row1')],
+        last: true,
+      });
+      stream.end();
+    });
+
+    it('should not route subsequent chunks to _addSingleChunk even if last=true', done => {
+      const stream = new PartialResultStream({});
+      const addSingleChunkSpy = sandbox.spy(stream as any, '_addSingleChunk');
+      const rows: any[] = [];
+      stream
+        .on('data', row => rows.push(row))
+        .on('end', () => {
+          try {
+            assert.strictEqual(addSingleChunkSpy.called, false);
+            assert.strictEqual(rows.length, 2);
+            done();
+          } catch (err) {
+            done(err);
+          }
+        })
+        .on('error', done);
+
+      const fields = [{name: NAME, type: {code: 'STRING'}}];
+      // First chunk: not last
+      stream.write({
+        metadata: {rowType: {fields}},
+        values: [convertToIValue('row1')],
+        last: false,
+      });
+      // Second chunk: last
+      stream.write({
+        values: [convertToIValue('row2')],
+        last: true,
+      });
+      stream.end();
+    });
   });
 
   describe('partialResultStream', () => {
@@ -1496,9 +1579,174 @@ describe('PartialResultStream', () => {
       });
     });
   });
+
+  describe('decodeRowsDirect & createFieldDecoders', () => {
+    it('should return empty array if fields or values are empty', () => {
+      assert.deepStrictEqual(prs.decodeRowsDirect({values: []} as any), []);
+      assert.deepStrictEqual(
+        prs.decodeRowsDirect({
+          metadata: {rowType: {fields: []}},
+          values: [convertToIValue('test')],
+        } as any),
+        [],
+      );
+    });
+
+    it('should decode basic rows in standard RowImpl mode', () => {
+      const chunk: any = {
+        metadata: {
+          rowType: {
+            fields: [
+              {name: 'id', type: {code: 'INT64'}},
+              {name: 'name', type: {code: 'STRING'}},
+            ],
+          },
+        },
+        values: [convertToIValue('101'), convertToIValue('Alice')],
+      };
+
+      const rows = prs.decodeRowsDirect(chunk);
+      assert.strictEqual(rows.length, 1);
+      assert.strictEqual(Array.isArray(rows[0]), true);
+      assert.strictEqual(rows[0][0].name, 'id');
+      assert.strictEqual(rows[0][0].value.value, '101');
+      assert.strictEqual(rows[0][1].name, 'name');
+      assert.strictEqual(rows[0][1].value, 'Alice');
+      assert.deepStrictEqual(rows[0].toJSON(), {id: 101, name: 'Alice'});
+    });
+
+    it('should decode rows in JSON mode directly', () => {
+      const chunk: any = {
+        metadata: {
+          rowType: {
+            fields: [
+              {name: 'id', type: {code: 'INT64'}},
+              {name: 'name', type: {code: 'STRING'}},
+            ],
+          },
+        },
+        values: [convertToIValue('101'), convertToIValue('Alice')],
+      };
+
+      const rows = prs.decodeRowsDirect(chunk, {json: true});
+      assert.strictEqual(rows.length, 1);
+      assert.deepStrictEqual(rows[0], {id: 101, name: 'Alice'});
+    });
+
+    it('should handle nameless columns in JSON mode', () => {
+      const chunk: any = {
+        metadata: {
+          rowType: {
+            fields: [
+              {name: '', type: {code: 'INT64'}},
+              {name: 'name', type: {code: 'STRING'}},
+            ],
+          },
+        },
+        values: [convertToIValue('101'), convertToIValue('Alice')],
+      };
+
+      // Default: omit nameless columns
+      const rowsOmitted = prs.decodeRowsDirect(chunk, {json: true});
+      assert.deepStrictEqual(rowsOmitted[0], {name: 'Alice'});
+
+      // With includeNameless: true
+      const rowsIncluded = prs.decodeRowsDirect(chunk, {
+        json: true,
+        jsonOptions: {includeNameless: true},
+      });
+      assert.deepStrictEqual(rowsIncluded[0], {_0: 101, name: 'Alice'});
+    });
+
+    it('should wrap serialization errors in JSON mode with actionable error message', () => {
+      const chunk: any = {
+        metadata: {
+          rowType: {
+            fields: [{name: 'large_num', type: {code: 'INT64'}}],
+          },
+        },
+        values: [convertToIValue('9223372036854775807')],
+      };
+
+      assert.throws(
+        () => {
+          prs.decodeRowsDirect(chunk, {
+            json: true,
+            jsonOptions: {wrapNumbers: false},
+          });
+        },
+        (err: Error) => {
+          assert(
+            err.message.includes(
+              'Serializing column "large_num" encountered an error',
+            ),
+          );
+          assert(
+            err.message.includes(
+              'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+            ),
+          );
+          return true;
+        },
+      );
+    });
+
+    it('should respect custom columnsMetadata in decoders', () => {
+      const getDecoderSpy = sandbox.spy(codec, 'getDecoder');
+      const mockProtoType = {decode: () => {}, toObject: () => {}};
+      const chunk: any = {
+        metadata: {
+          rowType: {
+            fields: [{name: 'protoCol', type: {code: 'PROTO'}}],
+          },
+        },
+        values: [convertToIValue(Buffer.from('test').toString('base64'))],
+      };
+
+      const columnsMetadata = {
+        protoCol: mockProtoType,
+      };
+
+      prs.decodeRowsDirect(chunk, {
+        columnsMetadata,
+      });
+      assert.strictEqual(getDecoderSpy.called, true);
+      const [, columnMetadataArg] = getDecoderSpy.lastCall.args;
+      assert.strictEqual(columnMetadataArg, mockProtoType);
+    });
+
+    it('should call custom codec.decode when codec.decode is stubbed', () => {
+      const stub = sandbox.stub(codec, 'decode').returns('custom_decoded');
+      const fields = [{name: 'col', type: {code: 'STRING'}}] as any;
+      const decoders = prs.createFieldDecoders(fields);
+
+      const result = decoders[0]('raw');
+      assert.strictEqual(result, 'custom_decoded');
+      assert.strictEqual(stub.callCount, 1);
+    });
+
+    it('should fall back to RowImpl toJSON when codec.convertFieldsToJson is stubbed in JSON mode', () => {
+      const stub = sandbox
+        .stub(codec, 'convertFieldsToJson')
+        .returns({mocked: true} as any);
+
+      const chunk: any = {
+        metadata: {
+          rowType: {
+            fields: [{name: 'id', type: {code: 'INT64'}}],
+          },
+        },
+        values: [convertToIValue('101')],
+      };
+
+      const rows = prs.decodeRowsDirect(chunk, {json: true});
+      assert.deepStrictEqual(rows[0], {mocked: true});
+      assert.strictEqual(stub.callCount, 1);
+    });
+  });
 });
 
-function convertToIValue(value) {
+export function convertToIValue(value) {
   let kind: string;
 
   if (typeof value === 'number') {
