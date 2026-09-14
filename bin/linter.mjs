@@ -15,6 +15,7 @@
 import {execFileSync, execFile} from 'child_process';
 import {existsSync} from 'fs';
 import path from 'path';
+import {fileURLToPath} from 'url';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
 
@@ -31,6 +32,8 @@ async function run() {
     } else {
       changedTsFiles = getChangedFiles();
     }
+
+    changedTsFiles = changedTsFiles.filter(shouldLintFile);
 
     if (changedTsFiles.length === 0) {
       console.log('No TypeScript files changed. Skipping checks.');
@@ -63,6 +66,26 @@ async function run() {
 
 // --- Git Changed Files Logic ---
 
+const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
+let repoRoot;
+
+/**
+ * Resolves and caches the repository root path.
+ */
+function getRepoRoot() {
+  if (!repoRoot) {
+    try {
+      repoRoot = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+        encoding: 'utf8',
+        stdio: 'pipe',
+      }).trim();
+    } catch (_err) {
+      repoRoot = REPO_ROOT;
+    }
+  }
+  return repoRoot;
+}
+
 /**
  * Executes a Git command synchronously.
  */
@@ -70,6 +93,11 @@ function runGit(args, options = {}) {
   return execFileSync('git', args, {
     encoding: 'utf8',
     stdio: 'pipe',
+    cwd: getRepoRoot(),
+    env: {
+      ...process.env,
+      GIT_TERMINAL_PROMPT: '0',
+    },
     ...options,
   });
 }
@@ -108,7 +136,7 @@ function getChangedFilesStrict() {
     return output
       .split('\n')
       .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
+      .filter(f => f.length > 0 && existsSync(path.resolve(getRepoRoot(), f)));
   } catch (err) {
     if (err.status !== 1) {
       throw new Error(
@@ -148,7 +176,9 @@ function getChangedFiles() {
       return output
         .split('\n')
         .map(f => f.trim())
-        .filter(f => f.length > 0 && existsSync(f));
+        .filter(
+          f => f.length > 0 && existsSync(path.resolve(getRepoRoot(), f)),
+        );
     } catch {
       // Continue to the next fallback ref
     }
@@ -167,7 +197,7 @@ function getChangedFiles() {
     return output
       .split('\n')
       .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
+      .filter(f => f.length > 0 && existsSync(path.resolve(getRepoRoot(), f)));
   } catch {
     return [];
   }
@@ -175,8 +205,12 @@ function getChangedFiles() {
 
 // --- ESLint Checker ---
 
+// Top-level repository directories that the linter ignores (e.g. generated packages)
+const IGNORED_ROOT_DIRS = new Set(['packages']);
+
+// Recursive path segments ignored anywhere in any package (build artifacts, fixtures, etc.)
 // LINT.IfChange(ignored_path_segments)
-const IGNORED_PATH_SEGMENTS = [
+const IGNORED_PATH_SEGMENTS = new Set([
   'node_modules',
   'build',
   'dist',
@@ -190,19 +224,30 @@ const IGNORED_PATH_SEGMENTS = [
   'coverage',
   '.nyc_output',
   'protos',
-];
+]);
 // LINT.ThenChange(.eslintrc.json:ignorePatterns)
 
 /**
  * Determines whether a file should undergo ESLint checks.
- * Excludes declaration files (*.d.ts), auto-generated artifacts, and test baselines/fixtures.
+ * Excludes declaration files (*.d.ts), auto-generated artifacts, test baselines/fixtures,
+ * and top-level ignored directories.
  */
 function shouldLintFile(filePath) {
   if (filePath.endsWith('.d.ts')) {
     return false;
   }
-  const segments = filePath.split(/[\\/]/);
-  return !segments.some(seg => IGNORED_PATH_SEGMENTS.includes(seg));
+  const relPath = path
+    .relative(getRepoRoot(), path.resolve(getRepoRoot(), filePath))
+    .replace(/\\/g, '/');
+  const segments = relPath.split('/');
+
+  // 1. Ignore if inside an ignored top-level directory (e.g. packages/)
+  if (IGNORED_ROOT_DIRS.has(segments[0])) {
+    return false;
+  }
+
+  // 2. Ignore if any segment matches an artifact or fixture folder
+  return !segments.some(seg => IGNORED_PATH_SEGMENTS.has(seg));
 }
 
 /**
@@ -220,7 +265,7 @@ async function checkEslint(filesToCheck) {
   // Group files by package directory to set tsconfigRootDir properly for typescript-eslint
   const filesByPkg = new Map();
   for (const file of filesToProcess) {
-    const pkgDir = findTsconfigDir(file) || process.cwd();
+    const pkgDir = findTsconfigDir(file) || getRepoRoot();
     if (!filesByPkg.has(pkgDir)) {
       filesByPkg.set(pkgDir, []);
     }
@@ -234,7 +279,7 @@ async function checkEslint(filesToCheck) {
       const absPkgDir = path.resolve(pkgDir);
       const eslint = new ESLint({
         cwd: absPkgDir,
-        resolvePluginsRelativeTo: process.cwd(),
+        resolvePluginsRelativeTo: getRepoRoot(),
         overrideConfig: {
           parserOptions: {
             tsconfigRootDir: absPkgDir,
@@ -243,7 +288,7 @@ async function checkEslint(filesToCheck) {
       });
 
       const relativeFiles = files.map(f =>
-        path.relative(absPkgDir, path.resolve(f)),
+        path.relative(absPkgDir, path.resolve(getRepoRoot(), f)),
       );
       const results = await eslint.lintFiles(relativeFiles);
       const formatter = await eslint.loadFormatter('stylish');
@@ -284,7 +329,7 @@ async function checkEslint(filesToCheck) {
  * Caches directories to avoid redundant disk operations.
  */
 function findTsconfigDir(filePath) {
-  let currentDir = path.resolve(path.dirname(filePath));
+  let currentDir = path.resolve(getRepoRoot(), path.dirname(filePath));
   const root = path.parse(currentDir).root;
 
   while (currentDir && currentDir !== root) {
@@ -329,7 +374,13 @@ async function ensurePackageDependencies(packages) {
       const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
       await execFileAsync(
         npmCmd,
-        ['install', '--no-audit', '--no-fund', '--ignore-scripts'],
+        [
+          'install',
+          '--no-audit',
+          '--no-fund',
+          '--ignore-scripts',
+          '--prefer-offline',
+        ],
         {
           cwd: pkg,
         },
@@ -354,8 +405,8 @@ async function checkTypeSafety(packagesToCheck) {
   const checks = Array.from(packagesToCheck).map(async pkg => {
     try {
       console.log(`  Type checking ${pkg}...`);
-      await execFileAsync('node', [
-        'node_modules/typescript/bin/tsc',
+      await execFileAsync(process.execPath, [
+        path.join(getRepoRoot(), 'node_modules/typescript/bin/tsc'),
         '--noEmit',
         '--project',
         path.join(pkg, 'tsconfig.json'),
