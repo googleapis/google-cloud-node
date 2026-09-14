@@ -120,7 +120,7 @@ export {
   checkTelemetryEnabled,
 } from './util';
 
-export {StaticTraceContext, traceAttempt} from './observability/TracerHelper';
+export {StaticTraceContext, traceCall} from './observability/TracerHelper';
 
 export {ServiceError, ChannelCredentials} from '@grpc/grpc-js';
 export {warn} from './warnings';

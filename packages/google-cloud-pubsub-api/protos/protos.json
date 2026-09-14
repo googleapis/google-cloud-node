@@ -3031,6 +3031,44 @@
                 "SeekResponse": {
                   "fields": {}
                 },
+                "PubsubClientTelemetry": {
+                  "oneofs": {
+                    "operation": {
+                      "oneof": [
+                        "publishOperation"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "publishOperation": {
+                      "type": "PublishOperation",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "PublishOperation": {
+                      "fields": {
+                        "hedgedAttemptCount": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "publishStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "SchemaService": {
                   "options": {
                     "(google.api.default_host)": "pubsub.googleapis.com",

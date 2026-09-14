@@ -25,6 +25,7 @@ import {
   ApplicationServiceClient,
   AudienceSegmentServiceClient,
   BandwidthGroupServiceClient,
+  BreakTemplateServiceClient,
   BrowserLanguageServiceClient,
   BrowserServiceClient,
   CdnConfigServiceClient,
@@ -109,6 +110,11 @@ function doStuffWithAudienceSegmentServiceClient(
 }
 function doStuffWithBandwidthGroupServiceClient(
   client: BandwidthGroupServiceClient,
+) {
+  client.close();
+}
+function doStuffWithBreakTemplateServiceClient(
+  client: BreakTemplateServiceClient,
 ) {
   client.close();
 }
@@ -362,6 +368,9 @@ function main() {
   // check that the client instance can be created
   const bandwidthGroupServiceClient = new BandwidthGroupServiceClient();
   doStuffWithBandwidthGroupServiceClient(bandwidthGroupServiceClient);
+  // check that the client instance can be created
+  const breakTemplateServiceClient = new BreakTemplateServiceClient();
+  doStuffWithBreakTemplateServiceClient(breakTemplateServiceClient);
   // check that the client instance can be created
   const browserLanguageServiceClient = new BrowserLanguageServiceClient();
   doStuffWithBrowserLanguageServiceClient(browserLanguageServiceClient);

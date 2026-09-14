@@ -47,6 +47,62 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AuditManager;
 
                     /**
+                     * Calls CreateAuditSchedule.
+                     * @param request CreateAuditScheduleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuditSchedule
+                     */
+                    public createAuditSchedule(request: google.cloud.auditmanager.v1.ICreateAuditScheduleRequest, callback: google.cloud.auditmanager.v1.AuditManager.CreateAuditScheduleCallback): void;
+
+                    /**
+                     * Calls CreateAuditSchedule.
+                     * @param request CreateAuditScheduleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAuditSchedule(request: google.cloud.auditmanager.v1.ICreateAuditScheduleRequest): Promise<google.cloud.auditmanager.v1.AuditSchedule>;
+
+                    /**
+                     * Calls UpdateAuditSchedule.
+                     * @param request UpdateAuditScheduleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuditSchedule
+                     */
+                    public updateAuditSchedule(request: google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest, callback: google.cloud.auditmanager.v1.AuditManager.UpdateAuditScheduleCallback): void;
+
+                    /**
+                     * Calls UpdateAuditSchedule.
+                     * @param request UpdateAuditScheduleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAuditSchedule(request: google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest): Promise<google.cloud.auditmanager.v1.AuditSchedule>;
+
+                    /**
+                     * Calls GetAuditSchedule.
+                     * @param request GetAuditScheduleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuditSchedule
+                     */
+                    public getAuditSchedule(request: google.cloud.auditmanager.v1.IGetAuditScheduleRequest, callback: google.cloud.auditmanager.v1.AuditManager.GetAuditScheduleCallback): void;
+
+                    /**
+                     * Calls GetAuditSchedule.
+                     * @param request GetAuditScheduleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAuditSchedule(request: google.cloud.auditmanager.v1.IGetAuditScheduleRequest): Promise<google.cloud.auditmanager.v1.AuditSchedule>;
+
+                    /**
+                     * Calls ListAuditSchedules.
+                     * @param request ListAuditSchedulesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAuditSchedulesResponse
+                     */
+                    public listAuditSchedules(request: google.cloud.auditmanager.v1.IListAuditSchedulesRequest, callback: google.cloud.auditmanager.v1.AuditManager.ListAuditSchedulesCallback): void;
+
+                    /**
+                     * Calls ListAuditSchedules.
+                     * @param request ListAuditSchedulesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAuditSchedules(request: google.cloud.auditmanager.v1.IListAuditSchedulesRequest): Promise<google.cloud.auditmanager.v1.ListAuditSchedulesResponse>;
+
+                    /**
                      * Calls EnrollResource.
                      * @param request EnrollResourceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Enrollment
@@ -162,6 +218,34 @@ export namespace google {
                 namespace AuditManager {
 
                     /**
+                     * Callback as used by {@link google.cloud.auditmanager.v1.AuditManager|createAuditSchedule}.
+                     * @param error Error, if any
+                     * @param [response] AuditSchedule
+                     */
+                    type CreateAuditScheduleCallback = (error: (Error|null), response?: google.cloud.auditmanager.v1.AuditSchedule) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.auditmanager.v1.AuditManager|updateAuditSchedule}.
+                     * @param error Error, if any
+                     * @param [response] AuditSchedule
+                     */
+                    type UpdateAuditScheduleCallback = (error: (Error|null), response?: google.cloud.auditmanager.v1.AuditSchedule) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.auditmanager.v1.AuditManager|getAuditSchedule}.
+                     * @param error Error, if any
+                     * @param [response] AuditSchedule
+                     */
+                    type GetAuditScheduleCallback = (error: (Error|null), response?: google.cloud.auditmanager.v1.AuditSchedule) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.auditmanager.v1.AuditManager|listAuditSchedules}.
+                     * @param error Error, if any
+                     * @param [response] ListAuditSchedulesResponse
+                     */
+                    type ListAuditSchedulesCallback = (error: (Error|null), response?: google.cloud.auditmanager.v1.ListAuditSchedulesResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.auditmanager.v1.AuditManager|enrollResource}.
                      * @param error Error, if any
                      * @param [response] Enrollment
@@ -241,6 +325,17 @@ export namespace google {
                     AUDIT_NOT_SUPPORTED = 5
                 }
 
+                /** ScheduleState enum. */
+                enum ScheduleState {
+                    SCHEDULE_STATE_UNSPECIFIED = 0,
+                    SCHEDULE_STATE_ACTIVE = 1,
+                    SCHEDULE_STATE_PAUSED = 2,
+                    SCHEDULE_STATE_COMPLETED = 3,
+                    SCHEDULE_STATE_FAILED_SETUP = 4,
+                    SCHEDULE_STATE_ERROR = 5,
+                    SCHEDULE_STATE_DELETED = 6
+                }
+
                 /** Properties of an EnrollResourceRequest. */
                 interface IEnrollResourceRequest {
 
@@ -249,6 +344,9 @@ export namespace google {
 
                     /** EnrollResourceRequest destinations */
                     destinations?: (google.cloud.auditmanager.v1.EnrollResourceRequest.IEligibleDestination[]|null);
+
+                    /** EnrollResourceRequest validateOnly */
+                    validateOnly?: (boolean|null);
                 }
 
                 /** Represents an EnrollResourceRequest. */
@@ -265,6 +363,9 @@ export namespace google {
 
                     /** EnrollResourceRequest destinations. */
                     public destinations: google.cloud.auditmanager.v1.EnrollResourceRequest.IEligibleDestination[];
+
+                    /** EnrollResourceRequest validateOnly. */
+                    public validateOnly: boolean;
 
                     /**
                      * Creates a new EnrollResourceRequest instance using the specified properties.
@@ -461,6 +562,9 @@ export namespace google {
 
                     /** GenerateAuditScopeReportRequest complianceFramework */
                     complianceFramework?: (string|null);
+
+                    /** GenerateAuditScopeReportRequest validateOnly */
+                    validateOnly?: (boolean|null);
                 }
 
                 /** Represents a GenerateAuditScopeReportRequest. */
@@ -483,6 +587,9 @@ export namespace google {
 
                     /** GenerateAuditScopeReportRequest complianceFramework. */
                     public complianceFramework: string;
+
+                    /** GenerateAuditScopeReportRequest validateOnly. */
+                    public validateOnly: boolean;
 
                     /**
                      * Creates a new GenerateAuditScopeReportRequest instance using the specified properties.
@@ -2924,6 +3031,845 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAuditScheduleRequest. */
+                interface ICreateAuditScheduleRequest {
+
+                    /** CreateAuditScheduleRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAuditScheduleRequest auditSchedule */
+                    auditSchedule?: (google.cloud.auditmanager.v1.IAuditSchedule|null);
+
+                    /** CreateAuditScheduleRequest auditScheduleId */
+                    auditScheduleId?: (string|null);
+
+                    /** CreateAuditScheduleRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateAuditScheduleRequest. */
+                class CreateAuditScheduleRequest implements ICreateAuditScheduleRequest {
+
+                    /**
+                     * Constructs a new CreateAuditScheduleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.ICreateAuditScheduleRequest);
+
+                    /** CreateAuditScheduleRequest parent. */
+                    public parent: string;
+
+                    /** CreateAuditScheduleRequest auditSchedule. */
+                    public auditSchedule?: (google.cloud.auditmanager.v1.IAuditSchedule|null);
+
+                    /** CreateAuditScheduleRequest auditScheduleId. */
+                    public auditScheduleId: string;
+
+                    /** CreateAuditScheduleRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateAuditScheduleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAuditScheduleRequest instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.ICreateAuditScheduleRequest): google.cloud.auditmanager.v1.CreateAuditScheduleRequest;
+
+                    /**
+                     * Encodes the specified CreateAuditScheduleRequest message. Does not implicitly {@link google.cloud.auditmanager.v1.CreateAuditScheduleRequest.verify|verify} messages.
+                     * @param message CreateAuditScheduleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.ICreateAuditScheduleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAuditScheduleRequest message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.CreateAuditScheduleRequest.verify|verify} messages.
+                     * @param message CreateAuditScheduleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.ICreateAuditScheduleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAuditScheduleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAuditScheduleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.CreateAuditScheduleRequest;
+
+                    /**
+                     * Decodes a CreateAuditScheduleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAuditScheduleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.CreateAuditScheduleRequest;
+
+                    /**
+                     * Verifies a CreateAuditScheduleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAuditScheduleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAuditScheduleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.CreateAuditScheduleRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAuditScheduleRequest message. Also converts values to other types if specified.
+                     * @param message CreateAuditScheduleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.CreateAuditScheduleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAuditScheduleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAuditScheduleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAuditScheduleRequest. */
+                interface IUpdateAuditScheduleRequest {
+
+                    /** UpdateAuditScheduleRequest auditSchedule */
+                    auditSchedule?: (google.cloud.auditmanager.v1.IAuditSchedule|null);
+
+                    /** UpdateAuditScheduleRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAuditScheduleRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateAuditScheduleRequest. */
+                class UpdateAuditScheduleRequest implements IUpdateAuditScheduleRequest {
+
+                    /**
+                     * Constructs a new UpdateAuditScheduleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest);
+
+                    /** UpdateAuditScheduleRequest auditSchedule. */
+                    public auditSchedule?: (google.cloud.auditmanager.v1.IAuditSchedule|null);
+
+                    /** UpdateAuditScheduleRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAuditScheduleRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateAuditScheduleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAuditScheduleRequest instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest): google.cloud.auditmanager.v1.UpdateAuditScheduleRequest;
+
+                    /**
+                     * Encodes the specified UpdateAuditScheduleRequest message. Does not implicitly {@link google.cloud.auditmanager.v1.UpdateAuditScheduleRequest.verify|verify} messages.
+                     * @param message UpdateAuditScheduleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAuditScheduleRequest message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.UpdateAuditScheduleRequest.verify|verify} messages.
+                     * @param message UpdateAuditScheduleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IUpdateAuditScheduleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAuditScheduleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAuditScheduleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.UpdateAuditScheduleRequest;
+
+                    /**
+                     * Decodes an UpdateAuditScheduleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAuditScheduleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.UpdateAuditScheduleRequest;
+
+                    /**
+                     * Verifies an UpdateAuditScheduleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAuditScheduleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAuditScheduleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.UpdateAuditScheduleRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAuditScheduleRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAuditScheduleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.UpdateAuditScheduleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAuditScheduleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAuditScheduleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAuditScheduleRequest. */
+                interface IGetAuditScheduleRequest {
+
+                    /** GetAuditScheduleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAuditScheduleRequest. */
+                class GetAuditScheduleRequest implements IGetAuditScheduleRequest {
+
+                    /**
+                     * Constructs a new GetAuditScheduleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IGetAuditScheduleRequest);
+
+                    /** GetAuditScheduleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAuditScheduleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAuditScheduleRequest instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IGetAuditScheduleRequest): google.cloud.auditmanager.v1.GetAuditScheduleRequest;
+
+                    /**
+                     * Encodes the specified GetAuditScheduleRequest message. Does not implicitly {@link google.cloud.auditmanager.v1.GetAuditScheduleRequest.verify|verify} messages.
+                     * @param message GetAuditScheduleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IGetAuditScheduleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAuditScheduleRequest message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.GetAuditScheduleRequest.verify|verify} messages.
+                     * @param message GetAuditScheduleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IGetAuditScheduleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAuditScheduleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAuditScheduleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.GetAuditScheduleRequest;
+
+                    /**
+                     * Decodes a GetAuditScheduleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAuditScheduleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.GetAuditScheduleRequest;
+
+                    /**
+                     * Verifies a GetAuditScheduleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAuditScheduleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAuditScheduleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.GetAuditScheduleRequest;
+
+                    /**
+                     * Creates a plain object from a GetAuditScheduleRequest message. Also converts values to other types if specified.
+                     * @param message GetAuditScheduleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.GetAuditScheduleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAuditScheduleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAuditScheduleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAuditSchedulesRequest. */
+                interface IListAuditSchedulesRequest {
+
+                    /** ListAuditSchedulesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAuditSchedulesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAuditSchedulesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAuditSchedulesRequest. */
+                class ListAuditSchedulesRequest implements IListAuditSchedulesRequest {
+
+                    /**
+                     * Constructs a new ListAuditSchedulesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IListAuditSchedulesRequest);
+
+                    /** ListAuditSchedulesRequest parent. */
+                    public parent: string;
+
+                    /** ListAuditSchedulesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAuditSchedulesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAuditSchedulesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuditSchedulesRequest instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IListAuditSchedulesRequest): google.cloud.auditmanager.v1.ListAuditSchedulesRequest;
+
+                    /**
+                     * Encodes the specified ListAuditSchedulesRequest message. Does not implicitly {@link google.cloud.auditmanager.v1.ListAuditSchedulesRequest.verify|verify} messages.
+                     * @param message ListAuditSchedulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IListAuditSchedulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuditSchedulesRequest message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.ListAuditSchedulesRequest.verify|verify} messages.
+                     * @param message ListAuditSchedulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IListAuditSchedulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuditSchedulesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuditSchedulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.ListAuditSchedulesRequest;
+
+                    /**
+                     * Decodes a ListAuditSchedulesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuditSchedulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.ListAuditSchedulesRequest;
+
+                    /**
+                     * Verifies a ListAuditSchedulesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuditSchedulesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuditSchedulesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.ListAuditSchedulesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAuditSchedulesRequest message. Also converts values to other types if specified.
+                     * @param message ListAuditSchedulesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.ListAuditSchedulesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuditSchedulesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAuditSchedulesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAuditSchedulesResponse. */
+                interface IListAuditSchedulesResponse {
+
+                    /** ListAuditSchedulesResponse auditSchedules */
+                    auditSchedules?: (google.cloud.auditmanager.v1.IAuditSchedule[]|null);
+
+                    /** ListAuditSchedulesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAuditSchedulesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAuditSchedulesResponse. */
+                class ListAuditSchedulesResponse implements IListAuditSchedulesResponse {
+
+                    /**
+                     * Constructs a new ListAuditSchedulesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IListAuditSchedulesResponse);
+
+                    /** ListAuditSchedulesResponse auditSchedules. */
+                    public auditSchedules: google.cloud.auditmanager.v1.IAuditSchedule[];
+
+                    /** ListAuditSchedulesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAuditSchedulesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAuditSchedulesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuditSchedulesResponse instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IListAuditSchedulesResponse): google.cloud.auditmanager.v1.ListAuditSchedulesResponse;
+
+                    /**
+                     * Encodes the specified ListAuditSchedulesResponse message. Does not implicitly {@link google.cloud.auditmanager.v1.ListAuditSchedulesResponse.verify|verify} messages.
+                     * @param message ListAuditSchedulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IListAuditSchedulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuditSchedulesResponse message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.ListAuditSchedulesResponse.verify|verify} messages.
+                     * @param message ListAuditSchedulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IListAuditSchedulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuditSchedulesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuditSchedulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.ListAuditSchedulesResponse;
+
+                    /**
+                     * Decodes a ListAuditSchedulesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuditSchedulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.ListAuditSchedulesResponse;
+
+                    /**
+                     * Verifies a ListAuditSchedulesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuditSchedulesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuditSchedulesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.ListAuditSchedulesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAuditSchedulesResponse message. Also converts values to other types if specified.
+                     * @param message ListAuditSchedulesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.ListAuditSchedulesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuditSchedulesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAuditSchedulesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AuditSchedule. */
+                interface IAuditSchedule {
+
+                    /** AuditSchedule name */
+                    name?: (string|null);
+
+                    /** AuditSchedule displayName */
+                    displayName?: (string|null);
+
+                    /** AuditSchedule gcsUri */
+                    gcsUri?: (string|null);
+
+                    /** AuditSchedule complianceFramework */
+                    complianceFramework?: (string|null);
+
+                    /** AuditSchedule reportFormat */
+                    reportFormat?: (google.cloud.auditmanager.v1.AuditSchedule.AuditReportFormat|keyof typeof google.cloud.auditmanager.v1.AuditSchedule.AuditReportFormat|null);
+
+                    /** AuditSchedule scheduleConfig */
+                    scheduleConfig?: (google.cloud.auditmanager.v1.IScheduleConfig|null);
+
+                    /** AuditSchedule state */
+                    state?: (google.cloud.auditmanager.v1.ScheduleState|keyof typeof google.cloud.auditmanager.v1.ScheduleState|null);
+
+                    /** AuditSchedule createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuditSchedule updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuditSchedule nextRunTime */
+                    nextRunTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuditSchedule lastTriggerTime */
+                    lastTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuditSchedule errorMessage */
+                    errorMessage?: (string|null);
+                }
+
+                /** Represents an AuditSchedule. */
+                class AuditSchedule implements IAuditSchedule {
+
+                    /**
+                     * Constructs a new AuditSchedule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IAuditSchedule);
+
+                    /** AuditSchedule name. */
+                    public name: string;
+
+                    /** AuditSchedule displayName. */
+                    public displayName: string;
+
+                    /** AuditSchedule gcsUri. */
+                    public gcsUri: string;
+
+                    /** AuditSchedule complianceFramework. */
+                    public complianceFramework: string;
+
+                    /** AuditSchedule reportFormat. */
+                    public reportFormat: (google.cloud.auditmanager.v1.AuditSchedule.AuditReportFormat|keyof typeof google.cloud.auditmanager.v1.AuditSchedule.AuditReportFormat);
+
+                    /** AuditSchedule scheduleConfig. */
+                    public scheduleConfig?: (google.cloud.auditmanager.v1.IScheduleConfig|null);
+
+                    /** AuditSchedule state. */
+                    public state: (google.cloud.auditmanager.v1.ScheduleState|keyof typeof google.cloud.auditmanager.v1.ScheduleState);
+
+                    /** AuditSchedule createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuditSchedule updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuditSchedule nextRunTime. */
+                    public nextRunTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuditSchedule lastTriggerTime. */
+                    public lastTriggerTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuditSchedule errorMessage. */
+                    public errorMessage: string;
+
+                    /**
+                     * Creates a new AuditSchedule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuditSchedule instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IAuditSchedule): google.cloud.auditmanager.v1.AuditSchedule;
+
+                    /**
+                     * Encodes the specified AuditSchedule message. Does not implicitly {@link google.cloud.auditmanager.v1.AuditSchedule.verify|verify} messages.
+                     * @param message AuditSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IAuditSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuditSchedule message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.AuditSchedule.verify|verify} messages.
+                     * @param message AuditSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IAuditSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuditSchedule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuditSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.AuditSchedule;
+
+                    /**
+                     * Decodes an AuditSchedule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuditSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.AuditSchedule;
+
+                    /**
+                     * Verifies an AuditSchedule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuditSchedule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuditSchedule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.AuditSchedule;
+
+                    /**
+                     * Creates a plain object from an AuditSchedule message. Also converts values to other types if specified.
+                     * @param message AuditSchedule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.AuditSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuditSchedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuditSchedule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AuditSchedule {
+
+                    /** AuditReportFormat enum. */
+                    enum AuditReportFormat {
+                        AUDIT_REPORT_FORMAT_UNSPECIFIED = 0,
+                        AUDIT_REPORT_FORMAT_ODF = 1
+                    }
+                }
+
+                /** Properties of a ScheduleConfig. */
+                interface IScheduleConfig {
+
+                    /** ScheduleConfig startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ScheduleConfig endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ScheduleConfig frequency */
+                    frequency?: (google.cloud.auditmanager.v1.ScheduleConfig.Frequency|keyof typeof google.cloud.auditmanager.v1.ScheduleConfig.Frequency|null);
+
+                    /** ScheduleConfig timeZone */
+                    timeZone?: (string|null);
+                }
+
+                /** Represents a ScheduleConfig. */
+                class ScheduleConfig implements IScheduleConfig {
+
+                    /**
+                     * Constructs a new ScheduleConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.auditmanager.v1.IScheduleConfig);
+
+                    /** ScheduleConfig startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ScheduleConfig endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ScheduleConfig frequency. */
+                    public frequency: (google.cloud.auditmanager.v1.ScheduleConfig.Frequency|keyof typeof google.cloud.auditmanager.v1.ScheduleConfig.Frequency);
+
+                    /** ScheduleConfig timeZone. */
+                    public timeZone: string;
+
+                    /**
+                     * Creates a new ScheduleConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ScheduleConfig instance
+                     */
+                    public static create(properties?: google.cloud.auditmanager.v1.IScheduleConfig): google.cloud.auditmanager.v1.ScheduleConfig;
+
+                    /**
+                     * Encodes the specified ScheduleConfig message. Does not implicitly {@link google.cloud.auditmanager.v1.ScheduleConfig.verify|verify} messages.
+                     * @param message ScheduleConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.auditmanager.v1.IScheduleConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ScheduleConfig message, length delimited. Does not implicitly {@link google.cloud.auditmanager.v1.ScheduleConfig.verify|verify} messages.
+                     * @param message ScheduleConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.auditmanager.v1.IScheduleConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ScheduleConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ScheduleConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.auditmanager.v1.ScheduleConfig;
+
+                    /**
+                     * Decodes a ScheduleConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ScheduleConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.auditmanager.v1.ScheduleConfig;
+
+                    /**
+                     * Verifies a ScheduleConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ScheduleConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ScheduleConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.auditmanager.v1.ScheduleConfig;
+
+                    /**
+                     * Creates a plain object from a ScheduleConfig message. Also converts values to other types if specified.
+                     * @param message ScheduleConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.auditmanager.v1.ScheduleConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ScheduleConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScheduleConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ScheduleConfig {
+
+                    /** Frequency enum. */
+                    enum Frequency {
+                        FREQUENCY_UNSPECIFIED = 0,
+                        DAILY = 1,
+                        WEEKLY = 2,
+                        MONTHLY = 3,
+                        QUARTERLY = 4,
+                        ANNUALLY = 5
+                    }
                 }
             }
         }
@@ -10454,6 +11400,103 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
