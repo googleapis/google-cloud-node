@@ -106,10 +106,10 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1alpha
-      package_name: '@google-analytics/admin'
       dependencies:
         google-auth-library: ^10.0.0-rc.1
         server-destroy: ^1.0.1
+      package_name: '@google-analytics/admin'
       client_documentation_override: https://googleapis.dev/nodejs/analytics-admin/latest/
   - name: google-analytics-data
     version: 7.1.0
