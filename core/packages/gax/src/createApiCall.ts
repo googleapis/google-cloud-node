@@ -41,57 +41,6 @@ import {
 import {checkTelemetryEnabled} from './util';
 
 /**
- * Flat margin added to a call's effective timeout when deriving the tracing
- * backstop handed to `traceCall`.
- *
- * The backstop only exists to stop a span leaking when a callback never fires,
- * so it must never elapse while the RPC is still legitimately running: doing so
- * would mark a call abandoned even though it later completes. A flat margin
- * keeps that headroom constant, so short-timeout calls still get a usable
- * grace period and long-timeout calls are not pushed far beyond the point
- * where the call can no longer be in flight.
- */
-const SPAN_BACKSTOP_BUFFER_MS = 30 * 1000;
-
-/**
- * Derives the `maxDurationMs` backstop for a traced call.
- *
- * A call only has a wall-clock bound when `totalTimeoutMillis` applies.
- * `CallSettings.merge` sets `totalTimeoutMillis` to the effective timeout
- * whenever retry codes are configured, so in that case the timeout bounds the
- * entire retry sequence, not just one attempt.
- *
- * When `maxRetries` is used instead, `merge` deletes `totalTimeoutMillis` (the
- * two are mutually exclusive, `retryable` throws if both are set) and the call
- * is bounded by attempt count plus backoff delays, which has no simple
- * wall-clock equivalent. No backstop is returned in that case, since ending a
- * span early is worse than leaving this edge case uncovered.
- *
- * @param {CallSettings} settings - The settings for this method.
- * @param {CallOptions} [callOptions] - Per-invocation options, which may
- *   override the timeout or supply `maxRetries`.
- * @return {number|undefined} The backstop in milliseconds, or undefined when
- *   the call has no wall-clock bound.
- */
-function getTracingBackstopMs(
-  settings: CallSettings,
-  callOptions?: CallOptions,
-): number | undefined {
-  const maxRetries =
-    callOptions?.maxRetries ?? settings.retry?.backoffSettings?.maxRetries;
-  if (maxRetries !== undefined) {
-    return undefined;
-  }
-
-  const timeout = callOptions?.timeout ?? settings.timeout;
-  if (!timeout || timeout <= 0) {
-    return undefined;
-  }
-
-  return timeout + SPAN_BACKSTOP_BUFFER_MS;
-}
-
-/**
  * Converts an rpc call into an API call governed by the settings.
  *
  * In typical usage, `func` will be a promise to a callable used to make an rpc
@@ -263,7 +212,6 @@ export function createApiCall(
         },
         isStreamingCall,
         callback,
-        getTracingBackstopMs(settings, callOptions),
       );
     };
   } else {

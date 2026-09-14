@@ -235,12 +235,15 @@ export function handleStream(
  * until that callback fires.
  *
  * Because the span's lifetime is then bound entirely to the callback, a
- * callback that never fires would leave the span open forever, and an unended
- * span is never exported. Transports normally prevent this: gRPC enforces the
- * deadline itself and cancels with DEADLINE_EXCEEDED. But `addTimeoutArg` only
- * forwards a deadline, it does not synthesize a callback, so a call made with
- * no timeout against an unresponsive transport has nothing to bound it. Pass
- * `maxDurationMs` to opt into a backstop for that case.
+ * callback that never fires leaves the span open, and an unended span is never
+ * exported. In practice the transport bounds this: `addTimeoutArg` always sets
+ * a deadline (`CallSettings.timeout` defaults to 30s) and gRPC cancels with
+ * DEADLINE_EXCEEDED when it expires.
+ *
+ * No timer is used to force the span closed. A fabricated end time would report
+ * a duration the RPC never took, corrupting latency data, and would mask the
+ * underlying defect. If a callback genuinely never fires, that is a transport
+ * bug and belongs fixed at its source.
  *
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
@@ -249,10 +252,6 @@ export function handleStream(
  *   when `callback` is supplied, otherwise `undefined`.
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call (true) or promise call (false).
  * @param {APICallback} [callback] - The user callback for callback-style invocations.
- * @param {number} [maxDurationMs] - Opt-in backstop, in milliseconds. Applies
- *   only to callback-style invocations. If the callback has not fired by then
- *   the span is marked abandoned and ended, so it is still exported rather than
- *   lost. The user callback is always forwarded, even if it arrives later.
  * @returns {T} The result of the traced operation.
  */
 export function traceCall(
@@ -261,7 +260,6 @@ export function traceCall(
   fn: (tracedCallback?: APICallback) => GaxCallResult,
   isStreamCall?: boolean,
   callback?: APICallback,
-  maxDurationMs?: number,
 ): GaxCallResult;
 export function traceCall<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
@@ -269,7 +267,6 @@ export function traceCall<T extends EventEmitter>(
   fn: (tracedCallback?: APICallback) => T,
   isStreamCall: true,
   callback?: APICallback,
-  maxDurationMs?: number,
 ): T;
 export function traceCall<T>(
   dynamicArgs: DynamicTraceContext,
@@ -277,7 +274,6 @@ export function traceCall<T>(
   fn: (tracedCallback?: APICallback) => T,
   isStreamCall?: false,
   callback?: APICallback,
-  maxDurationMs?: number,
 ): T;
 export function traceCall(
   dynamicArgs: DynamicTraceContext,
@@ -285,7 +281,6 @@ export function traceCall(
   fn: (tracedCallback?: APICallback) => GaxCallResult,
   isStreamCall = false,
   callback?: APICallback,
-  maxDurationMs?: number,
 ): GaxCallResult {
   const spanName = `${dynamicArgs.clientName}.${dynamicArgs.methodName}`;
   return getGaxTracer().startActiveSpan(spanName, {}, (span: Span) => {
@@ -300,11 +295,10 @@ export function traceCall(
 
     let spanEnded = false;
     let errorRecorded = false;
-    let backstopTimer: ReturnType<typeof setTimeout> | undefined;
 
     // Marks the span failed. Kept separate from recordError so paths that are
-    // failures but not exceptions (such as backstop abandonment) can set the
-    // status without emitting a misleading exception event.
+    // failures but not exceptions can set the status without emitting a
+    // misleading exception event.
     const setErrorStatus = (message: string) => {
       errorRecorded = true;
       span.setStatus({code: SpanStatusCode.ERROR, message});
@@ -315,10 +309,6 @@ export function traceCall(
     const endSpan = () => {
       if (!spanEnded) {
         spanEnded = true;
-        if (backstopTimer !== undefined) {
-          clearTimeout(backstopTimer);
-          backstopTimer = undefined;
-        }
         if (!errorRecorded) {
           span.setStatus({code: SpanStatusCode.OK});
         }
@@ -358,33 +348,13 @@ export function traceCall(
       !isStreamCall && callback
         ? function (this: unknown, ...args: Parameters<APICallback>) {
             const err = args[0];
-            // If the backstop already ended the span, don't mutate it further;
-            // the OpenTelemetry SDK ignores writes to an ended span. The user
-            // callback is still forwarded below.
-            if (err && !spanEnded) {
+            if (err) {
               recordError(err);
             }
             endSpan();
             callback.apply(this, args);
           }
         : undefined;
-
-    // Opt-in backstop, callback-style only. Promise and stream invocations are
-    // bound to settlement/stream events and are not covered here.
-    if (tracedCallback && maxDurationMs !== undefined && maxDurationMs > 0) {
-      backstopTimer = setTimeout(() => {
-        backstopTimer = undefined;
-        const message = `Callback did not fire within ${maxDurationMs}ms; span abandoned.`;
-        span.setAttributes({
-          'gcp.span.abandoned': true,
-          'error.message': message,
-        });
-        setErrorStatus(message);
-        endSpan();
-      }, maxDurationMs);
-      // Never let the backstop keep the process alive.
-      backstopTimer.unref?.();
-    }
 
     try {
       const result = fn(tracedCallback);
