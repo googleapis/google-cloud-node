@@ -1603,7 +1603,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         return;
       }
 
-      const currentLifecycleRules = Array.isArray(metadata.lifecycle?.rule)
+      const currentLifecycleRules = Array.isArray(metadata?.lifecycle?.rule)
         ? metadata.lifecycle?.rule
         : [];
 
