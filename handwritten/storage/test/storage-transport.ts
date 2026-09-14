@@ -523,5 +523,48 @@ describe('Storage Transport', () => {
       assert.strictEqual(capturedOpts.params, undefined);
       assert.strictEqual(capturedOpts.url, `${baseUrl}/test?foo=bar`);
     });
+
+    it('should safely handle error with object message in RETRYABLE_ERR_FN_DEFAULT', () => {
+      const err = {
+        config: {method: 'GET', url: 'http://test'},
+        response: {status: 503},
+        message: {error: {message: 'Retry Test: Caused a 503'}},
+      } as unknown as GaxiosError;
+
+      assert.doesNotThrow(() => {
+        const result = RETRYABLE_ERR_FN_DEFAULT(err);
+        assert.strictEqual(result, true);
+      });
+    });
+
+    it('should enrich GaxiosError with string message when apiError message is nested object', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const apiErrorData = {
+        error: {
+          code: '400',
+          message: {
+            error: {
+              message: 'Retry Test: Caused a 400',
+            },
+          },
+        },
+      };
+      const gaxiosError = {
+        response: {
+          status: 400,
+          data: apiErrorData,
+        },
+        message: '[object Object]',
+      };
+      requestStub.rejects(gaxiosError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error) => {
+          assert.strictEqual(err.message, 'Retry Test: Caused a 400');
+          return true;
+        },
+      );
+    });
   });
 });
