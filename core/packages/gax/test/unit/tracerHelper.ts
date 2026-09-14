@@ -204,6 +204,79 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['error.type'], 'ECONNREFUSED');
     });
 
+    // Fallback branches. Each of these must not produce a bogus error.type.
+    it('treats a zero status code as absent rather than as OK', async () => {
+      // Zero is the proto3 default for an unset code, which is why
+      // GoogleError.parseHttpError deletes the field. Reporting 'OK' as the
+      // type of a failed call would be actively wrong.
+      const error = Object.assign(new Error('unset code'), {code: 0});
+
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw error;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.attributes['error.type'], 'Error');
+    });
+
+    it('falls back to the class name for a code outside the Status range', async () => {
+      const error = Object.assign(new Error('bogus code'), {code: 4242});
+
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw error;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.attributes['error.type'], 'Error');
+    });
+
+    it('falls back to the class name for an empty string code', async () => {
+      const error = Object.assign(new Error('empty code'), {code: ''});
+
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw error;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.attributes['error.type'], 'Error');
+    });
+
+    it('falls back to the class name for a GoogleError carrying no code', async () => {
+      const error = new GoogleError('no code present');
+
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw error;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.attributes['error.type'], 'GoogleError');
+    });
+
+    it('omits error.type entirely when a non-Error is thrown', async () => {
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw 'plain string failure';
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(
+        span.attributes['error.message'],
+        'plain string failure',
+      );
+      assert.strictEqual(span.attributes['error.type'], undefined);
+      assert.strictEqual(span.attributes['exception.type'], undefined);
+      assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+    });
+
     it('handles missing optional static arguments gracefully', async () => {
       const emptyStaticArgs: StaticTraceContext = {};
       const result = await traceCall(dynamicArgs, emptyStaticArgs, async () => {
