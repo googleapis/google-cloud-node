@@ -447,9 +447,12 @@ describe('Storage Transport', () => {
 
     it('should retain query parameters in adapter if url was not modified', async () => {
       const gaxios = new Gaxios();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let capturedOpts: any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       sandbox.stub(gaxios, 'request').callsFake(async (opts: any) => {
         capturedOpts = opts;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return {data: {}, headers: new Map(), status: 200} as any;
       });
       const customTransport = new StorageTransport({
@@ -469,6 +472,7 @@ describe('Storage Transport', () => {
         packageJson: {name: 'test-package', version: '1.0.0'},
       });
       const requestStub = authClientStub.request as sinon.SinonStub;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       requestStub.callsFake(async (opts: any) => {
         return opts.adapter(opts);
       });
@@ -484,9 +488,12 @@ describe('Storage Transport', () => {
 
     it('should clear params in adapter if url already has params serialized', async () => {
       const gaxios = new Gaxios();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let capturedOpts: any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       sandbox.stub(gaxios, 'request').callsFake(async (opts: any) => {
         capturedOpts = opts;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return {data: {}, headers: new Map(), status: 200} as any;
       });
       const customTransport = new StorageTransport({
@@ -506,6 +513,7 @@ describe('Storage Transport', () => {
         packageJson: {name: 'test-package', version: '1.0.0'},
       });
       const requestStub = authClientStub.request as sinon.SinonStub;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       requestStub.callsFake(async (opts: any) => {
         const preparedOpts = {
           ...opts,
@@ -522,6 +530,49 @@ describe('Storage Transport', () => {
 
       assert.strictEqual(capturedOpts.params, undefined);
       assert.strictEqual(capturedOpts.url, `${baseUrl}/test?foo=bar`);
+    });
+
+    it('should safely handle error with object message in RETRYABLE_ERR_FN_DEFAULT', () => {
+      const err = {
+        config: {method: 'GET', url: 'http://test'},
+        response: {status: 503},
+        message: {error: {message: 'Retry Test: Caused a 503'}},
+      } as unknown as GaxiosError;
+
+      assert.doesNotThrow(() => {
+        const result = RETRYABLE_ERR_FN_DEFAULT(err);
+        assert.strictEqual(result, true);
+      });
+    });
+
+    it('should enrich GaxiosError with string message when apiError message is nested object', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      const apiErrorData = {
+        error: {
+          code: '400',
+          message: {
+            error: {
+              message: 'Retry Test: Caused a 400',
+            },
+          },
+        },
+      };
+      const gaxiosError = {
+        response: {
+          status: 400,
+          data: apiErrorData,
+        },
+        message: '[object Object]',
+      };
+      requestStub.rejects(gaxiosError);
+
+      await assert.rejects(
+        transport.makeRequest({url: '/test'}),
+        (err: Error) => {
+          assert.strictEqual(err.message, 'Retry Test: Caused a 400');
+          return true;
+        },
+      );
     });
   });
 });

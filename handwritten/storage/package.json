@@ -78,7 +78,7 @@
     "duplexify": "^4.1.3",
     "fast-xml-parser": "^5.3.4",
     "gaxios": "^7.3.0",
-    "google-auth-library": "^10.9.1",
+    "google-auth-library": "^11.0.0",
     "mime": "^3.0.0",
     "p-limit": "^3.0.1"
   },

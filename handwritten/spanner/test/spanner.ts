@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable promise/always-return */
+
 import {after, before, beforeEach, describe, Done, it} from 'mocha';
 import * as assert from 'assert';
 import {grpc, Status, ServiceError} from 'google-gax';
@@ -7359,12 +7361,13 @@ describe('Spanner with mock server', () => {
   describe('Tracing cache TTL', () => {
     const ttlSandbox = sinon.createSandbox();
     let warpOffset: number;
+    let dateNowStub: sinon.SinonStub;
 
     beforeEach(() => {
       _resetTracingEnabledForTest();
       warpOffset = 0;
       const originalNow = Date.now;
-      ttlSandbox
+      dateNowStub = ttlSandbox
         .stub(Date, 'now')
         .callsFake(() => originalNow.call(Date) + warpOffset);
     });
@@ -7413,15 +7416,18 @@ describe('Spanner with mock server', () => {
       assert.strictEqual(isTracingEnabled(), true);
       assert.strictEqual(getTracerProviderStub.callCount, 2);
 
-      // 5. Once enabled, subsequent calls should permanently return true without re-evaluating or checking global provider
+      // 5. Once enabled, subsequent calls should permanently return true without re-evaluating, checking global provider, or calling Date.now()
+      const dateNowCallCount = dateNowStub.callCount;
       assert.strictEqual(isTracingEnabled(), true);
       // Call count remains 2!
       assert.strictEqual(getTracerProviderStub.callCount, 2);
+      assert.strictEqual(dateNowStub.callCount, dateNowCallCount);
 
       // Advance clock by another 1 hour to prove it's permanently cached
       warpOffset += 3600000;
       assert.strictEqual(isTracingEnabled(), true);
       assert.strictEqual(getTracerProviderStub.callCount, 2);
+      assert.strictEqual(dateNowStub.callCount, dateNowCallCount);
     });
 
     it('real application flow: should transition from untraced to traced after OTel registration and TTL expiration', async () => {
