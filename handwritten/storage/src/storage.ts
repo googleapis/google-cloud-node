@@ -332,7 +332,17 @@ const IDEMPOTENCY_STRATEGY_DEFAULT = IdempotencyStrategy.RetryConditional;
 export function isTransientError(err: GaxiosError): boolean {
   const status = err.response?.status;
   const errCode = err.code?.toString().toUpperCase() || '';
-  const message = err.message?.toLowerCase() || '';
+  const rawMessage =
+    typeof err.message === 'string'
+      ? err.message
+      : typeof err.message === 'object' && err.message !== null
+        ? (err.message as {error?: {message?: string}; message?: string}).error
+            ?.message ||
+          (err.message as {error?: {message?: string}; message?: string})
+            .message ||
+          JSON.stringify(err.message)
+        : String(err.message || '');
+  const message = rawMessage.toLowerCase();
 
   // Immediate exit for non-retryable status codes
   if (status && [401, 405, 412].includes(status)) return false;
@@ -1205,7 +1215,7 @@ export class Storage {
             'Content-Type': 'application/json',
           },
         },
-        (err, data, resp) => {
+        (err, data) => {
           if (err) {
             callback(err);
             return;
@@ -1213,7 +1223,7 @@ export class Storage {
           const bucket = this.bucket(name);
           bucket.metadata = data!;
 
-          callback(null, bucket, resp);
+          callback(null, bucket, data);
         },
       )
       .catch(err => callback!(err));
@@ -1331,7 +1341,7 @@ export class Storage {
           retry: false,
           responseType: 'json',
         },
-        (err, data, resp) => {
+        (err, data) => {
           if (err) {
             callback(err);
             return;
@@ -1347,7 +1357,7 @@ export class Storage {
             null,
             hmacKey,
             hmacKey.secret,
-            resp as unknown as HmacKeyResourceResponse,
+            data as HmacKeyResourceResponse,
           );
         },
       )

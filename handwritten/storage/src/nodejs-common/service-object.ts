@@ -492,7 +492,9 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           },
         },
         (err, data, resp) => {
-          this.metadata = data!;
+          if (!err && data) {
+            this.metadata = data;
+          }
           callback(err, data!, resp);
         },
       )
@@ -558,8 +560,14 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           },
         },
         (err, data, resp) => {
-          this.metadata = data!;
-          callback(err, this.metadata, resp);
+          if (!err && data) {
+            this.metadata = data;
+          }
+          callback(
+            err,
+            (err ? undefined : this.metadata) as unknown as K,
+            resp,
+          );
         },
       )
       // eslint-disable-next-line promise/no-callback-in-promise
