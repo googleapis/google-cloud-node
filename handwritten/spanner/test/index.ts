@@ -36,6 +36,8 @@ import {
   GetInstanceConfigOptions,
   GetInstanceConfigsOptions,
   GetInstancesOptions,
+  callInvocationTransformer,
+  channelFactoryOverride,
 } from '../src';
 import {Duplex} from 'stream';
 import {CLOUD_RESOURCE_HEADER, AFE_SERVER_TIMING_HEADER} from '../src/common';
@@ -48,16 +50,19 @@ const music = singer.examples.spanner.music;
 // Verify that CLOUD_RESOURCE_HEADER is set to a correct value.
 assert.strictEqual(CLOUD_RESOURCE_HEADER, 'google-cloud-resource-prefix');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const apiConfig = require('../src/spanner_grpc_config.json');
-
 async function disableMetrics(sandbox: sinon.SinonSandbox) {
+  if (!('SPANNER_DISABLE_BUILTIN_METRICS' in process.env)) {
+    process.env.SPANNER_DISABLE_BUILTIN_METRICS = '';
+  }
   sandbox.stub(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS').value('true');
   await MetricsTracerFactory.resetInstance();
   MetricsTracerFactory.enabled = false;
 }
 
 async function enableMetrics(sandbox: sinon.SinonSandbox) {
+  if (!('SPANNER_DISABLE_BUILTIN_METRICS' in process.env)) {
+    process.env.SPANNER_DISABLE_BUILTIN_METRICS = '';
+  }
   sandbox.stub(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS').value('false');
   await MetricsTracerFactory.resetInstance();
 }
@@ -77,18 +82,6 @@ let replaceProjectIdTokenOverride;
 function fakeReplaceProjectIdToken(...args) {
   return (replaceProjectIdTokenOverride || replaceProjectIdToken)(...args);
 }
-
-const fakeGrpcGcp = () => {
-  return {
-    gcpChannelFactoryOverride: {},
-    gcpCallInvocationTransformer: {},
-    createGcpApiConfig: apiConfig => {
-      return {
-        calledWith_: apiConfig,
-      };
-    },
-  };
-};
 
 let promisified = false;
 const fakePfy = Object.assign({}, pfy, {
@@ -197,7 +190,6 @@ describe('Spanner', () => {
       'google-auth-library': {
         GoogleAuth: fakeGoogleAuth,
       },
-      'grpc-gcp': fakeGrpcGcp,
       './codec.js': {codec: fakeCodec},
       './instance.js': {Instance: FakeInstance},
       './instance-config.js': {InstanceConfig: FakeInstanceConfig},
@@ -230,12 +222,9 @@ describe('Spanner', () => {
       scopes: [],
       grpc,
       'grpc.keepalive_time_ms': 120000,
-      'grpc.callInvocationTransformer':
-        fakeGrpcGcp().gcpCallInvocationTransformer,
-      'grpc.channelFactoryOverride': fakeGrpcGcp().gcpChannelFactoryOverride,
-      'grpc.gcpApiConfig': {
-        calledWith_: apiConfig,
-      },
+      'grpc.callInvocationTransformer': callInvocationTransformer,
+      'grpc.channelFactoryOverride': channelFactoryOverride,
+      'grpc.spanner_channel_pool_holder': {},
     });
 
     it('should localize a cached gapic client map', () => {

@@ -44,7 +44,6 @@ describe('MultiplexedSession', () => {
       create: sandbox.stub().resolves(),
       transaction: sandbox.stub().callsFake(() => {
         const txn = new FakeTransaction();
-        (txn as any)._affinityKey = 'mock-uuid';
         return txn;
       }),
     });

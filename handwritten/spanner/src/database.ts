@@ -121,6 +121,7 @@ import {
   craftRequestId,
   newAtomicCounter,
 } from './request_id_header';
+import {TransactionAffinity} from './channel-pool';
 
 export type GetDatabaseRolesCallback = RequestCallback<
   IDatabaseRole,
@@ -512,6 +513,10 @@ class Database extends common.GrpcServiceObject {
     );
   }
 
+  get spanner(): Spanner | undefined {
+    return (this.parent as any)?.parent as Spanner | undefined;
+  }
+
   _nextNthRequest(): number {
     return this._nthRequest.increment();
   }
@@ -865,6 +870,11 @@ class Database extends common.GrpcServiceObject {
     const key = this.id!.split('/').pop();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this.parent as any).databases_.delete(key);
+    if (this.spanner?.channelPool_?.hasPrimeSession()) {
+      if (this.formattedName_) {
+        this.spanner.channelPool_.clearPrimeSession(this.formattedName_);
+      }
+    }
     this.pool_.close(callback!);
   }
   /**
@@ -2187,7 +2197,11 @@ class Database extends common.GrpcServiceObject {
           return;
         }
 
-        const snapshot = session!.snapshot(options, this.queryOptions_);
+        const snapshot = session!.snapshot(
+          options,
+          this.queryOptions_,
+          TransactionAffinity.newReadOnly(),
+        );
 
         snapshot.begin(err => {
           if (err) {

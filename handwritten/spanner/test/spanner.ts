@@ -360,6 +360,11 @@ describe('Spanner with mock server', () => {
       servicePath: 'localhost',
       port,
       sslCreds: grpc.credentials.createInsecure(),
+      channelPoolOptions: {
+        initialChannels: 1,
+        minChannels: 1,
+        maxChannels: 1,
+      },
     });
     // Gets a reference to a Cloud Spanner instance and database
     instance = spanner.instance('instance');
@@ -5420,8 +5425,8 @@ describe('Spanner with mock server', () => {
           isolationLevel: IsolationLevel.REPEATABLE_READ,
         },
       });
-      instance = spanner.instance('instance');
-      const database = newTestDatabase();
+      const localInstance = spanner.instance('instance');
+      const database = localInstance.database(`database-${dbCounter++}`);
       await database.runTransactionAsync(async tx => {
         await tx!.run(selectSql);
         await tx.commit();
@@ -5447,8 +5452,8 @@ describe('Spanner with mock server', () => {
           isolationLevel: IsolationLevel.REPEATABLE_READ,
         },
       });
-      instance = spanner.instance('instance');
-      const database = newTestDatabase();
+      const localInstance = spanner.instance('instance');
+      const database = localInstance.database(`database-${dbCounter++}`);
       await database.runTransactionAsync(
         {
           readLockMode: ReadLockMode.OPTIMISTIC,
@@ -5488,8 +5493,8 @@ describe('Spanner with mock server', () => {
           isolationLevel: IsolationLevel.SERIALIZABLE,
         },
       });
-      instance = spanner.instance('instance');
-      const database = newTestDatabase();
+      const localInstance = spanner.instance('instance');
+      const database = localInstance.database(`database-${dbCounter++}`);
       await database.runTransactionAsync(
         {
           isolationLevel: IsolationLevel.REPEATABLE_READ,
@@ -7160,6 +7165,7 @@ describe('Spanner with mock server', () => {
 
     after(async () => {
       await provider.shutdown();
+      instance._observabilityOptions = undefined;
     });
 
     const opts: typeof ObservabilityOptions = {tracerProvider: provider};
@@ -7222,6 +7228,7 @@ describe('Spanner with mock server', () => {
         expectedEventNames,
         `Mismatched events\n\tGot:  ${actualEventNames}\n\tWant: ${expectedEventNames}`,
       );
+      instance._observabilityOptions = undefined;
       done();
     });
   });
@@ -7257,6 +7264,7 @@ describe('Spanner with mock server', () => {
 
     after(async () => {
       await provider.shutdown();
+      trace.disable();
     });
 
     it('with retry on aborted query', async () => {
@@ -7365,6 +7373,7 @@ describe('Spanner with mock server', () => {
 
     beforeEach(() => {
       _resetTracingEnabledForTest();
+      instance._observabilityOptions = undefined;
       warpOffset = 0;
       const originalNow = Date.now;
       dateNowStub = ttlSandbox
@@ -7374,6 +7383,7 @@ describe('Spanner with mock server', () => {
 
     afterEach(async () => {
       ttlSandbox.restore();
+      instance._observabilityOptions = undefined;
     });
 
     it('should respect the 10-second TTL cache for global tracing checks', () => {
@@ -7463,7 +7473,7 @@ describe('Spanner with mock server', () => {
       getTracerProviderStub.returns(provider);
 
       // Advance clock past 10s TTL
-      warpOffset += 10100;
+      warpOffset += 20000;
 
       // Third call: cache has expired, so it auto-detects OTel and traces successfully!
       const [rows3] = await localDatabase.run({sql: selectSql});

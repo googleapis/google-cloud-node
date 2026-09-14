@@ -18,7 +18,6 @@ import {grpc, CallOptions, Operation as GaxOperation} from 'google-gax';
 import {protos} from '@google-cloud/spanner-api';
 import instanceAdmin = protos.google;
 import databaseAdmin = protos.google;
-import {Spanner} from '.';
 
 export type IOperation = instanceAdmin.longrunning.IOperation;
 
@@ -102,6 +101,36 @@ export function addLeaderAwareRoutingHeader(headers: {[k: string]: string}) {
   headers[LEADER_AWARE_ROUTING_HEADER] = 'true';
 }
 
+let isAFEServerTimingEnabledCache: boolean | undefined;
+
+export function isAFEServerTimingEnabled(): boolean {
+  if (isAFEServerTimingEnabledCache === undefined) {
+    isAFEServerTimingEnabledCache =
+      process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] !== 'true';
+  }
+  return isAFEServerTimingEnabledCache;
+}
+
+export function resetAFEServerTimingForTest(): void {
+  isAFEServerTimingEnabledCache = undefined;
+}
+
+/**
+ * Checks whether dynamic channel pooling is enabled.
+ * Defaults to true. Can be disabled by setting environment variable
+ * SPANNER_ENABLE_DYNAMIC_CHANNEL_POOL=false or
+ * GOOGLE_CLOUD_SPANNER_ENABLE_DYNAMIC_CHANNEL_POOL=false.
+ */
+export function isDynamicChannelPoolEnabled(): boolean {
+  const envValue =
+    process.env['SPANNER_ENABLE_DYNAMIC_CHANNEL_POOL'] ??
+    process.env['GOOGLE_CLOUD_SPANNER_ENABLE_DYNAMIC_CHANNEL_POOL'];
+  if (envValue !== undefined) {
+    return envValue.toLowerCase() !== 'false' && envValue !== '0';
+  }
+  return true;
+}
+
 /**
  * Returns common headers to add.
  * @param headers Common header list.
@@ -119,7 +148,7 @@ export function getCommonHeaders(
     headers[END_TO_END_TRACING_HEADER] = 'true';
   }
 
-  if (Spanner.isAFEServerTimingEnabled()) {
+  if (isAFEServerTimingEnabled()) {
     headers[AFE_SERVER_TIMING_HEADER] = 'true';
   }
 

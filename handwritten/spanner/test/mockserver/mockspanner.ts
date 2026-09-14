@@ -362,6 +362,7 @@ export class MockSpanner {
     this.rollback = this.rollback.bind(this);
 
     this.executeBatchDml = this.executeBatchDml.bind(this);
+    this.executeSql = this.executeSql.bind(this);
     this.executeStreamingSql = this.executeStreamingSql.bind(this);
     this.partitionQuery = this.partitionQuery.bind(this);
 
@@ -666,7 +667,33 @@ export class MockSpanner {
     callback: protobuf.Spanner.ExecuteSqlCallback,
   ) {
     this.pushRequest(call.request!, call.metadata);
-    callback(createUnimplementedError('ExecuteSql is not yet implemented'));
+    const res = this.statementResults.get(call.request!.sql);
+    if (!res) {
+      callback(
+        new Error(`There is no result registered for ${call.request!.sql}`),
+      );
+      return;
+    }
+    if (res.type === StatementResultType.ERROR) {
+      callback(res.error);
+      return;
+    }
+    if (res.type === StatementResultType.RESULT_SET) {
+      callback(null, res.resultSet as protobuf.ResultSet);
+      return;
+    }
+    if (res.type === StatementResultType.UPDATE_COUNT) {
+      callback(
+        null,
+        protobuf.ResultSet.create({
+          stats: {
+            rowCountExact: res.updateCount,
+          },
+        }),
+      );
+      return;
+    }
+    callback(null, protobuf.ResultSet.create());
   }
 
   executeStreamingSql(

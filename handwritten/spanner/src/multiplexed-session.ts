@@ -138,6 +138,14 @@ export class MultiplexedSession
                 },
               );
               this._multiplexedSession = createSessionResponse;
+              if (
+                this.database.spanner?.channelPool_ &&
+                this._multiplexedSession.formattedName_
+              ) {
+                this.database.spanner.channelPool_.setPrimeSession(
+                  this._multiplexedSession.formattedName_,
+                );
+              }
               span.addEvent('Created a multiplexed session');
             } catch (e) {
               setSpanError(span, e as Error);
