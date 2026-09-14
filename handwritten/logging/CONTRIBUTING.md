@@ -51,12 +51,12 @@ accept your pull requests.
 
 1.  Install dependencies:
 
-        npm install
+        pnpm install
 
 1.  Run the tests:
 
         # Run unit tests.
-        npm test
+        pnpm run test
 
         # Run sample integration tests.
         npm run samples-test
@@ -66,7 +66,7 @@ accept your pull requests.
 
 1.  Lint (and maybe fix) any changes:
 
-        npm run fix
+        pnpm run fix
 
 ## Running the tests in GCP services
 
