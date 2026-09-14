@@ -195,7 +195,7 @@ export function handleStream(
 
   // Client-streaming calls hand back a write-only stream: the readable side is
   // never opened, so 'end' and 'close' never fire and 'finish' is the only
-  // signal that the call completed. Without it the span would leak.
+  // signal that the call completed.
   //
   // 'finish' must NOT be used for readable streams. On bidi streams it fires as
   // soon as the caller stops writing, which is typically long before the server
@@ -214,8 +214,6 @@ export function handleStream(
     stream.removeListener('error', onError);
     stream.removeListener('end', onEnd);
     stream.removeListener('close', onClose);
-    // No isWriteOnly guard needed: removeListener is a no-op when onFinish was
-    // never registered, and it only ever matches our own closure.
     stream.removeListener('finish', onFinish);
   };
 
@@ -259,27 +257,12 @@ export function handleStream(
  * GCP telemetry attributes and recording errors/exceptions if thrown.
  *
  * Callback-style invocations need special handling. The API callers
- * (`NormalApiCaller`, `BundleApiCaller`, `LongrunningApiCaller` and
- * `PagedApiCaller`) all return `new OngoingCall(callback)` when a callback is
- * supplied, and `OngoingCall` has no `promise` property. Their `result()` then
- * hands back `canceller.promise`, which is `undefined`. With no promise and no
- * stream to await, the span would otherwise be ended synchronously, before the
- * RPC had even been sent.
+ * all return `new OngoingCall(callback)` when a callback is
+ * supplied, and `OngoingCall` has no `promise` property.
  *
- * To avoid that, pass the user's `callback` as the fifth argument. `fn` then
- * receives a traced replacement to hand to the RPC, and the span stays open
- * until that callback fires.
- *
- * Because the span's lifetime is then bound entirely to the callback, a
- * callback that never fires leaves the span open, and an unended span is never
- * exported. In practice the transport bounds this: `addTimeoutArg` always sets
- * a deadline (`CallSettings.timeout` defaults to 30s) and gRPC cancels with
- * DEADLINE_EXCEEDED when it expires.
- *
- * No timer is used to force the span closed. A fabricated end time would report
- * a duration the RPC never took, corrupting latency data, and would mask the
- * underlying defect. If a callback genuinely never fires, that is a transport
- * bug and belongs fixed at its source.
+ * To avoid spans ending prematurely with callback functions, pass the user's
+ * `callback` as the fifth argument. `fn` then receives a traced replacement
+ * to hand to the RPC, and the span stays open until that callback fires.
  *
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
@@ -395,9 +378,6 @@ export function traceCall(
 
     try {
       const result = fn(tracedCallback);
-      // Use getPromiseTarget instead of `result instanceof Promise` to ensure custom
-      // thenables, CancellablePromise implementations, and OngoingCallPromise wrappers
-      // are properly tracked rather than leaving spans unclosed or ending them prematurely.
       const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
       if (isStreamCall && result instanceof EventEmitter) {
         handleStream(result, recordError, endSpan);
