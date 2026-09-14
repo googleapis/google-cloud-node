@@ -17,6 +17,7 @@
 import {EventEmitter} from 'events';
 import {Span, SpanStatusCode, trace, Tracer} from '@opentelemetry/api';
 import {APICallback, GaxCallResult} from '../apitypes';
+import {Status} from '../status';
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -67,6 +68,32 @@ export interface DynamicTraceContext {
  */
 export function getGaxTracer(): Tracer {
   return trace.getTracer('google-gax');
+}
+
+/**
+ * Resolves the OpenTelemetry `error.type` attribute for a failed call.
+ *
+ * The error's class name is not usable on its own here, because the same
+ * logical failure arrives as a different class depending on the transport:
+ * grpc-js builds failures with a plain `Object.assign(new Error(msg), status)`,
+ * so it reports `Error`, while the REST path builds a real `GoogleError` via
+ * `GoogleError.parseHttpError`. `GoogleError` also never assigns `this.name`,
+ * so `name` is the inherited literal `'Error'` on both paths.
+ *
+ * The gRPC status code is the stable, low-cardinality identifier that is
+ * consistent across both transports, so it is preferred. Node system errors
+ * (`ECONNREFUSED`, `ETIMEDOUT`, ...) already carry a suitable string code and
+ * are used as-is. The class name remains a last-resort fallback.
+ */
+function resolveErrorType(e: Error): string {
+  const code = (e as {code?: unknown}).code;
+  if (typeof code === 'number' && Status[code] !== undefined) {
+    return Status[code];
+  }
+  if (typeof code === 'string' && code.length > 0) {
+    return code;
+  }
+  return e.constructor?.name ?? e.name;
 }
 
 /**
@@ -320,12 +347,13 @@ export function traceCall(
       if (e instanceof Error) {
         span.setAttributes({
           'error.message': e.message,
-          'error.type': e.constructor?.name ?? e.name,
+          'error.type': resolveErrorType(e),
         });
+        // recordException emits the `exception` event, which carries
+        // exception.type, exception.message and exception.stacktrace. Per OTel
+        // semconv those belong on that event and not on the span, so they are
+        // deliberately not copied up here.
         span.recordException(e);
-        if (e.name) {
-          span.setAttribute('exception.type', e.name);
-        }
         setErrorStatus(e.message);
       } else {
         const message = String(e);
