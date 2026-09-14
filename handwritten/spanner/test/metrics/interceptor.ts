@@ -1,4 +1,4 @@
-﻿// Copyright 2025 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -213,6 +213,19 @@ describe('MetricInterceptor', () => {
         mockMetricsTracer.recordAfeConnectivityErrorCount.getCall(0).args,
         Status.OK,
       );
+    });
+
+    it('reads server-timing header using metadata.get without calling metadata.getMap', () => {
+      const getMapSpy = sandbox.spy(serverTimingMetadata, 'getMap');
+      const getSpy = sandbox.spy(serverTimingMetadata, 'get');
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(serverTimingMetadata);
+
+      assert.strictEqual(getMapSpy.callCount, 0);
+      assert.strictEqual(getSpy.calledWith('server-timing'), true);
+      assert.strictEqual(mockMetricsTracer.extractGfeLatency.calledOnce, true);
     });
   });
 });
