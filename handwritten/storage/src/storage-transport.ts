@@ -178,6 +178,34 @@ export class StorageTransport {
       hasEtagInBody
     );
 
+    // Helper to enrich GaxiosError objects with legacy ApiError properties
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const decorateError = (err: any) => {
+      if (err && typeof err === 'object') {
+        err.code = err.response?.status || err.status || err.code;
+        if (err.response?.data?.error) {
+          const apiError = err.response.data.error;
+          if (typeof apiError === 'string') {
+            err.message = apiError;
+          } else if (apiError && typeof apiError === 'object') {
+            if (typeof apiError.message === 'string') {
+              err.message = apiError.message;
+            } else if (
+              apiError.message &&
+              typeof apiError.message === 'object'
+            ) {
+              err.message =
+                apiError.message.error?.message ||
+                apiError.message.message ||
+                JSON.stringify(apiError.message);
+            }
+            if (apiError.errors) err.errors = apiError.errors;
+          }
+        }
+      }
+      return err;
+    };
+
     try {
       const requestPromise = this.authClient.request<T>({
         adapter: async (opts: GaxiosOptions) => {
@@ -235,11 +263,15 @@ export class StorageTransport {
         return data;
       };
 
+      const enrichedPromise = requestPromise.catch(err => {
+        throw decorateError(err);
+      });
+
       if (callback) {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         (async () => {
           try {
-            const resp = await requestPromise;
+            const resp = await enrichedPromise;
             callback(null, decorateMetadata(resp), resp);
           } catch (err: unknown) {
             callback(
@@ -249,16 +281,17 @@ export class StorageTransport {
             );
           }
         })();
-        return requestPromise;
+        return enrichedPromise;
       }
 
-      return requestPromise;
+      return enrichedPromise;
     } catch (e) {
+      const err = decorateError(e);
       if (callback) {
-        callback(e as GaxiosError);
-        return Promise.reject(e);
+        callback(err as GaxiosError);
+        return Promise.reject(err);
       }
-      throw e;
+      throw err;
     }
   }
 
