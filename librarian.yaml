@@ -229,7 +229,9 @@ libraries:
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
-        nodejs: {}
+        nodejs:
+          exclude_protos:
+            - google/cloud/aiplatform/v1beta1/schema/io_format.proto
     copyright_year: "2026"
     keep:
       - src/decorator.ts
