@@ -516,7 +516,7 @@ describe('createApiCall', () => {
         return {cancel: () => {}};
       }
 
-      const apiCall = realCreateApiCall(func, settings);
+      const apiCall = gaxCreateApiCall(func, settings);
       await apiCall({param: 'test'}, undefined);
 
       assert.strictEqual(traceCallSpy.calledOnce, true);
@@ -548,7 +548,7 @@ describe('createApiCall', () => {
         return {cancel: () => {}};
       }
 
-      const apiCall = realCreateApiCall(func, settings);
+      const apiCall = gaxCreateApiCall(func, settings);
       await apiCall({param: 'test'}, {timeout: 1000});
 
       assert.strictEqual(traceCallSpy.calledOnce, true);
@@ -591,7 +591,7 @@ describe('createApiCall', () => {
         return {cancel: () => {}};
       }
 
-      const apiCall = realCreateApiCall(func, settings);
+      const apiCall = gaxCreateApiCall(func, settings);
       await apiCall({param: 'test'}, undefined);
 
       assert.strictEqual(traceCallSpy.calledOnce, true);
