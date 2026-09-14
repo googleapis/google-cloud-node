@@ -53,7 +53,11 @@ export const MetricInterceptor = (options, nextCall) => {
           // GFE/AFE latency if available,
           // or else increase the GFE/AFE connectivity error count
           if (metricsTracer) {
-            const serverTimingHeader = metadata.getMap()['server-timing'];
+            const serverTimingEntries = metadata.get('server-timing');
+            const serverTimingHeader =
+              serverTimingEntries.length > 0
+                ? String(serverTimingEntries[0])
+                : undefined;
             const gfeTiming =
               metricsTracer?.extractGfeLatency(serverTimingHeader);
             metricsTracer.gfeLatency = gfeTiming ?? null;
