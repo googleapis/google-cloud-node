@@ -11,10 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import {
-  View,
-  ExplicitBucketHistogramAggregation,
-} from '@opentelemetry/sdk-metrics';
+import {AggregationType, ViewOptions} from '@opentelemetry/sdk-metrics';
 
 export const SPANNER_METER_NAME = 'spanner-nodejs';
 export const CLIENT_METRICS_PREFIX = 'spanner.googleapis.com/internal/client';
@@ -91,33 +88,30 @@ export const HISTOGRAM_BUCKET_BOUNDARIES = [
 ];
 
 // Defined Views for metric aggregation
-export const OPERATION_LATENCY_VIEW = new View({
+const HISTOGRAM_AGGREGATION = {
+  type: AggregationType.EXPLICIT_BUCKET_HISTOGRAM as const,
+  options: {boundaries: HISTOGRAM_BUCKET_BOUNDARIES},
+};
+
+export const OPERATION_LATENCY_VIEW: ViewOptions = {
   instrumentName: METRIC_NAME_OPERATION_LATENCIES,
-  aggregation: new ExplicitBucketHistogramAggregation(
-    HISTOGRAM_BUCKET_BOUNDARIES,
-  ),
-});
+  aggregation: HISTOGRAM_AGGREGATION,
+};
 
-export const ATTEMPT_LATENCY_VIEW = new View({
+export const ATTEMPT_LATENCY_VIEW: ViewOptions = {
   instrumentName: METRIC_NAME_ATTEMPT_LATENCIES,
-  aggregation: new ExplicitBucketHistogramAggregation(
-    HISTOGRAM_BUCKET_BOUNDARIES,
-  ),
-});
+  aggregation: HISTOGRAM_AGGREGATION,
+};
 
-export const GFE_LATENCY_VIEW = new View({
+export const GFE_LATENCY_VIEW: ViewOptions = {
   instrumentName: METRIC_NAME_GFE_LATENCIES,
-  aggregation: new ExplicitBucketHistogramAggregation(
-    HISTOGRAM_BUCKET_BOUNDARIES,
-  ),
-});
+  aggregation: HISTOGRAM_AGGREGATION,
+};
 
-export const AFE_LATENCY_VIEW = new View({
+export const AFE_LATENCY_VIEW: ViewOptions = {
   instrumentName: METRIC_NAME_AFE_LATENCIES,
-  aggregation: new ExplicitBucketHistogramAggregation(
-    HISTOGRAM_BUCKET_BOUNDARIES,
-  ),
-});
+  aggregation: HISTOGRAM_AGGREGATION,
+};
 
 export const METRIC_VIEWS = [
   OPERATION_LATENCY_VIEW,
