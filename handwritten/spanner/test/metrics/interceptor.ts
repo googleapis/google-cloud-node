@@ -226,6 +226,19 @@ describe('MetricInterceptor', () => {
       );
     });
 
+    it('reads server-timing header using metadata.get without calling metadata.getMap', () => {
+      const getMapSpy = sandbox.spy(serverTimingMetadata, 'getMap');
+      const getSpy = sandbox.spy(serverTimingMetadata, 'get');
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(serverTimingMetadata);
+
+      assert.strictEqual(getMapSpy.callCount, 0);
+      assert.strictEqual(getSpy.calledWith('server-timing'), true);
+      assert.strictEqual(mockMetricsTracer.extractGfeLatency.calledOnce, true);
+    });
+
     it('AFE Metrics - Disabled when AFE server timing is disabled', () => {
       Spanner._resetAFEServerTimingForTest();
       process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'true';

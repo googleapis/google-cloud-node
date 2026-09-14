@@ -3990,6 +3990,61 @@ describe('Transaction', () => {
           last: true,
         });
       });
+
+      it('should fail waiting queries with an error if transaction ends before inline begin finishes', done => {
+        const fakeRequestStream1 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          return fakeRequestStream1;
+        });
+
+        transaction.run({sql: 'SELECT 1'}, () => {});
+        transaction.run({sql: 'SELECT 2'}, err => {
+          try {
+            assert(err);
+            assert.strictEqual(err!.message, 'Transaction has ended.');
+            assert.strictEqual(requestCount, 1);
+            fakeRequestStream1.end();
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        assert.strictEqual(requestCount, 1);
+        transaction.end();
+      });
+
+      it('should reject promise-based waiting query when transaction ends before inline begin finishes', async () => {
+        const fakeRequestStream1 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          return fakeRequestStream1;
+        });
+
+        transaction.run({sql: 'SELECT 1'}, () => {});
+        const waitingPromise = new Promise((resolve, reject) => {
+          transaction.run({sql: 'SELECT 2'}, (err, rows) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(rows);
+            }
+          });
+        });
+
+        transaction.end();
+
+        await assert.rejects(waitingPromise, {
+          message: 'Transaction has ended.',
+        });
+        assert.strictEqual(requestCount, 1);
+        fakeRequestStream1.end();
+      });
     });
 
     describe('runStream', () => {
