@@ -58,7 +58,6 @@ import {TEST_BUNDLE_ID, verifyMetadata} from '../test/bundle';
 import {
   bundleToElementArray,
   isEnterprise,
-  isPreferRest,
   Post,
   postConverter,
   postConverterMerge,
@@ -8741,28 +8740,7 @@ describe.skipClassic('non-native Firestore types', () => {
   afterEach(() => verifyInstance(firestore));
 
   async function getFirstSnapshot(query: Query): Promise<QuerySnapshot> {
-    if (query.firestore._settings.preferRest || isPreferRest()) {
-      return query.get();
-    }
-
-    const deferred = new DeferredPromise<QuerySnapshot>();
-    deferred.promise = new Promise((resolve, reject) => {
-      deferred.resolve = resolve;
-      deferred.reject = reject;
-    });
-
-    const unsubscribe = query.onSnapshot(
-      snapshot => {
-        deferred.resolve(snapshot);
-      },
-      err => {
-        deferred.reject(err);
-      },
-    );
-
-    const snapshot_1 = await deferred.promise!;
-    unsubscribe();
-    return snapshot_1 as QuerySnapshot;
+    return query.get();
   }
 
   interface TypeWithEquality {
