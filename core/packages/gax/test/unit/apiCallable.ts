@@ -491,6 +491,113 @@ describe('createApiCall', () => {
       assert.strictEqual(harness.getSpans('google-gax').length, 0);
     });
 
+    it('passes maxDurationMs derived from the call timeout to traceCall', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        timeout: 5000,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({param: 'test'}, undefined);
+
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+      const [, , , , , maxDurationMs] = traceCallSpy.firstCall.args;
+      assert.strictEqual(maxDurationMs, 35000);
+    });
+
+    it('derives maxDurationMs from a call-time timeout override', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        timeout: 5000,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({param: 'test'}, {timeout: 1000});
+
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+      const [, , , , , maxDurationMs] = traceCallSpy.firstCall.args;
+      assert.strictEqual(maxDurationMs, 31000);
+    });
+
+    it('omits maxDurationMs when maxRetries leaves the call without a wall-clock bound', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
+
+      // retryCodes is empty so the call does not actually go through
+      // `retryable`, which rejects maxRetries combined with a total timeout.
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        timeout: 5000,
+        retry: gax.createRetryOptions([], {
+          initialRetryDelayMillis: 100,
+          retryDelayMultiplier: 1.2,
+          maxRetryDelayMillis: 1000,
+          initialRpcTimeoutMillis: 3000,
+          rpcTimeoutMultiplier: 1,
+          maxRpcTimeoutMillis: 3000,
+          maxRetries: 3,
+        }),
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = realCreateApiCall(func, settings);
+      await apiCall({param: 'test'}, undefined);
+
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+      const [, , , , , maxDurationMs] = traceCallSpy.firstCall.args;
+      assert.strictEqual(maxDurationMs, undefined);
+    });
+
     it('correctly pipes telemetry information into the active span for gRPC calls', async () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const settings = new gax.CallSettings({
