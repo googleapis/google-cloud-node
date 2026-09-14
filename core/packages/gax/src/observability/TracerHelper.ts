@@ -255,7 +255,7 @@ export function handleStream(
  *   lost. The user callback is always forwarded, even if it arrives later.
  * @returns {T} The result of the traced operation.
  */
-export function traceAttempt(
+export function traceCall(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
   fn: (tracedCallback?: APICallback) => GaxCallResult,
@@ -263,7 +263,7 @@ export function traceAttempt(
   callback?: APICallback,
   maxDurationMs?: number,
 ): GaxCallResult;
-export function traceAttempt<T extends EventEmitter>(
+export function traceCall<T extends EventEmitter>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
   fn: (tracedCallback?: APICallback) => T,
@@ -271,7 +271,7 @@ export function traceAttempt<T extends EventEmitter>(
   callback?: APICallback,
   maxDurationMs?: number,
 ): T;
-export function traceAttempt<T>(
+export function traceCall<T>(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
   fn: (tracedCallback?: APICallback) => T,
@@ -279,7 +279,7 @@ export function traceAttempt<T>(
   callback?: APICallback,
   maxDurationMs?: number,
 ): T;
-export function traceAttempt(
+export function traceCall(
   dynamicArgs: DynamicTraceContext,
   staticArgs: StaticTraceContext,
   fn: (tracedCallback?: APICallback) => GaxCallResult,

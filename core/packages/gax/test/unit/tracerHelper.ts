@@ -21,7 +21,7 @@ import {SpanStatusCode} from '@opentelemetry/api';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
   getGaxTracer,
-  traceAttempt,
+  traceCall,
   handlePromise,
   handleStream,
   DynamicTraceContext,
@@ -59,7 +59,7 @@ describe('TracerHelper', () => {
     });
   });
 
-  describe('traceAttempt', () => {
+  describe('traceCall', () => {
     const dynamicArgs: DynamicTraceContext = {
       clientName: 'StorageClient',
       methodName: 'GetObject',
@@ -75,7 +75,7 @@ describe('TracerHelper', () => {
 
     it('creates and ends a span with correct name and attributes on success', async () => {
       const expectedResult = {data: 'test'};
-      const result = await traceAttempt(dynamicArgs, staticArgs, async () => {
+      const result = await traceCall(dynamicArgs, staticArgs, async () => {
         return expectedResult;
       });
 
@@ -111,7 +111,7 @@ describe('TracerHelper', () => {
 
       await assert.rejects(
         async () => {
-          await traceAttempt(dynamicArgs, staticArgs, async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
             throw error;
           });
         },
@@ -140,13 +140,9 @@ describe('TracerHelper', () => {
 
     it('handles missing optional static arguments gracefully', async () => {
       const emptyStaticArgs: StaticTraceContext = {};
-      const result = await traceAttempt(
-        dynamicArgs,
-        emptyStaticArgs,
-        async () => {
-          return 42;
-        },
-      );
+      const result = await traceCall(dynamicArgs, emptyStaticArgs, async () => {
+        return 42;
+      });
 
       assert.strictEqual(result, 42);
 
@@ -171,7 +167,7 @@ describe('TracerHelper', () => {
         rpcType: 'http',
       };
 
-      await traceAttempt(httpDynamicArgs, staticArgs, async () => {
+      await traceCall(httpDynamicArgs, staticArgs, async () => {
         return 'ok';
       });
 
@@ -181,7 +177,7 @@ describe('TracerHelper', () => {
     });
 
     it('manages span lifetime for resolved promises', async () => {
-      const result = await traceAttempt(dynamicArgs, staticArgs, () =>
+      const result = await traceCall(dynamicArgs, staticArgs, () =>
         Promise.resolve('async-result'),
       );
       assert.strictEqual(result, 'async-result');
@@ -198,7 +194,7 @@ describe('TracerHelper', () => {
         resolvePromise = resolve;
       });
 
-      const resultPromise = traceAttempt(
+      const resultPromise = traceCall(
         dynamicArgs,
         staticArgs,
         () => asyncPromise,
@@ -225,7 +221,7 @@ describe('TracerHelper', () => {
         }, 10);
       });
 
-      const result = traceAttempt(dynamicArgs, staticArgs, () => customPromise);
+      const result = traceCall(dynamicArgs, staticArgs, () => customPromise);
       assert.strictEqual(result, customPromise);
 
       const initialSpans = harness.getSpans('google-gax');
@@ -269,7 +265,7 @@ describe('TracerHelper', () => {
       // Verify it is NOT an instance of native Promise
       assert.strictEqual(customPromise instanceof Promise, false);
 
-      const result = traceAttempt(dynamicArgs, staticArgs, () => customPromise);
+      const result = traceCall(dynamicArgs, staticArgs, () => customPromise);
       assert.strictEqual(result, customPromise);
 
       // Verify the span is NOT closed while the custom promise is pending
@@ -287,7 +283,7 @@ describe('TracerHelper', () => {
       const ongoingCall = new OngoingCallPromise();
       assert.strictEqual(ongoingCall instanceof Promise, false);
 
-      const result = traceAttempt(dynamicArgs, staticArgs, () => ongoingCall);
+      const result = traceCall(dynamicArgs, staticArgs, () => ongoingCall);
       assert.strictEqual(result, ongoingCall);
 
       // Verify the span is NOT closed while ongoingCall is in flight
@@ -307,7 +303,7 @@ describe('TracerHelper', () => {
       assert.strictEqual(ongoingCall instanceof Promise, false);
 
       const error = new Error('ongoing call failed');
-      const result = traceAttempt(dynamicArgs, staticArgs, () => ongoingCall);
+      const result = traceCall(dynamicArgs, staticArgs, () => ongoingCall);
       assert.strictEqual(result, ongoingCall);
 
       // Verify the span is NOT closed while ongoingCall is in flight
@@ -329,7 +325,7 @@ describe('TracerHelper', () => {
     it('ends span synchronously if result is not a Promise', () => {
       const syncResult = {data: 'sync-data'};
 
-      const result = traceAttempt(dynamicArgs, staticArgs, () => syncResult);
+      const result = traceCall(dynamicArgs, staticArgs, () => syncResult);
       assert.strictEqual(result, syncResult);
 
       const spans = harness.getSpans('google-gax');
@@ -344,7 +340,7 @@ describe('TracerHelper', () => {
       });
 
       const error = new Error('async promise failure');
-      void traceAttempt(dynamicArgs, staticArgs, () => asyncPromise);
+      void traceCall(dynamicArgs, staticArgs, () => asyncPromise);
 
       // Verify the span is NOT closed while the promise is pending
       assert.strictEqual(harness.getSpans('google-gax').length, 0);
@@ -364,7 +360,7 @@ describe('TracerHelper', () => {
 
     it('does not end span prematurely while stream is active and emitting data', () => {
       const emitter = new EventEmitter();
-      const result = traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
+      const result = traceCall(dynamicArgs, staticArgs, () => emitter, true);
       assert.strictEqual(result, emitter);
 
       // Span must not be finished when stream is created
@@ -387,7 +383,7 @@ describe('TracerHelper', () => {
 
     it('does not end span prematurely until stream emits error event', () => {
       const emitter = new EventEmitter();
-      traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
+      traceCall(dynamicArgs, staticArgs, () => emitter, true);
 
       assert.strictEqual(harness.getSpans('google-gax').length, 0);
 
@@ -410,7 +406,7 @@ describe('TracerHelper', () => {
 
     it('does not end span prematurely until stream emits close event', () => {
       const emitter = new EventEmitter();
-      traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
+      traceCall(dynamicArgs, staticArgs, () => emitter, true);
 
       assert.strictEqual(harness.getSpans('google-gax').length, 0);
 
@@ -424,7 +420,7 @@ describe('TracerHelper', () => {
     });
 
     it('supports isStreamCall explicitly set to false', async () => {
-      const result = await traceAttempt(
+      const result = await traceCall(
         dynamicArgs,
         staticArgs,
         () => Promise.resolve('explicit-false'),
@@ -438,7 +434,7 @@ describe('TracerHelper', () => {
 
     it('ends span synchronously if isStreamCall is true but result is not an EventEmitter', () => {
       const nonEmitter = {data: 'not-an-emitter'};
-      const result = traceAttempt(
+      const result = traceCall(
         dynamicArgs,
         staticArgs,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -459,7 +455,7 @@ describe('TracerHelper', () => {
         },
       ) as GaxCallResult;
 
-      const result = traceAttempt(
+      const result = traceCall(
         dynamicArgs,
         staticArgs,
         () => cancellablePromise,
@@ -477,7 +473,7 @@ describe('TracerHelper', () => {
         cancel: () => {},
       }) as unknown as CancellableStream;
 
-      const result = traceAttempt(dynamicArgs, staticArgs, () => stream, true);
+      const result = traceCall(dynamicArgs, staticArgs, () => stream, true);
       assert.strictEqual(result, stream);
 
       assert.strictEqual(harness.getSpans('google-gax').length, 0);
@@ -497,7 +493,7 @@ describe('TracerHelper', () => {
       const executeStreamingCall = () => {
         attempt++;
         const currentStream = attempt === 1 ? attempt1Stream : attempt2Stream;
-        return traceAttempt(dynamicArgs, staticArgs, () => currentStream, true);
+        return traceCall(dynamicArgs, staticArgs, () => currentStream, true);
       };
 
       // Attempt 1
@@ -539,7 +535,7 @@ describe('TracerHelper', () => {
 
     it('keeps span active when a stream handles retries internally before completing', () => {
       const outerStream = new EventEmitter();
-      const result = traceAttempt(
+      const result = traceCall(
         dynamicArgs,
         staticArgs,
         () => outerStream,
@@ -569,7 +565,7 @@ describe('TracerHelper', () => {
 
         // Mimics an API caller that returns OngoingCall (no `.promise`), so
         // fn() yields undefined and there is nothing to await.
-        const returned = traceAttempt(
+        const returned = traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -600,7 +596,7 @@ describe('TracerHelper', () => {
         error.name = 'CustomRpcError';
         let invokedCallback: APICallback | undefined;
 
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -653,7 +649,7 @@ describe('TracerHelper', () => {
           },
         };
 
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -679,7 +675,7 @@ describe('TracerHelper', () => {
         let invokedCallback: APICallback | undefined;
         let userCallbackCount = 0;
 
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -706,7 +702,7 @@ describe('TracerHelper', () => {
 
       it('still ends the span synchronously when no callback is supplied', () => {
         const syncResult = {data: 'sync'};
-        const result = traceAttempt(
+        const result = traceCall(
           dynamicArgs,
           staticArgs,
           () => syncResult as unknown as ResultTuple,
@@ -722,7 +718,7 @@ describe('TracerHelper', () => {
         const emitter = new EventEmitter();
         let received: APICallback | undefined = (() => {}) as APICallback;
 
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -744,7 +740,7 @@ describe('TracerHelper', () => {
 
     describe('maxDurationMs backstop', () => {
       it('leaks the span by default when the callback never fires', async () => {
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           () => undefined as unknown as ResultTuple,
@@ -759,7 +755,7 @@ describe('TracerHelper', () => {
       });
 
       it('ends and marks the span abandoned when the callback never fires', async () => {
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           () => undefined as unknown as ResultTuple,
@@ -786,7 +782,7 @@ describe('TracerHelper', () => {
         let invokedCallback: APICallback | undefined;
         let userCallbackCount = 0;
 
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -820,7 +816,7 @@ describe('TracerHelper', () => {
         let invokedCallback: APICallback | undefined;
         let receivedResponse: unknown;
 
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -850,7 +846,7 @@ describe('TracerHelper', () => {
       it('does not apply the backstop to stream calls', async () => {
         const emitter = new EventEmitter();
 
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           () => emitter,
@@ -874,7 +870,7 @@ describe('TracerHelper', () => {
       });
 
       it('ignores a non-positive maxDurationMs', async () => {
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           () => undefined as unknown as ResultTuple,
@@ -896,7 +892,7 @@ describe('TracerHelper', () => {
       };
 
       it('sets OK for a synchronous non-promise result', () => {
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           () => ({data: 1}) as unknown as ResultTuple,
@@ -905,13 +901,13 @@ describe('TracerHelper', () => {
       });
 
       it('sets OK when the promise resolves', async () => {
-        await traceAttempt(dynamicArgs, staticArgs, async () => ({data: 1}));
+        await traceCall(dynamicArgs, staticArgs, async () => ({data: 1}));
         assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
       });
 
       it('sets ERROR when the promise rejects', async () => {
         await assert.rejects(async () => {
-          await traceAttempt(dynamicArgs, staticArgs, async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
             throw new Error('promise boom');
           });
         });
@@ -922,7 +918,7 @@ describe('TracerHelper', () => {
 
       it('sets ERROR when fn throws synchronously', () => {
         assert.throws(() =>
-          traceAttempt(dynamicArgs, staticArgs, () => {
+          traceCall(dynamicArgs, staticArgs, () => {
             throw new Error('sync boom');
           }),
         );
@@ -933,14 +929,14 @@ describe('TracerHelper', () => {
 
       it('sets OK when the stream ends cleanly', () => {
         const emitter = new EventEmitter();
-        traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
         emitter.emit('end');
         assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
       });
 
       it('sets ERROR when the stream errors', () => {
         const emitter = new EventEmitter();
-        traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
         emitter.emit('error', new Error('stream boom'));
         const status = lastStatus();
         assert.strictEqual(status.code, SpanStatusCode.ERROR);
@@ -954,7 +950,7 @@ describe('TracerHelper', () => {
             cb();
           },
         });
-        traceAttempt(dynamicArgs, staticArgs, () => writable, true);
+        traceCall(dynamicArgs, staticArgs, () => writable, true);
         writable.end();
 
         await new Promise<void>(resolve => setImmediate(resolve));
@@ -963,7 +959,7 @@ describe('TracerHelper', () => {
 
       it('sets OK when the callback reports success', () => {
         let invokedCallback: APICallback | undefined;
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -979,7 +975,7 @@ describe('TracerHelper', () => {
 
       it('sets ERROR when the callback reports failure', () => {
         let invokedCallback: APICallback | undefined;
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           tracedCallback => {
@@ -996,7 +992,7 @@ describe('TracerHelper', () => {
       });
 
       it('sets ERROR when the backstop abandons the span', async () => {
-        traceAttempt(
+        traceCall(
           dynamicArgs,
           staticArgs,
           () => undefined as unknown as ResultTuple,
@@ -1017,7 +1013,7 @@ describe('TracerHelper', () => {
       it('does not downgrade an ERROR status to OK when the span ends', () => {
         // endSpan resolves the status centrally; a recorded error must win.
         const emitter = new EventEmitter();
-        traceAttempt(dynamicArgs, staticArgs, () => emitter, true);
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
         emitter.emit('error', new Error('stream boom'));
         emitter.emit('end');
         emitter.emit('close');
