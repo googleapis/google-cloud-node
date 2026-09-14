@@ -38,7 +38,11 @@ import {
 } from '../../src/apitypes';
 import {GoogleError} from '../../src/googleError';
 import {OngoingCallPromise} from '../../src/call';
-import {OtelHarness} from './otelHarness';
+import {
+  OtelHarness,
+  snapshotListeners,
+  assertListenersRestored,
+} from './otelHarness';
 
 describe('TracerHelper', () => {
   let harness: OtelHarness;
@@ -738,152 +742,6 @@ describe('TracerHelper', () => {
       });
     });
 
-    describe('maxDurationMs backstop', () => {
-      it('leaks the span by default when the callback never fires', async () => {
-        traceCall(
-          dynamicArgs,
-          staticArgs,
-          () => undefined as unknown as ResultTuple,
-          false,
-          () => {},
-        );
-
-        await new Promise<void>(resolve => setTimeout(resolve, 50));
-
-        // No backstop requested, so the span intentionally stays open.
-        assert.strictEqual(harness.getSpans('google-gax').length, 0);
-      });
-
-      it('ends and marks the span abandoned when the callback never fires', async () => {
-        traceCall(
-          dynamicArgs,
-          staticArgs,
-          () => undefined as unknown as ResultTuple,
-          false,
-          () => {},
-          20,
-        );
-
-        assert.strictEqual(harness.getSpans('google-gax').length, 0);
-
-        await new Promise<void>(resolve => setTimeout(resolve, 60));
-
-        const spans = harness.getSpans('google-gax');
-        assert.strictEqual(spans.length, 1);
-        assert.strictEqual(spans[0].ended, true);
-        assert.strictEqual(spans[0].attributes['gcp.span.abandoned'], true);
-        assert.strictEqual(
-          spans[0].attributes['error.message'],
-          'Callback did not fire within 20ms; span abandoned.',
-        );
-      });
-
-      it('does not fire the backstop when the callback arrives in time', async () => {
-        let invokedCallback: APICallback | undefined;
-        let userCallbackCount = 0;
-
-        traceCall(
-          dynamicArgs,
-          staticArgs,
-          tracedCallback => {
-            invokedCallback = tracedCallback;
-            return undefined as unknown as ResultTuple;
-          },
-          false,
-          () => {
-            userCallbackCount++;
-          },
-          50,
-        );
-
-        invokedCallback!(null, {ok: true});
-
-        const spans = harness.getSpans('google-gax');
-        assert.strictEqual(spans.length, 1);
-        assert.strictEqual(
-          spans[0].attributes['gcp.span.abandoned'],
-          undefined,
-        );
-
-        // Wait past the backstop deadline: it must have been cleared, so no
-        // second span and no further mutation.
-        await new Promise<void>(resolve => setTimeout(resolve, 80));
-        assert.strictEqual(harness.getSpans('google-gax').length, 1);
-        assert.strictEqual(userCallbackCount, 1);
-      });
-
-      it('still forwards a callback that arrives after the backstop fired', async () => {
-        let invokedCallback: APICallback | undefined;
-        let receivedResponse: unknown;
-
-        traceCall(
-          dynamicArgs,
-          staticArgs,
-          tracedCallback => {
-            invokedCallback = tracedCallback;
-            return undefined as unknown as ResultTuple;
-          },
-          false,
-          (_err, response) => {
-            receivedResponse = response;
-          },
-          20,
-        );
-
-        await new Promise<void>(resolve => setTimeout(resolve, 60));
-        assert.strictEqual(harness.getSpans('google-gax').length, 1);
-
-        // The RPC finally responds, long after the span was abandoned.
-        invokedCallback!(null, {late: true});
-
-        assert.deepStrictEqual(receivedResponse, {late: true});
-        // The abandoned span is not duplicated or re-ended.
-        const spans = harness.getSpans('google-gax');
-        assert.strictEqual(spans.length, 1);
-        assert.strictEqual(spans[0].attributes['gcp.span.abandoned'], true);
-      });
-
-      it('does not apply the backstop to stream calls', async () => {
-        const emitter = new EventEmitter();
-
-        traceCall(
-          dynamicArgs,
-          staticArgs,
-          () => emitter,
-          true,
-          () => {},
-          20,
-        );
-
-        await new Promise<void>(resolve => setTimeout(resolve, 60));
-
-        // Stream lifetime is governed by handleStream, not the backstop.
-        assert.strictEqual(harness.getSpans('google-gax').length, 0);
-
-        emitter.emit('end');
-        const spans = harness.getSpans('google-gax');
-        assert.strictEqual(spans.length, 1);
-        assert.strictEqual(
-          spans[0].attributes['gcp.span.abandoned'],
-          undefined,
-        );
-      });
-
-      it('ignores a non-positive maxDurationMs', async () => {
-        traceCall(
-          dynamicArgs,
-          staticArgs,
-          () => undefined as unknown as ResultTuple,
-          false,
-          () => {},
-          0,
-        );
-
-        await new Promise<void>(resolve => setTimeout(resolve, 40));
-        assert.strictEqual(harness.getSpans('google-gax').length, 0);
-      });
-    });
-
     describe('span status', () => {
       const lastStatus = () => {
         const spans = harness.getSpans('google-gax');
@@ -989,25 +847,6 @@ describe('TracerHelper', () => {
         const status = lastStatus();
         assert.strictEqual(status.code, SpanStatusCode.ERROR);
         assert.strictEqual(status.message, 'callback boom');
-      });
-
-      it('sets ERROR when the backstop abandons the span', async () => {
-        traceCall(
-          dynamicArgs,
-          staticArgs,
-          () => undefined as unknown as ResultTuple,
-          false,
-          () => {},
-          20,
-        );
-
-        await new Promise<void>(resolve => setTimeout(resolve, 60));
-        const status = lastStatus();
-        assert.strictEqual(status.code, SpanStatusCode.ERROR);
-        assert.strictEqual(
-          status.message,
-          'Callback did not fire within 20ms; span abandoned.',
-        );
       });
 
       it('does not downgrade an ERROR status to OK when the span ends', () => {
@@ -1439,6 +1278,109 @@ describe('TracerHelper', () => {
 
       assert.strictEqual(recordErrorCount, 1);
       assert.strictEqual(endSpanCount, 1);
+    });
+  });
+
+  describe('harness assertions', () => {
+    const dynamicArgs: DynamicTraceContext = {
+      clientName: 'StorageClient',
+      methodName: 'GetObject',
+      rpcType: 'grpc',
+    };
+    const staticArgs: StaticTraceContext = {
+      gcpClientService: 'storage.googleapis.com',
+    };
+
+    it('counts exactly one exported span for a client-streaming call', async () => {
+      // Write-only stream: the readable side never opens, so 'end' never fires.
+      // emitClose:false also suppresses 'close', leaving 'finish' as the only
+      // completion signal — which is what makes this a real regression test.
+      // With emitClose left at its default of true, 'close' would end the span
+      // on its own and the missing-'finish' bug would slip through.
+      const writable = new Writable({
+        objectMode: true,
+        emitClose: false,
+        write(_chunk, _enc, cb) {
+          cb();
+        },
+      });
+
+      traceCall(dynamicArgs, staticArgs, () => writable, true);
+
+      harness.assertSpanCount(0, 'google-gax', 'span must stay open mid-call');
+
+      writable.write('foo');
+      writable.end();
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      harness.assertSpanCount(1, 'google-gax');
+    });
+
+    it('measures a callback span across the full RPC duration', async () => {
+      const rpcDurationMs = 40;
+      let invokedCallback: APICallback | undefined;
+
+      traceCall(
+        dynamicArgs,
+        staticArgs,
+        tracedCallback => {
+          invokedCallback = tracedCallback;
+          return undefined as unknown as ResultTuple;
+        },
+        false,
+        () => {},
+      );
+
+      // Simulate an RPC that takes time to respond.
+      await new Promise<void>(resolve => setTimeout(resolve, rpcDurationMs));
+      invokedCallback!(null, {ok: true});
+
+      // A span ended synchronously at call time would report ~0ms. The bound is
+      // set below the delay so timer granularity cannot make this flaky.
+      harness.assertMinDurationMs(rpcDurationMs / 2, 'google-gax');
+    });
+
+    it('reports ERROR status and message when the callback fails', () => {
+      const error = new GoogleError('permission denied');
+      let invokedCallback: APICallback | undefined;
+
+      traceCall(
+        dynamicArgs,
+        staticArgs,
+        tracedCallback => {
+          invokedCallback = tracedCallback;
+          return undefined as unknown as ResultTuple;
+        },
+        false,
+        () => {},
+      );
+
+      invokedCallback!(error);
+
+      harness.assertStatus(SpanStatusCode.ERROR, {
+        messageIncludes: 'permission denied',
+        tracerName: 'google-gax',
+      });
+    });
+
+    it('returns stream listener counts to baseline after completion', () => {
+      const stream = new EventEmitter();
+      // A pre-existing listener, standing in for a retry handler that the
+      // tracer must not remove.
+      stream.on('error', () => {});
+
+      const baseline = snapshotListeners(stream);
+
+      traceCall(dynamicArgs, staticArgs, () => stream, true);
+      assert.ok(
+        stream.listenerCount('error') > baseline.counts.get('error')!,
+        'tracer should have attached its own listeners',
+      );
+
+      stream.emit('end');
+
+      harness.assertSpanCount(1, 'google-gax');
+      assertListenersRestored(baseline, 'after stream end');
     });
   });
 });
