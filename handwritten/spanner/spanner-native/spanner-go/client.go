@@ -168,7 +168,7 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 	// so the cost lands at construction instead of in the measured workload.
 	// Steady-state behaviour is unchanged. Set SPANNER_NATIVE_NO_PREWARM=1 to
 	// restore the old lazy behaviour.
-	if os.Getenv("SPANNER_NATIVE_NO_PREWARM") == "" {
+	if os.Getenv("SPANNER_NATIVE_NO_PREWARM") == "" && !plaintext {
 		warmStart := time.Now()
 		var wg sync.WaitGroup
 
@@ -176,7 +176,7 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 			wg.Add(1)
 			go func(cc *grpc.ClientConn) {
 				defer wg.Done()
-				wctx, wcancel := context.WithTimeout(ctx, 30*time.Second)
+				wctx, wcancel := context.WithTimeout(ctx, 5*time.Second)
 				defer wcancel()
 				cc.Connect()
 				for {
