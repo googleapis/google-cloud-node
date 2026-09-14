@@ -29,6 +29,7 @@ import {
   partialResultStream,
   ResumeToken,
   Row,
+  decodeRowsDirect,
 } from './partial-result-stream';
 import {Session} from './session';
 import {Key} from './table';
@@ -48,12 +49,27 @@ import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import IAny = google.protobuf.IAny;
 import IQueryOptions = google.spanner.v1.ExecuteSqlRequest.IQueryOptions;
 import IRequestOptions = google.spanner.v1.IRequestOptions;
+import IResultSetStats = google.spanner.v1.IResultSetStats;
+import ResultSetStats = google.spanner.v1.ResultSetStats;
+import IResultSetMetadata = google.spanner.v1.IResultSetMetadata;
+import ResultSetMetadata = google.spanner.v1.ResultSetMetadata;
 import {Database, Spanner} from '.';
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
-import {RunTransactionOptions} from './transaction-runner';
-import {injectRequestIDIntoHeaders, nextNthRequest} from './request_id_header';
+import {
+  DeadlineError,
+  RunTransactionOptions,
+  isRetryableInternalError,
+} from './transaction-runner';
+import {
+  injectRequestIDIntoHeaders,
+  nextNthRequest,
+  X_GOOG_SPANNER_REQUEST_ID_HEADER,
+  X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
+} from './request_id_header';
 
 export type Rows = Array<Row | Json>;
+type ResultStats = ResultSetStats | IResultSetStats;
+type ResultMetadata = ResultSetMetadata | IResultSetMetadata;
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
 
@@ -71,6 +87,18 @@ function injectGaxOpt(existingOpts: any, key: string, value: any): any {
       }),
     }),
   });
+}
+
+function normalizeError(err: Error): ServiceError {
+  const errorWithCode = err as Partial<ServiceError>;
+  if (errorWithCode.code === undefined) {
+    Object.assign(errorWithCode, {
+      code: grpc.status.UNKNOWN,
+      details: err.message,
+      metadata: new grpc.Metadata(),
+    });
+  }
+  return errorWithCode as ServiceError;
 }
 
 export interface TimestampBounds {
@@ -223,10 +251,6 @@ export interface BatchUpdateCallback {
     rowCounts: number[],
     response?: spannerClient.spanner.v1.ExecuteBatchDmlResponse,
   ): void;
-}
-export interface BatchUpdateOptions {
-  requestOptions?: Omit<IRequestOptions, 'transactionTag'>;
-  gaxOptions?: CallOptions;
 }
 
 export type ReadCallback = NormalCallback<Rows>;
@@ -1107,6 +1131,7 @@ export class Snapshot extends EventEmitter {
     }
 
     this.ended = true;
+    this._releaseWaitingRequests();
     process.nextTick(() => this.emit('end'));
 
     if (this._affinityKey) {
@@ -1117,7 +1142,7 @@ export class Snapshot extends EventEmitter {
       if (client?.spannerStub) {
         Promise.resolve(client.spannerStub)
           .then((stub: any) => {
-            stub?.getChannel?.()?.unbind?.(this._affinityKey);
+            return stub?.getChannel?.()?.unbind?.(this._affinityKey);
           })
           .catch(() => {});
       }
@@ -1368,6 +1393,23 @@ export class Snapshot extends EventEmitter {
     query: string | ExecuteSqlRequest,
     callback?: RunCallback,
   ): void | Promise<RunResponse> {
+    if (this.runStream !== Snapshot.prototype.runStream) {
+      return this._runLegacy(query, callback!);
+    }
+    return this._run(query, callback!);
+  }
+
+  /**
+   * Always runs the query through the full streaming pipeline (Snapshot.prototype.runStream).
+   * Used when runStream has been overridden on Snapshot to preserve backward compatibility
+   * with custom stream implementations.
+   *
+   * @private
+   */
+  private _runLegacy(
+    query: string | ExecuteSqlRequest,
+    callback: RunCallback,
+  ): void {
     const rows: Rows = [];
     let stats: google.spanner.v1.ResultSetStats;
     let metadata: google.spanner.v1.ResultSetMetadata;
@@ -1379,18 +1421,11 @@ export class Snapshot extends EventEmitter {
         ...this._traceConfig,
       },
       span => {
-        return this.runStream(query)
+        this.runStream(query)
           .on('error', err => {
             setSpanError(span, err);
             span.end();
-            if (!('code' in err)) {
-              Object.assign(err, {
-                code: grpc.status.UNKNOWN,
-                details: err.message,
-                metadata: new grpc.Metadata(),
-              });
-            }
-            callback!(err as ServiceError, rows, stats, metadata);
+            callback!(normalizeError(err), rows, stats, metadata);
           })
           .on('response', response => {
             if (response.metadata) {
@@ -1400,14 +1435,385 @@ export class Snapshot extends EventEmitter {
               }
             }
           })
-          .on('data', row => rows.push(row))
-          .on('stats', _stats => (stats = _stats))
+          .on('data', row => {
+            rows.push(row);
+          })
+          .on('stats', _stats => {
+            stats = _stats;
+          })
           .on('end', () => {
             span.end();
             callback!(null, rows, stats, metadata);
           });
       },
     );
+  }
+
+  /**
+   * Executes a query using an optimized streaming model:
+   * 1. If all results are returned in a single PartialResultSet, the internal streaming
+   *    pipeline is simplified and rows are decoded directly, bypassing Stream overhead.
+   * 2. If there are more than one PartialResultSets, it seamlessly falls back to
+   *    the standard streaming model.
+   *
+   * @private
+   */
+  _run(
+    queryInput: string | ExecuteSqlRequest,
+    callback: RunCallback,
+    options?: {startRunSpan?: boolean},
+  ): void {
+    let query: ExecuteSqlRequest =
+      typeof queryInput === 'string' ? {sql: queryInput} : queryInput;
+
+    query = Object.assign({}, query) as ExecuteSqlRequest;
+    query.queryOptions = Object.assign(
+      Object.assign({}, this.queryOptions),
+      query.queryOptions,
+    );
+
+    const {
+      gaxOptions,
+      json,
+      jsonOptions,
+      maxResumeRetries,
+      requestOptions,
+      columnsMetadata,
+      types: _omittedTypes,
+      directedReadOptions: rawDirectedReadOptions,
+      ...rawQuery
+    } = query;
+    void _omittedTypes;
+    let formattedRequest: google.spanner.v1.IExecuteSqlRequest | undefined;
+    const seqno = this._seqno++;
+
+    const directedReadOptions = this._getDirectedReadOptions(
+      rawDirectedReadOptions,
+    );
+
+    const sanitizeRequest = () => {
+      const {params, paramTypes} = Snapshot.encodeParams(query);
+      const transaction: spannerClient.spanner.v1.ITransactionSelector = {};
+      if (this.id) {
+        transaction.id = this.id as Uint8Array;
+      } else if (this._options.readWrite) {
+        transaction.begin = this._options;
+      } else {
+        transaction.singleUse = this._options;
+      }
+
+      if (
+        !this.id &&
+        this._options.readWrite &&
+        (this.session.parent as Database).isMuxEnabledForRW_
+      ) {
+        this._setPreviousTransactionId(transaction);
+      }
+
+      formattedRequest = Object.assign({}, rawQuery, {
+        session: this.session.formattedName_!,
+        seqno,
+        requestOptions: this.configureTagOptions(
+          typeof transaction.singleUse !== 'undefined',
+          this.requestOptions?.transactionTag ?? undefined,
+          requestOptions,
+        ),
+        directedReadOptions,
+        transaction,
+        params,
+        paramTypes,
+      });
+    };
+
+    const headers = Object.assign({}, this.commonHeaders_);
+    if (
+      this._getSpanner().routeToLeaderEnabled &&
+      (this._options.readWrite !== undefined ||
+        this._options.partitionedDml !== undefined)
+    ) {
+      addLeaderAwareRoutingHeader(headers);
+    }
+
+    const traceConfig = {
+      transactionTag: this.requestOptions?.transactionTag,
+      requestTag: requestOptions?.requestTag,
+      ...query,
+      ...this._traceConfig,
+    };
+
+    const executeWithSpans = (
+      fn: (runSpan: Span | null, streamSpan: Span) => void,
+    ) => {
+      const startRunSpan = options?.startRunSpan !== false;
+      if (startRunSpan) {
+        return startTrace('Snapshot.run', traceConfig, runSpan => {
+          return startTrace('Snapshot.runStream', traceConfig, streamSpan => {
+            fn(runSpan, streamSpan);
+          });
+        });
+      } else {
+        return startTrace('Snapshot.runStream', traceConfig, streamSpan => {
+          fn(null, streamSpan);
+        });
+      }
+    };
+
+    executeWithSpans((runSpan, streamSpan) => {
+      let attempt = 0;
+      const database = this.session.parent as Database;
+      const nthRequest = nextNthRequest(database);
+
+      let completed = false;
+      const complete = (
+        err: Error | null,
+        rows: Rows = [],
+        stats?: ResultStats,
+        metadata?: ResultMetadata,
+      ) => {
+        if (completed) {
+          return;
+        }
+        completed = true;
+        if (err) {
+          setSpanError(streamSpan, err);
+        }
+        streamSpan.end();
+        if (runSpan) {
+          if (err) {
+            setSpanError(runSpan, err);
+          }
+          runSpan.end();
+        }
+        callback!(
+          err ? normalizeError(err) : null,
+          rows,
+          stats as google.spanner.v1.ResultSetStats,
+          metadata as google.spanner.v1.ResultSetMetadata,
+        );
+      };
+
+      const makeRequest = (resumeToken?: ResumeToken): Readable => {
+        attempt++;
+        if (!resumeToken) {
+          if (attempt === 1) {
+            streamSpan.addEvent('Starting stream');
+          } else {
+            streamSpan.addEvent('Re-attempting start stream', {attempt});
+          }
+        } else {
+          streamSpan.addEvent('Resuming stream', {
+            resume_token: resumeToken!.toString(),
+            attempt,
+          });
+        }
+
+        if (
+          !formattedRequest ||
+          (this.id && !formattedRequest.transaction?.id)
+        ) {
+          try {
+            sanitizeRequest();
+          } catch (e) {
+            const errorStream = new PassThrough();
+            setImmediate(() => {
+              errorStream.destroy(e as Error);
+            });
+            return errorStream;
+          }
+        }
+
+        const injectedHeaders = injectRequestIDIntoHeaders(
+          headers,
+          this.session,
+          nthRequest,
+          attempt,
+        );
+        const requestId = injectedHeaders[X_GOOG_SPANNER_REQUEST_ID_HEADER];
+        if (runSpan && requestId) {
+          runSpan.setAttribute(X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, requestId);
+        }
+
+        return this.requestStream({
+          client: 'SpannerClient',
+          method: 'executeStreamingSql',
+          reqOpts: Object.assign({}, formattedRequest, {
+            resumeToken,
+          }),
+          gaxOpts: gaxOptions,
+          headers: injectedHeaders,
+        });
+      };
+
+      const retryableCodes = [grpc.status.UNAVAILABLE];
+      const wrappedMakeRequest = this._wrapWithIdWaiter(makeRequest);
+      const startTime = Date.now();
+      const timeout = gaxOptions?.timeout ?? Infinity;
+
+      const executeRequest = () => {
+        const requestStream = this.id ? makeRequest() : wrappedMakeRequest();
+
+        const onError = (err: grpc.ServiceError) => {
+          const elapsed = Date.now() - startTime;
+          let maxRetries = Infinity;
+          if (maxResumeRetries !== undefined) {
+            maxRetries = maxResumeRetries;
+          } else if (timeout === Infinity) {
+            maxRetries = 10;
+          }
+          if (
+            elapsed < timeout &&
+            attempt <= maxRetries &&
+            err.code &&
+            (retryableCodes.includes(err.code) || isRetryableInternalError(err))
+          ) {
+            requestStream.removeAllListeners();
+            requestStream.on('error', () => {});
+            requestStream.destroy();
+            setImmediate(() => {
+              executeRequest();
+            });
+            return;
+          }
+
+          const wasAborted = isErrorAborted(err);
+          if (!this.id && this._useInRunner && !wasAborted) {
+            streamSpan.addEvent('Stream broken. Safe to retry');
+            void this.begin();
+          } else if (wasAborted) {
+            streamSpan.addEvent('Stream broken. Not safe to retry', {
+              'transaction.id': this.id?.toString(),
+            });
+          }
+
+          const finalError = elapsed >= timeout ? new DeadlineError(err) : err;
+          complete(finalError);
+        };
+
+        const onEnd = () => {
+          requestStream.removeListener('error', onError);
+          complete(null, []);
+        };
+
+        const onData = (firstChunk: google.spanner.v1.PartialResultSet) => {
+          requestStream.removeListener('error', onError);
+          requestStream.removeListener('end', onEnd);
+
+          if (firstChunk.last && !firstChunk.chunkedValue) {
+            // ⚡ FAST-PATH: Complete result in single chunk!
+            if (firstChunk.metadata?.transaction && !this.id) {
+              this._update(firstChunk.metadata.transaction, streamSpan);
+            }
+            this._updatePrecommitToken(firstChunk);
+
+            let rows: Rows;
+            try {
+              rows = decodeRowsDirect(firstChunk, {
+                json,
+                jsonOptions,
+                columnsMetadata,
+              });
+            } catch (decodeErr) {
+              requestStream.removeAllListeners();
+              requestStream.on('error', () => {});
+              requestStream.destroy();
+
+              complete(
+                decodeErr as Error,
+                [],
+                undefined,
+                firstChunk.metadata || undefined,
+              );
+              return;
+            }
+
+            // Query completed successfully. Do not cancel the gRPC call; allow it
+            // to drain remaining trailers/EOF in the background so it is not marked
+            // CANCELLED by Spanner or Cloud Monitoring.
+            requestStream.removeAllListeners('data');
+            requestStream.removeAllListeners('error');
+            requestStream.on('error', () => {});
+            requestStream.resume();
+
+            complete(
+              null,
+              rows,
+              firstChunk.stats || undefined,
+              firstChunk.metadata || undefined,
+            );
+            return;
+          }
+
+          // 🌊 FALLBACK PATH: Multi-chunk query!
+          if (firstChunk.metadata?.transaction && !this.id) {
+            this._update(firstChunk.metadata.transaction, streamSpan);
+          }
+          this._updatePrecommitToken(firstChunk);
+
+          requestStream.removeAllListeners('data');
+          requestStream.removeAllListeners('error');
+
+          const replayStream = new PassThrough({objectMode: true});
+          replayStream.write(firstChunk);
+          requestStream.pipe(replayStream);
+
+          requestStream.on('error', err => {
+            replayStream.destroy(err);
+          });
+          replayStream.on('close', () => {
+            if (!requestStream.destroyed) {
+              if (requestStream.readableEnded) {
+                requestStream.resume();
+              } else {
+                requestStream.destroy();
+              }
+            }
+          });
+
+          let initialStream: Readable | null = replayStream;
+          const fallbackMakeRequest = (resumeToken?: ResumeToken): Readable => {
+            if (!resumeToken && initialStream) {
+              const stream = initialStream;
+              initialStream = null;
+              return stream;
+            }
+            return makeRequest(resumeToken);
+          };
+
+          const rows: Rows = [];
+          let stats: google.spanner.v1.ResultSetStats;
+          let metadata: google.spanner.v1.ResultSetMetadata;
+
+          const fallbackStream = partialResultStream(fallbackMakeRequest, {
+            json,
+            jsonOptions,
+            maxResumeRetries,
+            columnsMetadata,
+            gaxOptions,
+          });
+
+          fallbackStream
+            .on('response', response => {
+              this._updatePrecommitToken(response);
+              if (response.metadata?.transaction && !this.id) {
+                this._update(response.metadata.transaction, streamSpan);
+              }
+              if (response.metadata) {
+                metadata = response.metadata;
+              }
+            })
+            .on('data', row => rows.push(row))
+            .on('stats', _stats => (stats = _stats))
+            .on('error', err => complete(err as Error, rows, stats, metadata))
+            .on('end', () => complete(null, rows, stats, metadata));
+        };
+
+        requestStream.once('error', onError);
+        requestStream.once('data', onData);
+        requestStream.once('end', onEnd);
+      };
+
+      executeRequest();
+    });
   }
 
   /**
@@ -1910,6 +2316,9 @@ export class Snapshot extends EventEmitter {
 
     // Queue subsequent requests.
     return (resumeToken?: ResumeToken): Readable => {
+      if (this.id) {
+        return makeRequest(resumeToken);
+      }
       const streamProxy = new Readable({
         read() {},
       });
@@ -2499,8 +2908,8 @@ export class Transaction extends Dml {
           if ((this.session.parent as Database).isMuxEnabledForRW_) {
             this._setMutationKey(mutations);
           }
-          this.begin().then(
-            () => {
+          this.begin()
+            .then(() => {
               this.commit(options, (err, resp) => {
                 if (err) {
                   setSpanError(span, err);
@@ -2508,13 +2917,13 @@ export class Transaction extends Dml {
                 span.end();
                 callback(err, resp);
               });
-            },
-            err => {
+              return null;
+            })
+            .catch(err => {
               setSpanError(span, err);
               span.end();
               callback(err, null);
-            },
-          );
+            });
           return;
         }
 

@@ -4,6 +4,59 @@
     {
       "changes": [
         {
+          "type": "perf",
+          "sha": "5da6e08b8cb3bb5a7b307d565c1e8a32705aa7d7",
+          "message": "Eliminate throwaway transactions",
+          "issues": [
+            "9260"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "937768022b61092d3af50204cdce5f43b24fcc4d",
+          "message": "Optimize row creation by using a shared prototype for toJSON",
+          "issues": [
+            "9259"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "2fe3bf841a2e05509ef01533b1ff230feec16e99",
+          "message": "Complete query stream on PartialResultSet.last without resumeToken",
+          "issues": [
+            "9258"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "e76fac28c96ffb0b082419f6a3ac36b727128e67",
+          "message": "Optimize stream pipeline by eliminating events-intercept",
+          "issues": [
+            "9221"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ee88e46133ec2eab9a658e849dfa3fa415a83ee6",
+          "message": "Add send and ack mutations Cloud Spanner Queues",
+          "issues": [
+            "9200"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "91d6dda0-55af-4de7-95e7-937268ee75b1",
+      "createTime": "2026-09-11T14:56:40.618Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "65450ab4e7f9f1f17e1566ac30b8846bc38e0dd9",
           "message": "Attach internalMethodName to otherArgs in constructSettings",
@@ -94070,5 +94123,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-09T14:40:18.857Z"
+  "updateTime": "2026-09-11T14:56:40.618Z"
 }
