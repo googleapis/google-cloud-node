@@ -205,7 +205,12 @@ export class RegexValue implements firestore.RegexValue {
    * Returns `true` if the two regex values have the same pattern and options, returns `false` otherwise.
    */
   isEqual(other: RegexValue): boolean {
-    return this.pattern === other.pattern && this.options === other.options;
+    return (
+      this === other ||
+      (other instanceof RegexValue &&
+        this.pattern === other.pattern &&
+        this.options === other.options)
+    );
   }
 }
 
@@ -247,7 +252,10 @@ export class BsonObjectId implements firestore.BsonObjectId {
    * Returns `true` if the two BsonObjectId values have the same pattern and options, returns `false` otherwise.
    */
   isEqual(other: BsonObjectId): boolean {
-    return this.value === other.value;
+    return (
+      this === other ||
+      (other instanceof BsonObjectId && this.value === other.value)
+    );
   }
 }
 
@@ -293,7 +301,10 @@ export class Int32Value implements firestore.Int32Value {
    * @return 'true' if this `Int32Value` is equal to the provided one.
    */
   isEqual(other: Int32Value): boolean {
-    return this.value === other.value;
+    return (
+      this === other ||
+      (other instanceof Int32Value && this.value === other.value)
+    );
   }
 }
 
@@ -334,6 +345,12 @@ export class Decimal128Value implements firestore.Decimal128Value {
    * @return 'true' if this `Decimal128Value` is equal to the provided one.
    */
   isEqual(other: Decimal128Value): boolean {
+    if (this === other) {
+      return true;
+    }
+    if (!(other instanceof Decimal128Value)) {
+      return false;
+    }
     const lhs = Quadruple.fromString(this.value);
     const rhs = Quadruple.fromString(other.value);
 
@@ -412,7 +429,12 @@ export class BsonTimestamp implements firestore.BsonTimestamp {
    * @return 'true' if this `BsonTimestamp` is equal to the provided one.
    */
   isEqual(other: BsonTimestamp): boolean {
-    return this.seconds === other.seconds && this.increment === other.increment;
+    return (
+      this === other ||
+      (other instanceof BsonTimestamp &&
+        this.seconds === other.seconds &&
+        this.increment === other.increment)
+    );
   }
 }
 
@@ -443,11 +465,7 @@ export class Bytes implements firestore.Bytes {
   static fromBase64String(base64: string, subtype = 0): Bytes {
     try {
       const buffer = Buffer.from(base64, 'base64');
-      const data = new Uint8Array(
-        buffer.buffer,
-        buffer.byteOffset,
-        buffer.byteLength,
-      );
+      const data = new Uint8Array(buffer);
       return new Bytes(data, subtype);
     } catch (e) {
       throw new Error('Failed to parse base64 string: ' + e);
@@ -547,7 +565,7 @@ export class Bytes implements firestore.Bytes {
       throw new Error('Received empty bytesValue for Bytes');
     }
     const subtype = bytes[0];
-    const data = bytes.slice(1);
+    const data = new Uint8Array(bytes.subarray(1));
     return new Bytes(data, subtype);
   }
 }

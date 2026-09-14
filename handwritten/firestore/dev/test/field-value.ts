@@ -674,4 +674,97 @@ describe('non-native types', () => {
     expect(value1.isEqual(value2)).to.be.true;
     expect(value2.isEqual(value1)).to.be.true;
   });
+
+  it('isEqual returns false for null, undefined, and non-matching objects', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const nonMatching: any[] = [
+      null,
+      undefined,
+      {},
+      {value: 'foo'},
+      'foo',
+      123,
+      true,
+    ];
+
+    const regex = new RegexValue('^foo', 'i');
+    expect(regex.isEqual(regex)).to.be.true;
+    for (const other of nonMatching) {
+      expect(regex.isEqual(other)).to.be.false;
+    }
+    expect(regex.isEqual(new RegexValue('^bar', 'i'))).to.be.false;
+    expect(regex.isEqual(new RegexValue('^foo', 'g'))).to.be.false;
+
+    const oid = new BsonObjectId('507f1f77bcf86cd799439011');
+    expect(oid.isEqual(oid)).to.be.true;
+    for (const other of nonMatching) {
+      expect(oid.isEqual(other)).to.be.false;
+    }
+    expect(oid.isEqual(new BsonObjectId('507f1f77bcf86cd799439012'))).to.be
+      .false;
+
+    const int32 = new Int32Value(42);
+    expect(int32.isEqual(int32)).to.be.true;
+    for (const other of nonMatching) {
+      expect(int32.isEqual(other)).to.be.false;
+    }
+    expect(int32.isEqual(new Int32Value(43))).to.be.false;
+
+    const decimal = new Decimal128Value('123.456');
+    expect(decimal.isEqual(decimal)).to.be.true;
+    for (const other of nonMatching) {
+      expect(decimal.isEqual(other)).to.be.false;
+    }
+    expect(decimal.isEqual(new Decimal128Value('123.457'))).to.be.false;
+
+    const timestamp = new BsonTimestamp(100, 200);
+    expect(timestamp.isEqual(timestamp)).to.be.true;
+    for (const other of nonMatching) {
+      expect(timestamp.isEqual(other)).to.be.false;
+    }
+    expect(timestamp.isEqual(new BsonTimestamp(100, 201))).to.be.false;
+    expect(timestamp.isEqual(new BsonTimestamp(101, 200))).to.be.false;
+
+    // Cross-type comparisons
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(regex.isEqual(oid as any)).to.be.false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(oid.isEqual(int32 as any)).to.be.false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(int32.isEqual(decimal as any)).to.be.false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(decimal.isEqual(timestamp as any)).to.be.false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(timestamp.isEqual(regex as any)).to.be.false;
+  });
+
+  it('Bytes.fromBase64String and Bytes._fromProto do not leak Buffer pool slab memory', () => {
+    const base64 = Buffer.from([1, 2, 3, 4]).toString('base64');
+    const b1 = Bytes.fromBase64String(base64, 5);
+    expect(b1.data.buffer.byteLength).to.equal(b1.data.byteLength);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const b2 = (Bytes as any)._fromProto({
+      mapValue: {
+        fields: {
+          [RESERVED_BSON_BINARY_KEY]: {
+            bytesValue: Buffer.from([5, 1, 2, 3, 4]),
+          },
+        },
+      },
+    });
+    expect(b2.data.buffer.byteLength).to.equal(b2.data.byteLength);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const b3 = (Bytes as any)._fromProto({
+      mapValue: {
+        fields: {
+          [RESERVED_BSON_BINARY_KEY]: {
+            bytesValue: Buffer.from([5, 1, 2, 3, 4]).toString('base64'),
+          },
+        },
+      },
+    });
+    expect(b3.data.buffer.byteLength).to.equal(b3.data.byteLength);
+  });
 });

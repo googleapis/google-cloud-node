@@ -272,13 +272,31 @@ function compareBsonTimestamps(left: api.IValue, right: api.IValue): number {
  * @private
  * @internal
  */
+function getBsonBinaryBytes(value: api.IValue): Uint8Array {
+  const bytesValue =
+    value.mapValue?.fields?.[RESERVED_BSON_BINARY_KEY]?.bytesValue ??
+    value.bytesValue;
+  if (bytesValue) {
+    return typeof bytesValue === 'string'
+      ? Buffer.from(bytesValue, 'base64')
+      : bytesValue;
+  }
+  throw new Error(
+    'Cannot get BSON binary bytes for non-blob value: ' + JSON.stringify(value),
+  );
+}
+
+/*!
+ * @private
+ * @internal
+ */
 function getSubtype(value: api.IValue): number {
   if (value.bytesValue !== undefined) {
     return 0;
   }
   const bsonBinaryFields = value.mapValue?.fields?.[RESERVED_BSON_BINARY_KEY];
   if (bsonBinaryFields && bsonBinaryFields.bytesValue) {
-    return bsonBinaryFields.bytesValue[0];
+    return getBsonBinaryBytes(bsonBinaryFields)[0];
   }
   throw new Error(
     'Cannot get subtype for non-blob value: ' + JSON.stringify(value),
@@ -291,7 +309,7 @@ function getData(value: api.IValue): Uint8Array {
   }
   const bsonBinaryFields = value.mapValue?.fields?.[RESERVED_BSON_BINARY_KEY];
   if (bsonBinaryFields && bsonBinaryFields.bytesValue) {
-    return bsonBinaryFields.bytesValue.slice(1);
+    return getBsonBinaryBytes(bsonBinaryFields).slice(1);
   }
   throw new Error(
     'Cannot get data for non-blob value: ' + JSON.stringify(value),

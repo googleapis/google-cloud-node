@@ -33,6 +33,7 @@ import {
   MinKey,
   RegexValue,
 } from '../src';
+import {RESERVED_BSON_BINARY_KEY} from '../src/map-type';
 import * as order from '../src/order';
 import {QualifiedResourcePath} from '../src/path';
 import {createInstance, InvalidApiUsage, verifyInstance} from './util/helpers';
@@ -60,6 +61,19 @@ describe('Order', () => {
 
   function blob(data: number[]): api.IValue {
     return wrap(Buffer.from(data));
+  }
+
+  function bsonBinaryBase64(subtype: number, data: number[]): api.IValue {
+    const bytes = Buffer.concat([Buffer.from([subtype]), Buffer.from(data)]);
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_BSON_BINARY_KEY]: {
+            bytesValue: bytes.toString('base64') as unknown as Uint8Array,
+          },
+        },
+      },
+    };
   }
 
   function resource(pathString: string): api.IValue {
@@ -273,9 +287,16 @@ describe('Order', () => {
       [
         wrap(Bytes.fromUint8Array(Buffer.from([1, 2, 3]), 5)),
         wrap(Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 5)),
+        bsonBinaryBase64(5, [1, 2, 3]),
       ],
-      [wrap(Bytes.fromUint8Array(Buffer.from([1]), 7))],
-      [wrap(Bytes.fromUint8Array(Buffer.from([2]), 7))],
+      [
+        wrap(Bytes.fromUint8Array(Buffer.from([1]), 7)),
+        bsonBinaryBase64(7, [1]),
+      ],
+      [
+        wrap(Bytes.fromUint8Array(Buffer.from([2]), 7)),
+        bsonBinaryBase64(7, [2]),
+      ],
 
       // resource names
       [resource('projects/p1/databases/d1/documents/c1/doc1')],
@@ -376,6 +397,31 @@ describe('Order', () => {
         }
       }
     }
+  });
+
+  it('correctly compares BSON binary blobs when bytesValue is represented as Base64 string', () => {
+    const b64Blob1 = bsonBinaryBase64(5, [1, 2, 3]);
+    const b64Blob1Copy = bsonBinaryBase64(5, [1, 2, 3]);
+    const uint8Blob1 = wrap(Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 5));
+
+    // Equality between Base64 and Base64, and between Base64 and Uint8Array
+    expect(order.compare(b64Blob1, b64Blob1Copy)).to.equal(0);
+    expect(order.compare(b64Blob1, uint8Blob1)).to.equal(0);
+    expect(order.compare(uint8Blob1, b64Blob1)).to.equal(0);
+
+    // Subtype ordering: subtype 5 < subtype 7
+    const b64BlobSubtype7 = bsonBinaryBase64(7, [1]);
+    expect(order.compare(b64Blob1, b64BlobSubtype7)).to.be.lessThan(0);
+    expect(order.compare(b64BlobSubtype7, b64Blob1)).to.be.greaterThan(0);
+
+    // Same subtype, different data ordering
+    const b64BlobSubtype7Larger = bsonBinaryBase64(7, [2]);
+    expect(
+      order.compare(b64BlobSubtype7, b64BlobSubtype7Larger),
+    ).to.be.lessThan(0);
+    expect(
+      order.compare(b64BlobSubtype7Larger, b64BlobSubtype7),
+    ).to.be.greaterThan(0);
   });
 });
 
