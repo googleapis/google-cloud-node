@@ -270,6 +270,9 @@ export class ExecutionUtil {
           request.readTime = transactionOrReadTime.toProto().timestampValue;
         } else if (transactionOrReadTime) {
           request.newTransaction = transactionOrReadTime;
+        } else if (structuredPipeline.options?.atomic) {
+          request.newTransaction = {readWrite: {}};
+          request.autoCommitTransaction = true;
         }
 
         let streamActive: Deferred<boolean>;

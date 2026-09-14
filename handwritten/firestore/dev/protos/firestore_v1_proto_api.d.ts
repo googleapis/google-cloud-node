@@ -2690,6 +2690,9 @@ export namespace google {
 
                 /** ExecutePipelineRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** ExecutePipelineRequest autoCommitTransaction */
+                autoCommitTransaction?: (boolean|null);
             }
 
             /** Represents an ExecutePipelineRequest. */
@@ -2715,6 +2718,9 @@ export namespace google {
 
                 /** ExecutePipelineRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** ExecutePipelineRequest autoCommitTransaction. */
+                public autoCommitTransaction?: (boolean|null);
 
                 /** ExecutePipelineRequest pipelineType. */
                 public pipelineType?: "structuredPipeline";
