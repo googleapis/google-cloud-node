@@ -5,6 +5,25 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.12.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.11.0...spanner-v8.12.0) (2026-09-11)
+
+
+### Features
+
+* **spanner:** Add send and ack mutations Cloud Spanner Queues ([#9200](https://github.com/googleapis/google-cloud-node/issues/9200)) ([ee88e46](https://github.com/googleapis/google-cloud-node/commit/ee88e46133ec2eab9a658e849dfa3fa415a83ee6))
+
+
+### Bug Fixes
+
+* **spanner:** Complete query stream on PartialResultSet.last without resumeToken ([#9258](https://github.com/googleapis/google-cloud-node/issues/9258)) ([2fe3bf8](https://github.com/googleapis/google-cloud-node/commit/2fe3bf841a2e05509ef01533b1ff230feec16e99))
+
+
+### Performance Improvements
+
+* Optimize stream pipeline by eliminating events-intercept ([#9221](https://github.com/googleapis/google-cloud-node/issues/9221)) ([e76fac2](https://github.com/googleapis/google-cloud-node/commit/e76fac28c96ffb0b082419f6a3ac36b727128e67))
+* **spanner:** Eliminate throwaway transactions ([#9260](https://github.com/googleapis/google-cloud-node/issues/9260)) ([5da6e08](https://github.com/googleapis/google-cloud-node/commit/5da6e08b8cb3bb5a7b307d565c1e8a32705aa7d7))
+* **spanner:** Optimize row creation by using a shared prototype for toJSON ([#9259](https://github.com/googleapis/google-cloud-node/issues/9259)) ([9377680](https://github.com/googleapis/google-cloud-node/commit/937768022b61092d3af50204cdce5f43b24fcc4d))
+
 ## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.10.0...spanner-v8.11.0) (2026-08-19)
 
 
