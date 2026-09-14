@@ -257,8 +257,22 @@ export class StorageTransport {
         err.code = err.response?.status || err.status || err.code;
         if (err.response?.data?.error) {
           const apiError = err.response.data.error;
-          if (apiError.message) err.message = apiError.message;
-          if (apiError.errors) err.errors = apiError.errors;
+          if (typeof apiError === 'string') {
+            err.message = apiError;
+          } else if (apiError && typeof apiError === 'object') {
+            if (typeof apiError.message === 'string') {
+              err.message = apiError.message;
+            } else if (
+              apiError.message &&
+              typeof apiError.message === 'object'
+            ) {
+              err.message =
+                apiError.message.error?.message ||
+                apiError.message.message ||
+                JSON.stringify(apiError.message);
+            }
+            if (apiError.errors) err.errors = apiError.errors;
+          }
         }
       }
       return err;
