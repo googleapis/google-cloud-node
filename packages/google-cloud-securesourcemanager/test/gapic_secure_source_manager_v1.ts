@@ -10690,6 +10690,344 @@ describe('v1.SecureSourceManagerClient', () => {
     });
   });
 
+  describe('fetchRefs', () => {
+    it('invokes fetchRefs without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.FetchRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.FetchRefsRequest',
+        ['repository'],
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+      ];
+      client.innerApiCalls.fetchRefs = stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchRefs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchRefs without error using callback', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.FetchRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.FetchRefsRequest',
+        ['repository'],
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+      ];
+      client.innerApiCalls.fetchRefs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchRefs(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securesourcemanager.v1.IRef[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchRefs with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.FetchRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.FetchRefsRequest',
+        ['repository'],
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchRefs = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.fetchRefs(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.fetchRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchRefsStream without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.FetchRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.FetchRefsRequest',
+        ['repository'],
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+      ];
+      client.descriptors.page.fetchRefs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.fetchRefsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securesourcemanager.v1.Ref[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.securesourcemanager.v1.Ref) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.fetchRefs.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.fetchRefs, request),
+      );
+      assert(
+        (client.descriptors.page.fetchRefs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes fetchRefsStream with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.FetchRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.FetchRefsRequest',
+        ['repository'],
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchRefs.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.fetchRefsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securesourcemanager.v1.Ref[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.securesourcemanager.v1.Ref) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.fetchRefs.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.fetchRefs, request),
+      );
+      assert(
+        (client.descriptors.page.fetchRefs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchRefs without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.FetchRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.FetchRefsRequest',
+        ['repository'],
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.Ref(),
+        ),
+      ];
+      client.descriptors.page.fetchRefs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securesourcemanager.v1.IRef[] = [];
+      const iterable = client.fetchRefsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.fetchRefs.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.fetchRefs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with fetchRefs with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.FetchRefsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.FetchRefsRequest',
+        ['repository'],
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchRefs.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError,
+      );
+      const iterable = client.fetchRefsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.securesourcemanager.v1.IRef[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.fetchRefs.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.fetchRefs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
   describe('listIssues', () => {
     it('invokes listIssues without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(

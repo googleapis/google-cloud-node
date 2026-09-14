@@ -232,6 +232,9 @@ export class BigtableInstanceAdminClient {
       materializedViewPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/instances/{instance}/materializedViews/{materialized_view}',
       ),
+      memoryLayerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer',
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
@@ -250,6 +253,11 @@ export class BigtableInstanceAdminClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      listMemoryLayers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'memoryLayers',
+      ),
       listAppProfiles: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -334,6 +342,12 @@ export class BigtableInstanceAdminClient {
     const partialUpdateClusterMetadata = protoFilesRoot.lookup(
       '.google.bigtable.admin.v2.PartialUpdateClusterMetadata',
     ) as gax.protobuf.Type;
+    const updateMemoryLayerResponse = protoFilesRoot.lookup(
+      '.google.bigtable.admin.v2.MemoryLayer',
+    ) as gax.protobuf.Type;
+    const updateMemoryLayerMetadata = protoFilesRoot.lookup(
+      '.google.bigtable.admin.v2.UpdateMemoryLayerMetadata',
+    ) as gax.protobuf.Type;
     const updateAppProfileResponse = protoFilesRoot.lookup(
       '.google.bigtable.admin.v2.AppProfile',
     ) as gax.protobuf.Type;
@@ -394,6 +408,11 @@ export class BigtableInstanceAdminClient {
         this.operationsClient,
         partialUpdateClusterResponse.decode.bind(partialUpdateClusterResponse),
         partialUpdateClusterMetadata.decode.bind(partialUpdateClusterMetadata),
+      ),
+      updateMemoryLayer: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateMemoryLayerResponse.decode.bind(updateMemoryLayerResponse),
+        updateMemoryLayerMetadata.decode.bind(updateMemoryLayerMetadata),
       ),
       updateAppProfile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -492,6 +511,9 @@ export class BigtableInstanceAdminClient {
       'updateCluster',
       'partialUpdateCluster',
       'deleteCluster',
+      'updateMemoryLayer',
+      'listMemoryLayers',
+      'getMemoryLayer',
       'createAppProfile',
       'getAppProfile',
       'listAppProfiles',
@@ -1561,6 +1583,136 @@ export class BigtableInstanceAdminClient {
           {} | undefined,
         ]) => {
           this._log.info('deleteCluster response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets information about the memory layer of a cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The unique name of the requested cluster's memory layer. Values
+   *   are of the form
+   *   `projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.bigtable.admin.v2.MemoryLayer|MemoryLayer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bigtable_instance_admin.get_memory_layer.js</caption>
+   * region_tag:bigtableadmin_v2_generated_BigtableInstanceAdmin_GetMemoryLayer_async
+   */
+  getMemoryLayer(
+    request?: protos.google.bigtable.admin.v2.IGetMemoryLayerRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.bigtable.admin.v2.IMemoryLayer,
+      protos.google.bigtable.admin.v2.IGetMemoryLayerRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getMemoryLayer(
+    request: protos.google.bigtable.admin.v2.IGetMemoryLayerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.bigtable.admin.v2.IMemoryLayer,
+      protos.google.bigtable.admin.v2.IGetMemoryLayerRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getMemoryLayer(
+    request: protos.google.bigtable.admin.v2.IGetMemoryLayerRequest,
+    callback: Callback<
+      protos.google.bigtable.admin.v2.IMemoryLayer,
+      protos.google.bigtable.admin.v2.IGetMemoryLayerRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getMemoryLayer(
+    request?: protos.google.bigtable.admin.v2.IGetMemoryLayerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.bigtable.admin.v2.IMemoryLayer,
+          | protos.google.bigtable.admin.v2.IGetMemoryLayerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.bigtable.admin.v2.IMemoryLayer,
+      protos.google.bigtable.admin.v2.IGetMemoryLayerRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.bigtable.admin.v2.IMemoryLayer,
+      protos.google.bigtable.admin.v2.IGetMemoryLayerRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMemoryLayer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.bigtable.admin.v2.IMemoryLayer,
+          | protos.google.bigtable.admin.v2.IGetMemoryLayerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMemoryLayer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMemoryLayer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.bigtable.admin.v2.IMemoryLayer,
+          protos.google.bigtable.admin.v2.IGetMemoryLayerRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMemoryLayer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3870,6 +4022,183 @@ export class BigtableInstanceAdminClient {
     >;
   }
   /**
+   * Updates the memory layer of a cluster.
+   *
+   * To enable the memory layer, set the memory_config.
+   * To disable the memory layer, unset the memory_config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.bigtable.admin.v2.MemoryLayer} request.memoryLayer
+   *   Required. The memory layer to update.
+   *
+   *   The memory layer's `name` format is as follows:
+   *   `projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer`.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bigtable_instance_admin.update_memory_layer.js</caption>
+   * region_tag:bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateMemoryLayer_async
+   */
+  updateMemoryLayer(
+    request?: protos.google.bigtable.admin.v2.IUpdateMemoryLayerRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.bigtable.admin.v2.IMemoryLayer,
+        protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateMemoryLayer(
+    request: protos.google.bigtable.admin.v2.IUpdateMemoryLayerRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.bigtable.admin.v2.IMemoryLayer,
+        protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateMemoryLayer(
+    request: protos.google.bigtable.admin.v2.IUpdateMemoryLayerRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.bigtable.admin.v2.IMemoryLayer,
+        protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateMemoryLayer(
+    request?: protos.google.bigtable.admin.v2.IUpdateMemoryLayerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.bigtable.admin.v2.IMemoryLayer,
+            protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.bigtable.admin.v2.IMemoryLayer,
+        protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.bigtable.admin.v2.IMemoryLayer,
+        protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'memory_layer.name': request.memoryLayer!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.bigtable.admin.v2.IMemoryLayer,
+            protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMemoryLayer response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMemoryLayer request %j', request);
+    return this.innerApiCalls
+      .updateMemoryLayer(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.bigtable.admin.v2.IMemoryLayer,
+            protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMemoryLayer response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateMemoryLayer()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bigtable_instance_admin.update_memory_layer.js</caption>
+   * region_tag:bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateMemoryLayer_async
+   */
+  async checkUpdateMemoryLayerProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.bigtable.admin.v2.MemoryLayer,
+      protos.google.bigtable.admin.v2.UpdateMemoryLayerMetadata
+    >
+  > {
+    this._log.info('updateMemoryLayer long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMemoryLayer,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.bigtable.admin.v2.MemoryLayer,
+      protos.google.bigtable.admin.v2.UpdateMemoryLayerMetadata
+    >;
+  }
+  /**
    * Updates an app profile within an instance.
    *
    * @param {Object} request
@@ -4742,6 +5071,253 @@ export class BigtableInstanceAdminClient {
       protos.google.bigtable.admin.v2.MaterializedView,
       protos.google.bigtable.admin.v2.UpdateMaterializedViewMetadata
     >;
+  }
+  /**
+   * Lists information about memory layers.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The unique name of the cluster for which a list of memory layers
+   *   is requested. Values are of the form
+   *   `projects/{project}/instances/{instance}/clusters/{cluster}`.
+   *   Use `{cluster} = '-'` to list MemoryLayers for all Clusters in an instance,
+   *   e.g., `projects/myproject/instances/myinstance/clusters/-`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of memory layers to return. The service may
+   *   return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMemoryLayers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMemoryLayers`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.bigtable.admin.v2.MemoryLayer|MemoryLayer}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMemoryLayersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMemoryLayers(
+    request?: protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.bigtable.admin.v2.IMemoryLayer[],
+      protos.google.bigtable.admin.v2.IListMemoryLayersRequest | null,
+      protos.google.bigtable.admin.v2.IListMemoryLayersResponse,
+    ]
+  >;
+  listMemoryLayers(
+    request: protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+      | protos.google.bigtable.admin.v2.IListMemoryLayersResponse
+      | null
+      | undefined,
+      protos.google.bigtable.admin.v2.IMemoryLayer
+    >,
+  ): void;
+  listMemoryLayers(
+    request: protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+    callback: PaginationCallback<
+      protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+      | protos.google.bigtable.admin.v2.IListMemoryLayersResponse
+      | null
+      | undefined,
+      protos.google.bigtable.admin.v2.IMemoryLayer
+    >,
+  ): void;
+  listMemoryLayers(
+    request?: protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+          | protos.google.bigtable.admin.v2.IListMemoryLayersResponse
+          | null
+          | undefined,
+          protos.google.bigtable.admin.v2.IMemoryLayer
+        >,
+    callback?: PaginationCallback<
+      protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+      | protos.google.bigtable.admin.v2.IListMemoryLayersResponse
+      | null
+      | undefined,
+      protos.google.bigtable.admin.v2.IMemoryLayer
+    >,
+  ): Promise<
+    [
+      protos.google.bigtable.admin.v2.IMemoryLayer[],
+      protos.google.bigtable.admin.v2.IListMemoryLayersRequest | null,
+      protos.google.bigtable.admin.v2.IListMemoryLayersResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+          | protos.google.bigtable.admin.v2.IListMemoryLayersResponse
+          | null
+          | undefined,
+          protos.google.bigtable.admin.v2.IMemoryLayer
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMemoryLayers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMemoryLayers request %j', request);
+    return this.innerApiCalls
+      .listMemoryLayers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.bigtable.admin.v2.IMemoryLayer[],
+          protos.google.bigtable.admin.v2.IListMemoryLayersRequest | null,
+          protos.google.bigtable.admin.v2.IListMemoryLayersResponse,
+        ]) => {
+          this._log.info('listMemoryLayers values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listMemoryLayers`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The unique name of the cluster for which a list of memory layers
+   *   is requested. Values are of the form
+   *   `projects/{project}/instances/{instance}/clusters/{cluster}`.
+   *   Use `{cluster} = '-'` to list MemoryLayers for all Clusters in an instance,
+   *   e.g., `projects/myproject/instances/myinstance/clusters/-`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of memory layers to return. The service may
+   *   return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMemoryLayers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMemoryLayers`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.bigtable.admin.v2.MemoryLayer|MemoryLayer} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMemoryLayersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMemoryLayersStream(
+    request?: protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMemoryLayers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMemoryLayers stream %j', request);
+    return this.descriptors.page.listMemoryLayers.createStream(
+      this.innerApiCalls.listMemoryLayers as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listMemoryLayers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The unique name of the cluster for which a list of memory layers
+   *   is requested. Values are of the form
+   *   `projects/{project}/instances/{instance}/clusters/{cluster}`.
+   *   Use `{cluster} = '-'` to list MemoryLayers for all Clusters in an instance,
+   *   e.g., `projects/myproject/instances/myinstance/clusters/-`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of memory layers to return. The service may
+   *   return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMemoryLayers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMemoryLayers`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.bigtable.admin.v2.MemoryLayer|MemoryLayer}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bigtable_instance_admin.list_memory_layers.js</caption>
+   * region_tag:bigtableadmin_v2_generated_BigtableInstanceAdmin_ListMemoryLayers_async
+   */
+  listMemoryLayersAsync(
+    request?: protos.google.bigtable.admin.v2.IListMemoryLayersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.bigtable.admin.v2.IMemoryLayer> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMemoryLayers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMemoryLayers iterate %j', request);
+    return this.descriptors.page.listMemoryLayers.asyncIterate(
+      this.innerApiCalls['listMemoryLayers'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.bigtable.admin.v2.IMemoryLayer>;
   }
   /**
    * Lists information about app profiles in an instance.
@@ -6222,6 +6798,58 @@ export class BigtableInstanceAdminClient {
     return this.pathTemplates.materializedViewPathTemplate.match(
       materializedViewName,
     ).materialized_view;
+  }
+
+  /**
+   * Return a fully-qualified memoryLayer resource name string.
+   *
+   * @param {string} project
+   * @param {string} instance
+   * @param {string} cluster
+   * @returns {string} Resource name string.
+   */
+  memoryLayerPath(project: string, instance: string, cluster: string) {
+    return this.pathTemplates.memoryLayerPathTemplate.render({
+      project: project,
+      instance: instance,
+      cluster: cluster,
+    });
+  }
+
+  /**
+   * Parse the project from MemoryLayer resource.
+   *
+   * @param {string} memoryLayerName
+   *   A fully-qualified path representing MemoryLayer resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMemoryLayerName(memoryLayerName: string) {
+    return this.pathTemplates.memoryLayerPathTemplate.match(memoryLayerName)
+      .project;
+  }
+
+  /**
+   * Parse the instance from MemoryLayer resource.
+   *
+   * @param {string} memoryLayerName
+   *   A fully-qualified path representing MemoryLayer resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromMemoryLayerName(memoryLayerName: string) {
+    return this.pathTemplates.memoryLayerPathTemplate.match(memoryLayerName)
+      .instance;
+  }
+
+  /**
+   * Parse the cluster from MemoryLayer resource.
+   *
+   * @param {string} memoryLayerName
+   *   A fully-qualified path representing MemoryLayer resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromMemoryLayerName(memoryLayerName: string) {
+    return this.pathTemplates.memoryLayerPathTemplate.match(memoryLayerName)
+      .cluster;
   }
 
   /**
