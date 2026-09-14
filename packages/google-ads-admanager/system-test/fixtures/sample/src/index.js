@@ -29,6 +29,7 @@ function main() {
   const applicationServiceClient = new admanager.ApplicationServiceClient();
   const audienceSegmentServiceClient = new admanager.AudienceSegmentServiceClient();
   const bandwidthGroupServiceClient = new admanager.BandwidthGroupServiceClient();
+  const breakTemplateServiceClient = new admanager.BreakTemplateServiceClient();
   const browserLanguageServiceClient = new admanager.BrowserLanguageServiceClient();
   const browserServiceClient = new admanager.BrowserServiceClient();
   const cdnConfigServiceClient = new admanager.CdnConfigServiceClient();
