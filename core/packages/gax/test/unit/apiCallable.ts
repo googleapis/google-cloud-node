@@ -578,7 +578,7 @@ describe('createApiCall', () => {
 
     it('passes fallback flag through when using fallback createApiCall with default options', async () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
@@ -604,8 +604,8 @@ describe('createApiCall', () => {
       const apiCall = fallbackCreateApiCall(func, settings);
       await apiCall({}, undefined);
 
-      assert.strictEqual(traceAttemptSpy.calledOnce, true);
-      const [dynamicArgs] = traceAttemptSpy.firstCall.args;
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+      const [dynamicArgs] = traceCallSpy.firstCall.args;
       assert.strictEqual(dynamicArgs.rpcType, 'http');
 
       const spans = harness.getSpans('google-gax');
@@ -618,7 +618,7 @@ describe('createApiCall', () => {
 
     it('passes explicit _fallback through when using fallback createApiCall', async () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
@@ -644,8 +644,8 @@ describe('createApiCall', () => {
       const apiCall = fallbackCreateApiCall(func, settings, undefined, 'rest');
       await apiCall({}, undefined);
 
-      assert.strictEqual(traceAttemptSpy.calledOnce, true);
-      const [dynamicArgs] = traceAttemptSpy.firstCall.args;
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+      const [dynamicArgs] = traceCallSpy.firstCall.args;
       assert.strictEqual(dynamicArgs.rpcType, 'http');
 
       const spans = harness.getSpans('google-gax');
@@ -656,7 +656,7 @@ describe('createApiCall', () => {
 
     it('passes fallback flag and isStreamingCall as true for server-streaming fallback calls', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
-      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
@@ -680,8 +680,8 @@ describe('createApiCall', () => {
       );
       void apiCall({}, undefined);
 
-      assert.strictEqual(traceAttemptSpy.calledOnce, true);
-      const [dynamicArgs, , , isStreamingCall] = traceAttemptSpy.firstCall.args;
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+      const [dynamicArgs, , , isStreamingCall] = traceCallSpy.firstCall.args;
       assert.strictEqual(dynamicArgs.rpcType, 'http');
       assert.strictEqual(isStreamingCall, true);
     });
