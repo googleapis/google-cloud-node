@@ -34,7 +34,7 @@ import {addTimeoutArg} from './normalCalls/timeout';
 import {StreamingApiCaller} from './streamingCalls/streamingApiCaller';
 import {warn} from './warnings';
 import {
-  traceAttempt,
+  traceCall,
   StaticTraceContext,
   DynamicTraceContext,
 } from './observability/TracerHelper';
@@ -200,13 +200,18 @@ export function createApiCall(
       callOptions?: CallOptions,
       callback?: APICallback,
     ) => {
-      return traceAttempt(
+      return traceCall(
         dynamicArgs,
         staticArgs,
-        () => {
-          return invokeCall(request, callOptions, callback);
+        (tracedCallback?: APICallback) => {
+          // `traceCall` only supplies a traced callback for callback-style,
+          // non-streaming invocations. When it is undefined the span is bound
+          // to the returned promise or stream instead, so pass the user's
+          // callback straight through.
+          return invokeCall(request, callOptions, tracedCallback ?? callback);
         },
         isStreamingCall,
+        callback,
       );
     };
   } else {
