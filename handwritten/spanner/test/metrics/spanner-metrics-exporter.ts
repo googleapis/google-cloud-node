@@ -31,7 +31,7 @@ import {
 } from '../../src/metrics/constants';
 import {Counter, Meter, Histogram} from '@opentelemetry/api';
 import {ExportResult, ExportResultCode} from '@opentelemetry/core';
-import {Resource} from '@opentelemetry/resources';
+import {resourceFromAttributes} from '@opentelemetry/resources';
 
 const PROJECT_ID = 'test-project';
 const INSTANCE_ID = 'test-instance';
@@ -95,7 +95,7 @@ describe('Export', () => {
   beforeEach(() => {
     exporter = new CloudMonitoringMetricsExporter({auth}, PROJECT_ID);
     reader = new InMemoryMetricReader();
-    const resource = new Resource({
+    const resource = resourceFromAttributes({
       ['project_id']: PROJECT_ID,
       ['client_hash']: CLIENT_HASH,
       ['location']: LOCATION,
