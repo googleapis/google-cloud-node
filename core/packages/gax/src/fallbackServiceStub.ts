@@ -51,14 +51,11 @@ if (isNodeJS()) {
 }
 
 export interface FallbackServiceStub {
-  // Compatible with gRPC service stub, so the argument order is gax's
-  // `UnaryCall`: (request, metadata, options, callback). Note that the third
-  // argument is what gRPC calls `options`, and it is the one carrying the
-  // deadline; the second is the metadata that becomes request headers.
+  // Compatible with gRPC service stub
   [method: string]: (
     request: {},
+    options?: {},
     metadata?: {},
-    callOptions?: {deadline?: Date},
     callback?: (err?: Error, response?: {} | undefined) => void,
   ) => StreamArrayParser | {cancel: () => void};
 }
@@ -153,6 +150,11 @@ export function generateServiceStub(
     },
   };
   for (const [rpcName, rpc] of Object.entries(rpcs)) {
+    // Named for what gax actually passes, which is its `UnaryCall` order:
+    // (request, metadata, options, callback). `FallbackServiceStub` declares
+    // the middle two the other way round, so the third argument — the one gRPC
+    // calls `options`, carrying the deadline — reads as metadata there and was
+    // long ignored as such.
     serviceStub[rpcName] = (
       request: {},
       metadata?: {[name: string]: string},

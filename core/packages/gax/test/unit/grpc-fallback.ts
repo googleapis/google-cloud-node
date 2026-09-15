@@ -24,7 +24,15 @@ import * as sinon from 'sinon';
 import * as stream from 'stream';
 import echoProtoJson = require('../fixtures/echo.json');
 import {GrpcClient} from '../../src/fallback';
-import {ClientStubOptions, GoogleAuth, GoogleError, Status} from '../../src';
+import {
+  CallSettings,
+  ClientStubOptions,
+  GoogleAuth,
+  GoogleError,
+  Status,
+  createApiCall,
+} from '../../src';
+import {GRPCCall} from '../../src/apitypes';
 import {StreamArrayParser} from '../../src/streamArrayParser';
 import {gaxios, PassThroughClient} from 'google-auth-library';
 import {setMockFallbackResponse} from './utils';
@@ -604,6 +612,31 @@ describe('grpc-fallback', () => {
       assert.ok(
         timeout > 4000 && timeout <= 5000,
         `expected a timeout near 5000ms, got ${timeout}`,
+      );
+    });
+
+    it('should carry CallSettings.timeout through to the transport', async () => {
+      const requests = recordRequests(
+        gaxGrpc,
+        new Response(Buffer.from(JSON.stringify({content: 'test'}))),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      // Every other test here hands the stub a deadline directly, which only
+      // exercises the stub itself. This one goes through `createApiCall`, the
+      // path a generated client takes, so `addTimeoutArg` is what produces the
+      // deadline. That hand-off is the seam where the deadline used to be
+      // dropped, and no direct call to the stub can see it.
+      const apiCall = createApiCall(
+        Promise.resolve(echoStub.echo as unknown as GRPCCall),
+        new CallSettings({timeout: 12345}),
+      );
+      await apiCall({content: 'test'}, {});
+
+      const timeout = requests[0].timeout as number;
+      assert.ok(
+        timeout > 11000 && timeout <= 12345,
+        `expected a timeout near 12345ms, got ${timeout}`,
       );
     });
 
