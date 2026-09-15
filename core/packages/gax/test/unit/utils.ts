@@ -171,3 +171,52 @@ export function setMockFallbackError(gaxGrpc: GrpcClient, error: Error) {
 
   return requestOptions;
 }
+
+/**
+ * Sets a response for a Fallback request, reproducing how gaxios decides
+ * between resolving and rejecting.
+ *
+ * Unlike {@link setMockFallbackResponse}, which always resolves, this applies
+ * the request's `validateStatus` predicate (defaulting to gaxios' own 2xx-only
+ * rule when the caller does not supply one) and rejects with a GaxiosError-shaped
+ * error when it fails. Transports that do not opt in to receiving error
+ * responses therefore see a rejection here, exactly as they would in production.
+ *
+ * @param gaxGrpc The gRPC Client to use
+ * @param response The Response object to use
+ */
+export function setMockFallbackHttpResponse(
+  gaxGrpc: GrpcClient,
+  response: Response,
+) {
+  class MockedHttpAuthClient extends PassThroughClient {
+    async request<T>(
+      opts: gaxios.GaxiosOptions,
+    ): Promise<gaxios.GaxiosResponse<T>> {
+      const validateStatus =
+        opts.validateStatus ??
+        ((status: number) => status >= 200 && status < 300);
+
+      if (!validateStatus(response.status)) {
+        throw Object.assign(
+          new Error(`Request failed with status code ${response.status}`),
+          {
+            status: response.status,
+            response: {status: response.status},
+          },
+        );
+      }
+
+      return Object.assign(response, {
+        config: {
+          headers: response.headers,
+          url: new URL(opts.url || 'https://example.com'),
+        },
+        data: response.body as T,
+      });
+    }
+  }
+
+  const authClient = new MockedHttpAuthClient();
+  gaxGrpc.auth = new GoogleAuth({authClient});
+}

@@ -117,10 +117,8 @@ function _toGoogleError(err: unknown): unknown {
     code: string | number;
   }>;
 
-  // Errors that carry an HTTP status (e.g. the 401 and 403 responses that we
-  // deliberately let the fetch implementation reject with, so that the auth
-  // client can refresh credentials and retry) map through the standard
-  // HTTP-to-gRPC table.
+  // Errors that carry an HTTP status map through the standard HTTP-to-gRPC
+  // table.
   const httpStatus =
     typeof fetchError.status === 'number'
       ? fetchError.status

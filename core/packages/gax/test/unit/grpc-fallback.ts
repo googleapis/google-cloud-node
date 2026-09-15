@@ -25,8 +25,13 @@ import echoProtoJson = require('../fixtures/echo.json');
 import {GrpcClient} from '../../src/fallback';
 import {ClientStubOptions, GoogleAuth, GoogleError, Status} from '../../src';
 import {StreamArrayParser} from '../../src/streamArrayParser';
+import {rpcCodeFromHttpStatusCode} from '../../src/status';
 import {PassThroughClient} from 'google-auth-library';
-import {setMockFallbackError, setMockFallbackResponse} from './utils';
+import {
+  setMockFallbackError,
+  setMockFallbackHttpResponse,
+  setMockFallbackResponse,
+} from './utils';
 
 let authClient = new PassThroughClient();
 let opts = {
@@ -675,6 +680,111 @@ describe('grpc-fallback', () => {
       assert.strictEqual(validateStatus(429), true);
       assert.strictEqual(validateStatus(503), true);
       assert.strictEqual(validateStatus(200), true);
+    });
+  });
+
+  describe('transport parity', () => {
+    // A client must observe the same canonical error code regardless of which
+    // transport carried the call: retry configuration is expressed in gRPC
+    // status codes, and user code branches on them. The gRPC transport reports
+    // the server's canonical code directly, so the fallback transport has to
+    // arrive at the same value from the HTTP response.
+    interface ParityCase {
+      name: string;
+      httpStatus: number;
+      status?: string;
+      expected: Status;
+    }
+
+    const cases: ParityCase[] = [
+      {
+        name: 'contention',
+        httpStatus: 409,
+        status: 'ABORTED',
+        expected: Status.ABORTED,
+      },
+      {
+        name: 'bad request',
+        httpStatus: 400,
+        status: 'INVALID_ARGUMENT',
+        expected: Status.INVALID_ARGUMENT,
+      },
+      {
+        name: 'missing resource',
+        httpStatus: 404,
+        status: 'NOT_FOUND',
+        expected: Status.NOT_FOUND,
+      },
+      {
+        name: 'quota',
+        httpStatus: 429,
+        status: 'RESOURCE_EXHAUSTED',
+        expected: Status.RESOURCE_EXHAUSTED,
+      },
+      {
+        name: 'backend unavailable',
+        httpStatus: 503,
+        status: 'UNAVAILABLE',
+        expected: Status.UNAVAILABLE,
+      },
+      // No `status` field: the code must still be derived from the HTTP status
+      // rather than passed through as an HTTP number.
+      {
+        name: 'unavailable without a status field',
+        httpStatus: 503,
+        expected: Status.UNAVAILABLE,
+      },
+      {
+        name: 'conflict without a status field',
+        httpStatus: 409,
+        expected: Status.ABORTED,
+      },
+    ];
+
+    for (const testCase of cases) {
+      it(`should surface ${Status[testCase.expected]} for ${testCase.name}`, async () => {
+        const body: {error: {code: number; message: string; status?: string}} =
+          {
+            error: {
+              code: testCase.httpStatus,
+              message: `${testCase.name} (test)`,
+            },
+          };
+        if (testCase.status) {
+          body.error.status = testCase.status;
+        }
+
+        setMockFallbackHttpResponse(
+          gaxGrpc,
+          new Response(Buffer.from(JSON.stringify(body)), {
+            status: testCase.httpStatus,
+          }),
+        );
+
+        const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+        const err = await new Promise<GoogleError>(resolve => {
+          echoStub.echo({content: 'test'}, {}, {}, (e?: Error) =>
+            resolve(e as GoogleError),
+          );
+        });
+
+        assert(err instanceof GoogleError);
+        assert.strictEqual(err.code, testCase.expected);
+        // The HTTP status must not leak through as the error code.
+        assert.notStrictEqual(err.code as number, testCase.httpStatus);
+      });
+    }
+
+    it('should produce codes consistent with the shared HTTP-to-gRPC mapping', () => {
+      // The fallback transport and the mapping table used elsewhere in gax must
+      // not drift apart.
+      for (const testCase of cases) {
+        assert.strictEqual(
+          rpcCodeFromHttpStatusCode(testCase.httpStatus),
+          testCase.expected,
+          `HTTP ${testCase.httpStatus} should map to ${Status[testCase.expected]}`,
+        );
+      }
     });
   });
 });
