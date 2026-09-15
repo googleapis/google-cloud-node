@@ -230,6 +230,7 @@ describe('Spanner', () => {
       scopes: [],
       grpc,
       'grpc.keepalive_time_ms': 120000,
+      'grpc.enable_channelz': 0,
       'grpc.callInvocationTransformer':
         fakeGrpcGcp().gcpCallInvocationTransformer,
       'grpc.channelFactoryOverride': fakeGrpcGcp().gcpChannelFactoryOverride,
@@ -292,6 +293,22 @@ describe('Spanner', () => {
       assert.deepStrictEqual(
         getFake(spanner.auth).calledWith_[0],
         expectedOptions,
+      );
+    });
+
+    it('should disable channelz by default and allow overriding it', () => {
+      const spannerDefault = new Spanner(OPTIONS);
+      assert.strictEqual(
+        (spannerDefault.options as any)['grpc.enable_channelz'],
+        0,
+      );
+
+      const spannerEnabled = new Spanner(
+        Object.assign({}, OPTIONS, {'grpc.enable_channelz': 1}),
+      );
+      assert.strictEqual(
+        (spannerEnabled.options as any)['grpc.enable_channelz'],
+        1,
       );
     });
 
@@ -2314,6 +2331,7 @@ describe('Spanner', () => {
 
         return spanner.request(CONFIG).then(result => {
           assert.strictEqual(result, gapicRequestFnResult);
+          return result;
         });
       });
     });
