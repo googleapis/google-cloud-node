@@ -719,16 +719,14 @@ class Database extends common.GrpcServiceObject {
       sessionCount: count,
     };
 
-    const headers = this.commonHeaders_;
-    if (this._getSpanner().routeToLeaderEnabled) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     const allHeaders = this._metadataWithRequestId(
       this._nextNthRequest(),
       1,
-      headers,
+      this.commonHeaders_,
     );
+    if (this._getSpanner().routeToLeaderEnabled) {
+      addLeaderAwareRoutingHeader(allHeaders);
+    }
 
     startTrace('Database.batchCreateSessions', this._traceConfig, span => {
       this.request<google.spanner.v1.IBatchCreateSessionsResponse>(
