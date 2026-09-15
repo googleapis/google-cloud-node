@@ -1326,6 +1326,44 @@ describe('TracerHelper', () => {
       assert.strictEqual(writable.listenerCount('error'), 0);
     });
 
+    it('does not use finish on a write-only stream when a callback is supplied', async () => {
+      let endSpanCount = 0;
+      // autoDestroy is disabled so 'close' does not fire immediately after
+      // 'finish'. Otherwise 'close' would end the span on its own and the test
+      // could not tell whether 'finish' was the trigger.
+      const writable = new Writable({
+        objectMode: true,
+        autoDestroy: false,
+        write(_chunk, _enc, cb) {
+          cb();
+        },
+      });
+
+      handleStream(
+        writable,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+        true,
+      );
+
+      // The callback reports completion, so 'finish' must not be subscribed.
+      assert.strictEqual(writable.listenerCount('finish'), 0);
+
+      writable.write('foo');
+      writable.end();
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      // The client has stopped writing but the server has not responded yet.
+      assert.strictEqual(endSpanCount, 0);
+
+      // 'close' still terminates the span, so it cannot leak.
+      writable.destroy();
+      await new Promise<void>(resolve => setImmediate(resolve));
+      assert.strictEqual(endSpanCount, 1);
+    });
+
     it('does not end a bidi span on finish while responses are still streaming', async () => {
       let endSpanCount = 0;
       const received: string[] = [];
@@ -1450,6 +1488,43 @@ describe('TracerHelper', () => {
 
       writable.write('foo');
       writable.end();
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      harness.assertSpanCount(1, 'google-gax');
+    });
+
+    it('keeps a client-streaming span open past finish when a callback is supplied', async () => {
+      // Same write-only shape as above, but with a user callback. The callback
+      // is the real completion signal, so 'finish' must not close the span:
+      // doing so would cut the span off before the server responded.
+      const writable = new Writable({
+        objectMode: true,
+        autoDestroy: false,
+        write(_chunk, _enc, cb) {
+          cb();
+        },
+      });
+
+      traceCall(
+        dynamicArgs,
+        staticArgs,
+        () => writable,
+        true,
+        () => {},
+      );
+
+      writable.write('foo');
+      writable.end();
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      harness.assertSpanCount(
+        0,
+        'google-gax',
+        "span must survive 'finish' when a callback is in play",
+      );
+
+      // 'close' remains a terminator, so the span cannot leak.
+      writable.destroy();
       await new Promise<void>(resolve => setImmediate(resolve));
 
       harness.assertSpanCount(1, 'google-gax');

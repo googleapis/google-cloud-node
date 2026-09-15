@@ -185,11 +185,14 @@ export function handlePromise<T>(
  * @param {EventEmitter} stream - The stream returned from the traced operation.
  * @param {function} recordError - Callback to record errors on the span.
  * @param {function} endSpan - Callback to end the span idempotently.
+ * @param {boolean} [hasCallback=false] - Whether the caller supplied a callback
+ *   for this call. When true, 'finish' is not treated as a completion signal.
  */
 export function handleStream(
   stream: EventEmitter,
   recordError: (err: unknown) => void,
   endSpan: () => void,
+  hasCallback = false,
 ): void {
   let spanEnded = false;
 
@@ -209,6 +212,14 @@ export function handleStream(
     'writable' in stream &&
     stream.writable === true &&
     (!('readable' in stream) || stream.readable !== true);
+
+  // A supplied callback is the authoritative completion signal: it fires when
+  // the server has responded. 'finish' only means the client stopped writing,
+  // which on a callback-driven client-streaming call happens before the
+  // response arrives, so subscribing to it would end the span early and hide
+  // any error reported through the callback. 'end', 'close' and 'error' still
+  // terminate the span, so this cannot leak.
+  const useFinish = isWriteOnly && !hasCallback;
 
   const cleanup = () => {
     stream.removeListener('error', onError);
@@ -247,7 +258,7 @@ export function handleStream(
   stream.on('error', onError);
   stream.on('end', onEnd);
   stream.on('close', onClose);
-  if (isWriteOnly) {
+  if (useFinish) {
     stream.on('finish', onFinish);
   }
 }
@@ -264,11 +275,17 @@ export function handleStream(
  * `callback` as the fifth argument. `fn` then receives a traced replacement
  * to hand to the RPC, and the span stays open until that callback fires.
  *
+ * Stream calls keep managing their own span lifetime, so `fn` receives
+ * `undefined` and the user's `callback` is handed back unwrapped. The callback
+ * is still reported to `handleStream`, which then stops treating 'finish' as a
+ * completion signal because the callback, not the end of the write side,
+ * marks the end of the RPC.
+ *
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
  * @param {function} fn - The operation to trace. Receives the traced callback
- *   when `callback` is supplied, otherwise `undefined`.
+ *   when `callback` is supplied on a non-stream call, otherwise `undefined`.
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call (true) or promise call (false).
  * @param {APICallback} [callback] - The user callback for callback-style invocations.
  * @returns {T} The result of the traced operation.
@@ -380,7 +397,7 @@ export function traceCall(
       const result = fn(tracedCallback);
       const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
       if (isStreamCall && result instanceof EventEmitter) {
-        handleStream(result, recordError, endSpan);
+        handleStream(result, recordError, endSpan, !!callback);
       } else if (promiseTarget) {
         handlePromise(promiseTarget, recordError, endSpan);
       } else if (tracedCallback) {
