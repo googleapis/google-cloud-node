@@ -21,6 +21,11 @@
      "matchUpdateTypes": ["major", "patch"]
     }
   ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["* 9 * * 1"],
+    "groupName": "lockfile maintenance"
+  },
   "ignoreDeps": [
     "typescript"
   ]
