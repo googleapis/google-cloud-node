@@ -209,8 +209,8 @@ describe('getInstanceAttributes', () => {
 
   it('should extract project, instance, and database from full resource path', () => {
     const formattedName = 'projects/proj1/instances/inst1/databases/db1';
-    const attrs = factory.getInstanceAttributes(formattedName);
-    assert.deepStrictEqual(attrs, {
+    const attributes = factory.getInstanceAttributes(formattedName);
+    assert.deepStrictEqual(attributes, {
       project: 'proj1',
       instance: 'inst1',
       database: 'db1',
@@ -219,8 +219,8 @@ describe('getInstanceAttributes', () => {
 
   it('should extract project and instance, and unknown database if database is missing', () => {
     const formattedName = 'projects/proj2/instances/inst2';
-    const attrs = factory.getInstanceAttributes(formattedName);
-    assert.deepStrictEqual(attrs, {
+    const attributes = factory.getInstanceAttributes(formattedName);
+    assert.deepStrictEqual(attributes, {
       project: 'proj2',
       instance: 'inst2',
       database: 'unknown',
@@ -228,8 +228,8 @@ describe('getInstanceAttributes', () => {
   });
 
   it('should return unknown strings for all if input is empty', () => {
-    const attrs = factory.getInstanceAttributes('');
-    assert.deepStrictEqual(attrs, {
+    const attributes = factory.getInstanceAttributes('');
+    assert.deepStrictEqual(attributes, {
       project: 'unknown',
       instance: 'unknown',
       database: 'unknown',
@@ -237,12 +237,160 @@ describe('getInstanceAttributes', () => {
   });
 
   it('should return unknown strings for all if input is malformed', () => {
-    const attrs = factory.getInstanceAttributes('foo/bar/baz');
-    assert.deepStrictEqual(attrs, {
+    const attributes = factory.getInstanceAttributes('foo/bar/baz');
+    assert.deepStrictEqual(attributes, {
       project: 'unknown',
       instance: 'unknown',
       database: 'unknown',
     });
+  });
+
+  it('should extract attributes from path with leading slash', () => {
+    const attributes = factory.getInstanceAttributes(
+      '/projects/proj1/instances/inst1/databases/db1',
+    );
+    assert.deepStrictEqual(attributes, {
+      project: 'proj1',
+      instance: 'inst1',
+      database: 'db1',
+    });
+  });
+
+  it('should extract attributes from path with extra sub-resources', () => {
+    const attributes = factory.getInstanceAttributes(
+      'projects/proj1/instances/inst1/databases/db1/sessions/session-xyz',
+    );
+    assert.deepStrictEqual(attributes, {
+      project: 'proj1',
+      instance: 'inst1',
+      database: 'db1',
+    });
+  });
+
+  it('should return unknown strings for non-string input', () => {
+    assert.deepStrictEqual(factory.getInstanceAttributes(null as any), {
+      project: 'unknown',
+      instance: 'unknown',
+      database: 'unknown',
+    });
+    assert.deepStrictEqual(factory.getInstanceAttributes(undefined as any), {
+      project: 'unknown',
+      instance: 'unknown',
+      database: 'unknown',
+    });
+    assert.deepStrictEqual(factory.getInstanceAttributes(123 as any), {
+      project: 'unknown',
+      instance: 'unknown',
+      database: 'unknown',
+    });
+  });
+
+  it('should return unknown strings if second segment is not instances', () => {
+    const attributes = factory.getInstanceAttributes(
+      'projects/proj1/locations/us-central1',
+    );
+    assert.deepStrictEqual(attributes, {
+      project: 'unknown',
+      instance: 'unknown',
+      database: 'unknown',
+    });
+  });
+
+  it('should return unknown strings if project or instance segment is empty', () => {
+    assert.deepStrictEqual(
+      factory.getInstanceAttributes('projects//instances/inst1'),
+      {
+        project: 'unknown',
+        instance: 'unknown',
+        database: 'unknown',
+      },
+    );
+    assert.deepStrictEqual(
+      factory.getInstanceAttributes('projects/proj1/instances/'),
+      {
+        project: 'unknown',
+        instance: 'unknown',
+        database: 'unknown',
+      },
+    );
+  });
+
+  it('should return unknown database if segment after instance is not databases or database ID is empty', () => {
+    assert.deepStrictEqual(
+      factory.getInstanceAttributes(
+        'projects/proj1/instances/inst1/operations/op1',
+      ),
+      {
+        project: 'proj1',
+        instance: 'inst1',
+        database: 'unknown',
+      },
+    );
+    assert.deepStrictEqual(
+      factory.getInstanceAttributes(
+        'projects/proj1/instances/inst1/databases/',
+      ),
+      {
+        project: 'proj1',
+        instance: 'inst1',
+        database: 'unknown',
+      },
+    );
+  });
+});
+
+describe('_extractOperationRequest', () => {
+  let factory: MetricsTracerFactory;
+  beforeEach(() => {
+    factory = new (MetricsTracerFactory as any)();
+  });
+
+  it('should extract the operation prefix from a valid request ID', () => {
+    const operationRequest =
+      factory['_extractOperationRequest']('1.1a2bc3d4.1.1.1.1');
+    assert.strictEqual(operationRequest, '1.1a2bc3d4.1.1.1');
+  });
+
+  it('should handle multi-digit attempt numbers', () => {
+    const operationRequest = factory['_extractOperationRequest'](
+      '1.1a2bc3d4.1.1.1.42',
+    );
+    assert.strictEqual(operationRequest, '1.1a2bc3d4.1.1.1');
+  });
+
+  it('should return empty string when attempt is not numeric', () => {
+    assert.strictEqual(
+      factory['_extractOperationRequest']('1.1a2bc3d4.1.1.1.attempt'),
+      '',
+    );
+  });
+
+  it('should return empty string when input has fewer than 5 dots', () => {
+    assert.strictEqual(
+      factory['_extractOperationRequest']('1.1a2bc3d4.1.1.1'),
+      '',
+    );
+    assert.strictEqual(factory['_extractOperationRequest']('foo.bar'), '');
+  });
+
+  it('should return empty string when input has more than 5 dots', () => {
+    assert.strictEqual(
+      factory['_extractOperationRequest']('1.1.1.1.1.1.1'),
+      '',
+    );
+  });
+
+  it('should return empty string for trailing dot or invalid input', () => {
+    assert.strictEqual(
+      factory['_extractOperationRequest']('1.1a2bc3d4.1.1.1.'),
+      '',
+    );
+    assert.strictEqual(factory['_extractOperationRequest'](''), '');
+    assert.strictEqual(
+      factory['_extractOperationRequest'](undefined as any),
+      '',
+    );
+    assert.strictEqual(factory['_extractOperationRequest'](123 as any), '');
   });
 });
 

@@ -264,7 +264,11 @@ export class MetricsTracerFactory {
    * @param formattedName The formatted resource name (e.g., full database path).
    * @returns An object containing project, instance, and database strings.
    */
-  public getInstanceAttributes(formattedName: string) {
+  public getInstanceAttributes(formattedName: string): {
+    project: string;
+    instance: string;
+    database: string;
+  } {
     if (typeof formattedName !== 'string' || formattedName === '') {
       return {
         project: Constants.UNKNOWN_ATTRIBUTE,
@@ -272,12 +276,31 @@ export class MetricsTracerFactory {
         database: Constants.UNKNOWN_ATTRIBUTE,
       };
     }
-    const regex =
-      /projects\/(?<projectId>[^/]+)\/instances\/(?<instanceId>[^/]+)(?:\/databases\/(?<databaseId>[^/]+))?/;
-    const match = formattedName.match(regex);
-    const project = match?.groups?.projectId || Constants.UNKNOWN_ATTRIBUTE;
-    const instance = match?.groups?.instanceId || Constants.UNKNOWN_ATTRIBUTE;
-    const database = match?.groups?.databaseId || Constants.UNKNOWN_ATTRIBUTE;
+    const parts = formattedName.split('/');
+    const startIndex = parts[0] === '' ? 1 : 0;
+    if (
+      parts.length < startIndex + 4 ||
+      parts[startIndex] !== 'projects' ||
+      parts[startIndex + 2] !== 'instances' ||
+      !parts[startIndex + 1] ||
+      !parts[startIndex + 3]
+    ) {
+      return {
+        project: Constants.UNKNOWN_ATTRIBUTE,
+        instance: Constants.UNKNOWN_ATTRIBUTE,
+        database: Constants.UNKNOWN_ATTRIBUTE,
+      };
+    }
+    const project = parts[startIndex + 1];
+    const instance = parts[startIndex + 3];
+    let database = Constants.UNKNOWN_ATTRIBUTE;
+    if (
+      parts.length >= startIndex + 6 &&
+      parts[startIndex + 4] === 'databases' &&
+      parts[startIndex + 5]
+    ) {
+      database = parts[startIndex + 5];
+    }
     return {project: project, instance: instance, database: database};
   }
 
@@ -316,19 +339,33 @@ export class MetricsTracerFactory {
   }
 
   private _extractOperationRequest(requestId: string): string {
-    if (!requestId) {
+    if (!requestId || typeof requestId !== 'string') {
       return '';
     }
 
-    const regex = /^(\d+\.[a-z0-9]+\.\d+\.\d+\.\d+)\.\d+$/i;
-    const match = requestId.match(regex);
+    let dotCount = 0;
+    let fifthDotIndex = -1;
+    for (let index = 0; index < requestId.length; index++) {
+      if (requestId.charCodeAt(index) === 46 /* '.' */) {
+        dotCount++;
+        if (dotCount === 5) {
+          fifthDotIndex = index;
+        }
+      }
+    }
 
-    if (!match) {
+    if (dotCount !== 5 || fifthDotIndex === requestId.length - 1) {
       return '';
     }
 
-    const request = match[1];
-    return request;
+    for (let index = fifthDotIndex + 1; index < requestId.length; index++) {
+      const code = requestId.charCodeAt(index);
+      if (code < 48 || code > 57) {
+        return '';
+      }
+    }
+
+    return requestId.slice(0, fifthDotIndex);
   }
 
   /**
