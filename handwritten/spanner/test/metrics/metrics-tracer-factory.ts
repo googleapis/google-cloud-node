@@ -158,20 +158,32 @@ describe('MetricsTracerFactory', () => {
     assert.ok(tracer);
   });
 
-  it('should clear a MetricsTracer using an extracted operation request id', () => {
+  it('should create independent MetricsTracer instances directly', () => {
     const factory = MetricsTracerFactory.getInstance('project-id');
-    factory!.createMetricsTracer(
+    const tracer1 = factory!.createMetricsTracer(
+      'some-method',
+      'method-name',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    const tracer2 = factory!.createMetricsTracer(
       'some-method',
       'method-name',
       '1.1a2bc3d4.1.1.1.1',
     );
 
-    assert.strictEqual((factory as any)._currentOperationTracers.size, 1);
+    assert.ok(tracer1);
+    assert.ok(tracer2);
+    assert.notStrictEqual(tracer1, tracer2);
+    assert.strictEqual(factory!.getCurrentTracer('1.1a2bc3d4.1.1.1.1'), null);
+    assert.doesNotThrow(() => {
+      factory!.clearCurrentTracer('1.1a2bc3d4.1.1.1.1');
+    });
+  });
 
-    factory!.clearCurrentTracer('1.1a2bc3d4.1.1.1');
-
-    assert.strictEqual((factory as any)._currentOperationTracers.size, 0);
-    assert.strictEqual((factory as any)._currentOperationLastUpdatedMs.size, 0);
+  it('should not schedule background cleanup interval', () => {
+    const setIntervalSpy = sandbox.spy(global, 'setInterval');
+    MetricsTracerFactory.getInstance('project-id');
+    assert.strictEqual(setIntervalSpy.called, false);
   });
 
   it('should correctly set default attributes', () => {
@@ -194,6 +206,65 @@ describe('MetricsTracerFactory', () => {
       'instance',
     );
   });
+
+  it('should return null when createMetricsTracer is called and factory is disabled', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id');
+    MetricsTracerFactory.enabled = false;
+    assert.strictEqual(MetricsTracerFactory.getInstance('project-id'), null);
+    const tracer = factory!.createMetricsTracer(
+      'some-method',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    assert.strictEqual(tracer, null);
+    MetricsTracerFactory.enabled = true;
+  });
+
+  it('should create tracer successfully when requestId is omitted', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id');
+    const tracer = factory!.createMetricsTracer(
+      'some-method',
+      'projects/project/instances/instance/databases/database',
+    );
+    assert.ok(tracer);
+  });
+
+  it('should create tracer with fallback attributes when formattedName is malformed', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id');
+    const tracer = factory!.createMetricsTracer('some-method', '');
+    assert.ok(tracer);
+    assert.strictEqual(
+      tracer!.clientAttributes[Constants.METRIC_LABEL_KEY_DATABASE],
+      'unknown',
+    );
+    assert.strictEqual(
+      tracer!.clientAttributes[Constants.MONITORED_RES_LABEL_KEY_INSTANCE],
+      'unknown',
+    );
+  });
+
+  it('should update singleton _projectId if initially created without one', async () => {
+    await MetricsTracerFactory.resetInstance();
+    const initialFactory = MetricsTracerFactory.getInstance();
+    assert.ok(initialFactory);
+    assert.strictEqual((initialFactory as any)._projectId, '');
+
+    const updatedFactory = MetricsTracerFactory.getInstance(
+      'resolved-project-id',
+    );
+    assert.strictEqual(updatedFactory, initialFactory);
+    assert.strictEqual(
+      (updatedFactory as any)._projectId,
+      'resolved-project-id',
+    );
+
+    // Subsequent call with different project ID should not overwrite already set project ID
+    const thirdFactory = MetricsTracerFactory.getInstance(
+      'different-project-id',
+    );
+    assert.strictEqual(thirdFactory, initialFactory);
+    assert.strictEqual((thirdFactory as any)._projectId, 'resolved-project-id');
+  });
 });
 
 describe('getInstanceAttributes', () => {
@@ -204,7 +275,6 @@ describe('getInstanceAttributes', () => {
 
   afterEach(async () => {
     await factory.resetMeterProvider();
-    clearInterval(factory['_intervalTracerCleanup']);
   });
 
   it('should extract project, instance, and database from full resource path', () => {
@@ -242,74 +312,6 @@ describe('getInstanceAttributes', () => {
       project: 'unknown',
       instance: 'unknown',
       database: 'unknown',
-    });
-  });
-});
-
-describe('MetricsTracerFactory with set clock', () => {
-  let clock: sinon.SinonFakeTimers;
-
-  beforeEach(async () => {
-    MetricsTracerFactory.enabled = true;
-    await MetricsTracerFactory.resetInstance();
-    // Use fake timers to control the clock
-    clock = sinon.useFakeTimers();
-  });
-
-  afterEach(() => {
-    // Restore the real timers
-    clock.restore();
-  });
-
-  describe('_cleanMetricTracers', () => {
-    it('should prune stale tracers', () => {
-      const factory = MetricsTracerFactory.getInstance('test-project');
-      assert(factory);
-
-      factory.createMetricsTracer(
-        'method1',
-        'projects/p/instances/i/databases/d',
-        '1.1a2b3c.1.1.1.1',
-      );
-
-      // Advance the clock to make the tracer stale
-      clock.tick(Constants.TRACER_CLEANUP_THRESHOLD_MS);
-
-      // Add another tracer to trigger pruning
-      factory.createMetricsTracer(
-        'method2',
-        'projects/p/instances/i/databases/d',
-        '2.1a2b3c.1.1.1.1',
-      );
-      // Only most recent tracer should remain
-      assert.strictEqual(factory['_currentOperationTracers'].size, 1);
-      assert.ok(factory['_currentOperationTracers'].has('2.1a2b3c.1.1.1'));
-    });
-
-    it('should not prune recent tracers', () => {
-      const factory = MetricsTracerFactory.getInstance('test-project');
-      assert(factory);
-
-      factory.createMetricsTracer(
-        'method1',
-        'projects/p/instances/i/databases/d',
-        '1.1a2b3c.1.1.1.1',
-      );
-
-      // Advance the clock, but not enough to hit the threshold
-      clock.tick(Constants.TRACER_CLEANUP_INTERVAL_MS);
-
-      // Add another tracer to trigger pruning
-      factory.createMetricsTracer(
-        'method2',
-        'projects/p/instances/i/databases/d',
-        '2.1a2b3c.1.1.1.1',
-      );
-
-      // Both tracers should be available
-      assert.strictEqual(factory['_currentOperationTracers'].size, 2);
-      assert.ok(factory['_currentOperationTracers'].has('1.1a2b3c.1.1.1'));
-      assert.ok(factory['_currentOperationTracers'].has('2.1a2b3c.1.1.1'));
     });
   });
 });

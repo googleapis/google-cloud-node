@@ -38,6 +38,7 @@ import {
   GetInstancesOptions,
 } from '../src';
 import {Duplex} from 'stream';
+import {EventEmitter} from 'events';
 import {CLOUD_RESOURCE_HEADER, AFE_SERVER_TIMING_HEADER} from '../src/common';
 import {MetricsTracerFactory} from '../src/metrics/metrics-tracer-factory';
 import IsolationLevel = protos.google.spanner.v1.TransactionOptions.IsolationLevel;
@@ -52,12 +53,16 @@ assert.strictEqual(CLOUD_RESOURCE_HEADER, 'google-cloud-resource-prefix');
 const apiConfig = require('../src/spanner_grpc_config.json');
 
 async function disableMetrics(sandbox: sinon.SinonSandbox) {
+  process.env['SPANNER_DISABLE_BUILTIN_METRICS'] =
+    process.env['SPANNER_DISABLE_BUILTIN_METRICS'] ?? 'false';
   sandbox.stub(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS').value('true');
   await MetricsTracerFactory.resetInstance();
   MetricsTracerFactory.enabled = false;
 }
 
 async function enableMetrics(sandbox: sinon.SinonSandbox) {
+  process.env['SPANNER_DISABLE_BUILTIN_METRICS'] =
+    process.env['SPANNER_DISABLE_BUILTIN_METRICS'] ?? 'false';
   sandbox.stub(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS').value('false');
   await MetricsTracerFactory.resetInstance();
 }
@@ -2201,12 +2206,6 @@ describe('Spanner', () => {
       replaceProjectIdTokenOverride = reqOpts => {
         return reqOpts;
       };
-      const expectedGaxOpts = extend(true, {}, CONFIG.gaxOpts, {
-        otherArgs: {
-          headers: CONFIG.headers,
-        },
-      });
-
       FAKE_GAPIC_CLIENT[CONFIG.method] = function (reqOpts, gaxOpts, arg) {
         assert.strictEqual(this, FAKE_GAPIC_CLIENT);
         assert.deepStrictEqual(reqOpts, CONFIG.reqOpts);
@@ -2221,6 +2220,30 @@ describe('Spanner', () => {
 
       spanner.prepareGapicRequest_(CONFIG, (err, requestFn) => {
         requestFn(done); // (FAKE_GAPIC_CLIENT[CONFIG.method])
+      });
+    });
+
+    it('should not mutate caller-provided headers object', done => {
+      const originalHeaders = {
+        [CLOUD_RESOURCE_HEADER]: 'original-header',
+        'custom-header': 'custom-value',
+      };
+      const config = {
+        client: CONFIG.client,
+        method: CONFIG.method,
+        reqOpts: CONFIG.reqOpts,
+        gaxOpts: CONFIG.gaxOpts,
+        headers: originalHeaders,
+      };
+
+      spanner.prepareGapicRequest_(config, err => {
+        assert.ifError(err);
+        assert.notStrictEqual(config.headers, originalHeaders);
+        assert.deepStrictEqual(originalHeaders, {
+          [CLOUD_RESOURCE_HEADER]: 'original-header',
+          'custom-header': 'custom-value',
+        });
+        done();
       });
     });
   });
@@ -2271,6 +2294,75 @@ describe('Spanner', () => {
 
         spanner.request(CONFIG, done);
       });
+
+      it('should not execute callback twice if requestFn calls callback and then throws', done => {
+        let callbackCallCount = 0;
+        const error = new Error('Synchronous error after callback.');
+
+        spanner.prepareGapicRequest_ = (config, callback) => {
+          callback(null, (wrappedCallback: (...args: unknown[]) => void) => {
+            wrappedCallback(null, 'result');
+            throw error;
+          });
+        };
+
+        spanner.request(CONFIG, (err: Error | null, result?: unknown) => {
+          callbackCallCount++;
+          assert.strictEqual(err, null);
+          assert.strictEqual(result, 'result');
+          setImmediate(() => {
+            assert.strictEqual(callbackCallCount, 1);
+            done();
+          });
+        });
+      });
+
+      it('should call callback with error if requestFn throws synchronously before callback is invoked', done => {
+        const error = new Error('Synchronous error before callback.');
+
+        spanner.prepareGapicRequest_ = (config, callback) => {
+          callback(null, () => {
+            throw error;
+          });
+        };
+
+        spanner.request(CONFIG, (err: Error | null) => {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should rethrow error if user callback throws synchronously', done => {
+        const error = new Error('User callback threw error.');
+
+        spanner.prepareGapicRequest_ = (config, callback) => {
+          callback(null, (wrappedCallback: (...args: unknown[]) => void) => {
+            wrappedCallback(null, 'result');
+          });
+        };
+
+        assert.throws(() => {
+          spanner.request(CONFIG, () => {
+            throw error;
+          });
+        }, error);
+        done();
+      });
+
+      it('should overwrite stale metricsTracer with undefined when metrics are not enabled for the call', done => {
+        const config = {
+          client: 'DatabaseAdminClient',
+          metricsTracer: {stale: true},
+        };
+
+        spanner.prepareGapicRequest_ = (cfg, callback) => {
+          assert.strictEqual(cfg.metricsTracer, undefined);
+          callback(null, util.noop);
+          done();
+        };
+
+        spanner.request(config, util.noop);
+      });
     });
 
     describe('promise mode', () => {
@@ -2288,20 +2380,39 @@ describe('Spanner', () => {
         spanner.request(CONFIG);
       });
 
-      it('should reject the promise', done => {
+      it('should reject the promise', async () => {
         const error = new Error('Error.');
 
         spanner.prepareGapicRequest_ = (config, callback) => {
           callback(error);
         };
 
-        spanner.request(CONFIG).catch(err => {
-          assert.strictEqual(err, error);
-          done();
-        });
+        await assert.rejects(spanner.request(CONFIG), error);
       });
 
-      it('should resolve the promise with the request fn', () => {
+      it('should reject the promise if requestFn throws synchronously', async () => {
+        const error = new Error('Synchronous requestFn error.');
+
+        spanner.prepareGapicRequest_ = (config, callback) => {
+          callback(null, () => {
+            throw error;
+          });
+        };
+
+        await assert.rejects(spanner.request(CONFIG), error);
+      });
+
+      it('should reject the promise if requestFn returns a rejecting promise', async () => {
+        const error = new Error('Async requestFn rejection.');
+
+        spanner.prepareGapicRequest_ = (config, callback) => {
+          callback(null, () => Promise.reject(error));
+        };
+
+        await assert.rejects(spanner.request(CONFIG), error);
+      });
+
+      it('should resolve the promise with the request fn', async () => {
         const gapicRequestFnResult = {};
 
         function gapicRequestFn() {
@@ -2312,9 +2423,8 @@ describe('Spanner', () => {
           callback(null, gapicRequestFn);
         };
 
-        return spanner.request(CONFIG).then(result => {
-          assert.strictEqual(result, gapicRequestFnResult);
-        });
+        const result = await spanner.request(CONFIG);
+        assert.strictEqual(result, gapicRequestFnResult);
       });
     });
   });
@@ -2395,6 +2505,98 @@ describe('Spanner', () => {
           done();
         })
         .emit('reading');
+    });
+
+    it('should destroy the stream if requestFn returns nullish', done => {
+      spanner.prepareGapicRequest_ = (config, callback) => {
+        callback(null, () => null);
+      };
+
+      spanner
+        .requestStream(CONFIG)
+        .on('error', err => {
+          assert.strictEqual(
+            err.message,
+            'Failed to initialize request stream.',
+          );
+          done();
+        })
+        .emit('reading');
+    });
+
+    it('should destroy the stream if requestFn throws an error', done => {
+      const error = new Error('Synchronous initialization failure.');
+
+      spanner.prepareGapicRequest_ = (config, callback) => {
+        callback(null, () => {
+          throw error;
+        });
+      };
+
+      spanner
+        .requestStream(CONFIG)
+        .on('error', err => {
+          assert.strictEqual(err, error);
+          done();
+        })
+        .emit('reading');
+    });
+
+    it('should destroy callStream when requestStream is destroyed', done => {
+      const fakeCallStream = Object.assign(new EventEmitter(), {
+        destroy: sinon.spy(),
+        pipe: sinon.spy(),
+      });
+
+      spanner.prepareGapicRequest_ = (config, callback) => {
+        callback(null, () => fakeCallStream);
+      };
+
+      const stream = spanner.requestStream(CONFIG);
+      stream.emit('reading');
+      stream.destroy();
+
+      setImmediate(() => {
+        assert.strictEqual(fakeCallStream.destroy.calledOnce, true);
+        done();
+      });
+    });
+
+    it('should not call requestFn if stream is destroyed before prepareGapicRequest_ finishes', done => {
+      const requestFn = sinon.spy();
+
+      spanner.prepareGapicRequest_ = (config, callback) => {
+        setImmediate(() => {
+          callback(null, requestFn);
+          assert.strictEqual(requestFn.called, false);
+          done();
+        });
+      };
+
+      const stream = spanner.requestStream(CONFIG);
+      stream.emit('reading');
+      stream.destroy();
+    });
+
+    it('should destroy callStream when stream is destroyed even if removeAllListeners was called', done => {
+      const fakeCallStream = Object.assign(new EventEmitter(), {
+        destroy: sinon.spy(),
+        pipe: sinon.spy(),
+      });
+
+      spanner.prepareGapicRequest_ = (config, callback) => {
+        callback(null, () => fakeCallStream);
+      };
+
+      const stream = spanner.requestStream(CONFIG);
+      stream.emit('reading');
+      stream.removeAllListeners();
+      stream.destroy();
+
+      setImmediate(() => {
+        assert.strictEqual(fakeCallStream.destroy.calledOnce, true);
+        done();
+      });
     });
   });
 

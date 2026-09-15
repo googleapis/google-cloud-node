@@ -16,7 +16,7 @@ import * as crypto from 'crypto';
 import * as os from 'os';
 import * as process from 'process';
 import {MeterProvider, MetricReader} from '@opentelemetry/sdk-metrics';
-import {Counter, Histogram, context, ROOT_CONTEXT} from '@opentelemetry/api';
+import {Counter, Histogram} from '@opentelemetry/api';
 import {detectResources, Resource} from '@opentelemetry/resources';
 import {GcpDetectorSync} from '@google-cloud/opentelemetry-resource-util';
 import * as Constants from './constants';
@@ -52,9 +52,6 @@ export class MetricsTracerFactory {
   private _clientUid: string;
   private _location = 'global';
   private _projectId: string;
-  private _currentOperationTracers = new Map();
-  private _currentOperationLastUpdatedMs = new Map();
-  private _intervalTracerCleanup: NodeJS.Timeout;
   public static enabled = true;
 
   /**
@@ -68,30 +65,20 @@ export class MetricsTracerFactory {
     this._clientUid = MetricsTracerFactory._generateClientUId();
     this._clientName = `${Constants.SPANNER_METER_NAME}/${version}`;
 
-    // Only perform async call to retrieve location is metrics are enabled.
+    // Only perform async call to retrieve location if metrics are enabled.
     if (MetricsTracerFactory.enabled) {
       (async () => {
         const location = await MetricsTracerFactory._detectClientLocation();
         this._location = location.length > 0 ? location : 'global';
       })().catch(error => {
-        throw error;
+        console.warn('Unable to detect client location.', error);
+        this._location = 'global';
       });
     }
 
     this._clientHash = MetricsTracerFactory._generateClientHash(
       this._clientUid,
     );
-
-    // Start the Tracer cleanup task at an interval
-    this._intervalTracerCleanup = context.with(ROOT_CONTEXT, () =>
-      setInterval(
-        this._cleanMetricsTracers.bind(this),
-        Constants.TRACER_CLEANUP_INTERVAL_MS,
-      ),
-    );
-    // unref the interval to prevent it from blocking app termination
-    // in the event loop
-    this._intervalTracerCleanup.unref();
   }
 
   /**
@@ -101,17 +88,21 @@ export class MetricsTracerFactory {
    * @param projectId Optional GCP project ID for the factory instantiation. Does nothing for subsequent calls.
    * @returns The singleton MetricsTracerFactory instance or null if disabled.
    */
-  public static getInstance(projectId: string): MetricsTracerFactory | null {
+  public static getInstance(projectId?: string): MetricsTracerFactory | null {
     if (!MetricsTracerFactory.enabled) {
       return null;
     }
 
     // Create a singleton instance, enabling/disabling metrics can only be done on the initial call
     if (MetricsTracerFactory._instance === null) {
-      MetricsTracerFactory._instance = new MetricsTracerFactory(projectId);
+      MetricsTracerFactory._instance = new MetricsTracerFactory(
+        projectId || '',
+      );
+    } else if (projectId && !MetricsTracerFactory._instance._projectId) {
+      MetricsTracerFactory._instance._projectId = projectId;
     }
 
-    return MetricsTracerFactory!._instance;
+    return MetricsTracerFactory._instance;
   }
 
   /**
@@ -143,7 +134,6 @@ export class MetricsTracerFactory {
    * Resets the singleton instance of the MetricsTracerFactory.
    */
   public static async resetInstance() {
-    clearInterval(MetricsTracerFactory._instance?._intervalTracerCleanup);
     await MetricsTracerFactory._instance?.resetMeterProvider();
     MetricsTracerFactory._instance = null;
   }
@@ -153,11 +143,9 @@ export class MetricsTracerFactory {
    */
   public async resetMeterProvider() {
     if (this._meterProvider !== null) {
-      await this._meterProvider!.shutdown();
+      await this._meterProvider.shutdown();
     }
     this._meterProvider = null;
-    this._currentOperationTracers = new Map();
-    this._currentOperationLastUpdatedMs = new Map();
   }
 
   /**
@@ -226,19 +214,14 @@ export class MetricsTracerFactory {
   public createMetricsTracer(
     method: string,
     formattedName: string,
-    requestId: string,
+    requestId?: string,
   ): MetricsTracer | null {
     if (!MetricsTracerFactory.enabled) {
       return null;
     }
-    const operationRequest = this._extractOperationRequest(requestId);
-
-    if (this._currentOperationTracers.has(operationRequest)) {
-      return this._currentOperationTracers.get(operationRequest);
-    }
 
     const {instance, database} = this.getInstanceAttributes(formattedName);
-    const tracer = new MetricsTracer(
+    return new MetricsTracer(
       this._instrumentAttemptCounter,
       this._instrumentAttemptLatency,
       this._instrumentOperationCounter,
@@ -252,11 +235,8 @@ export class MetricsTracerFactory {
       instance,
       this._projectId,
       method,
-      operationRequest,
+      requestId,
     );
-    this._currentOperationTracers.set(operationRequest, tracer);
-    this._currentOperationLastUpdatedMs.set(operationRequest, Date.now());
-    return tracer;
   }
 
   /**
@@ -283,53 +263,22 @@ export class MetricsTracerFactory {
 
   /**
    * Retrieves the current MetricsTracer for a given request id.
-   * Returns null if no tracer exists for the request.
-   * Does not implicitly create MetricsTracers as that should be done
-   * explicitly using the createMetricsTracer function.
-   * request id is expected to be as set in the gRPC metadata.
+   * @deprecated MetricsTracer is carried directly on the call context.
    * @param requestId The request id of the gRPC call set under 'x-goog-spanner-request-id'.
-   * @returns The MetricsTracer instance or null if not found.
+   * @returns null.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getCurrentTracer(requestId: string): MetricsTracer | null {
-    const operationRequest: string = this._extractOperationRequest(requestId);
-    if (!this._currentOperationTracers.has(operationRequest)) {
-      // Attempting to retrieve tracer that doesn't exist.
-      return null;
-    }
-    this._currentOperationLastUpdatedMs.set(operationRequest, Date.now());
-
-    return this._currentOperationTracers.get(operationRequest) ?? null;
+    return null;
   }
 
   /**
    * Removes the MetricsTracer associated with the given request id.
+   * @deprecated MetricsTracer is carried directly on the call context.
    * @param requestId The request id of the gRPC call set under 'x-goog-spanner-request-id'.
    */
-  public clearCurrentTracer(requestId: string) {
-    const operationRequest =
-      this._extractOperationRequest(requestId) || requestId;
-    if (!this._currentOperationTracers.has(operationRequest)) {
-      return;
-    }
-    this._currentOperationTracers.delete(operationRequest);
-    this._currentOperationLastUpdatedMs.delete(operationRequest);
-  }
-
-  private _extractOperationRequest(requestId: string): string {
-    if (!requestId) {
-      return '';
-    }
-
-    const regex = /^(\d+\.[a-z0-9]+\.\d+\.\d+\.\d+)\.\d+$/i;
-    const match = requestId.match(regex);
-
-    if (!match) {
-      return '';
-    }
-
-    const request = match[1];
-    return request;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public clearCurrentTracer(requestId: string): void {}
 
   /**
    * Creates and initializes all metric instruments (counters and histograms) for the MeterProvider.
@@ -474,21 +423,5 @@ export class MetricsTracerFactory {
       console.warn('Unable to detect location.', err);
     }
     return defaultRegion;
-  }
-
-  private _cleanMetricsTracers() {
-    if (this._currentOperationLastUpdatedMs.size === 0) {
-      return;
-    }
-
-    for (const [
-      operationTracer,
-      lastUpdated,
-    ] of this._currentOperationLastUpdatedMs.entries()) {
-      if (Date.now() - lastUpdated >= Constants.TRACER_CLEANUP_THRESHOLD_MS) {
-        this._currentOperationTracers.delete(operationTracer);
-        this._currentOperationLastUpdatedMs.delete(operationTracer);
-      }
-    }
   }
 }
