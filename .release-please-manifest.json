@@ -7,7 +7,7 @@
   "core/packages/gapic-node-processing": "0.2.2",
   "core/packages/gax": "6.4.0",
   "core/packages/gaxios": "8.1.0",
-  "core/packages/gcp-metadata": "9.0.3",
+  "core/packages/gcp-metadata": "9.0.4",
   "core/packages/google-auth-library-nodejs": "11.1.0",
   "core/packages/logging-utils": "2.0.1",
   "core/packages/nodejs-googleapis-common": "9.1.0",
