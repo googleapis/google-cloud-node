@@ -54,6 +54,12 @@ import {
   GetDatabaseOperationsCallback,
 } from './instance';
 import {PartialResultStream, Row} from './partial-result-stream';
+import {
+  isNativeCoreEnabled,
+  isNativeEligible,
+  runStreamNative,
+  DatabaseLike as NativeDatabaseLike,
+} from './native-core';
 import {Session} from './session';
 import {
   isSessionNotFoundError,
@@ -2908,6 +2914,19 @@ class Database extends common.GrpcServiceObject {
       this._runLegacy(query, options, callback!);
       return;
     }
+    // Go shared-core fast path.
+    //
+    // NOTE: _run() below is the optimised pure-JS pipeline and deliberately
+    // bypasses Database.prototype.runStream, so the dispatch inside
+    // runStream() is unreachable from run(). Eligible queries are therefore
+    // routed through the streaming pipeline, which does dispatch to the core
+    // (and transparently falls back to stock if the result set turns out to
+    // be unsupported). When the core is disabled this branch is skipped
+    // entirely and run() behaves exactly as it does upstream.
+    if (isNativeCoreEnabled() && isNativeEligible(query as unknown)) {
+      this._runLegacy(query, options, callback!);
+      return;
+    }
     this._run(query, options, callback!);
   }
 
@@ -3298,6 +3317,36 @@ class Database extends common.GrpcServiceObject {
    * ```
    */
   runStream(
+    query: string | ExecuteSqlRequest,
+    options?: TimestampBounds,
+  ): PartialResultStream {
+    // Go shared-core fast path. Only single-use read-only SQL queries are
+    // eligible. Timestamp bounds are supported: they are encoded with the
+    // same helper the stock path uses and forwarded verbatim in the
+    // single-use transaction, so the wire request is identical.
+    //
+    // If the core turns out to be unable to represent the result set
+    // (ARRAY/STRUCT columns) it invokes the fallback factory and the stock JS
+    // stream is used instead. That decision is always made before any row is
+    // emitted, so the caller sees a single coherent stream either way.
+    if (isNativeCoreEnabled() && isNativeEligible(query as unknown)) {
+      return runStreamNative(
+        this as unknown as NativeDatabaseLike,
+        query as unknown as string | Record<string, unknown>,
+        () =>
+          this.runStreamStock_(query, options) as unknown as NodeJS.ReadableStream,
+        Snapshot.encodeTimestampBounds(options || {}),
+      ) as unknown as PartialResultStream;
+    }
+    return this.runStreamStock_(query, options);
+  }
+
+  /**
+   * The stock pure-JS streaming implementation of {@link Database#runStream}.
+   *
+   * @private
+   */
+  runStreamStock_(
     query: string | ExecuteSqlRequest,
     options?: TimestampBounds,
   ): PartialResultStream {
