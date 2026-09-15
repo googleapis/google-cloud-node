@@ -31,8 +31,10 @@ const common = require('./common-grpc/service-object');
 /**
  * @callback GetSessionCallback
  * @param {?Error} error Request error, if any.
- * @param {Session} session The read-write session.
- * @param {Transaction} transaction The transaction object.
+ * @param {Session} [session] The session object.
+ * @param {Transaction} [transaction] The transaction object, if applicable.
+ *   Omitted for read-only multiplexed session acquisitions to prevent throwaway
+ *   allocations. Provided by getSessionForReadWrite or when using regular session pools.
  */
 export interface GetSessionCallback {
   (
@@ -216,9 +218,20 @@ export class SessionFactory
    * @param {GetSessionCallback} callback The callback function.
    */
   getSessionForReadWrite(callback: GetSessionCallback): void {
-    this.isMultiplexedRW
-      ? this.getSession(callback)
-      : this.pool_.getSession(callback);
+    if (this.isMultiplexedRW) {
+      this.getSession((error, session, transaction) => {
+        if (error || !session) {
+          callback(error ?? new Error('No session found'), null);
+          return;
+        }
+        const database = session.parent as Database;
+        const activeTransaction =
+          transaction ?? session.transaction(database.queryOptions_);
+        callback(null, session, activeTransaction);
+      });
+    } else {
+      this.pool_.getSession(callback);
+    }
   }
 
   /**

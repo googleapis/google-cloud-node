@@ -27,14 +27,16 @@ npm config -g ls || npm i -g npm@`npm --version`
 
 cd $(dirname $0)/..
 
-npm install
+npm install -g pnpm@9
+pnpm install
 
 # Install and link samples
 if [ -f samples/package.json ]; then
   cd samples/
   npm link ../
-  npm install
+  npm install -g pnpm@9
+  pnpm install
   cd ..
 fi
 
-npm run lint
+pnpm run lint

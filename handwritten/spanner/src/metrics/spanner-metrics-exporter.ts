@@ -34,7 +34,7 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private _metricsExportFailureLogged = false;
 
   constructor({auth}: ExporterOptions, projectId: string) {
-    this._client = new MetricServiceClient({auth: auth});
+    this._client = new MetricServiceClient({auth: auth as any});
 
     this._projectId = projectId;
   }
@@ -61,9 +61,11 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
     }
 
     this._lastExported = now;
-    this._exportAsync(metrics).then(resultCallback, err => {
-      resultCallback({code: ExportResultCode.FAILED, error: err});
-    });
+    this._exportAsync(metrics)
+      .then(resultCallback)
+      .catch(err => {
+        resultCallback({code: ExportResultCode.FAILED, error: err});
+      });
   }
 
   async shutdown(): Promise<void> {}

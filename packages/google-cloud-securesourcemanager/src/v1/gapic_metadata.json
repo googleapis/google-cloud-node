@@ -269,6 +269,13 @@
                 "fetchTreeAsync"
               ]
             },
+            "FetchRefs": {
+              "methods": [
+                "fetchRefs",
+                "fetchRefsStream",
+                "fetchRefsAsync"
+              ]
+            },
             "ListIssues": {
               "methods": [
                 "listIssues",
@@ -552,6 +559,13 @@
                 "fetchTree",
                 "fetchTreeStream",
                 "fetchTreeAsync"
+              ]
+            },
+            "FetchRefs": {
+              "methods": [
+                "fetchRefs",
+                "fetchRefsStream",
+                "fetchRefsAsync"
               ]
             },
             "ListIssues": {

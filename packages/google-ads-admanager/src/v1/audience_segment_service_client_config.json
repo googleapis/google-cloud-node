@@ -28,6 +28,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateAudienceSegment": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCreateAudienceSegments": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "BatchActivateAudienceSegments": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
