@@ -532,6 +532,33 @@ describe('unit test', () => {
     assert.strictEqual(false, isGCE);
   });
 
+  it('should emit MetadataLookupWarning with unwrapped error codes when AggregateError contains unexpected errors', async () => {
+    const primary = nock(HOST)
+      .persist()
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
+    const secondary = nock(SECONDARY_HOST)
+      .persist()
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
+
+    let emittedWarning = '';
+    const originalEmitWarning = process.emitWarning;
+    process.emitWarning = ((warning: string | Error) => {
+      emittedWarning = warning.toString();
+    }) as typeof process.emitWarning;
+
+    try {
+      const isGCE = await gcp.isAvailable();
+      assert.strictEqual(false, isGCE);
+      assert.match(emittedWarning, /code = ETIMEDOUT/);
+    } finally {
+      process.emitWarning = originalEmitWarning;
+      primary.done();
+      secondary.done();
+    }
+  });
+
   it('should return first successful response', async () => {
     const secondary = secondaryHostRequest(500);
     const primary = nock(HOST).get(`${PATH}/${TYPE}`).reply(404);

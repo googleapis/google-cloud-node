@@ -389,11 +389,24 @@ export async function isAvailable() {
               if (err.name === 'AggregateError' && Array.isArray(err.errors)) {
                 return err.errors.flatMap(getErrorCodes);
               }
+              if (
+                err.name === 'AbortError' ||
+                err.name === 'TimeoutError' ||
+                err.code === 'AbortError' ||
+                err.code === 'TimeoutError' ||
+                err.type === 'aborted' ||
+                err.type === 'request-timeout'
+              ) {
+                return ['ETIMEDOUT'];
+              }
               if (err.code) {
                 return [err.code.toString()];
               }
               if (err.cause) {
                 return getErrorCodes(err.cause);
+              }
+              if (err.error) {
+                return getErrorCodes(err.error);
               }
               return ['UNKNOWN'];
             };
@@ -412,7 +425,9 @@ export async function isAvailable() {
             );
 
             if (!isExpected) {
-              const code = err.code ? err.code.toString() : 'UNKNOWN';
+              const code = err.code
+                ? err.code.toString()
+                : Array.from(new Set(codes)).join(', ');
               process.emitWarning(
                 `received unexpected error = ${err.message} code = ${code}`,
                 'MetadataLookupWarning',
