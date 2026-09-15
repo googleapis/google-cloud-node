@@ -21,10 +21,12 @@ import assert from 'assert';
 import {describe, it, beforeEach, afterEach, after} from 'mocha';
 import * as protobuf from 'protobufjs';
 import * as sinon from 'sinon';
+import * as stream from 'stream';
 import echoProtoJson = require('../fixtures/echo.json');
 import {GrpcClient} from '../../src/fallback';
-import {ClientStubOptions, GoogleAuth, GoogleError} from '../../src';
-import {PassThroughClient} from 'google-auth-library';
+import {ClientStubOptions, GoogleAuth, GoogleError, Status} from '../../src';
+import {StreamArrayParser} from '../../src/streamArrayParser';
+import {gaxios, PassThroughClient} from 'google-auth-library';
 import {setMockFallbackResponse} from './utils';
 
 let authClient = new PassThroughClient();
@@ -538,5 +540,168 @@ describe('grpc-fallback', () => {
 
     const stub = await gaxGrpc.createStub(echoService, stubOptions);
     stub.close({}, {}, {}, () => {});
+  });
+
+  describe('call deadline', () => {
+    // `setMockFallbackResponse` discards the options it is handed, but the
+    // deadline handling under test is only observable there, so record them.
+    function recordRequests(
+      client: GrpcClient,
+      response: Response,
+    ): gaxios.GaxiosOptions[] {
+      const requests: gaxios.GaxiosOptions[] = [];
+      class RecordingAuthClient extends PassThroughClient {
+        async request<T>(
+          opts: gaxios.GaxiosOptions,
+        ): Promise<gaxios.GaxiosResponse<T>> {
+          requests.push(opts);
+          return Object.assign(response, {
+            config: {
+              headers: response.headers,
+              url: new URL(opts.url || 'https://example.com'),
+            },
+            data: response.body as T,
+          });
+        }
+      }
+      client.auth = new GoogleAuth({authClient: new RecordingAuthClient()});
+      return requests;
+    }
+
+    // What gaxios surfaces when its own AbortSignal.timeout fires: the
+    // DOMException's name is republished as the error's `code`.
+    function rejectWithTimeout(client: GrpcClient) {
+      class TimingOutAuthClient extends PassThroughClient {
+        async request<T>(): Promise<gaxios.GaxiosResponse<T>> {
+          const err = new Error('The operation was aborted due to timeout');
+          err.name = 'TimeoutError';
+          (err as {code?: string}).code = 'TimeoutError';
+          throw err;
+        }
+      }
+      client.auth = new GoogleAuth({authClient: new TimingOutAuthClient()});
+    }
+
+    it('should forward the deadline to the transport as a timeout', async () => {
+      const requests = recordRequests(
+        gaxGrpc,
+        new Response(Buffer.from(JSON.stringify({content: 'test'}))),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      await new Promise<void>(resolve => {
+        echoStub.echo(
+          {content: 'test'},
+          {},
+          {deadline: new Date(Date.now() + 5000)},
+          () => resolve(),
+        );
+      });
+
+      // The timeout is the time remaining until the deadline, so it is slightly
+      // less than the full 5s by the time the request is built.
+      const timeout = requests[0].timeout as number;
+      assert.ok(
+        timeout > 4000 && timeout <= 5000,
+        `expected a timeout near 5000ms, got ${timeout}`,
+      );
+    });
+
+    it('should not set a timeout when the call has no deadline', async () => {
+      const requests = recordRequests(
+        gaxGrpc,
+        new Response(Buffer.from(JSON.stringify({content: 'test'}))),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      await new Promise<void>(resolve => {
+        echoStub.echo({content: 'test'}, {}, {}, () => resolve());
+      });
+
+      assert.strictEqual(requests[0].timeout, undefined);
+    });
+
+    it('should never forward a zero timeout for an expired deadline', async () => {
+      const requests = recordRequests(
+        gaxGrpc,
+        new Response(Buffer.from(JSON.stringify({content: 'test'}))),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      await new Promise<void>(resolve => {
+        echoStub.echo(
+          {content: 'test'},
+          {},
+          {deadline: new Date(Date.now() - 60000)},
+          () => resolve(),
+        );
+      });
+
+      // gaxios reads `timeout: 0` as "no timeout", so an expired deadline must
+      // not round down to zero and disable the bound it asked for.
+      assert.strictEqual(requests[0].timeout, 1);
+    });
+
+    it('should not bound server-streaming calls by the deadline', async () => {
+      const responseStream = new stream.Readable();
+      responseStream.push(JSON.stringify([{content: 'test'}]));
+      responseStream.push(null);
+      const requests = recordRequests(
+        gaxGrpc,
+        new Response(responseStream as unknown as BodyInit),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const responses = echoStub.expand(
+        {content: 'test'},
+        {},
+        {deadline: new Date(Date.now() + 5000)},
+        () => {},
+      ) as StreamArrayParser;
+      await new Promise<void>((resolve, reject) => {
+        responses.on('data', () => {});
+        responses.on('error', reject);
+        responses.on('end', resolve);
+      });
+
+      // A server stream is long-lived by design; the signal would stay armed
+      // once the body starts flowing and abort a healthy read.
+      assert.strictEqual(requests[0].timeout, undefined);
+    });
+
+    it('should report an expired deadline as DEADLINE_EXCEEDED', async () => {
+      rejectWithTimeout(gaxGrpc);
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const err = await new Promise<Error | undefined>(resolve => {
+        echoStub.echo(
+          {content: 'test'},
+          {},
+          {deadline: new Date(Date.now() + 5000)},
+          (err?: Error) => resolve(err),
+        );
+      });
+
+      // gRPC reports this condition with a numeric status, and retryCodes,
+      // caller `err.code` checks and telemetry all key off that, so the REST
+      // path must not leak the transport's own error shape.
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.DEADLINE_EXCEEDED);
+      assert.match(err.message, /Deadline exceeded/);
+    });
+
+    it('should leave a timeout error alone when no deadline was forwarded', async () => {
+      rejectWithTimeout(gaxGrpc);
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const err = await new Promise<Error | undefined>(resolve => {
+        echoStub.echo({content: 'test'}, {}, {}, (err?: Error) => resolve(err));
+      });
+
+      // Nothing here asked for a deadline, so claiming one was exceeded would
+      // be a fabrication.
+      assert(!(err instanceof GoogleError));
+      assert.strictEqual(err?.name, 'TimeoutError');
+    });
   });
 });
