@@ -147,13 +147,31 @@ export function mutateInternal(
          a status code, the RPC level failure error code will be used as the
          entry failure code.
         */
-      (err as ServiceError & {errors?: ServiceError[]}).errors =
+      const rpcError = err;
+      (rpcError as ServiceError & {errors?: ServiceError[]}).errors =
         mutationErrors.concat(
           [...pendingEntryIndices]
             .filter(index => !mutationErrorsByEntryIndex.has(index))
-            .map(() => err),
+            .map((): ServiceError => {
+              // Carry the RPC-level code and message on a fresh error rather
+              // than pushing `rpcError` into its own `errors` array. A
+              // self-reference makes the returned error impossible to
+              // serialize for tools that follow the AggregateError convention
+              // of recursing into `errors` (e.g. pino).
+              const entryError = new Error(rpcError.message) as ServiceError;
+              entryError.code = rpcError.code;
+              // Preserve the gRPC debugging context that the former
+              // self-reference carried for each entry.
+              if (rpcError.metadata) {
+                entryError.metadata = rpcError.metadata;
+              }
+              if (rpcError.details) {
+                entryError.details = rpcError.details;
+              }
+              return entryError;
+            }),
         );
-      collectMetricsCallback(err, err);
+      collectMetricsCallback(rpcError, rpcError);
       return;
     }
     collectMetricsCallback(null, null);

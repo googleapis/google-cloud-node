@@ -19,7 +19,7 @@ import * as proxyquire from 'proxyquire';
 import * as pumpify from 'pumpify';
 import * as sinon from 'sinon';
 import {PassThrough, Writable, Duplex} from 'stream';
-import {ServiceError} from 'google-gax';
+import {grpc, ServiceError} from 'google-gax';
 
 import * as inst from '../src/instance';
 import {ChunkTransformer} from '../src/chunktransformer.js';
@@ -2861,6 +2861,9 @@ describe('Bigtable/Table', () => {
         ];
         const unretriableError = new Error('not retryable') as ServiceError;
         unretriableError.code = 3; // INVALID_ARGUMENT
+        unretriableError.metadata = new grpc.Metadata();
+        unretriableError.metadata.set('x-goog-error', 'context');
+        unretriableError.details = 'invalid argument details';
         emitters = [
           ((stream: Writable) => {
             stream.emit('data', {
@@ -2889,6 +2892,18 @@ describe('Bigtable/Table', () => {
               assert.strictEqual(err.errors.length, 1);
               assert.strictEqual(err.errors[0].code, 3);
               assert.strictEqual(err.errors[0].message, 'not retryable');
+              // Regression test for #8075: the per-entry error must not be
+              // `err` itself, otherwise `err.errors` references `err` and the
+              // error can no longer be serialized (e.g. by pino).
+              assert.notStrictEqual(err.errors[0], err);
+              assert.doesNotThrow(() => JSON.stringify(err));
+              // The per-entry error keeps the gRPC metadata and details from
+              // the RPC-level failure so debugging context isn't lost.
+              assert.strictEqual(err.errors[0].metadata, err.metadata);
+              assert.strictEqual(
+                err.errors[0].details,
+                'invalid argument details',
+              );
               done();
             } catch (e) {
               done(e);
