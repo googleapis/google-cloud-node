@@ -616,7 +616,7 @@ describe('createApiCall', () => {
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
     });
 
-    it('passes explicit _fallback through when using fallback createApiCall', async () => {
+    it('overrides an explicit _fallback argument, since the call is a fallback call by definition', async () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
@@ -641,7 +641,10 @@ describe('createApiCall', () => {
         };
       }
 
-      const apiCall = fallbackCreateApiCall(func, settings, undefined, 'rest');
+      // `_fallback` is documented as "unused; for compatibility only" and is
+      // never read. Reaching this function at all means the call is going over
+      // the fallback transport, so `false` must not be able to mislabel it.
+      const apiCall = fallbackCreateApiCall(func, settings, undefined, false);
       await apiCall({}, undefined);
 
       assert.strictEqual(traceCallSpy.calledOnce, true);
@@ -652,6 +655,70 @@ describe('createApiCall', () => {
       assert.strictEqual(spans.length, 1);
       const span = spans[0];
       assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+    });
+
+    it('ends the span and labels it DEADLINE_EXCEEDED when a fallback call times out', async () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        otherArgs: {
+          internalTelemetryInfo: telemetryInfo,
+          internalMethodName: 'Echo',
+        },
+      });
+
+      // The error the REST transport produces when a call exceeds its
+      // deadline: a GoogleError carrying the numeric gRPC status, so that
+      // retryCodes, caller `err.code` checks and telemetry all agree across
+      // transports. An unenforced deadline is what leaves a span open
+      // forever, which is the failure this tracing work has to surface
+      // rather than hide.
+      function timingOutFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        const error = new GoogleError(
+          'Deadline exceeded: Echo did not respond within 100 milliseconds.',
+        );
+        error.code = status.DEADLINE_EXCEEDED;
+        setImmediate(() => callback(error));
+        return {
+          cancel: () => {},
+        };
+      }
+
+      const apiCall = fallbackCreateApiCall(timingOutFunc, settings);
+      const promise = apiCall({}, undefined);
+
+      // The span must not be closed while the call is still outstanding; a
+      // fabricated end time would report a duration the RPC never took.
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      await assert.rejects(
+        async () => {
+          await promise;
+        },
+        (err: GoogleError) => {
+          assert.strictEqual(err.code, status.DEADLINE_EXCEEDED);
+          return true;
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      const span = spans[0];
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(span.attributes['gcp.method.type'], 'http');
+      // `resolveErrorType` maps the numeric code through the Status enum, so a
+      // deadline is reported by name rather than as the transport's own error
+      // class. Before the REST transport enforced the deadline this attribute
+      // would have read 'GaxiosError', and only if the call completed at all.
+      assert.strictEqual(span.attributes['error.type'], 'DEADLINE_EXCEEDED');
+      assert.strictEqual(span.events.length, 1);
+      assert.strictEqual(span.events[0].name, 'exception');
     });
 
     it('passes fallback flag and isStreamingCall as true for server-streaming fallback calls', () => {
