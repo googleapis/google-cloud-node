@@ -94,6 +94,11 @@ function _formatEmptyResponse(rpc: protobuf.Method) {
  * HTTP status number, so it never matches a retry code and is silently treated
  * as a permanent failure.
  *
+ * An error carrying an HTTP status maps through `rpcCodeFromHttpStatusCode`.
+ * Otherwise the call failed before producing a response, which is reported as
+ * UNAVAILABLE, except for an explicit cancellation (CANCELLED) or an elapsed
+ * deadline (DEADLINE_EXCEEDED).
+ *
  * @param err The error thrown by `auth.fetch()`.
  * @returns A GoogleError with a numeric `code`, or the original value if it is
  *   not an Error.
@@ -128,11 +133,12 @@ function _toGoogleError(err: unknown): unknown {
     return error;
   }
 
-  // Cancellations and timeouts are reported as a DOMException by native fetch,
-  // where `code` is a numeric DOMException value (20 and 23) rather than a
-  // string, and by name alone under node-fetch. Match on `name`, as the rest of
-  // this file does when it detects cancellation, and accept a string `code` too
-  // because gaxios matches errors in that form.
+  // An explicit cancellation and an elapsed deadline are distinct conditions in
+  // gRPC, so they are separated out before the general case below. Native fetch
+  // reports both as a DOMException, where `code` is a numeric DOMException
+  // value (20 and 23) rather than a string, so match on `name` as the rest of
+  // this file does when it detects cancellation. A string `code` is also
+  // accepted, because gaxios normalizes a DOMException's name onto `code`.
   if (err.name === 'AbortError' || fetchError.code === 'AbortError') {
     error.code = Status.CANCELLED;
     return error;
@@ -142,26 +148,14 @@ function _toGoogleError(err: unknown): unknown {
     return error;
   }
 
-  // Otherwise this is a connection-level failure identified by a system error
-  // code. gRPC reports these conditions as UNAVAILABLE.
-  switch (fetchError.code) {
-    case 'ECONNRESET':
-    case 'ECONNREFUSED':
-    case 'ECONNABORTED':
-    case 'EPIPE':
-    case 'ENOTFOUND':
-    case 'EAI_AGAIN':
-    case 'ENETUNREACH':
-    case 'EHOSTUNREACH':
-      error.code = Status.UNAVAILABLE;
-      break;
-    case 'ETIMEDOUT':
-      error.code = Status.DEADLINE_EXCEEDED;
-      break;
-    default:
-      error.code = Status.UNKNOWN;
-      break;
-  }
+  // Anything else that rejects here failed before producing a response, which
+  // gRPC reports as UNAVAILABLE irrespective of the underlying system error:
+  // @grpc/grpc-js defaults transport failures to UNAVAILABLE and only inspects
+  // errno to refine an HTTP/2 INTERNAL_ERROR. Enumerating errnos here would
+  // classify anything left off the list as non-retryable, so follow gRPC and
+  // treat the whole category uniformly. Errors raised while decoding a response
+  // are handled nearer the decoder and do not reach this point.
+  error.code = Status.UNAVAILABLE;
   return error;
 }
 

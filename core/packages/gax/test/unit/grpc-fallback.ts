@@ -632,13 +632,29 @@ describe('grpc-fallback', () => {
       assert.strictEqual(err.code, Status.CANCELLED);
     });
 
-    it('should use UNKNOWN for an unrecognized transport error', async () => {
+    it('should use UNAVAILABLE for an unrecognized transport error', async () => {
+      // An error that rejected before a response was produced is a transport
+      // failure, which gRPC reports as UNAVAILABLE whatever the cause. Codes
+      // left off a list would otherwise be classified as non-retryable.
       setMockFallbackError(gaxGrpc, new Error('something unexpected'));
 
       const err = await callEcho();
 
-      assert.strictEqual(err.code, Status.UNKNOWN);
+      assert.strictEqual(err.code, Status.UNAVAILABLE);
       assert.strictEqual(err.message, 'something unexpected');
+    });
+
+    it('should translate a socket timeout into UNAVAILABLE', async () => {
+      // @grpc/grpc-js maps ETIMEDOUT to UNAVAILABLE, not DEADLINE_EXCEEDED,
+      // which is reserved for an elapsed call deadline.
+      setMockFallbackError(
+        gaxGrpc,
+        Object.assign(new Error('socket timeout'), {code: 'ETIMEDOUT'}),
+      );
+
+      const err = await callEcho();
+
+      assert.strictEqual(err.code, Status.UNAVAILABLE);
     });
 
     it('should map a rejection carrying an HTTP status onto a gRPC status', async () => {
