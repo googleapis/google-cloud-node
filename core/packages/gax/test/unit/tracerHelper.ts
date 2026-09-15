@@ -107,6 +107,10 @@ describe('TracerHelper', () => {
       );
       assert.strictEqual(span.attributes['gcp.method.name'], 'GetObject');
       assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
+      // A successful call reports no error.type, and leaves the status unset
+      // rather than claiming OK on the application's behalf.
+      assert.strictEqual(span.attributes['error.type'], undefined);
+      assert.strictEqual(span.status.code, SpanStatusCode.UNSET);
       assert.strictEqual(span.events.length, 0);
     });
 
@@ -132,7 +136,10 @@ describe('TracerHelper', () => {
       const span = spans[0];
       assert.strictEqual(span.name, 'StorageClient.GetObject');
       assert.strictEqual(span.ended, true);
-      assert.strictEqual(span.attributes['error.message'], 'RPC Failed');
+      // The message is carried by the status description. `error.message` is
+      // deprecated and NOT RECOMMENDED on spans, so it must not appear.
+      assert.strictEqual(span.status.message, 'RPC Failed');
+      assert.strictEqual(span.attributes['error.message'], undefined);
       // No status code on this error, so error.type falls back to the class.
       assert.strictEqual(span.attributes['error.type'], 'Error');
       // exception.* belongs on the exception event, not on the span.
@@ -260,7 +267,7 @@ describe('TracerHelper', () => {
       assert.strictEqual(span.attributes['error.type'], 'GoogleError');
     });
 
-    it('omits error.type entirely when a non-Error is thrown', async () => {
+    it('reports the _OTHER error.type when a non-Error is thrown', async () => {
       await assert.rejects(async () => {
         await traceCall(dynamicArgs, staticArgs, async () => {
           throw 'plain string failure';
@@ -268,13 +275,16 @@ describe('TracerHelper', () => {
       });
 
       const span = harness.requireSingleSpan('google-gax');
-      assert.strictEqual(
-        span.attributes['error.message'],
-        'plain string failure',
-      );
-      assert.strictEqual(span.attributes['error.type'], undefined);
+      // Something must be reported, or the failure is invisible to any
+      // error-rate query that groups on error.type.
+      assert.strictEqual(span.attributes['error.type'], '_OTHER');
       assert.strictEqual(span.attributes['exception.type'], undefined);
       assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+      // The thrown value survives as the status description.
+      assert.strictEqual(span.status.message, 'plain string failure');
+      // No exception event: recordException on a bare string yields one with
+      // no type and no stacktrace, which adds nothing to the status above.
+      assert.strictEqual(span.events.length, 0);
     });
 
     it('handles missing optional static arguments gracefully', async () => {
@@ -545,15 +555,18 @@ describe('TracerHelper', () => {
         cancel(): void {}
         then<TResult1 = string, TResult2 = never>(
           onfulfilled?:
-            ((value: string) => TResult1 | PromiseLike<TResult1>) | null,
+            | ((value: string) => TResult1 | PromiseLike<TResult1>)
+            | null,
           onrejected?:
-            ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null,
+            | ((reason: unknown) => TResult2 | PromiseLike<TResult2>)
+            | null,
         ): Promise<TResult1 | TResult2> {
           return this.promise.then(onfulfilled, onrejected);
         }
         catch<TResult = never>(
           onrejected?:
-            ((reason: unknown) => TResult | PromiseLike<TResult>) | null,
+            | ((reason: unknown) => TResult | PromiseLike<TResult>)
+            | null,
         ): Promise<string | TResult> {
           return this.promise.catch(onrejected);
         }
@@ -618,10 +631,7 @@ describe('TracerHelper', () => {
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
       assert.strictEqual(spans[0].ended, true);
-      assert.strictEqual(
-        spans[0].attributes['error.message'],
-        'ongoing call failed',
-      );
+      assert.strictEqual(spans[0].status.message, 'ongoing call failed');
     });
 
     it('ends span synchronously if result is not a Promise', () => {
@@ -653,10 +663,7 @@ describe('TracerHelper', () => {
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
       assert.strictEqual(spans[0].ended, true);
-      assert.strictEqual(
-        spans[0].attributes['error.message'],
-        'async promise failure',
-      );
+      assert.strictEqual(spans[0].status.message, 'async promise failure');
       assert.strictEqual(spans[0].events.length, 1);
     });
 
@@ -698,10 +705,7 @@ describe('TracerHelper', () => {
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 1);
       assert.strictEqual(spans[0].ended, true);
-      assert.strictEqual(
-        spans[0].attributes['error.message'],
-        'stream failure',
-      );
+      assert.strictEqual(spans[0].status.message, 'stream failure');
       assert.strictEqual(spans[0].events.length, 1);
       assert.strictEqual(spans[0].events[0].name, 'exception');
     });
@@ -810,7 +814,7 @@ describe('TracerHelper', () => {
       assert.strictEqual(spansAfterAttempt1.length, 1);
       assert.strictEqual(spansAfterAttempt1[0].ended, true);
       assert.strictEqual(
-        spansAfterAttempt1[0].attributes['error.message'],
+        spansAfterAttempt1[0].status.message,
         'transient stream failure',
       );
       assert.strictEqual(spansAfterAttempt1[0].events.length, 1);
@@ -912,10 +916,7 @@ describe('TracerHelper', () => {
             const spans = harness.getSpans('google-gax');
             assert.strictEqual(spans.length, 1);
             assert.strictEqual(spans[0].ended, true);
-            assert.strictEqual(
-              spans[0].attributes['error.message'],
-              'RPC Failed',
-            );
+            assert.strictEqual(spans[0].status.message, 'RPC Failed');
             assert.strictEqual(
               spans[0].attributes['exception.type'],
               undefined,
@@ -1078,18 +1079,21 @@ describe('TracerHelper', () => {
         return spans[0].status;
       };
 
-      it('sets OK for a synchronous non-promise result', () => {
+      // A successful call leaves the status UNSET rather than setting OK.
+      // semconv reserves OK for an application overriding the
+      // instrumentation's judgement, so a library must never emit it.
+      it('leaves the status unset for a synchronous non-promise result', () => {
         traceCall(
           dynamicArgs,
           staticArgs,
           () => ({data: 1}) as unknown as ResultTuple,
         );
-        assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
       });
 
-      it('sets OK when the promise resolves', async () => {
+      it('leaves the status unset when the promise resolves', async () => {
         await traceCall(dynamicArgs, staticArgs, async () => ({data: 1}));
-        assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
       });
 
       it('sets ERROR when the promise rejects', async () => {
@@ -1114,11 +1118,11 @@ describe('TracerHelper', () => {
         assert.strictEqual(status.message, 'sync boom');
       });
 
-      it('sets OK when the stream ends cleanly', () => {
+      it('leaves the status unset when the stream ends cleanly', () => {
         const emitter = new EventEmitter();
         traceCall(dynamicArgs, staticArgs, () => emitter, true);
         emitter.emit('end');
-        assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
       });
 
       it('sets ERROR when the stream errors', () => {
@@ -1130,7 +1134,7 @@ describe('TracerHelper', () => {
         assert.strictEqual(status.message, 'stream boom');
       });
 
-      it('sets OK when a client-streaming call finishes', async () => {
+      it('leaves the status unset when a client-streaming call finishes', async () => {
         const writable = new Writable({
           objectMode: true,
           write(_chunk, _enc, cb) {
@@ -1141,10 +1145,10 @@ describe('TracerHelper', () => {
         writable.end();
 
         await new Promise<void>(resolve => setImmediate(resolve));
-        assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
       });
 
-      it('sets OK when the callback reports success', () => {
+      it('leaves the status unset when the callback reports success', () => {
         let invokedCallback: APICallback | undefined;
         traceCall(
           dynamicArgs,
@@ -1157,7 +1161,7 @@ describe('TracerHelper', () => {
           () => {},
         );
         invokedCallback!(null, {ok: true});
-        assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
       });
 
       it('sets ERROR when the callback reports failure', () => {
@@ -1178,8 +1182,9 @@ describe('TracerHelper', () => {
         assert.strictEqual(status.message, 'callback boom');
       });
 
-      it('does not downgrade an ERROR status to OK when the span ends', () => {
-        // endSpan resolves the status centrally; a recorded error must win.
+      it('does not clear an ERROR status when the span ends', () => {
+        // endSpan resolves the outcome centrally; a recorded error must win
+        // over the success path, which would otherwise leave it UNSET.
         const emitter = new EventEmitter();
         traceCall(dynamicArgs, staticArgs, () => emitter, true);
         emitter.emit('error', new Error('stream boom'));
@@ -1211,13 +1216,13 @@ describe('TracerHelper', () => {
         );
 
         invokedCallback!(null, {ok: true});
-        assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
 
         emitter.emit('error', new Error('too late'));
 
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 1);
-        assert.strictEqual(spans[0].status.code, SpanStatusCode.OK);
+        assert.strictEqual(spans[0].status.code, SpanStatusCode.UNSET);
         // No phantom exception event tacked onto the finished span.
         assert.strictEqual(
           spans[0].events.filter(e => e.name === 'exception').length,
