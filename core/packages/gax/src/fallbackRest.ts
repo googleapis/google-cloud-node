@@ -90,6 +90,7 @@ export function decodeResponse(
   rpc: protobuf.Method,
   ok: boolean,
   response: Buffer | ArrayBuffer,
+  httpStatusCode?: number,
 ): {} {
   // eslint-disable-next-line n/no-unsupported-features/node-builtins
   const decodedString = new TextDecoder().decode(response);
@@ -99,6 +100,17 @@ export function decodeResponse(
   const json = JSON.parse(decodedString);
   if (!ok) {
     const error = GoogleError.parseHttpError(json);
+    // `parseHttpError` reads the status out of the response body and maps it
+    // onto the gRPC `code`, keeping no record of the status the transport
+    // actually received — and the body's status can differ from it, or be
+    // missing entirely. Record the received one when the caller knows it.
+    //
+    // Optional because `decodeResponse` is also called from
+    // `streamArrayParser`, which only ever decodes an already-successful body
+    // and so has no status to pass.
+    if (httpStatusCode !== undefined) {
+      error.httpStatusCode = httpStatusCode;
+    }
     throw error;
   }
   const message = serializer.fromProto3JSON(rpc.resolvedResponseType!, json);
