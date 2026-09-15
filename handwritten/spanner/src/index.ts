@@ -107,6 +107,11 @@ import {MetricsTracer} from './metrics/metrics-tracer';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const gcpApiConfig = require('./spanner_grpc_config.json');
 
+import {
+  spannerCallInvocationTransformer,
+  spannerChannelFactoryOverride,
+} from './channel-factory';
+
 export type IOperation = instanceAdmin.longrunning.IOperation;
 
 export type GetInstancesOptions = PagedOptionsWithFilter;
@@ -424,8 +429,8 @@ class Spanner extends GrpcService {
         // Add grpc keep alive setting
         'grpc.keepalive_time_ms': 120000,
         // Enable grpc-gcp support
-        'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
-        'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
+        'grpc.callInvocationTransformer': spannerCallInvocationTransformer,
+        'grpc.channelFactoryOverride': spannerChannelFactoryOverride,
         'grpc.gcpApiConfig': grpcGcp.createGcpApiConfig(gcpApiConfig),
         grpc,
       },
