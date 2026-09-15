@@ -1877,12 +1877,21 @@ class Spanner extends GrpcService {
       const options = Object.assign({}, config.gaxOpts?.otherArgs?.options, {
         interceptors,
       });
-      const gaxOpts = extend(true, {}, config.gaxOpts, {
-        otherArgs: {
+      // Deep clone caller-owned properties to prevent downstream mutations
+      // (e.g. gax mutating `retry.backoffSettings`), while attaching our
+      // freshly merged otherArgs without redundantly deep-cloning them.
+      let gaxOpts: CallOptions;
+      if (config.gaxOpts) {
+        const {otherArgs: callerOtherArgs, ...restGaxOpts} = config.gaxOpts;
+        gaxOpts = extend(true, {}, restGaxOpts);
+        gaxOpts.otherArgs = Object.assign({}, callerOtherArgs, {
           headers,
           options,
-        },
-      });
+        });
+      } else {
+        gaxOpts = {otherArgs: {headers, options}};
+      }
+
       const requestFn = gaxClient[config.method].bind(
         gaxClient,
         reqOpts,

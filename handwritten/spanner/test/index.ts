@@ -2367,6 +2367,64 @@ describe('Spanner', () => {
       });
     });
 
+    it('should not modify the gax options supplied by the caller', done => {
+      const callerGaxOpts = {
+        timeout: 5000,
+        retry: {
+          retryCodes: [14, 4],
+          backoffSettings: {
+            initialRetryDelayMillis: 250,
+            retryDelayMultiplier: 1.3,
+            maxRetryDelayMillis: 32000,
+            initialRpcTimeoutMillis: 60000,
+            rpcTimeoutMultiplier: 1,
+            maxRpcTimeoutMillis: 60000,
+            totalTimeoutMillis: 600000,
+          },
+        },
+        otherArgs: {
+          headers: {'x-custom-header': 'custom-val'},
+          options: {customOption: true},
+        },
+      };
+      const customConfig = {...CONFIG, gaxOpts: callerGaxOpts};
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (reqOpts, gaxOpts) {
+        assert.notStrictEqual(gaxOpts, callerGaxOpts);
+        assert.notStrictEqual(gaxOpts.otherArgs, callerGaxOpts.otherArgs);
+        assert.notStrictEqual(gaxOpts.retry, callerGaxOpts.retry);
+        assert.notStrictEqual(
+          gaxOpts.retry.backoffSettings,
+          callerGaxOpts.retry.backoffSettings,
+        );
+        assert.deepStrictEqual(callerGaxOpts, {
+          timeout: 5000,
+          retry: {
+            retryCodes: [14, 4],
+            backoffSettings: {
+              initialRetryDelayMillis: 250,
+              retryDelayMultiplier: 1.3,
+              maxRetryDelayMillis: 32000,
+              initialRpcTimeoutMillis: 60000,
+              rpcTimeoutMultiplier: 1,
+              maxRpcTimeoutMillis: 60000,
+              totalTimeoutMillis: 600000,
+            },
+          },
+          otherArgs: {
+            headers: {'x-custom-header': 'custom-val'},
+            options: {customOption: true},
+          },
+        });
+        done();
+      };
+
+      spanner.prepareGapicRequest_(customConfig, (err, requestFn) => {
+        assert.ifError(err);
+        requestFn();
+      });
+    });
+
     it('should coalesce concurrent auth.getProjectId calls and replace tokens for both requests', done => {
       let getProjectIdCalls = 0;
       let authCallback: Function;
