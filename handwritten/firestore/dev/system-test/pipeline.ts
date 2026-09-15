@@ -801,6 +801,100 @@ describe.skipClassic('Pipeline class', () => {
       await db2.terminate();
     });
 
+    it('supports CollectionReference on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .collection(uninitializedDb.collection(randomCol.path))
+        .execute();
+      expect(snapshot.results.length).to.equal(10);
+      await uninitializedDb.terminate();
+    });
+
+    it('supports CollectionReference options object on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .collection({
+          collection: uninitializedDb.collection(randomCol.path),
+        })
+        .execute();
+      expect(snapshot.results.length).to.equal(10);
+      await uninitializedDb.terminate();
+    });
+
+    it('supports list of DocumentReferences on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .documents([
+          uninitializedDb.doc(`${randomCol.path}/book1`),
+          uninitializedDb.doc(`${randomCol.path}/book2`),
+        ])
+        .execute();
+      expect(snapshot.results.length).to.equal(2);
+      await uninitializedDb.terminate();
+    });
+
+    it('supports DocumentReference options object on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .documents({
+          docs: [
+            uninitializedDb.doc(`${randomCol.path}/book1`),
+            uninitializedDb.doc(`${randomCol.path}/book2`),
+          ],
+        })
+        .execute();
+      expect(snapshot.results.length).to.equal(2);
+      await uninitializedDb.terminate();
+    });
+
+    it('supports mixed strings and DocumentReferences on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .documents([
+          `${randomCol.path}/book1`,
+          uninitializedDb.doc(`${randomCol.path}/book2`),
+        ])
+        .execute();
+      expect(snapshot.results.length).to.equal(2);
+      await uninitializedDb.terminate();
+    });
+
+    it('rejects references for another DB on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      const db2 = getTestDb({databaseId: 'notDefault', projectId: 'random'});
+
+      expect(() => {
+        uninitializedDb.pipeline().collection(db2.collection('foo'));
+      }).to.throw(/Invalid CollectionReference/);
+
+      expect(() => {
+        uninitializedDb.pipeline().documents([db2.doc('foo/bar')]);
+      }).to.throw(/Invalid DocumentReference/);
+
+      await uninitializedDb.terminate();
+      await db2.terminate();
+    });
+
     it('supports collection group as source', async () => {
       const randomSubCollectionId = Math.random().toString(16).slice(2);
       const doc1 = await randomCol
