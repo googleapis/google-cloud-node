@@ -315,6 +315,169 @@ describe('TracerHelper', () => {
       assert.strictEqual(spans[0].attributes['gcp.method.type'], 'http');
     });
 
+    describe('response status attributes', () => {
+      const httpDynamicArgs: DynamicTraceContext = {
+        clientName: 'ComputeClient',
+        methodName: 'InsertInstance',
+        rpcType: 'http',
+      };
+
+      it('reports OK on a successful grpc call', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => 'ok');
+
+        harness.assertResponseStatus({rpcStatus: 'OK'});
+      });
+
+      it('reports OK and 200 on a successful http call', async () => {
+        await traceCall(httpDynamicArgs, staticArgs, async () => 'ok');
+
+        harness.assertResponseStatus({rpcStatus: 'OK', httpStatus: 200});
+      });
+
+      it('reports the gRPC status name on a failed grpc call', async () => {
+        // Shape produced by grpc-js callErrorFromStatus.
+        const error = Object.assign(new Error('5 NOT_FOUND'), {code: 5});
+
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'});
+      });
+
+      it('reports the received http status alongside the mapped gRPC status', async () => {
+        // 418 is unmapped, so rpcCodeFromHttpStatusCode collapses it to
+        // FAILED_PRECONDITION. The received status is therefore not
+        // recoverable from `code`, which is why it is carried separately.
+        const error = new GoogleError('teapot');
+        error.code = Status.FAILED_PRECONDITION;
+        error.httpStatusCode = 418;
+
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({
+          rpcStatus: 'FAILED_PRECONDITION',
+          httpStatus: 418,
+        });
+      });
+
+      it('omits the http status when no response was received', async () => {
+        // What toDeadlineExceeded produces: a real gRPC status, but no
+        // response and so no HTTP status to report. Omitting httpStatus
+        // asserts the attribute is absent.
+        const error = new GoogleError('Deadline exceeded');
+        error.code = Status.DEADLINE_EXCEEDED;
+
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: 'DEADLINE_EXCEEDED'});
+      });
+
+      it('reports UNKNOWN for a failure carrying no gRPC status', async () => {
+        const error = Object.assign(new Error('connect ECONNREFUSED'), {
+          code: 'ECONNREFUSED',
+        });
+
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: 'UNKNOWN'});
+      });
+
+      it('reports UNKNOWN rather than OK for a zero status code', async () => {
+        // Zero is the proto3 default for an unset code, so a failed call must
+        // not be labelled OK.
+        const error = Object.assign(new Error('unset code'), {code: 0});
+
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: 'UNKNOWN'});
+      });
+
+      it('reports UNKNOWN when a non-Error is thrown', async () => {
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw 'plain string failure';
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: 'UNKNOWN'});
+      });
+
+      it('reports the status of a stream failure', () => {
+        const emitter = new EventEmitter();
+        const error = new GoogleError('stream failed');
+        error.code = Status.UNAVAILABLE;
+
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
+        emitter.emit('error', error);
+
+        harness.assertResponseStatus({rpcStatus: 'UNAVAILABLE'});
+      });
+
+      it('reports the status of a failure delivered to a callback', done => {
+        const error = new GoogleError('permission denied');
+        error.code = Status.PERMISSION_DENIED;
+
+        // Mimics an API caller that returns OngoingCall (no `.promise`), so
+        // the span is bound to the callback rather than to a promise.
+        const returned = traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            tracedCallback!(error);
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          () => {
+            harness.assertResponseStatus({rpcStatus: 'PERMISSION_DENIED'});
+            done();
+          },
+        );
+
+        assert.strictEqual(returned, undefined);
+      });
+
+      // The harness derives the transport from the span, so these guard the
+      // guard: a regression that moved an attribute onto the wrong transport
+      // has to be caught rather than quietly accepted.
+      it('rejects an expected http status on a grpc span', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => 'ok');
+
+        assert.throws(
+          () =>
+            harness.assertResponseStatus({rpcStatus: 'OK', httpStatus: 200}),
+          /can never hold one/,
+        );
+      });
+
+      it('rejects a grpc status name that does not match', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => 'ok');
+
+        assert.throws(
+          () => harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}),
+          /rpc\.response\.status_code/,
+        );
+      });
+    });
+
     it('manages span lifetime for resolved promises', async () => {
       const result = await traceCall(dynamicArgs, staticArgs, () =>
         Promise.resolve('async-result'),

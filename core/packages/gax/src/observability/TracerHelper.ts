@@ -15,7 +15,13 @@
  */
 
 import {EventEmitter} from 'events';
-import {Span, SpanStatusCode, trace, Tracer} from '@opentelemetry/api';
+import {
+  Attributes,
+  Span,
+  SpanStatusCode,
+  trace,
+  Tracer,
+} from '@opentelemetry/api';
 import {APICallback, GaxCallResult} from '../apitypes';
 import {Status} from '../status';
 
@@ -103,6 +109,33 @@ function resolveErrorType(e: Error): string {
     return code;
   }
   return e.constructor?.name ?? e.name;
+}
+
+/**
+ * Resolves the gRPC status reported for a failed call, as its name.
+ *
+ * Zero is treated as absent rather than as `OK`, for the same reason as in
+ * `resolveErrorType`: it is the proto3 default for an unset field, so a failed
+ * call must not be labelled `OK`.
+ */
+function resolveRpcStatusName(e: unknown): string {
+  const code = (e as {code?: unknown} | null)?.code;
+  if (
+    typeof code === 'number' &&
+    code !== Status.OK &&
+    Status[code] !== undefined
+  ) {
+    return Status[code];
+  }
+  return Status[Status.UNKNOWN];
+}
+
+/**
+ * Reads the HTTP response status recorded on a fallback error.
+ */
+function resolveHttpStatusCode(e: unknown): number | undefined {
+  const code = (e as {httpStatusCode?: unknown} | null)?.httpStatusCode;
+  return typeof code === 'number' ? code : undefined;
 }
 
 /**
@@ -333,6 +366,13 @@ export function traceCall(
     let spanEnded = false;
     let errorRecorded = false;
 
+    // Resolved from the error when one is reported, and defaulted to success
+    // in endSpan otherwise. Held here rather than written immediately so that
+    // every completion path — promise, stream, callback, synchronous throw —
+    // emits them from the same place.
+    let rpcStatusName: string | undefined;
+    let httpStatusCode: number | undefined;
+
     // Marks the span failed. Kept separate from recordError so paths that are
     // failures but not exceptions can set the status without emitting a
     // misleading exception event.
@@ -341,19 +381,49 @@ export function traceCall(
       span.setStatus({code: SpanStatusCode.ERROR, message});
     };
 
+    // The gRPC status is reported for both transports, because it is the one
+    // status gax resolves on every call and the only one a caller can compare
+    // across them. The transport-specific attribute is an alias of it on gRPC,
+    // and the received HTTP status on the fallback, which is a different value
+    // rather than a restatement of the same one.
+    //
+    // Written from one place so the two can never disagree.
+    const setStatusAttributes = () => {
+      const attributes: Attributes = {
+        'rpc.response.status_code': rpcStatusName,
+      };
+      if (dynamicArgs.rpcType === 'grpc') {
+        attributes['grpc.response.status_code'] = rpcStatusName;
+      } else if (httpStatusCode !== undefined) {
+        attributes['http.response.status_code'] = httpStatusCode;
+      }
+      span.setAttributes(attributes);
+    };
+
     // Every path ends here, so the status is resolved in one place: ERROR if
     // anything reported a failure, OK otherwise.
     const endSpan = () => {
       if (!spanEnded) {
         spanEnded = true;
         if (!errorRecorded) {
+          rpcStatusName = Status[Status.OK];
+          // Nothing carries the response status back on a successful fallback
+          // call, and success means a 2xx, so 200 is the only value available.
+          // A legacy Apiary 204 is therefore also reported as 200.
+          httpStatusCode = 200;
           span.setStatus({code: SpanStatusCode.OK});
         }
+        setStatusAttributes();
         span.end();
       }
     };
 
     const recordError = (e: unknown) => {
+      // Resolved for every failure, including non-Error throws: those carry no
+      // status, and resolveRpcStatusName reports UNKNOWN for them, which is
+      // the right answer for a call that failed for an unmapped reason.
+      rpcStatusName = resolveRpcStatusName(e);
+      httpStatusCode = resolveHttpStatusCode(e);
       if (e instanceof Error) {
         span.setAttributes({
           'error.message': e.message,
