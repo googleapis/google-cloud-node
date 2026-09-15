@@ -1,6 +1,12 @@
 module cloud.google.com/go/spanner-native-core
 
-go 1.21
+// Go 1.25 is the first release whose runtime derives GOMAXPROCS from the cgroup
+// CPU limit instead of the host core count. That behaviour is gated on this
+// directive (GODEBUG containermaxprocs/updatemaxprocs default to 1 only for
+// modules declaring go >= 1.25), so it has to be declared here and not merely
+// built with a 1.25+ toolchain. spanner-native/install.js enforces the
+// toolchain floor.
+go 1.25
 
 require (
 	cloud.google.com/go/spanner v1.60.0

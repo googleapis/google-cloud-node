@@ -46,8 +46,15 @@ const GO_DIR = path.join(NATIVE_DIR, 'spanner-go');
 const ADDON = path.join(NATIVE_DIR, 'spanner_go.node');
 
 // Used only if go.dev cannot be reached to resolve the current stable release.
-const FALLBACK_GO_VERSION = 'go1.23.4';
-const MIN_GO_MINOR = 21;
+const FALLBACK_GO_VERSION = 'go1.25.0';
+
+// Go 1.25 is the first release whose runtime derives GOMAXPROCS from the
+// cgroup CPU limit. Older runtimes size the scheduler from the HOST core count,
+// so inside a CPU-limited container (e.g. a 2-vCPU Cloud Run instance on a
+// many-core host) they spin up far too many Ps. Measured CPU-per-operation was
+// ~2.9x higher as a result. Anything older is rejected in favour of a
+// downloaded toolchain so that benchmark numbers mean what they appear to.
+const MIN_GO_MINOR = 25;
 
 function log(msg) {
   console.log(`[spanner-native] ${msg}`);
