@@ -5,6 +5,25 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.13.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.12.0...spanner-v8.13.0) (2026-09-14)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+
+### Bug Fixes
+
+* **spanner:** Do not execute queued queries on ended transactions ([#9305](https://github.com/googleapis/google-cloud-node/issues/9305)) ([f74f198](https://github.com/googleapis/google-cloud-node/commit/f74f198914bd1ad62de684386249dc1b01c80df2))
+
+
+### Performance Improvements
+
+* **spanner:** Avoid cloning metadata map in metrics interceptor ([#9307](https://github.com/googleapis/google-cloud-node/issues/9307)) ([6eec761](https://github.com/googleapis/google-cloud-node/commit/6eec761501734b837a934b30cac440f53486163c))
+* **spanner:** Avoid redundant clock reads in isGlobalTracingEnabled ([#9311](https://github.com/googleapis/google-cloud-node/issues/9311)) ([c42f144](https://github.com/googleapis/google-cloud-node/commit/c42f14440b5afd3bb7e4be997a47d55037bcc8aa))
+* **spanner:** Bypass stream pipeline for single-chunk query results ([#9279](https://github.com/googleapis/google-cloud-node/issues/9279)) ([e46a407](https://github.com/googleapis/google-cloud-node/commit/e46a4076dcfea61104fcb99bf6f5d834fa0c1896))
+
 ## [8.12.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.11.0...spanner-v8.12.0) (2026-09-11)
 
 

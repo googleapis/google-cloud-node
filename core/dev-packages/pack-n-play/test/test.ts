@@ -26,9 +26,17 @@ describe('pack-n-play', () => {
       .map(i => path.join(fixturesPath, i))
       .filter(i => fs.statSync(i).isDirectory());
     for (const dir of dirs) {
+      const npmPrefix = path.join(dir, '.npm-global');
+      fs.mkdirSync(path.join(npmPrefix, 'lib', 'node_modules'), {
+        recursive: true,
+      });
       const opts: execa.Options = {
         stdio: 'inherit',
         cwd: dir,
+        env: {
+          ...process.env,
+          npm_config_prefix: npmPrefix,
+        },
       };
       await execa('npm', ['install', '--no-audit', '--no-fund'], opts);
       await execa('npm', ['link', '../../../'], opts);
