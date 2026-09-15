@@ -116,6 +116,7 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs, otherArgs);
     assert.strictEqual(settings.enableTelemetryTracing, undefined);
     assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
 
     settings = defaults.pageStreamingMethod;
     assert.strictEqual(settings.timeout, 30000);
@@ -124,6 +125,7 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs, otherArgs);
     assert.strictEqual(settings.enableTelemetryTracing, undefined);
     assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
   it('overrides settings', () => {
@@ -227,12 +229,17 @@ describe('gax construct settings', () => {
       settings.otherArgs.internalTelemetryInfo,
       telemetryInfo,
     );
+    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
 
     const pageSettings = defaults.pageStreamingMethod;
     assert.strictEqual(pageSettings.enableTelemetryTracing, true);
     assert.deepStrictEqual(
       pageSettings.otherArgs.internalTelemetryInfo,
       telemetryInfo,
+    );
+    assert.strictEqual(
+      pageSettings.otherArgs.internalMethodName,
+      'PageStreamingMethod',
     );
   });
 
@@ -258,6 +265,7 @@ describe('gax construct settings', () => {
       settings.otherArgs.internalTelemetryInfo,
       telemetryInfo,
     );
+    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
   });
 
   it('creates settings with enableTelemetryTracing set to false', () => {
@@ -272,6 +280,7 @@ describe('gax construct settings', () => {
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, false);
     assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
   describe('CallSettings telemetry fields', () => {
