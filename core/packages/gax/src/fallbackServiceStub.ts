@@ -156,7 +156,7 @@ export function generateServiceStub(
     // long ignored as such.
     serviceStub[rpcName] = (
       request: {},
-      metadata?: {[name: string]: string},
+      metadata?: {[name: string]: string | string[]},
       callOptions?: {deadline?: Date},
       callback?: Function,
     ) => {
@@ -228,8 +228,22 @@ export function generateServiceStub(
 
       const url = fetchParameters.url;
       const headers = new Headers(fetchParameters.headers);
+      // gRPC metadata is multi-valued, and `buildMetadata` normalizes every
+      // value to an array for exactly that reason. This used to read
+      // `metadata[key][0]`, which dropped every value after the first and, for
+      // a value that was a plain string rather than an array, sent only its
+      // first character. Replace whatever the request encoder set, as the
+      // single-value `set` did, then keep all of the values.
       for (const key of Object.keys(metadata)) {
-        headers.set(key, metadata[key][0]);
+        const value = metadata[key];
+        if (Array.isArray(value)) {
+          headers.delete(key);
+          for (const item of value) {
+            headers.append(key, String(item));
+          }
+        } else {
+          headers.set(key, String(value));
+        }
       }
       const streamArrayParser = new StreamArrayParser(rpc);
       let response204Ok = false;
