@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import type {Response as NodeFetchResponse} from 'node-fetch' with {'resolution-mode': 'import'};
+import type {Response as NodeFetchResponse} from 'node-fetch' with {
+  'resolution-mode': 'import',
+};
 
 import {AuthClient, GoogleAuth, gaxios} from 'google-auth-library';
 import * as serializer from 'proto3-json-serializer';
@@ -22,6 +24,8 @@ import * as serializer from 'proto3-json-serializer';
 import {isNodeJS} from './featureDetection';
 import {StreamArrayParser} from './streamArrayParser';
 import {defaultToObjectOptions} from './fallback';
+import {GoogleError} from './googleError';
+import {Status} from './status';
 import {pipeline, PipelineSource} from 'stream';
 import type {Agent as HttpAgent} from 'http';
 import type {Agent as HttpsAgent} from 'https';
@@ -33,8 +37,7 @@ import type {Agent as HttpsAgent} from 'https';
 // - https://github.com/node-fetch/node-fetch#custom-agent
 // - https://github.com/googleapis/gax-nodejs/pull/1534
 let agentOption:
-  | ((parsedUrl: {protocol: string}) => HttpAgent | HttpsAgent)
-  | null = null;
+  ((parsedUrl: {protocol: string}) => HttpAgent | HttpsAgent) | null = null;
 if (isNodeJS()) {
   const http = require('http');
   const https = require('https');
@@ -82,6 +85,41 @@ function _formatEmptyResponse(rpc: protobuf.Method) {
   return resp;
 }
 
+/**
+ * Reports an expired deadline the way the rest of gax expects.
+ *
+ * `retryCodes` matching, caller `err.code` comparisons and telemetry's
+ * `error.type` all key off the numeric gRPC status, and gRPC reports this
+ * condition as DEADLINE_EXCEEDED, so a REST deadline is surfaced identically
+ * rather than leaking a transport-specific error for a failure both transports
+ * share. The original error is kept as `cause`.
+ *
+ * Whether the deadline expired is passed in rather than inferred from `err`,
+ * because the error carries no usable evidence of it. Measured against a server
+ * that accepts a connection and never replies: node-fetch discards
+ * `signal.reason` and throws its own AbortError, gaxios wraps that in a
+ * GaxiosError which never sets `name` (so it stays the inherited 'Error') and
+ * only copies `code` from a DOMException cause, which this is not. The result
+ * is `name: 'Error'`, `code: undefined` — byte-identical to what `cancel()`
+ * produces. Only the caller, which armed the timer, knows which happened.
+ */
+function toDeadlineExceeded(
+  err: unknown,
+  rpcName: string,
+  timeoutMs: number | undefined,
+  timedOut: boolean,
+): unknown {
+  if (!timedOut || timeoutMs === undefined) {
+    return err;
+  }
+  const error = new GoogleError(
+    `Deadline exceeded: ${rpcName} did not respond within ${timeoutMs} milliseconds.`,
+    {cause: err},
+  );
+  error.code = Status.DEADLINE_EXCEEDED;
+  return error;
+}
+
 export function generateServiceStub(
   rpcs: {[name: string]: protobuf.Method},
   protocol: string,
@@ -112,13 +150,38 @@ export function generateServiceStub(
     },
   };
   for (const [rpcName, rpc] of Object.entries(rpcs)) {
+    // Named for what gax actually passes, which is its `UnaryCall` order:
+    // (request, metadata, options, callback). `FallbackServiceStub` declares
+    // the middle two the other way round, so the third argument — the one gRPC
+    // calls `options`, carrying the deadline — reads as metadata there and was
+    // long ignored as such.
     serviceStub[rpcName] = (
       request: {},
-      options?: {[name: string]: string},
-      _metadata?: {} | Function,
+      metadata?: {[name: string]: string | string[]},
+      callOptions?: {deadline?: Date},
       callback?: Function,
     ) => {
-      options ??= {};
+      metadata ??= {};
+
+      // `addTimeoutArg` sets a deadline on every call and `CallSettings.timeout`
+      // defaults to 30s, so one is essentially always present. gRPC enforces its
+      // own deadline, but nothing here ever read this one, so an endpoint that
+      // accepted the connection and then went quiet left the request — and the
+      // promise or callback waiting on it — outstanding forever. Convert it to
+      // the remaining duration and arm an abort signal with it below.
+      //
+      // Server-streaming RPCs are deliberately excluded. Their response is
+      // long-lived by design and the signal stays armed once the body starts
+      // flowing, so forwarding the deadline would abort a healthy stream
+      // mid-read. Bounding those is a separate, user-visible change.
+      let timeoutMs: number | undefined;
+      if (callOptions?.deadline && !rpc.responseStream) {
+        // `AbortSignal.timeout` rejects a negative delay with a RangeError, so
+        // an already-expired deadline is clamped. Zero is a fine value here: it
+        // aborts on the next tick, which is the right answer for a deadline
+        // that has already passed.
+        timeoutMs = Math.max(0, callOptions.deadline.getTime() - Date.now());
+      }
 
       // We cannot use async-await in this function because we need to return the canceller object as soon as possible.
       // Using plain old promises instead.
@@ -148,10 +211,40 @@ export function generateServiceStub(
       const cancelController = new AbortController();
       const cancelSignal = cancelController.signal as AbortSignal;
       let cancelRequested = false;
+
+      // Arm the deadline here rather than handing `timeout` to gaxios, which
+      // would build the identical `AbortSignal.timeout` internally. The
+      // difference is bookkeeping: both a deadline expiry and a `cancel()`
+      // abort the same request and surface the same error, so unless we record
+      // which one fired, the handlers below cannot tell them apart.
+      let timedOut = false;
+      let requestSignal = cancelSignal;
+      if (timeoutMs !== undefined) {
+        const timeoutSignal = AbortSignal.timeout(timeoutMs);
+        timeoutSignal.addEventListener('abort', () => (timedOut = true), {
+          once: true,
+        });
+        requestSignal = AbortSignal.any([cancelSignal, timeoutSignal]);
+      }
+
       const url = fetchParameters.url;
       const headers = new Headers(fetchParameters.headers);
-      for (const key of Object.keys(options)) {
-        headers.set(key, options[key][0]);
+      // gRPC metadata is multi-valued, and `buildMetadata` normalizes every
+      // value to an array for exactly that reason. This used to read
+      // `metadata[key][0]`, which dropped every value after the first and, for
+      // a value that was a plain string rather than an array, sent only its
+      // first character. Replace whatever the request encoder set, as the
+      // single-value `set` did, then keep all of the values.
+      for (const key of Object.keys(metadata)) {
+        const value = metadata[key];
+        if (Array.isArray(value)) {
+          headers.delete(key);
+          for (const item of value) {
+            headers.append(key, String(item));
+          }
+        } else {
+          headers.set(key, String(value));
+        }
       }
       const streamArrayParser = new StreamArrayParser(rpc);
       let response204Ok = false;
@@ -162,7 +255,7 @@ export function generateServiceStub(
             ? fetchParameters.body
             : Buffer.from(fetchParameters.body),
         method: fetchParameters.method,
-        signal: cancelSignal,
+        signal: requestSignal,
         responseType: 'stream', // ensure gaxios returns the data directly so that it handle data/streams itself
         agent: agentOption || undefined,
       };
@@ -213,14 +306,30 @@ export function generateServiceStub(
               .then(([ok, buffer]: [boolean, Buffer | ArrayBuffer]) => {
                 const response = responseDecoder(rpc, ok, buffer);
                 callback!(null, response);
+                return;
               })
               .catch((err: Error) => {
-                if (!cancelRequested || err.name !== 'AbortError') {
+                // The deadline can expire after the response headers arrive but
+                // before the body is fully read, which rejects here rather than
+                // in the outer handler.
+                const callErr = toDeadlineExceeded(
+                  err,
+                  rpcName,
+                  timeoutMs,
+                  timedOut,
+                );
+                // A caller that cancelled does not need the resulting abort
+                // reported back to it, but a deadline always does. This used to
+                // test `err.name !== 'AbortError'`; gaxios wraps node-fetch's
+                // AbortError and never sets its own `name`, leaving the
+                // inherited 'Error', so the check never matched and cancelled
+                // calls still reported an error. Use the state we recorded.
+                if (timedOut || !cancelRequested) {
                   if (rpc.responseStream) {
                     if (callback) {
-                      callback(err);
+                      callback(callErr);
                     }
-                    streamArrayParser.emit('error', err);
+                    streamArrayParser.emit('error', callErr);
                   } else {
                     // This supports a legacy Apiary behavior that allows
                     // empty 204 responses. If we do not intercept this potential error
@@ -232,7 +341,7 @@ export function generateServiceStub(
                     if (!response204Ok) {
                       // by this point, we're guaranteed to have added a callback
                       // it is added in the library before calling this.innerApiCalls
-                      callback!(err);
+                      callback!(callErr);
                     } else {
                       const resp = _formatEmptyResponse(rpc);
                       // by this point, we're guaranteed to have added a callback
@@ -244,7 +353,10 @@ export function generateServiceStub(
               });
           }
         })
-        .catch((err: unknown) => {
+        .catch((rawErr: unknown) => {
+          // The usual timeout path: the deadline expired before any response
+          // was received, so the fetch itself rejects.
+          const err = toDeadlineExceeded(rawErr, rpcName, timeoutMs, timedOut);
           if (rpc.responseStream) {
             if (callback) {
               callback(err);
