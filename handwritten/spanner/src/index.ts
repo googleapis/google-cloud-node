@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable import/namespace, promise/catch-or-return, promise/always-return */
+
 import {GrpcService, GrpcServiceConfig} from './common-grpc/service';
 import {PreciseDate} from '@google-cloud/precise-date';
 import {replaceProjectIdToken} from './helper';
@@ -74,6 +76,8 @@ import {
   CLOUD_RESOURCE_HEADER,
   NormalCallback,
   getCommonHeaders,
+  isAFEServerTimingEnabled,
+  resetAFEServerTimingForTest,
 } from './common';
 import {Session} from './session';
 import {SessionPool} from './session-pool';
@@ -329,7 +333,6 @@ class Spanner extends GrpcService {
   private _universeDomain: string;
   private _isInSecureCredentials: boolean;
   private _metricsEnabled = false;
-  private static _isAFEServerTimingEnabled: boolean | undefined;
   readonly _nthClientId: number;
 
   /**
@@ -356,17 +359,11 @@ class Spanner extends GrpcService {
    *
    * @returns {boolean} `true` if AFE server timing is enabled; otherwise, `false`.
    */
-  public static isAFEServerTimingEnabled = (): boolean => {
-    if (this._isAFEServerTimingEnabled === undefined) {
-      this._isAFEServerTimingEnabled =
-        process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] !== 'true';
-    }
-    return this._isAFEServerTimingEnabled;
-  };
+  public static isAFEServerTimingEnabled = isAFEServerTimingEnabled;
 
   /** Resets the cached value (use in tests if env changes). */
   public static _resetAFEServerTimingForTest(): void {
-    this._isAFEServerTimingEnabled = undefined;
+    resetAFEServerTimingForTest();
   }
 
   /**

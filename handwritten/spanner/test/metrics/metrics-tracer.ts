@@ -200,6 +200,15 @@ describe('MetricsTracer', () => {
       tracer.recordGfeLatency(Status.OK);
       assert.strictEqual(fakeGfeLatency.record.called, false);
     });
+
+    it('should record GFE latency when value is 0', () => {
+      tracer.enabled = true;
+      tracer.gfeLatency = 0;
+      tracer.recordGfeLatency(Status.OK);
+      assert.strictEqual(fakeGfeLatency.record.calledOnce, true);
+      assert.strictEqual(fakeGfeLatency.record.firstCall.args[0], 0);
+      assert.strictEqual(tracer.gfeLatency, null);
+    });
   });
 
   describe('recordGfeConnectivityErrorCount', () => {
@@ -242,6 +251,15 @@ describe('MetricsTracer', () => {
       tracer.afeLatency = 123;
       tracer.recordAfeLatency(Status.OK);
       assert.strictEqual(fakeAfeLatency.record.called, false);
+    });
+
+    it('should record AFE latency when value is 0', () => {
+      tracer.enabled = true;
+      tracer.afeLatency = 0;
+      tracer.recordAfeLatency(Status.OK);
+      assert.strictEqual(fakeAfeLatency.record.calledOnce, true);
+      assert.strictEqual(fakeAfeLatency.record.firstCall.args[0], 0);
+      assert.strictEqual(tracer.afeLatency, null);
     });
   });
 
