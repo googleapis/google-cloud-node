@@ -9133,10 +9133,10 @@ describe.skipClassic('non-native Firestore types', () => {
     expect(toIds(snapshot)).to.deep.equal([
       'l', // Infinity
       'h', // 2
-      'f', // 1.0
-      'e', // 1
-      'd', // 1
-      'c', // 1
+      'c', // 1 (Decimal128)
+      'f', // 1.0 (Double)
+      'd', // 1 (Int32)
+      'e', // 1 (Int64)
       'g', // 0.0012
       'b', // 0
       'a', // -1200
@@ -9162,7 +9162,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     orderedQuery = randomCol.where('key', '==', 1).orderBy('key', 'desc');
     snapshot = await getFirstSnapshot(orderedQuery);
-    expect(toIds(snapshot)).to.deep.equal(['f', 'e', 'd', 'c']);
+    expect(toIds(snapshot)).to.deep.equal(['c', 'f', 'd', 'e']);
   });
 
   it('decimal128 values with no 2s complement representation', async () => {
