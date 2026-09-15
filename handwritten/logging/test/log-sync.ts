@@ -102,9 +102,7 @@ describe('LogSync', () => {
     });
 
     afterEach(() => {
-      fs.unlink(TEST_FILE, e => {
-        console.log(e);
-      });
+      fs.rmSync(TEST_FILE, {force: true});
     });
 
     function createLogger() {
