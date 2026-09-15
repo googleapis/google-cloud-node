@@ -954,7 +954,6 @@ export class TransferManager {
       ) {
         try {
           await mpuHelper.abortUpload();
-          return;
         } catch (e) {
           throw new MultiPartUploadError(
             (e as Error).message,
