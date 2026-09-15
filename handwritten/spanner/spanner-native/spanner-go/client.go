@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"runtime/pprof"
+	"strconv"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -38,6 +40,43 @@ func init() {
 		_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
 		_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
 	}
+	maybeStartCPUProfile()
+}
+
+// maybeStartCPUProfile writes a Go CPU profile to the path in
+// SPANNER_GO_CPUPROFILE, covering SPANNER_GO_CPUPROFILE_SECONDS (default 30)
+// from library load. The V8 profiler cannot see Go runtime threads, so this is
+// the only way to attribute the Go half of per-request CPU.
+//
+// Entirely inert unless the variable is set.
+func maybeStartCPUProfile() {
+	path := os.Getenv("SPANNER_GO_CPUPROFILE")
+	if path == "" {
+		return
+	}
+	seconds := 30
+	if s := os.Getenv("SPANNER_GO_CPUPROFILE_SECONDS"); s != "" {
+		if n, err := strconv.Atoi(s); err == nil && n > 0 {
+			seconds = n
+		}
+	}
+	f, err := os.Create(path)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "[spanner-core] cpuprofile: %v\n", err)
+		return
+	}
+	if err := pprof.StartCPUProfile(f); err != nil {
+		fmt.Fprintf(os.Stderr, "[spanner-core] cpuprofile: %v\n", err)
+		_ = f.Close()
+		return
+	}
+	fmt.Fprintf(os.Stderr, "[spanner-core] CPU profile -> %s (%ds)\n", path, seconds)
+	go func() {
+		time.Sleep(time.Duration(seconds) * time.Second)
+		pprof.StopCPUProfile()
+		_ = f.Close()
+		fmt.Fprintf(os.Stderr, "[spanner-core] CPU profile written to %s\n", path)
+	}()
 }
 
 // CoreClient manages multiplexed gRPC connections, authentication, and request routing.

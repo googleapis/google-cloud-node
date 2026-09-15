@@ -140,15 +140,31 @@ export function closeNativeCore(): void {
     }
   }
   coreHandle = undefined;
+  enabledCache = undefined;
 }
 
-/** True when the caller asked for the Go shared core and it actually loaded. */
+/**
+ * True when the caller asked for the Go shared core and it actually loaded.
+ *
+ * Cached: this is called on every `runStream()`, and reading `process.env` is
+ * a native call that showed up at ~10us/op in a CPU profile. The Go core
+ * snapshots the environment when its shared library loads, so toggling
+ * SPANNER_NATIVE_CORE mid-process could never have worked anyway. Tests that
+ * flip the flag drop the module from require.cache, which resets this.
+ */
+let enabledCache: boolean | undefined;
+
 export function isNativeCoreEnabled(): boolean {
+  if (enabledCache !== undefined) {
+    return enabledCache;
+  }
   const flag = (process.env.SPANNER_NATIVE_CORE || '').toLowerCase();
   if (flag !== 'go' && flag !== '1' && flag !== 'true') {
-    return false;
+    enabledCache = false;
+    return enabledCache;
   }
-  return getCoreHandle() !== null;
+  enabledCache = getCoreHandle() !== null;
+  return enabledCache;
 }
 
 // ---------------------------------------------------------------------------
@@ -304,10 +320,11 @@ function buildRequestBytes(
     requestMsg.paramTypes = paramTypes;
   }
 
-  const message = google.spanner.v1.ExecuteSqlRequest.create(
+  // `encode` accepts a plain object, so the extra `create()` conversion pass
+  // that used to be here is redundant work on every request.
+  return google.spanner.v1.ExecuteSqlRequest.encode(
     requestMsg as never,
-  );
-  return google.spanner.v1.ExecuteSqlRequest.encode(message).finish();
+  ).finish();
 }
 
 // ---------------------------------------------------------------------------
@@ -347,6 +364,57 @@ function getSessionName(
     cb(null, name);
   });
 }
+
+// ---------------------------------------------------------------------------
+// Per-request caches
+//
+// A CPU profile of point-select showed the Node side of this path spending
+// most of its time on work that is identical for every execution of the same
+// query: re-decoding the result-set schema, rebuilding the row factory, and
+// re-allocating constant header/option objects. All of it is hoisted here.
+// ---------------------------------------------------------------------------
+
+/**
+ * Shared, immutable. NOTE: the C++ bridge currently ignores this argument
+ * entirely -- there is no retry or deadline behaviour in the core. It is kept
+ * only to preserve the native function's arity.
+ */
+const GAX_OPTIONS = Object.freeze({
+  retry: {
+    retryCodes: [14, 13], // UNAVAILABLE, INTERNAL
+    backoffSettings: {
+      initialRetryDelayMillis: 100,
+      maxRetryDelayMillis: 60000,
+      retryDelayMultiplier: 1.3,
+    },
+  },
+  timeoutMillis: 30000,
+});
+
+/** gRPC metadata headers, keyed by session name. */
+const metadataBySession = new Map<string, string[][]>();
+
+interface SchemaCacheEntry {
+  /** The exact ResultSetMetadata bytes this entry was built from. */
+  bytes: Buffer;
+  createRow: (values: Value[]) => NativeRow;
+  /** False when the result set contains ARRAY/STRUCT and must fall back. */
+  scalar: boolean;
+  decoded: google.spanner.v1.ResultSetMetadata;
+}
+
+/**
+ * Row factories keyed by SQL text.
+ *
+ * Decoding ResultSetMetadata and rebuilding the column decoders on every
+ * request is pure waste when the same statement is executed repeatedly. The
+ * cached entry is only reused after a memcmp against the incoming metadata
+ * bytes, so a schema change (ALTER TABLE, different column set) is detected
+ * and the entry rebuilt -- this is a fast-path optimisation, never a
+ * correctness assumption.
+ */
+const schemaCache = new Map<string, SchemaCacheEntry>();
+const SCHEMA_CACHE_MAX = 256;
 
 // ---------------------------------------------------------------------------
 // Public entry point
@@ -399,35 +467,30 @@ export function runStreamNative(
       return;
     }
 
-    const metadata: string[][] = [
-      [
-        'x-goog-request-params',
-        `session=${encodeURIComponent(sessionName)}`,
-      ],
-      ['x-goog-spanner-route-to-leader', 'true'],
-    ];
-
-    const gaxOptions = {
-      retry: {
-        retryCodes: [14, 13], // UNAVAILABLE, INTERNAL
-        backoffSettings: {
-          initialRetryDelayMillis: 100,
-          maxRetryDelayMillis: 60000,
-          retryDelayMultiplier: 1.3,
-        },
-      },
-      timeoutMillis: 30000,
-    };
+    // Headers depend only on the session, which is stable for the life of the
+    // process, so build them once per session instead of once per query.
+    let metadata = metadataBySession.get(sessionName);
+    if (!metadata) {
+      metadata = [
+        ['x-goog-request-params', `session=${encodeURIComponent(sessionName)}`],
+        ['x-goog-spanner-route-to-leader', 'true'],
+      ];
+      metadataBySession.set(sessionName, metadata);
+    }
 
     let createRow: ((values: Value[]) => NativeRow) | null = null;
     let fellBack = false;
+
+    // The result-set schema is a function of the statement text, so that is
+    // the cache key. Validated by memcmp against the returned bytes below.
+    const cacheKey = typeof query === 'string' ? query : (query.sql as string);
 
     addon.executeStreamingSqlNative(
       handle,
       sessionName,
       metadata,
       requestBytes,
-      gaxOptions,
+      GAX_OPTIONS,
       (cbErr, rows, telemetry, metadataPb) => {
         if (fellBack) {
           return;
@@ -440,11 +503,37 @@ export function runStreamNative(
         // First batch carries the serialized ResultSetMetadata.
         if (metadataPb && metadataPb.length > 0 && !createRow) {
           try {
-            const decoded = google.spanner.v1.ResultSetMetadata.decode(
-              metadataPb,
-            );
-            const fields = (decoded.rowType?.fields || []) as IField[];
-            if (!allColumnsScalar(fields)) {
+            // Fast path: same statement, same schema bytes as last time.
+            // A memcmp is far cheaper than decoding the descriptor and
+            // rebuilding every column decoder, and it still detects a schema
+            // change rather than assuming one cannot happen.
+            let entry = cacheKey ? schemaCache.get(cacheKey) : undefined;
+            if (entry && !entry.bytes.equals(metadataPb)) {
+              entry = undefined;
+            }
+
+            if (!entry) {
+              const decoded =
+                google.spanner.v1.ResultSetMetadata.decode(metadataPb);
+              const fields = (decoded.rowType?.fields || []) as IField[];
+              const scalar = allColumnsScalar(fields);
+              entry = {
+                bytes: Buffer.from(metadataPb),
+                createRow: scalar
+                  ? makeRowFactory(fields)
+                  : (null as unknown as (values: Value[]) => NativeRow),
+                scalar,
+                decoded,
+              };
+              if (cacheKey) {
+                if (schemaCache.size >= SCHEMA_CACHE_MAX) {
+                  schemaCache.clear();
+                }
+                schemaCache.set(cacheKey, entry);
+              }
+            }
+
+            if (!entry.scalar) {
               // The core cannot represent ARRAY/STRUCT cells. Hand control
               // back to the stock JS path and relay its output. No row has
               // been emitted yet, so this is transparent to the consumer.
@@ -463,8 +552,9 @@ export function runStreamNative(
               }
               return;
             }
-            createRow = makeRowFactory(fields);
-            out.emit('response', {metadata: decoded});
+
+            createRow = entry.createRow;
+            out.emit('response', {metadata: entry.decoded});
           } catch (e) {
             out.destroy(e as Error);
             return;
