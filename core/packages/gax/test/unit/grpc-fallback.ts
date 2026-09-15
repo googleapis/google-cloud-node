@@ -580,6 +580,22 @@ describe('grpc-fallback', () => {
     });
 
     it('should translate a timeout into DEADLINE_EXCEEDED', async () => {
+      // Native fetch rejects with a DOMException whose `code` is the numeric
+      // DOMException value (23), not a string, so the name is what identifies it.
+      setMockFallbackError(
+        gaxGrpc,
+        new DOMException(
+          'The operation was aborted due to timeout',
+          'TimeoutError',
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert.strictEqual(err.code, Status.DEADLINE_EXCEEDED);
+    });
+
+    it('should translate a timeout reported only by code into DEADLINE_EXCEEDED', async () => {
       setMockFallbackError(
         gaxGrpc,
         Object.assign(new Error('The operation was aborted due to timeout'), {
@@ -593,6 +609,18 @@ describe('grpc-fallback', () => {
     });
 
     it('should translate an aborted request into CANCELLED', async () => {
+      // As above: native fetch reports abort as DOMException code 20.
+      setMockFallbackError(
+        gaxGrpc,
+        new DOMException('This operation was aborted', 'AbortError'),
+      );
+
+      const err = await callEcho();
+
+      assert.strictEqual(err.code, Status.CANCELLED);
+    });
+
+    it('should translate an abort reported only by code into CANCELLED', async () => {
       setMockFallbackError(
         gaxGrpc,
         Object.assign(new Error('This operation was aborted'), {
