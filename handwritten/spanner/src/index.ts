@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable import/namespace, promise/catch-or-return, promise/always-return */
+
 import {GrpcService, GrpcServiceConfig} from './common-grpc/service';
 import {PreciseDate} from '@google-cloud/precise-date';
 import {replaceProjectIdToken} from './helper';
@@ -103,6 +105,7 @@ import {MetricInterceptor} from './metrics/interceptor';
 import {CloudMonitoringMetricsExporter} from './metrics/spanner-metrics-exporter';
 import {MetricsTracerFactory} from './metrics/metrics-tracer-factory';
 import {MetricsTracer} from './metrics/metrics-tracer';
+import {installHttp2StreamEndWorkaround} from './http2-workaround';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const gcpApiConfig = require('./spanner_grpc_config.json');
@@ -510,6 +513,7 @@ class Spanner extends GrpcService {
     this._universeDomain = universeEndpoint;
     this.projectId_ = options.projectId;
     this.configureMetrics_(options.disableBuiltInMetrics);
+    installHttp2StreamEndWorkaround();
   }
 
   get universeDomain() {
