@@ -83,6 +83,13 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 			return nil, fmt.Errorf("failed to initialize Spanner GAPIC client for DirectPath: %w", err)
 		}
 
+		if os.Getenv("SPANNER_NATIVE_DEBUG") != "" {
+			fmt.Fprintf(os.Stderr,
+				"[spanner-core] transport=GAPIC/DirectPath-eligible pool=%d "+
+					"(custom window sizes and channel pre-warm do NOT apply on this path)\n",
+				limit)
+		}
+
 		return &CoreClient{
 			gapicClient: gapicClient,
 			useGapic:    true,

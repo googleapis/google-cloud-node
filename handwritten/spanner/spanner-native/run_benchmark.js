@@ -49,15 +49,14 @@ const THREADS = process.env.BENCH_THREADS || '1';
 const WORKLOAD = process.argv[2] || 'read-narrow-result-set';
 const EXTRA_ARGS = process.argv.slice(3);
 
-// point-select issues `SELECT * FROM <table> WHERE id = @id` with the parameter
-// hard-typed as int64. It therefore only works against a table whose `id`
-// column is INT64. Warn rather than fail, in case a suitable table is passed.
+// point-select issues `SELECT * FROM <table> WHERE id = @id`. The parameter is
+// formatted as a STRING key (`user-<n>`) to match AsyncBenchmarkTable. Set
+// POINT_SELECT_ID_FORMAT=int64 for a table with an INT64 `id` column.
 if (WORKLOAD === 'point-select') {
-  console.warn(
-    '[launcher] NOTE: point-select requires a table with an INT64 `id` column.\n' +
-      `[launcher]       The default table (${TABLE}) uses STRING(36), so this\n` +
-      '[launcher]       workload will fail with INVALID_ARGUMENT against it.',
-  );
+  const idFormat = process.env.POINT_SELECT_ID_FORMAT === 'int64'
+    ? 'int64'
+    : `string ("${process.env.POINT_SELECT_ID_PREFIX ?? 'user-'}<n>")`;
+  console.log(`[launcher] point-select id parameter type: ${idFormat}`);
 }
 
 const usingCore = ['go', '1', 'true'].includes(

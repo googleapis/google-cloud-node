@@ -1,0 +1,20 @@
+import * as v1 from './v1';
+declare const DatabaseAdminClient: typeof v1.DatabaseAdminClient;
+type DatabaseAdminClient = v1.DatabaseAdminClient;
+declare const InstanceAdminClient: typeof v1.InstanceAdminClient;
+type InstanceAdminClient = v1.InstanceAdminClient;
+declare const SpannerClient: typeof v1.SpannerClient;
+type SpannerClient = v1.SpannerClient;
+declare const SpannerExecutorProxyClient: typeof v1.SpannerExecutorProxyClient;
+type SpannerExecutorProxyClient = v1.SpannerExecutorProxyClient;
+export { v1, DatabaseAdminClient, InstanceAdminClient, SpannerClient, SpannerExecutorProxyClient };
+declare const _default: {
+    v1: typeof v1;
+    DatabaseAdminClient: typeof v1.DatabaseAdminClient;
+    InstanceAdminClient: typeof v1.InstanceAdminClient;
+    SpannerClient: typeof v1.SpannerClient;
+    SpannerExecutorProxyClient: typeof v1.SpannerExecutorProxyClient;
+};
+export default _default;
+import * as protos from '../protos/protos';
+export { protos };
