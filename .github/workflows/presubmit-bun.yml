@@ -75,7 +75,7 @@ jobs:
           RUN_TESTS_MODE: RUN_UNIT_TESTS
           BUILD_TYPE: presubmit
           TEST_TYPE: units
-          TEST_CMD: bun run
+          TEST_CMD: bun --bun run
           SHARD_TOTAL: ${{ needs.setup.outputs.shard-total }}
           SHARD_INDEX: ${{ matrix.shard-index }}
           GIT_DIFF_ARG: HEAD^1
