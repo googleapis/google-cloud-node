@@ -454,6 +454,35 @@ describe('grpc-fallback', () => {
     });
   });
 
+  it('should record the received http status on the error', async () => {
+    const requestObject = {content: 'test-content'};
+
+    // The body reports 400 while the response itself is a 503. `code` is
+    // derived from the body, so a status read back off the error can only be
+    // the received one if the two differ.
+    setMockFallbackResponse(
+      gaxGrpc,
+      new Response(
+        JSON.stringify({error: {code: 400, message: 'mismatched status'}}),
+        {status: 503},
+      ),
+    );
+
+    const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+    await new Promise<void>((resolve, reject) => {
+      echoStub.echo(requestObject, {}, {}, (err?: Error) => {
+        try {
+          assert(err instanceof GoogleError);
+          assert.strictEqual(err.code, Status.INVALID_ARGUMENT);
+          assert.strictEqual(err.httpStatusCode, 503);
+          resolve();
+        } catch (e) {
+          reject(e);
+        }
+      });
+    });
+  });
+
   it('should promote ErrorInfo if exist in fallback-rest error', async () => {
     const requestObject = {content: 'test-content'};
     // example of an actual google.rpc.Status error message returned by Translate API

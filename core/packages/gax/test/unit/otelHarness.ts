@@ -199,6 +199,123 @@ export class OtelHarness {
       );
     }
   }
+
+  /**
+   * The three response status attributes carried by a traced call.
+   *
+   * @param {ReadableSpan} span - The span to read.
+   * @returns {ResponseStatusAttributes} The attributes, each undefined if absent.
+   */
+  responseStatus(span: ReadableSpan): ResponseStatusAttributes {
+    return {
+      rpc: span.attributes['rpc.response.status_code'] as string | undefined,
+      grpc: span.attributes['grpc.response.status_code'] as string | undefined,
+      http: span.attributes['http.response.status_code'] as number | undefined,
+    };
+  }
+
+  /**
+   * Asserts the response status attributes of a traced call.
+   *
+   * The transport-specific attribute is not named by the caller. It is derived
+   * from the span's own `gcp.method.type`, so a test cannot assert a
+   * combination the tracer is not supposed to produce — such as an HTTP status
+   * on a gRPC span. Both the presence of the attribute that applies and the
+   * absence of the one that does not are checked, because the second half is
+   * what catches an attribute leaking onto the wrong transport.
+   *
+   * `httpStatus` is only meaningful on a fallback span. Omitting it there
+   * asserts that no HTTP status was reported, which is the expected result for
+   * a failure that never received a response, such as an expired deadline.
+   *
+   * @param {object} expected - Expected status values.
+   * @param {string} expected.rpcStatus - gRPC status name, e.g. 'OK' or 'NOT_FOUND'.
+   * @param {number} [expected.httpStatus] - HTTP status expected on a fallback span.
+   * @param {object} [options] - Span selection.
+   * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
+   * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
+   */
+  assertResponseStatus(
+    expected: {rpcStatus: string; httpStatus?: number},
+    options: {tracerName?: string; span?: ReadableSpan} = {},
+  ): void {
+    const target = options.span ?? this.requireSingleSpan(options.tracerName);
+    const actual = this.responseStatus(target);
+    const transport = target.attributes['gcp.method.type'];
+    const where = `span '${target.name}'`;
+
+    assert.ok(
+      transport === 'grpc' || transport === 'http',
+      `${where} has gcp.method.type ${JSON.stringify(transport)}; the ` +
+        'transport-specific status attribute cannot be checked without it. ' +
+        'Was this span produced by traceCall?',
+    );
+
+    assert.strictEqual(
+      actual.rpc,
+      expected.rpcStatus,
+      `expected ${where} to report rpc.response.status_code ` +
+        `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.rpc)}. ` +
+        'This attribute is reported on every call, on both transports.',
+    );
+
+    if (transport === 'grpc') {
+      assert.strictEqual(
+        actual.grpc,
+        expected.rpcStatus,
+        `expected ${where} to report grpc.response.status_code ` +
+          `${JSON.stringify(expected.rpcStatus)}, got ${JSON.stringify(actual.grpc)}. ` +
+          'On a gRPC span it mirrors rpc.response.status_code.',
+      );
+      assert.strictEqual(
+        actual.http,
+        undefined,
+        `${where} is a gRPC span but reported http.response.status_code ` +
+          `${JSON.stringify(actual.http)}. A gRPC call has no HTTP status, ` +
+          'not even a synthesized one.',
+      );
+      assert.strictEqual(
+        expected.httpStatus,
+        undefined,
+        'assertResponseStatus was given an expected httpStatus for a gRPC ' +
+          'span, which can never hold one. Drop it, or assert against a ' +
+          'fallback span.',
+      );
+      return;
+    }
+
+    assert.strictEqual(
+      actual.grpc,
+      undefined,
+      `${where} is a fallback span but reported grpc.response.status_code ` +
+        `${JSON.stringify(actual.grpc)}. The gRPC status is reported as ` +
+        'rpc.response.status_code there, not under the grpc.* name.',
+    );
+    assert.strictEqual(
+      actual.http,
+      expected.httpStatus,
+      expected.httpStatus === undefined
+        ? `expected ${where} to report no http.response.status_code, got ` +
+            `${JSON.stringify(actual.http)}. It is only reported when a ` +
+            'response was actually received.'
+        : `expected ${where} to report http.response.status_code ` +
+            `${expected.httpStatus}, got ${JSON.stringify(actual.http)}. ` +
+            'This is the status the transport received, which is not ' +
+            'recoverable from the gRPC status it was mapped to.',
+    );
+  }
+}
+
+/**
+ * The response status attributes read off a traced span.
+ */
+export interface ResponseStatusAttributes {
+  /** `rpc.response.status_code`: gRPC status name, reported on both transports. */
+  rpc: string | undefined;
+  /** `grpc.response.status_code`: gRPC spans only. */
+  grpc: string | undefined;
+  /** `http.response.status_code`: fallback spans that received a response. */
+  http: number | undefined;
 }
 
 /**
