@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import type {Response as NodeFetchResponse} from 'node-fetch' with {'resolution-mode': 'import'};
+import type {Response as NodeFetchResponse} from 'node-fetch' with {
+  'resolution-mode': 'import',
+};
 
 import {AuthClient, GoogleAuth, gaxios} from 'google-auth-library';
 import * as serializer from 'proto3-json-serializer';
@@ -35,8 +37,7 @@ import type {Agent as HttpsAgent} from 'https';
 // - https://github.com/node-fetch/node-fetch#custom-agent
 // - https://github.com/googleapis/gax-nodejs/pull/1534
 let agentOption:
-  | ((parsedUrl: {protocol: string}) => HttpAgent | HttpsAgent)
-  | null = null;
+  ((parsedUrl: {protocol: string}) => HttpAgent | HttpsAgent) | null = null;
 if (isNodeJS()) {
   const http = require('http');
   const https = require('https');
@@ -305,6 +306,7 @@ export function generateServiceStub(
               .then(([ok, buffer]: [boolean, Buffer | ArrayBuffer]) => {
                 const response = responseDecoder(rpc, ok, buffer);
                 callback!(null, response);
+                return;
               })
               .catch((err: Error) => {
                 // The deadline can expire after the response headers arrive but
