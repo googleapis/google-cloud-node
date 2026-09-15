@@ -58,7 +58,7 @@ accept your pull requests.
         pnpm run test
 
         # Run all system tests.
-        npm run system-test
+        pnpm run system-test
 
 1.  Lint (and maybe fix) any changes:
 

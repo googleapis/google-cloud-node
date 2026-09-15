@@ -60,10 +60,10 @@ accept your pull requests.
         pnpm run test
 
         # Run sample integration tests.
-        npm run samples-test
+        pnpm run samples-test
 
         # Run all system tests.
-        npm run system-test
+        pnpm run system-test
 
 1.  Lint (and maybe fix) any changes:
 
