@@ -514,6 +514,37 @@ describe('failed transactions', () => {
     }
   });
 
+  it('does not orphan the transaction ID promise when the first read fails', async () => {
+    // The transaction ID promise is derived from the first read. On this path
+    // nothing ever awaits it, so without an attached handler Node reports an
+    // unhandled rejection and terminates the process.
+    const unhandledRejections: unknown[] = [];
+    const onUnhandledRejection = (reason: unknown) =>
+      unhandledRejections.push(reason);
+    process.on('unhandledRejection', onUnhandledRejection);
+
+    const serverError = new GoogleError('Test Error');
+    serverError.code = Status.UNAUTHENTICATED;
+
+    try {
+      await expect(
+        runTransaction(
+          /* transactionOptions= */ {readOnly: true},
+          (transaction, docRef) => transaction.get(docRef),
+          getDocument({newTransaction: {readOnly: {}}, error: serverError}),
+          // No rollback because the lazy-start operation failed
+        ),
+      ).to.eventually.be.rejected;
+
+      // Node reports unhandled rejections once the microtask queue drains, so
+      // yield a macrotask before asserting.
+      await new Promise(resolve => setImmediate(resolve));
+      expect(unhandledRejections).to.be.empty;
+    } finally {
+      process.removeListener('unhandledRejection', onUnhandledRejection);
+    }
+  });
+
   it('retries commit for expired transaction', async () => {
     // The transaction needs to perform a read or write otherwise it will be
     // a no-op and will not retry
