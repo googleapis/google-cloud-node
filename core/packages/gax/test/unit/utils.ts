@@ -143,3 +143,31 @@ export function setMockFallbackResponse(
   const authClient = new MockedResponseAuthClient();
   gaxGrpc.auth = new GoogleAuth({authClient});
 }
+
+/**
+ * Makes a Fallback request fail the way the real transport does: by rejecting
+ * from the auth client rather than resolving with a failed response. This is
+ * what gaxios does for network-level failures, and for HTTP statuses that do
+ * not pass `validateStatus`.
+ *
+ * @param gaxGrpc The gRPC Client to use
+ * @param error The error the transport should reject with
+ * @returns The request options the transport was called with
+ */
+export function setMockFallbackError(gaxGrpc: GrpcClient, error: Error) {
+  const requestOptions: gaxios.GaxiosOptions[] = [];
+
+  class MockedErrorAuthClient extends PassThroughClient {
+    async request<T>(
+      opts: gaxios.GaxiosOptions,
+    ): Promise<gaxios.GaxiosResponse<T>> {
+      requestOptions.push(opts);
+      throw error;
+    }
+  }
+
+  const authClient = new MockedErrorAuthClient();
+  gaxGrpc.auth = new GoogleAuth({authClient});
+
+  return requestOptions;
+}
