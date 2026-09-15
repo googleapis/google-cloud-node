@@ -139,6 +139,7 @@ export function generateServiceStub(
     rpc: protobuf.Method,
     ok: boolean,
     response: Buffer | ArrayBuffer,
+    httpStatusCode?: number,
   ) => {},
   numericEnums: boolean,
   minifyJson: boolean,
@@ -299,12 +300,20 @@ export function generateServiceStub(
             );
             return;
           } else {
+            // Captured here because the decoded value below is also named
+            // `response` and shadows the fetch response.
+            const httpStatusCode = response.status;
             return Promise.all([
               Promise.resolve(response.ok),
               response.arrayBuffer(),
             ])
               .then(([ok, buffer]: [boolean, Buffer | ArrayBuffer]) => {
-                const response = responseDecoder(rpc, ok, buffer);
+                const response = responseDecoder(
+                  rpc,
+                  ok,
+                  buffer,
+                  httpStatusCode,
+                );
                 callback!(null, response);
                 return;
               })
