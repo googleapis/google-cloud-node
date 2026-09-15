@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { WorkloadIdentityClient } from './workload_identity_client';
+export {WorkloadIdentityClient} from './workload_identity_client';

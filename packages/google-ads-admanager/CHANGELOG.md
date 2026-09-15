@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.11.0...admanager-v0.12.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.10.0...admanager-v0.11.0) (2026-09-02)
+
+
+### Features
+
+* Update API sources and regenerate ([#9219](https://github.com/googleapis/google-cloud-node/issues/9219)) ([09ff86e](https://github.com/googleapis/google-cloud-node/commit/09ff86ef811de9215c587496ece57ff8b5fb2b77))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.9.0...admanager-v0.10.0) (2026-08-21)
 
 

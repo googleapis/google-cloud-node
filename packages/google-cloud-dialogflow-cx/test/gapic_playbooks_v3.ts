@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as playbooksModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.playbooksStub, undefined);
@@ -282,12 +282,12 @@ describe('v3.PlaybooksClient', () => {
       assert(client.playbooksStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.playbooksStub);
@@ -296,14 +296,14 @@ describe('v3.PlaybooksClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.playbooksStub, undefined);
@@ -312,7 +312,7 @@ describe('v3.PlaybooksClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v3.PlaybooksClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v3.PlaybooksClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v3.PlaybooksClient', () => {
   describe('createPlaybook', () => {
     it('invokes createPlaybook without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes createPlaybook without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes createPlaybook with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes createPlaybook with closed client', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v3.PlaybooksClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPlaybook(request), expectedError);
@@ -487,7 +487,7 @@ describe('v3.PlaybooksClient', () => {
   describe('deletePlaybook', () => {
     it('invokes deletePlaybook without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes deletePlaybook without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -565,7 +565,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes deletePlaybook with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes deletePlaybook with closed client', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v3.PlaybooksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePlaybook(request), expectedError);
@@ -619,7 +619,7 @@ describe('v3.PlaybooksClient', () => {
   describe('getPlaybook', () => {
     it('invokes getPlaybook without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes getPlaybook without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes getPlaybook with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes getPlaybook with closed client', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v3.PlaybooksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPlaybook(request), expectedError);
@@ -751,7 +751,7 @@ describe('v3.PlaybooksClient', () => {
   describe('updatePlaybook', () => {
     it('invokes updatePlaybook without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes updatePlaybook without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes updatePlaybook with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -863,7 +863,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes updatePlaybook with closed client', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v3.PlaybooksClient', () => {
       );
       request.playbook.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePlaybook(request), expectedError);
@@ -887,7 +887,7 @@ describe('v3.PlaybooksClient', () => {
   describe('createPlaybookVersion', () => {
     it('invokes createPlaybookVersion without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes createPlaybookVersion without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes createPlaybookVersion with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes createPlaybookVersion with closed client', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1013,7 +1013,7 @@ describe('v3.PlaybooksClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1026,7 +1026,7 @@ describe('v3.PlaybooksClient', () => {
   describe('getPlaybookVersion', () => {
     it('invokes getPlaybookVersion without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1058,7 +1058,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes getPlaybookVersion without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes getPlaybookVersion with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes getPlaybookVersion with closed client', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1149,7 +1149,7 @@ describe('v3.PlaybooksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPlaybookVersion(request), expectedError);
@@ -1159,7 +1159,7 @@ describe('v3.PlaybooksClient', () => {
   describe('restorePlaybookVersion', () => {
     it('invokes restorePlaybookVersion without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes restorePlaybookVersion without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1238,7 +1238,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes restorePlaybookVersion with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes restorePlaybookVersion with closed client', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v3.PlaybooksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1298,7 +1298,7 @@ describe('v3.PlaybooksClient', () => {
   describe('deletePlaybookVersion', () => {
     it('invokes deletePlaybookVersion without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1330,7 +1330,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes deletePlaybookVersion without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes deletePlaybookVersion with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1411,7 +1411,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes deletePlaybookVersion with closed client', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1424,7 +1424,7 @@ describe('v3.PlaybooksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1437,7 +1437,7 @@ describe('v3.PlaybooksClient', () => {
   describe('exportPlaybook', () => {
     it('invokes exportPlaybook without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1470,7 +1470,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes exportPlaybook without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1524,7 +1524,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes exportPlaybook with call error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1555,7 +1555,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes exportPlaybook with LRO error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1588,7 +1588,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes checkExportPlaybookProgress without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1596,8 +1596,8 @@ describe('v3.PlaybooksClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportPlaybookProgress(
@@ -1610,7 +1610,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes checkExportPlaybookProgress with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1631,7 +1631,7 @@ describe('v3.PlaybooksClient', () => {
   describe('importPlaybook', () => {
     it('invokes importPlaybook without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1664,7 +1664,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes importPlaybook without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1718,7 +1718,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes importPlaybook with call error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1749,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes importPlaybook with LRO error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1782,7 +1782,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes checkImportPlaybookProgress without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1790,8 +1790,8 @@ describe('v3.PlaybooksClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportPlaybookProgress(
@@ -1804,7 +1804,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes checkImportPlaybookProgress with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1825,7 +1825,7 @@ describe('v3.PlaybooksClient', () => {
   describe('listPlaybooks', () => {
     it('invokes listPlaybooks without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1864,7 +1864,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes listPlaybooks without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1919,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes listPlaybooks with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes listPlaybooksStream without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2002,15 +2002,15 @@ describe('v3.PlaybooksClient', () => {
       assert(
         (client.descriptors.page.listPlaybooks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPlaybooksStream with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2051,15 +2051,15 @@ describe('v3.PlaybooksClient', () => {
       assert(
         (client.descriptors.page.listPlaybooks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPlaybooks without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2100,15 +2100,15 @@ describe('v3.PlaybooksClient', () => {
       assert(
         (client.descriptors.page.listPlaybooks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPlaybooks with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,9 +2140,9 @@ describe('v3.PlaybooksClient', () => {
       assert(
         (client.descriptors.page.listPlaybooks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2150,7 +2150,7 @@ describe('v3.PlaybooksClient', () => {
   describe('listPlaybookVersions', () => {
     it('invokes listPlaybookVersions without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2190,7 +2190,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes listPlaybookVersions without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2222,8 +2222,7 @@ describe('v3.PlaybooksClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.cx.v3.IPlaybookVersion[]
-              | null,
+              protos.google.cloud.dialogflow.cx.v3.IPlaybookVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2247,7 +2246,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes listPlaybookVersions with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2278,7 +2277,7 @@ describe('v3.PlaybooksClient', () => {
 
     it('invokes listPlaybookVersionsStream without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2331,15 +2330,15 @@ describe('v3.PlaybooksClient', () => {
       assert(
         (client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPlaybookVersionsStream with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2381,15 +2380,15 @@ describe('v3.PlaybooksClient', () => {
       assert(
         (client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPlaybookVersions without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2431,15 +2430,15 @@ describe('v3.PlaybooksClient', () => {
       assert(
         (client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPlaybookVersions with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2472,16 +2471,16 @@ describe('v3.PlaybooksClient', () => {
       assert(
         (client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2511,7 +2510,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2555,7 +2554,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2590,7 +2589,7 @@ describe('v3.PlaybooksClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2638,7 +2637,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2679,7 +2678,7 @@ describe('v3.PlaybooksClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2700,7 +2699,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2728,7 +2727,7 @@ describe('v3.PlaybooksClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2738,7 +2737,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2762,7 +2761,7 @@ describe('v3.PlaybooksClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2784,7 +2783,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2812,7 +2811,7 @@ describe('v3.PlaybooksClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2822,7 +2821,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2846,7 +2845,7 @@ describe('v3.PlaybooksClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2868,7 +2867,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2896,7 +2895,7 @@ describe('v3.PlaybooksClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2906,7 +2905,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2930,7 +2929,7 @@ describe('v3.PlaybooksClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2965,7 +2964,7 @@ describe('v3.PlaybooksClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3001,7 +3000,7 @@ describe('v3.PlaybooksClient', () => {
         agent: 'agentValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3065,7 +3064,7 @@ describe('v3.PlaybooksClient', () => {
         agent: 'agentValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3144,7 +3143,7 @@ describe('v3.PlaybooksClient', () => {
         agent: 'agentValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3223,7 +3222,7 @@ describe('v3.PlaybooksClient', () => {
         changelog: 'changelogValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3300,7 +3299,7 @@ describe('v3.PlaybooksClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3412,7 +3411,7 @@ describe('v3.PlaybooksClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3499,7 +3498,7 @@ describe('v3.PlaybooksClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3575,7 +3574,7 @@ describe('v3.PlaybooksClient', () => {
         environment: 'environmentValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3652,7 +3651,7 @@ describe('v3.PlaybooksClient', () => {
         example: 'exampleValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3740,7 +3739,7 @@ describe('v3.PlaybooksClient', () => {
         experiment: 'experimentValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3827,7 +3826,7 @@ describe('v3.PlaybooksClient', () => {
         flow: 'flowValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3903,7 +3902,7 @@ describe('v3.PlaybooksClient', () => {
         flow: 'flowValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3996,7 +3995,7 @@ describe('v3.PlaybooksClient', () => {
         generator: 'generatorValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4072,7 +4071,7 @@ describe('v3.PlaybooksClient', () => {
         intent: 'intentValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4146,7 +4145,7 @@ describe('v3.PlaybooksClient', () => {
         location: 'locationValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4198,7 +4197,7 @@ describe('v3.PlaybooksClient', () => {
         page: 'pageValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4285,7 +4284,7 @@ describe('v3.PlaybooksClient', () => {
         playbook: 'playbookValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4362,7 +4361,7 @@ describe('v3.PlaybooksClient', () => {
         version: 'versionValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4446,7 +4445,7 @@ describe('v3.PlaybooksClient', () => {
         project: 'projectValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4490,7 +4489,7 @@ describe('v3.PlaybooksClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4635,7 +4634,7 @@ describe('v3.PlaybooksClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4760,7 +4759,7 @@ describe('v3.PlaybooksClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4885,7 +4884,7 @@ describe('v3.PlaybooksClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4990,7 +4989,7 @@ describe('v3.PlaybooksClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5059,7 +5058,7 @@ describe('v3.PlaybooksClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5136,7 +5135,7 @@ describe('v3.PlaybooksClient', () => {
         result: 'resultValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5223,7 +5222,7 @@ describe('v3.PlaybooksClient', () => {
         tool: 'toolValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5300,7 +5299,7 @@ describe('v3.PlaybooksClient', () => {
         version: 'versionValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5388,7 +5387,7 @@ describe('v3.PlaybooksClient', () => {
         version: 'versionValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5475,7 +5474,7 @@ describe('v3.PlaybooksClient', () => {
         webhook: 'webhookValue',
       };
       const client = new playbooksModule.v3.PlaybooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

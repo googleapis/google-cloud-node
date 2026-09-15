@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as tensorboardserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -176,9 +176,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -308,7 +308,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.tensorboardServiceStub, undefined);
@@ -316,13 +316,13 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(client.tensorboardServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.tensorboardServiceStub);
@@ -331,15 +331,15 @@ describe('v1beta1.TensorboardServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.tensorboardServiceStub, undefined);
@@ -348,7 +348,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -357,7 +357,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -370,7 +370,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -394,7 +394,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboard without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -426,7 +426,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboard without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboard with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -506,7 +506,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboard with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTensorboard(request), expectedError);
@@ -530,7 +530,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardUsage without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardUsage without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardUsage with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -643,7 +643,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardUsage with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboard = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.readTensorboardUsage(request), expectedError);
@@ -667,7 +667,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardSize without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardSize without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardSize with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardSize with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -793,7 +793,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboard = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.readTensorboardSize(request), expectedError);
@@ -804,7 +804,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardExperiment without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -837,7 +837,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardExperiment without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardExperiment with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardExperiment with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -933,7 +933,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -947,7 +947,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardExperiment without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -980,7 +980,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardExperiment without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1028,7 +1028,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardExperiment with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardExperiment with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1076,7 +1076,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1090,7 +1090,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardExperiment without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1124,7 +1124,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardExperiment without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1173,7 +1173,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardExperiment with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardExperiment with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1223,7 +1223,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardExperiment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1237,7 +1237,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardRun without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardRun without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1318,7 +1318,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardRun with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1350,7 +1350,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardRun with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTensorboardRun(request), expectedError);
@@ -1374,7 +1374,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchCreateTensorboardRuns without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchCreateTensorboardRuns without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1455,7 +1455,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchCreateTensorboardRuns with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchCreateTensorboardRuns with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1503,7 +1503,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1517,7 +1517,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardRun without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1549,7 +1549,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardRun without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1597,7 +1597,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardRun with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardRun with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTensorboardRun(request), expectedError);
@@ -1653,7 +1653,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardRun without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardRun without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1736,7 +1736,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardRun with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardRun with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1783,7 +1783,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardRun.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTensorboardRun(request), expectedError);
@@ -1794,7 +1794,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchCreateTensorboardTimeSeries without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1827,7 +1827,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchCreateTensorboardTimeSeries without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1875,7 +1875,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchCreateTensorboardTimeSeries with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchCreateTensorboardTimeSeries with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1923,7 +1923,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1937,7 +1937,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardTimeSeries without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1970,7 +1970,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardTimeSeries without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2018,7 +2018,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardTimeSeries with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2053,7 +2053,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboardTimeSeries with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2080,7 +2080,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardTimeSeries without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2113,7 +2113,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardTimeSeries without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2161,7 +2161,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardTimeSeries with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2196,7 +2196,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getTensorboardTimeSeries with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2209,7 +2209,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2223,7 +2223,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardTimeSeries without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2257,7 +2257,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardTimeSeries without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2306,7 +2306,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardTimeSeries with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2342,7 +2342,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboardTimeSeries with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2356,7 +2356,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardTimeSeries.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2370,7 +2370,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchReadTensorboardTimeSeriesData without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2404,7 +2404,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchReadTensorboardTimeSeriesData without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2452,7 +2452,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchReadTensorboardTimeSeriesData with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2487,7 +2487,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes batchReadTensorboardTimeSeriesData with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2500,7 +2500,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboard = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2514,7 +2514,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardTimeSeriesData without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2547,7 +2547,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardTimeSeriesData without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2595,7 +2595,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardTimeSeriesData with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2630,7 +2630,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardTimeSeriesData with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2643,7 +2643,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardTimeSeries = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2657,7 +2657,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes writeTensorboardExperimentData without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2690,7 +2690,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes writeTensorboardExperimentData without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2738,7 +2738,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes writeTensorboardExperimentData with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2773,7 +2773,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes writeTensorboardExperimentData with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2786,7 +2786,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardExperiment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2800,7 +2800,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes writeTensorboardRunData without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2833,7 +2833,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes writeTensorboardRunData without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2881,7 +2881,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes writeTensorboardRunData with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2916,7 +2916,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes writeTensorboardRunData with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2929,7 +2929,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.tensorboardRun = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2943,7 +2943,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboard without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2977,7 +2977,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboard without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3032,7 +3032,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboard with call error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3064,7 +3064,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes createTensorboard with LRO error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3098,7 +3098,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkCreateTensorboardProgress without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3106,8 +3106,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTensorboardProgress(
@@ -3121,7 +3121,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkCreateTensorboardProgress with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3143,7 +3143,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboard without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3178,7 +3178,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboard without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3234,7 +3234,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboard with call error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3267,7 +3267,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes updateTensorboard with LRO error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3302,7 +3302,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkUpdateTensorboardProgress without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3310,8 +3310,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateTensorboardProgress(
@@ -3325,7 +3325,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkUpdateTensorboardProgress with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3347,7 +3347,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboard without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3381,7 +3381,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboard without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3436,7 +3436,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboard with call error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3468,7 +3468,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboard with LRO error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3502,7 +3502,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkDeleteTensorboardProgress without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3510,8 +3510,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTensorboardProgress(
@@ -3525,7 +3525,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkDeleteTensorboardProgress with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3547,7 +3547,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardExperiment without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3581,7 +3581,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardExperiment without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3636,7 +3636,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardExperiment with call error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3671,7 +3671,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardExperiment with LRO error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3705,7 +3705,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkDeleteTensorboardExperimentProgress without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3713,8 +3713,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3729,7 +3729,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkDeleteTensorboardExperimentProgress with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3751,7 +3751,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardRun without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3785,7 +3785,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardRun without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3840,7 +3840,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardRun with call error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3872,7 +3872,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardRun with LRO error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3906,7 +3906,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkDeleteTensorboardRunProgress without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3914,8 +3914,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTensorboardRunProgress(
@@ -3929,7 +3929,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkDeleteTensorboardRunProgress with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3951,7 +3951,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardTimeSeries without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3985,7 +3985,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardTimeSeries without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4040,7 +4040,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardTimeSeries with call error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4075,7 +4075,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteTensorboardTimeSeries with LRO error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4109,7 +4109,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkDeleteTensorboardTimeSeriesProgress without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4117,8 +4117,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4133,7 +4133,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes checkDeleteTensorboardTimeSeriesProgress with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4155,7 +4155,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardBlobData without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4202,7 +4202,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardBlobData without error and gaxServerStreamingRetries enabled', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
           gaxServerStreamingRetries: true,
         });
@@ -4250,7 +4250,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardBlobData with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4296,7 +4296,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes readTensorboardBlobData with closed client', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4309,11 +4309,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       request.timeSeries = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.readTensorboardBlobData(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -4343,7 +4343,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboards without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4383,7 +4383,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboards without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4415,8 +4415,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.ITensorboard[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.ITensorboard[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4441,7 +4440,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboards with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4473,7 +4472,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardsStream without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4526,16 +4525,16 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTensorboardsStream with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4577,16 +4576,16 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTensorboards without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4628,16 +4627,16 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTensorboards with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4670,9 +4669,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4681,7 +4680,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardExperiments without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4722,7 +4721,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardExperiments without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4780,7 +4779,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardExperiments with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4815,7 +4814,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardExperimentsStream without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4885,7 +4884,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardExperimentsStream with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4944,7 +4943,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with listTensorboardExperiments without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4999,7 +4998,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with listTensorboardExperiments with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5047,7 +5046,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardRuns without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5088,7 +5087,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardRuns without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5120,8 +5119,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5146,7 +5144,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardRuns with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5178,7 +5176,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardRunsStream without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5231,16 +5229,16 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTensorboardRunsStream with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5282,16 +5280,16 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTensorboardRuns without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5333,16 +5331,16 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTensorboardRuns with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5375,9 +5373,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(
         (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5386,7 +5384,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardTimeSeries without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5427,7 +5425,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardTimeSeries without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5485,7 +5483,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardTimeSeries with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5520,7 +5518,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardTimeSeriesStream without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5590,7 +5588,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes listTensorboardTimeSeriesStream with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5649,7 +5647,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with listTensorboardTimeSeries without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5704,7 +5702,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with listTensorboardTimeSeries with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5752,7 +5750,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes exportTensorboardTimeSeriesData without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5793,7 +5791,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes exportTensorboardTimeSeriesData without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5851,7 +5849,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes exportTensorboardTimeSeriesData with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5886,7 +5884,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes exportTensorboardTimeSeriesDataStream without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5959,7 +5957,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes exportTensorboardTimeSeriesDataStream with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6021,7 +6019,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with exportTensorboardTimeSeriesData without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6076,7 +6074,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with exportTensorboardTimeSeriesData with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6123,7 +6121,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6154,7 +6152,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6192,7 +6190,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6203,7 +6201,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6236,7 +6234,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6267,7 +6265,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6305,7 +6303,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6316,7 +6314,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6349,7 +6347,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6383,7 +6381,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6421,7 +6419,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6432,7 +6430,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6468,7 +6466,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6499,7 +6497,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6544,7 +6542,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6580,7 +6578,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6629,7 +6627,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6671,7 +6669,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6693,7 +6691,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6721,7 +6719,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6732,7 +6730,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6757,7 +6755,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6780,7 +6778,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6808,7 +6806,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6819,7 +6817,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6844,7 +6842,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6867,7 +6865,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6895,7 +6893,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6906,7 +6904,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6931,7 +6929,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6967,7 +6965,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7006,7 +7004,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7094,7 +7092,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7172,7 +7170,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7248,7 +7246,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7326,7 +7324,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7392,7 +7390,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7468,7 +7466,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7534,7 +7532,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7610,7 +7608,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7676,7 +7674,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7742,7 +7740,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7819,7 +7817,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7902,7 +7900,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7978,7 +7976,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8044,7 +8042,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8120,7 +8118,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8185,7 +8183,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8251,7 +8249,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8330,7 +8328,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8438,7 +8436,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8517,7 +8515,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8595,7 +8593,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8672,7 +8670,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8737,7 +8735,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8819,7 +8817,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8884,7 +8882,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8948,7 +8946,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9000,7 +8998,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9077,7 +9075,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9155,7 +9153,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9220,7 +9218,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9285,7 +9283,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9366,7 +9364,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9444,7 +9442,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9552,7 +9550,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9618,7 +9616,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9711,7 +9709,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9777,7 +9775,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9854,7 +9852,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9936,7 +9934,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10002,7 +10000,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10084,7 +10082,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10150,7 +10148,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10228,7 +10226,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10291,7 +10289,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10332,7 +10330,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10413,7 +10411,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10517,7 +10515,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10642,7 +10640,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10734,7 +10732,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10788,7 +10786,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10854,7 +10852,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10929,7 +10927,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10984,7 +10982,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11062,7 +11060,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11149,7 +11147,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11216,7 +11214,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11314,7 +11312,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11390,7 +11388,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11456,7 +11454,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11534,7 +11532,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11622,7 +11620,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11688,7 +11686,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11753,7 +11751,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11819,7 +11817,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11916,7 +11914,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12006,7 +12004,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12130,7 +12128,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12200,7 +12198,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12276,7 +12274,7 @@ describe('v1beta1.TensorboardServiceClient', () => {
       };
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

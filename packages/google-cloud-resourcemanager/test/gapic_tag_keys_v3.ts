@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as tagkeysModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -272,7 +272,7 @@ describe('v3.TagKeysClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tagKeysStub, undefined);
@@ -280,12 +280,12 @@ describe('v3.TagKeysClient', () => {
       assert(client.tagKeysStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.tagKeysStub);
@@ -294,14 +294,14 @@ describe('v3.TagKeysClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tagKeysStub, undefined);
@@ -310,7 +310,7 @@ describe('v3.TagKeysClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v3.TagKeysClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v3.TagKeysClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v3.TagKeysClient', () => {
   describe('getTagKey', () => {
     it('invokes getTagKey without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getTagKey without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getTagKey with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getTagKey with closed client', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v3.TagKeysClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTagKey(request), expectedError);
@@ -482,7 +482,7 @@ describe('v3.TagKeysClient', () => {
   describe('getNamespacedTagKey', () => {
     it('invokes getNamespacedTagKey without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getNamespacedTagKey without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getNamespacedTagKey with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -550,7 +550,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getNamespacedTagKey with closed client', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v3.TagKeysClient', () => {
         new protos.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNamespacedTagKey(request), expectedError);
@@ -568,7 +568,7 @@ describe('v3.TagKeysClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -677,7 +677,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -690,7 +690,7 @@ describe('v3.TagKeysClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -700,7 +700,7 @@ describe('v3.TagKeysClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -731,7 +731,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -778,7 +778,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -809,7 +809,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -822,7 +822,7 @@ describe('v3.TagKeysClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -832,7 +832,7 @@ describe('v3.TagKeysClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -911,7 +911,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -942,7 +942,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -955,7 +955,7 @@ describe('v3.TagKeysClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -965,7 +965,7 @@ describe('v3.TagKeysClient', () => {
   describe('createTagKey', () => {
     it('invokes createTagKey without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -983,7 +983,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes createTagKey without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes createTagKey with call error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1040,7 +1040,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes createTagKey with LRO error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes checkCreateTagKeyProgress without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,8 +1067,8 @@ describe('v3.TagKeysClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTagKeyProgress(
@@ -1081,7 +1081,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes checkCreateTagKeyProgress with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v3.TagKeysClient', () => {
   describe('updateTagKey', () => {
     it('invokes updateTagKey without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes updateTagKey without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1187,7 +1187,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes updateTagKey with call error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1219,7 +1219,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes updateTagKey with LRO error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1253,7 +1253,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes checkUpdateTagKeyProgress without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,8 +1261,8 @@ describe('v3.TagKeysClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateTagKeyProgress(
@@ -1275,7 +1275,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes checkUpdateTagKeyProgress with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1293,7 +1293,7 @@ describe('v3.TagKeysClient', () => {
   describe('deleteTagKey', () => {
     it('invokes deleteTagKey without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes deleteTagKey without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes deleteTagKey with call error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1410,7 +1410,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes deleteTagKey with LRO error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes checkDeleteTagKeyProgress without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,8 +1451,8 @@ describe('v3.TagKeysClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTagKeyProgress(
@@ -1465,7 +1465,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes checkDeleteTagKeyProgress with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,7 +1483,7 @@ describe('v3.TagKeysClient', () => {
   describe('listTagKeys', () => {
     it('invokes listTagKeys without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes listTagKeys without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1549,7 +1549,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes listTagKeys with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes listTagKeysStream without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1613,7 +1613,7 @@ describe('v3.TagKeysClient', () => {
 
     it('invokes listTagKeysStream with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1651,7 +1651,7 @@ describe('v3.TagKeysClient', () => {
 
     it('uses async iteration with listTagKeys without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v3.TagKeysClient', () => {
 
     it('uses async iteration with listTagKeys with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1717,7 +1717,7 @@ describe('v3.TagKeysClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1738,7 +1738,7 @@ describe('v3.TagKeysClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1766,7 +1766,7 @@ describe('v3.TagKeysClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1776,7 +1776,7 @@ describe('v3.TagKeysClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1800,7 +1800,7 @@ describe('v3.TagKeysClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1822,7 +1822,7 @@ describe('v3.TagKeysClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1850,7 +1850,7 @@ describe('v3.TagKeysClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1860,7 +1860,7 @@ describe('v3.TagKeysClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1884,7 +1884,7 @@ describe('v3.TagKeysClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1906,7 +1906,7 @@ describe('v3.TagKeysClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1934,7 +1934,7 @@ describe('v3.TagKeysClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1944,7 +1944,7 @@ describe('v3.TagKeysClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1968,7 +1968,7 @@ describe('v3.TagKeysClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2003,7 +2003,7 @@ describe('v3.TagKeysClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2037,7 +2037,7 @@ describe('v3.TagKeysClient', () => {
         folder: 'folderValue',
       };
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v3.TagKeysClient', () => {
         organization: 'organizationValue',
       };
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,7 +2113,7 @@ describe('v3.TagKeysClient', () => {
         project: 'projectValue',
       };
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v3.TagKeysClient', () => {
         tag_binding: 'tagBindingValue',
       };
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2190,7 +2190,7 @@ describe('v3.TagKeysClient', () => {
         tag_hold: 'tagHoldValue',
       };
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2238,7 +2238,7 @@ describe('v3.TagKeysClient', () => {
         tag_key: 'tagKeyValue',
       };
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2276,7 +2276,7 @@ describe('v3.TagKeysClient', () => {
         tag_value: 'tagValueValue',
       };
       const client = new tagkeysModule.v3.TagKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sqlusersserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -201,7 +201,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sqlUsersServiceStub, undefined);
@@ -209,12 +209,12 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       assert(client.sqlUsersServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sqlUsersServiceStub);
@@ -223,14 +223,14 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sqlUsersServiceStub, undefined);
@@ -239,7 +239,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -247,7 +247,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -259,7 +259,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -282,7 +282,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
   describe('delete', () => {
     it('invokes delete without error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -318,7 +318,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes delete without error using callback', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes delete with error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes delete with closed client', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -421,7 +421,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.delete(request), expectedError);
@@ -431,7 +431,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
   describe('get', () => {
     it('invokes get without error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes get without error using callback', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -526,7 +526,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes get with error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes get with closed client', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.get(request), expectedError);
@@ -596,7 +596,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
   describe('insert', () => {
     it('invokes insert without error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes insert without error using callback', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -684,7 +684,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes insert with error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -717,7 +717,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes insert with closed client', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insert(request), expectedError);
@@ -745,7 +745,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
   describe('list', () => {
     it('invokes list without error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes list without error using callback', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes list with error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes list with closed client', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.list(request), expectedError);
@@ -890,7 +890,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
   describe('update', () => {
     it('invokes update without error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes update without error using callback', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes update with error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
 
     it('invokes update with closed client', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.update(request), expectedError);
@@ -1038,7 +1038,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,7 +1068,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1147,7 +1147,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1195,7 +1195,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         backup: 'backupValue',
       };
       const client = new sqlusersserviceModule.v1beta4.SqlUsersServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

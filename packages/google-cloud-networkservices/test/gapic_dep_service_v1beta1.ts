@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as depserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.depServiceStub, undefined);
@@ -282,12 +282,12 @@ describe('v1beta1.DepServiceClient', () => {
       assert(client.depServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.depServiceStub);
@@ -296,14 +296,14 @@ describe('v1beta1.DepServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.depServiceStub, undefined);
@@ -312,7 +312,7 @@ describe('v1beta1.DepServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1beta1.DepServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1beta1.DepServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('getLbTrafficExtension', () => {
     it('invokes getLbTrafficExtension without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes getLbTrafficExtension without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes getLbTrafficExtension with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes getLbTrafficExtension with closed client', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1beta1.DepServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -494,7 +494,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('getLbRouteExtension', () => {
     it('invokes getLbRouteExtension without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -526,7 +526,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes getLbRouteExtension without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -573,7 +573,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes getLbRouteExtension with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -604,7 +604,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes getLbRouteExtension with closed client', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v1beta1.DepServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLbRouteExtension(request), expectedError);
@@ -627,7 +627,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('createLbTrafficExtension', () => {
     it('invokes createLbTrafficExtension without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes createLbTrafficExtension without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -714,7 +714,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes createLbTrafficExtension with call error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes createLbTrafficExtension with LRO error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkCreateLbTrafficExtensionProgress without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -789,8 +789,8 @@ describe('v1beta1.DepServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -804,7 +804,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkCreateLbTrafficExtensionProgress with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -825,7 +825,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('updateLbTrafficExtension', () => {
     it('invokes updateLbTrafficExtension without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes updateLbTrafficExtension without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes updateLbTrafficExtension with call error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes updateLbTrafficExtension with LRO error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -983,7 +983,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkUpdateLbTrafficExtensionProgress without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -991,8 +991,8 @@ describe('v1beta1.DepServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1006,7 +1006,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkUpdateLbTrafficExtensionProgress with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,7 +1027,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('deleteLbTrafficExtension', () => {
     it('invokes deleteLbTrafficExtension without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,7 +1060,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes deleteLbTrafficExtension without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes deleteLbTrafficExtension with call error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes deleteLbTrafficExtension with LRO error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkDeleteLbTrafficExtensionProgress without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1189,8 +1189,8 @@ describe('v1beta1.DepServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1204,7 +1204,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkDeleteLbTrafficExtensionProgress with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('createLbRouteExtension', () => {
     it('invokes createLbRouteExtension without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1258,7 +1258,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes createLbRouteExtension without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes createLbRouteExtension with call error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1346,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes createLbRouteExtension with LRO error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkCreateLbRouteExtensionProgress without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,8 +1387,8 @@ describe('v1beta1.DepServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateLbRouteExtensionProgress(
@@ -1401,7 +1401,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkCreateLbRouteExtensionProgress with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1422,7 +1422,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('updateLbRouteExtension', () => {
     it('invokes updateLbRouteExtension without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1456,7 +1456,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes updateLbRouteExtension without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes updateLbRouteExtension with call error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1546,7 +1546,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes updateLbRouteExtension with LRO error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,7 +1580,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkUpdateLbRouteExtensionProgress without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1588,8 +1588,8 @@ describe('v1beta1.DepServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateLbRouteExtensionProgress(
@@ -1602,7 +1602,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkUpdateLbRouteExtensionProgress with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1623,7 +1623,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('deleteLbRouteExtension', () => {
     it('invokes deleteLbRouteExtension without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1656,7 +1656,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes deleteLbRouteExtension without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,7 +1710,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes deleteLbRouteExtension with call error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1744,7 +1744,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes deleteLbRouteExtension with LRO error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1777,7 +1777,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkDeleteLbRouteExtensionProgress without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1785,8 +1785,8 @@ describe('v1beta1.DepServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteLbRouteExtensionProgress(
@@ -1799,7 +1799,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes checkDeleteLbRouteExtensionProgress with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('listLbTrafficExtensions', () => {
     it('invokes listLbTrafficExtensions without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1860,7 +1860,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes listLbTrafficExtensions without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1917,7 +1917,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes listLbTrafficExtensions with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1951,7 +1951,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes listLbTrafficExtensionsStream without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2020,7 +2020,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes listLbTrafficExtensionsStream with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2078,7 +2078,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('uses async iteration with listLbTrafficExtensions without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2132,7 +2132,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('uses async iteration with listLbTrafficExtensions with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2179,7 +2179,7 @@ describe('v1beta1.DepServiceClient', () => {
   describe('listLbRouteExtensions', () => {
     it('invokes listLbRouteExtensions without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2219,7 +2219,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes listLbRouteExtensions without error using callback', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2276,7 +2276,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes listLbRouteExtensions with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2310,7 +2310,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes listLbRouteExtensionsStream without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2379,7 +2379,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('invokes listLbRouteExtensionsStream with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2437,7 +2437,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('uses async iteration with listLbRouteExtensions without error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2491,7 +2491,7 @@ describe('v1beta1.DepServiceClient', () => {
 
     it('uses async iteration with listLbRouteExtensions with error', async () => {
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2544,7 +2544,7 @@ describe('v1beta1.DepServiceClient', () => {
         endpoint_policy: 'endpointPolicyValue',
       };
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2609,7 +2609,7 @@ describe('v1beta1.DepServiceClient', () => {
         lb_route_extension: 'lbRouteExtensionValue',
       };
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2677,7 +2677,7 @@ describe('v1beta1.DepServiceClient', () => {
         lb_traffic_extension: 'lbTrafficExtensionValue',
       };
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2753,7 +2753,7 @@ describe('v1beta1.DepServiceClient', () => {
         location: 'locationValue',
       };
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2801,7 +2801,7 @@ describe('v1beta1.DepServiceClient', () => {
         project: 'projectValue',
       };
       const client = new depserviceModule.v1beta1.DepServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

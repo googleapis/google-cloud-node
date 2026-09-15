@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { CloudDeployClient } from '@google-cloud/deploy';
+import {CloudDeployClient} from '@google-cloud/deploy';
 
 // check that the client class type name can be used
 function doStuffWithCloudDeployClient(client: CloudDeployClient) {

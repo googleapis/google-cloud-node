@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as controlserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.controlServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v2.ControlServiceClient', () => {
       assert(client.controlServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.controlServiceStub);
@@ -261,14 +261,14 @@ describe('v2.ControlServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.controlServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v2.ControlServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2.ControlServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2.ControlServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2.ControlServiceClient', () => {
   describe('createControl', () => {
     it('invokes createControl without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes createControl without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes createControl with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes createControl with closed client', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v2.ControlServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createControl(request), expectedError);
@@ -452,7 +452,7 @@ describe('v2.ControlServiceClient', () => {
   describe('deleteControl', () => {
     it('invokes deleteControl without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes deleteControl without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes deleteControl with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes deleteControl with closed client', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v2.ControlServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteControl(request), expectedError);
@@ -584,7 +584,7 @@ describe('v2.ControlServiceClient', () => {
   describe('updateControl', () => {
     it('invokes updateControl without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes updateControl without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes updateControl with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes updateControl with closed client', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v2.ControlServiceClient', () => {
       );
       request.control.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateControl(request), expectedError);
@@ -720,7 +720,7 @@ describe('v2.ControlServiceClient', () => {
   describe('getControl', () => {
     it('invokes getControl without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes getControl without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes getControl with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes getControl with closed client', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v2.ControlServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getControl(request), expectedError);
@@ -852,7 +852,7 @@ describe('v2.ControlServiceClient', () => {
   describe('listControls', () => {
     it('invokes listControls without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes listControls without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes listControls with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v2.ControlServiceClient', () => {
 
     it('invokes listControlsStream without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1008,15 +1008,15 @@ describe('v2.ControlServiceClient', () => {
       assert(
         (client.descriptors.page.listControls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listControlsStream with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1056,15 +1056,15 @@ describe('v2.ControlServiceClient', () => {
       assert(
         (client.descriptors.page.listControls.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listControls without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,15 +1099,15 @@ describe('v2.ControlServiceClient', () => {
       assert(
         (client.descriptors.page.listControls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listControls with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1139,16 +1139,16 @@ describe('v2.ControlServiceClient', () => {
       assert(
         (client.descriptors.page.listControls.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1178,7 +1178,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1222,7 +1222,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1257,7 +1257,7 @@ describe('v2.ControlServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1305,7 +1305,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1346,7 @@ describe('v2.ControlServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1367,7 +1367,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1395,7 +1395,7 @@ describe('v2.ControlServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1405,7 +1405,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1429,7 +1429,7 @@ describe('v2.ControlServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,7 +1451,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1479,7 +1479,7 @@ describe('v2.ControlServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1489,7 +1489,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1513,7 +1513,7 @@ describe('v2.ControlServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1563,7 +1563,7 @@ describe('v2.ControlServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1573,7 +1573,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1597,7 +1597,7 @@ describe('v2.ControlServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1632,7 +1632,7 @@ describe('v2.ControlServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1668,7 +1668,7 @@ describe('v2.ControlServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1735,7 +1735,7 @@ describe('v2.ControlServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1799,7 +1799,7 @@ describe('v2.ControlServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1867,7 +1867,7 @@ describe('v2.ControlServiceClient', () => {
         control: 'controlValue',
       };
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1943,7 +1943,7 @@ describe('v2.ControlServiceClient', () => {
         model: 'modelValue',
       };
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2020,7 +2020,7 @@ describe('v2.ControlServiceClient', () => {
         product: 'productValue',
       };
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2107,7 +2107,7 @@ describe('v2.ControlServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new controlserviceModule.v2.ControlServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

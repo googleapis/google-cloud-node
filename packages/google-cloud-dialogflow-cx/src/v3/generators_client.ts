@@ -29,10 +29,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class GeneratorsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dialogflow-cx');
@@ -67,11 +67,11 @@ export class GeneratorsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  generatorsStub?: Promise<{ [name: string]: Function }>;
+  generatorsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of GeneratorsClient.
@@ -147,7 +147,7 @@ export class GeneratorsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -341,21 +341,21 @@ export class GeneratorsClient {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v3/{name=projects/*/operations/*}:cancel',
           additional_bindings: [
-            { post: '/v3/{name=projects/*/locations/*/operations/*}:cancel' },
+            {post: '/v3/{name=projects/*/locations/*/operations/*}:cancel'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v3/{name=projects/*/operations/*}',
           additional_bindings: [
-            { get: '/v3/{name=projects/*/locations/*/operations/*}' },
+            {get: '/v3/{name=projects/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v3/{name=projects/*}/operations',
           additional_bindings: [
-            { get: '/v3/{name=projects/*/locations/*}/operations' },
+            {get: '/v3/{name=projects/*/locations/*}/operations'},
           ],
         },
       ];
@@ -371,7 +371,7 @@ export class GeneratorsClient {
       'google.cloud.dialogflow.cx.v3.Generators',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -411,7 +411,7 @@ export class GeneratorsClient {
           (this._protos as any).google.cloud.dialogflow.cx.v3.Generators,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -424,7 +424,7 @@ export class GeneratorsClient {
     ];
     for (const methodName of generatorsStubMethods) {
       const callPromise = this.generatorsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -629,7 +629,7 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGenerator request %j', request);
@@ -770,7 +770,7 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createGenerator request %j', request);
@@ -912,7 +912,7 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         'generator.name': request.generator!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateGenerator request %j', request);
@@ -1060,7 +1060,7 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteGenerator request %j', request);
@@ -1209,7 +1209,7 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1280,7 +1280,7 @@ export class GeneratorsClient {
       });
     const defaultCallSettings = this._defaults['listGenerators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGenerators stream %j', request);
@@ -1333,7 +1333,7 @@ export class GeneratorsClient {
       });
     const defaultCallSettings = this._defaults['listGenerators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGenerators iterate %j', request);
@@ -3880,11 +3880,11 @@ export class GeneratorsClient {
    */
   close(): Promise<void> {
     if (this.generatorsStub && !this._terminated) {
-      return this.generatorsStub.then((stub) => {
+      return this.generatorsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

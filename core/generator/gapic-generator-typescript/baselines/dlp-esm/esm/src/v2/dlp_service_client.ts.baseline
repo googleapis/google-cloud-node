@@ -26,14 +26,14 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 // @ts-ignore
 import type * as protos from '../../../protos/protos.js';
 import * as dlp_service_client_config from './dlp_service_client_config.json';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { getJSON } from '../json-helper.cjs';
+import {fileURLToPath} from 'url';
+import {getJSON} from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -49,7 +49,7 @@ const gapicConfig = getJSON(
 const jsonProtos = getJSON(
   path.join(dirname, '..', '..', '..', 'protos/protos.json'),
 );
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 const version = getJSON(
   path.join(dirname, '..', '..', '..', '..', 'package.json'),
 ).version;
@@ -74,7 +74,7 @@ export class DlpServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dlp');
@@ -86,9 +86,9 @@ export class DlpServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  dlpServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  dlpServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DlpServiceClient.
@@ -165,7 +165,7 @@ export class DlpServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -297,7 +297,7 @@ export class DlpServiceClient {
       'google.privacy.dlp.v2.DlpService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -337,7 +337,7 @@ export class DlpServiceClient {
           (this._protos as any).google.privacy.dlp.v2.DlpService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -376,7 +376,7 @@ export class DlpServiceClient {
     ];
     for (const methodName of dlpServiceStubMethods) {
       const callPromise = this.dlpServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -592,7 +592,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('inspectContent request %j', request);
@@ -738,7 +738,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('redactImage request %j', request);
@@ -897,7 +897,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deidentifyContent request %j', request);
@@ -1060,7 +1060,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reidentifyContent request %j', request);
@@ -1196,7 +1196,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInfoTypes request %j', request);
@@ -1342,7 +1342,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createInspectTemplate request %j', request);
@@ -1486,7 +1486,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateInspectTemplate request %j', request);
@@ -1626,7 +1626,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInspectTemplate request %j', request);
@@ -1763,7 +1763,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteInspectTemplate request %j', request);
@@ -1915,7 +1915,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDeidentifyTemplate request %j', request);
@@ -2060,7 +2060,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDeidentifyTemplate request %j', request);
@@ -2201,7 +2201,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDeidentifyTemplate request %j', request);
@@ -2342,7 +2342,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDeidentifyTemplate request %j', request);
@@ -2486,7 +2486,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createJobTrigger request %j', request);
@@ -2620,7 +2620,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateJobTrigger request %j', request);
@@ -2748,7 +2748,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getJobTrigger request %j', request);
@@ -2876,7 +2876,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteJobTrigger request %j', request);
@@ -3012,7 +3012,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('activateJobTrigger request %j', request);
@@ -3157,7 +3157,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDlpJob request %j', request);
@@ -3283,7 +3283,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDlpJob request %j', request);
@@ -3411,7 +3411,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDlpJob request %j', request);
@@ -3539,7 +3539,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelDlpJob request %j', request);
@@ -3685,7 +3685,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createStoredInfoType request %j', request);
@@ -3830,7 +3830,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateStoredInfoType request %j', request);
@@ -3962,7 +3962,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getStoredInfoType request %j', request);
@@ -4100,7 +4100,7 @@ export class DlpServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteStoredInfoType request %j', request);
@@ -4264,7 +4264,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4352,7 +4352,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listInspectTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInspectTemplates stream %j', request);
@@ -4422,7 +4422,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listInspectTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInspectTemplates iterate %j', request);
@@ -4549,7 +4549,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4637,7 +4637,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listDeidentifyTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeidentifyTemplates stream %j', request);
@@ -4707,7 +4707,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listDeidentifyTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeidentifyTemplates iterate %j', request);
@@ -4853,7 +4853,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4967,7 +4967,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listJobTriggers stream %j', request);
@@ -5063,7 +5063,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listJobTriggers iterate %j', request);
@@ -5210,7 +5210,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5324,7 +5324,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listDlpJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDlpJobs stream %j', request);
@@ -5422,7 +5422,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listDlpJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDlpJobs iterate %j', request);
@@ -5550,7 +5550,7 @@ export class DlpServiceClient {
         parent: request.parent ?? '',
         location_id: request.locationId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5639,7 +5639,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listStoredInfoTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listStoredInfoTypes stream %j', request);
@@ -5710,7 +5710,7 @@ export class DlpServiceClient {
       });
     const defaultCallSettings = this._defaults['listStoredInfoTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listStoredInfoTypes iterate %j', request);
@@ -6123,7 +6123,7 @@ export class DlpServiceClient {
    */
   close(): Promise<void> {
     if (this.dlpServiceStub && !this._terminated) {
-      return this.dlpServiceStub.then((stub) => {
+      return this.dlpServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

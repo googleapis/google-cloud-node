@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as specialistpoolserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -289,7 +289,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.specialistPoolServiceStub, undefined);
@@ -297,13 +297,13 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       assert(client.specialistPoolServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.specialistPoolServiceStub);
@@ -312,15 +312,15 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.specialistPoolServiceStub, undefined);
@@ -329,7 +329,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +351,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -375,7 +375,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getSpecialistPool without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getSpecialistPool without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getSpecialistPool with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getSpecialistPool with closed client', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSpecialistPool(request), expectedError);
@@ -511,7 +511,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes createSpecialistPool without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes createSpecialistPool without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes createSpecialistPool with call error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes createSpecialistPool with LRO error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes checkCreateSpecialistPoolProgress without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -674,8 +674,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSpecialistPoolProgress(
@@ -689,7 +689,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes checkCreateSpecialistPoolProgress with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes deleteSpecialistPool without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes deleteSpecialistPool without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes deleteSpecialistPool with call error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes deleteSpecialistPool with LRO error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes checkDeleteSpecialistPoolProgress without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -874,8 +874,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSpecialistPoolProgress(
@@ -889,7 +889,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes checkDeleteSpecialistPoolProgress with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -911,7 +911,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes updateSpecialistPool without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -946,7 +946,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes updateSpecialistPool without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes updateSpecialistPool with call error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1035,7 +1035,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes updateSpecialistPool with LRO error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1070,7 +1070,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes checkUpdateSpecialistPoolProgress without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1078,8 +1078,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSpecialistPoolProgress(
@@ -1093,7 +1093,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes checkUpdateSpecialistPoolProgress with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1115,7 +1115,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes listSpecialistPools without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1156,7 +1156,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes listSpecialistPools without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1188,8 +1188,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1214,7 +1213,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes listSpecialistPools with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1246,7 +1245,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes listSpecialistPoolsStream without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1299,16 +1298,16 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       assert(
         (client.descriptors.page.listSpecialistPools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSpecialistPoolsStream with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1350,16 +1349,16 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       assert(
         (client.descriptors.page.listSpecialistPools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSpecialistPools without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1401,16 +1400,16 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       assert(
         (client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSpecialistPools with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1443,9 +1442,9 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       assert(
         (client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1453,7 +1452,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1484,7 +1483,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1522,7 +1521,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1533,7 +1532,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1566,7 +1565,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1597,7 +1596,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1635,7 +1634,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1646,7 +1645,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1679,7 +1678,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1713,7 +1712,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1751,7 +1750,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1762,7 +1761,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1798,7 +1797,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1829,7 +1828,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1874,7 +1873,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1910,7 +1909,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1959,7 +1958,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2001,7 +2000,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2023,7 +2022,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2051,7 +2050,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2062,7 +2061,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2087,7 +2086,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2110,7 +2109,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2138,7 +2137,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2149,7 +2148,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2174,7 +2173,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2197,7 +2196,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2225,7 +2224,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2236,7 +2235,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2261,7 +2260,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2297,7 +2296,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2336,7 +2335,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2424,7 +2423,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2502,7 +2501,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2578,7 +2577,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2656,7 +2655,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2722,7 +2721,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2798,7 +2797,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2864,7 +2863,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2940,7 +2939,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3006,7 +3005,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3072,7 +3071,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3149,7 +3148,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3232,7 +3231,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3308,7 +3307,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3374,7 +3373,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3450,7 +3449,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3515,7 +3514,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3581,7 +3580,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3660,7 +3659,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3768,7 +3767,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3847,7 +3846,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3925,7 +3924,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4002,7 +4001,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4067,7 +4066,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4149,7 +4148,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4214,7 +4213,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4278,7 +4277,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4330,7 +4329,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4407,7 +4406,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4485,7 +4484,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4550,7 +4549,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4615,7 +4614,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4696,7 +4695,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4774,7 +4773,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4882,7 +4881,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4948,7 +4947,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5041,7 +5040,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5107,7 +5106,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5184,7 +5183,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5266,7 +5265,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5332,7 +5331,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5414,7 +5413,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5480,7 +5479,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5558,7 +5557,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5623,7 +5622,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5704,7 +5703,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5808,7 +5807,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5933,7 +5932,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6025,7 +6024,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6079,7 +6078,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6145,7 +6144,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6220,7 +6219,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6275,7 +6274,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6353,7 +6352,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6440,7 +6439,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6507,7 +6506,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6605,7 +6604,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6681,7 +6680,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6747,7 +6746,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6825,7 +6824,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6913,7 +6912,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6979,7 +6978,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7044,7 +7043,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7110,7 +7109,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7207,7 +7206,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7297,7 +7296,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7421,7 +7420,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7491,7 +7490,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7567,7 +7566,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       };
       const client =
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,7 +52,7 @@ export class ChatServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('chat');
@@ -65,9 +65,9 @@ export class ChatServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  chatServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  chatServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ChatServiceClient.
@@ -143,7 +143,7 @@ export class ChatServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -314,7 +314,7 @@ export class ChatServiceClient {
       'google.chat.v1.ChatService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -354,7 +354,7 @@ export class ChatServiceClient {
           (this._protos as any).google.chat.v1.ChatService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -411,7 +411,7 @@ export class ChatServiceClient {
     ];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -729,7 +729,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createMessage request %j', request);
@@ -899,7 +899,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMembership request %j', request);
@@ -1060,7 +1060,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMessage request %j', request);
@@ -1232,7 +1232,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'message.name': request.message!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateMessage request %j', request);
@@ -1391,7 +1391,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteMessage request %j', request);
@@ -1528,7 +1528,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAttachment request %j', request);
@@ -1670,7 +1670,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('uploadAttachment request %j', request);
@@ -1837,7 +1837,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSpace request %j', request);
@@ -2015,7 +2015,7 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSpace request %j', request);
@@ -2250,7 +2250,7 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setUpSpace request %j', request);
@@ -2503,7 +2503,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'space.name': request.space!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSpace request %j', request);
@@ -2665,7 +2665,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSpace request %j', request);
@@ -2804,7 +2804,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('completeImportSpace request %j', request);
@@ -2963,7 +2963,7 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('findDirectMessage request %j', request);
@@ -3183,7 +3183,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createMembership request %j', request);
@@ -3348,7 +3348,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'membership.name': request.membership!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateMembership request %j', request);
@@ -3535,7 +3535,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteMembership request %j', request);
@@ -3675,7 +3675,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createReaction request %j', request);
@@ -3812,7 +3812,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteReaction request %j', request);
@@ -3946,7 +3946,7 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCustomEmoji request %j', request);
@@ -4091,7 +4091,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCustomEmoji request %j', request);
@@ -4239,7 +4239,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteCustomEmoji request %j', request);
@@ -4388,7 +4388,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSpaceReadState request %j', request);
@@ -4549,7 +4549,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'space_read_state.name': request.spaceReadState!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSpaceReadState request %j', request);
@@ -4699,7 +4699,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getThreadReadState request %j', request);
@@ -4843,7 +4843,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAvailability request %j', request);
@@ -4994,7 +4994,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('markAsActive request %j', request);
@@ -5137,7 +5137,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('markAsAway request %j', request);
@@ -5285,7 +5285,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('markAsDoNotDisturb request %j', request);
@@ -5422,7 +5422,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'availability.name': request.availability!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAvailability request %j', request);
@@ -5592,7 +5592,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSpaceEvent request %j', request);
@@ -5738,7 +5738,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSpaceNotificationSetting request %j', request);
@@ -5891,7 +5891,7 @@ export class ChatServiceClient {
         'space_notification_setting.name':
           request.spaceNotificationSetting!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSpaceNotificationSetting request %j', request);
@@ -6041,7 +6041,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSection request %j', request);
@@ -6180,7 +6180,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSection request %j', request);
@@ -6319,7 +6319,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'section.name': request.section!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSection request %j', request);
@@ -6462,7 +6462,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('positionSection request %j', request);
@@ -6602,7 +6602,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('moveSectionItem request %j', request);
@@ -6830,7 +6830,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6964,7 +6964,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMessages stream %j', request);
@@ -7082,7 +7082,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMessages iterate %j', request);
@@ -7295,7 +7295,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7444,7 +7444,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMemberships stream %j', request);
@@ -7577,7 +7577,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMemberships iterate %j', request);
@@ -7861,7 +7861,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8088,7 +8088,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['searchMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchMessages stream %j', request);
@@ -8299,7 +8299,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['searchMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchMessages iterate %j', request);
@@ -8442,7 +8442,7 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8533,7 +8533,7 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSpaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSpaces stream %j', request);
@@ -8608,7 +8608,7 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSpaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSpaces iterate %j', request);
@@ -8873,7 +8873,7 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9084,7 +9084,7 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchSpaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchSpaces stream %j', request);
@@ -9279,7 +9279,7 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchSpaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchSpaces iterate %j', request);
@@ -9425,7 +9425,7 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9521,7 +9521,7 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['findGroupChats'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('findGroupChats stream %j', request);
@@ -9601,7 +9601,7 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['findGroupChats'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('findGroupChats iterate %j', request);
@@ -9763,7 +9763,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9882,7 +9882,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listReactions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReactions stream %j', request);
@@ -9985,7 +9985,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listReactions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReactions iterate %j', request);
@@ -10114,7 +10114,7 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10197,7 +10197,7 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCustomEmojis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomEmojis stream %j', request);
@@ -10264,7 +10264,7 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCustomEmojis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomEmojis iterate %j', request);
@@ -10466,7 +10466,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10596,7 +10596,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpaceEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSpaceEvents stream %j', request);
@@ -10710,7 +10710,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpaceEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSpaceEvents iterate %j', request);
@@ -10840,7 +10840,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10928,7 +10928,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listSections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSections stream %j', request);
@@ -11000,7 +11000,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listSections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSections iterate %j', request);
@@ -11135,7 +11135,7 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11228,7 +11228,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listSectionItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSectionItems stream %j', request);
@@ -11305,7 +11305,7 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listSectionItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSectionItems iterate %j', request);
@@ -11935,7 +11935,7 @@ export class ChatServiceClient {
    */
   close(): Promise<void> {
     if (this.chatServiceStub && !this._terminated) {
-      return this.chatServiceStub.then((stub) => {
+      return this.chatServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dataproductserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -278,7 +278,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataProductServiceStub, undefined);
@@ -286,12 +286,12 @@ describe('v1.DataProductServiceClient', () => {
       assert(client.dataProductServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataProductServiceStub);
@@ -300,14 +300,14 @@ describe('v1.DataProductServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataProductServiceStub, undefined);
@@ -316,7 +316,7 @@ describe('v1.DataProductServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -324,7 +324,7 @@ describe('v1.DataProductServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -336,7 +336,7 @@ describe('v1.DataProductServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -359,7 +359,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('getDataProduct', () => {
     it('invokes getDataProduct without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes getDataProduct without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes getDataProduct with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes getDataProduct with closed client', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1.DataProductServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataProduct(request), expectedError);
@@ -491,7 +491,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('requestDataProductAccess', () => {
     it('invokes requestDataProductAccess without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -523,7 +523,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes requestDataProductAccess without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes requestDataProductAccess with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -604,7 +604,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes requestDataProductAccess with closed client', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v1.DataProductServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -630,7 +630,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('getDataAsset', () => {
     it('invokes getDataAsset without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes getDataAsset without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes getDataAsset with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes getDataAsset with closed client', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1.DataProductServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataAsset(request), expectedError);
@@ -762,7 +762,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('createDataProduct', () => {
     it('invokes createDataProduct without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes createDataProduct without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -849,7 +849,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes createDataProduct with call error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes createDataProduct with LRO error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkCreateDataProductProgress without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -921,8 +921,8 @@ describe('v1.DataProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDataProductProgress(
@@ -935,7 +935,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkCreateDataProductProgress with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -956,7 +956,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('deleteDataProduct', () => {
     it('invokes deleteDataProduct without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes deleteDataProduct without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1043,7 +1043,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes deleteDataProduct with call error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1074,7 +1074,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes deleteDataProduct with LRO error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkDeleteDataProductProgress without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1115,8 +1115,8 @@ describe('v1.DataProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDataProductProgress(
@@ -1129,7 +1129,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkDeleteDataProductProgress with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1150,7 +1150,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('updateDataProduct', () => {
     it('invokes updateDataProduct without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1184,7 +1184,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes updateDataProduct without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes updateDataProduct with call error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes updateDataProduct with LRO error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1305,7 +1305,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkUpdateDataProductProgress without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1313,8 +1313,8 @@ describe('v1.DataProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDataProductProgress(
@@ -1327,7 +1327,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkUpdateDataProductProgress with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1348,7 +1348,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('createDataAsset', () => {
     it('invokes createDataAsset without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1381,7 +1381,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes createDataAsset without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1435,7 +1435,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes createDataAsset with call error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1466,7 +1466,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes createDataAsset with LRO error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkCreateDataAssetProgress without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1507,8 +1507,8 @@ describe('v1.DataProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDataAssetProgress(
@@ -1521,7 +1521,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkCreateDataAssetProgress with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1542,7 +1542,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('updateDataAsset', () => {
     it('invokes updateDataAsset without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1576,7 +1576,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes updateDataAsset without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1631,7 +1631,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes updateDataAsset with call error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1663,7 +1663,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes updateDataAsset with LRO error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1697,7 +1697,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkUpdateDataAssetProgress without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1705,8 +1705,8 @@ describe('v1.DataProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDataAssetProgress(
@@ -1719,7 +1719,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkUpdateDataAssetProgress with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,7 +1740,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('deleteDataAsset', () => {
     it('invokes deleteDataAsset without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1773,7 +1773,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes deleteDataAsset without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1827,7 +1827,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes deleteDataAsset with call error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1858,7 +1858,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes deleteDataAsset with LRO error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1891,7 +1891,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkDeleteDataAssetProgress without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1899,8 +1899,8 @@ describe('v1.DataProductServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDataAssetProgress(
@@ -1913,7 +1913,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes checkDeleteDataAssetProgress with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1934,7 +1934,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('listDataProducts', () => {
     it('invokes listDataProducts without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1973,7 +1973,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes listDataProducts without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2028,7 +2028,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes listDataProducts with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2059,7 +2059,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes listDataProductsStream without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2111,15 +2111,15 @@ describe('v1.DataProductServiceClient', () => {
       assert(
         (client.descriptors.page.listDataProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataProductsStream with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2160,15 +2160,15 @@ describe('v1.DataProductServiceClient', () => {
       assert(
         (client.descriptors.page.listDataProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataProducts without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2209,15 +2209,15 @@ describe('v1.DataProductServiceClient', () => {
       assert(
         (client.descriptors.page.listDataProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataProducts with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2249,9 +2249,9 @@ describe('v1.DataProductServiceClient', () => {
       assert(
         (client.descriptors.page.listDataProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2259,7 +2259,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('listDataAssets', () => {
     it('invokes listDataAssets without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2292,7 +2292,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes listDataAssets without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2341,7 +2341,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes listDataAssets with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2372,7 +2372,7 @@ describe('v1.DataProductServiceClient', () => {
 
     it('invokes listDataAssetsStream without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2418,15 +2418,15 @@ describe('v1.DataProductServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataAssetsStream with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2467,15 +2467,15 @@ describe('v1.DataProductServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataAssets without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2510,15 +2510,15 @@ describe('v1.DataProductServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataAssets with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2550,16 +2550,16 @@ describe('v1.DataProductServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2589,7 +2589,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2633,7 +2633,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2668,7 +2668,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2716,7 +2716,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2757,7 +2757,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2778,7 +2778,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2806,7 +2806,7 @@ describe('v1.DataProductServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2816,7 +2816,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2840,7 +2840,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2862,7 +2862,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2890,7 +2890,7 @@ describe('v1.DataProductServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2900,7 +2900,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2924,7 +2924,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2946,7 +2946,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2974,7 +2974,7 @@ describe('v1.DataProductServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2984,7 +2984,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3008,7 +3008,7 @@ describe('v1.DataProductServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3043,7 +3043,7 @@ describe('v1.DataProductServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3079,7 +3079,7 @@ describe('v1.DataProductServiceClient', () => {
         aspect_type: 'aspectTypeValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3145,7 +3145,7 @@ describe('v1.DataProductServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3231,7 +3231,7 @@ describe('v1.DataProductServiceClient', () => {
         change_request: 'changeRequestValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3296,7 +3296,7 @@ describe('v1.DataProductServiceClient', () => {
         content: 'contentValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3372,7 +3372,7 @@ describe('v1.DataProductServiceClient', () => {
         data_asset: 'dataAssetValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3448,7 +3448,7 @@ describe('v1.DataProductServiceClient', () => {
         data_attribute_id: 'dataAttributeIdValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3524,7 +3524,7 @@ describe('v1.DataProductServiceClient', () => {
         data_attribute_binding_id: 'dataAttributeBindingIdValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3605,7 +3605,7 @@ describe('v1.DataProductServiceClient', () => {
         data_product: 'dataProductValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3669,7 +3669,7 @@ describe('v1.DataProductServiceClient', () => {
         dataScan: 'dataScanValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3734,7 +3734,7 @@ describe('v1.DataProductServiceClient', () => {
         job: 'jobValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3809,7 +3809,7 @@ describe('v1.DataProductServiceClient', () => {
         data_taxonomy_id: 'dataTaxonomyIdValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3873,7 +3873,7 @@ describe('v1.DataProductServiceClient', () => {
         encryption_config: 'encryptionConfigValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3944,7 +3944,7 @@ describe('v1.DataProductServiceClient', () => {
         entity: 'entityValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4031,7 +4031,7 @@ describe('v1.DataProductServiceClient', () => {
         entry: 'entryValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4106,7 +4106,7 @@ describe('v1.DataProductServiceClient', () => {
         entry_group: 'entryGroupValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4171,7 +4171,7 @@ describe('v1.DataProductServiceClient', () => {
         entry_link: 'entryLinkValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4246,7 +4246,7 @@ describe('v1.DataProductServiceClient', () => {
         entry_type: 'entryTypeValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4311,7 +4311,7 @@ describe('v1.DataProductServiceClient', () => {
         environment: 'environmentValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4386,7 +4386,7 @@ describe('v1.DataProductServiceClient', () => {
         glossary: 'glossaryValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4451,7 +4451,7 @@ describe('v1.DataProductServiceClient', () => {
         glossary_category: 'glossaryCategoryValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4531,7 +4531,7 @@ describe('v1.DataProductServiceClient', () => {
         glossary_term: 'glossaryTermValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4608,7 +4608,7 @@ describe('v1.DataProductServiceClient', () => {
         job: 'jobValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4694,7 +4694,7 @@ describe('v1.DataProductServiceClient', () => {
         lake: 'lakeValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4757,7 +4757,7 @@ describe('v1.DataProductServiceClient', () => {
         location: 'locationValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4807,7 +4807,7 @@ describe('v1.DataProductServiceClient', () => {
         metadata_feed: 'metadataFeedValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4871,7 +4871,7 @@ describe('v1.DataProductServiceClient', () => {
         metadataJob: 'metadataJobValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4938,7 +4938,7 @@ describe('v1.DataProductServiceClient', () => {
         partition: 'partitionValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5036,7 +5036,7 @@ describe('v1.DataProductServiceClient', () => {
         action: 'actionValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5132,7 +5132,7 @@ describe('v1.DataProductServiceClient', () => {
         action: 'actionValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5242,7 +5242,7 @@ describe('v1.DataProductServiceClient', () => {
         action: 'actionValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5372,7 +5372,7 @@ describe('v1.DataProductServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5459,7 +5459,7 @@ describe('v1.DataProductServiceClient', () => {
         task: 'taskValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5535,7 +5535,7 @@ describe('v1.DataProductServiceClient', () => {
         zone: 'zoneValue',
       };
       const client = new dataproductserviceModule.v1.DataProductServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as metricsv1beta3Module from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -240,7 +240,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.metricsV1Beta3Stub, undefined);
@@ -248,12 +248,12 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       assert(client.metricsV1Beta3Stub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.metricsV1Beta3Stub);
@@ -262,14 +262,14 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.metricsV1Beta3Stub, undefined);
@@ -278,7 +278,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
   describe('getJobMetrics', () => {
     it('invokes getJobMetrics without error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -362,7 +362,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getJobMetrics without error using callback', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -419,7 +419,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getJobMetrics with error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -460,7 +460,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getJobMetrics with closed client', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getJobMetrics(request), expectedError);
@@ -493,7 +493,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
   describe('getJobExecutionDetails', () => {
     it('invokes getJobExecutionDetails without error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -543,7 +543,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getJobExecutionDetails without error using callback', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getJobExecutionDetails with error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getJobExecutionDetailsStream without error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getJobExecutionDetailsStream with error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -793,7 +793,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('uses async iteration with getJobExecutionDetails without error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('uses async iteration with getJobExecutionDetails with error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -912,7 +912,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
   describe('getStageExecutionDetails', () => {
     it('invokes getStageExecutionDetails without error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,7 +967,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getStageExecutionDetails without error using callback', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getStageExecutionDetails with error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1086,7 +1086,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getStageExecutionDetailsStream without error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1167,7 +1167,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('invokes getStageExecutionDetailsStream with error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1237,7 +1237,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('uses async iteration with getStageExecutionDetails without error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1305,7 +1305,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
 
     it('uses async iteration with getStageExecutionDetails with error', async () => {
       const client = new metricsv1beta3Module.v1beta3.MetricsV1Beta3Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

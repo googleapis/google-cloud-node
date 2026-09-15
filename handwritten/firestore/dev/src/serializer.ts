@@ -183,6 +183,10 @@ export class Serializer {
       };
     }
 
+    if (isTemporalInstant(val)) {
+      return Timestamp.fromInstant(val).toProto();
+    }
+
     if (val === null) {
       return {
         nullValue: 'NULL_VALUE',
@@ -606,6 +610,8 @@ export function validateUserInput(
     // Ok.
   } else if (isMomentJsType(value)) {
     // Ok.
+  } else if (isTemporalInstant(value)) {
+    // Ok.
   } else if (value instanceof Buffer || value instanceof Uint8Array) {
     // Ok.
   } else if (value === null) {
@@ -615,6 +621,34 @@ export function validateUserInput(
   } else if (typeof value === 'object') {
     throw new Error(customObjectMessage(arg, value, path));
   }
+}
+
+/**
+ * Checks if the given value is an instance of `Temporal.Instant`.
+ * Checks both `instanceof` against runtime `Temporal.Instant` (if available)
+ * and duck typing via `[Symbol.toStringTag]` and `epochNanoseconds` bigint property
+ * to support polyfills or cross-realm instances.
+ */
+export function isTemporalInstant(value: unknown): value is Temporal.Instant {
+  if (typeof value !== 'object' || value === null) {
+    return false;
+  }
+  if (
+    typeof Temporal !== 'undefined' &&
+    typeof (Temporal as Record<string, unknown>).Instant === 'function'
+  ) {
+    const instantCtor = (Temporal as Record<string, unknown>).Instant as new (
+      ...args: unknown[]
+    ) => unknown;
+    if (value instanceof instantCtor) {
+      return true;
+    }
+  }
+  const instant = value as Partial<Temporal.Instant>;
+  return (
+    instant[Symbol.toStringTag] === 'Temporal.Instant' &&
+    typeof instant.epochNanoseconds === 'bigint'
+  );
 }
 
 /**

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as backupdrModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -275,7 +275,7 @@ describe('v1.BackupDRClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.backupDRStub, undefined);
@@ -283,12 +283,12 @@ describe('v1.BackupDRClient', () => {
       assert(client.backupDRStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.backupDRStub);
@@ -297,14 +297,14 @@ describe('v1.BackupDRClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.backupDRStub, undefined);
@@ -313,7 +313,7 @@ describe('v1.BackupDRClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -321,7 +321,7 @@ describe('v1.BackupDRClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -333,7 +333,7 @@ describe('v1.BackupDRClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -356,7 +356,7 @@ describe('v1.BackupDRClient', () => {
   describe('getManagementServer', () => {
     it('invokes getManagementServer without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getManagementServer without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getManagementServer with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getManagementServer with closed client', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.BackupDRClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getManagementServer(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.BackupDRClient', () => {
   describe('getBackupVault', () => {
     it('invokes getBackupVault without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupVault without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupVault with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupVault with closed client', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1.BackupDRClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupVault(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1.BackupDRClient', () => {
   describe('getDataSource', () => {
     it('invokes getDataSource without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getDataSource without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getDataSource with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getDataSource with closed client', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.BackupDRClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataSource(request), expectedError);
@@ -753,7 +753,7 @@ describe('v1.BackupDRClient', () => {
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackup without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackup with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackup with closed client', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v1.BackupDRClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -882,7 +882,7 @@ describe('v1.BackupDRClient', () => {
   describe('getBackupPlan', () => {
     it('invokes getBackupPlan without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlan without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlan with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -991,7 +991,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlan with closed client', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.BackupDRClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupPlan(request), expectedError);
@@ -1014,7 +1014,7 @@ describe('v1.BackupDRClient', () => {
   describe('getBackupPlanRevision', () => {
     it('invokes getBackupPlanRevision without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlanRevision without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlanRevision with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1127,7 +1127,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlanRevision with closed client', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1140,7 +1140,7 @@ describe('v1.BackupDRClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1153,7 +1153,7 @@ describe('v1.BackupDRClient', () => {
   describe('getBackupPlanAssociation', () => {
     it('invokes getBackupPlanAssociation without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlanAssociation without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1232,7 +1232,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlanAssociation with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1266,7 +1266,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getBackupPlanAssociation with closed client', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1279,7 +1279,7 @@ describe('v1.BackupDRClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1292,7 +1292,7 @@ describe('v1.BackupDRClient', () => {
   describe('getDataSourceReference', () => {
     it('invokes getDataSourceReference without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1324,7 +1324,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getDataSourceReference without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1371,7 +1371,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getDataSourceReference with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1405,7 +1405,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes getDataSourceReference with closed client', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1418,7 +1418,7 @@ describe('v1.BackupDRClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1431,7 +1431,7 @@ describe('v1.BackupDRClient', () => {
   describe('createManagementServer', () => {
     it('invokes createManagementServer without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1464,7 +1464,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createManagementServer without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1518,7 +1518,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createManagementServer with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1552,7 +1552,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createManagementServer with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1585,7 +1585,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkCreateManagementServerProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1593,8 +1593,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateManagementServerProgress(
@@ -1607,7 +1607,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkCreateManagementServerProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1628,7 +1628,7 @@ describe('v1.BackupDRClient', () => {
   describe('deleteManagementServer', () => {
     it('invokes deleteManagementServer without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,7 +1661,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteManagementServer without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1715,7 +1715,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteManagementServer with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1749,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteManagementServer with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1782,7 +1782,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteManagementServerProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1790,8 +1790,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteManagementServerProgress(
@@ -1804,7 +1804,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteManagementServerProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1825,7 +1825,7 @@ describe('v1.BackupDRClient', () => {
   describe('createBackupVault', () => {
     it('invokes createBackupVault without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1858,7 +1858,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupVault without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1912,7 +1912,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupVault with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1943,7 +1943,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupVault with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1976,7 +1976,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkCreateBackupVaultProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1984,8 +1984,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupVaultProgress(
@@ -1998,7 +1998,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkCreateBackupVaultProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2019,7 +2019,7 @@ describe('v1.BackupDRClient', () => {
   describe('updateBackupVault', () => {
     it('invokes updateBackupVault without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,7 +2053,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupVault without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2108,7 +2108,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupVault with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupVault with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2174,7 +2174,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateBackupVaultProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2182,8 +2182,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupVaultProgress(
@@ -2196,7 +2196,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateBackupVaultProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2217,7 +2217,7 @@ describe('v1.BackupDRClient', () => {
   describe('deleteBackupVault', () => {
     it('invokes deleteBackupVault without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2250,7 +2250,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupVault without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2304,7 +2304,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupVault with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2335,7 +2335,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupVault with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2368,7 +2368,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteBackupVaultProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2376,8 +2376,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupVaultProgress(
@@ -2390,7 +2390,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteBackupVaultProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2411,7 +2411,7 @@ describe('v1.BackupDRClient', () => {
   describe('updateDataSource', () => {
     it('invokes updateDataSource without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2445,7 +2445,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateDataSource without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2500,7 +2500,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateDataSource with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2532,7 +2532,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateDataSource with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateDataSourceProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2574,8 +2574,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDataSourceProgress(
@@ -2588,7 +2588,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateDataSourceProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2609,7 +2609,7 @@ describe('v1.BackupDRClient', () => {
   describe('updateBackup', () => {
     it('invokes updateBackup without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2642,7 +2642,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackup without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2697,7 +2697,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackup with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2729,7 +2729,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackup with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2763,7 +2763,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateBackupProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2771,8 +2771,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupProgress(
@@ -2785,7 +2785,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateBackupProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2803,7 +2803,7 @@ describe('v1.BackupDRClient', () => {
   describe('deleteBackup', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2835,7 +2835,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackup without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2889,7 +2889,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackup with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2920,7 +2920,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackup with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2953,7 +2953,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteBackupProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2961,8 +2961,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupProgress(
@@ -2975,7 +2975,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteBackupProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2993,7 +2993,7 @@ describe('v1.BackupDRClient', () => {
   describe('restoreBackup', () => {
     it('invokes restoreBackup without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3026,7 +3026,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes restoreBackup without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3080,7 +3080,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes restoreBackup with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3111,7 +3111,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes restoreBackup with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3144,7 +3144,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkRestoreBackupProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3152,8 +3152,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreBackupProgress(
@@ -3166,7 +3166,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkRestoreBackupProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3187,7 +3187,7 @@ describe('v1.BackupDRClient', () => {
   describe('createBackupPlan', () => {
     it('invokes createBackupPlan without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3220,7 +3220,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupPlan without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3274,7 +3274,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupPlan with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3305,7 +3305,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupPlan with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3338,7 +3338,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkCreateBackupPlanProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3346,8 +3346,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupPlanProgress(
@@ -3360,7 +3360,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkCreateBackupPlanProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3381,7 +3381,7 @@ describe('v1.BackupDRClient', () => {
   describe('updateBackupPlan', () => {
     it('invokes updateBackupPlan without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3415,7 +3415,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupPlan without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3470,7 +3470,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupPlan with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3502,7 +3502,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupPlan with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3536,7 +3536,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateBackupPlanProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3544,8 +3544,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupPlanProgress(
@@ -3558,7 +3558,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateBackupPlanProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3579,7 +3579,7 @@ describe('v1.BackupDRClient', () => {
   describe('deleteBackupPlan', () => {
     it('invokes deleteBackupPlan without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3612,7 +3612,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupPlan without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3666,7 +3666,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupPlan with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3697,7 +3697,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupPlan with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3730,7 +3730,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteBackupPlanProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3738,8 +3738,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupPlanProgress(
@@ -3752,7 +3752,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteBackupPlanProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3773,7 +3773,7 @@ describe('v1.BackupDRClient', () => {
   describe('createBackupPlanAssociation', () => {
     it('invokes createBackupPlanAssociation without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3806,7 +3806,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupPlanAssociation without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3860,7 +3860,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupPlanAssociation with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3894,7 +3894,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes createBackupPlanAssociation with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3927,7 +3927,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkCreateBackupPlanAssociationProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3935,8 +3935,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3950,7 +3950,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkCreateBackupPlanAssociationProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3971,7 +3971,7 @@ describe('v1.BackupDRClient', () => {
   describe('updateBackupPlanAssociation', () => {
     it('invokes updateBackupPlanAssociation without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4005,7 +4005,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupPlanAssociation without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4060,7 +4060,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupPlanAssociation with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4095,7 +4095,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes updateBackupPlanAssociation with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4129,7 +4129,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateBackupPlanAssociationProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4137,8 +4137,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4152,7 +4152,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkUpdateBackupPlanAssociationProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4173,7 +4173,7 @@ describe('v1.BackupDRClient', () => {
   describe('deleteBackupPlanAssociation', () => {
     it('invokes deleteBackupPlanAssociation without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4206,7 +4206,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupPlanAssociation without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4260,7 +4260,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupPlanAssociation with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4294,7 +4294,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes deleteBackupPlanAssociation with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4327,7 +4327,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteBackupPlanAssociationProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4335,8 +4335,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4350,7 +4350,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkDeleteBackupPlanAssociationProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4371,7 +4371,7 @@ describe('v1.BackupDRClient', () => {
   describe('triggerBackup', () => {
     it('invokes triggerBackup without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4404,7 +4404,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes triggerBackup without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4458,7 +4458,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes triggerBackup with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4489,7 +4489,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes triggerBackup with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4522,7 +4522,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkTriggerBackupProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4530,8 +4530,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTriggerBackupProgress(
@@ -4544,7 +4544,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkTriggerBackupProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4565,7 +4565,7 @@ describe('v1.BackupDRClient', () => {
   describe('initializeService', () => {
     it('invokes initializeService without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4598,7 +4598,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes initializeService without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4652,7 +4652,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes initializeService with call error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4683,7 +4683,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes initializeService with LRO error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4716,7 +4716,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkInitializeServiceProgress without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4724,8 +4724,8 @@ describe('v1.BackupDRClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkInitializeServiceProgress(
@@ -4738,7 +4738,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes checkInitializeServiceProgress with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4759,7 +4759,7 @@ describe('v1.BackupDRClient', () => {
   describe('listManagementServers', () => {
     it('invokes listManagementServers without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4799,7 +4799,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listManagementServers without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4854,7 +4854,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listManagementServers with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4888,7 +4888,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listManagementServersStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4955,7 +4955,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listManagementServersStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5011,7 +5011,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with listManagementServers without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5064,7 +5064,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with listManagementServers with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5111,7 +5111,7 @@ describe('v1.BackupDRClient', () => {
   describe('listBackupVaults', () => {
     it('invokes listBackupVaults without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5150,7 +5150,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupVaults without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5205,7 +5205,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupVaults with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5236,7 +5236,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupVaultsStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5288,15 +5288,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupVaultsStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5337,15 +5337,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupVaults without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5386,15 +5386,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupVaults with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5426,9 +5426,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupVaults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5436,7 +5436,7 @@ describe('v1.BackupDRClient', () => {
   describe('fetchUsableBackupVaults', () => {
     it('invokes fetchUsableBackupVaults without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5476,7 +5476,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchUsableBackupVaults without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5531,7 +5531,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchUsableBackupVaults with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5565,7 +5565,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchUsableBackupVaultsStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5631,7 +5631,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchUsableBackupVaultsStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5686,7 +5686,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with fetchUsableBackupVaults without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5739,7 +5739,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with fetchUsableBackupVaults with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5785,7 +5785,7 @@ describe('v1.BackupDRClient', () => {
   describe('listDataSources', () => {
     it('invokes listDataSources without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5818,7 +5818,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listDataSources without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5867,7 +5867,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listDataSources with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5898,7 +5898,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listDataSourcesStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5944,15 +5944,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataSourcesStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5993,15 +5993,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataSources without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6036,15 +6036,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataSources with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6076,9 +6076,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6086,7 +6086,7 @@ describe('v1.BackupDRClient', () => {
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6119,7 +6119,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackups without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6168,7 +6168,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackups with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6199,7 +6199,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupsStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6245,15 +6245,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6296,15 +6296,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6339,15 +6339,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6381,9 +6381,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6391,7 +6391,7 @@ describe('v1.BackupDRClient', () => {
   describe('fetchBackupsForResourceType', () => {
     it('invokes fetchBackupsForResourceType without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6425,7 +6425,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchBackupsForResourceType without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6474,7 +6474,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchBackupsForResourceType with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6508,7 +6508,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchBackupsForResourceTypeStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6571,7 +6571,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchBackupsForResourceTypeStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6629,7 +6629,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with fetchBackupsForResourceType without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6676,7 +6676,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with fetchBackupsForResourceType with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6722,7 +6722,7 @@ describe('v1.BackupDRClient', () => {
   describe('listBackupPlans', () => {
     it('invokes listBackupPlans without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6755,7 +6755,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlans without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6804,7 +6804,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlans with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6835,7 +6835,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlansStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6881,15 +6881,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupPlansStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6930,15 +6930,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupPlans without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6973,15 +6973,15 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackupPlans with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7013,9 +7013,9 @@ describe('v1.BackupDRClient', () => {
       assert(
         (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7023,7 +7023,7 @@ describe('v1.BackupDRClient', () => {
   describe('listBackupPlanRevisions', () => {
     it('invokes listBackupPlanRevisions without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7063,7 +7063,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlanRevisions without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7095,8 +7095,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IBackupPlanRevision[]
-              | null,
+              protos.google.cloud.backupdr.v1.IBackupPlanRevision[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7120,7 +7119,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlanRevisions with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7154,7 +7153,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlanRevisionsStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7221,7 +7220,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlanRevisionsStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7277,7 +7276,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with listBackupPlanRevisions without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7331,7 +7330,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with listBackupPlanRevisions with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7378,7 +7377,7 @@ describe('v1.BackupDRClient', () => {
   describe('listBackupPlanAssociations', () => {
     it('invokes listBackupPlanAssociations without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7418,7 +7417,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlanAssociations without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7450,8 +7449,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IBackupPlanAssociation[]
-              | null,
+              protos.google.cloud.backupdr.v1.IBackupPlanAssociation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7475,7 +7473,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlanAssociations with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7509,7 +7507,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlanAssociationsStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7576,7 +7574,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listBackupPlanAssociationsStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7632,7 +7630,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with listBackupPlanAssociations without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7686,7 +7684,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with listBackupPlanAssociations with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7733,7 +7731,7 @@ describe('v1.BackupDRClient', () => {
   describe('fetchBackupPlanAssociationsForResourceType', () => {
     it('invokes fetchBackupPlanAssociationsForResourceType without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7776,7 +7774,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchBackupPlanAssociationsForResourceType without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7808,8 +7806,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IBackupPlanAssociation[]
-              | null,
+              protos.google.cloud.backupdr.v1.IBackupPlanAssociation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7835,7 +7832,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchBackupPlanAssociationsForResourceType with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7869,7 +7866,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchBackupPlanAssociationsForResourceTypeStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7940,7 +7937,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchBackupPlanAssociationsForResourceTypeStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8000,7 +7997,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with fetchBackupPlanAssociationsForResourceType without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8055,7 +8052,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with fetchBackupPlanAssociationsForResourceType with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8103,7 +8100,7 @@ describe('v1.BackupDRClient', () => {
   describe('listDataSourceReferences', () => {
     it('invokes listDataSourceReferences without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8143,7 +8140,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listDataSourceReferences without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8175,8 +8172,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IDataSourceReference[]
-              | null,
+              protos.google.cloud.backupdr.v1.IDataSourceReference[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8200,7 +8196,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listDataSourceReferences with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8234,7 +8230,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listDataSourceReferencesStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8301,7 +8297,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes listDataSourceReferencesStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8357,7 +8353,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with listDataSourceReferences without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8411,7 +8407,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with listDataSourceReferences with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8458,7 +8454,7 @@ describe('v1.BackupDRClient', () => {
   describe('fetchDataSourceReferencesForResourceType', () => {
     it('invokes fetchDataSourceReferencesForResourceType without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8501,7 +8497,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchDataSourceReferencesForResourceType without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8533,8 +8529,7 @@ describe('v1.BackupDRClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.backupdr.v1.IDataSourceReference[]
-              | null,
+              protos.google.cloud.backupdr.v1.IDataSourceReference[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8560,7 +8555,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchDataSourceReferencesForResourceType with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8594,7 +8589,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchDataSourceReferencesForResourceTypeStream without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8665,7 +8660,7 @@ describe('v1.BackupDRClient', () => {
 
     it('invokes fetchDataSourceReferencesForResourceTypeStream with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8725,7 +8720,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with fetchDataSourceReferencesForResourceType without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8780,7 +8775,7 @@ describe('v1.BackupDRClient', () => {
 
     it('uses async iteration with fetchDataSourceReferencesForResourceType with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8827,7 +8822,7 @@ describe('v1.BackupDRClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8857,7 +8852,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8895,7 +8890,7 @@ describe('v1.BackupDRClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8905,7 +8900,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8937,7 +8932,7 @@ describe('v1.BackupDRClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8967,7 +8962,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9005,7 +9000,7 @@ describe('v1.BackupDRClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9015,7 +9010,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9047,7 +9042,7 @@ describe('v1.BackupDRClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9080,7 +9075,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9118,7 +9113,7 @@ describe('v1.BackupDRClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9128,7 +9123,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9163,7 +9158,7 @@ describe('v1.BackupDRClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9193,7 +9188,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9237,7 +9232,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9272,7 +9267,7 @@ describe('v1.BackupDRClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9320,7 +9315,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9361,7 +9356,7 @@ describe('v1.BackupDRClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9382,7 +9377,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9410,7 +9405,7 @@ describe('v1.BackupDRClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9420,7 +9415,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9444,7 +9439,7 @@ describe('v1.BackupDRClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9466,7 +9461,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9494,7 +9489,7 @@ describe('v1.BackupDRClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9504,7 +9499,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9528,7 +9523,7 @@ describe('v1.BackupDRClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9550,7 +9545,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9578,7 +9573,7 @@ describe('v1.BackupDRClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9588,7 +9583,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9612,7 +9607,7 @@ describe('v1.BackupDRClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9647,7 +9642,7 @@ describe('v1.BackupDRClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9685,7 +9680,7 @@ describe('v1.BackupDRClient', () => {
         backup: 'backupValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9771,7 +9766,7 @@ describe('v1.BackupDRClient', () => {
         backup_plan: 'backupPlanValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9835,7 +9830,7 @@ describe('v1.BackupDRClient', () => {
         backup_plan_association: 'backupPlanAssociationValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9917,7 +9912,7 @@ describe('v1.BackupDRClient', () => {
         revision: 'revisionValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10008,7 +10003,7 @@ describe('v1.BackupDRClient', () => {
         backupvault: 'backupvaultValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10073,7 +10068,7 @@ describe('v1.BackupDRClient', () => {
         datasource: 'datasourceValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10148,7 +10143,7 @@ describe('v1.BackupDRClient', () => {
         data_source_reference: 'dataSourceReferenceValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10225,7 +10220,7 @@ describe('v1.BackupDRClient', () => {
         location: 'locationValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10275,7 +10270,7 @@ describe('v1.BackupDRClient', () => {
         managementserver: 'managementserverValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10341,7 +10336,7 @@ describe('v1.BackupDRClient', () => {
         project: 'projectValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10381,7 +10376,7 @@ describe('v1.BackupDRClient', () => {
         resource_backup_config: 'resourceBackupConfigValue',
       };
       const client = new backupdrModule.v1.BackupDRClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

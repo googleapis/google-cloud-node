@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sessionserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sessionServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.SessionServiceClient', () => {
       assert(client.sessionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sessionServiceStub);
@@ -299,14 +299,14 @@ describe('v1.SessionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sessionServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.SessionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.SessionServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.SessionServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.SessionServiceClient', () => {
   describe('getSession', () => {
     it('invokes getSession without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes getSession without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes getSession with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes getSession with closed client', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1.SessionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSession(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1.SessionServiceClient', () => {
   describe('updateSession', () => {
     it('invokes updateSession without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes updateSession without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes updateSession with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes updateSession with closed client', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.SessionServiceClient', () => {
       );
       request.session.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSession(request), expectedError);
@@ -626,7 +626,7 @@ describe('v1.SessionServiceClient', () => {
   describe('appendEvent', () => {
     it('invokes appendEvent without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes appendEvent without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes appendEvent with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes appendEvent with closed client', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1.SessionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.appendEvent(request), expectedError);
@@ -758,7 +758,7 @@ describe('v1.SessionServiceClient', () => {
   describe('createSession', () => {
     it('invokes createSession without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes createSession without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes createSession with call error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -876,7 +876,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes createSession with LRO error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -909,7 +909,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes checkCreateSessionProgress without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -917,8 +917,8 @@ describe('v1.SessionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSessionProgress(
@@ -931,7 +931,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes checkCreateSessionProgress with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -952,7 +952,7 @@ describe('v1.SessionServiceClient', () => {
   describe('deleteSession', () => {
     it('invokes deleteSession without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -985,7 +985,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes deleteSession without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1039,7 +1039,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes deleteSession with call error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1070,7 +1070,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes deleteSession with LRO error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1103,7 +1103,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes checkDeleteSessionProgress without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1111,8 +1111,8 @@ describe('v1.SessionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSessionProgress(
@@ -1125,7 +1125,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes checkDeleteSessionProgress with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1.SessionServiceClient', () => {
   describe('listSessions', () => {
     it('invokes listSessions without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,7 +1179,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes listSessions without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1228,7 +1228,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes listSessions with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1259,7 +1259,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes listSessionsStream without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1305,15 +1305,15 @@ describe('v1.SessionServiceClient', () => {
       assert(
         (client.descriptors.page.listSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSessionsStream with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1356,15 +1356,15 @@ describe('v1.SessionServiceClient', () => {
       assert(
         (client.descriptors.page.listSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSessions without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1399,15 +1399,15 @@ describe('v1.SessionServiceClient', () => {
       assert(
         (client.descriptors.page.listSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSessions with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1439,9 +1439,9 @@ describe('v1.SessionServiceClient', () => {
       assert(
         (client.descriptors.page.listSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1449,7 +1449,7 @@ describe('v1.SessionServiceClient', () => {
   describe('listEvents', () => {
     it('invokes listEvents without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1488,7 +1488,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes listEvents without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes listEvents with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1574,7 +1574,7 @@ describe('v1.SessionServiceClient', () => {
 
     it('invokes listEventsStream without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1626,15 +1626,15 @@ describe('v1.SessionServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEventsStream with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1677,15 +1677,15 @@ describe('v1.SessionServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvents without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1726,15 +1726,15 @@ describe('v1.SessionServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvents with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1768,16 +1768,16 @@ describe('v1.SessionServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1807,7 +1807,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1845,7 +1845,7 @@ describe('v1.SessionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1855,7 +1855,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1887,7 +1887,7 @@ describe('v1.SessionServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1917,7 +1917,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1955,7 +1955,7 @@ describe('v1.SessionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1965,7 +1965,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1997,7 +1997,7 @@ describe('v1.SessionServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2030,7 +2030,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2068,7 +2068,7 @@ describe('v1.SessionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2078,7 +2078,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,7 +2113,7 @@ describe('v1.SessionServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2143,7 +2143,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2187,7 +2187,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2222,7 +2222,7 @@ describe('v1.SessionServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2270,7 +2270,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2311,7 @@ describe('v1.SessionServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2332,7 +2332,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2360,7 +2360,7 @@ describe('v1.SessionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2370,7 +2370,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2394,7 +2394,7 @@ describe('v1.SessionServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2444,7 +2444,7 @@ describe('v1.SessionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2454,7 +2454,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2478,7 +2478,7 @@ describe('v1.SessionServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2500,7 +2500,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2528,7 +2528,7 @@ describe('v1.SessionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2538,7 +2538,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2562,7 +2562,7 @@ describe('v1.SessionServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2597,7 +2597,7 @@ describe('v1.SessionServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2635,7 +2635,7 @@ describe('v1.SessionServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2722,7 +2722,7 @@ describe('v1.SessionServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2799,7 +2799,7 @@ describe('v1.SessionServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2874,7 +2874,7 @@ describe('v1.SessionServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2951,7 +2951,7 @@ describe('v1.SessionServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3016,7 +3016,7 @@ describe('v1.SessionServiceClient', () => {
         context: 'contextValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3091,7 +3091,7 @@ describe('v1.SessionServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3156,7 +3156,7 @@ describe('v1.SessionServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3231,7 +3231,7 @@ describe('v1.SessionServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3296,7 +3296,7 @@ describe('v1.SessionServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3361,7 +3361,7 @@ describe('v1.SessionServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3437,7 +3437,7 @@ describe('v1.SessionServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3519,7 +3519,7 @@ describe('v1.SessionServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3595,7 +3595,7 @@ describe('v1.SessionServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3670,7 +3670,7 @@ describe('v1.SessionServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3734,7 +3734,7 @@ describe('v1.SessionServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3812,7 +3812,7 @@ describe('v1.SessionServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3889,7 +3889,7 @@ describe('v1.SessionServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3965,7 +3965,7 @@ describe('v1.SessionServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4029,7 +4029,7 @@ describe('v1.SessionServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4110,7 +4110,7 @@ describe('v1.SessionServiceClient', () => {
         index: 'indexValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4174,7 +4174,7 @@ describe('v1.SessionServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4239,7 +4239,7 @@ describe('v1.SessionServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4316,7 +4316,7 @@ describe('v1.SessionServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4380,7 +4380,7 @@ describe('v1.SessionServiceClient', () => {
         model: 'modelValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4444,7 +4444,7 @@ describe('v1.SessionServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4524,7 +4524,7 @@ describe('v1.SessionServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4601,7 +4601,7 @@ describe('v1.SessionServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4708,7 +4708,7 @@ describe('v1.SessionServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4773,7 +4773,7 @@ describe('v1.SessionServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4849,7 +4849,7 @@ describe('v1.SessionServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4930,7 +4930,7 @@ describe('v1.SessionServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4995,7 +4995,7 @@ describe('v1.SessionServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5076,7 +5076,7 @@ describe('v1.SessionServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5153,7 +5153,7 @@ describe('v1.SessionServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5217,7 +5217,7 @@ describe('v1.SessionServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5297,7 +5297,7 @@ describe('v1.SessionServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5400,7 +5400,7 @@ describe('v1.SessionServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5524,7 +5524,7 @@ describe('v1.SessionServiceClient', () => {
         model: 'modelValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5615,7 +5615,7 @@ describe('v1.SessionServiceClient', () => {
         model: 'modelValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5668,7 +5668,7 @@ describe('v1.SessionServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5731,7 +5731,7 @@ describe('v1.SessionServiceClient', () => {
         location: 'locationValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5785,7 +5785,7 @@ describe('v1.SessionServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5860,7 +5860,7 @@ describe('v1.SessionServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5926,7 +5926,7 @@ describe('v1.SessionServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6001,7 +6001,7 @@ describe('v1.SessionServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6066,7 +6066,7 @@ describe('v1.SessionServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6143,7 +6143,7 @@ describe('v1.SessionServiceClient', () => {
         event: 'eventValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6230,7 +6230,7 @@ describe('v1.SessionServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6295,7 +6295,7 @@ describe('v1.SessionServiceClient', () => {
         study: 'studyValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6359,7 +6359,7 @@ describe('v1.SessionServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6424,7 +6424,7 @@ describe('v1.SessionServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6520,7 +6520,7 @@ describe('v1.SessionServiceClient', () => {
         run: 'runValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6609,7 +6609,7 @@ describe('v1.SessionServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6732,7 +6732,7 @@ describe('v1.SessionServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6801,7 +6801,7 @@ describe('v1.SessionServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6876,7 +6876,7 @@ describe('v1.SessionServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new sessionserviceModule.v1.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

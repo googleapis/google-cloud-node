@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as environmentsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.environmentsStub, undefined);
@@ -279,12 +279,12 @@ describe('v1.EnvironmentsClient', () => {
       assert(client.environmentsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.environmentsStub);
@@ -293,14 +293,14 @@ describe('v1.EnvironmentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.environmentsStub, undefined);
@@ -309,7 +309,7 @@ describe('v1.EnvironmentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v1.EnvironmentsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v1.EnvironmentsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('getEnvironment', () => {
     it('invokes getEnvironment without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getEnvironment without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getEnvironment with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getEnvironment with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEnvironment(request), expectedError);
@@ -484,7 +484,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('executeAirflowCommand', () => {
     it('invokes executeAirflowCommand without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes executeAirflowCommand without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes executeAirflowCommand with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes executeAirflowCommand with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.environment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -623,7 +623,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('stopAirflowCommand', () => {
     it('invokes stopAirflowCommand without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes stopAirflowCommand without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes stopAirflowCommand with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes stopAirflowCommand with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.environment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.stopAirflowCommand(request), expectedError);
@@ -756,7 +756,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('pollAirflowCommand', () => {
     it('invokes pollAirflowCommand without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -788,7 +788,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes pollAirflowCommand without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes pollAirflowCommand with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes pollAirflowCommand with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -879,7 +879,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.environment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pollAirflowCommand(request), expectedError);
@@ -889,7 +889,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('createUserWorkloadsSecret', () => {
     it('invokes createUserWorkloadsSecret without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -921,7 +921,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createUserWorkloadsSecret without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createUserWorkloadsSecret with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createUserWorkloadsSecret with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1015,7 +1015,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1028,7 +1028,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('getUserWorkloadsSecret', () => {
     it('invokes getUserWorkloadsSecret without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,7 +1060,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getUserWorkloadsSecret without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getUserWorkloadsSecret with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1141,7 +1141,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getUserWorkloadsSecret with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1154,7 +1154,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1167,7 +1167,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('updateUserWorkloadsSecret', () => {
     it('invokes updateUserWorkloadsSecret without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1200,7 +1200,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateUserWorkloadsSecret without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1248,7 +1248,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateUserWorkloadsSecret with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateUserWorkloadsSecret with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1297,7 +1297,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.userWorkloadsSecret.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1310,7 +1310,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('deleteUserWorkloadsSecret', () => {
     it('invokes deleteUserWorkloadsSecret without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteUserWorkloadsSecret without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1389,7 +1389,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteUserWorkloadsSecret with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteUserWorkloadsSecret with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1436,7 +1436,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1449,7 +1449,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('createUserWorkloadsConfigMap', () => {
     it('invokes createUserWorkloadsConfigMap without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1481,7 +1481,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createUserWorkloadsConfigMap without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1528,7 +1528,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createUserWorkloadsConfigMap with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1562,7 +1562,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createUserWorkloadsConfigMap with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1575,7 +1575,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1588,7 +1588,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('getUserWorkloadsConfigMap', () => {
     it('invokes getUserWorkloadsConfigMap without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1620,7 +1620,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getUserWorkloadsConfigMap without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1667,7 +1667,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getUserWorkloadsConfigMap with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1701,7 +1701,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes getUserWorkloadsConfigMap with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1714,7 +1714,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1727,7 +1727,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('updateUserWorkloadsConfigMap', () => {
     it('invokes updateUserWorkloadsConfigMap without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1760,7 +1760,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateUserWorkloadsConfigMap without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1808,7 +1808,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateUserWorkloadsConfigMap with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1843,7 +1843,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateUserWorkloadsConfigMap with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1857,7 +1857,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.userWorkloadsConfigMap.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1870,7 +1870,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('deleteUserWorkloadsConfigMap', () => {
     it('invokes deleteUserWorkloadsConfigMap without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1902,7 +1902,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteUserWorkloadsConfigMap without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1949,7 +1949,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteUserWorkloadsConfigMap with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1983,7 +1983,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteUserWorkloadsConfigMap with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,7 +1996,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2009,7 +2009,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('fetchDatabaseProperties', () => {
     it('invokes fetchDatabaseProperties without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2041,7 +2041,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes fetchDatabaseProperties without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,7 +2088,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes fetchDatabaseProperties with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2122,7 +2122,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes fetchDatabaseProperties with closed client', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2135,7 +2135,7 @@ describe('v1.EnvironmentsClient', () => {
       );
       request.environment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2148,7 +2148,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('createEnvironment', () => {
     it('invokes createEnvironment without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2181,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createEnvironment without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2235,7 +2235,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createEnvironment with call error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2266,7 +2266,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes createEnvironment with LRO error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2299,7 +2299,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkCreateEnvironmentProgress without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2307,8 +2307,8 @@ describe('v1.EnvironmentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEnvironmentProgress(
@@ -2321,7 +2321,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkCreateEnvironmentProgress with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2342,7 +2342,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('updateEnvironment', () => {
     it('invokes updateEnvironment without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2375,7 +2375,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateEnvironment without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2429,7 +2429,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateEnvironment with call error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2460,7 +2460,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes updateEnvironment with LRO error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2493,7 +2493,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkUpdateEnvironmentProgress without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2501,8 +2501,8 @@ describe('v1.EnvironmentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEnvironmentProgress(
@@ -2515,7 +2515,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkUpdateEnvironmentProgress with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2536,7 +2536,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('deleteEnvironment', () => {
     it('invokes deleteEnvironment without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2569,7 +2569,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteEnvironment without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2623,7 +2623,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteEnvironment with call error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2654,7 +2654,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes deleteEnvironment with LRO error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2687,7 +2687,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkDeleteEnvironmentProgress without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2695,8 +2695,8 @@ describe('v1.EnvironmentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEnvironmentProgress(
@@ -2709,7 +2709,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkDeleteEnvironmentProgress with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2730,7 +2730,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('checkUpgrade', () => {
     it('invokes checkUpgrade without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2762,7 +2762,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkUpgrade without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2816,7 +2816,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkUpgrade with call error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2847,7 +2847,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkUpgrade with LRO error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2880,7 +2880,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkCheckUpgradeProgress without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,8 +2888,8 @@ describe('v1.EnvironmentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCheckUpgradeProgress(
@@ -2902,7 +2902,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkCheckUpgradeProgress with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2920,7 +2920,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('saveSnapshot', () => {
     it('invokes saveSnapshot without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2952,7 +2952,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes saveSnapshot without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3006,7 +3006,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes saveSnapshot with call error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3037,7 +3037,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes saveSnapshot with LRO error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3070,7 +3070,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkSaveSnapshotProgress without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3078,8 +3078,8 @@ describe('v1.EnvironmentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSaveSnapshotProgress(
@@ -3092,7 +3092,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkSaveSnapshotProgress with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3110,7 +3110,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('loadSnapshot', () => {
     it('invokes loadSnapshot without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3142,7 +3142,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes loadSnapshot without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3196,7 +3196,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes loadSnapshot with call error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3227,7 +3227,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes loadSnapshot with LRO error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3260,7 +3260,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkLoadSnapshotProgress without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3268,8 +3268,8 @@ describe('v1.EnvironmentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkLoadSnapshotProgress(
@@ -3282,7 +3282,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkLoadSnapshotProgress with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3300,7 +3300,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('databaseFailover', () => {
     it('invokes databaseFailover without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3333,7 +3333,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes databaseFailover without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3387,7 +3387,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes databaseFailover with call error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3418,7 +3418,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes databaseFailover with LRO error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3451,7 +3451,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkDatabaseFailoverProgress without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3459,8 +3459,8 @@ describe('v1.EnvironmentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDatabaseFailoverProgress(
@@ -3473,7 +3473,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes checkDatabaseFailoverProgress with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3494,7 +3494,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('listEnvironments', () => {
     it('invokes listEnvironments without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3533,7 +3533,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listEnvironments without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3590,7 +3590,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listEnvironments with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3621,7 +3621,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listEnvironmentsStream without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3676,15 +3676,15 @@ describe('v1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listEnvironments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEnvironmentsStream with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3728,15 +3728,15 @@ describe('v1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listEnvironments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEnvironments without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3778,15 +3778,15 @@ describe('v1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEnvironments with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3819,9 +3819,9 @@ describe('v1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3829,7 +3829,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('listWorkloads', () => {
     it('invokes listWorkloads without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3868,7 +3868,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listWorkloads without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3925,7 +3925,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listWorkloads with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3956,7 +3956,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listWorkloadsStream without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4011,15 +4011,15 @@ describe('v1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWorkloadsStream with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4063,15 +4063,15 @@ describe('v1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkloads without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4113,15 +4113,15 @@ describe('v1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkloads with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4154,9 +4154,9 @@ describe('v1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4164,7 +4164,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('listUserWorkloadsSecrets', () => {
     it('invokes listUserWorkloadsSecrets without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4204,7 +4204,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listUserWorkloadsSecrets without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4261,7 +4261,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listUserWorkloadsSecrets with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4295,7 +4295,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listUserWorkloadsSecretsStream without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4364,7 +4364,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listUserWorkloadsSecretsStream with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4422,7 +4422,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('uses async iteration with listUserWorkloadsSecrets without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4476,7 +4476,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('uses async iteration with listUserWorkloadsSecrets with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4523,7 +4523,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('listUserWorkloadsConfigMaps', () => {
     it('invokes listUserWorkloadsConfigMaps without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4563,7 +4563,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listUserWorkloadsConfigMaps without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4620,7 +4620,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listUserWorkloadsConfigMaps with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4654,7 +4654,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listUserWorkloadsConfigMapsStream without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4726,7 +4726,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('invokes listUserWorkloadsConfigMapsStream with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4787,7 +4787,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('uses async iteration with listUserWorkloadsConfigMaps without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4841,7 +4841,7 @@ describe('v1.EnvironmentsClient', () => {
 
     it('uses async iteration with listUserWorkloadsConfigMaps with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4887,7 +4887,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4908,7 +4908,7 @@ describe('v1.EnvironmentsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4936,7 +4936,7 @@ describe('v1.EnvironmentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4946,7 +4946,7 @@ describe('v1.EnvironmentsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4970,7 +4970,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4992,7 +4992,7 @@ describe('v1.EnvironmentsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5020,7 +5020,7 @@ describe('v1.EnvironmentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5030,7 +5030,7 @@ describe('v1.EnvironmentsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5054,7 +5054,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5076,7 +5076,7 @@ describe('v1.EnvironmentsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5104,7 +5104,7 @@ describe('v1.EnvironmentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5114,7 +5114,7 @@ describe('v1.EnvironmentsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5138,7 +5138,7 @@ describe('v1.EnvironmentsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5173,7 +5173,7 @@ describe('v1.EnvironmentsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5209,7 +5209,7 @@ describe('v1.EnvironmentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5274,7 +5274,7 @@ describe('v1.EnvironmentsClient', () => {
         user_workloads_config_map: 'userWorkloadsConfigMapValue',
       };
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5371,7 +5371,7 @@ describe('v1.EnvironmentsClient', () => {
         user_workloads_secret: 'userWorkloadsSecretValue',
       };
       const client = new environmentsModule.v1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

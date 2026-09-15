@@ -15,11 +15,8 @@
  */
 
 import {GrpcService} from './common-grpc/service';
-import * as checkpointStream from 'checkpoint-stream';
-import * as eventsIntercept from 'events-intercept';
-import mergeStream = require('merge-stream');
 import {common as p} from 'protobufjs';
-import {Readable, Transform} from 'stream';
+import {PassThrough, Readable, Transform} from 'stream';
 import * as streamEvents from 'stream-events';
 import {grpc, CallOptions} from 'google-gax';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
@@ -27,7 +24,6 @@ import {DeadlineError, isRetryableInternalError} from './transaction-runner';
 import {codec, JSONOptions, Json, Field, Value} from './codec';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
-import * as stream from 'stream';
 import {isDefined, isEmpty, isString} from './helper';
 
 const originalDecode = codec.decode;
@@ -126,6 +122,186 @@ export interface Row extends Array<Field> {
 }
 
 /**
+ * Row implementation extending Array to provide a shared, non-enumerable
+ * toJSON method without per-row closures or Object.setPrototypeOf overhead.
+ */
+class RowImpl extends Array<Field> implements Row {
+  toJSON(options?: JSONOptions): Json {
+    return codec.convertFieldsToJson(this, options);
+  }
+}
+Object.defineProperty(RowImpl.prototype, 'constructor', {
+  value: Array,
+  writable: true,
+  configurable: true,
+  enumerable: false,
+});
+
+/**
+ * Creates an array of decoder functions for the specified struct fields.
+ *
+ * @private
+ */
+export function createFieldDecoders(
+  fields: google.spanner.v1.StructType.Field[],
+  options?: RowOptions,
+): Function[] {
+  const jsonMode = Boolean(options?.json);
+  const jsonOptions = options?.jsonOptions;
+  const columnsMetadata = options?.columnsMetadata;
+
+  return fields.map(({name, type}) => {
+    const columnMetadata =
+      columnsMetadata &&
+      name !== null &&
+      name !== undefined &&
+      Object.prototype.hasOwnProperty.call(columnsMetadata, name)
+        ? (columnsMetadata as Record<string, object>)[name]
+        : undefined;
+    if (codec.decode !== originalDecode) {
+      return (val: Value) =>
+        codec.decode(val, type as google.spanner.v1.Type, columnMetadata);
+    }
+    return codec.getDecoder(
+      type as google.spanner.v1.Type,
+      columnMetadata,
+      jsonMode ? jsonOptions || {} : undefined,
+    );
+  });
+}
+
+/**
+ * Directly creates a plain JSON object from row cell values, bypassing
+ * Struct, Row, and WrappedNumber class wrappers when possible.
+ *
+ * @private
+ */
+export function createJsonRow(
+  fields: google.spanner.v1.StructType.Field[],
+  decoders: Function[],
+  values: Value[],
+  includeNameless?: boolean,
+): Json {
+  const json: Json = {};
+  const len = fields.length;
+
+  for (let i = 0; i < len; i++) {
+    const {name} = fields[i];
+    if (!name && !includeNameless) {
+      continue;
+    }
+    const fieldName = name || `_${i}`;
+    try {
+      json[fieldName] = decoders[i](values[i]);
+    } catch (e) {
+      (e as Error).message = [
+        `Serializing column "${fieldName}" encountered an error: ${
+          (e as Error).message
+        }`,
+        'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+      ].join(' ');
+      throw e;
+    }
+  }
+  return json;
+}
+
+/**
+ * Converts an array of decoded cell values into a Row.
+ *
+ * @private
+ */
+export function createRow(
+  fields: google.spanner.v1.StructType.Field[],
+  decoders: Function[],
+  values: Value[],
+): Row {
+  const len = fields.length;
+  const row = new RowImpl(len);
+  for (let i = 0; i < len; i++) {
+    row[i] = {
+      name: fields[i].name,
+      value: decoders[i](values[i]),
+    };
+  }
+  return row;
+}
+
+/**
+ * Formats raw row values into either a plain JSON object or a Row instance
+ * according to the provided RowOptions.
+ *
+ * @private
+ */
+export function formatRow(
+  fields: google.spanner.v1.StructType.Field[],
+  decoders: Function[],
+  values: Value[],
+  options?: RowOptions,
+): Row {
+  const jsonMode = Boolean(options?.json);
+  const jsonOptions = options?.jsonOptions;
+  const isJsonStubbed =
+    codec.convertFieldsToJson !== originalConvertFieldsToJson;
+
+  if (jsonMode && !isJsonStubbed) {
+    return createJsonRow(
+      fields,
+      decoders,
+      values,
+      Boolean(jsonOptions?.includeNameless),
+    ) as unknown as Row;
+  }
+
+  const row = createRow(fields, decoders, values);
+  return jsonMode ? (row.toJSON(jsonOptions) as unknown as Row) : row;
+}
+
+/**
+ * Directly decodes rows from a PartialResultSet without going through the stream
+ * pipeline. Used by the fast-path for queries returning small results in a single chunk.
+ *
+ * @private
+ */
+export function decodeRowsDirect(
+  chunk: google.spanner.v1.PartialResultSet,
+  options?: RowOptions,
+  existingFields?: google.spanner.v1.StructType.Field[],
+  existingDecoders?: Function[],
+): Row[] {
+  const fields =
+    existingFields ||
+    ((chunk.metadata?.rowType?.fields ||
+      []) as google.spanner.v1.StructType.Field[]);
+  const numFields = fields.length;
+  const chunkValues = chunk.values || [];
+  const numValues = chunkValues.length;
+  if (numFields === 0 || numValues === 0) {
+    return [];
+  }
+
+  const rowCount = Math.floor(numValues / numFields);
+  const rows: Row[] = new Array(rowCount);
+
+  const decoders: Function[] =
+    existingDecoders || createFieldDecoders(fields, options);
+
+  const rowValues: Value[] = new Array(numFields);
+
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+    const offset = rowIndex * numFields;
+    for (let columnIndex = 0; columnIndex < numFields; columnIndex++) {
+      rowValues[columnIndex] = GrpcService.decodeValue_(
+        chunkValues[offset + columnIndex],
+      );
+    }
+    rows[rowIndex] = formatRow(fields, decoders, rowValues, options);
+  }
+
+  return rows;
+}
+
+/**
  * @callback PartialResultStream~rowCallback
  * @param {Row|object} row The row data.
  */
@@ -193,12 +369,14 @@ export class PartialResultStream extends Transform implements ResultEvents {
   private _pendingValueForResume?: p.IValue;
   private _values: p.IValue[];
   private _numPushFailed = 0;
+  private _isFirstChunk = true;
   constructor(options = {}) {
     super({objectMode: true});
 
     this._destroyed = false;
     this._options = Object.assign({maxResumeRetries: 20}, options);
     this._values = [];
+    this._isFirstChunk = true;
   }
   /**
    * Destroys the stream.
@@ -243,28 +421,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
     if (!this._fields && chunk.metadata) {
       this._fields = chunk.metadata.rowType!
         .fields as google.spanner.v1.StructType.Field[];
-
-      this._decoders = this._fields.map(({name, type}) => {
-        const columnMetadata =
-          this._options.columnsMetadata &&
-          name !== null &&
-          name !== undefined &&
-          Object.prototype.hasOwnProperty.call(
-            this._options.columnsMetadata,
-            name,
-          )
-            ? (this._options.columnsMetadata as any)[name]
-            : undefined;
-        if (codec.decode !== originalDecode) {
-          return val =>
-            codec.decode(val, type as google.spanner.v1.Type, columnMetadata);
-        }
-        return codec.getDecoder(
-          type as google.spanner.v1.Type,
-          columnMetadata,
-          this._options.json ? this._options.jsonOptions || {} : undefined,
-        );
-      });
+      this._decoders = createFieldDecoders(this._fields, this._options);
     }
 
     let res = true;
@@ -279,6 +436,11 @@ export class PartialResultStream extends Transform implements ResultEvents {
 
     if (chunk.last) {
       this.push(null);
+      // Calling next() notifies Node's stream machinery that processing of this
+      // chunk is complete on the Writable side of this Transform stream.
+      // This is a local, synchronous callback to Node's internal buffer; it does
+      // not block the event loop or wait for upstream network I/O or gRPC trailers.
+      next();
       return;
     }
 
@@ -339,6 +501,14 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @param {object} chunk The partial result set.
    */
   private _addChunk(chunk: google.spanner.v1.PartialResultSet): boolean {
+    const isFirstChunk = this._isFirstChunk;
+    this._isFirstChunk = false;
+
+    // Fast path for single-chunk stream responses:
+    if (isFirstChunk && chunk.last && !chunk.chunkedValue) {
+      return this._addSingleChunk(chunk);
+    }
+
     const chunkValues = chunk.values;
     const numValues = chunkValues.length;
     const values: Value[] = new Array(numValues);
@@ -381,6 +551,33 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
     return res;
   }
+
+  /**
+   * Fast-path handler for single-chunk stream responses. Decodes rows directly
+   * and pushes them into the stream without incremental chunk buffering.
+   *
+   * @private
+   * @param {google.spanner.v1.PartialResultSet} chunk The partial result set.
+   * @returns {boolean} Whether the stream can accept more data.
+   */
+  private _addSingleChunk(chunk: google.spanner.v1.PartialResultSet): boolean {
+    const rows = decodeRowsDirect(
+      chunk,
+      this._options,
+      this._fields,
+      this._decoders,
+    );
+    let canAcceptMore = true;
+    for (let i = 0; i < rows.length; i++) {
+      const accepted = this.push(rows[i]);
+      if (!accepted && canAcceptMore) {
+        canAcceptMore = false;
+        this.emit('paused');
+      }
+    }
+    return canAcceptMore;
+  }
+
   /**
    * Manages complete values, pushing a completed row into the stream once all
    * values have been received.
@@ -400,20 +597,9 @@ export class PartialResultStream extends Transform implements ResultEvents {
 
     this._values = [];
 
-    const isJsonStubbed =
-      codec.convertFieldsToJson !== originalConvertFieldsToJson;
-
-    if (this._options.json && !isJsonStubbed) {
-      return this.push(this._createJsonRow(values));
-    }
-
-    const row: Row = this._createRow(values);
-
-    if (this._options.json) {
-      return this.push(row.toJSON(this._options.jsonOptions));
-    }
-
-    return this.push(row);
+    return this.push(
+      formatRow(this._fields, this._decoders, values, this._options),
+    );
   }
 
   /**
@@ -426,31 +612,12 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @returns {Json} The plain JavaScript object representing the row.
    */
   private _createJsonRow(values: Value[]): Json {
-    const json: Json = {};
-    const fields = this._fields;
-    const decoders = this._decoders;
-    const len = fields.length;
-    const includeNameless = !!this._options.jsonOptions?.includeNameless;
-
-    for (let i = 0; i < len; i++) {
-      const {name} = fields[i];
-      if (!name && !includeNameless) {
-        continue;
-      }
-      const fieldName = name ? name : `_${i}`;
-      try {
-        json[fieldName] = decoders[i](values[i]);
-      } catch (e) {
-        (e as Error).message = [
-          `Serializing column "${fieldName}" encountered an error: ${
-            (e as Error).message
-          }`,
-          'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
-        ].join(' ');
-        throw e;
-      }
-    }
-    return json;
+    return createJsonRow(
+      this._fields,
+      this._decoders,
+      values,
+      Boolean(this._options.jsonOptions?.includeNameless),
+    );
   }
   /**
    * Converts an array of values into a row.
@@ -461,25 +628,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @returns {Row}
    */
   private _createRow(values: Value[]): Row {
-    const len = values.length;
-    const fields = new Array(len);
-    const decoders = this._decoders;
-    const classFields = this._fields;
-
-    for (let i = 0; i < len; i++) {
-      fields[i] = {
-        name: classFields[i].name,
-        value: decoders[i](values[i]),
-      };
-    }
-
-    Object.defineProperty(fields, 'toJSON', {
-      value: (options?: JSONOptions): Json => {
-        return codec.convertFieldsToJson(fields, options);
-      },
-    });
-
-    return fields as Row;
+    return createRow(this._fields, this._decoders, values);
   }
   /**
    * Attempts to merge chunked values together.
@@ -555,6 +704,100 @@ export class PartialResultStream extends Transform implements ResultEvents {
 }
 
 /**
+ * A custom Transform stream that buffers PartialResultSet chunks and flushes them
+ * asynchronously to prevent blocking the event loop.
+ *
+ * It holds chunks in a queue until a "checkpoint" is reached (as determined by
+ * `isCheckpointFn`) or until the queue exceeds `maxQueued` items.
+ *
+ * @private
+ */
+class CheckpointStream extends Transform {
+  private queue: google.spanner.v1.PartialResultSet[] = [];
+  private maxQueued: number;
+  private isCheckpointFn: (
+    chunk: google.spanner.v1.PartialResultSet,
+  ) => boolean;
+
+  constructor(options: {
+    maxQueued?: number;
+    isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet) => boolean;
+  }) {
+    super({objectMode: true});
+    this.maxQueued = options.maxQueued ?? 10;
+    this.isCheckpointFn = options.isCheckpointFn;
+  }
+
+  /**
+   * Buffers chunks and flushes queue synchronously on checkpoints or when max limit is reached.
+   *
+   * @param {google.spanner.v1.PartialResultSet} chunk The chunk to transform.
+   * @param {string} enc Encoding (unused).
+   * @param {Function} callback Callback to signal completion of transformation.
+   */
+  _transform(
+    chunk: google.spanner.v1.PartialResultSet,
+    enc: string,
+    callback: () => void,
+  ): void {
+    this.queue.push(chunk);
+    const isCheckpoint = this.isCheckpointFn(chunk);
+    let shouldFlush = false;
+    if (isCheckpoint) {
+      this.emit('checkpoint', chunk);
+      shouldFlush = true;
+    } else if (this.queue.length > this.maxQueued) {
+      shouldFlush = true;
+    }
+
+    if (!shouldFlush) {
+      return callback();
+    }
+
+    this._flushQueue();
+    callback();
+  }
+
+  /**
+   * Flushes queued chunks synchronously to prevent state races on retry/reset.
+   *
+   * @private
+   */
+  private _flushQueue(): void {
+    while (this.queue.length > 0 && !this.destroyed) {
+      this.push(this.queue.shift());
+    }
+  }
+
+  /**
+   * Flushes remaining queued chunks before destroying the stream with the provided error.
+   *
+   * @param {Error} err The error to destroy the stream with.
+   */
+  flushAndDestroy(err: Error): void {
+    this._flushQueue();
+    this.destroy(err);
+  }
+
+  /**
+   * Clears the queue without flushing, useful when retrying and discarding partial data.
+   */
+  reset(): void {
+    this.queue = [];
+  }
+
+  /**
+   * Flushes all remaining queued chunks when the stream ends.
+   *
+   * @param {Function} callback Callback to call when flushing is complete.
+   */
+  _flush(callback: () => void): void {
+    this._flushQueue();
+    callback();
+  }
+}
+
+/**
  * Rows returned from queries may be chunked, requiring them to be stitched
  * together. This function returns a stream that will properly assemble these
  * rows, as well as retry after an error. Rows are only emitted if they hit a
@@ -577,28 +820,35 @@ export function partialResultStream(
   const retryableCodes = [grpc.status.UNAVAILABLE];
   const maxQueued = 10;
   let lastResumeToken: ResumeToken;
-  let lastRequestStream: Readable;
+  let lastRequestStream: Readable | undefined;
+  let errorListener: (err: grpc.ServiceError) => void;
   const startTime = Date.now();
   const timeout = options?.gaxOptions?.timeout ?? Infinity;
 
-  // mergeStream allows multiple streams to be connected into one. This is good;
+  // requestsStream allows multiple streams to be connected into one. This is good;
   // if we need to retry a request and pipe more data to the user's stream.
   // We also add an additional stream that can be used to flush any remaining
   // items in the checkpoint stream that have been received, and that did not
   // contain a resume token.
-  const requestsStream = mergeStream();
-  const flushStream = new stream.PassThrough({objectMode: true});
-  requestsStream.add(flushStream);
+  const requestsStream = new PassThrough({objectMode: true});
+  const flushStream = new PassThrough({objectMode: true});
+  flushStream.pipe(requestsStream);
   const partialRSStream = new PartialResultStream(options);
   const userStream = streamEvents(partialRSStream);
   // We keep track of the number of PartialResultSets that did not include a
   // resume token, as that is an indication whether it is safe to retry the
   // stream halfway.
   let withoutCheckpointCount = 0;
-  const batchAndSplitOnTokenStream = checkpointStream.obj({
+  let receivedLast = false;
+  const batchAndSplitOnTokenStream = new CheckpointStream({
     maxQueued,
     isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet): boolean => {
-      const withCheckpoint = _hasResumeToken(chunk);
+      if (chunk.last) {
+        receivedLast = true;
+        destroyRequestStream();
+        requestsStream.end();
+      }
+      const withCheckpoint = _hasResumeToken(chunk) || Boolean(chunk.last);
       if (withCheckpoint) {
         withoutCheckpointCount = 0;
       } else {
@@ -611,32 +861,68 @@ export function partialResultStream(
   // This listener ensures that the last request that executed successfully
   // after one or more retries will end the requestsStream.
   const endListener = () => {
+    if (receivedLast) {
+      return;
+    }
     setImmediate(() => {
+      if (receivedLast) {
+        return;
+      }
       // Push a fake PartialResultSet without any values but with a resume token
       // into the stream to ensure that the checkpoint stream is emptied, and
       // then push `null` to end the stream.
       flushStream.push({resumeToken: '_'});
       flushStream.push(null);
-      requestsStream.end();
     });
   };
+
+  const destroyRequestStream = (): void => {
+    if (lastRequestStream) {
+      const streamToClean = lastRequestStream;
+      lastRequestStream = undefined;
+      streamToClean.removeListener('end', endListener);
+      if (errorListener) {
+        streamToClean.removeListener('error', errorListener);
+      }
+      streamToClean.on('error', () => {});
+      streamToClean.unpipe(requestsStream);
+      if (receivedLast) {
+        // Query completed successfully. Do not cancel the gRPC call; allow it
+        // to drain remaining trailers/EOF in the background so it is not marked
+        // CANCELLED by Spanner or Cloud Monitoring.
+        streamToClean.resume();
+      } else {
+        streamToClean.destroy();
+      }
+    }
+  };
+
   const makeRequest = (): void => {
     if (isDefined(lastResumeToken) && lastResumeToken.length > 0) {
       partialRSStream._resetPendingValues();
     }
     lastRequestStream = requestFn(lastResumeToken);
     lastRequestStream.on('end', endListener);
-    requestsStream.add(lastRequestStream);
+    errorListener = (err: grpc.ServiceError) => {
+      if (receivedLast) {
+        return;
+      }
+      destroyRequestStream();
+      setImmediate(() => retry(err));
+    };
+    lastRequestStream.on('error', errorListener);
+    lastRequestStream.pipe(requestsStream, {end: false});
   };
 
   const retry = (err: grpc.ServiceError): void => {
+    destroyRequestStream();
     const elapsed = Date.now() - startTime;
     if (elapsed >= timeout) {
       // The timeout has reached so this will flush any rows the
       // checkpoint stream has queued. After that, we will destroy the
       // user's stream with the Deadline exceeded error.
       setImmediate(() =>
-        batchAndSplitOnTokenStream.destroy(new DeadlineError(err)),
+        batchAndSplitOnTokenStream.flushAndDestroy(new DeadlineError(err)),
       );
       return;
     }
@@ -653,14 +939,10 @@ export function partialResultStream(
       // This is not a retryable error so this will flush any rows the
       // checkpoint stream has queued. After that, we will destroy the
       // user's stream with the same error.
-      setImmediate(() => batchAndSplitOnTokenStream.destroy(err));
+      setImmediate(() => batchAndSplitOnTokenStream.flushAndDestroy(err));
       return;
     }
 
-    if (lastRequestStream) {
-      lastRequestStream.removeListener('end', endListener);
-      lastRequestStream.destroy();
-    }
     // Delay the retry until all the values that are already in the stream
     // pipeline have been handled. This ensures that the checkpoint stream is
     // reset to the correct point. Calling .reset() directly here could cause
@@ -674,15 +956,12 @@ export function partialResultStream(
   };
 
   userStream.once('reading', makeRequest);
-  eventsIntercept.patch(requestsStream);
-
-  // need types for events-intercept
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (requestsStream as any).intercept('error', err =>
-    // Retry __after__ all pending data has been processed to ensure that the
-    // checkpoint stream is reset at the correct position.
-    setImmediate(() => retry(err)),
-  );
+  userStream.once('close', () => {
+    destroyRequestStream();
+    requestsStream.destroy();
+    flushStream.destroy();
+    batchAndSplitOnTokenStream.destroy();
+  });
 
   return (
     requestsStream

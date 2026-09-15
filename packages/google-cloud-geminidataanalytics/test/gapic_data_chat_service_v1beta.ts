@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datachatserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -138,9 +138,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -220,7 +220,7 @@ describe('v1beta.DataChatServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new datachatserviceModule.v1beta.DataChatServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -264,7 +264,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataChatServiceStub, undefined);
@@ -272,12 +272,12 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(client.dataChatServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataChatServiceStub);
@@ -286,14 +286,14 @@ describe('v1beta.DataChatServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataChatServiceStub, undefined);
@@ -302,7 +302,7 @@ describe('v1beta.DataChatServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -310,7 +310,7 @@ describe('v1beta.DataChatServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -322,7 +322,7 @@ describe('v1beta.DataChatServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -345,7 +345,7 @@ describe('v1beta.DataChatServiceClient', () => {
   describe('createConversation', () => {
     it('invokes createConversation without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -377,7 +377,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes createConversation without error using callback', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes createConversation with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes createConversation with closed client', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1beta.DataChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createConversation(request), expectedError);
@@ -478,7 +478,7 @@ describe('v1beta.DataChatServiceClient', () => {
   describe('deleteConversation', () => {
     it('invokes deleteConversation without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -510,7 +510,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes deleteConversation without error using callback', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes deleteConversation with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes deleteConversation with closed client', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1beta.DataChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteConversation(request), expectedError);
@@ -611,7 +611,7 @@ describe('v1beta.DataChatServiceClient', () => {
   describe('getConversation', () => {
     it('invokes getConversation without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -642,7 +642,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes getConversation without error using callback', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -689,7 +689,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes getConversation with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -720,7 +720,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes getConversation with closed client', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v1beta.DataChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConversation(request), expectedError);
@@ -743,7 +743,7 @@ describe('v1beta.DataChatServiceClient', () => {
   describe('queryData', () => {
     it('invokes queryData without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -774,7 +774,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes queryData without error using callback', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -821,7 +821,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes queryData with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -849,7 +849,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes queryData with closed client', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1beta.DataChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryData(request), expectedError);
@@ -872,7 +872,7 @@ describe('v1beta.DataChatServiceClient', () => {
   describe('chat', () => {
     it('invokes chat without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes chat without error and gaxServerStreamingRetries enabled', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -961,7 +961,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes chat with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes chat with closed client', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,11 +1018,11 @@ describe('v1beta.DataChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.chat(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1050,7 +1050,7 @@ describe('v1beta.DataChatServiceClient', () => {
   describe('listConversations', () => {
     it('invokes listConversations without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1089,7 +1089,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes listConversations without error using callback', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes listConversations with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1177,7 +1177,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes listConversationsStream without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1232,15 +1232,15 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConversationsStream with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1284,15 +1284,15 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversations without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1334,15 +1334,15 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversations with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,9 +1375,9 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1385,7 +1385,7 @@ describe('v1beta.DataChatServiceClient', () => {
   describe('listMessages', () => {
     it('invokes listMessages without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1424,7 +1424,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes listMessages without error using callback', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1481,7 +1481,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes listMessages with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1512,7 +1512,7 @@ describe('v1beta.DataChatServiceClient', () => {
 
     it('invokes listMessagesStream without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,15 +1567,15 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMessages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMessagesStream with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1621,15 +1621,15 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMessages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMessages without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1671,15 +1671,15 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMessages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMessages with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1712,16 +1712,16 @@ describe('v1beta.DataChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMessages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1751,7 +1751,7 @@ describe('v1beta.DataChatServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1795,7 +1795,7 @@ describe('v1beta.DataChatServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1830,7 +1830,7 @@ describe('v1beta.DataChatServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,7 +1878,7 @@ describe('v1beta.DataChatServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1926,7 +1926,7 @@ describe('v1beta.DataChatServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1990,7 +1990,7 @@ describe('v1beta.DataChatServiceClient', () => {
         data_agent: 'dataAgentValue',
       };
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,7 +2053,7 @@ describe('v1beta.DataChatServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2101,7 +2101,7 @@ describe('v1beta.DataChatServiceClient', () => {
         project: 'projectValue',
       };
       const client = new datachatserviceModule.v1beta.DataChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

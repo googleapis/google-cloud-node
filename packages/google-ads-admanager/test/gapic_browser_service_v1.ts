@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as browserserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.BrowserServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.BrowserServiceClient', () => {
       assert(client.browserServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new browserserviceModule.v1.BrowserServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.browserServiceStub);
@@ -274,12 +274,12 @@ describe('v1.BrowserServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new browserserviceModule.v1.BrowserServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.BrowserServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -455,7 +455,7 @@ describe('v1.BrowserServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBrowser(request), expectedError);
@@ -465,7 +465,7 @@ describe('v1.BrowserServiceClient', () => {
   describe('listBrowsers', () => {
     it('invokes listBrowsers without error', async () => {
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -498,7 +498,7 @@ describe('v1.BrowserServiceClient', () => {
 
     it('invokes listBrowsers without error using callback', async () => {
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -547,7 +547,7 @@ describe('v1.BrowserServiceClient', () => {
 
     it('invokes listBrowsers with error', async () => {
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -578,7 +578,7 @@ describe('v1.BrowserServiceClient', () => {
 
     it('invokes listBrowsersStream without error', async () => {
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -624,15 +624,15 @@ describe('v1.BrowserServiceClient', () => {
       assert(
         (client.descriptors.page.listBrowsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBrowsersStream with error', async () => {
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -675,9 +675,9 @@ describe('v1.BrowserServiceClient', () => {
       assert(
         (client.descriptors.page.listBrowsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -718,15 +718,15 @@ describe('v1.BrowserServiceClient', () => {
       assert(
         (client.descriptors.page.listBrowsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBrowsers with error', async () => {
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -758,9 +758,9 @@ describe('v1.BrowserServiceClient', () => {
       assert(
         (client.descriptors.page.listBrowsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -774,7 +774,7 @@ describe('v1.BrowserServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v1.BrowserServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -907,7 +907,7 @@ describe('v1.BrowserServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -956,7 +956,7 @@ describe('v1.BrowserServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1.BrowserServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v1.BrowserServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v1.BrowserServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1.BrowserServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1205,6 +1205,58 @@ describe('v1.BrowserServiceClient', () => {
       });
     });
 
+    describe('breakTemplate', async () => {
+      const fakePath = '/rendered/path/breakTemplate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        break_template: 'breakTemplateValue',
+      };
+      const client = new browserserviceModule.v1.BrowserServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.breakTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.breakTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('breakTemplatePath', () => {
+        const result = client.breakTemplatePath(
+          'networkCodeValue',
+          'breakTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromBreakTemplateName', () => {
+        const result = client.matchNetworkCodeFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBreakTemplateFromBreakTemplateName', () => {
+        const result = client.matchBreakTemplateFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'breakTemplateValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('browser', async () => {
       const fakePath = '/rendered/path/browser';
       const expectedParameters = {
@@ -1212,7 +1264,7 @@ describe('v1.BrowserServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,7 +1313,7 @@ describe('v1.BrowserServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1366,7 @@ describe('v1.BrowserServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,7 +1418,7 @@ describe('v1.BrowserServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1419,7 +1471,7 @@ describe('v1.BrowserServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1472,7 +1524,7 @@ describe('v1.BrowserServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1529,7 +1581,7 @@ describe('v1.BrowserServiceClient', () => {
         company: 'companyValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1578,7 +1630,7 @@ describe('v1.BrowserServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1627,7 +1679,7 @@ describe('v1.BrowserServiceClient', () => {
         content: 'contentValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1676,7 +1728,7 @@ describe('v1.BrowserServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1728,7 +1780,7 @@ describe('v1.BrowserServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1780,7 +1832,7 @@ describe('v1.BrowserServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1829,7 +1881,7 @@ describe('v1.BrowserServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,7 +1933,7 @@ describe('v1.BrowserServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1938,7 +1990,7 @@ describe('v1.BrowserServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1991,7 +2043,7 @@ describe('v1.BrowserServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2043,7 +2095,7 @@ describe('v1.BrowserServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2106,7 +2158,7 @@ describe('v1.BrowserServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2171,7 +2223,7 @@ describe('v1.BrowserServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2236,7 +2288,7 @@ describe('v1.BrowserServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2298,7 +2350,7 @@ describe('v1.BrowserServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2345,7 +2397,7 @@ describe('v1.BrowserServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2402,7 +2454,7 @@ describe('v1.BrowserServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2455,7 +2507,7 @@ describe('v1.BrowserServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2518,7 +2570,7 @@ describe('v1.BrowserServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2583,7 +2635,7 @@ describe('v1.BrowserServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2635,7 +2687,7 @@ describe('v1.BrowserServiceClient', () => {
         label: 'labelValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2684,7 +2736,7 @@ describe('v1.BrowserServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2733,7 +2785,7 @@ describe('v1.BrowserServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2785,7 +2837,7 @@ describe('v1.BrowserServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2837,7 +2889,7 @@ describe('v1.BrowserServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2890,7 +2942,7 @@ describe('v1.BrowserServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2942,7 +2994,7 @@ describe('v1.BrowserServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2994,7 +3046,7 @@ describe('v1.BrowserServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3059,7 +3111,7 @@ describe('v1.BrowserServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3110,7 +3162,7 @@ describe('v1.BrowserServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3149,7 +3201,7 @@ describe('v1.BrowserServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3202,7 +3254,7 @@ describe('v1.BrowserServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3267,7 +3319,7 @@ describe('v1.BrowserServiceClient', () => {
         order: 'orderValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3316,7 +3368,7 @@ describe('v1.BrowserServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3365,7 +3417,7 @@ describe('v1.BrowserServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3417,7 +3469,7 @@ describe('v1.BrowserServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3470,7 +3522,7 @@ describe('v1.BrowserServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3533,7 +3585,7 @@ describe('v1.BrowserServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3596,7 +3648,7 @@ describe('v1.BrowserServiceClient', () => {
         report: 'reportValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3645,7 +3697,7 @@ describe('v1.BrowserServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3708,7 +3760,7 @@ describe('v1.BrowserServiceClient', () => {
         role: 'roleValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3757,7 +3809,7 @@ describe('v1.BrowserServiceClient', () => {
         site: 'siteValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3806,7 +3858,7 @@ describe('v1.BrowserServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3855,7 +3907,7 @@ describe('v1.BrowserServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3908,7 +3960,7 @@ describe('v1.BrowserServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3961,7 +4013,7 @@ describe('v1.BrowserServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4018,7 +4070,7 @@ describe('v1.BrowserServiceClient', () => {
         team: 'teamValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4067,7 +4119,7 @@ describe('v1.BrowserServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4130,7 +4182,7 @@ describe('v1.BrowserServiceClient', () => {
         user: 'userValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4179,7 +4231,7 @@ describe('v1.BrowserServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4242,7 +4294,7 @@ describe('v1.BrowserServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new browserserviceModule.v1.BrowserServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

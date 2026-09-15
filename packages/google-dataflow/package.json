@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dataflow",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "dataflow client for Node.js",
   "repository": {
     "type": "git",

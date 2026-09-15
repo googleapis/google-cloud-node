@@ -20,16 +20,16 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as jobserviceModule from '../src/index.js';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -128,9 +128,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -248,7 +248,7 @@ describe('v2.JobServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.jobServiceStub, undefined);
@@ -256,12 +256,12 @@ describe('v2.JobServiceClient', () => {
       assert(client.jobServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.jobServiceStub);
@@ -270,14 +270,14 @@ describe('v2.JobServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.jobServiceStub, undefined);
@@ -286,7 +286,7 @@ describe('v2.JobServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -294,7 +294,7 @@ describe('v2.JobServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -306,7 +306,7 @@ describe('v2.JobServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -329,7 +329,7 @@ describe('v2.JobServiceClient', () => {
   describe('cancelJob', () => {
     it('invokes cancelJob without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -365,7 +365,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes cancelJob without error using callback', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -417,7 +417,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes cancelJob with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes cancelJob with closed client', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v2.JobServiceClient', () => {
       );
       request.jobId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelJob(request), expectedError);
@@ -478,7 +478,7 @@ describe('v2.JobServiceClient', () => {
   describe('getJob', () => {
     it('invokes getJob without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes getJob without error using callback', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes getJob with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes getJob with closed client', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v2.JobServiceClient', () => {
       );
       request.jobId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getJob(request), expectedError);
@@ -627,7 +627,7 @@ describe('v2.JobServiceClient', () => {
   describe('insertJob', () => {
     it('invokes insertJob without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes insertJob without error using callback', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -705,7 +705,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes insertJob with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes insertJob with closed client', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v2.JobServiceClient', () => {
       );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insertJob(request), expectedError);
@@ -756,7 +756,7 @@ describe('v2.JobServiceClient', () => {
   describe('deleteJob', () => {
     it('invokes deleteJob without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -792,7 +792,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes deleteJob without error using callback', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes deleteJob with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes deleteJob with closed client', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v2.JobServiceClient', () => {
       );
       request.jobId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -905,7 +905,7 @@ describe('v2.JobServiceClient', () => {
   describe('getQueryResults', () => {
     it('invokes getQueryResults without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -941,7 +941,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes getQueryResults without error using callback', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes getQueryResults with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes getQueryResults with closed client', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v2.JobServiceClient', () => {
       );
       request.jobId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getQueryResults(request), expectedError);
@@ -1057,7 +1057,7 @@ describe('v2.JobServiceClient', () => {
   describe('query', () => {
     it('invokes query without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1087,7 +1087,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes query without error using callback', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes query with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes query with closed client', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1172,7 +1172,7 @@ describe('v2.JobServiceClient', () => {
       );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.query(request), expectedError);
@@ -1182,7 +1182,7 @@ describe('v2.JobServiceClient', () => {
   describe('listJobs', () => {
     it('invokes listJobs without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes listJobs without error using callback', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1276,7 +1276,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes listJobs with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1304,7 +1304,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes listJobsStream without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v2.JobServiceClient', () => {
 
     it('invokes listJobsStream with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v2.JobServiceClient', () => {
 
     it('uses async iteration with listJobs without error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1463,7 +1463,7 @@ describe('v2.JobServiceClient', () => {
 
     it('uses async iteration with listJobs with error', async () => {
       const client = new jobserviceModule.v2.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

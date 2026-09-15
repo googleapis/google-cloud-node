@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as hubserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -280,7 +280,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.hubServiceStub, undefined);
@@ -288,12 +288,12 @@ describe('v1beta.HubServiceClient', () => {
       assert(client.hubServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.hubServiceStub);
@@ -302,14 +302,14 @@ describe('v1beta.HubServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.hubServiceStub, undefined);
@@ -318,7 +318,7 @@ describe('v1beta.HubServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -326,7 +326,7 @@ describe('v1beta.HubServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -338,7 +338,7 @@ describe('v1beta.HubServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -361,7 +361,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getHub', () => {
     it('invokes getHub without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getHub without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getHub with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getHub with closed client', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1beta.HubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getHub(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getSpoke', () => {
     it('invokes getSpoke without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getSpoke without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getSpoke with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getSpoke with closed client', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1beta.HubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSpoke(request), expectedError);
@@ -619,7 +619,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getRouteTable', () => {
     it('invokes getRouteTable without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getRouteTable without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getRouteTable with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getRouteTable with closed client', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1beta.HubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRouteTable(request), expectedError);
@@ -751,7 +751,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getRoute', () => {
     it('invokes getRoute without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getRoute without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getRoute with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -857,7 +857,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getRoute with closed client', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -870,7 +870,7 @@ describe('v1beta.HubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRoute(request), expectedError);
@@ -880,7 +880,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getGroup', () => {
     it('invokes getGroup without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -911,7 +911,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getGroup without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -958,7 +958,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getGroup with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getGroup with closed client', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v1beta.HubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGroup(request), expectedError);
@@ -1009,7 +1009,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getGatewayAdvertisedRoute', () => {
     it('invokes getGatewayAdvertisedRoute without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1041,7 +1041,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getGatewayAdvertisedRoute without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1088,7 +1088,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getGatewayAdvertisedRoute with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1122,7 +1122,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes getGatewayAdvertisedRoute with closed client', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v1beta.HubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1148,7 +1148,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('createHub', () => {
     it('invokes createHub without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1180,7 +1180,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createHub without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1234,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createHub with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1265,7 +1265,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createHub with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1298,7 +1298,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkCreateHubProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1306,8 +1306,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateHubProgress(
@@ -1320,7 +1320,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkCreateHubProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1338,7 +1338,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('updateHub', () => {
     it('invokes updateHub without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1371,7 +1371,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateHub without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1426,7 +1426,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateHub with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1458,7 +1458,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateHub with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1492,7 +1492,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkUpdateHubProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,8 +1500,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateHubProgress(
@@ -1514,7 +1514,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkUpdateHubProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1532,7 +1532,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('deleteHub', () => {
     it('invokes deleteHub without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1564,7 +1564,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteHub without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1618,7 +1618,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteHub with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1649,7 +1649,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteHub with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1682,7 +1682,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkDeleteHubProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1690,8 +1690,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteHubProgress(
@@ -1704,7 +1704,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkDeleteHubProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1722,7 +1722,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('createSpoke', () => {
     it('invokes createSpoke without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createSpoke without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1808,7 +1808,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createSpoke with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1839,7 +1839,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createSpoke with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1872,7 +1872,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkCreateSpokeProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1880,8 +1880,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSpokeProgress(
@@ -1894,7 +1894,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkCreateSpokeProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1912,7 +1912,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('updateSpoke', () => {
     it('invokes updateSpoke without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1945,7 +1945,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateSpoke without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2000,7 +2000,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateSpoke with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2032,7 +2032,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateSpoke with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkUpdateSpokeProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2074,8 +2074,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSpokeProgress(
@@ -2088,7 +2088,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkUpdateSpokeProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2106,7 +2106,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('rejectHubSpoke', () => {
     it('invokes rejectHubSpoke without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2139,7 +2139,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes rejectHubSpoke without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2193,7 +2193,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes rejectHubSpoke with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2224,7 +2224,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes rejectHubSpoke with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2257,7 +2257,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkRejectHubSpokeProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2265,8 +2265,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRejectHubSpokeProgress(
@@ -2279,7 +2279,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkRejectHubSpokeProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2300,7 +2300,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('acceptHubSpoke', () => {
     it('invokes acceptHubSpoke without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2333,7 +2333,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes acceptHubSpoke without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2387,7 +2387,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes acceptHubSpoke with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2418,7 +2418,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes acceptHubSpoke with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2451,7 +2451,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkAcceptHubSpokeProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2459,8 +2459,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAcceptHubSpokeProgress(
@@ -2473,7 +2473,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkAcceptHubSpokeProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2494,7 +2494,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('acceptSpokeUpdate', () => {
     it('invokes acceptSpokeUpdate without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2527,7 +2527,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes acceptSpokeUpdate without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2581,7 +2581,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes acceptSpokeUpdate with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,7 +2612,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes acceptSpokeUpdate with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2645,7 +2645,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkAcceptSpokeUpdateProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2653,8 +2653,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAcceptSpokeUpdateProgress(
@@ -2667,7 +2667,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkAcceptSpokeUpdateProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2688,7 +2688,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('rejectSpokeUpdate', () => {
     it('invokes rejectSpokeUpdate without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2721,7 +2721,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes rejectSpokeUpdate without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2775,7 +2775,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes rejectSpokeUpdate with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2806,7 +2806,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes rejectSpokeUpdate with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2839,7 +2839,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkRejectSpokeUpdateProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2847,8 +2847,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRejectSpokeUpdateProgress(
@@ -2861,7 +2861,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkRejectSpokeUpdateProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2882,7 +2882,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('deleteSpoke', () => {
     it('invokes deleteSpoke without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2914,7 +2914,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteSpoke without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2968,7 +2968,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteSpoke with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2999,7 +2999,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteSpoke with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3032,7 +3032,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkDeleteSpokeProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3040,8 +3040,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSpokeProgress(
@@ -3054,7 +3054,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkDeleteSpokeProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3072,7 +3072,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('updateGroup', () => {
     it('invokes updateGroup without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3105,7 +3105,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateGroup without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3160,7 +3160,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateGroup with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3192,7 +3192,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateGroup with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3226,7 +3226,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkUpdateGroupProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3234,8 +3234,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateGroupProgress(
@@ -3248,7 +3248,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkUpdateGroupProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3266,7 +3266,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('createGatewayAdvertisedRoute', () => {
     it('invokes createGatewayAdvertisedRoute without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3299,7 +3299,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createGatewayAdvertisedRoute without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3353,7 +3353,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createGatewayAdvertisedRoute with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3387,7 +3387,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes createGatewayAdvertisedRoute with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3420,7 +3420,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkCreateGatewayAdvertisedRouteProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3428,8 +3428,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3443,7 +3443,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkCreateGatewayAdvertisedRouteProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3464,7 +3464,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('updateGatewayAdvertisedRoute', () => {
     it('invokes updateGatewayAdvertisedRoute without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3498,7 +3498,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateGatewayAdvertisedRoute without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3553,7 +3553,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateGatewayAdvertisedRoute with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3588,7 +3588,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes updateGatewayAdvertisedRoute with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3622,7 +3622,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkUpdateGatewayAdvertisedRouteProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3630,8 +3630,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3645,7 +3645,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkUpdateGatewayAdvertisedRouteProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3666,7 +3666,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('deleteGatewayAdvertisedRoute', () => {
     it('invokes deleteGatewayAdvertisedRoute without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3699,7 +3699,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteGatewayAdvertisedRoute without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3753,7 +3753,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteGatewayAdvertisedRoute with call error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3787,7 +3787,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes deleteGatewayAdvertisedRoute with LRO error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3820,7 +3820,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkDeleteGatewayAdvertisedRouteProgress without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3828,8 +3828,8 @@ describe('v1beta.HubServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3843,7 +3843,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes checkDeleteGatewayAdvertisedRouteProgress with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3864,7 +3864,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listHubs', () => {
     it('invokes listHubs without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3903,7 +3903,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listHubs without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3935,8 +3935,7 @@ describe('v1beta.HubServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkconnectivity.v1beta.IHub[]
-              | null,
+              protos.google.cloud.networkconnectivity.v1beta.IHub[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3960,7 +3959,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listHubs with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3988,7 +3987,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listHubsStream without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4041,15 +4040,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listHubsStream with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4093,15 +4092,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHubs without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4142,15 +4141,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHubs with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4184,9 +4183,9 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4194,7 +4193,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listHubSpokes', () => {
     it('invokes listHubSpokes without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4233,7 +4232,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listHubSpokes without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4265,8 +4264,7 @@ describe('v1beta.HubServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkconnectivity.v1beta.ISpoke[]
-              | null,
+              protos.google.cloud.networkconnectivity.v1beta.ISpoke[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4290,7 +4288,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listHubSpokes with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4321,7 +4319,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listHubSpokesStream without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4374,15 +4372,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubSpokes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listHubSpokesStream with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4424,15 +4422,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubSpokes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHubSpokes without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4474,15 +4472,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubSpokes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHubSpokes with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4515,9 +4513,9 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listHubSpokes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4525,7 +4523,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('queryHubStatus', () => {
     it('invokes queryHubStatus without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4564,7 +4562,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes queryHubStatus without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4621,7 +4619,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes queryHubStatus with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4652,7 +4650,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes queryHubStatusStream without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4707,15 +4705,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.queryHubStatus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes queryHubStatusStream with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4759,15 +4757,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.queryHubStatus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryHubStatus without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4809,15 +4807,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.queryHubStatus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryHubStatus with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4850,9 +4848,9 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.queryHubStatus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4860,7 +4858,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listSpokes', () => {
     it('invokes listSpokes without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4899,7 +4897,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listSpokes without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4931,8 +4929,7 @@ describe('v1beta.HubServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkconnectivity.v1beta.ISpoke[]
-              | null,
+              protos.google.cloud.networkconnectivity.v1beta.ISpoke[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4956,7 +4953,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listSpokes with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4987,7 +4984,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listSpokesStream without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5040,15 +5037,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listSpokes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSpokesStream with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5092,15 +5089,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listSpokes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSpokes without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5142,15 +5139,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listSpokes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSpokes with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5185,9 +5182,9 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listSpokes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5195,7 +5192,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listRoutes', () => {
     it('invokes listRoutes without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5234,7 +5231,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listRoutes without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5266,8 +5263,7 @@ describe('v1beta.HubServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkconnectivity.v1beta.IRoute[]
-              | null,
+              protos.google.cloud.networkconnectivity.v1beta.IRoute[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5291,7 +5287,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listRoutes with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5322,7 +5318,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listRoutesStream without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5375,15 +5371,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRoutesStream with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5427,15 +5423,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRoutes without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5477,15 +5473,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRoutes with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5520,9 +5516,9 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5530,7 +5526,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listRouteTables', () => {
     it('invokes listRouteTables without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5569,7 +5565,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listRouteTables without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5626,7 +5622,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listRouteTables with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5657,7 +5653,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listRouteTablesStream without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5712,15 +5708,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listRouteTables.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRouteTablesStream with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5764,15 +5760,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listRouteTables.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRouteTables without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5814,15 +5810,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listRouteTables.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRouteTables with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5855,9 +5851,9 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listRouteTables.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5865,7 +5861,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listGroups', () => {
     it('invokes listGroups without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5904,7 +5900,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listGroups without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5936,8 +5932,7 @@ describe('v1beta.HubServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networkconnectivity.v1beta.IGroup[]
-              | null,
+              protos.google.cloud.networkconnectivity.v1beta.IGroup[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5961,7 +5956,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listGroups with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5992,7 +5987,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listGroupsStream without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6045,15 +6040,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGroupsStream with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6097,15 +6092,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroups without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6147,15 +6142,15 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroups with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6190,9 +6185,9 @@ describe('v1beta.HubServiceClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6200,7 +6195,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listGatewayAdvertisedRoutes', () => {
     it('invokes listGatewayAdvertisedRoutes without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6240,7 +6235,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listGatewayAdvertisedRoutes without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6297,7 +6292,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listGatewayAdvertisedRoutes with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6331,7 +6326,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listGatewayAdvertisedRoutesStream without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6403,7 +6398,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('invokes listGatewayAdvertisedRoutesStream with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6464,7 +6459,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('uses async iteration with listGatewayAdvertisedRoutes without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6518,7 +6513,7 @@ describe('v1beta.HubServiceClient', () => {
 
     it('uses async iteration with listGatewayAdvertisedRoutes with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6564,7 +6559,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6594,7 +6589,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6632,7 +6627,7 @@ describe('v1beta.HubServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6642,7 +6637,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6674,7 +6669,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6704,7 +6699,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6742,7 +6737,7 @@ describe('v1beta.HubServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6752,7 +6747,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6784,7 +6779,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6817,7 +6812,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6855,7 +6850,7 @@ describe('v1beta.HubServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6865,7 +6860,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6900,7 +6895,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6930,7 +6925,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6974,7 +6969,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7009,7 +7004,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7057,7 +7052,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7098,7 +7093,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7119,7 +7114,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7147,7 +7142,7 @@ describe('v1beta.HubServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7157,7 +7152,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7181,7 +7176,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7203,7 +7198,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7231,7 +7226,7 @@ describe('v1beta.HubServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7241,7 +7236,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7265,7 +7260,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7287,7 +7282,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7315,7 +7310,7 @@ describe('v1beta.HubServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7325,7 +7320,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7349,7 +7344,7 @@ describe('v1beta.HubServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7384,7 +7379,7 @@ describe('v1beta.HubServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7421,7 +7416,7 @@ describe('v1beta.HubServiceClient', () => {
         destination: 'destinationValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7498,7 +7493,7 @@ describe('v1beta.HubServiceClient', () => {
         gateway_advertised_route: 'gatewayAdvertisedRouteValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7594,7 +7589,7 @@ describe('v1beta.HubServiceClient', () => {
         group: 'groupValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7657,7 +7652,7 @@ describe('v1beta.HubServiceClient', () => {
         hub: 'hubValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7708,7 +7703,7 @@ describe('v1beta.HubServiceClient', () => {
         route: 'routeValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7783,7 +7778,7 @@ describe('v1beta.HubServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7847,7 +7842,7 @@ describe('v1beta.HubServiceClient', () => {
         resource_id: 'resourceIdValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7925,7 +7920,7 @@ describe('v1beta.HubServiceClient', () => {
         location: 'locationValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7975,7 +7970,7 @@ describe('v1beta.HubServiceClient', () => {
         multicloud_data_transfer_config: 'multicloudDataTransferConfigValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8055,7 +8050,7 @@ describe('v1beta.HubServiceClient', () => {
           'multicloudDataTransferSupportedServiceValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8144,7 +8139,7 @@ describe('v1beta.HubServiceClient', () => {
         resource_id: 'resourceIdValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8193,7 +8188,7 @@ describe('v1beta.HubServiceClient', () => {
         policy_based_route: 'policyBasedRouteValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8250,7 +8245,7 @@ describe('v1beta.HubServiceClient', () => {
         remote_transport_profile: 'remoteTransportProfileValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8331,7 +8326,7 @@ describe('v1beta.HubServiceClient', () => {
         route_table: 'routeTableValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8395,7 +8390,7 @@ describe('v1beta.HubServiceClient', () => {
         sac_attachment: 'sacAttachmentValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8459,7 +8454,7 @@ describe('v1beta.HubServiceClient', () => {
         spoke: 'spokeValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8523,7 +8518,7 @@ describe('v1beta.HubServiceClient', () => {
         transport: 'transportValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8587,7 +8582,7 @@ describe('v1beta.HubServiceClient', () => {
         resource_id: 'resourceIdValue',
       };
       const client = new hubserviceModule.v1beta.HubServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datapolicyserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1.DataPolicyServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new datapolicyserviceModule.v1.DataPolicyServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -243,7 +243,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataPolicyServiceStub, undefined);
@@ -251,12 +251,12 @@ describe('v1.DataPolicyServiceClient', () => {
       assert(client.dataPolicyServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataPolicyServiceStub);
@@ -265,14 +265,14 @@ describe('v1.DataPolicyServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataPolicyServiceStub, undefined);
@@ -281,7 +281,7 @@ describe('v1.DataPolicyServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -289,7 +289,7 @@ describe('v1.DataPolicyServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -301,7 +301,7 @@ describe('v1.DataPolicyServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -324,7 +324,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('createDataPolicy', () => {
     it('invokes createDataPolicy without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -355,7 +355,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes createDataPolicy without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes createDataPolicy with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes createDataPolicy with closed client', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -446,7 +446,7 @@ describe('v1.DataPolicyServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataPolicy(request), expectedError);
@@ -456,7 +456,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('updateDataPolicy', () => {
     it('invokes updateDataPolicy without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes updateDataPolicy without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -536,7 +536,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes updateDataPolicy with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes updateDataPolicy with closed client', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -582,7 +582,7 @@ describe('v1.DataPolicyServiceClient', () => {
       );
       request.dataPolicy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataPolicy(request), expectedError);
@@ -592,7 +592,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('renameDataPolicy', () => {
     it('invokes renameDataPolicy without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes renameDataPolicy without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -670,7 +670,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes renameDataPolicy with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes renameDataPolicy with closed client', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -714,7 +714,7 @@ describe('v1.DataPolicyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.renameDataPolicy(request), expectedError);
@@ -724,7 +724,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('deleteDataPolicy', () => {
     it('invokes deleteDataPolicy without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -755,7 +755,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes deleteDataPolicy without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes deleteDataPolicy with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes deleteDataPolicy with closed client', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v1.DataPolicyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataPolicy(request), expectedError);
@@ -856,7 +856,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('getDataPolicy', () => {
     it('invokes getDataPolicy without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes getDataPolicy without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes getDataPolicy with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes getDataPolicy with closed client', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.DataPolicyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataPolicy(request), expectedError);
@@ -988,7 +988,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1019,7 +1019,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1066,7 +1066,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1097,7 +1097,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1110,7 +1110,7 @@ describe('v1.DataPolicyServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1120,7 +1120,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1.DataPolicyServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1252,7 +1252,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1284,7 +1284,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1331,7 +1331,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1362,7 +1362,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v1.DataPolicyServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1385,7 +1385,7 @@ describe('v1.DataPolicyServiceClient', () => {
   describe('listDataPolicies', () => {
     it('invokes listDataPolicies without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1424,7 +1424,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes listDataPolicies without error using callback', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1456,8 +1456,7 @@ describe('v1.DataPolicyServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy[]
-              | null,
+              protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1481,7 +1480,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes listDataPolicies with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1512,7 +1511,7 @@ describe('v1.DataPolicyServiceClient', () => {
 
     it('invokes listDataPoliciesStream without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,15 +1566,15 @@ describe('v1.DataPolicyServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataPoliciesStream with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1619,15 +1618,15 @@ describe('v1.DataPolicyServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataPolicies without error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1669,15 +1668,15 @@ describe('v1.DataPolicyServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataPolicies with error', async () => {
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,9 +1709,9 @@ describe('v1.DataPolicyServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1726,7 +1725,7 @@ describe('v1.DataPolicyServiceClient', () => {
         data_policy: 'dataPolicyValue',
       };
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1789,7 +1788,7 @@ describe('v1.DataPolicyServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1837,7 +1836,7 @@ describe('v1.DataPolicyServiceClient', () => {
         project: 'projectValue',
       };
       const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

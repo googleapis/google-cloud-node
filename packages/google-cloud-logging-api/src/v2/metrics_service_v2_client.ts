@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class MetricsServiceV2Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('logging-api');
@@ -64,9 +64,9 @@ export class MetricsServiceV2Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  metricsServiceV2Stub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  metricsServiceV2Stub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of MetricsServiceV2Client.
@@ -142,7 +142,7 @@ export class MetricsServiceV2Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -327,7 +327,7 @@ export class MetricsServiceV2Client {
       'google.logging.v2.MetricsServiceV2',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -367,7 +367,7 @@ export class MetricsServiceV2Client {
           (this._protos as any).google.logging.v2.MetricsServiceV2,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -380,7 +380,7 @@ export class MetricsServiceV2Client {
     ];
     for (const methodName of metricsServiceV2StubMethods) {
       const callPromise = this.metricsServiceV2Stub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -578,7 +578,7 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         metric_name: request.metricName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getLogMetric request %j', request);
@@ -709,7 +709,7 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createLogMetric request %j', request);
@@ -841,7 +841,7 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         metric_name: request.metricName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateLogMetric request %j', request);
@@ -967,7 +967,7 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         metric_name: request.metricName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteLogMetric request %j', request);
@@ -1106,7 +1106,7 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1178,7 +1178,7 @@ export class MetricsServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLogMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLogMetrics stream %j', request);
@@ -1234,7 +1234,7 @@ export class MetricsServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLogMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLogMetrics iterate %j', request);
@@ -2916,7 +2916,7 @@ export class MetricsServiceV2Client {
    */
   close(): Promise<void> {
     if (this.metricsServiceV2Stub && !this._terminated) {
-      return this.metricsServiceV2Stub.then((stub) => {
+      return this.metricsServiceV2Stub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

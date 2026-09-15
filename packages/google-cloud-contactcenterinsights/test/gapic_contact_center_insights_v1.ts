@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as contactcenterinsightsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos, IamProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -286,7 +286,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.contactCenterInsightsStub, undefined);
@@ -294,13 +294,13 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(client.contactCenterInsightsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.contactCenterInsightsStub);
@@ -309,15 +309,15 @@ describe('v1.ContactCenterInsightsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.contactCenterInsightsStub, undefined);
@@ -326,7 +326,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -348,7 +348,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -372,7 +372,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createConversation without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -405,7 +405,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createConversation without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createConversation with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createConversation with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -498,7 +498,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createConversation(request), expectedError);
@@ -509,7 +509,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateConversation without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -543,7 +543,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateConversation without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -592,7 +592,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateConversation with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -625,7 +625,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateConversation with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -639,7 +639,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.conversation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateConversation(request), expectedError);
@@ -650,7 +650,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getConversation without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -682,7 +682,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getConversation without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getConversation with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -762,7 +762,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getConversation with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -775,7 +775,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConversation(request), expectedError);
@@ -786,7 +786,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteConversation without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -819,7 +819,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteConversation without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteConversation with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -899,7 +899,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteConversation with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -912,7 +912,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteConversation(request), expectedError);
@@ -923,7 +923,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getAnalysis without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -955,7 +955,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getAnalysis without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getAnalysis with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1035,7 +1035,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getAnalysis with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1048,7 +1048,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnalysis(request), expectedError);
@@ -1059,7 +1059,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteAnalysis without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteAnalysis without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteAnalysis with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1171,7 +1171,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteAnalysis with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1184,7 +1184,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAnalysis(request), expectedError);
@@ -1195,7 +1195,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateIssueModel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1228,7 +1228,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateIssueModel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateIssueModel with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateIssueModel with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1324,7 +1324,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.issueModel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateIssueModel(request), expectedError);
@@ -1335,7 +1335,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIssueModel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1367,7 +1367,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIssueModel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIssueModel with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1447,7 +1447,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIssueModel with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1460,7 +1460,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIssueModel(request), expectedError);
@@ -1471,7 +1471,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listIssueModels without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1503,7 +1503,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listIssueModels without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1551,7 +1551,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listIssueModels with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1583,7 +1583,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listIssueModels with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1596,7 +1596,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listIssueModels(request), expectedError);
@@ -1607,7 +1607,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIssue without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1639,7 +1639,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIssue without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIssue with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1716,7 +1716,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIssue with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1729,7 +1729,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIssue(request), expectedError);
@@ -1740,7 +1740,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listIssues without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1772,7 +1772,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listIssues without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listIssues with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1852,7 +1852,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listIssues with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1865,7 +1865,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listIssues(request), expectedError);
@@ -1876,7 +1876,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateIssue without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateIssue without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1958,7 +1958,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateIssue with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1991,7 +1991,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateIssue with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2005,7 +2005,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.issue.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateIssue(request), expectedError);
@@ -2016,7 +2016,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteIssue without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2048,7 +2048,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteIssue without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2096,7 +2096,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteIssue with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2128,7 +2128,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteIssue with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2141,7 +2141,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteIssue(request), expectedError);
@@ -2152,7 +2152,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes calculateIssueModelStats without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2185,7 +2185,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes calculateIssueModelStats without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2233,7 +2233,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes calculateIssueModelStats with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2268,7 +2268,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes calculateIssueModelStats with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2281,7 +2281,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.issueModel = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2295,7 +2295,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createPhraseMatcher without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2328,7 +2328,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createPhraseMatcher without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2376,7 +2376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createPhraseMatcher with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2408,7 +2408,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createPhraseMatcher with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2421,7 +2421,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPhraseMatcher(request), expectedError);
@@ -2432,7 +2432,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getPhraseMatcher without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2464,7 +2464,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getPhraseMatcher without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2512,7 +2512,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getPhraseMatcher with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2544,7 +2544,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getPhraseMatcher with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2557,7 +2557,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPhraseMatcher(request), expectedError);
@@ -2568,7 +2568,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deletePhraseMatcher without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2601,7 +2601,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deletePhraseMatcher without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2649,7 +2649,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deletePhraseMatcher with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2681,7 +2681,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deletePhraseMatcher with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2694,7 +2694,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePhraseMatcher(request), expectedError);
@@ -2705,7 +2705,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updatePhraseMatcher without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2739,7 +2739,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updatePhraseMatcher without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2788,7 +2788,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updatePhraseMatcher with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2821,7 +2821,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updatePhraseMatcher with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2835,7 +2835,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.phraseMatcher.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePhraseMatcher(request), expectedError);
@@ -2846,7 +2846,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes calculateStats without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2878,7 +2878,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes calculateStats without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2926,7 +2926,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes calculateStats with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2958,7 +2958,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes calculateStats with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2971,7 +2971,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.calculateStats(request), expectedError);
@@ -2982,7 +2982,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getSettings without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3014,7 +3014,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getSettings without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3062,7 +3062,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getSettings with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3094,7 +3094,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getSettings with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3107,7 +3107,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSettings(request), expectedError);
@@ -3118,7 +3118,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateSettings without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3151,7 +3151,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateSettings without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3200,7 +3200,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateSettings with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3233,7 +3233,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateSettings with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3247,7 +3247,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSettings(request), expectedError);
@@ -3258,7 +3258,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createAnalysisRule without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3291,7 +3291,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createAnalysisRule without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3339,7 +3339,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createAnalysisRule with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3371,7 +3371,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createAnalysisRule with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3384,7 +3384,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAnalysisRule(request), expectedError);
@@ -3395,7 +3395,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getAnalysisRule without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3427,7 +3427,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getAnalysisRule without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3475,7 +3475,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getAnalysisRule with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3507,7 +3507,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getAnalysisRule with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3520,7 +3520,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnalysisRule(request), expectedError);
@@ -3531,7 +3531,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateAnalysisRule without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3565,7 +3565,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateAnalysisRule without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3614,7 +3614,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateAnalysisRule with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3647,7 +3647,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateAnalysisRule with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3661,7 +3661,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.analysisRule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAnalysisRule(request), expectedError);
@@ -3672,7 +3672,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteAnalysisRule without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3705,7 +3705,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteAnalysisRule without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3753,7 +3753,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteAnalysisRule with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3785,7 +3785,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteAnalysisRule with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3798,7 +3798,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAnalysisRule(request), expectedError);
@@ -3809,7 +3809,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getEncryptionSpec without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3841,7 +3841,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getEncryptionSpec without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3889,7 +3889,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getEncryptionSpec with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3921,7 +3921,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getEncryptionSpec with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3934,7 +3934,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEncryptionSpec(request), expectedError);
@@ -3945,7 +3945,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createView without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3977,7 +3977,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createView without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4025,7 +4025,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createView with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4057,7 +4057,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createView with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4070,7 +4070,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createView(request), expectedError);
@@ -4081,7 +4081,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getView without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4113,7 +4113,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getView without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4161,7 +4161,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getView with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4190,7 +4190,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getView with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4203,7 +4203,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getView(request), expectedError);
@@ -4214,7 +4214,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateView without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4247,7 +4247,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateView without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4296,7 +4296,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateView with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4329,7 +4329,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateView with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4343,7 +4343,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.view.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateView(request), expectedError);
@@ -4354,7 +4354,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteView without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4386,7 +4386,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteView without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4434,7 +4434,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteView with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4466,7 +4466,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteView with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4479,7 +4479,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteView(request), expectedError);
@@ -4490,7 +4490,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaQuestion without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4522,7 +4522,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaQuestion without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4570,7 +4570,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaQuestion with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4602,7 +4602,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaQuestion with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4615,7 +4615,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createQaQuestion(request), expectedError);
@@ -4626,7 +4626,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaQuestion without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4658,7 +4658,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaQuestion without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4706,7 +4706,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaQuestion with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4738,7 +4738,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaQuestion with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4751,7 +4751,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getQaQuestion(request), expectedError);
@@ -4762,7 +4762,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateQaQuestion without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4795,7 +4795,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateQaQuestion without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4844,7 +4844,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateQaQuestion with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4877,7 +4877,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateQaQuestion with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4891,7 +4891,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.qaQuestion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateQaQuestion(request), expectedError);
@@ -4902,7 +4902,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaQuestion without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4934,7 +4934,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaQuestion without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4982,7 +4982,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaQuestion with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5014,7 +5014,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaQuestion with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5027,7 +5027,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteQaQuestion(request), expectedError);
@@ -5038,7 +5038,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaScorecard without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5070,7 +5070,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaScorecard without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5118,7 +5118,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaScorecard with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5150,7 +5150,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaScorecard with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5163,7 +5163,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createQaScorecard(request), expectedError);
@@ -5174,7 +5174,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaScorecard without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5206,7 +5206,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaScorecard without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5254,7 +5254,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaScorecard with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5286,7 +5286,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaScorecard with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5299,7 +5299,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getQaScorecard(request), expectedError);
@@ -5310,7 +5310,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateQaScorecard without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5343,7 +5343,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateQaScorecard without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5392,7 +5392,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateQaScorecard with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5425,7 +5425,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateQaScorecard with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5439,7 +5439,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.qaScorecard.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateQaScorecard(request), expectedError);
@@ -5450,7 +5450,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaScorecard without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5482,7 +5482,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaScorecard without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5530,7 +5530,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaScorecard with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5562,7 +5562,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaScorecard with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5575,7 +5575,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteQaScorecard(request), expectedError);
@@ -5586,7 +5586,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaScorecardRevision without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5619,7 +5619,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaScorecardRevision without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5667,7 +5667,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaScorecardRevision with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5702,7 +5702,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createQaScorecardRevision with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5715,7 +5715,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -5729,7 +5729,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaScorecardRevision without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5762,7 +5762,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaScorecardRevision without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5810,7 +5810,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaScorecardRevision with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5845,7 +5845,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getQaScorecardRevision with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5858,7 +5858,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -5872,7 +5872,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deployQaScorecardRevision without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5905,7 +5905,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deployQaScorecardRevision without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5953,7 +5953,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deployQaScorecardRevision with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5988,7 +5988,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deployQaScorecardRevision with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6001,7 +6001,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6015,7 +6015,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes undeployQaScorecardRevision without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6048,7 +6048,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes undeployQaScorecardRevision without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6096,7 +6096,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes undeployQaScorecardRevision with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6131,7 +6131,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes undeployQaScorecardRevision with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6144,7 +6144,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6158,7 +6158,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaScorecardRevision without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6191,7 +6191,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaScorecardRevision without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6239,7 +6239,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaScorecardRevision with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6274,7 +6274,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteQaScorecardRevision with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6287,7 +6287,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6301,7 +6301,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createFeedbackLabel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6334,7 +6334,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createFeedbackLabel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6382,7 +6382,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createFeedbackLabel with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6414,7 +6414,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createFeedbackLabel with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6427,7 +6427,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFeedbackLabel(request), expectedError);
@@ -6438,7 +6438,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getFeedbackLabel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6470,7 +6470,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getFeedbackLabel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6518,7 +6518,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getFeedbackLabel with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6550,7 +6550,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getFeedbackLabel with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6563,7 +6563,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFeedbackLabel(request), expectedError);
@@ -6574,7 +6574,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateFeedbackLabel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6608,7 +6608,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateFeedbackLabel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6657,7 +6657,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateFeedbackLabel with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6690,7 +6690,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes updateFeedbackLabel with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6704,7 +6704,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.feedbackLabel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFeedbackLabel(request), expectedError);
@@ -6715,7 +6715,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteFeedbackLabel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6748,7 +6748,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteFeedbackLabel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6796,7 +6796,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteFeedbackLabel with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6828,7 +6828,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteFeedbackLabel with closed client', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6841,7 +6841,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteFeedbackLabel(request), expectedError);
@@ -6852,7 +6852,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes uploadConversation without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6886,7 +6886,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes uploadConversation without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6941,7 +6941,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes uploadConversation with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6973,7 +6973,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes uploadConversation with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7007,7 +7007,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkUploadConversationProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7015,8 +7015,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUploadConversationProgress(
@@ -7030,7 +7030,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkUploadConversationProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7052,7 +7052,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createAnalysis without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7086,7 +7086,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createAnalysis without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7141,7 +7141,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createAnalysis with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7173,7 +7173,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createAnalysis with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7207,7 +7207,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkCreateAnalysisProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7215,8 +7215,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAnalysisProgress(
@@ -7230,7 +7230,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkCreateAnalysisProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7252,7 +7252,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkAnalyzeConversations without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7286,7 +7286,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkAnalyzeConversations without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7341,7 +7341,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkAnalyzeConversations with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7376,7 +7376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkAnalyzeConversations with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7410,7 +7410,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkBulkAnalyzeConversationsProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7418,8 +7418,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -7434,7 +7434,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkBulkAnalyzeConversationsProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7456,7 +7456,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkDeleteConversations without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7490,7 +7490,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkDeleteConversations without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7545,7 +7545,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkDeleteConversations with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7580,7 +7580,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkDeleteConversations with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7614,7 +7614,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkBulkDeleteConversationsProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7622,8 +7622,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -7638,7 +7638,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkBulkDeleteConversationsProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7660,7 +7660,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes ingestConversations without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7694,7 +7694,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes ingestConversations without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7749,7 +7749,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes ingestConversations with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7781,7 +7781,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes ingestConversations with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7815,7 +7815,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkIngestConversationsProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7823,8 +7823,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkIngestConversationsProgress(
@@ -7838,7 +7838,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkIngestConversationsProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7860,7 +7860,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes exportInsightsData without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7894,7 +7894,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes exportInsightsData without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7949,7 +7949,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes exportInsightsData with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7981,7 +7981,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes exportInsightsData with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8015,7 +8015,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkExportInsightsDataProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8023,8 +8023,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportInsightsDataProgress(
@@ -8038,7 +8038,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkExportInsightsDataProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8060,7 +8060,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createIssueModel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8094,7 +8094,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createIssueModel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8149,7 +8149,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createIssueModel with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8181,7 +8181,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes createIssueModel with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8215,7 +8215,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkCreateIssueModelProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8223,8 +8223,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateIssueModelProgress(
@@ -8238,7 +8238,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkCreateIssueModelProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8260,7 +8260,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteIssueModel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8294,7 +8294,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteIssueModel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8349,7 +8349,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteIssueModel with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8381,7 +8381,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteIssueModel with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8415,7 +8415,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkDeleteIssueModelProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8423,8 +8423,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteIssueModelProgress(
@@ -8438,7 +8438,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkDeleteIssueModelProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8460,7 +8460,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deployIssueModel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8494,7 +8494,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deployIssueModel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8549,7 +8549,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deployIssueModel with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8581,7 +8581,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deployIssueModel with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8615,7 +8615,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkDeployIssueModelProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8623,8 +8623,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeployIssueModelProgress(
@@ -8638,7 +8638,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkDeployIssueModelProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8660,7 +8660,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes undeployIssueModel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8694,7 +8694,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes undeployIssueModel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8749,7 +8749,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes undeployIssueModel with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8781,7 +8781,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes undeployIssueModel with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8815,7 +8815,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkUndeployIssueModelProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8823,8 +8823,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeployIssueModelProgress(
@@ -8838,7 +8838,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkUndeployIssueModelProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8860,7 +8860,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes exportIssueModel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8894,7 +8894,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes exportIssueModel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8949,7 +8949,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes exportIssueModel with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8981,7 +8981,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes exportIssueModel with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9015,7 +9015,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkExportIssueModelProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9023,8 +9023,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportIssueModelProgress(
@@ -9038,7 +9038,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkExportIssueModelProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9060,7 +9060,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes importIssueModel without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9094,7 +9094,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes importIssueModel without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9149,7 +9149,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes importIssueModel with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9181,7 +9181,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes importIssueModel with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9215,7 +9215,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkImportIssueModelProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9223,8 +9223,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportIssueModelProgress(
@@ -9238,7 +9238,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkImportIssueModelProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9260,7 +9260,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes initializeEncryptionSpec without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9295,7 +9295,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes initializeEncryptionSpec without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9351,7 +9351,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes initializeEncryptionSpec with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9387,7 +9387,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes initializeEncryptionSpec with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9422,7 +9422,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkInitializeEncryptionSpecProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9430,8 +9430,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -9446,7 +9446,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkInitializeEncryptionSpecProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9468,7 +9468,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes queryMetrics without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9501,7 +9501,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes queryMetrics without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9556,7 +9556,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes queryMetrics with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9588,7 +9588,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes queryMetrics with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9622,7 +9622,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkQueryMetricsProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9630,8 +9630,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkQueryMetricsProgress(
@@ -9645,7 +9645,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkQueryMetricsProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9664,7 +9664,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes tuneQaScorecardRevision without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9698,7 +9698,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes tuneQaScorecardRevision without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9753,7 +9753,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes tuneQaScorecardRevision with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9788,7 +9788,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes tuneQaScorecardRevision with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9822,7 +9822,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkTuneQaScorecardRevisionProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9830,8 +9830,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -9846,7 +9846,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkTuneQaScorecardRevisionProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9868,7 +9868,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkUploadFeedbackLabels without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9902,7 +9902,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkUploadFeedbackLabels without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9957,7 +9957,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkUploadFeedbackLabels with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9992,7 +9992,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkUploadFeedbackLabels with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10026,7 +10026,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkBulkUploadFeedbackLabelsProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10034,8 +10034,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -10050,7 +10050,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkBulkUploadFeedbackLabelsProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10072,7 +10072,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkDownloadFeedbackLabels without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10106,7 +10106,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkDownloadFeedbackLabels without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10161,7 +10161,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkDownloadFeedbackLabels with call error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10196,7 +10196,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes bulkDownloadFeedbackLabels with LRO error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10230,7 +10230,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkBulkDownloadFeedbackLabelsProgress without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10238,8 +10238,8 @@ describe('v1.ContactCenterInsightsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -10254,7 +10254,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes checkBulkDownloadFeedbackLabelsProgress with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10276,7 +10276,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listConversations without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10316,7 +10316,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listConversations without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10374,7 +10374,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listConversations with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10406,7 +10406,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listConversationsStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10461,16 +10461,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConversationsStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10514,16 +10514,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversations without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10565,16 +10565,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversations with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10607,9 +10607,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10618,7 +10618,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAnalyses without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10658,7 +10658,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAnalyses without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10690,8 +10690,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.contactcenterinsights.v1.IAnalysis[]
-              | null,
+              protos.google.cloud.contactcenterinsights.v1.IAnalysis[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10716,7 +10715,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAnalyses with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10748,7 +10747,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAnalysesStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10801,16 +10800,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAnalysesStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10854,16 +10853,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnalyses without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10905,16 +10904,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnalyses with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10947,9 +10946,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10958,7 +10957,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listPhraseMatchers without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10999,7 +10998,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listPhraseMatchers without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11057,7 +11056,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listPhraseMatchers with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11089,7 +11088,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listPhraseMatchersStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11144,16 +11143,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPhraseMatchersStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11197,16 +11196,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPhraseMatchers without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11248,16 +11247,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPhraseMatchers with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11290,9 +11289,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11301,7 +11300,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAnalysisRules without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11341,7 +11340,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAnalysisRules without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11399,7 +11398,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAnalysisRules with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11431,7 +11430,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAnalysisRulesStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11486,16 +11485,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalysisRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAnalysisRulesStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11539,16 +11538,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalysisRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnalysisRules without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11590,16 +11589,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalysisRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnalysisRules with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11632,9 +11631,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalysisRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11643,7 +11642,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listViews without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11683,7 +11682,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listViews without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11715,8 +11714,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.contactcenterinsights.v1.IView[]
-              | null,
+              protos.google.cloud.contactcenterinsights.v1.IView[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11741,7 +11739,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listViews with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11770,7 +11768,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listViewsStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11823,16 +11821,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listViewsStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11876,16 +11874,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listViews without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11926,16 +11924,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listViews with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -11969,9 +11967,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11980,7 +11978,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaQuestions without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12020,7 +12018,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaQuestions without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12052,8 +12050,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.contactcenterinsights.v1.IQaQuestion[]
-              | null,
+              protos.google.cloud.contactcenterinsights.v1.IQaQuestion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12078,7 +12075,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaQuestions with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12110,7 +12107,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaQuestionsStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12165,16 +12162,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaQuestions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listQaQuestionsStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12218,16 +12215,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaQuestions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQaQuestions without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12269,16 +12266,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaQuestions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQaQuestions with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12311,9 +12308,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaQuestions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12322,7 +12319,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecards without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12362,7 +12359,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecards without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12420,7 +12417,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecards with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12452,7 +12449,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecardsStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12507,16 +12504,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaScorecards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listQaScorecardsStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12560,16 +12557,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaScorecards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQaScorecards without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12611,16 +12608,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaScorecards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQaScorecards with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12653,9 +12650,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listQaScorecards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12664,7 +12661,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecardRevisions without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12705,7 +12702,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecardRevisions without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12763,7 +12760,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecardRevisions with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12798,7 +12795,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecardRevisionsStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12868,7 +12865,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listQaScorecardRevisionsStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12927,7 +12924,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('uses async iteration with listQaScorecardRevisions without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -12982,7 +12979,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('uses async iteration with listQaScorecardRevisions with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13030,7 +13027,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listFeedbackLabels without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13071,7 +13068,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listFeedbackLabels without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13129,7 +13126,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listFeedbackLabels with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13161,7 +13158,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listFeedbackLabelsStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13216,16 +13213,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listFeedbackLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFeedbackLabelsStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13269,16 +13266,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listFeedbackLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeedbackLabels without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13320,16 +13317,16 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listFeedbackLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeedbackLabels with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13362,9 +13359,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listFeedbackLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13373,7 +13370,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAllFeedbackLabels without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13414,7 +13411,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAllFeedbackLabels without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13472,7 +13469,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAllFeedbackLabels with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13507,7 +13504,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAllFeedbackLabelsStream without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13577,7 +13574,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes listAllFeedbackLabelsStream with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13636,7 +13633,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('uses async iteration with listAllFeedbackLabels without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13691,7 +13688,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('uses async iteration with listAllFeedbackLabels with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13738,7 +13735,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13769,7 +13766,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13807,7 +13804,7 @@ describe('v1.ContactCenterInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -13818,7 +13815,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13851,7 +13848,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13882,7 +13879,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13920,7 +13917,7 @@ describe('v1.ContactCenterInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -13931,7 +13928,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13964,7 +13961,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -13998,7 +13995,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14036,7 +14033,7 @@ describe('v1.ContactCenterInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -14047,7 +14044,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14083,7 +14080,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14105,7 +14102,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -14133,7 +14130,7 @@ describe('v1.ContactCenterInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -14144,7 +14141,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -14169,7 +14166,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14192,7 +14189,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -14220,7 +14217,7 @@ describe('v1.ContactCenterInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -14231,7 +14228,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -14256,7 +14253,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14279,7 +14276,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -14307,7 +14304,7 @@ describe('v1.ContactCenterInsightsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -14318,7 +14315,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -14343,7 +14340,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -14379,7 +14376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14416,7 +14413,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14480,7 +14477,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14535,7 +14532,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14611,7 +14608,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14675,7 +14672,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14726,7 +14723,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14795,7 +14792,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -14942,7 +14939,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15088,7 +15085,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15214,7 +15211,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15317,7 +15314,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15423,7 +15420,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15505,7 +15502,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15592,7 +15589,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15657,7 +15654,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15736,7 +15733,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15829,7 +15826,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -15880,7 +15877,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

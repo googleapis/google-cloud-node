@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dlpserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dlpServiceStub, undefined);
@@ -245,12 +245,12 @@ describe('v2.DlpServiceClient', () => {
       assert(client.dlpServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dlpServiceStub);
@@ -259,14 +259,14 @@ describe('v2.DlpServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dlpServiceStub, undefined);
@@ -275,7 +275,7 @@ describe('v2.DlpServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v2.DlpServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v2.DlpServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v2.DlpServiceClient', () => {
   describe('inspectContent', () => {
     it('invokes inspectContent without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes inspectContent without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes inspectContent with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes inspectContent with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.inspectContent(request), expectedError);
@@ -450,7 +450,7 @@ describe('v2.DlpServiceClient', () => {
   describe('redactImage', () => {
     it('invokes redactImage without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes redactImage without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -528,7 +528,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes redactImage with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes redactImage with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.redactImage(request), expectedError);
@@ -582,7 +582,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deidentifyContent', () => {
     it('invokes deidentifyContent without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deidentifyContent without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deidentifyContent with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deidentifyContent with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deidentifyContent(request), expectedError);
@@ -714,7 +714,7 @@ describe('v2.DlpServiceClient', () => {
   describe('reidentifyContent', () => {
     it('invokes reidentifyContent without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes reidentifyContent without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -792,7 +792,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes reidentifyContent with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -823,7 +823,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes reidentifyContent with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -836,7 +836,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.reidentifyContent(request), expectedError);
@@ -846,7 +846,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listInfoTypes', () => {
     it('invokes listInfoTypes without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listInfoTypes without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -924,7 +924,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listInfoTypes with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -955,7 +955,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listInfoTypes with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listInfoTypes(request), expectedError);
@@ -978,7 +978,7 @@ describe('v2.DlpServiceClient', () => {
   describe('createInspectTemplate', () => {
     it('invokes createInspectTemplate without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createInspectTemplate without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1057,7 +1057,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createInspectTemplate with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createInspectTemplate with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1117,7 +1117,7 @@ describe('v2.DlpServiceClient', () => {
   describe('updateInspectTemplate', () => {
     it('invokes updateInspectTemplate without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1149,7 +1149,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateInspectTemplate without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateInspectTemplate with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1230,7 +1230,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateInspectTemplate with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1243,7 +1243,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1256,7 +1256,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getInspectTemplate', () => {
     it('invokes getInspectTemplate without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1288,7 +1288,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getInspectTemplate without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1335,7 +1335,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getInspectTemplate with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,7 +1366,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getInspectTemplate with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInspectTemplate(request), expectedError);
@@ -1389,7 +1389,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteInspectTemplate', () => {
     it('invokes deleteInspectTemplate without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1421,7 +1421,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteInspectTemplate without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1468,7 +1468,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteInspectTemplate with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteInspectTemplate with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1515,7 +1515,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1528,7 +1528,7 @@ describe('v2.DlpServiceClient', () => {
   describe('createDeidentifyTemplate', () => {
     it('invokes createDeidentifyTemplate without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1560,7 +1560,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDeidentifyTemplate without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1607,7 +1607,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDeidentifyTemplate with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1641,7 +1641,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDeidentifyTemplate with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1654,7 +1654,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1667,7 +1667,7 @@ describe('v2.DlpServiceClient', () => {
   describe('updateDeidentifyTemplate', () => {
     it('invokes updateDeidentifyTemplate without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1699,7 +1699,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateDeidentifyTemplate without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1746,7 +1746,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateDeidentifyTemplate with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1780,7 +1780,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateDeidentifyTemplate with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1793,7 +1793,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1806,7 +1806,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getDeidentifyTemplate', () => {
     it('invokes getDeidentifyTemplate without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1838,7 +1838,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDeidentifyTemplate without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1885,7 +1885,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDeidentifyTemplate with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1919,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDeidentifyTemplate with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,7 +1932,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1945,7 +1945,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteDeidentifyTemplate', () => {
     it('invokes deleteDeidentifyTemplate without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1977,7 +1977,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDeidentifyTemplate without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2024,7 +2024,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDeidentifyTemplate with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2058,7 +2058,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDeidentifyTemplate with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2071,7 +2071,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2084,7 +2084,7 @@ describe('v2.DlpServiceClient', () => {
   describe('createJobTrigger', () => {
     it('invokes createJobTrigger without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2115,7 +2115,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createJobTrigger without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2162,7 +2162,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createJobTrigger with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2193,7 +2193,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createJobTrigger with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2206,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createJobTrigger(request), expectedError);
@@ -2216,7 +2216,7 @@ describe('v2.DlpServiceClient', () => {
   describe('updateJobTrigger', () => {
     it('invokes updateJobTrigger without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2247,7 +2247,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateJobTrigger without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2294,7 +2294,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateJobTrigger with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2325,7 +2325,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateJobTrigger with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2338,7 +2338,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateJobTrigger(request), expectedError);
@@ -2348,7 +2348,7 @@ describe('v2.DlpServiceClient', () => {
   describe('hybridInspectJobTrigger', () => {
     it('invokes hybridInspectJobTrigger without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2380,7 +2380,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes hybridInspectJobTrigger without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2427,7 +2427,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes hybridInspectJobTrigger with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2461,7 +2461,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes hybridInspectJobTrigger with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2474,7 +2474,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2487,7 +2487,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getJobTrigger', () => {
     it('invokes getJobTrigger without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2518,7 +2518,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getJobTrigger without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2565,7 +2565,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getJobTrigger with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2596,7 +2596,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getJobTrigger with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2609,7 +2609,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getJobTrigger(request), expectedError);
@@ -2619,7 +2619,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteJobTrigger', () => {
     it('invokes deleteJobTrigger without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2650,7 +2650,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteJobTrigger without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2697,7 +2697,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteJobTrigger with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2728,7 +2728,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteJobTrigger with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2741,7 +2741,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteJobTrigger(request), expectedError);
@@ -2751,7 +2751,7 @@ describe('v2.DlpServiceClient', () => {
   describe('activateJobTrigger', () => {
     it('invokes activateJobTrigger without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2783,7 +2783,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes activateJobTrigger without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2830,7 +2830,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes activateJobTrigger with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2861,7 +2861,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes activateJobTrigger with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2874,7 +2874,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.activateJobTrigger(request), expectedError);
@@ -2884,7 +2884,7 @@ describe('v2.DlpServiceClient', () => {
   describe('createDiscoveryConfig', () => {
     it('invokes createDiscoveryConfig without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2916,7 +2916,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDiscoveryConfig without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2963,7 +2963,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDiscoveryConfig with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2997,7 +2997,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDiscoveryConfig with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3010,7 +3010,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3023,7 +3023,7 @@ describe('v2.DlpServiceClient', () => {
   describe('updateDiscoveryConfig', () => {
     it('invokes updateDiscoveryConfig without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3055,7 +3055,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateDiscoveryConfig without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3102,7 +3102,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateDiscoveryConfig with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,7 +3136,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateDiscoveryConfig with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3149,7 +3149,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3162,7 +3162,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getDiscoveryConfig', () => {
     it('invokes getDiscoveryConfig without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3194,7 +3194,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDiscoveryConfig without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3241,7 +3241,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDiscoveryConfig with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3272,7 +3272,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDiscoveryConfig with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3285,7 +3285,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDiscoveryConfig(request), expectedError);
@@ -3295,7 +3295,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteDiscoveryConfig', () => {
     it('invokes deleteDiscoveryConfig without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3327,7 +3327,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDiscoveryConfig without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3374,7 +3374,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDiscoveryConfig with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3408,7 +3408,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDiscoveryConfig with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3421,7 +3421,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3434,7 +3434,7 @@ describe('v2.DlpServiceClient', () => {
   describe('createDlpJob', () => {
     it('invokes createDlpJob without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3465,7 +3465,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDlpJob without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3512,7 +3512,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDlpJob with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3543,7 +3543,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createDlpJob with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3556,7 +3556,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDlpJob(request), expectedError);
@@ -3566,7 +3566,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getDlpJob', () => {
     it('invokes getDlpJob without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3597,7 +3597,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDlpJob without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3644,7 +3644,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDlpJob with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3672,7 +3672,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getDlpJob with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3685,7 +3685,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDlpJob(request), expectedError);
@@ -3695,7 +3695,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteDlpJob', () => {
     it('invokes deleteDlpJob without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3726,7 +3726,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDlpJob without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3773,7 +3773,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDlpJob with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3804,7 +3804,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteDlpJob with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3817,7 +3817,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDlpJob(request), expectedError);
@@ -3827,7 +3827,7 @@ describe('v2.DlpServiceClient', () => {
   describe('cancelDlpJob', () => {
     it('invokes cancelDlpJob without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3858,7 +3858,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes cancelDlpJob without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3905,7 +3905,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes cancelDlpJob with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3936,7 +3936,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes cancelDlpJob with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3949,7 +3949,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelDlpJob(request), expectedError);
@@ -3959,7 +3959,7 @@ describe('v2.DlpServiceClient', () => {
   describe('createStoredInfoType', () => {
     it('invokes createStoredInfoType without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3991,7 +3991,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createStoredInfoType without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4038,7 +4038,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createStoredInfoType with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4069,7 +4069,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createStoredInfoType with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4082,7 +4082,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createStoredInfoType(request), expectedError);
@@ -4092,7 +4092,7 @@ describe('v2.DlpServiceClient', () => {
   describe('updateStoredInfoType', () => {
     it('invokes updateStoredInfoType without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4124,7 +4124,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateStoredInfoType without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4171,7 +4171,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateStoredInfoType with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4202,7 +4202,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateStoredInfoType with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4215,7 +4215,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateStoredInfoType(request), expectedError);
@@ -4225,7 +4225,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getStoredInfoType', () => {
     it('invokes getStoredInfoType without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4256,7 +4256,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getStoredInfoType without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4303,7 +4303,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getStoredInfoType with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4334,7 +4334,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getStoredInfoType with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4347,7 +4347,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStoredInfoType(request), expectedError);
@@ -4357,7 +4357,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteStoredInfoType', () => {
     it('invokes deleteStoredInfoType without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4389,7 +4389,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteStoredInfoType without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4436,7 +4436,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteStoredInfoType with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4467,7 +4467,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteStoredInfoType with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4480,7 +4480,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteStoredInfoType(request), expectedError);
@@ -4490,7 +4490,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getProjectDataProfile', () => {
     it('invokes getProjectDataProfile without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4522,7 +4522,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getProjectDataProfile without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4569,7 +4569,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getProjectDataProfile with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4603,7 +4603,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getProjectDataProfile with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4616,7 +4616,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4629,7 +4629,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getFileStoreDataProfile', () => {
     it('invokes getFileStoreDataProfile without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4661,7 +4661,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getFileStoreDataProfile without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4708,7 +4708,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getFileStoreDataProfile with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4742,7 +4742,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getFileStoreDataProfile with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4755,7 +4755,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4768,7 +4768,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteFileStoreDataProfile', () => {
     it('invokes deleteFileStoreDataProfile without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4800,7 +4800,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteFileStoreDataProfile without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4847,7 +4847,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteFileStoreDataProfile with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4881,7 +4881,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteFileStoreDataProfile with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4894,7 +4894,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4907,7 +4907,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getTableDataProfile', () => {
     it('invokes getTableDataProfile without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4939,7 +4939,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getTableDataProfile without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4986,7 +4986,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getTableDataProfile with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5017,7 +5017,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getTableDataProfile with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5030,7 +5030,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTableDataProfile(request), expectedError);
@@ -5040,7 +5040,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getColumnDataProfile', () => {
     it('invokes getColumnDataProfile without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5072,7 +5072,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getColumnDataProfile without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5119,7 +5119,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getColumnDataProfile with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5150,7 +5150,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getColumnDataProfile with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5163,7 +5163,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getColumnDataProfile(request), expectedError);
@@ -5173,7 +5173,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteTableDataProfile', () => {
     it('invokes deleteTableDataProfile without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5205,7 +5205,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteTableDataProfile without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5252,7 +5252,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteTableDataProfile with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5286,7 +5286,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteTableDataProfile with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5299,7 +5299,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -5312,7 +5312,7 @@ describe('v2.DlpServiceClient', () => {
   describe('hybridInspectDlpJob', () => {
     it('invokes hybridInspectDlpJob without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5344,7 +5344,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes hybridInspectDlpJob without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5391,7 +5391,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes hybridInspectDlpJob with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5422,7 +5422,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes hybridInspectDlpJob with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5435,7 +5435,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.hybridInspectDlpJob(request), expectedError);
@@ -5445,7 +5445,7 @@ describe('v2.DlpServiceClient', () => {
   describe('finishDlpJob', () => {
     it('invokes finishDlpJob without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5476,7 +5476,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes finishDlpJob without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5523,7 +5523,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes finishDlpJob with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5554,7 +5554,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes finishDlpJob with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5567,7 +5567,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.finishDlpJob(request), expectedError);
@@ -5577,7 +5577,7 @@ describe('v2.DlpServiceClient', () => {
   describe('createConnection', () => {
     it('invokes createConnection without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5608,7 +5608,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createConnection without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5655,7 +5655,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createConnection with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5686,7 +5686,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes createConnection with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5699,7 +5699,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createConnection(request), expectedError);
@@ -5709,7 +5709,7 @@ describe('v2.DlpServiceClient', () => {
   describe('getConnection', () => {
     it('invokes getConnection without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5740,7 +5740,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getConnection without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5787,7 +5787,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getConnection with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5818,7 +5818,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes getConnection with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5831,7 +5831,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnection(request), expectedError);
@@ -5841,7 +5841,7 @@ describe('v2.DlpServiceClient', () => {
   describe('deleteConnection', () => {
     it('invokes deleteConnection without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5872,7 +5872,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteConnection without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5919,7 +5919,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteConnection with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5950,7 +5950,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes deleteConnection with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5963,7 +5963,7 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteConnection(request), expectedError);
@@ -5973,7 +5973,7 @@ describe('v2.DlpServiceClient', () => {
   describe('updateConnection', () => {
     it('invokes updateConnection without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6004,7 +6004,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateConnection without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6051,7 +6051,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateConnection with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6082,7 +6082,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes updateConnection with closed client', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6095,17 +6095,548 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateConnection(request), expectedError);
     });
   });
 
+  describe('createContentPolicy', () => {
+    it('invokes createContentPolicy without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateContentPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.createContentPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createContentPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createContentPolicy without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateContentPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.createContentPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createContentPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IContentPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createContentPolicy with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateContentPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createContentPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createContentPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createContentPolicy with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateContentPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createContentPolicy(request), expectedError);
+    });
+  });
+
+  describe('updateContentPolicy', () => {
+    it('invokes updateContentPolicy without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.updateContentPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateContentPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateContentPolicy without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.updateContentPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateContentPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IContentPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateContentPolicy with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateContentPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateContentPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateContentPolicy with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateContentPolicy(request), expectedError);
+    });
+  });
+
+  describe('getContentPolicy', () => {
+    it('invokes getContentPolicy without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.getContentPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getContentPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getContentPolicy without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.getContentPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getContentPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IContentPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getContentPolicy with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getContentPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getContentPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getContentPolicy with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getContentPolicy(request), expectedError);
+    });
+  });
+
+  describe('deleteContentPolicy', () => {
+    it('invokes deleteContentPolicy without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteContentPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteContentPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteContentPolicy without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteContentPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteContentPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteContentPolicy with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteContentPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteContentPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteContentPolicy with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteContentPolicy(request), expectedError);
+    });
+  });
+
   describe('listInspectTemplates', () => {
     it('invokes listInspectTemplates without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6145,7 +6676,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listInspectTemplates without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6200,7 +6731,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listInspectTemplates with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6231,7 +6762,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listInspectTemplatesStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6283,15 +6814,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listInspectTemplates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInspectTemplatesStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6332,15 +6863,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listInspectTemplates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInspectTemplates without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6381,15 +6912,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInspectTemplates with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6421,9 +6952,9 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6431,7 +6962,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listDeidentifyTemplates', () => {
     it('invokes listDeidentifyTemplates without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6471,7 +7002,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDeidentifyTemplates without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6526,7 +7057,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDeidentifyTemplates with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6560,7 +7091,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDeidentifyTemplatesStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6626,7 +7157,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDeidentifyTemplatesStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6681,7 +7212,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listDeidentifyTemplates without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6734,7 +7265,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listDeidentifyTemplates with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6781,7 +7312,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listJobTriggers', () => {
     it('invokes listJobTriggers without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6814,7 +7345,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listJobTriggers without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6863,7 +7394,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listJobTriggers with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6894,7 +7425,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listJobTriggersStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6940,15 +7471,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listJobTriggers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listJobTriggersStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6989,15 +7520,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listJobTriggers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobTriggers without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7032,15 +7563,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listJobTriggers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobTriggers with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7072,9 +7603,9 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listJobTriggers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7082,7 +7613,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listDiscoveryConfigs', () => {
     it('invokes listDiscoveryConfigs without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7122,7 +7653,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDiscoveryConfigs without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7177,7 +7708,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDiscoveryConfigs with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7208,7 +7739,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDiscoveryConfigsStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7260,15 +7791,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listDiscoveryConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDiscoveryConfigsStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7309,15 +7840,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listDiscoveryConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDiscoveryConfigs without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7358,15 +7889,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listDiscoveryConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDiscoveryConfigs with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7398,9 +7929,9 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listDiscoveryConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7408,7 +7939,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listDlpJobs', () => {
     it('invokes listDlpJobs without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7441,7 +7972,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDlpJobs without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7490,7 +8021,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDlpJobs with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7521,7 +8052,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listDlpJobsStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7564,15 +8095,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listDlpJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDlpJobsStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7612,15 +8143,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listDlpJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDlpJobs without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7655,15 +8186,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listDlpJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDlpJobs with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7697,9 +8228,9 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listDlpJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7707,7 +8238,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listStoredInfoTypes', () => {
     it('invokes listStoredInfoTypes without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7747,7 +8278,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listStoredInfoTypes without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7802,7 +8333,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listStoredInfoTypes with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7833,7 +8364,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listStoredInfoTypesStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7885,15 +8416,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listStoredInfoTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listStoredInfoTypesStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7934,15 +8465,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listStoredInfoTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStoredInfoTypes without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7983,15 +8514,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStoredInfoTypes with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8023,9 +8554,9 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8033,7 +8564,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listProjectDataProfiles', () => {
     it('invokes listProjectDataProfiles without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8073,7 +8604,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listProjectDataProfiles without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8128,7 +8659,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listProjectDataProfiles with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8162,7 +8693,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listProjectDataProfilesStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8228,7 +8759,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listProjectDataProfilesStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8283,7 +8814,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listProjectDataProfiles without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8336,7 +8867,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listProjectDataProfiles with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8383,7 +8914,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listTableDataProfiles', () => {
     it('invokes listTableDataProfiles without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8423,7 +8954,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listTableDataProfiles without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8478,7 +9009,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listTableDataProfiles with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8512,7 +9043,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listTableDataProfilesStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8578,7 +9109,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listTableDataProfilesStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8633,7 +9164,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listTableDataProfiles without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8686,7 +9217,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listTableDataProfiles with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8732,7 +9263,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listColumnDataProfiles', () => {
     it('invokes listColumnDataProfiles without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8772,7 +9303,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listColumnDataProfiles without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8827,7 +9358,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listColumnDataProfiles with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8861,7 +9392,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listColumnDataProfilesStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8927,7 +9458,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listColumnDataProfilesStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8982,7 +9513,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listColumnDataProfiles without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9035,7 +9566,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listColumnDataProfiles with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9081,7 +9612,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listFileStoreDataProfiles', () => {
     it('invokes listFileStoreDataProfiles without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9121,7 +9652,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listFileStoreDataProfiles without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9153,8 +9684,7 @@ describe('v2.DlpServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.privacy.dlp.v2.IFileStoreDataProfile[]
-              | null,
+              protos.google.privacy.dlp.v2.IFileStoreDataProfile[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9178,7 +9708,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listFileStoreDataProfiles with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9212,7 +9742,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listFileStoreDataProfilesStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9279,7 +9809,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listFileStoreDataProfilesStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9335,7 +9865,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listFileStoreDataProfiles without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9389,7 +9919,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('uses async iteration with listFileStoreDataProfiles with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9436,7 +9966,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listConnections', () => {
     it('invokes listConnections without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9469,7 +9999,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listConnections without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9518,7 +10048,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listConnections with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9549,7 +10079,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes listConnectionsStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9595,15 +10125,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConnectionsStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9644,15 +10174,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnections without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9687,15 +10217,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnections with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9727,9 +10257,9 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9737,7 +10267,7 @@ describe('v2.DlpServiceClient', () => {
   describe('searchConnections', () => {
     it('invokes searchConnections without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9770,7 +10300,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes searchConnections without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9819,7 +10349,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes searchConnections with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9850,7 +10380,7 @@ describe('v2.DlpServiceClient', () => {
 
     it('invokes searchConnectionsStream without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9896,15 +10426,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.searchConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchConnectionsStream with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9945,15 +10475,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.searchConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchConnections without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9988,15 +10518,15 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.searchConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchConnections with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10028,16 +10558,318 @@ describe('v2.DlpServiceClient', () => {
       assert(
         (client.descriptors.page.searchConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listContentPolicies', () => {
+    it('invokes listContentPolicies without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+      ];
+      client.innerApiCalls.listContentPolicies =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listContentPolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listContentPolicies without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+      ];
+      client.innerApiCalls.listContentPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listContentPolicies(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IContentPolicy[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listContentPolicies with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listContentPolicies = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listContentPolicies(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listContentPoliciesStream without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+      ];
+      client.descriptors.page.listContentPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listContentPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.ContentPolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.ContentPolicy) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listContentPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listContentPolicies, request),
+      );
+      assert(
+        (client.descriptors.page.listContentPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listContentPoliciesStream with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listContentPolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listContentPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.ContentPolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.ContentPolicy) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listContentPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listContentPolicies, request),
+      );
+      assert(
+        (client.descriptors.page.listContentPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listContentPolicies without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+      ];
+      client.descriptors.page.listContentPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.privacy.dlp.v2.IContentPolicy[] = [];
+      const iterable = client.listContentPoliciesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listContentPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listContentPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listContentPolicies with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listContentPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listContentPoliciesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.privacy.dlp.v2.IContentPolicy[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listContentPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listContentPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10067,7 +10899,7 @@ describe('v2.DlpServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10111,7 +10943,7 @@ describe('v2.DlpServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10146,7 +10978,7 @@ describe('v2.DlpServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10194,7 +11026,7 @@ describe('v2.DlpServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10234,6 +11066,70 @@ describe('v2.DlpServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('contentPolicy', async () => {
+      const fakePath = '/rendered/path/contentPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        content_policy: 'contentPolicyValue',
+      };
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.contentPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.contentPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('contentPolicyPath', () => {
+        const result = client.contentPolicyPath(
+          'projectValue',
+          'locationValue',
+          'contentPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.contentPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromContentPolicyName', () => {
+        const result = client.matchProjectFromContentPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.contentPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromContentPolicyName', () => {
+        const result = client.matchLocationFromContentPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.contentPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchContentPolicyFromContentPolicyName', () => {
+        const result = client.matchContentPolicyFromContentPolicyName(fakePath);
+        assert.strictEqual(result, 'contentPolicyValue');
+        assert(
+          (client.pathTemplates.contentPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('discoveryConfig', async () => {
       const fakePath = '/rendered/path/discoveryConfig';
       const expectedParameters = {
@@ -10242,7 +11138,7 @@ describe('v2.DlpServiceClient', () => {
         discovery_config: 'discoveryConfigValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10307,7 +11203,7 @@ describe('v2.DlpServiceClient', () => {
         finding: 'findingValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10370,7 +11266,7 @@ describe('v2.DlpServiceClient', () => {
         location: 'locationValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10418,7 +11314,7 @@ describe('v2.DlpServiceClient', () => {
         organization: 'organizationValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10457,7 +11353,7 @@ describe('v2.DlpServiceClient', () => {
         deidentify_template: 'deidentifyTemplateValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10522,7 +11418,7 @@ describe('v2.DlpServiceClient', () => {
         inspect_template: 'inspectTemplateValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10586,7 +11482,7 @@ describe('v2.DlpServiceClient', () => {
         location: 'locationValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10650,7 +11546,7 @@ describe('v2.DlpServiceClient', () => {
         column_data_profile: 'columnDataProfileValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10737,7 +11633,7 @@ describe('v2.DlpServiceClient', () => {
         connection: 'connectionValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10818,7 +11714,7 @@ describe('v2.DlpServiceClient', () => {
         deidentify_template: 'deidentifyTemplateValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10906,7 +11802,7 @@ describe('v2.DlpServiceClient', () => {
         file_store_data_profile: 'fileStoreDataProfileValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10993,7 +11889,7 @@ describe('v2.DlpServiceClient', () => {
         inspect_template: 'inspectTemplateValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11076,7 +11972,7 @@ describe('v2.DlpServiceClient', () => {
         project_data_profile: 'projectDataProfileValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11163,7 +12059,7 @@ describe('v2.DlpServiceClient', () => {
         stored_info_type: 'storedInfoTypeValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11246,7 +12142,7 @@ describe('v2.DlpServiceClient', () => {
         table_data_profile: 'tableDataProfileValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11332,7 +12228,7 @@ describe('v2.DlpServiceClient', () => {
         stored_info_type: 'storedInfoTypeValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11396,7 +12292,7 @@ describe('v2.DlpServiceClient', () => {
         project: 'projectValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11435,7 +12331,7 @@ describe('v2.DlpServiceClient', () => {
         deidentify_template: 'deidentifyTemplateValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11499,7 +12395,7 @@ describe('v2.DlpServiceClient', () => {
         project: 'projectValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11544,7 +12440,7 @@ describe('v2.DlpServiceClient', () => {
         dlp_job: 'dlpJobValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11593,7 +12489,7 @@ describe('v2.DlpServiceClient', () => {
         inspect_template: 'inspectTemplateValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11656,7 +12552,7 @@ describe('v2.DlpServiceClient', () => {
         job_trigger: 'jobTriggerValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11719,7 +12615,7 @@ describe('v2.DlpServiceClient', () => {
         column_data_profile: 'columnDataProfileValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11800,7 +12696,7 @@ describe('v2.DlpServiceClient', () => {
         connection: 'connectionValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11879,7 +12775,7 @@ describe('v2.DlpServiceClient', () => {
         deidentify_template: 'deidentifyTemplateValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11962,7 +12858,7 @@ describe('v2.DlpServiceClient', () => {
         dlp_job: 'dlpJobValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12041,7 +12937,7 @@ describe('v2.DlpServiceClient', () => {
         file_store_data_profile: 'fileStoreDataProfileValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12124,7 +13020,7 @@ describe('v2.DlpServiceClient', () => {
         inspect_template: 'inspectTemplateValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12203,7 +13099,7 @@ describe('v2.DlpServiceClient', () => {
         job_trigger: 'jobTriggerValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12282,7 +13178,7 @@ describe('v2.DlpServiceClient', () => {
         project_data_profile: 'projectDataProfileValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12365,7 +13261,7 @@ describe('v2.DlpServiceClient', () => {
         stored_info_type: 'storedInfoTypeValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12444,7 +13340,7 @@ describe('v2.DlpServiceClient', () => {
         table_data_profile: 'tableDataProfileValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12522,7 +13418,7 @@ describe('v2.DlpServiceClient', () => {
         stored_info_type: 'storedInfoTypeValue',
       };
       const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class PipelineServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -72,12 +72,12 @@ export class PipelineServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  pipelineServiceStub?: Promise<{ [name: string]: Function }>;
+  pipelineServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PipelineServiceClient.
@@ -153,7 +153,7 @@ export class PipelineServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -467,15 +467,13 @@ export class PipelineServiceClient {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
           additional_bindings: [
-            { get: '/v1beta1/{name=projects/*/locations/*}' },
+            {get: '/v1beta1/{name=projects/*/locations/*}'},
           ],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [
-            { get: '/v1beta1/{name=projects/*}/locations' },
-          ],
+          additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
@@ -952,17 +950,15 @@ export class PipelineServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
-            { post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:cancel' },
+            {post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:cancel'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            {
-              delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            { delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1063,9 +1059,7 @@ export class PipelineServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1150,7 +1144,7 @@ export class PipelineServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1beta1/{name=projects/*/locations/*/operations/*}' },
+            {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
@@ -1387,18 +1381,16 @@ export class PipelineServiceClient {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1beta1/{name=onlineEvaluators/*/operations/*}' },
+            {delete: '/v1beta1/{name=onlineEvaluators/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1420,9 +1412,7 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
@@ -1450,7 +1440,7 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1475,7 +1465,7 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1491,7 +1481,7 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1504,9 +1494,7 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1537,13 +1525,11 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1beta1/{name=projects/*/locations/*/operations/*}' },
+            {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
             },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
-            },
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
             },
@@ -1715,16 +1701,16 @@ export class PipelineServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1beta1/{name=onlineEvaluators/*/operations/*}' },
+            {get: '/v1beta1/{name=onlineEvaluators/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1740,16 +1726,12 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1759,19 +1741,15 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1796,7 +1774,7 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1809,7 +1787,7 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1825,7 +1803,7 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1856,11 +1834,9 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { get: '/v1beta1/{name=projects/*/locations/*}/operations' },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations',
-            },
-            { get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations' },
+            {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
             },
@@ -1942,9 +1918,7 @@ export class PipelineServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations',
-            },
+            {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -2032,7 +2006,7 @@ export class PipelineServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
             },
-            { get: '/v1beta1/{name=onlineEvaluators/*}/operations' },
+            {get: '/v1beta1/{name=onlineEvaluators/*}/operations'},
           ],
         },
         {
@@ -2189,9 +2163,7 @@ export class PipelineServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait',
-            },
+            {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
             },
@@ -2366,7 +2338,7 @@ export class PipelineServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:wait' },
+            {post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:wait'},
           ],
         },
       ];
@@ -2439,7 +2411,7 @@ export class PipelineServiceClient {
       'google.cloud.aiplatform.v1beta1.PipelineService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -2479,7 +2451,7 @@ export class PipelineServiceClient {
           (this._protos as any).google.cloud.aiplatform.v1beta1.PipelineService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -2499,7 +2471,7 @@ export class PipelineServiceClient {
     ];
     for (const methodName of pipelineServiceStubMethods) {
       const callPromise = this.pipelineServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -2710,7 +2682,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createTrainingPipeline request %j', request);
@@ -2855,7 +2827,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTrainingPipeline request %j', request);
@@ -3013,7 +2985,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelTrainingPipeline request %j', request);
@@ -3166,7 +3138,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createPipelineJob request %j', request);
@@ -3305,7 +3277,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPipelineJob request %j', request);
@@ -3462,7 +3434,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelPipelineJob request %j', request);
@@ -3614,7 +3586,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3671,7 +3643,7 @@ export class PipelineServiceClient {
     this._log.info('deleteTrainingPipeline long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3785,7 +3757,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3842,7 +3814,7 @@ export class PipelineServiceClient {
     this._log.info('deletePipelineJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3962,7 +3934,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4019,7 +3991,7 @@ export class PipelineServiceClient {
     this._log.info('batchDeletePipelineJobs long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4143,7 +4115,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4200,7 +4172,7 @@ export class PipelineServiceClient {
     this._log.info('batchCancelPipelineJobs long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4336,7 +4308,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4432,7 +4404,7 @@ export class PipelineServiceClient {
       });
     const defaultCallSettings = this._defaults['listTrainingPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTrainingPipelines stream %j', request);
@@ -4510,7 +4482,7 @@ export class PipelineServiceClient {
       });
     const defaultCallSettings = this._defaults['listTrainingPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTrainingPipelines iterate %j', request);
@@ -4671,7 +4643,7 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4795,7 +4767,7 @@ export class PipelineServiceClient {
       });
     const defaultCallSettings = this._defaults['listPipelineJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPipelineJobs stream %j', request);
@@ -4901,7 +4873,7 @@ export class PipelineServiceClient {
       });
     const defaultCallSettings = this._defaults['listPipelineJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPipelineJobs iterate %j', request);
@@ -9906,14 +9878,14 @@ export class PipelineServiceClient {
    */
   close(): Promise<void> {
     if (this.pipelineServiceStub && !this._terminated) {
-      return this.pipelineServiceStub.then((stub) => {
+      return this.pipelineServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

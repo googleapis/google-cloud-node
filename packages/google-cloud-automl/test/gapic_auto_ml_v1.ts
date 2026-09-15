@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as automlModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -269,7 +269,7 @@ describe('v1.AutoMlClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.autoMlStub, undefined);
@@ -277,12 +277,12 @@ describe('v1.AutoMlClient', () => {
       assert(client.autoMlStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.autoMlStub);
@@ -291,14 +291,14 @@ describe('v1.AutoMlClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.autoMlStub, undefined);
@@ -307,7 +307,7 @@ describe('v1.AutoMlClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -315,7 +315,7 @@ describe('v1.AutoMlClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -327,7 +327,7 @@ describe('v1.AutoMlClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -350,7 +350,7 @@ describe('v1.AutoMlClient', () => {
   describe('getDataset', () => {
     it('invokes getDataset without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -381,7 +381,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getDataset without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getDataset with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getDataset with closed client', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataset(request), expectedError);
@@ -482,7 +482,7 @@ describe('v1.AutoMlClient', () => {
   describe('updateDataset', () => {
     it('invokes updateDataset without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes updateDataset without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes updateDataset with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes updateDataset with closed client', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v1.AutoMlClient', () => {
       );
       request.dataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataset(request), expectedError);
@@ -618,7 +618,7 @@ describe('v1.AutoMlClient', () => {
   describe('getAnnotationSpec', () => {
     it('invokes getAnnotationSpec without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -649,7 +649,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getAnnotationSpec without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getAnnotationSpec with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -727,7 +727,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getAnnotationSpec with closed client', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnnotationSpec(request), expectedError);
@@ -750,7 +750,7 @@ describe('v1.AutoMlClient', () => {
   describe('getModel', () => {
     it('invokes getModel without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getModel without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getModel with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getModel with closed client', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -869,7 +869,7 @@ describe('v1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getModel(request), expectedError);
@@ -879,7 +879,7 @@ describe('v1.AutoMlClient', () => {
   describe('updateModel', () => {
     it('invokes updateModel without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -911,7 +911,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes updateModel without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes updateModel with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -991,7 +991,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes updateModel with closed client', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1.AutoMlClient', () => {
       );
       request.model.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateModel(request), expectedError);
@@ -1015,7 +1015,7 @@ describe('v1.AutoMlClient', () => {
   describe('getModelEvaluation', () => {
     it('invokes getModelEvaluation without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getModelEvaluation without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,7 +1094,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getModelEvaluation with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1125,7 +1125,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes getModelEvaluation with closed client', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getModelEvaluation(request), expectedError);
@@ -1148,7 +1148,7 @@ describe('v1.AutoMlClient', () => {
   describe('createDataset', () => {
     it('invokes createDataset without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes createDataset without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes createDataset with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1266,7 +1266,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes createDataset with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1299,7 +1299,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkCreateDatasetProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1307,8 +1307,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatasetProgress(
@@ -1321,7 +1321,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkCreateDatasetProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1.AutoMlClient', () => {
   describe('deleteDataset', () => {
     it('invokes deleteDataset without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deleteDataset without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1429,7 +1429,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deleteDataset with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1460,7 +1460,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deleteDataset with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,7 +1493,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkDeleteDatasetProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,8 +1501,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDatasetProgress(
@@ -1515,7 +1515,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkDeleteDatasetProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1536,7 +1536,7 @@ describe('v1.AutoMlClient', () => {
   describe('importData', () => {
     it('invokes importData without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1568,7 +1568,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes importData without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1622,7 +1622,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes importData with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1653,7 +1653,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes importData with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1686,7 +1686,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkImportDataProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1694,8 +1694,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDataProgress(
@@ -1708,7 +1708,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkImportDataProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1726,7 +1726,7 @@ describe('v1.AutoMlClient', () => {
   describe('exportData', () => {
     it('invokes exportData without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes exportData without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1812,7 +1812,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes exportData with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1843,7 +1843,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes exportData with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkExportDataProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1884,8 +1884,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportDataProgress(
@@ -1898,7 +1898,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkExportDataProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1916,7 +1916,7 @@ describe('v1.AutoMlClient', () => {
   describe('createModel', () => {
     it('invokes createModel without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1948,7 +1948,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes createModel without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2002,7 +2002,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes createModel with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2033,7 +2033,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes createModel with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkCreateModelProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2074,8 +2074,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateModelProgress(
@@ -2088,7 +2088,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkCreateModelProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2106,7 +2106,7 @@ describe('v1.AutoMlClient', () => {
   describe('deleteModel', () => {
     it('invokes deleteModel without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2138,7 +2138,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deleteModel without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2192,7 +2192,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deleteModel with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2223,7 +2223,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deleteModel with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2256,7 +2256,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkDeleteModelProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2264,8 +2264,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteModelProgress(
@@ -2278,7 +2278,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkDeleteModelProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2296,7 +2296,7 @@ describe('v1.AutoMlClient', () => {
   describe('deployModel', () => {
     it('invokes deployModel without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2328,7 +2328,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deployModel without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2382,7 +2382,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deployModel with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2413,7 +2413,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes deployModel with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2446,7 +2446,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkDeployModelProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2454,8 +2454,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeployModelProgress(
@@ -2468,7 +2468,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkDeployModelProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2486,7 +2486,7 @@ describe('v1.AutoMlClient', () => {
   describe('undeployModel', () => {
     it('invokes undeployModel without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2519,7 +2519,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes undeployModel without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2573,7 +2573,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes undeployModel with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2604,7 +2604,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes undeployModel with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2637,7 +2637,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkUndeployModelProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2645,8 +2645,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeployModelProgress(
@@ -2659,7 +2659,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkUndeployModelProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2680,7 +2680,7 @@ describe('v1.AutoMlClient', () => {
   describe('exportModel', () => {
     it('invokes exportModel without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2712,7 +2712,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes exportModel without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2766,7 +2766,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes exportModel with call error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2797,7 +2797,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes exportModel with LRO error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2830,7 +2830,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkExportModelProgress without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2838,8 +2838,8 @@ describe('v1.AutoMlClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportModelProgress(
@@ -2852,7 +2852,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes checkExportModelProgress with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2870,7 +2870,7 @@ describe('v1.AutoMlClient', () => {
   describe('listDatasets', () => {
     it('invokes listDatasets without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2903,7 +2903,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listDatasets without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2952,7 +2952,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listDatasets with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2983,7 +2983,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listDatasetsStream without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3026,15 +3026,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatasetsStream with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3074,15 +3074,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3117,15 +3117,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3157,9 +3157,9 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3167,7 +3167,7 @@ describe('v1.AutoMlClient', () => {
   describe('listModels', () => {
     it('invokes listModels without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3200,7 +3200,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listModels without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3249,7 +3249,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listModels with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3280,7 +3280,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listModelsStream without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3323,15 +3323,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listModelsStream with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3371,15 +3371,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModels without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3414,15 +3414,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModels with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3456,9 +3456,9 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3466,7 +3466,7 @@ describe('v1.AutoMlClient', () => {
   describe('listModelEvaluations', () => {
     it('invokes listModelEvaluations without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3506,7 +3506,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listModelEvaluations without error using callback', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3561,7 +3561,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listModelEvaluations with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3592,7 +3592,7 @@ describe('v1.AutoMlClient', () => {
 
     it('invokes listModelEvaluationsStream without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3644,15 +3644,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listModelEvaluationsStream with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3693,15 +3693,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listModelEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModelEvaluations without error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3742,15 +3742,15 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModelEvaluations with error', async () => {
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3782,9 +3782,9 @@ describe('v1.AutoMlClient', () => {
       assert(
         (client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3799,7 +3799,7 @@ describe('v1.AutoMlClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3875,7 +3875,7 @@ describe('v1.AutoMlClient', () => {
         dataset: 'datasetValue',
       };
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3938,7 +3938,7 @@ describe('v1.AutoMlClient', () => {
         location: 'locationValue',
       };
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3988,7 +3988,7 @@ describe('v1.AutoMlClient', () => {
         model: 'modelValue',
       };
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4053,7 +4053,7 @@ describe('v1.AutoMlClient', () => {
         model_evaluation: 'modelEvaluationValue',
       };
       const client = new automlModule.v1.AutoMlClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

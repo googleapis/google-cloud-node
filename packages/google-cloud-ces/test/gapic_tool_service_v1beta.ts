@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as toolserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.toolServiceStub, undefined);
@@ -207,12 +207,12 @@ describe('v1beta.ToolServiceClient', () => {
       assert(client.toolServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.toolServiceStub);
@@ -221,14 +221,14 @@ describe('v1beta.ToolServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.toolServiceStub, undefined);
@@ -237,7 +237,7 @@ describe('v1beta.ToolServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -245,7 +245,7 @@ describe('v1beta.ToolServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -257,7 +257,7 @@ describe('v1beta.ToolServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -280,7 +280,7 @@ describe('v1beta.ToolServiceClient', () => {
   describe('executeTool', () => {
     it('invokes executeTool without error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -311,7 +311,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes executeTool without error using callback', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -358,7 +358,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes executeTool with error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes executeTool with closed client', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1beta.ToolServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeTool(request), expectedError);
@@ -412,7 +412,7 @@ describe('v1beta.ToolServiceClient', () => {
   describe('retrieveToolSchema', () => {
     it('invokes retrieveToolSchema without error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes retrieveToolSchema without error using callback', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes retrieveToolSchema with error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes retrieveToolSchema with closed client', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1beta.ToolServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.retrieveToolSchema(request), expectedError);
@@ -545,7 +545,7 @@ describe('v1beta.ToolServiceClient', () => {
   describe('retrieveTools', () => {
     it('invokes retrieveTools without error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +576,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes retrieveTools without error using callback', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes retrieveTools with error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1beta.ToolServiceClient', () => {
 
     it('invokes retrieveTools with closed client', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1beta.ToolServiceClient', () => {
       );
       request.toolset = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.retrieveTools(request), expectedError);
@@ -676,7 +676,7 @@ describe('v1beta.ToolServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1beta.ToolServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1beta.ToolServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -785,7 +785,7 @@ describe('v1beta.ToolServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1beta.ToolServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1beta.ToolServiceClient', () => {
         agent: 'agentValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +957,7 @@ describe('v1beta.ToolServiceClient', () => {
         app: 'appValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1022,7 +1022,7 @@ describe('v1beta.ToolServiceClient', () => {
         version: 'versionValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v1beta.ToolServiceClient', () => {
         changelog: 'changelogValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v1beta.ToolServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1beta.ToolServiceClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1326,7 +1326,7 @@ describe('v1beta.ToolServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v1beta.ToolServiceClient', () => {
         evaluation_dataset: 'evaluationDatasetValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1494,7 +1494,7 @@ describe('v1beta.ToolServiceClient', () => {
         evaluation_expectation: 'evaluationExpectationValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1591,7 +1591,7 @@ describe('v1beta.ToolServiceClient', () => {
         evaluation_result: 'evaluationResultValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1682,7 +1682,7 @@ describe('v1beta.ToolServiceClient', () => {
         evaluation_run: 'evaluationRunValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v1beta.ToolServiceClient', () => {
         example: 'exampleValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1834,7 +1834,7 @@ describe('v1beta.ToolServiceClient', () => {
         guardrail: 'guardrailValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1beta.ToolServiceClient', () => {
         omnichannel: 'omnichannelValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,7 +1974,7 @@ describe('v1beta.ToolServiceClient', () => {
         scheduled_evaluation_run: 'scheduledEvaluationRunValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2068,7 +2068,7 @@ describe('v1beta.ToolServiceClient', () => {
         location: 'locationValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2125,7 +2125,7 @@ describe('v1beta.ToolServiceClient', () => {
         tool: 'toolValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2201,7 +2201,7 @@ describe('v1beta.ToolServiceClient', () => {
         toolset: 'toolsetValue',
       };
       const client = new toolserviceModule.v1beta.ToolServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

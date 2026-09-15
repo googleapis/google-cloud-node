@@ -95,10 +95,11 @@ export class MultiplexedSession
     this._createSession()
       .then(() => {
         this._maintain();
+        return null;
       })
       // Ignore errors here. If this fails, the next user request will
       // automatically trigger a retry via `_getSession`.
-      .catch(err => {});
+      .catch(() => {});
   }
 
   /**
@@ -196,6 +197,9 @@ export class MultiplexedSession
 
   /**
    * Retrieves a session asynchronously and invokes a callback with the session details.
+   * Note: The callback receives `(null, session)`. To prevent unnecessary allocations on
+   * read query paths, a `Transaction` is not created here. Callers requiring a read-write
+   * transaction should use `SessionFactory.prototype.getSessionForReadWrite`.
    *
    * @param {GetSessionCallback} callback - The callback to be invoked once the session is acquired or an error occurs.
    *
@@ -203,15 +207,30 @@ export class MultiplexedSession
    *
    */
   getSession(callback: GetSessionCallback): void {
-    this._getSession().then(
-      session =>
-        callback(
-          null,
-          session,
-          session!.transaction((session!.parent as Database).queryOptions_),
-        ),
-      callback,
-    );
+    if (this._multiplexedSession !== null) {
+      const session = this._multiplexedSession;
+      const span = getActiveOrNoopSpan();
+      span.addEvent('Cache hit: has usable multiplexed session');
+      // Use process.nextTick to guarantee asynchronous callback execution ("never release Zalgo").
+      // This avoids microtask and Promise allocation overhead while preventing race conditions
+      // where callers (such as Database.prototype.runStream) need to return their stream and
+      // register lifecycle listeners before the session callback executes.
+      process.nextTick(() => {
+        callback(null, session);
+      });
+      return;
+    }
+
+    this._getSession()
+      .then(session => {
+        callback(null, session);
+        return null;
+      }, callback)
+      .catch(err => {
+        process.nextTick(() => {
+          throw err;
+        });
+      });
   }
 
   /**

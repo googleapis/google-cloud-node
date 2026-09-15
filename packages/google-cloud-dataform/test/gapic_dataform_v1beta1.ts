@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dataformModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -275,7 +275,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataformStub, undefined);
@@ -283,12 +283,12 @@ describe('v1beta1.DataformClient', () => {
       assert(client.dataformStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataformStub);
@@ -297,14 +297,14 @@ describe('v1beta1.DataformClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataformStub, undefined);
@@ -313,7 +313,7 @@ describe('v1beta1.DataformClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -321,7 +321,7 @@ describe('v1beta1.DataformClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -333,7 +333,7 @@ describe('v1beta1.DataformClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -356,7 +356,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getTeamFolder', () => {
     it('invokes getTeamFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getTeamFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getTeamFolder with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getTeamFolder with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTeamFolder(request), expectedError);
@@ -488,7 +488,7 @@ describe('v1beta1.DataformClient', () => {
   describe('createTeamFolder', () => {
     it('invokes createTeamFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createTeamFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createTeamFolder with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createTeamFolder with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTeamFolder(request), expectedError);
@@ -620,7 +620,7 @@ describe('v1beta1.DataformClient', () => {
   describe('updateTeamFolder', () => {
     it('invokes updateTeamFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateTeamFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateTeamFolder with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -732,7 +732,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateTeamFolder with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.teamFolder.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTeamFolder(request), expectedError);
@@ -756,7 +756,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteTeamFolder', () => {
     it('invokes deleteTeamFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteTeamFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteTeamFolder with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteTeamFolder with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTeamFolder(request), expectedError);
@@ -888,7 +888,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getFolder', () => {
     it('invokes getFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getFolder with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -994,7 +994,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getFolder with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFolder(request), expectedError);
@@ -1017,7 +1017,7 @@ describe('v1beta1.DataformClient', () => {
   describe('createFolder', () => {
     it('invokes createFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1048,7 +1048,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createFolder with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1126,7 +1126,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createFolder with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFolder(request), expectedError);
@@ -1149,7 +1149,7 @@ describe('v1beta1.DataformClient', () => {
   describe('updateFolder', () => {
     it('invokes updateFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateFolder with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,7 +1261,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateFolder with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1275,7 +1275,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.folder.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFolder(request), expectedError);
@@ -1285,7 +1285,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteFolder', () => {
     it('invokes deleteFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1316,7 +1316,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteFolder with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1394,7 +1394,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteFolder with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteFolder(request), expectedError);
@@ -1417,7 +1417,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getRepository', () => {
     it('invokes getRepository without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getRepository without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getRepository with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1526,7 +1526,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getRepository with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,7 +1539,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRepository(request), expectedError);
@@ -1549,7 +1549,7 @@ describe('v1beta1.DataformClient', () => {
   describe('createRepository', () => {
     it('invokes createRepository without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,7 +1580,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createRepository without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1627,7 +1627,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createRepository with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,7 +1658,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createRepository with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1671,7 +1671,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRepository(request), expectedError);
@@ -1681,7 +1681,7 @@ describe('v1beta1.DataformClient', () => {
   describe('updateRepository', () => {
     it('invokes updateRepository without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1713,7 +1713,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateRepository without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1761,7 +1761,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateRepository with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1793,7 +1793,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateRepository with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1807,7 +1807,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.repository.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRepository(request), expectedError);
@@ -1817,7 +1817,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteRepository', () => {
     it('invokes deleteRepository without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1848,7 +1848,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteRepository without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteRepository with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1926,7 +1926,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteRepository with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1939,7 +1939,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRepository(request), expectedError);
@@ -1949,7 +1949,7 @@ describe('v1beta1.DataformClient', () => {
   describe('commitRepositoryChanges', () => {
     it('invokes commitRepositoryChanges without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1981,7 +1981,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes commitRepositoryChanges without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2028,7 +2028,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes commitRepositoryChanges with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2062,7 +2062,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes commitRepositoryChanges with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2088,7 +2088,7 @@ describe('v1beta1.DataformClient', () => {
   describe('readRepositoryFile', () => {
     it('invokes readRepositoryFile without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2120,7 +2120,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes readRepositoryFile without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2167,7 +2167,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes readRepositoryFile with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2198,7 +2198,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes readRepositoryFile with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2211,7 +2211,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.readRepositoryFile(request), expectedError);
@@ -2221,7 +2221,7 @@ describe('v1beta1.DataformClient', () => {
   describe('computeRepositoryAccessTokenStatus', () => {
     it('invokes computeRepositoryAccessTokenStatus without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2254,7 +2254,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes computeRepositoryAccessTokenStatus without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2301,7 +2301,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes computeRepositoryAccessTokenStatus with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2335,7 +2335,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes computeRepositoryAccessTokenStatus with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2348,7 +2348,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2361,7 +2361,7 @@ describe('v1beta1.DataformClient', () => {
   describe('fetchRemoteBranches', () => {
     it('invokes fetchRemoteBranches without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2393,7 +2393,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchRemoteBranches without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2440,7 +2440,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchRemoteBranches with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2471,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchRemoteBranches with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2484,7 +2484,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchRemoteBranches(request), expectedError);
@@ -2494,7 +2494,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getWorkspace', () => {
     it('invokes getWorkspace without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkspace without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2572,7 +2572,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkspace with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2603,7 +2603,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkspace with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2616,7 +2616,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkspace(request), expectedError);
@@ -2626,7 +2626,7 @@ describe('v1beta1.DataformClient', () => {
   describe('createWorkspace', () => {
     it('invokes createWorkspace without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2657,7 +2657,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkspace without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2704,7 +2704,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkspace with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2735,7 +2735,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkspace with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2748,7 +2748,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createWorkspace(request), expectedError);
@@ -2758,7 +2758,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteWorkspace', () => {
     it('invokes deleteWorkspace without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2789,7 +2789,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkspace without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2836,7 +2836,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkspace with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2867,7 +2867,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkspace with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2880,7 +2880,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteWorkspace(request), expectedError);
@@ -2890,7 +2890,7 @@ describe('v1beta1.DataformClient', () => {
   describe('installNpmPackages', () => {
     it('invokes installNpmPackages without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2922,7 +2922,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes installNpmPackages without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2969,7 +2969,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes installNpmPackages with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3000,7 +3000,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes installNpmPackages with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3013,7 +3013,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.installNpmPackages(request), expectedError);
@@ -3023,7 +3023,7 @@ describe('v1beta1.DataformClient', () => {
   describe('pullGitCommits', () => {
     it('invokes pullGitCommits without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3054,7 +3054,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes pullGitCommits without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3101,7 +3101,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes pullGitCommits with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3132,7 +3132,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes pullGitCommits with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3145,7 +3145,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pullGitCommits(request), expectedError);
@@ -3155,7 +3155,7 @@ describe('v1beta1.DataformClient', () => {
   describe('syncWorkspaceRefs', () => {
     it('invokes syncWorkspaceRefs without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3186,7 +3186,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes syncWorkspaceRefs without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3233,7 +3233,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes syncWorkspaceRefs with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3264,7 +3264,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes syncWorkspaceRefs with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3277,7 +3277,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.syncWorkspaceRefs(request), expectedError);
@@ -3287,7 +3287,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteBranch', () => {
     it('invokes deleteBranch without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3318,7 +3318,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteBranch without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3365,7 +3365,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteBranch with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3396,7 +3396,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteBranch with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3409,7 +3409,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBranch(request), expectedError);
@@ -3419,7 +3419,7 @@ describe('v1beta1.DataformClient', () => {
   describe('checkoutWorkspaceBranch', () => {
     it('invokes checkoutWorkspaceBranch without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3451,7 +3451,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkoutWorkspaceBranch without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3498,7 +3498,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkoutWorkspaceBranch with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3532,7 +3532,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkoutWorkspaceBranch with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3545,7 +3545,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3558,7 +3558,7 @@ describe('v1beta1.DataformClient', () => {
   describe('fetchCurrentWorkspaceBranch', () => {
     it('invokes fetchCurrentWorkspaceBranch without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3590,7 +3590,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchCurrentWorkspaceBranch without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3637,7 +3637,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchCurrentWorkspaceBranch with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3671,7 +3671,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchCurrentWorkspaceBranch with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3684,7 +3684,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3697,7 +3697,7 @@ describe('v1beta1.DataformClient', () => {
   describe('pushGitCommits', () => {
     it('invokes pushGitCommits without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3728,7 +3728,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes pushGitCommits without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3775,7 +3775,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes pushGitCommits with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3806,7 +3806,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes pushGitCommits with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3819,7 +3819,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pushGitCommits(request), expectedError);
@@ -3829,7 +3829,7 @@ describe('v1beta1.DataformClient', () => {
   describe('fetchFileGitStatuses', () => {
     it('invokes fetchFileGitStatuses without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3861,7 +3861,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchFileGitStatuses without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3908,7 +3908,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchFileGitStatuses with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3939,7 +3939,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchFileGitStatuses with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3952,7 +3952,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchFileGitStatuses(request), expectedError);
@@ -3962,7 +3962,7 @@ describe('v1beta1.DataformClient', () => {
   describe('fetchGitAheadBehind', () => {
     it('invokes fetchGitAheadBehind without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3994,7 +3994,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchGitAheadBehind without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4041,7 +4041,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchGitAheadBehind with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4072,7 +4072,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchGitAheadBehind with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4085,7 +4085,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchGitAheadBehind(request), expectedError);
@@ -4095,7 +4095,7 @@ describe('v1beta1.DataformClient', () => {
   describe('commitWorkspaceChanges', () => {
     it('invokes commitWorkspaceChanges without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4127,7 +4127,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes commitWorkspaceChanges without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4174,7 +4174,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes commitWorkspaceChanges with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4208,7 +4208,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes commitWorkspaceChanges with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4221,7 +4221,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4234,7 +4234,7 @@ describe('v1beta1.DataformClient', () => {
   describe('resetWorkspaceChanges', () => {
     it('invokes resetWorkspaceChanges without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4266,7 +4266,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes resetWorkspaceChanges without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4313,7 +4313,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes resetWorkspaceChanges with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4347,7 +4347,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes resetWorkspaceChanges with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4360,7 +4360,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4373,7 +4373,7 @@ describe('v1beta1.DataformClient', () => {
   describe('fetchFileDiff', () => {
     it('invokes fetchFileDiff without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4404,7 +4404,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchFileDiff without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4451,7 +4451,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchFileDiff with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4482,7 +4482,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchFileDiff with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4495,7 +4495,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchFileDiff(request), expectedError);
@@ -4505,7 +4505,7 @@ describe('v1beta1.DataformClient', () => {
   describe('makeDirectory', () => {
     it('invokes makeDirectory without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4536,7 +4536,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes makeDirectory without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4583,7 +4583,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes makeDirectory with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4614,7 +4614,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes makeDirectory with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4627,7 +4627,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.makeDirectory(request), expectedError);
@@ -4637,7 +4637,7 @@ describe('v1beta1.DataformClient', () => {
   describe('removeDirectory', () => {
     it('invokes removeDirectory without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4668,7 +4668,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes removeDirectory without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4715,7 +4715,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes removeDirectory with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4746,7 +4746,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes removeDirectory with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4759,7 +4759,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeDirectory(request), expectedError);
@@ -4769,7 +4769,7 @@ describe('v1beta1.DataformClient', () => {
   describe('moveDirectory', () => {
     it('invokes moveDirectory without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4800,7 +4800,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveDirectory without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4847,7 +4847,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveDirectory with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4878,7 +4878,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveDirectory with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4891,7 +4891,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.moveDirectory(request), expectedError);
@@ -4901,7 +4901,7 @@ describe('v1beta1.DataformClient', () => {
   describe('readFile', () => {
     it('invokes readFile without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4932,7 +4932,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes readFile without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4979,7 +4979,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes readFile with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5007,7 +5007,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes readFile with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5020,7 +5020,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.readFile(request), expectedError);
@@ -5030,7 +5030,7 @@ describe('v1beta1.DataformClient', () => {
   describe('removeFile', () => {
     it('invokes removeFile without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5061,7 +5061,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes removeFile without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5108,7 +5108,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes removeFile with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5139,7 +5139,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes removeFile with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5152,7 +5152,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeFile(request), expectedError);
@@ -5162,7 +5162,7 @@ describe('v1beta1.DataformClient', () => {
   describe('moveFile', () => {
     it('invokes moveFile without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5193,7 +5193,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveFile without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5240,7 +5240,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveFile with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5268,7 +5268,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveFile with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5281,7 +5281,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.moveFile(request), expectedError);
@@ -5291,7 +5291,7 @@ describe('v1beta1.DataformClient', () => {
   describe('writeFile', () => {
     it('invokes writeFile without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5322,7 +5322,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes writeFile without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5369,7 +5369,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes writeFile with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5397,7 +5397,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes writeFile with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5410,7 +5410,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.writeFile(request), expectedError);
@@ -5420,7 +5420,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getReleaseConfig', () => {
     it('invokes getReleaseConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5451,7 +5451,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getReleaseConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5498,7 +5498,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getReleaseConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5529,7 +5529,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getReleaseConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5542,7 +5542,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReleaseConfig(request), expectedError);
@@ -5552,7 +5552,7 @@ describe('v1beta1.DataformClient', () => {
   describe('createReleaseConfig', () => {
     it('invokes createReleaseConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5584,7 +5584,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createReleaseConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5631,7 +5631,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createReleaseConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5662,7 +5662,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createReleaseConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5675,7 +5675,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createReleaseConfig(request), expectedError);
@@ -5685,7 +5685,7 @@ describe('v1beta1.DataformClient', () => {
   describe('updateReleaseConfig', () => {
     it('invokes updateReleaseConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5718,7 +5718,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateReleaseConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5766,7 +5766,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateReleaseConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5798,7 +5798,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateReleaseConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5812,7 +5812,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.releaseConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateReleaseConfig(request), expectedError);
@@ -5822,7 +5822,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteReleaseConfig', () => {
     it('invokes deleteReleaseConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5854,7 +5854,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteReleaseConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5901,7 +5901,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteReleaseConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5932,7 +5932,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteReleaseConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5945,7 +5945,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteReleaseConfig(request), expectedError);
@@ -5955,7 +5955,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getCompilationResult', () => {
     it('invokes getCompilationResult without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5987,7 +5987,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getCompilationResult without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6034,7 +6034,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getCompilationResult with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6065,7 +6065,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getCompilationResult with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6078,7 +6078,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCompilationResult(request), expectedError);
@@ -6088,7 +6088,7 @@ describe('v1beta1.DataformClient', () => {
   describe('createCompilationResult', () => {
     it('invokes createCompilationResult without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6120,7 +6120,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createCompilationResult without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6167,7 +6167,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createCompilationResult with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6201,7 +6201,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createCompilationResult with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6214,7 +6214,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6227,7 +6227,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getWorkflowConfig', () => {
     it('invokes getWorkflowConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6258,7 +6258,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkflowConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6305,7 +6305,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkflowConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6336,7 +6336,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkflowConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6349,7 +6349,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkflowConfig(request), expectedError);
@@ -6359,7 +6359,7 @@ describe('v1beta1.DataformClient', () => {
   describe('createWorkflowConfig', () => {
     it('invokes createWorkflowConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6391,7 +6391,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkflowConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6438,7 +6438,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkflowConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6469,7 +6469,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkflowConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6482,7 +6482,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createWorkflowConfig(request), expectedError);
@@ -6492,7 +6492,7 @@ describe('v1beta1.DataformClient', () => {
   describe('updateWorkflowConfig', () => {
     it('invokes updateWorkflowConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6525,7 +6525,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateWorkflowConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6573,7 +6573,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateWorkflowConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6605,7 +6605,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateWorkflowConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6619,7 +6619,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workflowConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateWorkflowConfig(request), expectedError);
@@ -6629,7 +6629,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteWorkflowConfig', () => {
     it('invokes deleteWorkflowConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6661,7 +6661,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkflowConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6708,7 +6708,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkflowConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6739,7 +6739,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkflowConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6752,7 +6752,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteWorkflowConfig(request), expectedError);
@@ -6762,7 +6762,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getWorkflowInvocation', () => {
     it('invokes getWorkflowInvocation without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6794,7 +6794,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkflowInvocation without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6841,7 +6841,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkflowInvocation with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6875,7 +6875,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getWorkflowInvocation with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6888,7 +6888,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6901,7 +6901,7 @@ describe('v1beta1.DataformClient', () => {
   describe('createWorkflowInvocation', () => {
     it('invokes createWorkflowInvocation without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6933,7 +6933,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkflowInvocation without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6980,7 +6980,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkflowInvocation with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7014,7 +7014,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes createWorkflowInvocation with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7027,7 +7027,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -7040,7 +7040,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteWorkflowInvocation', () => {
     it('invokes deleteWorkflowInvocation without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7072,7 +7072,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkflowInvocation without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7119,7 +7119,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkflowInvocation with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7153,7 +7153,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteWorkflowInvocation with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7166,7 +7166,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -7179,7 +7179,7 @@ describe('v1beta1.DataformClient', () => {
   describe('cancelWorkflowInvocation', () => {
     it('invokes cancelWorkflowInvocation without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7211,7 +7211,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes cancelWorkflowInvocation without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7258,7 +7258,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes cancelWorkflowInvocation with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7292,7 +7292,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes cancelWorkflowInvocation with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7305,7 +7305,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -7318,7 +7318,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getConfig', () => {
     it('invokes getConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7349,7 +7349,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7396,7 +7396,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7424,7 +7424,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7437,7 +7437,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConfig(request), expectedError);
@@ -7447,7 +7447,7 @@ describe('v1beta1.DataformClient', () => {
   describe('updateConfig', () => {
     it('invokes updateConfig without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7479,7 +7479,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateConfig without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7527,7 +7527,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateConfig with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7559,7 +7559,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes updateConfig with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7573,7 +7573,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.config.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateConfig(request), expectedError);
@@ -7583,7 +7583,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7614,7 +7614,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7661,7 +7661,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7692,7 +7692,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7705,7 +7705,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -7715,7 +7715,7 @@ describe('v1beta1.DataformClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7746,7 +7746,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7793,7 +7793,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7824,7 +7824,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7837,7 +7837,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -7847,7 +7847,7 @@ describe('v1beta1.DataformClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7879,7 +7879,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7926,7 +7926,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7957,7 +7957,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7970,7 +7970,7 @@ describe('v1beta1.DataformClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -7980,7 +7980,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteTeamFolderTree', () => {
     it('invokes deleteTeamFolderTree without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8013,7 +8013,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteTeamFolderTree without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8067,7 +8067,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteTeamFolderTree with call error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8098,7 +8098,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteTeamFolderTree with LRO error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8131,7 +8131,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkDeleteTeamFolderTreeProgress without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8139,8 +8139,8 @@ describe('v1beta1.DataformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTeamFolderTreeProgress(
@@ -8153,7 +8153,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkDeleteTeamFolderTreeProgress with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8174,7 +8174,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteFolderTree', () => {
     it('invokes deleteFolderTree without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8207,7 +8207,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteFolderTree without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8261,7 +8261,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteFolderTree with call error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8292,7 +8292,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteFolderTree with LRO error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8325,7 +8325,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkDeleteFolderTreeProgress without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8333,8 +8333,8 @@ describe('v1beta1.DataformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFolderTreeProgress(
@@ -8347,7 +8347,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkDeleteFolderTreeProgress with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8368,7 +8368,7 @@ describe('v1beta1.DataformClient', () => {
   describe('moveFolder', () => {
     it('invokes moveFolder without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8400,7 +8400,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveFolder without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8454,7 +8454,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveFolder with call error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8485,7 +8485,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveFolder with LRO error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8518,7 +8518,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkMoveFolderProgress without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8526,8 +8526,8 @@ describe('v1beta1.DataformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMoveFolderProgress(
@@ -8540,7 +8540,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkMoveFolderProgress with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8558,7 +8558,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteRepositoryLongRunning', () => {
     it('invokes deleteRepositoryLongRunning without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8591,7 +8591,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteRepositoryLongRunning without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8645,7 +8645,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteRepositoryLongRunning with call error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8679,7 +8679,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes deleteRepositoryLongRunning with LRO error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8712,7 +8712,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkDeleteRepositoryLongRunningProgress without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8720,8 +8720,8 @@ describe('v1beta1.DataformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -8735,7 +8735,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkDeleteRepositoryLongRunningProgress with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8756,7 +8756,7 @@ describe('v1beta1.DataformClient', () => {
   describe('moveRepository', () => {
     it('invokes moveRepository without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8789,7 +8789,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveRepository without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8843,7 +8843,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveRepository with call error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8874,7 +8874,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes moveRepository with LRO error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8907,7 +8907,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkMoveRepositoryProgress without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8915,8 +8915,8 @@ describe('v1beta1.DataformClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMoveRepositoryProgress(
@@ -8929,7 +8929,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes checkMoveRepositoryProgress with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8950,7 +8950,7 @@ describe('v1beta1.DataformClient', () => {
   describe('queryTeamFolderContents', () => {
     it('invokes queryTeamFolderContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8990,7 +8990,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryTeamFolderContents without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9047,7 +9047,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryTeamFolderContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9081,7 +9081,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryTeamFolderContentsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9150,7 +9150,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryTeamFolderContentsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9208,7 +9208,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryTeamFolderContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9262,7 +9262,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryTeamFolderContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9309,7 +9309,7 @@ describe('v1beta1.DataformClient', () => {
   describe('searchTeamFolders', () => {
     it('invokes searchTeamFolders without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9348,7 +9348,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes searchTeamFolders without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9405,7 +9405,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes searchTeamFolders with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9436,7 +9436,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes searchTeamFoldersStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9491,15 +9491,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchTeamFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchTeamFoldersStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9543,15 +9543,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchTeamFolders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchTeamFolders without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9593,15 +9593,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchTeamFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchTeamFolders with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9634,9 +9634,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchTeamFolders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9644,7 +9644,7 @@ describe('v1beta1.DataformClient', () => {
   describe('queryFolderContents', () => {
     it('invokes queryFolderContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9684,7 +9684,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryFolderContents without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9741,7 +9741,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryFolderContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9772,7 +9772,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryFolderContentsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9827,15 +9827,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.queryFolderContents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes queryFolderContentsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9879,15 +9879,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.queryFolderContents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryFolderContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9929,15 +9929,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.queryFolderContents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryFolderContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9970,9 +9970,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.queryFolderContents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9980,7 +9980,7 @@ describe('v1beta1.DataformClient', () => {
   describe('queryUserRootContents', () => {
     it('invokes queryUserRootContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10020,7 +10020,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryUserRootContents without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10077,7 +10077,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryUserRootContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10111,7 +10111,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryUserRootContentsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10180,7 +10180,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryUserRootContentsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10238,7 +10238,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryUserRootContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10292,7 +10292,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryUserRootContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10339,7 +10339,7 @@ describe('v1beta1.DataformClient', () => {
   describe('listRepositories', () => {
     it('invokes listRepositories without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10378,7 +10378,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listRepositories without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10433,7 +10433,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listRepositories with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10464,7 +10464,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listRepositoriesStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10516,15 +10516,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRepositoriesStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10565,15 +10565,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRepositories without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10614,15 +10614,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRepositories with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10655,9 +10655,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10665,7 +10665,7 @@ describe('v1beta1.DataformClient', () => {
   describe('queryRepositoryDirectoryContents', () => {
     it('invokes queryRepositoryDirectoryContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10705,7 +10705,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryRepositoryDirectoryContents without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10737,8 +10737,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IDirectoryEntry[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IDirectoryEntry[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10762,7 +10761,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryRepositoryDirectoryContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10796,7 +10795,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryRepositoryDirectoryContentsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10866,7 +10865,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryRepositoryDirectoryContentsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10925,7 +10924,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryRepositoryDirectoryContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10979,7 +10978,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryRepositoryDirectoryContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11026,7 +11025,7 @@ describe('v1beta1.DataformClient', () => {
   describe('fetchRepositoryHistory', () => {
     it('invokes fetchRepositoryHistory without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11066,7 +11065,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchRepositoryHistory without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11098,8 +11097,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.ICommitLogEntry[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.ICommitLogEntry[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11123,7 +11121,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchRepositoryHistory with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11157,7 +11155,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchRepositoryHistoryStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11224,7 +11222,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchRepositoryHistoryStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11280,7 +11278,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with fetchRepositoryHistory without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11334,7 +11332,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with fetchRepositoryHistory with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11381,7 +11379,7 @@ describe('v1beta1.DataformClient', () => {
   describe('listWorkspaces', () => {
     it('invokes listWorkspaces without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11420,7 +11418,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkspaces without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11475,7 +11473,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkspaces with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11506,7 +11504,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkspacesStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11558,15 +11556,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkspaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWorkspacesStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11607,15 +11605,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkspaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkspaces without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11656,15 +11654,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkspaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkspaces with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11696,9 +11694,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkspaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11706,7 +11704,7 @@ describe('v1beta1.DataformClient', () => {
   describe('fetchWorkspaceBranches', () => {
     it('invokes fetchWorkspaceBranches without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11746,7 +11744,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchWorkspaceBranches without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11778,8 +11776,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IBranchMetadata[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IBranchMetadata[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -11803,7 +11800,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchWorkspaceBranches with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11837,7 +11834,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchWorkspaceBranchesStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11904,7 +11901,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes fetchWorkspaceBranchesStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11960,7 +11957,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with fetchWorkspaceBranches without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12014,7 +12011,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with fetchWorkspaceBranches with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12061,7 +12058,7 @@ describe('v1beta1.DataformClient', () => {
   describe('queryDirectoryContents', () => {
     it('invokes queryDirectoryContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12101,7 +12098,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryDirectoryContents without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12133,8 +12130,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IDirectoryEntry[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IDirectoryEntry[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12158,7 +12154,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryDirectoryContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12192,7 +12188,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryDirectoryContentsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12259,7 +12255,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryDirectoryContentsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12315,7 +12311,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryDirectoryContents without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12369,7 +12365,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryDirectoryContents with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12416,7 +12412,7 @@ describe('v1beta1.DataformClient', () => {
   describe('searchFiles', () => {
     it('invokes searchFiles without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12455,7 +12451,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes searchFiles without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12487,8 +12483,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.ISearchResult[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.ISearchResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12512,7 +12507,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes searchFiles with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12543,7 +12538,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes searchFilesStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12596,15 +12591,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchFilesStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12648,15 +12643,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchFiles without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12698,15 +12693,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchFiles with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12741,9 +12736,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.searchFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12751,7 +12746,7 @@ describe('v1beta1.DataformClient', () => {
   describe('listReleaseConfigs', () => {
     it('invokes listReleaseConfigs without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12791,7 +12786,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listReleaseConfigs without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12823,8 +12818,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IReleaseConfig[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IReleaseConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12848,7 +12842,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listReleaseConfigs with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12879,7 +12873,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listReleaseConfigsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12932,15 +12926,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listReleaseConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReleaseConfigsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12982,15 +12976,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listReleaseConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReleaseConfigs without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13032,15 +13026,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listReleaseConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReleaseConfigs with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13073,9 +13067,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listReleaseConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13083,7 +13077,7 @@ describe('v1beta1.DataformClient', () => {
   describe('listCompilationResults', () => {
     it('invokes listCompilationResults without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13123,7 +13117,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listCompilationResults without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13155,8 +13149,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.ICompilationResult[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.ICompilationResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13180,7 +13173,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listCompilationResults with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13214,7 +13207,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listCompilationResultsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13283,7 +13276,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listCompilationResultsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13341,7 +13334,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with listCompilationResults without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13395,7 +13388,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with listCompilationResults with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13442,7 +13435,7 @@ describe('v1beta1.DataformClient', () => {
   describe('queryCompilationResultActions', () => {
     it('invokes queryCompilationResultActions without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13482,7 +13475,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryCompilationResultActions without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13539,7 +13532,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryCompilationResultActions with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13573,7 +13566,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryCompilationResultActionsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13645,7 +13638,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryCompilationResultActionsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13706,7 +13699,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryCompilationResultActions without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13760,7 +13753,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryCompilationResultActions with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13807,7 +13800,7 @@ describe('v1beta1.DataformClient', () => {
   describe('listWorkflowConfigs', () => {
     it('invokes listWorkflowConfigs without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13847,7 +13840,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkflowConfigs without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13879,8 +13872,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IWorkflowConfig[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IWorkflowConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13904,7 +13896,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkflowConfigs with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13935,7 +13927,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkflowConfigsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13988,15 +13980,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkflowConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWorkflowConfigsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14038,15 +14030,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkflowConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkflowConfigs without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14088,15 +14080,15 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkflowConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkflowConfigs with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14129,9 +14121,9 @@ describe('v1beta1.DataformClient', () => {
       assert(
         (client.descriptors.page.listWorkflowConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -14139,7 +14131,7 @@ describe('v1beta1.DataformClient', () => {
   describe('listWorkflowInvocations', () => {
     it('invokes listWorkflowInvocations without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14179,7 +14171,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkflowInvocations without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14211,8 +14203,7 @@ describe('v1beta1.DataformClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[]
-              | null,
+              protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -14236,7 +14227,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkflowInvocations with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14270,7 +14261,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkflowInvocationsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14339,7 +14330,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes listWorkflowInvocationsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14397,7 +14388,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with listWorkflowInvocations without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14451,7 +14442,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with listWorkflowInvocations with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14498,7 +14489,7 @@ describe('v1beta1.DataformClient', () => {
   describe('queryWorkflowInvocationActions', () => {
     it('invokes queryWorkflowInvocationActions without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14538,7 +14529,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryWorkflowInvocationActions without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14595,7 +14586,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryWorkflowInvocationActions with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14629,7 +14620,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryWorkflowInvocationActionsStream without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14701,7 +14692,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('invokes queryWorkflowInvocationActionsStream with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14762,7 +14753,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryWorkflowInvocationActions without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14816,7 +14807,7 @@ describe('v1beta1.DataformClient', () => {
 
     it('uses async iteration with queryWorkflowInvocationActions with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14862,7 +14853,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14892,7 +14883,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14936,7 +14927,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14971,7 +14962,7 @@ describe('v1beta1.DataformClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15019,7 +15010,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15060,7 +15051,7 @@ describe('v1beta1.DataformClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15081,7 +15072,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -15109,7 +15100,7 @@ describe('v1beta1.DataformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -15119,7 +15110,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -15143,7 +15134,7 @@ describe('v1beta1.DataformClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15165,7 +15156,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -15193,7 +15184,7 @@ describe('v1beta1.DataformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -15203,7 +15194,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -15227,7 +15218,7 @@ describe('v1beta1.DataformClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15249,7 +15240,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -15277,7 +15268,7 @@ describe('v1beta1.DataformClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -15287,7 +15278,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -15311,7 +15302,7 @@ describe('v1beta1.DataformClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -15346,7 +15337,7 @@ describe('v1beta1.DataformClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15383,7 +15374,7 @@ describe('v1beta1.DataformClient', () => {
         compilation_result: 'compilationResultValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15474,7 +15465,7 @@ describe('v1beta1.DataformClient', () => {
         location: 'locationValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15525,7 +15516,7 @@ describe('v1beta1.DataformClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15602,7 +15593,7 @@ describe('v1beta1.DataformClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15692,7 +15683,7 @@ describe('v1beta1.DataformClient', () => {
         folder: 'folderValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15755,7 +15746,7 @@ describe('v1beta1.DataformClient', () => {
         location: 'locationValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15805,7 +15796,7 @@ describe('v1beta1.DataformClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15887,7 +15878,7 @@ describe('v1beta1.DataformClient', () => {
         release_config: 'releaseConfigValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15962,7 +15953,7 @@ describe('v1beta1.DataformClient', () => {
         repository: 'repositoryValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16026,7 +16017,7 @@ describe('v1beta1.DataformClient', () => {
         version: 'versionValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16090,7 +16081,7 @@ describe('v1beta1.DataformClient', () => {
         team_folder: 'teamFolderValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16155,7 +16146,7 @@ describe('v1beta1.DataformClient', () => {
         workflow_config: 'workflowConfigValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16232,7 +16223,7 @@ describe('v1beta1.DataformClient', () => {
         workflow_invocation: 'workflowInvocationValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -16325,7 +16316,7 @@ describe('v1beta1.DataformClient', () => {
         workspace: 'workspaceValue',
       };
       const client = new dataformModule.v1beta1.DataformClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

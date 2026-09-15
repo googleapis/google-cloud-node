@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as notificationsapiserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -251,7 +251,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.notificationsApiServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.NotificationsApiServiceClient', () => {
       assert(client.notificationsApiServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.notificationsApiServiceStub);
@@ -274,15 +274,15 @@ describe('v1.NotificationsApiServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.notificationsApiServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.NotificationsApiServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes getNotificationSubscription without error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes getNotificationSubscription without error using callback', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes getNotificationSubscription with error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes getNotificationSubscription with closed client', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes createNotificationSubscription without error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes createNotificationSubscription without error using callback', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes createNotificationSubscription with error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes createNotificationSubscription with closed client', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -623,7 +623,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes updateNotificationSubscription without error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes updateNotificationSubscription without error using callback', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes updateNotificationSubscription with error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes updateNotificationSubscription with closed client', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       );
       request.notificationSubscription.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -770,7 +770,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes deleteNotificationSubscription without error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -803,7 +803,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes deleteNotificationSubscription without error using callback', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -851,7 +851,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes deleteNotificationSubscription with error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes deleteNotificationSubscription with closed client', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -899,7 +899,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -913,7 +913,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes getNotificationSubscriptionHealthMetrics without error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes getNotificationSubscriptionHealthMetrics without error using callback', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes getNotificationSubscriptionHealthMetrics with error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1034,7 +1034,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes getNotificationSubscriptionHealthMetrics with closed client', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1061,7 +1061,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes listNotificationSubscriptions without error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes listNotificationSubscriptions without error using callback', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1160,7 +1160,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes listNotificationSubscriptions with error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1195,7 +1195,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes listNotificationSubscriptionsStream without error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1268,7 +1268,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('invokes listNotificationSubscriptionsStream with error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1330,7 +1330,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('uses async iteration with listNotificationSubscriptions without error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1385,7 +1385,7 @@ describe('v1.NotificationsApiServiceClient', () => {
     it('uses async iteration with listNotificationSubscriptions with error', async () => {
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1437,7 +1437,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       };
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v1.NotificationsApiServiceClient', () => {
       };
       const client =
         new notificationsapiserviceModule.v1.NotificationsApiServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

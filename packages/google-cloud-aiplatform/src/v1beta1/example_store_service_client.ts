@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class ExampleStoreServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -70,12 +70,12 @@ export class ExampleStoreServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  exampleStoreServiceStub?: Promise<{ [name: string]: Function }>;
+  exampleStoreServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ExampleStoreServiceClient.
@@ -151,7 +151,7 @@ export class ExampleStoreServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -462,15 +462,13 @@ export class ExampleStoreServiceClient {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
           additional_bindings: [
-            { get: '/v1beta1/{name=projects/*/locations/*}' },
+            {get: '/v1beta1/{name=projects/*/locations/*}'},
           ],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [
-            { get: '/v1beta1/{name=projects/*}/locations' },
-          ],
+          additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
@@ -947,17 +945,15 @@ export class ExampleStoreServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
-            { post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:cancel' },
+            {post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:cancel'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            {
-              delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            { delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1058,9 +1054,7 @@ export class ExampleStoreServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1145,7 +1139,7 @@ export class ExampleStoreServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1beta1/{name=projects/*/locations/*/operations/*}' },
+            {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
@@ -1382,18 +1376,16 @@ export class ExampleStoreServiceClient {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1beta1/{name=onlineEvaluators/*/operations/*}' },
+            {delete: '/v1beta1/{name=onlineEvaluators/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1415,9 +1407,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
@@ -1445,7 +1435,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1470,7 +1460,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1486,7 +1476,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1499,9 +1489,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1532,13 +1520,11 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1beta1/{name=projects/*/locations/*/operations/*}' },
+            {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
             },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
-            },
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
             },
@@ -1710,16 +1696,16 @@ export class ExampleStoreServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1beta1/{name=onlineEvaluators/*/operations/*}' },
+            {get: '/v1beta1/{name=onlineEvaluators/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1735,16 +1721,12 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1754,19 +1736,15 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1791,7 +1769,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1804,7 +1782,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1820,7 +1798,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1851,11 +1829,9 @@ export class ExampleStoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { get: '/v1beta1/{name=projects/*/locations/*}/operations' },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations',
-            },
-            { get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations' },
+            {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
             },
@@ -1937,9 +1913,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations',
-            },
+            {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -2027,7 +2001,7 @@ export class ExampleStoreServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
             },
-            { get: '/v1beta1/{name=onlineEvaluators/*}/operations' },
+            {get: '/v1beta1/{name=onlineEvaluators/*}/operations'},
           ],
         },
         {
@@ -2184,9 +2158,7 @@ export class ExampleStoreServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait',
-            },
+            {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
             },
@@ -2361,7 +2333,7 @@ export class ExampleStoreServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:wait' },
+            {post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:wait'},
           ],
         },
       ];
@@ -2411,7 +2383,7 @@ export class ExampleStoreServiceClient {
       'google.cloud.aiplatform.v1beta1.ExampleStoreService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -2452,7 +2424,7 @@ export class ExampleStoreServiceClient {
             .ExampleStoreService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -2469,7 +2441,7 @@ export class ExampleStoreServiceClient {
     ];
     for (const methodName of exampleStoreServiceStubMethods) {
       const callPromise = this.exampleStoreServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -2678,7 +2650,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExampleStore request %j', request);
@@ -2824,7 +2796,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         example_store: request.exampleStore ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('upsertExamples request %j', request);
@@ -2969,7 +2941,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         example_store: request.exampleStore ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('removeExamples request %j', request);
@@ -3112,7 +3084,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         example_store: request.exampleStore ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchExamples request %j', request);
@@ -3266,7 +3238,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3323,7 +3295,7 @@ export class ExampleStoreServiceClient {
     this._log.info('createExampleStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3441,7 +3413,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'example_store.name': request.exampleStore!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3498,7 +3470,7 @@ export class ExampleStoreServiceClient {
     this._log.info('updateExampleStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3612,7 +3584,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3669,7 +3641,7 @@ export class ExampleStoreServiceClient {
     this._log.info('deleteExampleStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3781,7 +3753,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3853,7 +3825,7 @@ export class ExampleStoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listExampleStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExampleStores stream %j', request);
@@ -3907,7 +3879,7 @@ export class ExampleStoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listExampleStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExampleStores iterate %j', request);
@@ -4023,7 +3995,7 @@ export class ExampleStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         example_store: request.exampleStore ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4102,7 +4074,7 @@ export class ExampleStoreServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchExamples stream %j', request);
@@ -4163,7 +4135,7 @@ export class ExampleStoreServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchExamples iterate %j', request);
@@ -9145,14 +9117,14 @@ export class ExampleStoreServiceClient {
    */
   close(): Promise<void> {
     if (this.exampleStoreServiceStub && !this._terminated) {
-      return this.exampleStoreServiceStub.then((stub) => {
+      return this.exampleStoreServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

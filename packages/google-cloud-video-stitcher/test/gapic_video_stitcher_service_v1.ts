@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as videostitcherserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -284,7 +284,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.videoStitcherServiceStub, undefined);
@@ -292,13 +292,13 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(client.videoStitcherServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.videoStitcherServiceStub);
@@ -307,15 +307,15 @@ describe('v1.VideoStitcherServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.videoStitcherServiceStub, undefined);
@@ -324,7 +324,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -333,7 +333,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -346,7 +346,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -370,7 +370,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getCdnKey without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getCdnKey without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getCdnKey with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getCdnKey with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -492,7 +492,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCdnKey(request), expectedError);
@@ -503,7 +503,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createVodSession without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createVodSession without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -583,7 +583,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createVodSession with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createVodSession with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -628,7 +628,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createVodSession(request), expectedError);
@@ -639,7 +639,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodSession without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -671,7 +671,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodSession without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -719,7 +719,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodSession with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodSession with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -764,7 +764,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVodSession(request), expectedError);
@@ -775,7 +775,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodStitchDetail without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -808,7 +808,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodStitchDetail without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodStitchDetail with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodStitchDetail with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -901,7 +901,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVodStitchDetail(request), expectedError);
@@ -912,7 +912,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodAdTagDetail without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -944,7 +944,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodAdTagDetail without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodAdTagDetail with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1024,7 +1024,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodAdTagDetail with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVodAdTagDetail(request), expectedError);
@@ -1048,7 +1048,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveAdTagDetail without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1081,7 +1081,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveAdTagDetail without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveAdTagDetail with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1161,7 +1161,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveAdTagDetail with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLiveAdTagDetail(request), expectedError);
@@ -1185,7 +1185,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getSlate without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1217,7 +1217,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getSlate without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1265,7 +1265,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getSlate with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getSlate with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1307,7 +1307,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSlate(request), expectedError);
@@ -1318,7 +1318,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createLiveSession without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1350,7 +1350,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createLiveSession without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1398,7 +1398,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createLiveSession with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1430,7 +1430,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createLiveSession with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createLiveSession(request), expectedError);
@@ -1454,7 +1454,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveSession without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1486,7 +1486,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveSession without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1534,7 +1534,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveSession with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveSession with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1579,7 +1579,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLiveSession(request), expectedError);
@@ -1590,7 +1590,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveConfig without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1622,7 +1622,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveConfig without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1670,7 +1670,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveConfig with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1702,7 +1702,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getLiveConfig with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1715,7 +1715,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLiveConfig(request), expectedError);
@@ -1726,7 +1726,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodConfig without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodConfig without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1806,7 +1806,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodConfig with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1838,7 +1838,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getVodConfig with closed client', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1851,7 +1851,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVodConfig(request), expectedError);
@@ -1862,7 +1862,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createCdnKey without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createCdnKey without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createCdnKey with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1982,7 +1982,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createCdnKey with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkCreateCdnKeyProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2024,8 +2024,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCdnKeyProgress(
@@ -2039,7 +2039,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkCreateCdnKeyProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2058,7 +2058,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteCdnKey without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2091,7 +2091,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteCdnKey without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2146,7 +2146,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteCdnKey with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2178,7 +2178,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteCdnKey with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2212,7 +2212,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkDeleteCdnKeyProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2220,8 +2220,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCdnKeyProgress(
@@ -2235,7 +2235,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkDeleteCdnKeyProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2254,7 +2254,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateCdnKey without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2288,7 +2288,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateCdnKey without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2344,7 +2344,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateCdnKey with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2377,7 +2377,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateCdnKey with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2412,7 +2412,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkUpdateCdnKeyProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2420,8 +2420,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateCdnKeyProgress(
@@ -2435,7 +2435,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkUpdateCdnKeyProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2454,7 +2454,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createSlate without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2487,7 +2487,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createSlate without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2542,7 +2542,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createSlate with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2574,7 +2574,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createSlate with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkCreateSlateProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2616,8 +2616,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSlateProgress(
@@ -2631,7 +2631,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkCreateSlateProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2650,7 +2650,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateSlate without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2684,7 +2684,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateSlate without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2740,7 +2740,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateSlate with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2773,7 +2773,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateSlate with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2808,7 +2808,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkUpdateSlateProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2816,8 +2816,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSlateProgress(
@@ -2831,7 +2831,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkUpdateSlateProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2850,7 +2850,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteSlate without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2883,7 +2883,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteSlate without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2938,7 +2938,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteSlate with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2970,7 +2970,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteSlate with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3004,7 +3004,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkDeleteSlateProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3012,8 +3012,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSlateProgress(
@@ -3027,7 +3027,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkDeleteSlateProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3046,7 +3046,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createLiveConfig without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3080,7 +3080,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createLiveConfig without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3135,7 +3135,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createLiveConfig with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3167,7 +3167,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createLiveConfig with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3201,7 +3201,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkCreateLiveConfigProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3209,8 +3209,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateLiveConfigProgress(
@@ -3224,7 +3224,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkCreateLiveConfigProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3246,7 +3246,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteLiveConfig without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3280,7 +3280,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteLiveConfig without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3335,7 +3335,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteLiveConfig with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3367,7 +3367,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteLiveConfig with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3401,7 +3401,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkDeleteLiveConfigProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3409,8 +3409,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteLiveConfigProgress(
@@ -3424,7 +3424,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkDeleteLiveConfigProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3446,7 +3446,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateLiveConfig without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3481,7 +3481,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateLiveConfig without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3537,7 +3537,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateLiveConfig with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3570,7 +3570,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateLiveConfig with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3605,7 +3605,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkUpdateLiveConfigProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3613,8 +3613,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateLiveConfigProgress(
@@ -3628,7 +3628,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkUpdateLiveConfigProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3650,7 +3650,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createVodConfig without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3684,7 +3684,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createVodConfig without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3739,7 +3739,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createVodConfig with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3771,7 +3771,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes createVodConfig with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3805,7 +3805,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkCreateVodConfigProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3813,8 +3813,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateVodConfigProgress(
@@ -3828,7 +3828,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkCreateVodConfigProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3850,7 +3850,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteVodConfig without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3884,7 +3884,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteVodConfig without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3939,7 +3939,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteVodConfig with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3971,7 +3971,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteVodConfig with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4005,7 +4005,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkDeleteVodConfigProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4013,8 +4013,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteVodConfigProgress(
@@ -4028,7 +4028,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkDeleteVodConfigProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4050,7 +4050,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateVodConfig without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4085,7 +4085,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateVodConfig without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4141,7 +4141,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateVodConfig with call error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4174,7 +4174,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes updateVodConfig with LRO error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4209,7 +4209,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkUpdateVodConfigProgress without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4217,8 +4217,8 @@ describe('v1.VideoStitcherServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateVodConfigProgress(
@@ -4232,7 +4232,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes checkUpdateVodConfigProgress with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4254,7 +4254,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listCdnKeys without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4294,7 +4294,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listCdnKeys without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4350,7 +4350,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listCdnKeys with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4382,7 +4382,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listCdnKeysStream without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4434,16 +4434,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCdnKeysStream with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4486,16 +4486,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCdnKeys without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4536,16 +4536,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCdnKeys with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4579,9 +4579,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4590,7 +4590,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodStitchDetails without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4631,7 +4631,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodStitchDetails without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4663,8 +4663,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.video.stitcher.v1.IVodStitchDetail[]
-              | null,
+              protos.google.cloud.video.stitcher.v1.IVodStitchDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4689,7 +4688,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodStitchDetails with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4721,7 +4720,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodStitchDetailsStream without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4774,16 +4773,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVodStitchDetailsStream with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4825,16 +4824,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVodStitchDetails without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4876,16 +4875,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVodStitchDetails with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4918,9 +4917,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4929,7 +4928,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodAdTagDetails without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4970,7 +4969,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodAdTagDetails without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5002,8 +5001,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[]
-              | null,
+              protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5028,7 +5026,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodAdTagDetails with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5060,7 +5058,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodAdTagDetailsStream without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5113,16 +5111,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVodAdTagDetailsStream with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5164,16 +5162,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVodAdTagDetails without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5215,16 +5213,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVodAdTagDetails with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5257,9 +5255,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5268,7 +5266,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listLiveAdTagDetails without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5309,7 +5307,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listLiveAdTagDetails without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5341,8 +5339,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[]
-              | null,
+              protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5367,7 +5364,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listLiveAdTagDetails with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5399,7 +5396,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listLiveAdTagDetailsStream without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5452,16 +5449,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLiveAdTagDetailsStream with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5503,16 +5500,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLiveAdTagDetails without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5554,16 +5551,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLiveAdTagDetails with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5596,9 +5593,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5607,7 +5604,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listSlates without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5647,7 +5644,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listSlates without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5703,7 +5700,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listSlates with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5735,7 +5732,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listSlatesStream without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5787,16 +5784,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSlatesStream with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5839,16 +5836,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSlates without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5889,16 +5886,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSlates with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5932,9 +5929,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5943,7 +5940,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listLiveConfigs without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5983,7 +5980,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listLiveConfigs without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6039,7 +6036,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listLiveConfigs with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6071,7 +6068,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listLiveConfigsStream without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6124,16 +6121,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLiveConfigsStream with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6175,16 +6172,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLiveConfigs without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6225,16 +6222,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLiveConfigs with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6267,9 +6264,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6278,7 +6275,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodConfigs without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6318,7 +6315,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodConfigs without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6374,7 +6371,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodConfigs with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6406,7 +6403,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes listVodConfigsStream without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6458,16 +6455,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVodConfigsStream with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6508,16 +6505,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVodConfigs without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6558,16 +6555,16 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVodConfigs with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6600,9 +6597,9 @@ describe('v1.VideoStitcherServiceClient', () => {
       assert(
         (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6610,7 +6607,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6632,7 +6629,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6660,7 +6657,7 @@ describe('v1.VideoStitcherServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6671,7 +6668,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6696,7 +6693,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6719,7 +6716,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6747,7 +6744,7 @@ describe('v1.VideoStitcherServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6758,7 +6755,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6783,7 +6780,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6806,7 +6803,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6834,7 +6831,7 @@ describe('v1.VideoStitcherServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6845,7 +6842,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6870,7 +6867,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -6906,7 +6903,7 @@ describe('v1.VideoStitcherServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6943,7 +6940,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7009,7 +7006,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7086,7 +7083,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7151,7 +7148,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7215,7 +7212,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7264,7 +7261,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7305,7 +7302,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7371,7 +7368,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7448,7 +7445,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7513,7 +7510,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7579,7 +7576,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       };
       const client =
         new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

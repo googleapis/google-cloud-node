@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -64,7 +64,7 @@ export class MapManagementClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('mapmanagement');
@@ -77,9 +77,9 @@ export class MapManagementClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  mapManagementStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  mapManagementStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of MapManagementClient.
@@ -155,7 +155,7 @@ export class MapManagementClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -258,7 +258,7 @@ export class MapManagementClient {
       'google.maps.mapmanagement.v2beta.MapManagement',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -298,7 +298,7 @@ export class MapManagementClient {
           (this._protos as any).google.maps.mapmanagement.v2beta.MapManagement,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -321,7 +321,7 @@ export class MapManagementClient {
     ];
     for (const methodName of mapManagementStubMethods) {
       const callPromise = this.mapManagementStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -528,7 +528,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createMapConfig request %j', request);
@@ -666,7 +666,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMapConfig request %j', request);
@@ -819,7 +819,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'map_config.name': request.mapConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateMapConfig request %j', request);
@@ -967,7 +967,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteMapConfig request %j', request);
@@ -1113,7 +1113,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createStyleConfig request %j', request);
@@ -1257,7 +1257,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getStyleConfig request %j', request);
@@ -1410,7 +1410,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'style_config.name': request.styleConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateStyleConfig request %j', request);
@@ -1554,7 +1554,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteStyleConfig request %j', request);
@@ -1700,7 +1700,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createMapContextConfig request %j', request);
@@ -1845,7 +1845,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMapContextConfig request %j', request);
@@ -2001,7 +2001,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'map_context_config.name': request.mapContextConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateMapContextConfig request %j', request);
@@ -2146,7 +2146,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteMapContextConfig request %j', request);
@@ -2300,7 +2300,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2376,7 +2376,7 @@ export class MapManagementClient {
       });
     const defaultCallSettings = this._defaults['listMapConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMapConfigs stream %j', request);
@@ -2434,7 +2434,7 @@ export class MapManagementClient {
       });
     const defaultCallSettings = this._defaults['listMapConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMapConfigs iterate %j', request);
@@ -2555,7 +2555,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2639,7 +2639,7 @@ export class MapManagementClient {
       });
     const defaultCallSettings = this._defaults['listStyleConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listStyleConfigs stream %j', request);
@@ -2705,7 +2705,7 @@ export class MapManagementClient {
       });
     const defaultCallSettings = this._defaults['listStyleConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listStyleConfigs iterate %j', request);
@@ -2817,7 +2817,7 @@ export class MapManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2892,7 +2892,7 @@ export class MapManagementClient {
       });
     const defaultCallSettings = this._defaults['listMapContextConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMapContextConfigs stream %j', request);
@@ -2949,7 +2949,7 @@ export class MapManagementClient {
       });
     const defaultCallSettings = this._defaults['listMapContextConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMapContextConfigs iterate %j', request);
@@ -3165,7 +3165,7 @@ export class MapManagementClient {
    */
   close(): Promise<void> {
     if (this.mapManagementStub && !this._terminated) {
-      return this.mapManagementStub.then((stub) => {
+      return this.mapManagementStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as pagesModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v3.PagesClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.pagesStub, undefined);
@@ -245,12 +245,12 @@ describe('v3.PagesClient', () => {
       assert(client.pagesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.pagesStub);
@@ -259,14 +259,14 @@ describe('v3.PagesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.pagesStub, undefined);
@@ -275,7 +275,7 @@ describe('v3.PagesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v3.PagesClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v3.PagesClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v3.PagesClient', () => {
   describe('getPage', () => {
     it('invokes getPage without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes getPage without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes getPage with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes getPage with closed client', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v3.PagesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPage(request), expectedError);
@@ -447,7 +447,7 @@ describe('v3.PagesClient', () => {
   describe('createPage', () => {
     it('invokes createPage without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes createPage without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -525,7 +525,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes createPage with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes createPage with closed client', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v3.PagesClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPage(request), expectedError);
@@ -579,7 +579,7 @@ describe('v3.PagesClient', () => {
   describe('updatePage', () => {
     it('invokes updatePage without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes updatePage without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -659,7 +659,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes updatePage with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes updatePage with closed client', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -705,7 +705,7 @@ describe('v3.PagesClient', () => {
       );
       request.page.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePage(request), expectedError);
@@ -715,7 +715,7 @@ describe('v3.PagesClient', () => {
   describe('deletePage', () => {
     it('invokes deletePage without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes deletePage without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -793,7 +793,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes deletePage with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -824,7 +824,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes deletePage with closed client', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -837,7 +837,7 @@ describe('v3.PagesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePage(request), expectedError);
@@ -847,7 +847,7 @@ describe('v3.PagesClient', () => {
   describe('listPages', () => {
     it('invokes listPages without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes listPages without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -929,7 +929,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes listPages with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +957,7 @@ describe('v3.PagesClient', () => {
 
     it('invokes listPagesStream without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,15 +1003,15 @@ describe('v3.PagesClient', () => {
       assert(
         (client.descriptors.page.listPages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPagesStream with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1054,15 +1054,15 @@ describe('v3.PagesClient', () => {
       assert(
         (client.descriptors.page.listPages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPages without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,15 +1096,15 @@ describe('v3.PagesClient', () => {
       assert(
         (client.descriptors.page.listPages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPages with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1137,16 +1137,16 @@ describe('v3.PagesClient', () => {
       assert(
         (client.descriptors.page.listPages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v3.PagesClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1220,7 +1220,7 @@ describe('v3.PagesClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1255,7 +1255,7 @@ describe('v3.PagesClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v3.PagesClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1344,7 +1344,7 @@ describe('v3.PagesClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1365,7 +1365,7 @@ describe('v3.PagesClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1393,7 +1393,7 @@ describe('v3.PagesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1403,7 +1403,7 @@ describe('v3.PagesClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1427,7 +1427,7 @@ describe('v3.PagesClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1449,7 +1449,7 @@ describe('v3.PagesClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1477,7 +1477,7 @@ describe('v3.PagesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1487,7 +1487,7 @@ describe('v3.PagesClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1511,7 +1511,7 @@ describe('v3.PagesClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v3.PagesClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1561,7 +1561,7 @@ describe('v3.PagesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1571,7 +1571,7 @@ describe('v3.PagesClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1595,7 +1595,7 @@ describe('v3.PagesClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1630,7 +1630,7 @@ describe('v3.PagesClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1666,7 +1666,7 @@ describe('v3.PagesClient', () => {
         agent: 'agentValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1730,7 +1730,7 @@ describe('v3.PagesClient', () => {
         agent: 'agentValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1809,7 +1809,7 @@ describe('v3.PagesClient', () => {
         agent: 'agentValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1888,7 +1888,7 @@ describe('v3.PagesClient', () => {
         changelog: 'changelogValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1965,7 +1965,7 @@ describe('v3.PagesClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2077,7 +2077,7 @@ describe('v3.PagesClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2164,7 +2164,7 @@ describe('v3.PagesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2240,7 +2240,7 @@ describe('v3.PagesClient', () => {
         environment: 'environmentValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2317,7 +2317,7 @@ describe('v3.PagesClient', () => {
         example: 'exampleValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2405,7 +2405,7 @@ describe('v3.PagesClient', () => {
         experiment: 'experimentValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2492,7 +2492,7 @@ describe('v3.PagesClient', () => {
         flow: 'flowValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2568,7 +2568,7 @@ describe('v3.PagesClient', () => {
         flow: 'flowValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2661,7 +2661,7 @@ describe('v3.PagesClient', () => {
         generator: 'generatorValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2737,7 +2737,7 @@ describe('v3.PagesClient', () => {
         intent: 'intentValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2811,7 +2811,7 @@ describe('v3.PagesClient', () => {
         location: 'locationValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2863,7 +2863,7 @@ describe('v3.PagesClient', () => {
         page: 'pageValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2950,7 +2950,7 @@ describe('v3.PagesClient', () => {
         playbook: 'playbookValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3027,7 +3027,7 @@ describe('v3.PagesClient', () => {
         version: 'versionValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3111,7 +3111,7 @@ describe('v3.PagesClient', () => {
         project: 'projectValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3155,7 +3155,7 @@ describe('v3.PagesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3300,7 +3300,7 @@ describe('v3.PagesClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3425,7 +3425,7 @@ describe('v3.PagesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3550,7 +3550,7 @@ describe('v3.PagesClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3655,7 +3655,7 @@ describe('v3.PagesClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3724,7 +3724,7 @@ describe('v3.PagesClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3801,7 +3801,7 @@ describe('v3.PagesClient', () => {
         result: 'resultValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3888,7 +3888,7 @@ describe('v3.PagesClient', () => {
         tool: 'toolValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3965,7 +3965,7 @@ describe('v3.PagesClient', () => {
         version: 'versionValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4053,7 +4053,7 @@ describe('v3.PagesClient', () => {
         version: 'versionValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4140,7 +4140,7 @@ describe('v3.PagesClient', () => {
         webhook: 'webhookValue',
       };
       const client = new pagesModule.v3.PagesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -29,10 +29,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class ExamplesClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dialogflow-cx');
@@ -67,11 +67,11 @@ export class ExamplesClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  examplesStub?: Promise<{ [name: string]: Function }>;
+  examplesStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ExamplesClient.
@@ -147,7 +147,7 @@ export class ExamplesClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -341,21 +341,21 @@ export class ExamplesClient {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v3/{name=projects/*/operations/*}:cancel',
           additional_bindings: [
-            { post: '/v3/{name=projects/*/locations/*/operations/*}:cancel' },
+            {post: '/v3/{name=projects/*/locations/*/operations/*}:cancel'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v3/{name=projects/*/operations/*}',
           additional_bindings: [
-            { get: '/v3/{name=projects/*/locations/*/operations/*}' },
+            {get: '/v3/{name=projects/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v3/{name=projects/*}/operations',
           additional_bindings: [
-            { get: '/v3/{name=projects/*/locations/*}/operations' },
+            {get: '/v3/{name=projects/*/locations/*}/operations'},
           ],
         },
       ];
@@ -371,7 +371,7 @@ export class ExamplesClient {
       'google.cloud.dialogflow.cx.v3.Examples',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -411,7 +411,7 @@ export class ExamplesClient {
           (this._protos as any).google.cloud.dialogflow.cx.v3.Examples,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -424,7 +424,7 @@ export class ExamplesClient {
     ];
     for (const methodName of examplesStubMethods) {
       const callPromise = this.examplesStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -629,7 +629,7 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createExample request %j', request);
@@ -768,7 +768,7 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteExample request %j', request);
@@ -907,7 +907,7 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExample request %j', request);
@@ -1044,7 +1044,7 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         'example.name': request.example!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateExample request %j', request);
@@ -1197,7 +1197,7 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1272,7 +1272,7 @@ export class ExamplesClient {
       });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExamples stream %j', request);
@@ -1329,7 +1329,7 @@ export class ExamplesClient {
       });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExamples iterate %j', request);
@@ -3876,11 +3876,11 @@ export class ExamplesClient {
    */
   close(): Promise<void> {
     if (this.examplesStub && !this._terminated) {
-      return this.examplesStub.then((stub) => {
+      return this.examplesStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

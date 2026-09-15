@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as mapmanagementModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.mapManagementStub, undefined);
@@ -250,12 +250,12 @@ describe('v2beta.MapManagementClient', () => {
       assert(client.mapManagementStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.mapManagementStub);
@@ -264,14 +264,14 @@ describe('v2beta.MapManagementClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.mapManagementStub, undefined);
@@ -280,7 +280,7 @@ describe('v2beta.MapManagementClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v2beta.MapManagementClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v2beta.MapManagementClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('createMapConfig', () => {
     it('invokes createMapConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createMapConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createMapConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createMapConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createMapConfig(request), expectedError);
@@ -455,7 +455,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('getMapConfig', () => {
     it('invokes getMapConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getMapConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getMapConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getMapConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMapConfig(request), expectedError);
@@ -587,7 +587,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('updateMapConfig', () => {
     it('invokes updateMapConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateMapConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateMapConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateMapConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.mapConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateMapConfig(request), expectedError);
@@ -723,7 +723,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('deleteMapConfig', () => {
     it('invokes deleteMapConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteMapConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteMapConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteMapConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteMapConfig(request), expectedError);
@@ -855,7 +855,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('createStyleConfig', () => {
     it('invokes createStyleConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createStyleConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -933,7 +933,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createStyleConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createStyleConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createStyleConfig(request), expectedError);
@@ -987,7 +987,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('getStyleConfig', () => {
     it('invokes getStyleConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getStyleConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1065,7 +1065,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getStyleConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,7 +1096,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getStyleConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStyleConfig(request), expectedError);
@@ -1119,7 +1119,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('updateStyleConfig', () => {
     it('invokes updateStyleConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateStyleConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1199,7 +1199,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateStyleConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateStyleConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.styleConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateStyleConfig(request), expectedError);
@@ -1255,7 +1255,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('deleteStyleConfig', () => {
     it('invokes deleteStyleConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1286,7 +1286,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteStyleConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1333,7 +1333,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteStyleConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteStyleConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteStyleConfig(request), expectedError);
@@ -1387,7 +1387,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('createMapContextConfig', () => {
     it('invokes createMapContextConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1419,7 +1419,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createMapContextConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1466,7 +1466,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createMapContextConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,7 +1500,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes createMapContextConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1513,7 +1513,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1526,7 +1526,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('getMapContextConfig', () => {
     it('invokes getMapContextConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1558,7 +1558,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getMapContextConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1605,7 +1605,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getMapContextConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1636,7 +1636,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes getMapContextConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1649,7 +1649,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMapContextConfig(request), expectedError);
@@ -1659,7 +1659,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('updateMapContextConfig', () => {
     it('invokes updateMapContextConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1692,7 +1692,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateMapContextConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,7 +1740,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateMapContextConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1775,7 +1775,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes updateMapContextConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1789,7 +1789,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.mapContextConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1802,7 +1802,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('deleteMapContextConfig', () => {
     it('invokes deleteMapContextConfig without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1834,7 +1834,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteMapContextConfig without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,7 +1881,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteMapContextConfig with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes deleteMapContextConfig with closed client', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1928,7 +1928,7 @@ describe('v2beta.MapManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1941,7 +1941,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('listMapConfigs', () => {
     it('invokes listMapConfigs without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1980,7 +1980,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listMapConfigs without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2012,8 +2012,7 @@ describe('v2beta.MapManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.maps.mapmanagement.v2beta.IMapConfig[]
-              | null,
+              protos.google.maps.mapmanagement.v2beta.IMapConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2037,7 +2036,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listMapConfigs with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2068,7 +2067,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listMapConfigsStream without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2121,15 +2120,15 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listMapConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMapConfigsStream with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2171,15 +2170,15 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listMapConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMapConfigs without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2221,15 +2220,15 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listMapConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMapConfigs with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2262,9 +2261,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listMapConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2272,7 +2271,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('listStyleConfigs', () => {
     it('invokes listStyleConfigs without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2310,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listStyleConfigs without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2343,8 +2342,7 @@ describe('v2beta.MapManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.maps.mapmanagement.v2beta.IStyleConfig[]
-              | null,
+              protos.google.maps.mapmanagement.v2beta.IStyleConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2368,7 +2366,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listStyleConfigs with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2399,7 +2397,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listStyleConfigsStream without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2452,15 +2450,15 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listStyleConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listStyleConfigsStream with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2502,15 +2500,15 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listStyleConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStyleConfigs without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2552,15 +2550,15 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listStyleConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStyleConfigs with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2593,9 +2591,9 @@ describe('v2beta.MapManagementClient', () => {
       assert(
         (client.descriptors.page.listStyleConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2603,7 +2601,7 @@ describe('v2beta.MapManagementClient', () => {
   describe('listMapContextConfigs', () => {
     it('invokes listMapContextConfigs without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2643,7 +2641,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listMapContextConfigs without error using callback', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2700,7 +2698,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listMapContextConfigs with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2734,7 +2732,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listMapContextConfigsStream without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2803,7 +2801,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('invokes listMapContextConfigsStream with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2861,7 +2859,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('uses async iteration with listMapContextConfigs without error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2915,7 +2913,7 @@ describe('v2beta.MapManagementClient', () => {
 
     it('uses async iteration with listMapContextConfigs with error', async () => {
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2967,7 +2965,7 @@ describe('v2beta.MapManagementClient', () => {
         dataset: 'datasetValue',
       };
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3016,7 +3014,7 @@ describe('v2beta.MapManagementClient', () => {
         map_config: 'mapConfigValue',
       };
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3066,7 +3064,7 @@ describe('v2beta.MapManagementClient', () => {
         map_context_config: 'mapContextConfigValue',
       };
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3132,7 +3130,7 @@ describe('v2beta.MapManagementClient', () => {
         project: 'projectValue',
       };
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3171,7 +3169,7 @@ describe('v2beta.MapManagementClient', () => {
         style_config: 'styleConfigValue',
       };
       const client = new mapmanagementModule.v2beta.MapManagementClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

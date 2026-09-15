@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as foldersModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -272,7 +272,7 @@ describe('v3.FoldersClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.foldersStub, undefined);
@@ -280,12 +280,12 @@ describe('v3.FoldersClient', () => {
       assert(client.foldersStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.foldersStub);
@@ -294,14 +294,14 @@ describe('v3.FoldersClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.foldersStub, undefined);
@@ -310,7 +310,7 @@ describe('v3.FoldersClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v3.FoldersClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v3.FoldersClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v3.FoldersClient', () => {
   describe('getFolder', () => {
     it('invokes getFolder without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes getFolder without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes getFolder with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes getFolder with closed client', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v3.FoldersClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFolder(request), expectedError);
@@ -482,7 +482,7 @@ describe('v3.FoldersClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -604,7 +604,7 @@ describe('v3.FoldersClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -614,7 +614,7 @@ describe('v3.FoldersClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -645,7 +645,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -723,7 +723,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v3.FoldersClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -746,7 +746,7 @@ describe('v3.FoldersClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -778,7 +778,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -825,7 +825,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -869,7 +869,7 @@ describe('v3.FoldersClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -879,7 +879,7 @@ describe('v3.FoldersClient', () => {
   describe('createFolder', () => {
     it('invokes createFolder without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,7 +897,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes createFolder without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -937,7 +937,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes createFolder with call error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -954,7 +954,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes createFolder with LRO error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkCreateFolderProgress without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -981,8 +981,8 @@ describe('v3.FoldersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFolderProgress(
@@ -995,7 +995,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkCreateFolderProgress with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1013,7 +1013,7 @@ describe('v3.FoldersClient', () => {
   describe('updateFolder', () => {
     it('invokes updateFolder without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes updateFolder without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1101,7 +1101,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes updateFolder with call error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1133,7 +1133,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes updateFolder with LRO error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1167,7 +1167,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkUpdateFolderProgress without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,8 +1175,8 @@ describe('v3.FoldersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFolderProgress(
@@ -1189,7 +1189,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkUpdateFolderProgress with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1207,7 +1207,7 @@ describe('v3.FoldersClient', () => {
   describe('moveFolder', () => {
     it('invokes moveFolder without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes moveFolder without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1293,7 +1293,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes moveFolder with call error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1324,7 +1324,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes moveFolder with LRO error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkMoveFolderProgress without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1365,8 +1365,8 @@ describe('v3.FoldersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMoveFolderProgress(
@@ -1379,7 +1379,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkMoveFolderProgress with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1397,7 +1397,7 @@ describe('v3.FoldersClient', () => {
   describe('deleteFolder', () => {
     it('invokes deleteFolder without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1429,7 +1429,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes deleteFolder without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,7 +1483,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes deleteFolder with call error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1514,7 +1514,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes deleteFolder with LRO error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1547,7 +1547,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkDeleteFolderProgress without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1555,8 +1555,8 @@ describe('v3.FoldersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFolderProgress(
@@ -1569,7 +1569,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkDeleteFolderProgress with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +1587,7 @@ describe('v3.FoldersClient', () => {
   describe('undeleteFolder', () => {
     it('invokes undeleteFolder without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1620,7 +1620,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes undeleteFolder without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1674,7 +1674,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes undeleteFolder with call error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1705,7 +1705,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes undeleteFolder with LRO error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1738,7 +1738,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkUndeleteFolderProgress without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1746,8 +1746,8 @@ describe('v3.FoldersClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeleteFolderProgress(
@@ -1760,7 +1760,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes checkUndeleteFolderProgress with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1781,7 +1781,7 @@ describe('v3.FoldersClient', () => {
   describe('listFolders', () => {
     it('invokes listFolders without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1806,7 +1806,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes listFolders without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1847,7 +1847,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes listFolders with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1864,7 +1864,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes listFoldersStream without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1911,7 +1911,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes listFoldersStream with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1949,7 +1949,7 @@ describe('v3.FoldersClient', () => {
 
     it('uses async iteration with listFolders without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1985,7 +1985,7 @@ describe('v3.FoldersClient', () => {
 
     it('uses async iteration with listFolders with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v3.FoldersClient', () => {
   describe('searchFolders', () => {
     it('invokes searchFolders without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2041,7 +2041,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes searchFolders without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes searchFolders with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2099,7 +2099,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes searchFoldersStream without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2146,7 +2146,7 @@ describe('v3.FoldersClient', () => {
 
     it('invokes searchFoldersStream with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2182,7 +2182,7 @@ describe('v3.FoldersClient', () => {
 
     it('uses async iteration with searchFolders without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2218,7 +2218,7 @@ describe('v3.FoldersClient', () => {
 
     it('uses async iteration with searchFolders with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2246,7 +2246,7 @@ describe('v3.FoldersClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2267,7 +2267,7 @@ describe('v3.FoldersClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2295,7 +2295,7 @@ describe('v3.FoldersClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2305,7 +2305,7 @@ describe('v3.FoldersClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2329,7 +2329,7 @@ describe('v3.FoldersClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2351,7 +2351,7 @@ describe('v3.FoldersClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2379,7 +2379,7 @@ describe('v3.FoldersClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2389,7 +2389,7 @@ describe('v3.FoldersClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2413,7 +2413,7 @@ describe('v3.FoldersClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2435,7 +2435,7 @@ describe('v3.FoldersClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2463,7 +2463,7 @@ describe('v3.FoldersClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2473,7 +2473,7 @@ describe('v3.FoldersClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2497,7 +2497,7 @@ describe('v3.FoldersClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2532,7 +2532,7 @@ describe('v3.FoldersClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v3.FoldersClient', () => {
         folder: 'folderValue',
       };
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2604,7 +2604,7 @@ describe('v3.FoldersClient', () => {
         organization: 'organizationValue',
       };
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2642,7 +2642,7 @@ describe('v3.FoldersClient', () => {
         project: 'projectValue',
       };
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2680,7 +2680,7 @@ describe('v3.FoldersClient', () => {
         tag_binding: 'tagBindingValue',
       };
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2719,7 +2719,7 @@ describe('v3.FoldersClient', () => {
         tag_hold: 'tagHoldValue',
       };
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2767,7 +2767,7 @@ describe('v3.FoldersClient', () => {
         tag_key: 'tagKeyValue',
       };
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2805,7 +2805,7 @@ describe('v3.FoldersClient', () => {
         tag_value: 'tagValueValue',
       };
       const client = new foldersModule.v3.FoldersClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

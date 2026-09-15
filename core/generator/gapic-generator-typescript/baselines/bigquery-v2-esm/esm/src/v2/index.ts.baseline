@@ -16,10 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { DatasetServiceClient } from './dataset_service_client.js';
-export { JobServiceClient } from './job_service_client.js';
-export { ModelServiceClient } from './model_service_client.js';
-export { ProjectServiceClient } from './project_service_client.js';
-export { RoutineServiceClient } from './routine_service_client.js';
-export { RowAccessPolicyServiceClient } from './row_access_policy_service_client.js';
-export { TableServiceClient } from './table_service_client.js';
+export {DatasetServiceClient} from './dataset_service_client.js';
+export {JobServiceClient} from './job_service_client.js';
+export {ModelServiceClient} from './model_service_client.js';
+export {ProjectServiceClient} from './project_service_client.js';
+export {RoutineServiceClient} from './routine_service_client.js';
+export {RowAccessPolicyServiceClient} from './row_access_policy_service_client.js';
+export {TableServiceClient} from './table_service_client.js';

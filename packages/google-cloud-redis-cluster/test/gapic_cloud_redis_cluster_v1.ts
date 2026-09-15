@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudredisclusterModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -236,7 +236,7 @@ describe('v1.CloudRedisClusterClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new cloudredisclusterModule.v1.CloudRedisClusterClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'redis.configured.example.com');
@@ -277,7 +277,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudRedisClusterStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(client.cloudRedisClusterStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudRedisClusterStub);
@@ -299,14 +299,14 @@ describe('v1.CloudRedisClusterClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudRedisClusterStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.CloudRedisClusterClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.CloudRedisClusterClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.CloudRedisClusterClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('getCluster', () => {
     it('invokes getCluster without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getCluster without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getCluster with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getCluster with closed client', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1.CloudRedisClusterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('getClusterCertificateAuthority', () => {
     it('invokes getClusterCertificateAuthority without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getClusterCertificateAuthority without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getClusterCertificateAuthority with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getClusterCertificateAuthority with closed client', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.CloudRedisClusterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -629,7 +629,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('getSharedRegionalCertificateAuthority', () => {
     it('invokes getSharedRegionalCertificateAuthority without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getSharedRegionalCertificateAuthority without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -709,7 +709,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getSharedRegionalCertificateAuthority with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getSharedRegionalCertificateAuthority with closed client', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1.CloudRedisClusterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -767,7 +767,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('getBackupCollection', () => {
     it('invokes getBackupCollection without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getBackupCollection without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getBackupCollection with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getBackupCollection with closed client', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -890,7 +890,7 @@ describe('v1.CloudRedisClusterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupCollection(request), expectedError);
@@ -900,7 +900,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getBackup without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getBackup with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes getBackup with closed client', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1019,7 +1019,7 @@ describe('v1.CloudRedisClusterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -1029,7 +1029,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes updateCluster without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1118,7 +1118,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes updateCluster with call error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1150,7 +1150,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes updateCluster with LRO error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1184,7 +1184,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkUpdateClusterProgress without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1192,8 +1192,8 @@ describe('v1.CloudRedisClusterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateClusterProgress(
@@ -1206,7 +1206,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkUpdateClusterProgress with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes deleteCluster without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes deleteCluster with call error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes deleteCluster with LRO error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1378,7 +1378,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkDeleteClusterProgress without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1386,8 +1386,8 @@ describe('v1.CloudRedisClusterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClusterProgress(
@@ -1400,7 +1400,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkDeleteClusterProgress with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1421,7 +1421,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1454,7 +1454,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes createCluster without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes createCluster with call error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,7 +1539,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes createCluster with LRO error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1572,7 +1572,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkCreateClusterProgress without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,8 +1580,8 @@ describe('v1.CloudRedisClusterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClusterProgress(
@@ -1594,7 +1594,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkCreateClusterProgress with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1615,7 +1615,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('rescheduleClusterMaintenance', () => {
     it('invokes rescheduleClusterMaintenance without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1648,7 +1648,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes rescheduleClusterMaintenance without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1702,7 +1702,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes rescheduleClusterMaintenance with call error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1736,7 +1736,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes rescheduleClusterMaintenance with LRO error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkRescheduleClusterMaintenanceProgress without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1777,8 +1777,8 @@ describe('v1.CloudRedisClusterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1792,7 +1792,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkRescheduleClusterMaintenanceProgress with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1813,7 +1813,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('deleteBackup', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1845,7 +1845,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes deleteBackup without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1899,7 +1899,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes deleteBackup with call error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1930,7 +1930,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes deleteBackup with LRO error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1963,7 +1963,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkDeleteBackupProgress without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1971,8 +1971,8 @@ describe('v1.CloudRedisClusterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupProgress(
@@ -1985,7 +1985,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkDeleteBackupProgress with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2003,7 +2003,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('exportBackup', () => {
     it('invokes exportBackup without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2035,7 +2035,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes exportBackup without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2089,7 +2089,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes exportBackup with call error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2120,7 +2120,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes exportBackup with LRO error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2153,7 +2153,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkExportBackupProgress without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2161,8 +2161,8 @@ describe('v1.CloudRedisClusterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportBackupProgress(
@@ -2175,7 +2175,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkExportBackupProgress with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2193,7 +2193,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('backupCluster', () => {
     it('invokes backupCluster without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2226,7 +2226,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes backupCluster without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2280,7 +2280,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes backupCluster with call error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2311,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes backupCluster with LRO error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2344,7 +2344,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkBackupClusterProgress without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2352,8 +2352,8 @@ describe('v1.CloudRedisClusterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBackupClusterProgress(
@@ -2366,7 +2366,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes checkBackupClusterProgress with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2387,7 +2387,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2426,7 +2426,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listClusters without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2481,7 +2481,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listClusters with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2512,7 +2512,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listClustersStream without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2564,15 +2564,15 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listClustersStream with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2615,15 +2615,15 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2664,15 +2664,15 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2704,9 +2704,9 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2714,7 +2714,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('listBackupCollections', () => {
     it('invokes listBackupCollections without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2754,7 +2754,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listBackupCollections without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2786,8 +2786,7 @@ describe('v1.CloudRedisClusterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.redis.cluster.v1.IBackupCollection[]
-              | null,
+              protos.google.cloud.redis.cluster.v1.IBackupCollection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2811,7 +2810,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listBackupCollections with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2845,7 +2844,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listBackupCollectionsStream without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2912,7 +2911,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listBackupCollectionsStream with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2968,7 +2967,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('uses async iteration with listBackupCollections without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3022,7 +3021,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('uses async iteration with listBackupCollections with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3069,7 +3068,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3108,7 +3107,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listBackups without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3163,7 +3162,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listBackups with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3194,7 +3193,7 @@ describe('v1.CloudRedisClusterClient', () => {
 
     it('invokes listBackupsStream without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3246,15 +3245,15 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3297,15 +3296,15 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3346,15 +3345,15 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3388,16 +3387,16 @@ describe('v1.CloudRedisClusterClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3427,7 +3426,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3471,7 +3470,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3506,7 +3505,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3554,7 +3553,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3595,7 +3594,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3616,7 +3615,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3644,7 +3643,7 @@ describe('v1.CloudRedisClusterClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3654,7 +3653,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3678,7 +3677,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3700,7 +3699,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3728,7 +3727,7 @@ describe('v1.CloudRedisClusterClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3738,7 +3737,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3762,7 +3761,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3784,7 +3783,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3812,7 +3811,7 @@ describe('v1.CloudRedisClusterClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3822,7 +3821,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3846,7 +3845,7 @@ describe('v1.CloudRedisClusterClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3881,7 +3880,7 @@ describe('v1.CloudRedisClusterClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3918,7 +3917,7 @@ describe('v1.CloudRedisClusterClient', () => {
         backup: 'backupValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3993,7 +3992,7 @@ describe('v1.CloudRedisClusterClient', () => {
         backup_collection: 'backupCollectionValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4061,7 +4060,7 @@ describe('v1.CloudRedisClusterClient', () => {
         ca_pool: 'caPoolValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4125,7 +4124,7 @@ describe('v1.CloudRedisClusterClient', () => {
         cluster: 'clusterValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4204,7 +4203,7 @@ describe('v1.CloudRedisClusterClient', () => {
         cluster: 'clusterValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4269,7 +4268,7 @@ describe('v1.CloudRedisClusterClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4346,7 +4345,7 @@ describe('v1.CloudRedisClusterClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4436,7 +4435,7 @@ describe('v1.CloudRedisClusterClient', () => {
         forwarding_rule: 'forwardingRuleValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4500,7 +4499,7 @@ describe('v1.CloudRedisClusterClient', () => {
         location: 'locationValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4549,7 +4548,7 @@ describe('v1.CloudRedisClusterClient', () => {
         network: 'networkValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4597,7 +4596,7 @@ describe('v1.CloudRedisClusterClient', () => {
         project: 'projectValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4637,7 +4636,7 @@ describe('v1.CloudRedisClusterClient', () => {
         service_attachment: 'serviceAttachmentValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4713,7 +4712,7 @@ describe('v1.CloudRedisClusterClient', () => {
         location: 'locationValue',
       };
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

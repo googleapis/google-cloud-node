@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as retrieverserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.retrieverServiceStub, undefined);
@@ -252,12 +252,12 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(client.retrieverServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.retrieverServiceStub);
@@ -266,14 +266,14 @@ describe('v1beta.RetrieverServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.retrieverServiceStub, undefined);
@@ -282,7 +282,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -290,7 +290,7 @@ describe('v1beta.RetrieverServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -302,7 +302,7 @@ describe('v1beta.RetrieverServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -325,7 +325,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('createCorpus', () => {
     it('invokes createCorpus without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -342,7 +342,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createCorpus without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -375,7 +375,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createCorpus with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createCorpus with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         new protos.google.ai.generativelanguage.v1beta.CreateCorpusRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCorpus(request), expectedError);
@@ -410,7 +410,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('getCorpus', () => {
     it('invokes getCorpus without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -441,7 +441,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getCorpus without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getCorpus with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getCorpus with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCorpus(request), expectedError);
@@ -539,7 +539,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('updateCorpus', () => {
     it('invokes updateCorpus without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateCorpus without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateCorpus with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateCorpus with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -665,7 +665,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.corpus.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCorpus(request), expectedError);
@@ -675,7 +675,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('deleteCorpus', () => {
     it('invokes deleteCorpus without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteCorpus without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteCorpus with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteCorpus with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCorpus(request), expectedError);
@@ -807,7 +807,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('queryCorpus', () => {
     it('invokes queryCorpus without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes queryCorpus without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes queryCorpus with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes queryCorpus with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -929,7 +929,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryCorpus(request), expectedError);
@@ -939,7 +939,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('createDocument', () => {
     it('invokes createDocument without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -970,7 +970,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createDocument without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createDocument with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1048,7 +1048,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createDocument with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDocument(request), expectedError);
@@ -1071,7 +1071,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('getDocument', () => {
     it('invokes getDocument without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getDocument without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1149,7 +1149,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getDocument with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1180,7 +1180,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getDocument with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1193,7 +1193,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDocument(request), expectedError);
@@ -1203,7 +1203,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('updateDocument', () => {
     it('invokes updateDocument without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateDocument without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateDocument with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1315,7 +1315,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateDocument with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1329,7 +1329,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.document.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDocument(request), expectedError);
@@ -1339,7 +1339,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('deleteDocument', () => {
     it('invokes deleteDocument without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1370,7 +1370,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteDocument without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteDocument with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteDocument with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1461,7 +1461,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDocument(request), expectedError);
@@ -1471,7 +1471,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('queryDocument', () => {
     it('invokes queryDocument without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes queryDocument without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1549,7 +1549,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes queryDocument with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,7 +1580,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes queryDocument with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1593,7 +1593,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryDocument(request), expectedError);
@@ -1603,7 +1603,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('createChunk', () => {
     it('invokes createChunk without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createChunk without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1681,7 +1681,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createChunk with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1712,7 +1712,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes createChunk with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1725,7 +1725,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createChunk(request), expectedError);
@@ -1735,7 +1735,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('batchCreateChunks', () => {
     it('invokes batchCreateChunks without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1766,7 +1766,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchCreateChunks without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1813,7 +1813,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchCreateChunks with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1844,7 +1844,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchCreateChunks with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1857,7 +1857,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateChunks(request), expectedError);
@@ -1867,7 +1867,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('getChunk', () => {
     it('invokes getChunk without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1898,7 +1898,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getChunk without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1945,7 +1945,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getChunk with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1973,7 +1973,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes getChunk with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1986,7 +1986,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getChunk(request), expectedError);
@@ -1996,7 +1996,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('updateChunk', () => {
     it('invokes updateChunk without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2028,7 +2028,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateChunk without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2076,7 +2076,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateChunk with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2108,7 +2108,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes updateChunk with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2122,7 +2122,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.chunk.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateChunk(request), expectedError);
@@ -2132,7 +2132,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('batchUpdateChunks', () => {
     it('invokes batchUpdateChunks without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2163,7 +2163,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchUpdateChunks without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2210,7 +2210,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchUpdateChunks with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2241,7 +2241,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchUpdateChunks with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2254,7 +2254,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateChunks(request), expectedError);
@@ -2264,7 +2264,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('deleteChunk', () => {
     it('invokes deleteChunk without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2295,7 +2295,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteChunk without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2342,7 +2342,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteChunk with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2373,7 +2373,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes deleteChunk with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2386,7 +2386,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteChunk(request), expectedError);
@@ -2396,7 +2396,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('batchDeleteChunks', () => {
     it('invokes batchDeleteChunks without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2427,7 +2427,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchDeleteChunks without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2474,7 +2474,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchDeleteChunks with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2505,7 +2505,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes batchDeleteChunks with closed client', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2518,7 +2518,7 @@ describe('v1beta.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchDeleteChunks(request), expectedError);
@@ -2528,7 +2528,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('listCorpora', () => {
     it('invokes listCorpora without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2553,7 +2553,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listCorpora without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2579,8 +2579,7 @@ describe('v1beta.RetrieverServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ai.generativelanguage.v1beta.ICorpus[]
-              | null,
+              protos.google.ai.generativelanguage.v1beta.ICorpus[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2596,7 +2595,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listCorpora with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2613,7 +2612,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listCorporaStream without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2661,7 +2660,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listCorporaStream with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2700,7 +2699,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('uses async iteration with listCorpora without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2737,7 +2736,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('uses async iteration with listCorpora with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2769,7 +2768,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('listDocuments', () => {
     it('invokes listDocuments without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2808,7 +2807,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listDocuments without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2840,8 +2839,7 @@ describe('v1beta.RetrieverServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ai.generativelanguage.v1beta.IDocument[]
-              | null,
+              protos.google.ai.generativelanguage.v1beta.IDocument[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2865,7 +2863,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listDocuments with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2896,7 +2894,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listDocumentsStream without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2949,15 +2947,15 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDocumentsStream with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2999,15 +2997,15 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDocuments without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3049,15 +3047,15 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDocuments with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3090,9 +3088,9 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3100,7 +3098,7 @@ describe('v1beta.RetrieverServiceClient', () => {
   describe('listChunks', () => {
     it('invokes listChunks without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3139,7 +3137,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listChunks without error using callback', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3194,7 +3192,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listChunks with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3225,7 +3223,7 @@ describe('v1beta.RetrieverServiceClient', () => {
 
     it('invokes listChunksStream without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3278,15 +3276,15 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(
         (client.descriptors.page.listChunks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listChunksStream with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3330,15 +3328,15 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(
         (client.descriptors.page.listChunks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChunks without error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3379,15 +3377,15 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(
         (client.descriptors.page.listChunks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChunks with error', async () => {
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3422,9 +3420,9 @@ describe('v1beta.RetrieverServiceClient', () => {
       assert(
         (client.descriptors.page.listChunks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3436,7 +3434,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         id: 'idValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3476,7 +3474,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3538,7 +3536,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         corpus: 'corpusValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3577,7 +3575,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         permission: 'permissionValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3639,7 +3637,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         document: 'documentValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3687,7 +3685,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         file: 'fileValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3725,7 +3723,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         model: 'modelValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3763,7 +3761,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         tuned_model: 'tunedModelValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3802,7 +3800,7 @@ describe('v1beta.RetrieverServiceClient', () => {
         permission: 'permissionValue',
       };
       const client = new retrieverserviceModule.v1beta.RetrieverServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

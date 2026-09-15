@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dashboardsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1.DashboardsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new dashboardsserviceModule.v1.DashboardsServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'monitoring.configured.example.com');
@@ -240,7 +240,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dashboardsServiceStub, undefined);
@@ -248,12 +248,12 @@ describe('v1.DashboardsServiceClient', () => {
       assert(client.dashboardsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dashboardsServiceStub);
@@ -262,14 +262,14 @@ describe('v1.DashboardsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dashboardsServiceStub, undefined);
@@ -278,7 +278,7 @@ describe('v1.DashboardsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1.DashboardsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1.DashboardsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1.DashboardsServiceClient', () => {
   describe('createDashboard', () => {
     it('invokes createDashboard without error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes createDashboard without error using callback', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes createDashboard with error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes createDashboard with closed client', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.DashboardsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDashboard(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1.DashboardsServiceClient', () => {
   describe('getDashboard', () => {
     it('invokes getDashboard without error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes getDashboard without error using callback', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes getDashboard with error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes getDashboard with closed client', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v1.DashboardsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDashboard(request), expectedError);
@@ -585,7 +585,7 @@ describe('v1.DashboardsServiceClient', () => {
   describe('deleteDashboard', () => {
     it('invokes deleteDashboard without error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes deleteDashboard without error using callback', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -663,7 +663,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes deleteDashboard with error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes deleteDashboard with closed client', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v1.DashboardsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDashboard(request), expectedError);
@@ -717,7 +717,7 @@ describe('v1.DashboardsServiceClient', () => {
   describe('updateDashboard', () => {
     it('invokes updateDashboard without error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes updateDashboard without error using callback', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes updateDashboard with error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes updateDashboard with closed client', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1.DashboardsServiceClient', () => {
       );
       request.dashboard.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDashboard(request), expectedError);
@@ -853,7 +853,7 @@ describe('v1.DashboardsServiceClient', () => {
   describe('listDashboards', () => {
     it('invokes listDashboards without error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -892,7 +892,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes listDashboards without error using callback', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes listDashboards with error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.DashboardsServiceClient', () => {
 
     it('invokes listDashboardsStream without error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,15 +1030,15 @@ describe('v1.DashboardsServiceClient', () => {
       assert(
         (client.descriptors.page.listDashboards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDashboardsStream with error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1079,15 +1079,15 @@ describe('v1.DashboardsServiceClient', () => {
       assert(
         (client.descriptors.page.listDashboards.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDashboards without error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1128,15 +1128,15 @@ describe('v1.DashboardsServiceClient', () => {
       assert(
         (client.descriptors.page.listDashboards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDashboards with error', async () => {
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1169,9 +1169,9 @@ describe('v1.DashboardsServiceClient', () => {
       assert(
         (client.descriptors.page.listDashboards.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1184,7 +1184,7 @@ describe('v1.DashboardsServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1236,7 +1236,7 @@ describe('v1.DashboardsServiceClient', () => {
         dashboard: 'dashboardValue',
       };
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1284,7 +1284,7 @@ describe('v1.DashboardsServiceClient', () => {
         project: 'projectValue',
       };
       const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

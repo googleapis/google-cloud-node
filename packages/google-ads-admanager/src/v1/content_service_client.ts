@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class ContentServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('admanager');
@@ -64,9 +64,9 @@ export class ContentServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  contentServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  contentServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ContentServiceClient.
@@ -141,14 +141,14 @@ export class ContentServiceClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -231,6 +231,9 @@ export class ContentServiceClient {
       ),
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
+      ),
+      breakTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/breakTemplates/{break_template}',
       ),
       browserPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browsers/{browser}',
@@ -422,7 +425,7 @@ export class ContentServiceClient {
       'google.ads.admanager.v1.ContentService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -462,14 +465,14 @@ export class ContentServiceClient {
           (this._protos as any).google.ads.admanager.v1.ContentService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const contentServiceStubMethods = ['getContent', 'listContent'];
     for (const methodName of contentServiceStubMethods) {
       const callPromise = this.contentServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -663,7 +666,7 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getContent request %j', request);
@@ -833,7 +836,7 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -936,7 +939,7 @@ export class ContentServiceClient {
       });
     const defaultCallSettings = this._defaults['listContent'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listContent stream %j', request);
@@ -1021,7 +1024,7 @@ export class ContentServiceClient {
       });
     const defaultCallSettings = this._defaults['listContent'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listContent iterate %j', request);
@@ -1368,6 +1371,44 @@ export class ContentServiceClient {
     return this.pathTemplates.bandwidthGroupPathTemplate.match(
       bandwidthGroupName,
     ).bandwidth_group;
+  }
+
+  /**
+   * Return a fully-qualified breakTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} break_template
+   * @returns {string} Resource name string.
+   */
+  breakTemplatePath(networkCode: string, breakTemplate: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.render({
+      network_code: networkCode,
+      break_template: breakTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from BreakTemplate resource.
+   *
+   * @param {string} breakTemplateName
+   *   A fully-qualified path representing BreakTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBreakTemplateName(breakTemplateName: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.match(breakTemplateName)
+      .network_code;
+  }
+
+  /**
+   * Parse the break_template from BreakTemplate resource.
+   *
+   * @param {string} breakTemplateName
+   *   A fully-qualified path representing BreakTemplate resource.
+   * @returns {string} A string representing the break_template.
+   */
+  matchBreakTemplateFromBreakTemplateName(breakTemplateName: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.match(breakTemplateName)
+      .break_template;
   }
 
   /**
@@ -3592,7 +3633,7 @@ export class ContentServiceClient {
    */
   close(): Promise<void> {
     if (this.contentServiceStub && !this._terminated) {
-      return this.contentServiceStub.then((stub) => {
+      return this.contentServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

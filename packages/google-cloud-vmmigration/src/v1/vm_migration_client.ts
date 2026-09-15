@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class VmMigrationClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('vmmigration');
@@ -68,11 +68,11 @@ export class VmMigrationClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  vmMigrationStub?: Promise<{ [name: string]: Function }>;
+  vmMigrationStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of VmMigrationClient.
@@ -148,7 +148,7 @@ export class VmMigrationClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -811,7 +811,7 @@ export class VmMigrationClient {
       'google.cloud.vmmigration.v1.VmMigration',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -851,7 +851,7 @@ export class VmMigrationClient {
           (this._protos as any).google.cloud.vmmigration.v1.VmMigration,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -921,7 +921,7 @@ export class VmMigrationClient {
     ];
     for (const methodName of vmMigrationStubMethods) {
       const callPromise = this.vmMigrationStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -1116,7 +1116,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSource request %j', request);
@@ -1257,7 +1257,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         source: request.source ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchInventory request %j', request);
@@ -1400,7 +1400,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getUtilizationReport request %j', request);
@@ -1543,7 +1543,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDatacenterConnector request %j', request);
@@ -1682,7 +1682,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMigratingVm request %j', request);
@@ -1810,7 +1810,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCloneJob request %j', request);
@@ -1944,7 +1944,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCutoverJob request %j', request);
@@ -2072,7 +2072,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGroup request %j', request);
@@ -2209,7 +2209,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTargetProject request %j', request);
@@ -2352,7 +2352,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReplicationCycle request %j', request);
@@ -2489,7 +2489,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getImageImport request %j', request);
@@ -2623,7 +2623,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getImageImportJob request %j', request);
@@ -2766,7 +2766,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDiskMigrationJob request %j', request);
@@ -2934,7 +2934,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2991,7 +2991,7 @@ export class VmMigrationClient {
     this._log.info('createSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3123,7 +3123,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         'source.name': request.source!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3180,7 +3180,7 @@ export class VmMigrationClient {
     this._log.info('updateSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3306,7 +3306,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3363,7 +3363,7 @@ export class VmMigrationClient {
     this._log.info('deleteSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3498,7 +3498,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3555,7 +3555,7 @@ export class VmMigrationClient {
     this._log.info('createUtilizationReport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3681,7 +3681,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3738,7 +3738,7 @@ export class VmMigrationClient {
     this._log.info('deleteUtilizationReport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3871,7 +3871,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3928,7 +3928,7 @@ export class VmMigrationClient {
     this._log.info('createDatacenterConnector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4054,7 +4054,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4111,7 +4111,7 @@ export class VmMigrationClient {
     this._log.info('deleteDatacenterConnector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4238,7 +4238,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         datacenter_connector: request.datacenterConnector ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4295,7 +4295,7 @@ export class VmMigrationClient {
     this._log.info('upgradeAppliance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4425,7 +4425,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4482,7 +4482,7 @@ export class VmMigrationClient {
     this._log.info('createMigratingVm long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4614,7 +4614,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         'migrating_vm.name': request.migratingVm!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4671,7 +4671,7 @@ export class VmMigrationClient {
     this._log.info('updateMigratingVm long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4783,7 +4783,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4840,7 +4840,7 @@ export class VmMigrationClient {
     this._log.info('deleteMigratingVm long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4953,7 +4953,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         migrating_vm: request.migratingVm ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5010,7 +5010,7 @@ export class VmMigrationClient {
     this._log.info('startMigration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5125,7 +5125,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         migrating_vm: request.migratingVm ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5182,7 +5182,7 @@ export class VmMigrationClient {
     this._log.info('resumeMigration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5296,7 +5296,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         migrating_vm: request.migratingVm ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5353,7 +5353,7 @@ export class VmMigrationClient {
     this._log.info('pauseMigration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5466,7 +5466,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         migrating_vm: request.migratingVm ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5523,7 +5523,7 @@ export class VmMigrationClient {
     this._log.info('finalizeMigration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5635,7 +5635,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         migrating_vm: request.migratingVm ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5692,7 +5692,7 @@ export class VmMigrationClient {
     this._log.info('extendMigration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5822,7 +5822,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5879,7 +5879,7 @@ export class VmMigrationClient {
     this._log.info('createCloneJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5991,7 +5991,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6048,7 +6048,7 @@ export class VmMigrationClient {
     this._log.info('cancelCloneJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6180,7 +6180,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6237,7 +6237,7 @@ export class VmMigrationClient {
     this._log.info('createCutoverJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6349,7 +6349,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6406,7 +6406,7 @@ export class VmMigrationClient {
     this._log.info('cancelCutoverJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6536,7 +6536,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6593,7 +6593,7 @@ export class VmMigrationClient {
     this._log.info('createGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6725,7 +6725,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         'group.name': request.group!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6782,7 +6782,7 @@ export class VmMigrationClient {
     this._log.info('updateGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6908,7 +6908,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6965,7 +6965,7 @@ export class VmMigrationClient {
     this._log.info('deleteGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7079,7 +7079,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         group: request.group ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7136,7 +7136,7 @@ export class VmMigrationClient {
     this._log.info('addGroupMigration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7250,7 +7250,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         group: request.group ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7307,7 +7307,7 @@ export class VmMigrationClient {
     this._log.info('removeGroupMigration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7440,7 +7440,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7497,7 +7497,7 @@ export class VmMigrationClient {
     this._log.info('createTargetProject long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7632,7 +7632,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         'target_project.name': request.targetProject!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7689,7 +7689,7 @@ export class VmMigrationClient {
     this._log.info('updateTargetProject long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7818,7 +7818,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7875,7 +7875,7 @@ export class VmMigrationClient {
     this._log.info('deleteTargetProject long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8008,7 +8008,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8065,7 +8065,7 @@ export class VmMigrationClient {
     this._log.info('createImageImport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8191,7 +8191,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8248,7 +8248,7 @@ export class VmMigrationClient {
     this._log.info('deleteImageImport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8360,7 +8360,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8417,7 +8417,7 @@ export class VmMigrationClient {
     this._log.info('cancelImageImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8550,7 +8550,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8607,7 +8607,7 @@ export class VmMigrationClient {
     this._log.info('createDiskMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8740,7 +8740,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         'disk_migration_job.name': request.diskMigrationJob!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8797,7 +8797,7 @@ export class VmMigrationClient {
     this._log.info('updateDiskMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8909,7 +8909,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8966,7 +8966,7 @@ export class VmMigrationClient {
     this._log.info('deleteDiskMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9078,7 +9078,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9135,7 +9135,7 @@ export class VmMigrationClient {
     this._log.info('runDiskMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9247,7 +9247,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9304,7 +9304,7 @@ export class VmMigrationClient {
     this._log.info('cancelDiskMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9422,7 +9422,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9500,7 +9500,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSources stream %j', request);
@@ -9560,7 +9560,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSources iterate %j', request);
@@ -9678,7 +9678,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         source: request.source ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9754,7 +9754,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['fetchStorageInventory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchStorageInventory stream %j', request);
@@ -9812,7 +9812,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['fetchStorageInventory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchStorageInventory iterate %j', request);
@@ -9930,7 +9930,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10011,7 +10011,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listUtilizationReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUtilizationReports stream %j', request);
@@ -10074,7 +10074,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listUtilizationReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUtilizationReports iterate %j', request);
@@ -10190,7 +10190,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10269,7 +10269,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listDatacenterConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatacenterConnectors stream %j', request);
@@ -10330,7 +10330,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listDatacenterConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatacenterConnectors iterate %j', request);
@@ -10447,7 +10447,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10527,7 +10527,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listMigratingVms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMigratingVms stream %j', request);
@@ -10589,7 +10589,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listMigratingVms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMigratingVms iterate %j', request);
@@ -10705,7 +10705,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10783,7 +10783,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listCloneJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCloneJobs stream %j', request);
@@ -10843,7 +10843,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listCloneJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCloneJobs iterate %j', request);
@@ -10959,7 +10959,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11037,7 +11037,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listCutoverJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCutoverJobs stream %j', request);
@@ -11097,7 +11097,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listCutoverJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCutoverJobs iterate %j', request);
@@ -11206,7 +11206,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11284,7 +11284,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGroups stream %j', request);
@@ -11344,7 +11344,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGroups iterate %j', request);
@@ -11462,7 +11462,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11540,7 +11540,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listTargetProjects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTargetProjects stream %j', request);
@@ -11600,7 +11600,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listTargetProjects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTargetProjects iterate %j', request);
@@ -11715,7 +11715,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11793,7 +11793,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listReplicationCycles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReplicationCycles stream %j', request);
@@ -11853,7 +11853,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listReplicationCycles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReplicationCycles iterate %j', request);
@@ -11971,7 +11971,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12052,7 +12052,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listImageImports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImageImports stream %j', request);
@@ -12115,7 +12115,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listImageImports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImageImports iterate %j', request);
@@ -12233,7 +12233,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12314,7 +12314,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listImageImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImageImportJobs stream %j', request);
@@ -12377,7 +12377,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listImageImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listImageImportJobs iterate %j', request);
@@ -12493,7 +12493,7 @@ export class VmMigrationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12572,7 +12572,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listDiskMigrationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDiskMigrationJobs stream %j', request);
@@ -12633,7 +12633,7 @@ export class VmMigrationClient {
       });
     const defaultCallSettings = this._defaults['listDiskMigrationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDiskMigrationJobs iterate %j', request);
@@ -13963,11 +13963,11 @@ export class VmMigrationClient {
    */
   close(): Promise<void> {
     if (this.vmMigrationStub && !this._terminated) {
-      return this.vmMigrationStub.then((stub) => {
+      return this.vmMigrationStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

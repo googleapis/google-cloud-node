@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as adbreakserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.AdBreakServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.AdBreakServiceClient', () => {
       assert(client.adBreakServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.adBreakServiceStub);
@@ -274,12 +274,12 @@ describe('v1.AdBreakServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.AdBreakServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -455,7 +455,7 @@ describe('v1.AdBreakServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAdBreak(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.AdBreakServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAdBreak(request), expectedError);
@@ -723,7 +723,7 @@ describe('v1.AdBreakServiceClient', () => {
       );
       request.adBreak.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAdBreak(request), expectedError);
@@ -855,7 +855,7 @@ describe('v1.AdBreakServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAdBreak(request), expectedError);
@@ -865,7 +865,7 @@ describe('v1.AdBreakServiceClient', () => {
   describe('listAdBreaks', () => {
     it('invokes listAdBreaks without error', async () => {
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -898,7 +898,7 @@ describe('v1.AdBreakServiceClient', () => {
 
     it('invokes listAdBreaks without error using callback', async () => {
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1.AdBreakServiceClient', () => {
 
     it('invokes listAdBreaks with error', async () => {
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.AdBreakServiceClient', () => {
 
     it('invokes listAdBreaksStream without error', async () => {
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1024,15 +1024,15 @@ describe('v1.AdBreakServiceClient', () => {
       assert(
         (client.descriptors.page.listAdBreaks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAdBreaksStream with error', async () => {
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1075,9 +1075,9 @@ describe('v1.AdBreakServiceClient', () => {
       assert(
         (client.descriptors.page.listAdBreaks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1118,15 +1118,15 @@ describe('v1.AdBreakServiceClient', () => {
       assert(
         (client.descriptors.page.listAdBreaks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAdBreaks with error', async () => {
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1158,9 +1158,9 @@ describe('v1.AdBreakServiceClient', () => {
       assert(
         (client.descriptors.page.listAdBreaks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1174,7 +1174,7 @@ describe('v1.AdBreakServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1238,7 +1238,7 @@ describe('v1.AdBreakServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1307,7 +1307,7 @@ describe('v1.AdBreakServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1356,7 +1356,7 @@ describe('v1.AdBreakServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1405,7 +1405,7 @@ describe('v1.AdBreakServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1454,7 +1454,7 @@ describe('v1.AdBreakServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1506,7 +1506,7 @@ describe('v1.AdBreakServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1559,7 +1559,7 @@ describe('v1.AdBreakServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1605,6 +1605,58 @@ describe('v1.AdBreakServiceClient', () => {
       });
     });
 
+    describe('breakTemplate', async () => {
+      const fakePath = '/rendered/path/breakTemplate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        break_template: 'breakTemplateValue',
+      };
+      const client = new adbreakserviceModule.v1.AdBreakServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.breakTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.breakTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('breakTemplatePath', () => {
+        const result = client.breakTemplatePath(
+          'networkCodeValue',
+          'breakTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromBreakTemplateName', () => {
+        const result = client.matchNetworkCodeFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBreakTemplateFromBreakTemplateName', () => {
+        const result = client.matchBreakTemplateFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'breakTemplateValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('browser', async () => {
       const fakePath = '/rendered/path/browser';
       const expectedParameters = {
@@ -1612,7 +1664,7 @@ describe('v1.AdBreakServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,7 +1713,7 @@ describe('v1.AdBreakServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1714,7 +1766,7 @@ describe('v1.AdBreakServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1766,7 +1818,7 @@ describe('v1.AdBreakServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1819,7 +1871,7 @@ describe('v1.AdBreakServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1872,7 +1924,7 @@ describe('v1.AdBreakServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1929,7 +1981,7 @@ describe('v1.AdBreakServiceClient', () => {
         company: 'companyValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1978,7 +2030,7 @@ describe('v1.AdBreakServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2027,7 +2079,7 @@ describe('v1.AdBreakServiceClient', () => {
         content: 'contentValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2076,7 +2128,7 @@ describe('v1.AdBreakServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2128,7 +2180,7 @@ describe('v1.AdBreakServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2180,7 +2232,7 @@ describe('v1.AdBreakServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2229,7 +2281,7 @@ describe('v1.AdBreakServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2281,7 +2333,7 @@ describe('v1.AdBreakServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2338,7 +2390,7 @@ describe('v1.AdBreakServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2391,7 +2443,7 @@ describe('v1.AdBreakServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2443,7 +2495,7 @@ describe('v1.AdBreakServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2506,7 +2558,7 @@ describe('v1.AdBreakServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2571,7 +2623,7 @@ describe('v1.AdBreakServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2636,7 +2688,7 @@ describe('v1.AdBreakServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2698,7 +2750,7 @@ describe('v1.AdBreakServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2745,7 +2797,7 @@ describe('v1.AdBreakServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2802,7 +2854,7 @@ describe('v1.AdBreakServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2855,7 +2907,7 @@ describe('v1.AdBreakServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2918,7 +2970,7 @@ describe('v1.AdBreakServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2983,7 +3035,7 @@ describe('v1.AdBreakServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3035,7 +3087,7 @@ describe('v1.AdBreakServiceClient', () => {
         label: 'labelValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3084,7 +3136,7 @@ describe('v1.AdBreakServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3133,7 +3185,7 @@ describe('v1.AdBreakServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3185,7 +3237,7 @@ describe('v1.AdBreakServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3237,7 +3289,7 @@ describe('v1.AdBreakServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3290,7 +3342,7 @@ describe('v1.AdBreakServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3342,7 +3394,7 @@ describe('v1.AdBreakServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3394,7 +3446,7 @@ describe('v1.AdBreakServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3459,7 +3511,7 @@ describe('v1.AdBreakServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3510,7 +3562,7 @@ describe('v1.AdBreakServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3549,7 +3601,7 @@ describe('v1.AdBreakServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3602,7 +3654,7 @@ describe('v1.AdBreakServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3667,7 +3719,7 @@ describe('v1.AdBreakServiceClient', () => {
         order: 'orderValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3716,7 +3768,7 @@ describe('v1.AdBreakServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3765,7 +3817,7 @@ describe('v1.AdBreakServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3817,7 +3869,7 @@ describe('v1.AdBreakServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3870,7 +3922,7 @@ describe('v1.AdBreakServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3933,7 +3985,7 @@ describe('v1.AdBreakServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3996,7 +4048,7 @@ describe('v1.AdBreakServiceClient', () => {
         report: 'reportValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4045,7 +4097,7 @@ describe('v1.AdBreakServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4108,7 +4160,7 @@ describe('v1.AdBreakServiceClient', () => {
         role: 'roleValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4157,7 +4209,7 @@ describe('v1.AdBreakServiceClient', () => {
         site: 'siteValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4206,7 +4258,7 @@ describe('v1.AdBreakServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4255,7 +4307,7 @@ describe('v1.AdBreakServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4308,7 +4360,7 @@ describe('v1.AdBreakServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4361,7 +4413,7 @@ describe('v1.AdBreakServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4418,7 +4470,7 @@ describe('v1.AdBreakServiceClient', () => {
         team: 'teamValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4467,7 +4519,7 @@ describe('v1.AdBreakServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4530,7 +4582,7 @@ describe('v1.AdBreakServiceClient', () => {
         user: 'userValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4579,7 +4631,7 @@ describe('v1.AdBreakServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4642,7 +4694,7 @@ describe('v1.AdBreakServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new adbreakserviceModule.v1.AdBreakServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

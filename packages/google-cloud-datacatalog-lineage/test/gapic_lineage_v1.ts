@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as lineageModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -170,9 +170,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -290,7 +290,7 @@ describe('v1.LineageClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.lineageStub, undefined);
@@ -298,12 +298,12 @@ describe('v1.LineageClient', () => {
       assert(client.lineageStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.lineageStub);
@@ -312,14 +312,14 @@ describe('v1.LineageClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.lineageStub, undefined);
@@ -328,7 +328,7 @@ describe('v1.LineageClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -336,7 +336,7 @@ describe('v1.LineageClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -348,7 +348,7 @@ describe('v1.LineageClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -371,7 +371,7 @@ describe('v1.LineageClient', () => {
   describe('processOpenLineageRunEvent', () => {
     it('invokes processOpenLineageRunEvent without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes processOpenLineageRunEvent without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -462,7 +462,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes processOpenLineageRunEvent with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes processOpenLineageRunEvent with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1.LineageClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -528,7 +528,7 @@ describe('v1.LineageClient', () => {
   describe('createProcess', () => {
     it('invokes createProcess without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createProcess without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createProcess with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createProcess with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -665,7 +665,7 @@ describe('v1.LineageClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createProcess(request), expectedError);
@@ -675,7 +675,7 @@ describe('v1.LineageClient', () => {
   describe('updateProcess', () => {
     it('invokes updateProcess without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes updateProcess without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -765,7 +765,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes updateProcess with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes updateProcess with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -816,7 +816,7 @@ describe('v1.LineageClient', () => {
       );
       request.process.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateProcess(request), expectedError);
@@ -826,7 +826,7 @@ describe('v1.LineageClient', () => {
   describe('getProcess', () => {
     it('invokes getProcess without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -857,7 +857,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getProcess without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -904,7 +904,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getProcess with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -935,7 +935,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getProcess with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -948,7 +948,7 @@ describe('v1.LineageClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcess(request), expectedError);
@@ -958,7 +958,7 @@ describe('v1.LineageClient', () => {
   describe('createRun', () => {
     it('invokes createRun without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -994,7 +994,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createRun without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createRun with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1079,7 +1079,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createRun with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1092,7 +1092,7 @@ describe('v1.LineageClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRun(request), expectedError);
@@ -1102,7 +1102,7 @@ describe('v1.LineageClient', () => {
   describe('updateRun', () => {
     it('invokes updateRun without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes updateRun without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1182,7 +1182,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes updateRun with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1211,7 +1211,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes updateRun with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v1.LineageClient', () => {
       );
       request.run.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRun(request), expectedError);
@@ -1235,7 +1235,7 @@ describe('v1.LineageClient', () => {
   describe('getRun', () => {
     it('invokes getRun without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1266,7 +1266,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getRun without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1313,7 +1313,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getRun with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1341,7 +1341,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getRun with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1354,7 +1354,7 @@ describe('v1.LineageClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRun(request), expectedError);
@@ -1364,7 +1364,7 @@ describe('v1.LineageClient', () => {
   describe('createLineageEvent', () => {
     it('invokes createLineageEvent without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createLineageEvent without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1453,7 +1453,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createLineageEvent with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1489,7 +1489,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes createLineageEvent with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v1.LineageClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createLineageEvent(request), expectedError);
@@ -1512,7 +1512,7 @@ describe('v1.LineageClient', () => {
   describe('getLineageEvent', () => {
     it('invokes getLineageEvent without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getLineageEvent without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1590,7 +1590,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getLineageEvent with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1621,7 +1621,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes getLineageEvent with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1.LineageClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLineageEvent(request), expectedError);
@@ -1644,7 +1644,7 @@ describe('v1.LineageClient', () => {
   describe('deleteLineageEvent', () => {
     it('invokes deleteLineageEvent without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1676,7 +1676,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteLineageEvent without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1723,7 +1723,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteLineageEvent with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteLineageEvent with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1767,7 +1767,7 @@ describe('v1.LineageClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteLineageEvent(request), expectedError);
@@ -1777,7 +1777,7 @@ describe('v1.LineageClient', () => {
   describe('deleteProcess', () => {
     it('invokes deleteProcess without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1810,7 +1810,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteProcess without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1864,7 +1864,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteProcess with call error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteProcess with LRO error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1928,7 +1928,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes checkDeleteProcessProgress without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1936,8 +1936,8 @@ describe('v1.LineageClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteProcessProgress(
@@ -1950,7 +1950,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes checkDeleteProcessProgress with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v1.LineageClient', () => {
   describe('deleteRun', () => {
     it('invokes deleteRun without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2003,7 +2003,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteRun without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2057,7 +2057,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteRun with call error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,7 +2088,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes deleteRun with LRO error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2121,7 +2121,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes checkDeleteRunProgress without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2129,8 +2129,8 @@ describe('v1.LineageClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRunProgress(
@@ -2143,7 +2143,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes checkDeleteRunProgress with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2161,7 +2161,7 @@ describe('v1.LineageClient', () => {
   describe('searchLineageStreaming', () => {
     it('invokes searchLineageStreaming without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2207,7 +2207,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes searchLineageStreaming without error and gaxServerStreamingRetries enabled', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -2254,7 +2254,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes searchLineageStreaming with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2299,7 +2299,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes searchLineageStreaming with closed client', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2312,11 +2312,11 @@ describe('v1.LineageClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.searchLineageStreaming(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -2344,7 +2344,7 @@ describe('v1.LineageClient', () => {
   describe('listProcesses', () => {
     it('invokes listProcesses without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2383,7 +2383,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listProcesses without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2415,8 +2415,7 @@ describe('v1.LineageClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datacatalog.lineage.v1.IProcess[]
-              | null,
+              protos.google.cloud.datacatalog.lineage.v1.IProcess[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2440,7 +2439,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listProcesses with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2470,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listProcessesStream without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2524,15 +2523,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listProcesses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProcessesStream with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2574,15 +2573,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listProcesses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcesses without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2624,15 +2623,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProcesses with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2665,9 +2664,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2675,7 +2674,7 @@ describe('v1.LineageClient', () => {
   describe('listRuns', () => {
     it('invokes listRuns without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2714,7 +2713,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listRuns without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2769,7 +2768,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listRuns with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2797,7 +2796,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listRunsStream without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2849,15 +2848,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRunsStream with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2900,15 +2899,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRuns without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2948,15 +2947,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRuns with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2989,9 +2988,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2999,7 +2998,7 @@ describe('v1.LineageClient', () => {
   describe('listLineageEvents', () => {
     it('invokes listLineageEvents without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3038,7 +3037,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listLineageEvents without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3070,8 +3069,7 @@ describe('v1.LineageClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[]
-              | null,
+              protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3095,7 +3093,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listLineageEvents with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3126,7 +3124,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes listLineageEventsStream without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3181,15 +3179,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listLineageEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLineageEventsStream with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3233,15 +3231,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listLineageEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLineageEvents without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3283,15 +3281,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLineageEvents with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3324,9 +3322,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3334,7 +3332,7 @@ describe('v1.LineageClient', () => {
   describe('searchLinks', () => {
     it('invokes searchLinks without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3373,7 +3371,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes searchLinks without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3428,7 +3426,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes searchLinks with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3459,7 +3457,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes searchLinksStream without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3511,15 +3509,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.searchLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchLinksStream with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3562,15 +3560,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.searchLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchLinks without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3611,15 +3609,15 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchLinks with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3654,9 +3652,9 @@ describe('v1.LineageClient', () => {
       assert(
         (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3664,7 +3662,7 @@ describe('v1.LineageClient', () => {
   describe('batchSearchLinkProcesses', () => {
     it('invokes batchSearchLinkProcesses without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3704,7 +3702,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes batchSearchLinkProcesses without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3736,8 +3734,7 @@ describe('v1.LineageClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[]
-              | null,
+              protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3761,7 +3758,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes batchSearchLinkProcesses with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3795,7 +3792,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes batchSearchLinkProcessesStream without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3864,7 +3861,7 @@ describe('v1.LineageClient', () => {
 
     it('invokes batchSearchLinkProcessesStream with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3922,7 +3919,7 @@ describe('v1.LineageClient', () => {
 
     it('uses async iteration with batchSearchLinkProcesses without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3976,7 +3973,7 @@ describe('v1.LineageClient', () => {
 
     it('uses async iteration with batchSearchLinkProcesses with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4022,7 +4019,7 @@ describe('v1.LineageClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4043,7 +4040,7 @@ describe('v1.LineageClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4071,7 +4068,7 @@ describe('v1.LineageClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4081,7 +4078,7 @@ describe('v1.LineageClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4105,7 +4102,7 @@ describe('v1.LineageClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4127,7 +4124,7 @@ describe('v1.LineageClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4155,7 +4152,7 @@ describe('v1.LineageClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4165,7 +4162,7 @@ describe('v1.LineageClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4189,7 +4186,7 @@ describe('v1.LineageClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4211,7 +4208,7 @@ describe('v1.LineageClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4239,7 +4236,7 @@ describe('v1.LineageClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4249,7 +4246,7 @@ describe('v1.LineageClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4273,7 +4270,7 @@ describe('v1.LineageClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4308,7 +4305,7 @@ describe('v1.LineageClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4346,7 +4343,7 @@ describe('v1.LineageClient', () => {
         lineage_event: 'lineageEventValue',
       };
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4431,7 +4428,7 @@ describe('v1.LineageClient', () => {
         location: 'locationValue',
       };
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4481,7 +4478,7 @@ describe('v1.LineageClient', () => {
         process: 'processValue',
       };
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4543,7 +4540,7 @@ describe('v1.LineageClient', () => {
         project: 'projectValue',
       };
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4584,7 +4581,7 @@ describe('v1.LineageClient', () => {
         run: 'runValue',
       };
       const client = new lineageModule.v1.LineageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

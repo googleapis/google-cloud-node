@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { AgentRegistryClient } from '@google-cloud/agentregistry';
+import {AgentRegistryClient} from '@google-cloud/agentregistry';
 
 // check that the client class type name can be used
 function doStuffWithAgentRegistryClient(client: AgentRegistryClient) {

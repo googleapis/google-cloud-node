@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class TensorboardServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -70,12 +70,12 @@ export class TensorboardServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  tensorboardServiceStub?: Promise<{ [name: string]: Function }>;
+  tensorboardServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of TensorboardServiceClient.
@@ -151,7 +151,7 @@ export class TensorboardServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -455,12 +455,12 @@ export class TensorboardServiceClient {
         {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
-          additional_bindings: [{ get: '/v1/{name=projects/*/locations/*}' }],
+          additional_bindings: [{get: '/v1/{name=projects/*/locations/*}'}],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [{ get: '/v1/{name=projects/*}/locations' }],
+          additional_bindings: [{get: '/v1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
@@ -753,7 +753,7 @@ export class TensorboardServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:cancel' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
@@ -892,10 +892,8 @@ export class TensorboardServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            {
-              delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            { delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -996,9 +994,7 @@ export class TensorboardServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1083,7 +1079,7 @@ export class TensorboardServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1/{name=projects/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1168,9 +1164,7 @@ export class TensorboardServiceClient {
               delete:
                 '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1267,18 +1261,16 @@ export class TensorboardServiceClient {
               delete:
                 '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}' },
+            {delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1300,9 +1292,7 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
@@ -1330,7 +1320,7 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1355,7 +1345,7 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1371,7 +1361,7 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1384,9 +1374,7 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1417,10 +1405,8 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
-            {
-              get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1436,9 +1422,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
@@ -1460,7 +1444,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1482,7 +1466,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1510,7 +1494,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1523,9 +1507,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1553,16 +1535,16 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
-            { get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}' },
+            {get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1578,16 +1560,12 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1597,19 +1575,15 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1634,7 +1608,7 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1647,7 +1621,7 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1663,7 +1637,7 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1694,8 +1668,8 @@ export class TensorboardServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { get: '/v1/{name=projects/*/locations/*}/operations' },
-            { get: '/v1/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1711,7 +1685,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1721,19 +1695,15 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/v1/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1755,7 +1725,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1774,7 +1744,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1790,13 +1760,11 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1824,7 +1792,7 @@ export class TensorboardServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
-            { get: '/v1/{name=reasoningEngines/*/sessions/*}/operations' },
+            {get: '/v1/{name=reasoningEngines/*/sessions/*}/operations'},
           ],
         },
         {
@@ -1981,7 +1949,7 @@ export class TensorboardServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:wait' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -2213,7 +2181,7 @@ export class TensorboardServiceClient {
       'google.cloud.aiplatform.v1.TensorboardService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -2253,7 +2221,7 @@ export class TensorboardServiceClient {
           (this._protos as any).google.cloud.aiplatform.v1.TensorboardService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -2291,11 +2259,11 @@ export class TensorboardServiceClient {
     ];
     for (const methodName of tensorboardServiceStubMethods) {
       const callPromise = this.tensorboardServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -2510,7 +2478,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTensorboard request %j', request);
@@ -2652,7 +2620,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard: request.tensorboard ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readTensorboardUsage request %j', request);
@@ -2791,7 +2759,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard: request.tensorboard ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readTensorboardSize request %j', request);
@@ -2944,7 +2912,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createTensorboardExperiment request %j', request);
@@ -3089,7 +3057,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTensorboardExperiment request %j', request);
@@ -3242,7 +3210,7 @@ export class TensorboardServiceClient {
         'tensorboard_experiment.name':
           request.tensorboardExperiment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateTensorboardExperiment request %j', request);
@@ -3395,7 +3363,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createTensorboardRun request %j', request);
@@ -3545,7 +3513,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchCreateTensorboardRuns request %j', request);
@@ -3684,7 +3652,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTensorboardRun request %j', request);
@@ -3836,7 +3804,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'tensorboard_run.name': request.tensorboardRun!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateTensorboardRun request %j', request);
@@ -3988,7 +3956,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchCreateTensorboardTimeSeries request %j', request);
@@ -4147,7 +4115,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createTensorboardTimeSeries request %j', request);
@@ -4292,7 +4260,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTensorboardTimeSeries request %j', request);
@@ -4446,7 +4414,7 @@ export class TensorboardServiceClient {
         'tensorboard_time_series.name':
           request.tensorboardTimeSeries!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateTensorboardTimeSeries request %j', request);
@@ -4602,7 +4570,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard: request.tensorboard ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchReadTensorboardTimeSeriesData request %j', request);
@@ -4764,7 +4732,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard_time_series: request.tensorboardTimeSeries ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readTensorboardTimeSeriesData request %j', request);
@@ -4912,7 +4880,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard_experiment: request.tensorboardExperiment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('writeTensorboardExperimentData request %j', request);
@@ -5070,7 +5038,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard_run: request.tensorboardRun ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('writeTensorboardRunData request %j', request);
@@ -5156,7 +5124,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         time_series: request.timeSeries ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readTensorboardBlobData stream %j', options);
@@ -5265,7 +5233,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5322,7 +5290,7 @@ export class TensorboardServiceClient {
     this._log.info('createTensorboard long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5443,7 +5411,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'tensorboard.name': request.tensorboard!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5500,7 +5468,7 @@ export class TensorboardServiceClient {
     this._log.info('updateTensorboard long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5614,7 +5582,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5671,7 +5639,7 @@ export class TensorboardServiceClient {
     this._log.info('deleteTensorboard long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5785,7 +5753,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5848,7 +5816,7 @@ export class TensorboardServiceClient {
     this._log.info('deleteTensorboardExperiment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5962,7 +5930,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6019,7 +5987,7 @@ export class TensorboardServiceClient {
     this._log.info('deleteTensorboardRun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6133,7 +6101,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6196,7 +6164,7 @@ export class TensorboardServiceClient {
     this._log.info('deleteTensorboardTimeSeries long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6320,7 +6288,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6404,7 +6372,7 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTensorboards stream %j', request);
@@ -6470,7 +6438,7 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTensorboards iterate %j', request);
@@ -6591,7 +6559,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6675,7 +6643,7 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardExperiments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTensorboardExperiments stream %j', request);
@@ -6741,7 +6709,7 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardExperiments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTensorboardExperiments iterate %j', request);
@@ -6862,7 +6830,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6946,7 +6914,7 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTensorboardRuns stream %j', request);
@@ -7012,7 +6980,7 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTensorboardRuns iterate %j', request);
@@ -7133,7 +7101,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7217,7 +7185,7 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardTimeSeries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTensorboardTimeSeries stream %j', request);
@@ -7283,7 +7251,7 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardTimeSeries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTensorboardTimeSeries iterate %j', request);
@@ -7404,7 +7372,7 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard_time_series: request.tensorboardTimeSeries ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7488,7 +7456,7 @@ export class TensorboardServiceClient {
     const defaultCallSettings =
       this._defaults['exportTensorboardTimeSeriesData'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('exportTensorboardTimeSeriesData stream %j', request);
@@ -7554,7 +7522,7 @@ export class TensorboardServiceClient {
     const defaultCallSettings =
       this._defaults['exportTensorboardTimeSeriesData'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('exportTensorboardTimeSeriesData iterate %j', request);
@@ -11789,14 +11757,14 @@ export class TensorboardServiceClient {
    */
   close(): Promise<void> {
     if (this.tensorboardServiceStub && !this._terminated) {
-      return this.tensorboardServiceStub.then((stub) => {
+      return this.tensorboardServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

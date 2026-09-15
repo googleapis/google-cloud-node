@@ -27,7 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,7 +52,7 @@ export class DiscussServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('generativelanguage');
@@ -65,9 +65,9 @@ export class DiscussServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  discussServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  discussServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DiscussServiceClient.
@@ -143,7 +143,7 @@ export class DiscussServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -231,7 +231,7 @@ export class DiscussServiceClient {
       'google.ai.generativelanguage.v1alpha.DiscussService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -272,14 +272,14 @@ export class DiscussServiceClient {
             .DiscussService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const discussServiceStubMethods = ['generateMessage', 'countMessageTokens'];
     for (const methodName of discussServiceStubMethods) {
       const callPromise = this.discussServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -517,7 +517,7 @@ export class DiscussServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateMessage request %j', request);
@@ -667,7 +667,7 @@ export class DiscussServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('countMessageTokens request %j', request);
@@ -1016,7 +1016,7 @@ export class DiscussServiceClient {
    */
   close(): Promise<void> {
     if (this.discussServiceStub && !this._terminated) {
-      return this.discussServiceStub.then((stub) => {
+      return this.discussServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

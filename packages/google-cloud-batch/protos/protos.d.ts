@@ -3191,6 +3191,9 @@ export namespace google {
 
                         /** NetworkInterface noExternalIpAddress */
                         noExternalIpAddress?: (boolean|null);
+
+                        /** NetworkInterface nicType */
+                        nicType?: (google.cloud.batch.v1.AllocationPolicy.NetworkInterface.NicType|keyof typeof google.cloud.batch.v1.AllocationPolicy.NetworkInterface.NicType|null);
                     }
 
                     /** Represents a NetworkInterface. */
@@ -3210,6 +3213,9 @@ export namespace google {
 
                         /** NetworkInterface noExternalIpAddress. */
                         public noExternalIpAddress: boolean;
+
+                        /** NetworkInterface nicType. */
+                        public nicType?: (google.cloud.batch.v1.AllocationPolicy.NetworkInterface.NicType|keyof typeof google.cloud.batch.v1.AllocationPolicy.NetworkInterface.NicType|null);
 
                         /**
                          * Creates a new NetworkInterface instance using the specified properties.
@@ -3287,6 +3293,17 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NetworkInterface {
+
+                        /** NicType enum. */
+                        enum NicType {
+                            NIC_TYPE_UNSPECIFIED = 0,
+                            GVNIC = 1,
+                            IRDMA = 2,
+                            MRDMA = 3
+                        }
                     }
 
                     /** Properties of a NetworkPolicy. */

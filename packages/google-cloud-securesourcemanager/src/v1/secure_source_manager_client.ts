@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class SecureSourceManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('securesourcemanager');
@@ -72,12 +72,12 @@ export class SecureSourceManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  secureSourceManagerStub?: Promise<{ [name: string]: Function }>;
+  secureSourceManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SecureSourceManagerClient.
@@ -153,7 +153,7 @@ export class SecureSourceManagerClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -295,6 +295,11 @@ export class SecureSourceManagerClient {
         'pageToken',
         'nextPageToken',
         'treeEntries',
+      ),
+      fetchRefs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'refs',
       ),
       listIssues: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -731,7 +736,7 @@ export class SecureSourceManagerClient {
       'google.cloud.securesourcemanager.v1.SecureSourceManager',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -772,7 +777,7 @@ export class SecureSourceManagerClient {
             .SecureSourceManager,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -809,6 +814,7 @@ export class SecureSourceManagerClient {
       'listPullRequestFileDiffs',
       'fetchTree',
       'fetchBlob',
+      'fetchRefs',
       'createIssue',
       'getIssue',
       'listIssues',
@@ -832,7 +838,7 @@ export class SecureSourceManagerClient {
     ];
     for (const methodName of secureSourceManagerStubMethods) {
       const callPromise = this.secureSourceManagerStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -924,7 +930,10 @@ export class SecureSourceManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/securesourcemanager.read-write',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1039,7 +1048,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInstance request %j', request);
@@ -1184,7 +1193,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRepository request %j', request);
@@ -1323,7 +1332,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getHook request %j', request);
@@ -1456,7 +1465,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicyRepo request %j', request);
@@ -1592,7 +1601,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicyRepo request %j', request);
@@ -1723,7 +1732,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissionsRepo request %j', request);
@@ -1863,7 +1872,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBranchRule request %j', request);
@@ -2008,7 +2017,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPullRequest request %j', request);
@@ -2149,7 +2158,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         repository: request.repository ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchBlob request %j', request);
@@ -2288,7 +2297,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIssue request %j', request);
@@ -2433,7 +2442,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPullRequestComment request %j', request);
@@ -2578,7 +2587,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIssueComment request %j', request);
@@ -2746,7 +2755,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2803,7 +2812,7 @@ export class SecureSourceManagerClient {
     this._log.info('createInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2931,7 +2940,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2988,7 +2997,7 @@ export class SecureSourceManagerClient {
     this._log.info('deleteInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3110,7 +3119,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3167,7 +3176,7 @@ export class SecureSourceManagerClient {
     this._log.info('createRepository long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3288,7 +3297,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'repository.name': request.repository!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3345,7 +3354,7 @@ export class SecureSourceManagerClient {
     this._log.info('updateRepository long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3462,7 +3471,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3519,7 +3528,7 @@ export class SecureSourceManagerClient {
     this._log.info('deleteRepository long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3640,7 +3649,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3697,7 +3706,7 @@ export class SecureSourceManagerClient {
     this._log.info('createHook long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3815,7 +3824,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'hook.name': request.hook!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3872,7 +3881,7 @@ export class SecureSourceManagerClient {
     this._log.info('updateHook long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3986,7 +3995,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4043,7 +4052,7 @@ export class SecureSourceManagerClient {
     this._log.info('deleteHook long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4156,7 +4165,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4213,7 +4222,7 @@ export class SecureSourceManagerClient {
     this._log.info('createBranchRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4333,7 +4342,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'branch_rule.name': request.branchRule!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4390,7 +4399,7 @@ export class SecureSourceManagerClient {
     this._log.info('updateBranchRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4504,7 +4513,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4561,7 +4570,7 @@ export class SecureSourceManagerClient {
     this._log.info('deleteBranchRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4676,7 +4685,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4733,7 +4742,7 @@ export class SecureSourceManagerClient {
     this._log.info('createPullRequest long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4851,7 +4860,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'pull_request.name': request.pullRequest!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4908,7 +4917,7 @@ export class SecureSourceManagerClient {
     this._log.info('updatePullRequest long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5022,7 +5031,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5079,7 +5088,7 @@ export class SecureSourceManagerClient {
     this._log.info('mergePullRequest long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5193,7 +5202,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5250,7 +5259,7 @@ export class SecureSourceManagerClient {
     this._log.info('openPullRequest long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5364,7 +5373,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5421,7 +5430,7 @@ export class SecureSourceManagerClient {
     this._log.info('closePullRequest long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5536,7 +5545,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5593,7 +5602,7 @@ export class SecureSourceManagerClient {
     this._log.info('createIssue long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5711,7 +5720,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'issue.name': request.issue!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5768,7 +5777,7 @@ export class SecureSourceManagerClient {
     this._log.info('updateIssue long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5886,7 +5895,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5943,7 +5952,7 @@ export class SecureSourceManagerClient {
     this._log.info('deleteIssue long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6061,7 +6070,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6118,7 +6127,7 @@ export class SecureSourceManagerClient {
     this._log.info('openIssue long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6236,7 +6245,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6293,7 +6302,7 @@ export class SecureSourceManagerClient {
     this._log.info('closeIssue long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6413,7 +6422,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6470,7 +6479,7 @@ export class SecureSourceManagerClient {
     this._log.info('createPullRequestComment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6586,7 +6595,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'pull_request_comment.name': request.pullRequestComment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6643,7 +6652,7 @@ export class SecureSourceManagerClient {
     this._log.info('updatePullRequestComment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6757,7 +6766,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6814,7 +6823,7 @@ export class SecureSourceManagerClient {
     this._log.info('deletePullRequestComment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6937,7 +6946,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7000,7 +7009,7 @@ export class SecureSourceManagerClient {
     this._log.info('batchCreatePullRequestComments long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7125,7 +7134,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7182,7 +7191,7 @@ export class SecureSourceManagerClient {
     this._log.info('resolvePullRequestComments long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7307,7 +7316,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7370,7 +7379,7 @@ export class SecureSourceManagerClient {
     this._log.info('unresolvePullRequestComments long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7485,7 +7494,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7542,7 +7551,7 @@ export class SecureSourceManagerClient {
     this._log.info('createIssueComment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7660,7 +7669,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'issue_comment.name': request.issueComment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7717,7 +7726,7 @@ export class SecureSourceManagerClient {
     this._log.info('updateIssueComment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7831,7 +7840,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7888,7 +7897,7 @@ export class SecureSourceManagerClient {
     this._log.info('deleteIssueComment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8000,7 +8009,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8072,7 +8081,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstances stream %j', request);
@@ -8126,7 +8135,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstances iterate %j', request);
@@ -8243,7 +8252,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8320,7 +8329,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRepositories stream %j', request);
@@ -8379,7 +8388,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRepositories iterate %j', request);
@@ -8484,7 +8493,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8552,7 +8561,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listHooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listHooks stream %j', request);
@@ -8602,7 +8611,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listHooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listHooks iterate %j', request);
@@ -8706,7 +8715,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8773,7 +8782,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listBranchRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBranchRules stream %j', request);
@@ -8822,7 +8831,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listBranchRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBranchRules iterate %j', request);
@@ -8928,7 +8937,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8997,7 +9006,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listPullRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPullRequests stream %j', request);
@@ -9048,7 +9057,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listPullRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPullRequests iterate %j', request);
@@ -9155,7 +9164,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9225,7 +9234,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listPullRequestFileDiffs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPullRequestFileDiffs stream %j', request);
@@ -9277,7 +9286,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listPullRequestFileDiffs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPullRequestFileDiffs iterate %j', request);
@@ -9390,7 +9399,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         repository: request.repository ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9466,7 +9475,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['fetchTree'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchTree stream %j', request);
@@ -9524,7 +9533,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['fetchTree'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchTree iterate %j', request);
@@ -9533,6 +9542,244 @@ export class SecureSourceManagerClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.ITreeEntry>;
+  }
+  /**
+   * Fetches git references from a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the references from.
+   * @param {google.cloud.securesourcemanager.v1.Ref.RefType} [request.type]
+   *   Optional. The type of reference to fetch (eg. branch, tag). By default, all
+   *   references are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Ref|Ref}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchRefsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchRefs(
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IRef[],
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse,
+    ]
+  >;
+  fetchRefs(
+    request: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRef
+    >,
+  ): void;
+  fetchRefs(
+    request: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRef
+    >,
+  ): void;
+  fetchRefs(
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+          | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IRef
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRef
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IRef[],
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+          | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IRef
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchRefs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchRefs request %j', request);
+    return this.innerApiCalls
+      .fetchRefs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IRef[],
+          protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse,
+        ]) => {
+          this._log.info('fetchRefs values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `fetchRefs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the references from.
+   * @param {google.cloud.securesourcemanager.v1.Ref.RefType} [request.type]
+   *   Optional. The type of reference to fetch (eg. branch, tag). By default, all
+   *   references are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Ref|Ref} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchRefsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchRefsStream(
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchRefs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchRefs stream %j', request);
+    return this.descriptors.page.fetchRefs.createStream(
+      this.innerApiCalls.fetchRefs as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `fetchRefs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the references from.
+   * @param {google.cloud.securesourcemanager.v1.Ref.RefType} [request.type]
+   *   Optional. The type of reference to fetch (eg. branch, tag). By default, all
+   *   references are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.Ref|Ref}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.fetch_refs.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_FetchRefs_async
+   */
+  fetchRefsAsync(
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IRef> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchRefs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchRefs iterate %j', request);
+    return this.descriptors.page.fetchRefs.asyncIterate(
+      this.innerApiCalls['fetchRefs'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IRef>;
   }
   /**
    * Lists issues in a repository.
@@ -9632,7 +9879,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9703,7 +9950,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listIssues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIssues stream %j', request);
@@ -9756,7 +10003,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listIssues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIssues iterate %j', request);
@@ -9862,7 +10109,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9931,7 +10178,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listPullRequestComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPullRequestComments stream %j', request);
@@ -9982,7 +10229,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listPullRequestComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPullRequestComments iterate %j', request);
@@ -10088,7 +10335,7 @@ export class SecureSourceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10157,7 +10404,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listIssueComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIssueComments stream %j', request);
@@ -10208,7 +10455,7 @@ export class SecureSourceManagerClient {
       });
     const defaultCallSettings = this._defaults['listIssueComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIssueComments iterate %j', request);
@@ -11392,14 +11639,14 @@ export class SecureSourceManagerClient {
    */
   close(): Promise<void> {
     if (this.secureSourceManagerStub && !this._terminated) {
-      return this.secureSourceManagerStub.then((stub) => {
+      return this.secureSourceManagerStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

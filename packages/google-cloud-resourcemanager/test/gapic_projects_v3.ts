@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as projectsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -272,7 +272,7 @@ describe('v3.ProjectsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.projectsStub, undefined);
@@ -280,12 +280,12 @@ describe('v3.ProjectsClient', () => {
       assert(client.projectsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.projectsStub);
@@ -294,14 +294,14 @@ describe('v3.ProjectsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.projectsStub, undefined);
@@ -310,7 +310,7 @@ describe('v3.ProjectsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v3.ProjectsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v3.ProjectsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v3.ProjectsClient', () => {
   describe('getProject', () => {
     it('invokes getProject without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes getProject without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes getProject with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -462,7 +462,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes getProject with closed client', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -475,7 +475,7 @@ describe('v3.ProjectsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProject(request), expectedError);
@@ -485,7 +485,7 @@ describe('v3.ProjectsClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v3.ProjectsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -617,7 +617,7 @@ describe('v3.ProjectsClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v3.ProjectsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -749,7 +749,7 @@ describe('v3.ProjectsClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v3.ProjectsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -882,7 +882,7 @@ describe('v3.ProjectsClient', () => {
   describe('createProject', () => {
     it('invokes createProject without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -901,7 +901,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes createProject without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -941,7 +941,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes createProject with call error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -958,7 +958,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes createProject with LRO error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkCreateProjectProgress without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -985,8 +985,8 @@ describe('v3.ProjectsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateProjectProgress(
@@ -999,7 +999,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkCreateProjectProgress with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v3.ProjectsClient', () => {
   describe('updateProject', () => {
     it('invokes updateProject without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes updateProject without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes updateProject with call error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1141,7 +1141,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes updateProject with LRO error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkUpdateProjectProgress without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1183,8 +1183,8 @@ describe('v3.ProjectsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateProjectProgress(
@@ -1197,7 +1197,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkUpdateProjectProgress with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1218,7 +1218,7 @@ describe('v3.ProjectsClient', () => {
   describe('moveProject', () => {
     it('invokes moveProject without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes moveProject without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1304,7 +1304,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes moveProject with call error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1335,7 +1335,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes moveProject with LRO error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1368,7 +1368,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkMoveProjectProgress without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1376,8 +1376,8 @@ describe('v3.ProjectsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMoveProjectProgress(
@@ -1390,7 +1390,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkMoveProjectProgress with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1408,7 +1408,7 @@ describe('v3.ProjectsClient', () => {
   describe('deleteProject', () => {
     it('invokes deleteProject without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes deleteProject without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes deleteProject with call error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1526,7 +1526,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes deleteProject with LRO error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1559,7 +1559,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkDeleteProjectProgress without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,8 +1567,8 @@ describe('v3.ProjectsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteProjectProgress(
@@ -1581,7 +1581,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkDeleteProjectProgress with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v3.ProjectsClient', () => {
   describe('undeleteProject', () => {
     it('invokes undeleteProject without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1635,7 +1635,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes undeleteProject without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1689,7 +1689,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes undeleteProject with call error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1720,7 +1720,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes undeleteProject with LRO error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1753,7 +1753,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkUndeleteProjectProgress without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1761,8 +1761,8 @@ describe('v3.ProjectsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeleteProjectProgress(
@@ -1775,7 +1775,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes checkUndeleteProjectProgress with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1796,7 +1796,7 @@ describe('v3.ProjectsClient', () => {
   describe('listProjects', () => {
     it('invokes listProjects without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1821,7 +1821,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes listProjects without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1862,7 +1862,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes listProjects with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1879,7 +1879,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes listProjectsStream without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1926,7 +1926,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes listProjectsStream with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,7 +1964,7 @@ describe('v3.ProjectsClient', () => {
 
     it('uses async iteration with listProjects without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2000,7 +2000,7 @@ describe('v3.ProjectsClient', () => {
 
     it('uses async iteration with listProjects with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2029,7 @@ describe('v3.ProjectsClient', () => {
   describe('searchProjects', () => {
     it('invokes searchProjects without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2054,7 +2054,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes searchProjects without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2095,7 +2095,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes searchProjects with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2112,7 +2112,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes searchProjectsStream without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2159,7 +2159,7 @@ describe('v3.ProjectsClient', () => {
 
     it('invokes searchProjectsStream with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2195,7 +2195,7 @@ describe('v3.ProjectsClient', () => {
 
     it('uses async iteration with searchProjects without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,7 +2231,7 @@ describe('v3.ProjectsClient', () => {
 
     it('uses async iteration with searchProjects with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2259,7 +2259,7 @@ describe('v3.ProjectsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2280,7 +2280,7 @@ describe('v3.ProjectsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2308,7 +2308,7 @@ describe('v3.ProjectsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2318,7 +2318,7 @@ describe('v3.ProjectsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2342,7 +2342,7 @@ describe('v3.ProjectsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2364,7 +2364,7 @@ describe('v3.ProjectsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2392,7 +2392,7 @@ describe('v3.ProjectsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2402,7 +2402,7 @@ describe('v3.ProjectsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2426,7 +2426,7 @@ describe('v3.ProjectsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2448,7 +2448,7 @@ describe('v3.ProjectsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2476,7 +2476,7 @@ describe('v3.ProjectsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2486,7 +2486,7 @@ describe('v3.ProjectsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2510,7 +2510,7 @@ describe('v3.ProjectsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2545,7 +2545,7 @@ describe('v3.ProjectsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2579,7 +2579,7 @@ describe('v3.ProjectsClient', () => {
         folder: 'folderValue',
       };
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2617,7 +2617,7 @@ describe('v3.ProjectsClient', () => {
         organization: 'organizationValue',
       };
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2655,7 +2655,7 @@ describe('v3.ProjectsClient', () => {
         project: 'projectValue',
       };
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2693,7 +2693,7 @@ describe('v3.ProjectsClient', () => {
         tag_binding: 'tagBindingValue',
       };
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2732,7 +2732,7 @@ describe('v3.ProjectsClient', () => {
         tag_hold: 'tagHoldValue',
       };
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2780,7 +2780,7 @@ describe('v3.ProjectsClient', () => {
         tag_key: 'tagKeyValue',
       };
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2818,7 +2818,7 @@ describe('v3.ProjectsClient', () => {
         tag_value: 'tagValueValue',
       };
       const client = new projectsModule.v3.ProjectsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

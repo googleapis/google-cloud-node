@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as userlistserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.userListServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.UserListServiceClient', () => {
       assert(client.userListServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.userListServiceStub);
@@ -261,14 +261,14 @@ describe('v1.UserListServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.userListServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.UserListServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.UserListServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.UserListServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.UserListServiceClient', () => {
   describe('getUserList', () => {
     it('invokes getUserList without error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes getUserList without error using callback', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes getUserList with error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes getUserList with closed client', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.UserListServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUserList(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1.UserListServiceClient', () => {
   describe('createUserList', () => {
     it('invokes createUserList without error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes createUserList without error using callback', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes createUserList with error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes createUserList with closed client', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.UserListServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createUserList(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.UserListServiceClient', () => {
   describe('updateUserList', () => {
     it('invokes updateUserList without error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes updateUserList without error using callback', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes updateUserList with error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes updateUserList with closed client', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1.UserListServiceClient', () => {
       );
       request.userList.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateUserList(request), expectedError);
@@ -720,7 +720,7 @@ describe('v1.UserListServiceClient', () => {
   describe('deleteUserList', () => {
     it('invokes deleteUserList without error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes deleteUserList without error using callback', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes deleteUserList with error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes deleteUserList with closed client', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v1.UserListServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteUserList(request), expectedError);
@@ -852,7 +852,7 @@ describe('v1.UserListServiceClient', () => {
   describe('listUserLists', () => {
     it('invokes listUserLists without error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes listUserLists without error using callback', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes listUserLists with error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.UserListServiceClient', () => {
 
     it('invokes listUserListsStream without error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,15 +1011,15 @@ describe('v1.UserListServiceClient', () => {
       assert(
         (client.descriptors.page.listUserLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listUserListsStream with error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,15 +1060,15 @@ describe('v1.UserListServiceClient', () => {
       assert(
         (client.descriptors.page.listUserLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUserLists without error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1103,15 +1103,15 @@ describe('v1.UserListServiceClient', () => {
       assert(
         (client.descriptors.page.listUserLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUserLists with error', async () => {
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1143,9 +1143,9 @@ describe('v1.UserListServiceClient', () => {
       assert(
         (client.descriptors.page.listUserLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1158,7 +1158,7 @@ describe('v1.UserListServiceClient', () => {
         account: 'accountValue',
       };
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1208,7 @@ describe('v1.UserListServiceClient', () => {
         partner_link: 'partnerLinkValue',
       };
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v1.UserListServiceClient', () => {
         user_list: 'userListValue',
       };
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1336,7 +1336,7 @@ describe('v1.UserListServiceClient', () => {
         user_list_direct_license: 'userListDirectLicenseValue',
       };
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v1.UserListServiceClient', () => {
         user_list_global_license: 'userListGlobalLicenseValue',
       };
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1.UserListServiceClient', () => {
         license_customer_info: 'licenseCustomerInfoValue',
       };
       const client = new userlistserviceModule.v1.UserListServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

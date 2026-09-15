@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as machinelearningrunsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -291,7 +291,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.machineLearningRunsStub, undefined);
@@ -299,13 +299,13 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(client.machineLearningRunsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.machineLearningRunsStub);
@@ -314,15 +314,15 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.machineLearningRunsStub, undefined);
@@ -331,7 +331,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -353,7 +353,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -377,7 +377,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getMachineLearningRun without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -410,7 +410,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getMachineLearningRun without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -458,7 +458,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getMachineLearningRun with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -493,7 +493,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getMachineLearningRun with closed client', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -506,7 +506,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -520,7 +520,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfilerTarget without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -552,7 +552,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfilerTarget without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfilerTarget with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfilerTarget with closed client', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -645,7 +645,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProfilerTarget(request), expectedError);
@@ -656,7 +656,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteProfilerTarget without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -689,7 +689,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteProfilerTarget without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -737,7 +737,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteProfilerTarget with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -769,7 +769,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteProfilerTarget with closed client', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteProfilerTarget(request), expectedError);
@@ -793,7 +793,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfilerSession without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfilerSession without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfilerSession with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -906,7 +906,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfilerSession with closed client', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProfilerSession(request), expectedError);
@@ -930,7 +930,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteProfilerSession without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -963,7 +963,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteProfilerSession without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteProfilerSession with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteProfilerSession with closed client', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1073,7 +1073,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfileSession without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -1107,7 +1107,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfileSession without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -1157,7 +1157,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfileSession with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -1191,7 +1191,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getProfileSession with closed client', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -1205,7 +1205,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProfileSession(request), expectedError);
@@ -1217,7 +1217,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getMonitoredEvent without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1249,7 +1249,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getMonitoredEvent without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1297,7 +1297,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getMonitoredEvent with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1329,7 +1329,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getMonitoredEvent with closed client', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMonitoredEvent(request), expectedError);
@@ -1353,7 +1353,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createMachineLearningRun without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1387,7 +1387,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createMachineLearningRun without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createMachineLearningRun with call error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createMachineLearningRun with LRO error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkCreateMachineLearningRunProgress without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1519,8 +1519,8 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1535,7 +1535,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkCreateMachineLearningRunProgress with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1557,7 +1557,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes updateMachineLearningRun without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1592,7 +1592,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes updateMachineLearningRun without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1648,7 +1648,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes updateMachineLearningRun with call error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1684,7 +1684,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes updateMachineLearningRun with LRO error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1719,7 +1719,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkUpdateMachineLearningRunProgress without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1727,8 +1727,8 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1743,7 +1743,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkUpdateMachineLearningRunProgress with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1765,7 +1765,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteMachineLearningRun without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1799,7 +1799,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteMachineLearningRun without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1854,7 +1854,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteMachineLearningRun with call error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteMachineLearningRun with LRO error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1923,7 +1923,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkDeleteMachineLearningRunProgress without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1931,8 +1931,8 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1947,7 +1947,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkDeleteMachineLearningRunProgress with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1969,7 +1969,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createProfilerTarget without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2003,7 +2003,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createProfilerTarget without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2058,7 +2058,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createProfilerTarget with call error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2090,7 +2090,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createProfilerTarget with LRO error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2124,7 +2124,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkCreateProfilerTargetProgress without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2132,8 +2132,8 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateProfilerTargetProgress(
@@ -2147,7 +2147,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkCreateProfilerTargetProgress with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2169,7 +2169,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createProfilerSession without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2203,7 +2203,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createProfilerSession without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2258,7 +2258,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createProfilerSession with call error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2293,7 +2293,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createProfilerSession with LRO error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2327,7 +2327,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkCreateProfilerSessionProgress without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2335,8 +2335,8 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateProfilerSessionProgress(
@@ -2350,7 +2350,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkCreateProfilerSessionProgress with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2372,7 +2372,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createMonitoredEvent without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2406,7 +2406,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createMonitoredEvent without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2461,7 +2461,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createMonitoredEvent with call error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2493,7 +2493,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes createMonitoredEvent with LRO error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2527,7 +2527,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkCreateMonitoredEventProgress without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2535,8 +2535,8 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMonitoredEventProgress(
@@ -2550,7 +2550,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkCreateMonitoredEventProgress with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2572,7 +2572,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes updateMonitoredEvent without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2607,7 +2607,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes updateMonitoredEvent without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2663,7 +2663,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes updateMonitoredEvent with call error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2696,7 +2696,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes updateMonitoredEvent with LRO error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2731,7 +2731,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkUpdateMonitoredEventProgress without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2739,8 +2739,8 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMonitoredEventProgress(
@@ -2754,7 +2754,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkUpdateMonitoredEventProgress with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2776,7 +2776,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteMonitoredEvent without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2810,7 +2810,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteMonitoredEvent without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2865,7 +2865,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteMonitoredEvent with call error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2897,7 +2897,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteMonitoredEvent with LRO error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2931,7 +2931,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkDeleteMonitoredEventProgress without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2939,8 +2939,8 @@ describe('v1alpha.MachineLearningRunsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteMonitoredEventProgress(
@@ -2954,7 +2954,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes checkDeleteMonitoredEventProgress with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2976,7 +2976,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMachineLearningRuns without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3017,7 +3017,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMachineLearningRuns without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3075,7 +3075,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMachineLearningRuns with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3110,7 +3110,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMachineLearningRunsStream without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3180,7 +3180,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMachineLearningRunsStream with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3239,7 +3239,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('uses async iteration with listMachineLearningRuns without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3294,7 +3294,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('uses async iteration with listMachineLearningRuns with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3342,7 +3342,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfilerTargets without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3383,7 +3383,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfilerTargets without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3441,7 +3441,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfilerTargets with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3473,7 +3473,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfilerTargetsStream without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3528,16 +3528,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfilerTargets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProfilerTargetsStream with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3581,16 +3581,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfilerTargets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProfilerTargets without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3632,16 +3632,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProfilerTargets with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3674,9 +3674,9 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3685,7 +3685,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfilerSessions without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3726,7 +3726,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfilerSessions without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3784,7 +3784,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfilerSessions with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3816,7 +3816,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfilerSessionsStream without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3871,16 +3871,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfilerSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProfilerSessionsStream with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3924,16 +3924,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfilerSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProfilerSessions without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3975,16 +3975,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProfilerSessions with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4017,9 +4017,9 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4028,7 +4028,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfileSessions without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -4071,7 +4071,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfileSessions without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -4131,7 +4131,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfileSessions with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -4165,7 +4165,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listProfileSessionsStream without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -4222,16 +4222,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfileSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProfileSessionsStream with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -4277,16 +4277,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfileSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProfileSessions without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -4330,16 +4330,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfileSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProfileSessions with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -4374,9 +4374,9 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listProfileSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4385,7 +4385,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMonitoredEvents without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4426,7 +4426,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMonitoredEvents without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4484,7 +4484,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMonitoredEvents with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4516,7 +4516,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes listMonitoredEventsStream without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4571,16 +4571,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMonitoredEventsStream with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4624,16 +4624,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMonitoredEvents without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4675,16 +4675,16 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMonitoredEvents with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4717,9 +4717,9 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       assert(
         (client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4727,7 +4727,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4758,7 +4758,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4803,7 +4803,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4839,7 +4839,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4888,7 +4888,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4930,7 +4930,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4952,7 +4952,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -4980,7 +4980,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4991,7 +4991,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5016,7 +5016,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5039,7 +5039,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5067,7 +5067,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5078,7 +5078,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5103,7 +5103,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5126,7 +5126,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5154,7 +5154,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5165,7 +5165,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5190,7 +5190,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -5226,7 +5226,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5263,7 +5263,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5327,7 +5327,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5378,7 +5378,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5457,7 +5457,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5536,7 +5536,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5613,7 +5613,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5692,7 +5692,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5771,7 +5771,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5847,7 +5847,7 @@ describe('v1alpha.MachineLearningRunsClient', () => {
       };
       const client =
         new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

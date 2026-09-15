@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as metadataserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.metadataServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.MetadataServiceClient', () => {
       assert(client.metadataServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.metadataServiceStub);
@@ -261,14 +261,14 @@ describe('v1.MetadataServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.metadataServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.MetadataServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.MetadataServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.MetadataServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('createEntity', () => {
     it('invokes createEntity without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes createEntity without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes createEntity with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes createEntity with closed client', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.MetadataServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEntity(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('updateEntity', () => {
     it('invokes updateEntity without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes updateEntity without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -532,7 +532,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes updateEntity with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes updateEntity with closed client', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -578,7 +578,7 @@ describe('v1.MetadataServiceClient', () => {
       );
       request.entity.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEntity(request), expectedError);
@@ -588,7 +588,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('deleteEntity', () => {
     it('invokes deleteEntity without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes deleteEntity without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes deleteEntity with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes deleteEntity with closed client', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1.MetadataServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEntity(request), expectedError);
@@ -720,7 +720,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('getEntity', () => {
     it('invokes getEntity without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes getEntity without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes getEntity with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes getEntity with closed client', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v1.MetadataServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntity(request), expectedError);
@@ -849,7 +849,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('createPartition', () => {
     it('invokes createPartition without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes createPartition without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -927,7 +927,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes createPartition with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -958,7 +958,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes createPartition with closed client', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v1.MetadataServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPartition(request), expectedError);
@@ -981,7 +981,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('deletePartition', () => {
     it('invokes deletePartition without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1012,7 +1012,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes deletePartition without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes deletePartition with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1090,7 +1090,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes deletePartition with closed client', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1103,7 +1103,7 @@ describe('v1.MetadataServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePartition(request), expectedError);
@@ -1113,7 +1113,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('getPartition', () => {
     it('invokes getPartition without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1144,7 +1144,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes getPartition without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes getPartition with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1222,7 +1222,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes getPartition with closed client', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v1.MetadataServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPartition(request), expectedError);
@@ -1245,7 +1245,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('listEntities', () => {
     it('invokes listEntities without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes listEntities without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1327,7 +1327,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes listEntities with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes listEntitiesStream without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1404,15 +1404,15 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listEntities.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEntitiesStream with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1455,15 +1455,15 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listEntities.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntities without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1498,15 +1498,15 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listEntities.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntities with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1538,9 +1538,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listEntities.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1548,7 +1548,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('listPartitions', () => {
     it('invokes listPartitions without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1581,7 +1581,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes listPartitions without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1630,7 +1630,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes listPartitions with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,7 +1661,7 @@ describe('v1.MetadataServiceClient', () => {
 
     it('invokes listPartitionsStream without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1707,15 +1707,15 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listPartitions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPartitionsStream with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1756,15 +1756,15 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listPartitions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPartitions without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1799,15 +1799,15 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listPartitions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPartitions with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1839,16 +1839,16 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listPartitions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,7 +1878,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1922,7 +1922,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1957,7 +1957,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2005,7 +2005,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2046,7 +2046,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2067,7 +2067,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2095,7 +2095,7 @@ describe('v1.MetadataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2105,7 +2105,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2129,7 +2129,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2179,7 +2179,7 @@ describe('v1.MetadataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2189,7 +2189,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2213,7 +2213,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2235,7 +2235,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2263,7 +2263,7 @@ describe('v1.MetadataServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2273,7 +2273,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2297,7 +2297,7 @@ describe('v1.MetadataServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2332,7 +2332,7 @@ describe('v1.MetadataServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2368,7 +2368,7 @@ describe('v1.MetadataServiceClient', () => {
         aspect_type: 'aspectTypeValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2434,7 +2434,7 @@ describe('v1.MetadataServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2520,7 +2520,7 @@ describe('v1.MetadataServiceClient', () => {
         change_request: 'changeRequestValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2585,7 +2585,7 @@ describe('v1.MetadataServiceClient', () => {
         content: 'contentValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2661,7 +2661,7 @@ describe('v1.MetadataServiceClient', () => {
         data_asset: 'dataAssetValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2737,7 +2737,7 @@ describe('v1.MetadataServiceClient', () => {
         data_attribute_id: 'dataAttributeIdValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2813,7 +2813,7 @@ describe('v1.MetadataServiceClient', () => {
         data_attribute_binding_id: 'dataAttributeBindingIdValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2894,7 +2894,7 @@ describe('v1.MetadataServiceClient', () => {
         data_product: 'dataProductValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2958,7 +2958,7 @@ describe('v1.MetadataServiceClient', () => {
         dataScan: 'dataScanValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3023,7 +3023,7 @@ describe('v1.MetadataServiceClient', () => {
         job: 'jobValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3098,7 +3098,7 @@ describe('v1.MetadataServiceClient', () => {
         data_taxonomy_id: 'dataTaxonomyIdValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3162,7 +3162,7 @@ describe('v1.MetadataServiceClient', () => {
         encryption_config: 'encryptionConfigValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3233,7 +3233,7 @@ describe('v1.MetadataServiceClient', () => {
         entity: 'entityValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3320,7 +3320,7 @@ describe('v1.MetadataServiceClient', () => {
         entry: 'entryValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3395,7 +3395,7 @@ describe('v1.MetadataServiceClient', () => {
         entry_group: 'entryGroupValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3460,7 +3460,7 @@ describe('v1.MetadataServiceClient', () => {
         entry_link: 'entryLinkValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3535,7 +3535,7 @@ describe('v1.MetadataServiceClient', () => {
         entry_type: 'entryTypeValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3600,7 +3600,7 @@ describe('v1.MetadataServiceClient', () => {
         environment: 'environmentValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3675,7 +3675,7 @@ describe('v1.MetadataServiceClient', () => {
         glossary: 'glossaryValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3740,7 +3740,7 @@ describe('v1.MetadataServiceClient', () => {
         glossary_category: 'glossaryCategoryValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3820,7 +3820,7 @@ describe('v1.MetadataServiceClient', () => {
         glossary_term: 'glossaryTermValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3897,7 +3897,7 @@ describe('v1.MetadataServiceClient', () => {
         job: 'jobValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3983,7 +3983,7 @@ describe('v1.MetadataServiceClient', () => {
         lake: 'lakeValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4047,7 +4047,7 @@ describe('v1.MetadataServiceClient', () => {
         metadata_feed: 'metadataFeedValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4111,7 +4111,7 @@ describe('v1.MetadataServiceClient', () => {
         metadataJob: 'metadataJobValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4178,7 +4178,7 @@ describe('v1.MetadataServiceClient', () => {
         partition: 'partitionValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4276,7 +4276,7 @@ describe('v1.MetadataServiceClient', () => {
         action: 'actionValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4372,7 +4372,7 @@ describe('v1.MetadataServiceClient', () => {
         action: 'actionValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4482,7 +4482,7 @@ describe('v1.MetadataServiceClient', () => {
         action: 'actionValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4612,7 +4612,7 @@ describe('v1.MetadataServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4699,7 +4699,7 @@ describe('v1.MetadataServiceClient', () => {
         task: 'taskValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4775,7 +4775,7 @@ describe('v1.MetadataServiceClient', () => {
         zone: 'zoneValue',
       };
       const client = new metadataserviceModule.v1.MetadataServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

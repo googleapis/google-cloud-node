@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as snoozeserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.snoozeServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v3.SnoozeServiceClient', () => {
       assert(client.snoozeServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.snoozeServiceStub);
@@ -261,14 +261,14 @@ describe('v3.SnoozeServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.snoozeServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v3.SnoozeServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v3.SnoozeServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v3.SnoozeServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v3.SnoozeServiceClient', () => {
   describe('createSnooze', () => {
     it('invokes createSnooze without error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes createSnooze without error using callback', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes createSnooze with error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes createSnooze with closed client', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v3.SnoozeServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSnooze(request), expectedError);
@@ -452,7 +452,7 @@ describe('v3.SnoozeServiceClient', () => {
   describe('getSnooze', () => {
     it('invokes getSnooze without error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes getSnooze without error using callback', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes getSnooze with error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes getSnooze with closed client', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v3.SnoozeServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSnooze(request), expectedError);
@@ -581,7 +581,7 @@ describe('v3.SnoozeServiceClient', () => {
   describe('updateSnooze', () => {
     it('invokes updateSnooze without error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes updateSnooze without error using callback', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes updateSnooze with error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes updateSnooze with closed client', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v3.SnoozeServiceClient', () => {
       );
       request.snooze.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSnooze(request), expectedError);
@@ -717,7 +717,7 @@ describe('v3.SnoozeServiceClient', () => {
   describe('listSnoozes', () => {
     it('invokes listSnoozes without error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes listSnoozes without error using callback', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes listSnoozes with error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v3.SnoozeServiceClient', () => {
 
     it('invokes listSnoozesStream without error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,15 +873,15 @@ describe('v3.SnoozeServiceClient', () => {
       assert(
         (client.descriptors.page.listSnoozes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSnoozesStream with error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -921,15 +921,15 @@ describe('v3.SnoozeServiceClient', () => {
       assert(
         (client.descriptors.page.listSnoozes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSnoozes without error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,15 +964,15 @@ describe('v3.SnoozeServiceClient', () => {
       assert(
         (client.descriptors.page.listSnoozes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSnoozes with error', async () => {
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,9 +1006,9 @@ describe('v3.SnoozeServiceClient', () => {
       assert(
         (client.descriptors.page.listSnoozes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1021,7 +1021,7 @@ describe('v3.SnoozeServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v3.SnoozeServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1162,7 +1162,7 @@ describe('v3.SnoozeServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v3.SnoozeServiceClient', () => {
         group: 'groupValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1276,7 +1276,7 @@ describe('v3.SnoozeServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1341,7 +1341,7 @@ describe('v3.SnoozeServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1391,7 +1391,7 @@ describe('v3.SnoozeServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1473,7 +1473,7 @@ describe('v3.SnoozeServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1538,7 +1538,7 @@ describe('v3.SnoozeServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v3.SnoozeServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1684,7 +1684,7 @@ describe('v3.SnoozeServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1749,7 @@ describe('v3.SnoozeServiceClient', () => {
         group: 'groupValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1811,7 +1811,7 @@ describe('v3.SnoozeServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v3.SnoozeServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1940,7 +1940,7 @@ describe('v3.SnoozeServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2026,7 +2026,7 @@ describe('v3.SnoozeServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2090,7 +2090,7 @@ describe('v3.SnoozeServiceClient', () => {
         project: 'projectValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2129,7 +2129,7 @@ describe('v3.SnoozeServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2192,7 +2192,7 @@ describe('v3.SnoozeServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2269,7 +2269,7 @@ describe('v3.SnoozeServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2334,7 +2334,7 @@ describe('v3.SnoozeServiceClient', () => {
         group: 'groupValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2383,7 +2383,7 @@ describe('v3.SnoozeServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2448,7 +2448,7 @@ describe('v3.SnoozeServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2501,7 +2501,7 @@ describe('v3.SnoozeServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2583,7 +2583,7 @@ describe('v3.SnoozeServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2648,7 +2648,7 @@ describe('v3.SnoozeServiceClient', () => {
         snooze: 'snoozeValue',
       };
       const client = new snoozeserviceModule.v3.SnoozeServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

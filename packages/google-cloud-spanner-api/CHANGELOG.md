@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-spanner-api-v0.3.0...google-cloud-spanner-api-v0.4.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-spanner-api-v0.2.0...google-cloud-spanner-api-v0.3.0) (2026-08-04)
 
 

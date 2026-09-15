@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as notebookserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.notebookServiceStub, undefined);
@@ -287,12 +287,12 @@ describe('v1beta1.NotebookServiceClient', () => {
       assert(client.notebookServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.notebookServiceStub);
@@ -301,14 +301,14 @@ describe('v1beta1.NotebookServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.notebookServiceStub, undefined);
@@ -317,7 +317,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('getNotebookRuntimeTemplate', () => {
     it('invokes getNotebookRuntimeTemplate without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookRuntimeTemplate without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookRuntimeTemplate with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -473,7 +473,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookRuntimeTemplate with closed client', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1beta1.NotebookServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -499,7 +499,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('updateNotebookRuntimeTemplate', () => {
     it('invokes updateNotebookRuntimeTemplate without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -532,7 +532,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes updateNotebookRuntimeTemplate without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -580,7 +580,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes updateNotebookRuntimeTemplate with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes updateNotebookRuntimeTemplate with closed client', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -629,7 +629,7 @@ describe('v1beta1.NotebookServiceClient', () => {
       );
       request.notebookRuntimeTemplate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -642,7 +642,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('getNotebookRuntime', () => {
     it('invokes getNotebookRuntime without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -674,7 +674,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookRuntime without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -721,7 +721,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookRuntime with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookRuntime with closed client', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -765,7 +765,7 @@ describe('v1beta1.NotebookServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNotebookRuntime(request), expectedError);
@@ -775,7 +775,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('getNotebookExecutionJob', () => {
     it('invokes getNotebookExecutionJob without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -807,7 +807,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookExecutionJob without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -854,7 +854,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookExecutionJob with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes getNotebookExecutionJob with closed client', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -901,7 +901,7 @@ describe('v1beta1.NotebookServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -914,7 +914,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('createNotebookRuntimeTemplate', () => {
     it('invokes createNotebookRuntimeTemplate without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes createNotebookRuntimeTemplate without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes createNotebookRuntimeTemplate with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1035,7 +1035,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes createNotebookRuntimeTemplate with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,7 +1068,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkCreateNotebookRuntimeTemplateProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1076,8 +1076,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1091,7 +1091,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkCreateNotebookRuntimeTemplateProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('deleteNotebookRuntimeTemplate', () => {
     it('invokes deleteNotebookRuntimeTemplate without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1145,7 +1145,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookRuntimeTemplate without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1199,7 +1199,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookRuntimeTemplate with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1233,7 +1233,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookRuntimeTemplate with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1266,7 +1266,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkDeleteNotebookRuntimeTemplateProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1274,8 +1274,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1289,7 +1289,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkDeleteNotebookRuntimeTemplateProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('assignNotebookRuntime', () => {
     it('invokes assignNotebookRuntime without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1343,7 +1343,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes assignNotebookRuntime without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1397,7 +1397,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes assignNotebookRuntime with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,7 +1431,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes assignNotebookRuntime with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1464,7 +1464,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkAssignNotebookRuntimeProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1472,8 +1472,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAssignNotebookRuntimeProgress(
@@ -1486,7 +1486,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkAssignNotebookRuntimeProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1507,7 +1507,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('deleteNotebookRuntime', () => {
     it('invokes deleteNotebookRuntime without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1540,7 +1540,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookRuntime without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1594,7 +1594,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookRuntime with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1628,7 +1628,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookRuntime with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,7 +1661,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkDeleteNotebookRuntimeProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1669,8 +1669,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteNotebookRuntimeProgress(
@@ -1683,7 +1683,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkDeleteNotebookRuntimeProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1704,7 +1704,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('upgradeNotebookRuntime', () => {
     it('invokes upgradeNotebookRuntime without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1737,7 +1737,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes upgradeNotebookRuntime without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1791,7 +1791,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes upgradeNotebookRuntime with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1825,7 +1825,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes upgradeNotebookRuntime with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1858,7 +1858,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkUpgradeNotebookRuntimeProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1866,8 +1866,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpgradeNotebookRuntimeProgress(
@@ -1880,7 +1880,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkUpgradeNotebookRuntimeProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1901,7 +1901,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('startNotebookRuntime', () => {
     it('invokes startNotebookRuntime without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1934,7 +1934,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes startNotebookRuntime without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1988,7 +1988,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes startNotebookRuntime with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2019,7 +2019,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes startNotebookRuntime with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2052,7 +2052,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkStartNotebookRuntimeProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2060,8 +2060,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartNotebookRuntimeProgress(
@@ -2074,7 +2074,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkStartNotebookRuntimeProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2095,7 +2095,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('stopNotebookRuntime', () => {
     it('invokes stopNotebookRuntime without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2128,7 +2128,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes stopNotebookRuntime without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2182,7 +2182,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes stopNotebookRuntime with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2213,7 +2213,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes stopNotebookRuntime with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2246,7 +2246,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkStopNotebookRuntimeProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2254,8 +2254,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopNotebookRuntimeProgress(
@@ -2268,7 +2268,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkStopNotebookRuntimeProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,7 +2289,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('createNotebookExecutionJob', () => {
     it('invokes createNotebookExecutionJob without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2322,7 +2322,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes createNotebookExecutionJob without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2376,7 +2376,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes createNotebookExecutionJob with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2410,7 +2410,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes createNotebookExecutionJob with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2443,7 +2443,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkCreateNotebookExecutionJobProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2451,8 +2451,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2466,7 +2466,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkCreateNotebookExecutionJobProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2487,7 +2487,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('deleteNotebookExecutionJob', () => {
     it('invokes deleteNotebookExecutionJob without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2520,7 +2520,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookExecutionJob without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2574,7 +2574,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookExecutionJob with call error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes deleteNotebookExecutionJob with LRO error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2641,7 +2641,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkDeleteNotebookExecutionJobProgress without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2649,8 +2649,8 @@ describe('v1beta1.NotebookServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2664,7 +2664,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes checkDeleteNotebookExecutionJobProgress with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2685,7 +2685,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('listNotebookRuntimeTemplates', () => {
     it('invokes listNotebookRuntimeTemplates without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2725,7 +2725,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookRuntimeTemplates without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2782,7 +2782,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookRuntimeTemplates with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2816,7 +2816,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookRuntimeTemplatesStream without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,7 +2888,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookRuntimeTemplatesStream with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2949,7 +2949,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('uses async iteration with listNotebookRuntimeTemplates without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3003,7 +3003,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('uses async iteration with listNotebookRuntimeTemplates with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3050,7 +3050,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('listNotebookRuntimes', () => {
     it('invokes listNotebookRuntimes without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3090,7 +3090,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookRuntimes without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3122,8 +3122,7 @@ describe('v1beta1.NotebookServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.INotebookRuntime[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.INotebookRuntime[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3147,7 +3146,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookRuntimes with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3178,7 +3177,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookRuntimesStream without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3233,15 +3232,15 @@ describe('v1beta1.NotebookServiceClient', () => {
       assert(
         (client.descriptors.page.listNotebookRuntimes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNotebookRuntimesStream with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3285,15 +3284,15 @@ describe('v1beta1.NotebookServiceClient', () => {
       assert(
         (client.descriptors.page.listNotebookRuntimes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNotebookRuntimes without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3335,15 +3334,15 @@ describe('v1beta1.NotebookServiceClient', () => {
       assert(
         (client.descriptors.page.listNotebookRuntimes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNotebookRuntimes with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3376,9 +3375,9 @@ describe('v1beta1.NotebookServiceClient', () => {
       assert(
         (client.descriptors.page.listNotebookRuntimes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3386,7 +3385,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('listNotebookExecutionJobs', () => {
     it('invokes listNotebookExecutionJobs without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3426,7 +3425,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookExecutionJobs without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3483,7 +3482,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookExecutionJobs with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3517,7 +3516,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookExecutionJobsStream without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3586,7 +3585,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('invokes listNotebookExecutionJobsStream with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3644,7 +3643,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('uses async iteration with listNotebookExecutionJobs without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3698,7 +3697,7 @@ describe('v1beta1.NotebookServiceClient', () => {
 
     it('uses async iteration with listNotebookExecutionJobs with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3744,7 +3743,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3774,7 +3773,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3812,7 +3811,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3822,7 +3821,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3854,7 +3853,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3884,7 +3883,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3922,7 +3921,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3932,7 +3931,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3964,7 +3963,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3997,7 +3996,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4035,7 +4034,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4045,7 +4044,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4080,7 +4079,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4110,7 +4109,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4154,7 +4153,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4189,7 +4188,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4237,7 +4236,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4278,7 +4277,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4299,7 +4298,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4327,7 +4326,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4337,7 +4336,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4361,7 +4360,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4383,7 +4382,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4411,7 +4410,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4421,7 +4420,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4445,7 +4444,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4467,7 +4466,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4495,7 +4494,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4505,7 +4504,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4529,7 +4528,7 @@ describe('v1beta1.NotebookServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4564,7 +4563,7 @@ describe('v1beta1.NotebookServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4602,7 +4601,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4689,7 +4688,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4766,7 +4765,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4841,7 +4840,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4918,7 +4917,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4983,7 +4982,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         context: 'contextValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5058,7 +5057,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5123,7 +5122,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5198,7 +5197,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5263,7 +5262,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5328,7 +5327,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5404,7 +5403,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5486,7 +5485,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5561,7 +5560,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         example_store: 'exampleStoreValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5626,7 +5625,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5701,7 +5700,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         extension: 'extensionValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5765,7 +5764,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5830,7 +5829,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         feature_monitor: 'featureMonitorValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5908,7 +5907,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         feature_monitor_job: 'featureMonitorJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6015,7 +6014,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6093,7 +6092,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6170,7 +6169,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6246,7 +6245,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6310,7 +6309,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6391,7 +6390,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         index: 'indexValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6455,7 +6454,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6518,7 +6517,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         location: 'locationValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6569,7 +6568,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         memory: 'memoryValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6645,7 +6644,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6722,7 +6721,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6786,7 +6785,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         model: 'modelValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6850,7 +6849,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6930,7 +6929,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7007,7 +7006,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7114,7 +7113,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         model_monitor: 'modelMonitorValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7179,7 +7178,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         model_monitoring_job: 'modelMonitoringJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7271,7 +7270,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7336,7 +7335,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7412,7 +7411,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7493,7 +7492,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7558,7 +7557,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7639,7 +7638,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         online_evaluator: 'onlineEvaluatorValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7704,7 +7703,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7781,7 +7780,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7845,7 +7844,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7925,7 +7924,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8028,7 +8027,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8152,7 +8151,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         model: 'modelValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8243,7 +8242,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         model: 'modelValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8296,7 +8295,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8361,7 +8360,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         rag_data_schema: 'ragDataSchemaValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8435,7 +8434,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         location: 'locationValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8489,7 +8488,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8566,7 +8565,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         rag_metadata: 'ragMetadataValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8652,7 +8651,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8718,7 +8717,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         runtime_revision: 'runtimeRevisionValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8815,7 +8814,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8890,7 +8889,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8955,7 +8954,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9032,7 +9031,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         event: 'eventValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9119,7 +9118,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9184,7 +9183,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         study: 'studyValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9248,7 +9247,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9313,7 +9312,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9409,7 +9408,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         run: 'runValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9498,7 +9497,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9621,7 +9620,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9690,7 +9689,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9765,7 +9764,7 @@ describe('v1beta1.NotebookServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

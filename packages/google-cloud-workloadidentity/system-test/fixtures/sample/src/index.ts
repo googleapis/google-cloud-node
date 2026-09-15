@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { WorkloadIdentityClient } from '@google-cloud/workloadidentity';
+import {WorkloadIdentityClient} from '@google-cloud/workloadidentity';
 
 // check that the client class type name can be used
 function doStuffWithWorkloadIdentityClient(client: WorkloadIdentityClient) {

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as auditModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -286,7 +286,7 @@ describe('v1.AuditClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.auditStub, undefined);
@@ -294,12 +294,12 @@ describe('v1.AuditClient', () => {
       assert(client.auditStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.auditStub);
@@ -308,14 +308,14 @@ describe('v1.AuditClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.auditStub, undefined);
@@ -324,7 +324,7 @@ describe('v1.AuditClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -332,7 +332,7 @@ describe('v1.AuditClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -344,7 +344,7 @@ describe('v1.AuditClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -367,7 +367,7 @@ describe('v1.AuditClient', () => {
   describe('generateFrameworkAuditScopeReport', () => {
     it('invokes generateFrameworkAuditScopeReport without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes generateFrameworkAuditScopeReport without error using callback', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes generateFrameworkAuditScopeReport with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes generateFrameworkAuditScopeReport with closed client', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -494,7 +494,7 @@ describe('v1.AuditClient', () => {
       );
       request.scope = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -507,7 +507,7 @@ describe('v1.AuditClient', () => {
   describe('getFrameworkAudit', () => {
     it('invokes getFrameworkAudit without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -538,7 +538,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes getFrameworkAudit without error using callback', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -585,7 +585,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes getFrameworkAudit with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes getFrameworkAudit with closed client', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -629,7 +629,7 @@ describe('v1.AuditClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFrameworkAudit(request), expectedError);
@@ -639,7 +639,7 @@ describe('v1.AuditClient', () => {
   describe('createFrameworkAudit', () => {
     it('invokes createFrameworkAudit without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -672,7 +672,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes createFrameworkAudit without error using callback', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes createFrameworkAudit with call error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -757,7 +757,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes createFrameworkAudit with LRO error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -790,7 +790,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes checkCreateFrameworkAuditProgress without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,8 +798,8 @@ describe('v1.AuditClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFrameworkAuditProgress(
@@ -812,7 +812,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes checkCreateFrameworkAuditProgress with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1.AuditClient', () => {
   describe('listFrameworkAudits', () => {
     it('invokes listFrameworkAudits without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes listFrameworkAudits without error using callback', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes listFrameworkAudits with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.AuditClient', () => {
 
     it('invokes listFrameworkAuditsStream without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1016,15 +1016,15 @@ describe('v1.AuditClient', () => {
       assert(
         (client.descriptors.page.listFrameworkAudits.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFrameworkAuditsStream with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,15 +1068,15 @@ describe('v1.AuditClient', () => {
       assert(
         (client.descriptors.page.listFrameworkAudits.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFrameworkAudits without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1118,15 +1118,15 @@ describe('v1.AuditClient', () => {
       assert(
         (client.descriptors.page.listFrameworkAudits.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFrameworkAudits with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,16 +1159,16 @@ describe('v1.AuditClient', () => {
       assert(
         (client.descriptors.page.listFrameworkAudits.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1.AuditClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1.AuditClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v1.AuditClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v1.AuditClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,7 +1366,7 @@ describe('v1.AuditClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,7 +1387,7 @@ describe('v1.AuditClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1415,7 +1415,7 @@ describe('v1.AuditClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1425,7 +1425,7 @@ describe('v1.AuditClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1449,7 +1449,7 @@ describe('v1.AuditClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1471,7 +1471,7 @@ describe('v1.AuditClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1499,7 +1499,7 @@ describe('v1.AuditClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1509,7 +1509,7 @@ describe('v1.AuditClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1533,7 +1533,7 @@ describe('v1.AuditClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1555,7 +1555,7 @@ describe('v1.AuditClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1583,7 +1583,7 @@ describe('v1.AuditClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1593,7 +1593,7 @@ describe('v1.AuditClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1617,7 +1617,7 @@ describe('v1.AuditClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1652,7 +1652,7 @@ describe('v1.AuditClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1688,7 +1688,7 @@ describe('v1.AuditClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1.AuditClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v1.AuditClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,7 +1964,7 @@ describe('v1.AuditClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2050,7 +2050,7 @@ describe('v1.AuditClient', () => {
         location: 'locationValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2101,7 +2101,7 @@ describe('v1.AuditClient', () => {
         cloud_control_deployment: 'cloudControlDeploymentValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2188,7 +2188,7 @@ describe('v1.AuditClient', () => {
         cloud_control: 'cloudControlValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2270,7 +2270,7 @@ describe('v1.AuditClient', () => {
         location: 'locationValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2336,7 +2336,7 @@ describe('v1.AuditClient', () => {
         control: 'controlValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2415,7 +2415,7 @@ describe('v1.AuditClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2504,7 +2504,7 @@ describe('v1.AuditClient', () => {
           'generateFrameworkAuditScopeReportResponseValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2595,7 +2595,7 @@ describe('v1.AuditClient', () => {
         framework_audit: 'frameworkAuditValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2680,7 +2680,7 @@ describe('v1.AuditClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2787,7 +2787,7 @@ describe('v1.AuditClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2876,7 +2876,7 @@ describe('v1.AuditClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2965,7 +2965,7 @@ describe('v1.AuditClient', () => {
         framework_deployment: 'frameworkDeploymentValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3052,7 +3052,7 @@ describe('v1.AuditClient', () => {
         framework: 'frameworkValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3129,7 +3129,7 @@ describe('v1.AuditClient', () => {
         project: 'projectValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3169,7 +3169,7 @@ describe('v1.AuditClient', () => {
         cloud_control_deployment: 'cloudControlDeploymentValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3256,7 +3256,7 @@ describe('v1.AuditClient', () => {
         cloud_control: 'cloudControlValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3334,7 +3334,7 @@ describe('v1.AuditClient', () => {
         location: 'locationValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3397,7 +3397,7 @@ describe('v1.AuditClient', () => {
         control: 'controlValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3476,7 +3476,7 @@ describe('v1.AuditClient', () => {
         finding_summary: 'findingSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3557,7 +3557,7 @@ describe('v1.AuditClient', () => {
           'generateFrameworkAuditScopeReportResponseValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3647,7 +3647,7 @@ describe('v1.AuditClient', () => {
         framework_audit: 'frameworkAuditValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3728,7 +3728,7 @@ describe('v1.AuditClient', () => {
         control_compliance_summary: 'controlComplianceSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3835,7 +3835,7 @@ describe('v1.AuditClient', () => {
         framework_compliance_report: 'frameworkComplianceReportValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3923,7 +3923,7 @@ describe('v1.AuditClient', () => {
         framework_compliance_summary: 'frameworkComplianceSummaryValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4010,7 +4010,7 @@ describe('v1.AuditClient', () => {
         framework_deployment: 'frameworkDeploymentValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4093,7 +4093,7 @@ describe('v1.AuditClient', () => {
         framework: 'frameworkValue',
       };
       const client = new auditModule.v1.AuditClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

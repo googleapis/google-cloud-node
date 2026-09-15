@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as devicemanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.deviceManagerStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.DeviceManagerClient', () => {
       assert(client.deviceManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.deviceManagerStub);
@@ -261,14 +261,14 @@ describe('v1.DeviceManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.deviceManagerStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.DeviceManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.DeviceManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.DeviceManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('createDeviceRegistry', () => {
     it('invokes createDeviceRegistry without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes createDeviceRegistry without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes createDeviceRegistry with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes createDeviceRegistry with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDeviceRegistry(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('getDeviceRegistry', () => {
     it('invokes getDeviceRegistry without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getDeviceRegistry without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getDeviceRegistry with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getDeviceRegistry with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeviceRegistry(request), expectedError);
@@ -585,7 +585,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('updateDeviceRegistry', () => {
     it('invokes updateDeviceRegistry without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes updateDeviceRegistry without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes updateDeviceRegistry with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes updateDeviceRegistry with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.deviceRegistry.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDeviceRegistry(request), expectedError);
@@ -722,7 +722,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('deleteDeviceRegistry', () => {
     it('invokes deleteDeviceRegistry without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -754,7 +754,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes deleteDeviceRegistry without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes deleteDeviceRegistry with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes deleteDeviceRegistry with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDeviceRegistry(request), expectedError);
@@ -855,7 +855,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('createDevice', () => {
     it('invokes createDevice without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes createDevice without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -933,7 +933,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes createDevice with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes createDevice with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDevice(request), expectedError);
@@ -987,7 +987,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('getDevice', () => {
     it('invokes getDevice without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getDevice without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1065,7 +1065,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getDevice with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getDevice with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDevice(request), expectedError);
@@ -1116,7 +1116,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('updateDevice', () => {
     it('invokes updateDevice without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes updateDevice without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes updateDevice with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1228,7 +1228,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes updateDevice with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.device.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDevice(request), expectedError);
@@ -1252,7 +1252,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('deleteDevice', () => {
     it('invokes deleteDevice without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes deleteDevice without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1330,7 +1330,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes deleteDevice with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes deleteDevice with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDevice(request), expectedError);
@@ -1384,7 +1384,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('modifyCloudToDeviceConfig', () => {
     it('invokes modifyCloudToDeviceConfig without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1416,7 +1416,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes modifyCloudToDeviceConfig without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1463,7 +1463,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes modifyCloudToDeviceConfig with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1497,7 +1497,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes modifyCloudToDeviceConfig with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1510,7 +1510,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1523,7 +1523,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('listDeviceConfigVersions', () => {
     it('invokes listDeviceConfigVersions without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1555,7 +1555,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceConfigVersions without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceConfigVersions with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1636,7 +1636,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceConfigVersions with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1649,7 +1649,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1662,7 +1662,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('listDeviceStates', () => {
     it('invokes listDeviceStates without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1693,7 +1693,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceStates without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,7 +1740,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceStates with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1771,7 +1771,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceStates with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1784,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listDeviceStates(request), expectedError);
@@ -1794,7 +1794,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1825,7 +1825,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1872,7 +1872,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1903,7 +1903,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1916,7 +1916,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1926,7 +1926,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1957,7 +1957,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2004,7 +2004,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2035,7 +2035,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2048,7 +2048,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -2058,7 +2058,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2090,7 +2090,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2137,7 +2137,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2168,7 +2168,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2181,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2191,7 +2191,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('sendCommandToDevice', () => {
     it('invokes sendCommandToDevice without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2223,7 +2223,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes sendCommandToDevice without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2270,7 +2270,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes sendCommandToDevice with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2301,7 +2301,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes sendCommandToDevice with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2314,7 +2314,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.sendCommandToDevice(request), expectedError);
@@ -2324,7 +2324,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('bindDeviceToGateway', () => {
     it('invokes bindDeviceToGateway without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2356,7 +2356,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes bindDeviceToGateway without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2403,7 +2403,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes bindDeviceToGateway with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2434,7 +2434,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes bindDeviceToGateway with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2447,7 +2447,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.bindDeviceToGateway(request), expectedError);
@@ -2457,7 +2457,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('unbindDeviceFromGateway', () => {
     it('invokes unbindDeviceFromGateway without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2489,7 +2489,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes unbindDeviceFromGateway without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2536,7 +2536,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes unbindDeviceFromGateway with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2570,7 +2570,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes unbindDeviceFromGateway with closed client', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2583,7 +2583,7 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2596,7 +2596,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('listDeviceRegistries', () => {
     it('invokes listDeviceRegistries without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2630,7 +2630,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceRegistries without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2679,7 +2679,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceRegistries with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2710,7 +2710,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDeviceRegistriesStream without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2756,15 +2756,15 @@ describe('v1.DeviceManagerClient', () => {
       assert(
         (client.descriptors.page.listDeviceRegistries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeviceRegistriesStream with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2805,15 +2805,15 @@ describe('v1.DeviceManagerClient', () => {
       assert(
         (client.descriptors.page.listDeviceRegistries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeviceRegistries without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2848,15 +2848,15 @@ describe('v1.DeviceManagerClient', () => {
       assert(
         (client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeviceRegistries with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,9 +2888,9 @@ describe('v1.DeviceManagerClient', () => {
       assert(
         (client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2898,7 +2898,7 @@ describe('v1.DeviceManagerClient', () => {
   describe('listDevices', () => {
     it('invokes listDevices without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2931,7 +2931,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDevices without error using callback', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2980,7 +2980,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDevices with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3011,7 +3011,7 @@ describe('v1.DeviceManagerClient', () => {
 
     it('invokes listDevicesStream without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3054,15 +3054,15 @@ describe('v1.DeviceManagerClient', () => {
       assert(
         (client.descriptors.page.listDevices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDevicesStream with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3102,15 +3102,15 @@ describe('v1.DeviceManagerClient', () => {
       assert(
         (client.descriptors.page.listDevices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDevices without error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3145,15 +3145,15 @@ describe('v1.DeviceManagerClient', () => {
       assert(
         (client.descriptors.page.listDevices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDevices with error', async () => {
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3187,9 +3187,9 @@ describe('v1.DeviceManagerClient', () => {
       assert(
         (client.descriptors.page.listDevices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3204,7 +3204,7 @@ describe('v1.DeviceManagerClient', () => {
         device: 'deviceValue',
       };
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3278,7 +3278,7 @@ describe('v1.DeviceManagerClient', () => {
         location: 'locationValue',
       };
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3328,7 +3328,7 @@ describe('v1.DeviceManagerClient', () => {
         registry: 'registryValue',
       };
       const client = new devicemanagerModule.v1.DeviceManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

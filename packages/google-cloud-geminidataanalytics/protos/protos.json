@@ -656,6 +656,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "propertyGraphReferences": {
+                          "rule": "repeated",
+                          "type": "BigQueryPropertyGraphReference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3196,7 +3204,9 @@
                             "looker",
                             "alloydb",
                             "spannerReference",
-                            "cloudSqlReference"
+                            "cloudSqlReference",
+                            "bigtableReference",
+                            "firestoreReference"
                           ]
                         }
                       },
@@ -3224,6 +3234,14 @@
                         "cloudSqlReference": {
                           "type": "CloudSqlReference",
                           "id": 10
+                        },
+                        "bigtableReference": {
+                          "type": "BigtableReference",
+                          "id": 11
+                        },
+                        "firestoreReference": {
+                          "type": "FirestoreReference",
+                          "id": 13
                         }
                       }
                     },
@@ -3233,6 +3251,13 @@
                           "rule": "repeated",
                           "type": "BigQueryTableReference",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3309,6 +3334,24 @@
                         }
                       }
                     },
+                    "DatabaseTableReference": {
+                      "fields": {
+                        "tableId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "schema": {
+                          "type": "Schema",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "AlloyDbDatabaseReference": {
                       "fields": {
                         "projectId": {
@@ -3353,6 +3396,118 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "databaseTableReferences": {
+                          "rule": "repeated",
+                          "type": "DatabaseTableReference",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BigtableReference": {
+                      "fields": {
+                        "databaseReference": {
+                          "type": "BigtableDatabaseReference",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BigtableDatabaseReference": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tableIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "databaseTableReferences": {
+                          "rule": "repeated",
+                          "type": "DatabaseTableReference",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FirestoreReference": {
+                      "fields": {
+                        "databaseReference": {
+                          "type": "FirestoreDatabaseReference",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FirestoreDatabaseReference": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "databaseId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "collectionIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "databaseTableReferences": {
+                          "rule": "repeated",
+                          "type": "DatabaseTableReference",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3390,13 +3545,6 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
-                        "region": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
                         "instanceId": {
                           "type": "string",
                           "id": 3,
@@ -3418,6 +3566,25 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "databaseTableReferences": {
+                          "rule": "repeated",
+                          "type": "DatabaseTableReference",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "priority": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestTag": {
+                          "type": "string",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -3489,6 +3656,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "databaseTableReferences": {
+                          "rule": "repeated",
+                          "type": "DatabaseTableReference",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3585,7 +3760,9 @@
                             "lookerExploreReference",
                             "alloyDbReference",
                             "spannerReference",
-                            "cloudSqlReference"
+                            "cloudSqlReference",
+                            "bigtableReference",
+                            "firestoreReference"
                           ]
                         }
                       },
@@ -3613,6 +3790,14 @@
                         "cloudSqlReference": {
                           "type": "CloudSqlReference",
                           "id": 14
+                        },
+                        "bigtableReference": {
+                          "type": "BigtableReference",
+                          "id": 15
+                        },
+                        "firestoreReference": {
+                          "type": "FirestoreReference",
+                          "id": 17
                         },
                         "schema": {
                           "type": "Schema",
@@ -4837,6 +5022,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "generateDebugInfo": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4861,11 +5053,31 @@
                     "ParameterizedSecureViewParameters": {
                       "fields": {
                         "parameters": {
-                          "keyType": "string",
-                          "type": "string",
+                          "rule": "repeated",
+                          "type": "Parameter",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Parameter": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
                           }
                         }
                       }
@@ -4892,6 +5104,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 5
+                        },
+                        "pipelineDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 9
                         }
                       }
                     },
@@ -6461,7 +6677,9 @@
                             "looker",
                             "alloydb",
                             "spannerReference",
-                            "cloudSqlReference"
+                            "cloudSqlReference",
+                            "bigtableReference",
+                            "firestoreReference"
                           ]
                         }
                       },
@@ -6489,6 +6707,14 @@
                         "cloudSqlReference": {
                           "type": "CloudSqlReference",
                           "id": 10
+                        },
+                        "bigtableReference": {
+                          "type": "BigtableReference",
+                          "id": 11
+                        },
+                        "firestoreReference": {
+                          "type": "FirestoreReference",
+                          "id": 13
                         }
                       }
                     },
@@ -6506,6 +6732,13 @@
                           "rule": "repeated",
                           "type": "BigQueryPropertyGraphReference",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -6652,6 +6885,110 @@
                           "rule": "repeated",
                           "type": "DatabaseTableReference",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BigtableReference": {
+                      "fields": {
+                        "databaseReference": {
+                          "type": "BigtableDatabaseReference",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BigtableDatabaseReference": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tableIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "databaseTableReferences": {
+                          "rule": "repeated",
+                          "type": "DatabaseTableReference",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FirestoreReference": {
+                      "fields": {
+                        "databaseReference": {
+                          "type": "FirestoreDatabaseReference",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "agentContextReference": {
+                          "type": "AgentContextReference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FirestoreDatabaseReference": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "databaseId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "collectionIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "databaseTableReferences": {
+                          "rule": "repeated",
+                          "type": "DatabaseTableReference",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -6934,7 +7271,9 @@
                             "alloyDbReference",
                             "spannerReference",
                             "cloudSqlReference",
-                            "bigqueryPropertyGraphReference"
+                            "bigtableReference",
+                            "bigqueryPropertyGraphReference",
+                            "firestoreReference"
                           ]
                         }
                       },
@@ -6963,9 +7302,17 @@
                           "type": "CloudSqlReference",
                           "id": 14
                         },
+                        "bigtableReference": {
+                          "type": "BigtableReference",
+                          "id": 15
+                        },
                         "bigqueryPropertyGraphReference": {
                           "type": "BigQueryPropertyGraphReference",
                           "id": 16
+                        },
+                        "firestoreReference": {
+                          "type": "FirestoreReference",
+                          "id": 17
                         },
                         "schema": {
                           "type": "Schema",
@@ -8233,6 +8580,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "generateDebugInfo": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8308,6 +8662,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 5
+                        },
+                        "pipelineDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 9
                         }
                       }
                     },

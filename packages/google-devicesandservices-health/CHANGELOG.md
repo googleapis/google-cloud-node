@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.6.1...health-v0.7.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/health-v0.6.0...health-v0.6.1) (2026-08-26)
 
 

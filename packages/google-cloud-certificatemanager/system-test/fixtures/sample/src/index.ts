@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { CertificateManagerClient } from '@google-cloud/certificate-manager';
+import {CertificateManagerClient} from '@google-cloud/certificate-manager';
 
 // check that the client class type name can be used
 function doStuffWithCertificateManagerClient(client: CertificateManagerClient) {

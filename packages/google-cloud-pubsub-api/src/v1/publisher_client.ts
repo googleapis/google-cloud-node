@@ -28,10 +28,10 @@ import type {
   IamClient,
   IamProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class PublisherClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('pubsub-api');
@@ -67,10 +67,10 @@ export class PublisherClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  publisherStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  publisherStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PublisherClient.
@@ -146,7 +146,7 @@ export class PublisherClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -253,7 +253,7 @@ export class PublisherClient {
       'google.pubsub.v1.Publisher',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -293,7 +293,7 @@ export class PublisherClient {
           (this._protos as any).google.pubsub.v1.Publisher,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -310,7 +310,7 @@ export class PublisherClient {
     ];
     for (const methodName of publisherStubMethods) {
       const callPromise = this.publisherStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -551,7 +551,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createTopic request %j', request);
@@ -682,7 +682,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         'topic.name': request.topic!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateTopic request %j', request);
@@ -810,7 +810,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('publish request %j', request);
@@ -935,7 +935,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTopic request %j', request);
@@ -1064,7 +1064,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteTopic request %j', request);
@@ -1192,7 +1192,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('detachSubscription request %j', request);
@@ -1327,7 +1327,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1395,7 +1395,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTopics stream %j', request);
@@ -1447,7 +1447,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTopics iterate %j', request);
@@ -1554,7 +1554,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1624,7 +1624,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopicSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTopicSubscriptions stream %j', request);
@@ -1676,7 +1676,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopicSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTopicSubscriptions iterate %j', request);
@@ -1781,7 +1781,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1851,7 +1851,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopicSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTopicSnapshots stream %j', request);
@@ -1903,7 +1903,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopicSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTopicSnapshots iterate %j', request);
@@ -2305,11 +2305,11 @@ export class PublisherClient {
    */
   close(): Promise<void> {
     if (this.publisherStub && !this._terminated) {
-      return this.publisherStub.then((stub) => {
+      return this.publisherStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
       });

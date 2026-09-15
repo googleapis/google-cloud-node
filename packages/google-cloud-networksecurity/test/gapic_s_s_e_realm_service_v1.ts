@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sserealmserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -280,7 +280,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sSERealmServiceStub, undefined);
@@ -288,12 +288,12 @@ describe('v1.SSERealmServiceClient', () => {
       assert(client.sSERealmServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sSERealmServiceStub);
@@ -302,14 +302,14 @@ describe('v1.SSERealmServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sSERealmServiceStub, undefined);
@@ -318,7 +318,7 @@ describe('v1.SSERealmServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -326,7 +326,7 @@ describe('v1.SSERealmServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -338,7 +338,7 @@ describe('v1.SSERealmServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -361,7 +361,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('getSACRealm', () => {
     it('invokes getSACRealm without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes getSACRealm without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes getSACRealm with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -470,7 +470,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes getSACRealm with closed client', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.SSERealmServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSACRealm(request), expectedError);
@@ -493,7 +493,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('getSACAttachment', () => {
     it('invokes getSACAttachment without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes getSACAttachment without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes getSACAttachment with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes getSACAttachment with closed client', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.SSERealmServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSACAttachment(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('createSACRealm', () => {
     it('invokes createSACRealm without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes createSACRealm without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes createSACRealm with call error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes createSACRealm with LRO error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -776,7 +776,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes checkCreateSACRealmProgress without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,8 +784,8 @@ describe('v1.SSERealmServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSACRealmProgress(
@@ -798,7 +798,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes checkCreateSACRealmProgress with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -819,7 +819,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('deleteSACRealm', () => {
     it('invokes deleteSACRealm without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -852,7 +852,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes deleteSACRealm without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -906,7 +906,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes deleteSACRealm with call error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -937,7 +937,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes deleteSACRealm with LRO error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -970,7 +970,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes checkDeleteSACRealmProgress without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,8 +978,8 @@ describe('v1.SSERealmServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSACRealmProgress(
@@ -992,7 +992,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes checkDeleteSACRealmProgress with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1013,7 +1013,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('createSACAttachment', () => {
     it('invokes createSACAttachment without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes createSACAttachment without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1100,7 +1100,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes createSACAttachment with call error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1131,7 +1131,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes createSACAttachment with LRO error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1164,7 +1164,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes checkCreateSACAttachmentProgress without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1172,8 +1172,8 @@ describe('v1.SSERealmServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSACAttachmentProgress(
@@ -1186,7 +1186,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes checkCreateSACAttachmentProgress with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1207,7 +1207,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('deleteSACAttachment', () => {
     it('invokes deleteSACAttachment without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes deleteSACAttachment without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes deleteSACAttachment with call error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes deleteSACAttachment with LRO error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes checkDeleteSACAttachmentProgress without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,8 +1366,8 @@ describe('v1.SSERealmServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSACAttachmentProgress(
@@ -1380,7 +1380,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes checkDeleteSACAttachmentProgress with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('listSACRealms', () => {
     it('invokes listSACRealms without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1440,7 +1440,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes listSACRealms without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes listSACRealms with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1526,7 +1526,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes listSACRealmsStream without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1578,15 +1578,15 @@ describe('v1.SSERealmServiceClient', () => {
       assert(
         (client.descriptors.page.listSACRealms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSACRealmsStream with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1627,15 +1627,15 @@ describe('v1.SSERealmServiceClient', () => {
       assert(
         (client.descriptors.page.listSACRealms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSACRealms without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1676,15 +1676,15 @@ describe('v1.SSERealmServiceClient', () => {
       assert(
         (client.descriptors.page.listSACRealms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSACRealms with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1717,9 +1717,9 @@ describe('v1.SSERealmServiceClient', () => {
       assert(
         (client.descriptors.page.listSACRealms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1727,7 +1727,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('listSACAttachments', () => {
     it('invokes listSACAttachments without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1767,7 +1767,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes listSACAttachments without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1799,8 +1799,7 @@ describe('v1.SSERealmServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1.ISACAttachment[]
-              | null,
+              protos.google.cloud.networksecurity.v1.ISACAttachment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1824,7 +1823,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes listSACAttachments with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,7 +1854,7 @@ describe('v1.SSERealmServiceClient', () => {
 
     it('invokes listSACAttachmentsStream without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1908,15 +1907,15 @@ describe('v1.SSERealmServiceClient', () => {
       assert(
         (client.descriptors.page.listSACAttachments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSACAttachmentsStream with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1958,15 +1957,15 @@ describe('v1.SSERealmServiceClient', () => {
       assert(
         (client.descriptors.page.listSACAttachments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSACAttachments without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2008,15 +2007,15 @@ describe('v1.SSERealmServiceClient', () => {
       assert(
         (client.descriptors.page.listSACAttachments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSACAttachments with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2049,16 +2048,16 @@ describe('v1.SSERealmServiceClient', () => {
       assert(
         (client.descriptors.page.listSACAttachments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,7 +2087,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2126,7 +2125,7 @@ describe('v1.SSERealmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2136,7 +2135,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2168,7 +2167,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2198,7 +2197,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2236,7 +2235,7 @@ describe('v1.SSERealmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2246,7 +2245,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2278,7 +2277,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2310,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2349,7 +2348,7 @@ describe('v1.SSERealmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2359,7 +2358,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2394,7 +2393,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2424,7 +2423,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2468,7 +2467,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2503,7 +2502,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2551,7 +2550,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2592,7 +2591,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2613,7 +2612,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2641,7 +2640,7 @@ describe('v1.SSERealmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2651,7 +2650,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2675,7 +2674,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2697,7 +2696,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2725,7 +2724,7 @@ describe('v1.SSERealmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2735,7 +2734,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2759,7 +2758,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2781,7 +2780,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2809,7 +2808,7 @@ describe('v1.SSERealmServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2819,7 +2818,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2843,7 +2842,7 @@ describe('v1.SSERealmServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2878,7 +2877,7 @@ describe('v1.SSERealmServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2914,7 +2913,7 @@ describe('v1.SSERealmServiceClient', () => {
         authorization_policy: 'authorizationPolicyValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2992,7 +2991,7 @@ describe('v1.SSERealmServiceClient', () => {
         authz_policy: 'authzPolicyValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3056,7 +3055,7 @@ describe('v1.SSERealmServiceClient', () => {
         backend_authentication_config: 'backendAuthenticationConfigValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,7 +3135,7 @@ describe('v1.SSERealmServiceClient', () => {
         client_tls_policy: 'clientTlsPolicyValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3201,7 +3200,7 @@ describe('v1.SSERealmServiceClient', () => {
         dns_threat_detector: 'dnsThreatDetectorValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3278,7 +3277,7 @@ describe('v1.SSERealmServiceClient', () => {
         firewall_endpoint_association: 'firewallEndpointAssociationValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3358,7 +3357,7 @@ describe('v1.SSERealmServiceClient', () => {
         gateway_security_policy: 'gatewaySecurityPolicyValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3440,7 +3439,7 @@ describe('v1.SSERealmServiceClient', () => {
         rule: 'ruleValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3536,7 +3535,7 @@ describe('v1.SSERealmServiceClient', () => {
         intercept_deployment: 'interceptDeploymentValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3614,7 +3613,7 @@ describe('v1.SSERealmServiceClient', () => {
         intercept_deployment_group: 'interceptDeploymentGroupValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3695,7 +3694,7 @@ describe('v1.SSERealmServiceClient', () => {
         intercept_endpoint_group: 'interceptEndpointGroupValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3777,7 +3776,7 @@ describe('v1.SSERealmServiceClient', () => {
           'interceptEndpointGroupAssociationValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3859,7 +3858,7 @@ describe('v1.SSERealmServiceClient', () => {
         location: 'locationValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3909,7 +3908,7 @@ describe('v1.SSERealmServiceClient', () => {
         mirroring_deployment: 'mirroringDeploymentValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3987,7 +3986,7 @@ describe('v1.SSERealmServiceClient', () => {
         mirroring_deployment_group: 'mirroringDeploymentGroupValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4068,7 +4067,7 @@ describe('v1.SSERealmServiceClient', () => {
         mirroring_endpoint_group: 'mirroringEndpointGroupValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4150,7 +4149,7 @@ describe('v1.SSERealmServiceClient', () => {
           'mirroringEndpointGroupAssociationValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4233,7 +4232,7 @@ describe('v1.SSERealmServiceClient', () => {
         address_group: 'addressGroupValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4316,7 +4315,7 @@ describe('v1.SSERealmServiceClient', () => {
         firewall_endpoint: 'firewallEndpointValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4403,7 +4402,7 @@ describe('v1.SSERealmServiceClient', () => {
         security_profile: 'securityProfileValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4487,7 +4486,7 @@ describe('v1.SSERealmServiceClient', () => {
         security_profile_group: 'securityProfileGroupValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4572,7 +4571,7 @@ describe('v1.SSERealmServiceClient', () => {
         project: 'projectValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4612,7 +4611,7 @@ describe('v1.SSERealmServiceClient', () => {
         address_group: 'addressGroupValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4690,7 +4689,7 @@ describe('v1.SSERealmServiceClient', () => {
         firewall_endpoint: 'firewallEndpointValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4771,7 +4770,7 @@ describe('v1.SSERealmServiceClient', () => {
         security_profile: 'securityProfileValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4850,7 +4849,7 @@ describe('v1.SSERealmServiceClient', () => {
         security_profile_group: 'securityProfileGroupValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4933,7 +4932,7 @@ describe('v1.SSERealmServiceClient', () => {
         sac_attachment: 'sacAttachmentValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4997,7 +4996,7 @@ describe('v1.SSERealmServiceClient', () => {
         sac_realm: 'sacRealmValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5061,7 +5060,7 @@ describe('v1.SSERealmServiceClient', () => {
         server_tls_policy: 'serverTlsPolicyValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5126,7 +5125,7 @@ describe('v1.SSERealmServiceClient', () => {
         tls_inspection_policy: 'tlsInspectionPolicyValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5204,7 +5203,7 @@ describe('v1.SSERealmServiceClient', () => {
         url_list: 'urlListValue',
       };
       const client = new sserealmserviceModule.v1.SSERealmServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

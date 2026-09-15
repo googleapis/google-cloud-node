@@ -20,14 +20,14 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as completionserviceModule from '../src/index.js';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -54,7 +54,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -228,7 +228,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.completionServiceStub, undefined);
@@ -236,13 +236,13 @@ describe('v2alpha.CompletionServiceClient', () => {
       assert(client.completionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.completionServiceStub);
@@ -251,15 +251,15 @@ describe('v2alpha.CompletionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.completionServiceStub, undefined);
@@ -268,7 +268,7 @@ describe('v2alpha.CompletionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -277,7 +277,7 @@ describe('v2alpha.CompletionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -290,7 +290,7 @@ describe('v2alpha.CompletionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -314,7 +314,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes completeQuery without error', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -346,7 +346,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes completeQuery without error using callback', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -394,7 +394,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes completeQuery with error', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -426,7 +426,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes completeQuery with closed client', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v2alpha.CompletionServiceClient', () => {
       );
       request.catalog = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.completeQuery(request), expectedError);
@@ -450,7 +450,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes importCompletionData without error', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes importCompletionData without error using callback', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -539,7 +539,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes importCompletionData with call error', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes importCompletionData with LRO error', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes checkImportCompletionDataProgress without error', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -613,8 +613,8 @@ describe('v2alpha.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportCompletionDataProgress(
@@ -628,7 +628,7 @@ describe('v2alpha.CompletionServiceClient', () => {
     it('invokes checkImportCompletionDataProgress with error', async () => {
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -654,10 +654,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.alertConfigPathTemplate.render = sinon
@@ -697,10 +697,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.attributesConfigPathTemplate.render = sinon
@@ -768,10 +768,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.branchPathTemplate.render = sinon
@@ -846,10 +846,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.catalogPathTemplate.render = sinon
@@ -913,10 +913,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.completionConfigPathTemplate.render = sinon
@@ -984,10 +984,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.controlPathTemplate.render = sinon
@@ -1060,10 +1060,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.loggingConfigPathTemplate.render = sinon
@@ -1104,10 +1104,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.merchantCenterAccountLinkPathTemplate.render = sinon
@@ -1204,10 +1204,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.modelPathTemplate.render = sinon
@@ -1284,10 +1284,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.productPathTemplate.render = sinon
@@ -1371,10 +1371,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.retailProjectPathTemplate.render = sinon
@@ -1415,10 +1415,10 @@ describe('v2alpha.CompletionServiceClient', () => {
       };
       const client =
         new completionserviceModule.v2alpha.CompletionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.servingConfigPathTemplate.render = sinon

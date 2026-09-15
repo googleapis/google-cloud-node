@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as creativewrapperserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -272,13 +272,13 @@ describe('v1.CreativeWrapperServiceClient', () => {
       assert(client.creativeWrapperServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.creativeWrapperServiceStub);
@@ -287,12 +287,12 @@ describe('v1.CreativeWrapperServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
           auth: googleAuth,
@@ -304,7 +304,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -476,7 +476,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCreativeWrapper(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -759,7 +759,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -906,7 +906,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       );
       request.creativeWrapper.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1049,7 +1049,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1192,7 +1192,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1335,7 +1335,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1349,7 +1349,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
     it('invokes listCreativeWrappers without error', async () => {
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1390,7 +1390,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
     it('invokes listCreativeWrappers without error using callback', async () => {
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1446,7 +1446,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
     it('invokes listCreativeWrappers with error', async () => {
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1478,7 +1478,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
     it('invokes listCreativeWrappersStream without error', async () => {
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1530,16 +1530,16 @@ describe('v1.CreativeWrapperServiceClient', () => {
       assert(
         (client.descriptors.page.listCreativeWrappers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCreativeWrappersStream with error', async () => {
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1580,9 +1580,9 @@ describe('v1.CreativeWrapperServiceClient', () => {
       assert(
         (client.descriptors.page.listCreativeWrappers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1630,16 +1630,16 @@ describe('v1.CreativeWrapperServiceClient', () => {
       assert(
         (client.descriptors.page.listCreativeWrappers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCreativeWrappers with error', async () => {
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1671,9 +1671,9 @@ describe('v1.CreativeWrapperServiceClient', () => {
       assert(
         (client.descriptors.page.listCreativeWrappers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1688,7 +1688,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1753,7 +1753,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1823,7 +1823,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1873,7 +1873,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1923,7 +1923,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1973,7 +1973,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2026,7 +2026,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2080,7 +2080,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2126,6 +2126,59 @@ describe('v1.CreativeWrapperServiceClient', () => {
       });
     });
 
+    describe('breakTemplate', async () => {
+      const fakePath = '/rendered/path/breakTemplate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        break_template: 'breakTemplateValue',
+      };
+      const client =
+        new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.breakTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.breakTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('breakTemplatePath', () => {
+        const result = client.breakTemplatePath(
+          'networkCodeValue',
+          'breakTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromBreakTemplateName', () => {
+        const result = client.matchNetworkCodeFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBreakTemplateFromBreakTemplateName', () => {
+        const result = client.matchBreakTemplateFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'breakTemplateValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('browser', async () => {
       const fakePath = '/rendered/path/browser';
       const expectedParameters = {
@@ -2134,7 +2187,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2184,7 +2237,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2238,7 +2291,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2291,7 +2344,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2345,7 +2398,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2399,7 +2452,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2457,7 +2510,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2507,7 +2560,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2557,7 +2610,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2607,7 +2660,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2660,7 +2713,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2713,7 +2766,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2763,7 +2816,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2816,7 +2869,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2874,7 +2927,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2928,7 +2981,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2981,7 +3034,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3045,7 +3098,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3111,7 +3164,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3177,7 +3230,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3240,7 +3293,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3288,7 +3341,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3346,7 +3399,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3400,7 +3453,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3464,7 +3517,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3530,7 +3583,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3583,7 +3636,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3633,7 +3686,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3683,7 +3736,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3736,7 +3789,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3789,7 +3842,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3843,7 +3896,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3896,7 +3949,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3949,7 +4002,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4015,7 +4068,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4067,7 +4120,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4107,7 +4160,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4161,7 +4214,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4227,7 +4280,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4277,7 +4330,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4327,7 +4380,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4380,7 +4433,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4434,7 +4487,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4498,7 +4551,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4562,7 +4615,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4612,7 +4665,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4676,7 +4729,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4726,7 +4779,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4776,7 +4829,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4826,7 +4879,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4880,7 +4933,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4934,7 +4987,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4992,7 +5045,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5042,7 +5095,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5106,7 +5159,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5156,7 +5209,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5220,7 +5273,7 @@ describe('v1.CreativeWrapperServiceClient', () => {
       };
       const client =
         new creativewrapperserviceModule.v1.CreativeWrapperServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

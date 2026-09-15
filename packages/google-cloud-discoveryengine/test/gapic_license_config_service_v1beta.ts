@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as licenseconfigserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -254,7 +254,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.licenseConfigServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       assert(client.licenseConfigServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.licenseConfigServiceStub);
@@ -277,15 +277,15 @@ describe('v1beta.LicenseConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.licenseConfigServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes createLicenseConfig without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -373,7 +373,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes createLicenseConfig without error using callback', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -421,7 +421,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes createLicenseConfig with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes createLicenseConfig with closed client', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createLicenseConfig(request), expectedError);
@@ -477,7 +477,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes updateLicenseConfig without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -511,7 +511,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes updateLicenseConfig without error using callback', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes updateLicenseConfig with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes updateLicenseConfig with closed client', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       );
       request.licenseConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateLicenseConfig(request), expectedError);
@@ -618,7 +618,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes getLicenseConfig without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes getLicenseConfig without error using callback', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes getLicenseConfig with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes getLicenseConfig with closed client', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLicenseConfig(request), expectedError);
@@ -754,7 +754,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes distributeLicenseConfig without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes distributeLicenseConfig without error using callback', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes distributeLicenseConfig with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -870,7 +870,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes distributeLicenseConfig with closed client', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -883,7 +883,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       );
       request.billingAccountLicenseConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -897,7 +897,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes retractLicenseConfig without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes retractLicenseConfig without error using callback', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes retractLicenseConfig with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes retractLicenseConfig with closed client', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       );
       request.billingAccountLicenseConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.retractLicenseConfig(request), expectedError);
@@ -1034,7 +1034,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes listLicenseConfigs without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes listLicenseConfigs without error using callback', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1133,7 +1133,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes listLicenseConfigs with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1165,7 +1165,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes listLicenseConfigsStream without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1220,16 +1220,16 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listLicenseConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLicenseConfigsStream with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1273,16 +1273,16 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listLicenseConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLicenseConfigs without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1324,16 +1324,16 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listLicenseConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLicenseConfigs with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1366,9 +1366,9 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       assert(
         (client.descriptors.page.listLicenseConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1376,7 +1376,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1488,7 +1488,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1537,7 +1537,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1585,7 +1585,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1639,7 +1639,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1739,7 +1739,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1825,7 +1825,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1894,7 +1894,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1970,7 +1970,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2035,7 +2035,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2101,7 +2101,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2183,7 +2183,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2247,7 +2247,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2296,7 +2296,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2336,7 +2336,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2401,7 +2401,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2482,7 +2482,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2587,7 +2587,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2735,7 +2735,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2899,7 +2899,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3026,7 +3026,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3154,7 +3154,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3281,7 +3281,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3391,7 +3391,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3518,7 +3518,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3647,7 +3647,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3793,7 +3793,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3919,7 +3919,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4029,7 +4029,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4157,7 +4157,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4286,7 +4286,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4431,7 +4431,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4558,7 +4558,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4685,7 +4685,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4813,7 +4813,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4957,7 +4957,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5081,7 +5081,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5163,7 +5163,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5291,7 +5291,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5434,7 +5434,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5530,7 +5530,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5638,7 +5638,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5745,7 +5745,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5835,7 +5835,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5929,7 +5929,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6037,7 +6037,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6162,7 +6162,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6260,7 +6260,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6350,7 +6350,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6459,7 +6459,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6567,7 +6567,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6643,7 +6643,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6709,7 +6709,7 @@ describe('v1beta.LicenseConfigServiceClient', () => {
       };
       const client =
         new licenseconfigserviceModule.v1beta.LicenseConfigServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

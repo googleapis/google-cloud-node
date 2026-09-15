@@ -23,6 +23,7 @@ import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
 import {toLowerCamelCase} from './util';
+import {StaticTraceContext} from './observability/TracerHelper';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -788,8 +789,10 @@ export interface ClientConfig {
  * @param {Object.<string, string[]>} retryNames - A dictionary mapping the strings
  *   referring to response status codes to objects representing
  *   those codes.
- * @param {Object} otherArgs - the non-request arguments to be passed to the API
+ * @param {Object} [otherArgs] - the non-request arguments to be passed to the API
  *   calls.
+ * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+ * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -799,8 +802,12 @@ export function constructSettings(
   configOverrides: ClientConfig,
   retryNames: {},
   otherArgs?: {},
+  enableTelemetryTracing?: boolean,
+  internalTelemetryInfo?: StaticTraceContext,
 ) {
-  otherArgs = otherArgs || {};
+  otherArgs = internalTelemetryInfo
+    ? {...otherArgs, internalTelemetryInfo}
+    : otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
@@ -857,8 +864,12 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs,
+      otherArgs:
+        internalTelemetryInfo || enableTelemetryTracing
+          ? {...otherArgs, internalMethodName: methodName}
+          : otherArgs,
       apiName,
+      enableTelemetryTracing,
     });
   }
 

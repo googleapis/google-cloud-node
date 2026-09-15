@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as adaptationModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v1.AdaptationClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.adaptationStub, undefined);
@@ -245,12 +245,12 @@ describe('v1.AdaptationClient', () => {
       assert(client.adaptationStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.adaptationStub);
@@ -259,14 +259,14 @@ describe('v1.AdaptationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.adaptationStub, undefined);
@@ -275,7 +275,7 @@ describe('v1.AdaptationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v1.AdaptationClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v1.AdaptationClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v1.AdaptationClient', () => {
   describe('createPhraseSet', () => {
     it('invokes createPhraseSet without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes createPhraseSet without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes createPhraseSet with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes createPhraseSet with closed client', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.AdaptationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createPhraseSet(request), expectedError);
@@ -450,7 +450,7 @@ describe('v1.AdaptationClient', () => {
   describe('getPhraseSet', () => {
     it('invokes getPhraseSet without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes getPhraseSet without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -528,7 +528,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes getPhraseSet with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes getPhraseSet with closed client', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1.AdaptationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPhraseSet(request), expectedError);
@@ -582,7 +582,7 @@ describe('v1.AdaptationClient', () => {
   describe('updatePhraseSet', () => {
     it('invokes updatePhraseSet without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes updatePhraseSet without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes updatePhraseSet with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes updatePhraseSet with closed client', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1.AdaptationClient', () => {
       );
       request.phraseSet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updatePhraseSet(request), expectedError);
@@ -718,7 +718,7 @@ describe('v1.AdaptationClient', () => {
   describe('deletePhraseSet', () => {
     it('invokes deletePhraseSet without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes deletePhraseSet without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes deletePhraseSet with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -827,7 +827,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes deletePhraseSet with closed client', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v1.AdaptationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePhraseSet(request), expectedError);
@@ -850,7 +850,7 @@ describe('v1.AdaptationClient', () => {
   describe('createCustomClass', () => {
     it('invokes createCustomClass without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes createCustomClass without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes createCustomClass with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes createCustomClass with closed client', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -972,7 +972,7 @@ describe('v1.AdaptationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCustomClass(request), expectedError);
@@ -982,7 +982,7 @@ describe('v1.AdaptationClient', () => {
   describe('getCustomClass', () => {
     it('invokes getCustomClass without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1013,7 +1013,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes getCustomClass without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,7 +1060,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes getCustomClass with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes getCustomClass with closed client', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v1.AdaptationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomClass(request), expectedError);
@@ -1114,7 +1114,7 @@ describe('v1.AdaptationClient', () => {
   describe('updateCustomClass', () => {
     it('invokes updateCustomClass without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes updateCustomClass without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1194,7 +1194,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes updateCustomClass with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1226,7 +1226,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes updateCustomClass with closed client', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.AdaptationClient', () => {
       );
       request.customClass.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCustomClass(request), expectedError);
@@ -1250,7 +1250,7 @@ describe('v1.AdaptationClient', () => {
   describe('deleteCustomClass', () => {
     it('invokes deleteCustomClass without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1281,7 +1281,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes deleteCustomClass without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1328,7 +1328,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes deleteCustomClass with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1359,7 +1359,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes deleteCustomClass with closed client', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1.AdaptationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCustomClass(request), expectedError);
@@ -1382,7 +1382,7 @@ describe('v1.AdaptationClient', () => {
   describe('listPhraseSet', () => {
     it('invokes listPhraseSet without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes listPhraseSet without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1464,7 +1464,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes listPhraseSet with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes listPhraseSetStream without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1541,15 +1541,15 @@ describe('v1.AdaptationClient', () => {
       assert(
         (client.descriptors.page.listPhraseSet.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPhraseSetStream with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1590,15 +1590,15 @@ describe('v1.AdaptationClient', () => {
       assert(
         (client.descriptors.page.listPhraseSet.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPhraseSet without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1633,15 +1633,15 @@ describe('v1.AdaptationClient', () => {
       assert(
         (client.descriptors.page.listPhraseSet.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPhraseSet with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1673,9 +1673,9 @@ describe('v1.AdaptationClient', () => {
       assert(
         (client.descriptors.page.listPhraseSet.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1683,7 +1683,7 @@ describe('v1.AdaptationClient', () => {
   describe('listCustomClasses', () => {
     it('invokes listCustomClasses without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1716,7 +1716,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes listCustomClasses without error using callback', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1765,7 +1765,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes listCustomClasses with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1796,7 +1796,7 @@ describe('v1.AdaptationClient', () => {
 
     it('invokes listCustomClassesStream without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1842,15 +1842,15 @@ describe('v1.AdaptationClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCustomClassesStream with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1891,15 +1891,15 @@ describe('v1.AdaptationClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomClasses without error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1934,15 +1934,15 @@ describe('v1.AdaptationClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomClasses with error', async () => {
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,9 +1974,9 @@ describe('v1.AdaptationClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1990,7 +1990,7 @@ describe('v1.AdaptationClient', () => {
         custom_class: 'customClassValue',
       };
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,7 +2053,7 @@ describe('v1.AdaptationClient', () => {
         location: 'locationValue',
       };
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2103,7 +2103,7 @@ describe('v1.AdaptationClient', () => {
         phrase_set: 'phraseSetValue',
       };
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2165,7 +2165,7 @@ describe('v1.AdaptationClient', () => {
         project: 'projectValue',
       };
       const client = new adaptationModule.v1.AdaptationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

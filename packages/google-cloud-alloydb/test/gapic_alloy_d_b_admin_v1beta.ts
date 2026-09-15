@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as alloydbadminModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.alloyDBAdminStub, undefined);
@@ -285,12 +285,12 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(client.alloyDBAdminStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.alloyDBAdminStub);
@@ -299,14 +299,14 @@ describe('v1beta.AlloyDBAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.alloyDBAdminStub, undefined);
@@ -315,7 +315,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('getCluster', () => {
     it('invokes getCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getCluster with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getCluster with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -622,7 +622,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('executeSql', () => {
     it('invokes executeSql without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -653,7 +653,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes executeSql without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes executeSql with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -731,7 +731,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes executeSql with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -744,7 +744,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.instance = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.executeSql(request), expectedError);
@@ -754,7 +754,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -785,7 +785,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getBackup without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getBackup with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getBackup with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -883,7 +883,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('generateClientCertificate', () => {
     it('invokes generateClientCertificate without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -915,7 +915,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes generateClientCertificate without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes generateClientCertificate with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -996,7 +996,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes generateClientCertificate with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1009,7 +1009,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1022,7 +1022,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('getConnectionInfo', () => {
     it('invokes getConnectionInfo without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1053,7 +1053,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getConnectionInfo without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1100,7 +1100,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getConnectionInfo with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1131,7 +1131,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getConnectionInfo with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1144,7 +1144,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnectionInfo(request), expectedError);
@@ -1154,7 +1154,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('getUser', () => {
     it('invokes getUser without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getUser without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1232,7 +1232,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getUser with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes getUser with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,7 +1273,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUser(request), expectedError);
@@ -1283,7 +1283,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('createUser', () => {
     it('invokes createUser without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createUser without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createUser with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1392,7 +1392,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createUser with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1405,7 +1405,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createUser(request), expectedError);
@@ -1415,7 +1415,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('updateUser', () => {
     it('invokes updateUser without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1447,7 +1447,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateUser without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateUser with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1527,7 +1527,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateUser with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1541,7 +1541,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.user.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateUser(request), expectedError);
@@ -1551,7 +1551,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('deleteUser', () => {
     it('invokes deleteUser without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1582,7 +1582,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteUser without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteUser with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1660,7 +1660,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteUser with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1673,7 +1673,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteUser(request), expectedError);
@@ -1683,7 +1683,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('createDatabase', () => {
     it('invokes createDatabase without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1714,7 +1714,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createDatabase without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1761,7 +1761,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createDatabase with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1792,7 +1792,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createDatabase with closed client', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1805,7 +1805,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDatabase(request), expectedError);
@@ -1815,7 +1815,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1848,7 +1848,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1902,7 +1902,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1933,7 +1933,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1966,7 +1966,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,8 +1974,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClusterProgress(
@@ -1988,7 +1988,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2009,7 +2009,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2043,7 +2043,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2098,7 +2098,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2130,7 +2130,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2164,7 +2164,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkUpdateClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2172,8 +2172,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateClusterProgress(
@@ -2186,7 +2186,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkUpdateClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2207,7 +2207,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('exportCluster', () => {
     it('invokes exportCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2240,7 +2240,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes exportCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2294,7 +2294,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes exportCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2325,7 +2325,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes exportCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2358,7 +2358,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkExportClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2366,8 +2366,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportClusterProgress(
@@ -2380,7 +2380,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkExportClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2401,7 +2401,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('importCluster', () => {
     it('invokes importCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2434,7 +2434,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes importCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2488,7 +2488,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes importCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2519,7 +2519,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes importCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2552,7 +2552,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkImportClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2560,8 +2560,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportClusterProgress(
@@ -2574,7 +2574,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkImportClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2595,7 +2595,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('upgradeCluster', () => {
     it('invokes upgradeCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2628,7 +2628,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes upgradeCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2682,7 +2682,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes upgradeCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2713,7 +2713,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes upgradeCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2746,7 +2746,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkUpgradeClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2754,8 +2754,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpgradeClusterProgress(
@@ -2768,7 +2768,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkUpgradeClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2789,7 +2789,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2822,7 +2822,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2876,7 +2876,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2907,7 +2907,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2940,7 +2940,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkDeleteClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2948,8 +2948,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClusterProgress(
@@ -2962,7 +2962,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkDeleteClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2983,7 +2983,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('promoteCluster', () => {
     it('invokes promoteCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3016,7 +3016,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes promoteCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3070,7 +3070,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes promoteCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3101,7 +3101,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes promoteCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3134,7 +3134,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkPromoteClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3142,8 +3142,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPromoteClusterProgress(
@@ -3156,7 +3156,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkPromoteClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3177,7 +3177,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('switchoverCluster', () => {
     it('invokes switchoverCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3210,7 +3210,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes switchoverCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3264,7 +3264,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes switchoverCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3295,7 +3295,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes switchoverCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3328,7 +3328,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkSwitchoverClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3336,8 +3336,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSwitchoverClusterProgress(
@@ -3350,7 +3350,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkSwitchoverClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3371,7 +3371,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('restoreCluster', () => {
     it('invokes restoreCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3404,7 +3404,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes restoreCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3458,7 +3458,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes restoreCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3489,7 +3489,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes restoreCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3522,7 +3522,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkRestoreClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3530,8 +3530,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreClusterProgress(
@@ -3544,7 +3544,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkRestoreClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3565,7 +3565,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('createSecondaryCluster', () => {
     it('invokes createSecondaryCluster without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3598,7 +3598,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createSecondaryCluster without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3652,7 +3652,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createSecondaryCluster with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3686,7 +3686,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createSecondaryCluster with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3719,7 +3719,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateSecondaryClusterProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3727,8 +3727,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSecondaryClusterProgress(
@@ -3741,7 +3741,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateSecondaryClusterProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3762,7 +3762,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3795,7 +3795,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createInstance without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3849,7 +3849,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createInstance with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3880,7 +3880,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createInstance with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3913,7 +3913,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3921,8 +3921,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -3935,7 +3935,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3956,7 +3956,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('createSecondaryInstance', () => {
     it('invokes createSecondaryInstance without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3989,7 +3989,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createSecondaryInstance without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4043,7 +4043,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createSecondaryInstance with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4077,7 +4077,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createSecondaryInstance with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4110,7 +4110,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateSecondaryInstanceProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4118,8 +4118,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4133,7 +4133,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateSecondaryInstanceProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4154,7 +4154,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('batchCreateInstances', () => {
     it('invokes batchCreateInstances without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4187,7 +4187,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes batchCreateInstances without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4241,7 +4241,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes batchCreateInstances with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4272,7 +4272,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes batchCreateInstances with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4305,7 +4305,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkBatchCreateInstancesProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4313,8 +4313,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchCreateInstancesProgress(
@@ -4327,7 +4327,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkBatchCreateInstancesProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4348,7 +4348,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('updateInstance', () => {
     it('invokes updateInstance without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4382,7 +4382,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateInstance without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4437,7 +4437,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateInstance with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4469,7 +4469,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateInstance with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4503,7 +4503,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkUpdateInstanceProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4511,8 +4511,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceProgress(
@@ -4525,7 +4525,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkUpdateInstanceProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4546,7 +4546,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('deleteInstance', () => {
     it('invokes deleteInstance without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4579,7 +4579,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteInstance without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4633,7 +4633,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteInstance with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4664,7 +4664,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteInstance with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4697,7 +4697,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkDeleteInstanceProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4705,8 +4705,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInstanceProgress(
@@ -4719,7 +4719,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkDeleteInstanceProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4740,7 +4740,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('failoverInstance', () => {
     it('invokes failoverInstance without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4773,7 +4773,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes failoverInstance without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4827,7 +4827,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes failoverInstance with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4858,7 +4858,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes failoverInstance with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4891,7 +4891,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkFailoverInstanceProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4899,8 +4899,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkFailoverInstanceProgress(
@@ -4913,7 +4913,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkFailoverInstanceProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4934,7 +4934,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('injectFault', () => {
     it('invokes injectFault without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4966,7 +4966,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes injectFault without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5020,7 +5020,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes injectFault with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5051,7 +5051,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes injectFault with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5084,7 +5084,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkInjectFaultProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5092,8 +5092,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkInjectFaultProgress(
@@ -5106,7 +5106,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkInjectFaultProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5124,7 +5124,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('restartInstance', () => {
     it('invokes restartInstance without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5157,7 +5157,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes restartInstance without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5211,7 +5211,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes restartInstance with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5242,7 +5242,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes restartInstance with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5275,7 +5275,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkRestartInstanceProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5283,8 +5283,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestartInstanceProgress(
@@ -5297,7 +5297,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkRestartInstanceProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5318,7 +5318,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('createBackup', () => {
     it('invokes createBackup without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5350,7 +5350,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createBackup without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5404,7 +5404,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createBackup with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5435,7 +5435,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes createBackup with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5468,7 +5468,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateBackupProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5476,8 +5476,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBackupProgress(
@@ -5490,7 +5490,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkCreateBackupProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5508,7 +5508,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('updateBackup', () => {
     it('invokes updateBackup without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5541,7 +5541,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateBackup without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5596,7 +5596,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateBackup with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5628,7 +5628,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes updateBackup with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5662,7 +5662,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkUpdateBackupProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5670,8 +5670,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBackupProgress(
@@ -5684,7 +5684,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkUpdateBackupProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5702,7 +5702,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('deleteBackup', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5734,7 +5734,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteBackup without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5788,7 +5788,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteBackup with call error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5819,7 +5819,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes deleteBackup with LRO error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5852,7 +5852,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkDeleteBackupProgress without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5860,8 +5860,8 @@ describe('v1beta.AlloyDBAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupProgress(
@@ -5874,7 +5874,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes checkDeleteBackupProgress with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5892,7 +5892,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5925,7 +5925,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listClusters without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5974,7 +5974,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listClusters with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6005,7 +6005,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listClustersStream without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6051,15 +6051,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listClustersStream with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6102,15 +6102,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6145,15 +6145,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6185,9 +6185,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6195,7 +6195,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6234,7 +6234,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6289,7 +6289,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6320,7 +6320,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6372,15 +6372,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6421,15 +6421,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6470,15 +6470,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6510,9 +6510,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6520,7 +6520,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6553,7 +6553,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listBackups without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6602,7 +6602,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listBackups with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6633,7 +6633,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listBackupsStream without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6679,15 +6679,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6730,15 +6730,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6773,15 +6773,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6815,9 +6815,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6825,7 +6825,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('listSupportedDatabaseFlags', () => {
     it('invokes listSupportedDatabaseFlags without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6865,7 +6865,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listSupportedDatabaseFlags without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6922,7 +6922,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listSupportedDatabaseFlags with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6956,7 +6956,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listSupportedDatabaseFlagsStream without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7025,7 +7025,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listSupportedDatabaseFlagsStream with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7083,7 +7083,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('uses async iteration with listSupportedDatabaseFlags without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7137,7 +7137,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('uses async iteration with listSupportedDatabaseFlags with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7184,7 +7184,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('listUsers', () => {
     it('invokes listUsers without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7217,7 +7217,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listUsers without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7266,7 +7266,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listUsers with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7294,7 +7294,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listUsersStream without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7340,15 +7340,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listUsersStream with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7391,15 +7391,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUsers without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7433,15 +7433,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUsers with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7474,9 +7474,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7484,7 +7484,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('listDatabases', () => {
     it('invokes listDatabases without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7523,7 +7523,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listDatabases without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7578,7 +7578,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listDatabases with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7609,7 +7609,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
 
     it('invokes listDatabasesStream without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7661,15 +7661,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatabasesStream with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7710,15 +7710,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatabases without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7759,15 +7759,15 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatabases with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7799,16 +7799,16 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7838,7 +7838,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7876,7 +7876,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7886,7 +7886,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7918,7 +7918,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7948,7 +7948,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7986,7 +7986,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7996,7 +7996,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8028,7 +8028,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8061,7 +8061,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8099,7 +8099,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8109,7 +8109,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8144,7 +8144,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8174,7 +8174,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8218,7 +8218,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8253,7 +8253,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8301,7 +8301,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8342,7 +8342,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8363,7 +8363,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8391,7 +8391,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8401,7 +8401,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8425,7 +8425,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8447,7 +8447,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8475,7 +8475,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8485,7 +8485,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8509,7 +8509,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8531,7 +8531,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8559,7 +8559,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8569,7 +8569,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8593,7 +8593,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8628,7 +8628,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8664,7 +8664,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         backup: 'backupValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8728,7 +8728,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         cluster: 'clusterValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8793,7 +8793,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         instance: 'instanceValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8869,7 +8869,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         database: 'databaseValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8945,7 +8945,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         instance: 'instanceValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9019,7 +9019,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         location: 'locationValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9067,7 +9067,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         project: 'projectValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9107,7 +9107,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         flag: 'flagValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9186,7 +9186,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
         user: 'userValue',
       };
       const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as executionsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -240,7 +240,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.executionsStub, undefined);
@@ -248,12 +248,12 @@ describe('v1.ExecutionsClient', () => {
       assert(client.executionsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.executionsStub);
@@ -262,14 +262,14 @@ describe('v1.ExecutionsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.executionsStub, undefined);
@@ -278,7 +278,7 @@ describe('v1.ExecutionsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1.ExecutionsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1.ExecutionsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1.ExecutionsClient', () => {
   describe('createExecution', () => {
     it('invokes createExecution without error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes createExecution without error using callback', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes createExecution with error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes createExecution with closed client', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.ExecutionsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createExecution(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1.ExecutionsClient', () => {
   describe('getExecution', () => {
     it('invokes getExecution without error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes getExecution without error using callback', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes getExecution with error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes getExecution with closed client', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v1.ExecutionsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExecution(request), expectedError);
@@ -585,7 +585,7 @@ describe('v1.ExecutionsClient', () => {
   describe('cancelExecution', () => {
     it('invokes cancelExecution without error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes cancelExecution without error using callback', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -663,7 +663,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes cancelExecution with error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes cancelExecution with closed client', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v1.ExecutionsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelExecution(request), expectedError);
@@ -717,7 +717,7 @@ describe('v1.ExecutionsClient', () => {
   describe('listExecutions', () => {
     it('invokes listExecutions without error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes listExecutions without error using callback', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -788,8 +788,7 @@ describe('v1.ExecutionsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.workflows.executions.v1.IExecution[]
-              | null,
+              protos.google.cloud.workflows.executions.v1.IExecution[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -813,7 +812,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes listExecutions with error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +843,7 @@ describe('v1.ExecutionsClient', () => {
 
     it('invokes listExecutionsStream without error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,15 +896,15 @@ describe('v1.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExecutionsStream with error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,15 +946,15 @@ describe('v1.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExecutions without error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,15 +996,15 @@ describe('v1.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExecutions with error', async () => {
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1038,9 +1037,9 @@ describe('v1.ExecutionsClient', () => {
       assert(
         (client.descriptors.page.listExecutions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1055,7 +1054,7 @@ describe('v1.ExecutionsClient', () => {
         execution: 'executionValue',
       };
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1130,7 +1129,7 @@ describe('v1.ExecutionsClient', () => {
         workflow: 'workflowValue',
       };
       const client = new executionsModule.v1.ExecutionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

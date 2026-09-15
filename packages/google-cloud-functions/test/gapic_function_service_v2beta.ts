@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as functionserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2beta.FunctionServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new functionserviceModule.v2beta.FunctionServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -281,7 +281,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.functionServiceStub, undefined);
@@ -289,12 +289,12 @@ describe('v2beta.FunctionServiceClient', () => {
       assert(client.functionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.functionServiceStub);
@@ -303,14 +303,14 @@ describe('v2beta.FunctionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.functionServiceStub, undefined);
@@ -319,7 +319,7 @@ describe('v2beta.FunctionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -327,7 +327,7 @@ describe('v2beta.FunctionServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -339,7 +339,7 @@ describe('v2beta.FunctionServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -362,7 +362,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('getFunction', () => {
     it('invokes getFunction without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -393,7 +393,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes getFunction without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes getFunction with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes getFunction with closed client', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v2beta.FunctionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFunction(request), expectedError);
@@ -494,7 +494,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('generateUploadUrl', () => {
     it('invokes generateUploadUrl without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -525,7 +525,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes generateUploadUrl without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes generateUploadUrl with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes generateUploadUrl with closed client', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v2beta.FunctionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateUploadUrl(request), expectedError);
@@ -626,7 +626,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('generateDownloadUrl', () => {
     it('invokes generateDownloadUrl without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes generateDownloadUrl without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -705,7 +705,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes generateDownloadUrl with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes generateDownloadUrl with closed client', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v2beta.FunctionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateDownloadUrl(request), expectedError);
@@ -759,7 +759,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('listRuntimes', () => {
     it('invokes listRuntimes without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -790,7 +790,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes listRuntimes without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -837,7 +837,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes listRuntimes with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -868,7 +868,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes listRuntimes with closed client', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v2beta.FunctionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listRuntimes(request), expectedError);
@@ -891,7 +891,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('createFunction', () => {
     it('invokes createFunction without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -924,7 +924,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes createFunction without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes createFunction with call error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1009,7 +1009,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes createFunction with LRO error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes checkCreateFunctionProgress without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,8 +1050,8 @@ describe('v2beta.FunctionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFunctionProgress(
@@ -1064,7 +1064,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes checkCreateFunctionProgress with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1085,7 +1085,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('updateFunction', () => {
     it('invokes updateFunction without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1119,7 +1119,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes updateFunction without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes updateFunction with call error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes updateFunction with LRO error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes checkUpdateFunctionProgress without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1248,8 +1248,8 @@ describe('v2beta.FunctionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFunctionProgress(
@@ -1262,7 +1262,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes checkUpdateFunctionProgress with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('deleteFunction', () => {
     it('invokes deleteFunction without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1316,7 +1316,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes deleteFunction without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1370,7 +1370,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes deleteFunction with call error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes deleteFunction with LRO error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1434,7 +1434,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes checkDeleteFunctionProgress without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,8 +1442,8 @@ describe('v2beta.FunctionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFunctionProgress(
@@ -1456,7 +1456,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes checkDeleteFunctionProgress with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('listFunctions', () => {
     it('invokes listFunctions without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,7 +1516,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes listFunctions without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1571,7 +1571,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes listFunctions with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v2beta.FunctionServiceClient', () => {
 
     it('invokes listFunctionsStream without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1654,15 +1654,15 @@ describe('v2beta.FunctionServiceClient', () => {
       assert(
         (client.descriptors.page.listFunctions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFunctionsStream with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1703,15 +1703,15 @@ describe('v2beta.FunctionServiceClient', () => {
       assert(
         (client.descriptors.page.listFunctions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFunctions without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1752,15 +1752,15 @@ describe('v2beta.FunctionServiceClient', () => {
       assert(
         (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFunctions with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1792,16 +1792,16 @@ describe('v2beta.FunctionServiceClient', () => {
       assert(
         (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1831,7 +1831,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1869,7 +1869,7 @@ describe('v2beta.FunctionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1879,7 +1879,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1911,7 +1911,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1941,7 +1941,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1979,7 +1979,7 @@ describe('v2beta.FunctionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1989,7 +1989,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2054,7 +2054,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2092,7 +2092,7 @@ describe('v2beta.FunctionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2102,7 +2102,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2137,7 +2137,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2167,7 +2167,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2211,7 +2211,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2246,7 +2246,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2294,7 +2294,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2335,7 +2335,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2356,7 +2356,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2384,7 +2384,7 @@ describe('v2beta.FunctionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2394,7 +2394,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2418,7 +2418,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2440,7 +2440,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2468,7 +2468,7 @@ describe('v2beta.FunctionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2478,7 +2478,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2502,7 +2502,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2524,7 +2524,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2552,7 +2552,7 @@ describe('v2beta.FunctionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2562,7 +2562,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2586,7 +2586,7 @@ describe('v2beta.FunctionServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2621,7 +2621,7 @@ describe('v2beta.FunctionServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2657,7 +2657,7 @@ describe('v2beta.FunctionServiceClient', () => {
         build: 'buildValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2721,7 +2721,7 @@ describe('v2beta.FunctionServiceClient', () => {
         channel: 'channelValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2785,7 +2785,7 @@ describe('v2beta.FunctionServiceClient', () => {
         connector: 'connectorValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2850,7 +2850,7 @@ describe('v2beta.FunctionServiceClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2925,7 +2925,7 @@ describe('v2beta.FunctionServiceClient', () => {
         function: 'functionValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2988,7 +2988,7 @@ describe('v2beta.FunctionServiceClient', () => {
         location: 'locationValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3036,7 +3036,7 @@ describe('v2beta.FunctionServiceClient', () => {
         project: 'projectValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3076,7 +3076,7 @@ describe('v2beta.FunctionServiceClient', () => {
         repository: 'repositoryValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3140,7 +3140,7 @@ describe('v2beta.FunctionServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3203,7 +3203,7 @@ describe('v2beta.FunctionServiceClient', () => {
         topic: 'topicValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3253,7 +3253,7 @@ describe('v2beta.FunctionServiceClient', () => {
         trigger: 'triggerValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3317,7 +3317,7 @@ describe('v2beta.FunctionServiceClient', () => {
         worker_pool: 'workerPoolValue',
       };
       const client = new functionserviceModule.v2beta.FunctionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

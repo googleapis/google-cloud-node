@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as documentprocessorserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -207,7 +207,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'documentai.example.com');
@@ -216,7 +216,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'documentai.example.com');
@@ -243,7 +243,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'documentai.configured.example.com');
@@ -258,7 +258,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -291,7 +291,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -300,15 +300,15 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(client.documentProcessorServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.documentProcessorServiceStub);
@@ -317,16 +317,16 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -336,7 +336,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -346,7 +346,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -361,7 +361,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -387,7 +387,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -421,7 +421,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -471,7 +471,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -505,7 +505,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -519,7 +519,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.processDocument(request), expectedError);
@@ -531,7 +531,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -566,7 +566,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -616,7 +616,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -650,7 +650,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -664,7 +664,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchProcessorTypes(request), expectedError);
@@ -676,7 +676,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -710,7 +710,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -760,7 +760,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -794,7 +794,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -808,7 +808,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcessorType(request), expectedError);
@@ -820,7 +820,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -854,7 +854,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -904,7 +904,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -938,7 +938,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -952,7 +952,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcessor(request), expectedError);
@@ -964,7 +964,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -999,7 +999,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1049,7 +1049,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1083,7 +1083,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1097,7 +1097,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProcessorVersion(request), expectedError);
@@ -1109,7 +1109,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1143,7 +1143,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1193,7 +1193,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1227,7 +1227,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1241,7 +1241,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createProcessor(request), expectedError);
@@ -1253,7 +1253,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1287,7 +1287,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1337,7 +1337,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1371,7 +1371,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1385,7 +1385,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluation(request), expectedError);
@@ -1397,7 +1397,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1433,7 +1433,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1490,7 +1490,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1527,7 +1527,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1563,7 +1563,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1572,8 +1572,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchProcessDocumentsProgress(
@@ -1588,7 +1588,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1612,7 +1612,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1648,7 +1648,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1705,7 +1705,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1742,7 +1742,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1778,7 +1778,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1787,8 +1787,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTrainProcessorVersionProgress(
@@ -1803,7 +1803,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1827,7 +1827,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1863,7 +1863,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1920,7 +1920,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1957,7 +1957,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1993,7 +1993,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2002,8 +2002,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteProcessorVersionProgress(
@@ -2018,7 +2018,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2042,7 +2042,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2078,7 +2078,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2135,7 +2135,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2172,7 +2172,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2208,7 +2208,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2217,8 +2217,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeployProcessorVersionProgress(
@@ -2233,7 +2233,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2257,7 +2257,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2293,7 +2293,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2350,7 +2350,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2387,7 +2387,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2423,7 +2423,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2432,8 +2432,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2449,7 +2449,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2473,7 +2473,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2509,7 +2509,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2566,7 +2566,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2600,7 +2600,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2636,7 +2636,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2645,8 +2645,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteProcessorProgress(
@@ -2661,7 +2661,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2685,7 +2685,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2721,7 +2721,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2778,7 +2778,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2812,7 +2812,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2848,7 +2848,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2857,8 +2857,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEnableProcessorProgress(
@@ -2873,7 +2873,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2897,7 +2897,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2933,7 +2933,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2990,7 +2990,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3024,7 +3024,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3060,7 +3060,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3069,8 +3069,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDisableProcessorProgress(
@@ -3085,7 +3085,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3109,7 +3109,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3145,7 +3145,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3202,7 +3202,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3239,7 +3239,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3275,7 +3275,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3284,8 +3284,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3301,7 +3301,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3325,7 +3325,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3363,7 +3363,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3422,7 +3422,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3458,7 +3458,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3496,7 +3496,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3506,8 +3506,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkReviewDocumentProgress(
@@ -3523,7 +3523,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3549,7 +3549,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3585,7 +3585,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3642,7 +3642,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3679,7 +3679,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3715,7 +3715,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3724,8 +3724,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3741,7 +3741,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3765,7 +3765,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3801,7 +3801,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3858,7 +3858,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3895,7 +3895,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3931,7 +3931,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3940,8 +3940,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportProcessorVersionProgress(
@@ -3956,7 +3956,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3980,7 +3980,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4023,7 +4023,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4056,8 +4056,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.documentai.v1beta3.IProcessorType[]
-              | null,
+              protos.google.cloud.documentai.v1beta3.IProcessorType[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4083,7 +4082,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4117,7 +4116,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4171,9 +4170,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessorTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4181,7 +4180,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4224,9 +4223,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessorTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4234,7 +4233,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4277,9 +4276,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessorTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4287,7 +4286,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4321,9 +4320,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessorTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4333,7 +4332,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4375,7 +4374,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4433,7 +4432,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4467,7 +4466,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4521,9 +4520,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4531,7 +4530,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4574,9 +4573,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4584,7 +4583,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4626,9 +4625,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -4636,7 +4635,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4670,9 +4669,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listProcessors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4682,7 +4681,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4725,7 +4724,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4758,8 +4757,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.documentai.v1beta3.IProcessorVersion[]
-              | null,
+              protos.google.cloud.documentai.v1beta3.IProcessorVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4785,7 +4783,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4822,7 +4820,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4894,7 +4892,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4955,7 +4953,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5012,7 +5010,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5062,7 +5060,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5104,7 +5102,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5137,8 +5135,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.documentai.v1beta3.IEvaluation[]
-              | null,
+              protos.google.cloud.documentai.v1beta3.IEvaluation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5164,7 +5161,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5198,7 +5195,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5252,9 +5249,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5262,7 +5259,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5305,9 +5302,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5315,7 +5312,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5358,9 +5355,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -5368,7 +5365,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5402,9 +5399,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5413,7 +5410,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5446,7 +5443,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5493,7 +5490,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5531,7 +5528,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5582,7 +5579,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5626,7 +5623,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5650,7 +5647,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5679,7 +5676,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5691,7 +5688,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5718,7 +5715,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5743,7 +5740,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5772,7 +5769,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5784,7 +5781,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5811,7 +5808,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5836,7 +5833,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5865,7 +5862,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5877,7 +5874,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5904,7 +5901,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5942,7 +5939,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5981,7 +5978,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6048,7 +6045,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6117,7 +6114,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6206,7 +6203,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6284,7 +6281,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6337,7 +6334,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6404,7 +6401,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6472,7 +6469,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -6552,7 +6549,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const client =
         new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

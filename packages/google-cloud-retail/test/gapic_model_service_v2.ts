@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as modelserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.modelServiceStub, undefined);
@@ -284,12 +284,12 @@ describe('v2.ModelServiceClient', () => {
       assert(client.modelServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.modelServiceStub);
@@ -298,14 +298,14 @@ describe('v2.ModelServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.modelServiceStub, undefined);
@@ -314,7 +314,7 @@ describe('v2.ModelServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v2.ModelServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v2.ModelServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v2.ModelServiceClient', () => {
   describe('getModel', () => {
     it('invokes getModel without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes getModel without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes getModel with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes getModel with closed client', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -476,7 +476,7 @@ describe('v2.ModelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getModel(request), expectedError);
@@ -486,7 +486,7 @@ describe('v2.ModelServiceClient', () => {
   describe('pauseModel', () => {
     it('invokes pauseModel without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes pauseModel without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes pauseModel with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -595,7 +595,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes pauseModel with closed client', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v2.ModelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pauseModel(request), expectedError);
@@ -618,7 +618,7 @@ describe('v2.ModelServiceClient', () => {
   describe('resumeModel', () => {
     it('invokes resumeModel without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -649,7 +649,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes resumeModel without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes resumeModel with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -727,7 +727,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes resumeModel with closed client', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v2.ModelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resumeModel(request), expectedError);
@@ -750,7 +750,7 @@ describe('v2.ModelServiceClient', () => {
   describe('deleteModel', () => {
     it('invokes deleteModel without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes deleteModel without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes deleteModel with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes deleteModel with closed client', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v2.ModelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteModel(request), expectedError);
@@ -882,7 +882,7 @@ describe('v2.ModelServiceClient', () => {
   describe('updateModel', () => {
     it('invokes updateModel without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes updateModel without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes updateModel with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -994,7 +994,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes updateModel with closed client', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1008,7 +1008,7 @@ describe('v2.ModelServiceClient', () => {
       );
       request.model.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateModel(request), expectedError);
@@ -1018,7 +1018,7 @@ describe('v2.ModelServiceClient', () => {
   describe('createModel', () => {
     it('invokes createModel without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes createModel without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes createModel with call error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes createModel with LRO error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1168,7 +1168,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes checkCreateModelProgress without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,8 +1176,8 @@ describe('v2.ModelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateModelProgress(
@@ -1190,7 +1190,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes checkCreateModelProgress with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1208,7 @@ describe('v2.ModelServiceClient', () => {
   describe('tuneModel', () => {
     it('invokes tuneModel without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes tuneModel without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes tuneModel with call error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes tuneModel with LRO error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes checkTuneModelProgress without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,8 +1366,8 @@ describe('v2.ModelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTuneModelProgress(
@@ -1380,7 +1380,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes checkTuneModelProgress with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1398,7 +1398,7 @@ describe('v2.ModelServiceClient', () => {
   describe('listModels', () => {
     it('invokes listModels without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,7 +1431,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes listModels without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1480,7 +1480,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes listModels with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v2.ModelServiceClient', () => {
 
     it('invokes listModelsStream without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1554,15 +1554,15 @@ describe('v2.ModelServiceClient', () => {
       assert(
         (client.descriptors.page.listModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listModelsStream with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,15 +1602,15 @@ describe('v2.ModelServiceClient', () => {
       assert(
         (client.descriptors.page.listModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModels without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1645,15 +1645,15 @@ describe('v2.ModelServiceClient', () => {
       assert(
         (client.descriptors.page.listModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModels with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1687,16 +1687,16 @@ describe('v2.ModelServiceClient', () => {
       assert(
         (client.descriptors.page.listModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1726,7 +1726,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1770,7 +1770,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1805,7 +1805,7 @@ describe('v2.ModelServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1853,7 +1853,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1894,7 +1894,7 @@ describe('v2.ModelServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1943,7 +1943,7 @@ describe('v2.ModelServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1953,7 +1953,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1977,7 +1977,7 @@ describe('v2.ModelServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1999,7 +1999,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2027,7 +2027,7 @@ describe('v2.ModelServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2037,7 +2037,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2061,7 +2061,7 @@ describe('v2.ModelServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2083,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2111,7 +2111,7 @@ describe('v2.ModelServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2121,7 +2121,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2145,7 +2145,7 @@ describe('v2.ModelServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2180,7 +2180,7 @@ describe('v2.ModelServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2216,7 +2216,7 @@ describe('v2.ModelServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2283,7 +2283,7 @@ describe('v2.ModelServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2347,7 +2347,7 @@ describe('v2.ModelServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2415,7 +2415,7 @@ describe('v2.ModelServiceClient', () => {
         control: 'controlValue',
       };
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2491,7 +2491,7 @@ describe('v2.ModelServiceClient', () => {
         model: 'modelValue',
       };
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2568,7 +2568,7 @@ describe('v2.ModelServiceClient', () => {
         product: 'productValue',
       };
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2655,7 +2655,7 @@ describe('v2.ModelServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new modelserviceModule.v2.ModelServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

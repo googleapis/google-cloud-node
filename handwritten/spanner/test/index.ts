@@ -29,14 +29,15 @@ import * as pfy from '@google-cloud/promisify';
 import {grpc} from 'google-gax';
 import * as sinon from 'sinon';
 import * as spnr from '../src';
-import {protos} from '../src';
-import {Duplex} from 'stream';
-import {CreateInstanceRequest, CreateInstanceConfigRequest} from '../src/index';
 import {
+  protos,
+  CreateInstanceRequest,
+  CreateInstanceConfigRequest,
   GetInstanceConfigOptions,
   GetInstanceConfigsOptions,
   GetInstancesOptions,
 } from '../src';
+import {Duplex} from 'stream';
 import {CLOUD_RESOURCE_HEADER, AFE_SERVER_TIMING_HEADER} from '../src/common';
 import {MetricsTracerFactory} from '../src/metrics/metrics-tracer-factory';
 import IsolationLevel = protos.google.spanner.v1.TransactionOptions.IsolationLevel;

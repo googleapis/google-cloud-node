@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class DataLabelingServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('datalabeling');
@@ -66,10 +66,10 @@ export class DataLabelingServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  dataLabelingServiceStub?: Promise<{ [name: string]: Function }>;
+  dataLabelingServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataLabelingServiceClient.
@@ -145,7 +145,7 @@ export class DataLabelingServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -392,7 +392,7 @@ export class DataLabelingServiceClient {
       'google.cloud.datalabeling.v1beta1.DataLabelingService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -433,7 +433,7 @@ export class DataLabelingServiceClient {
             .DataLabelingService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -475,7 +475,7 @@ export class DataLabelingServiceClient {
     ];
     for (const methodName of dataLabelingServiceStubMethods) {
       const callPromise = this.dataLabelingServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -685,7 +685,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDataset request %j', request);
@@ -823,7 +823,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataset request %j', request);
@@ -967,7 +967,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDataset request %j', request);
@@ -1106,7 +1106,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataItem request %j', request);
@@ -1251,7 +1251,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAnnotatedDataset request %j', request);
@@ -1396,7 +1396,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAnnotatedDataset request %j', request);
@@ -1539,7 +1539,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExample request %j', request);
@@ -1687,7 +1687,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAnnotationSpecSet request %j', request);
@@ -1831,7 +1831,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAnnotationSpecSet request %j', request);
@@ -1975,7 +1975,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAnnotationSpecSet request %j', request);
@@ -2119,7 +2119,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInstruction request %j', request);
@@ -2263,7 +2263,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteInstruction request %j', request);
@@ -2409,7 +2409,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluation request %j', request);
@@ -2555,7 +2555,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEvaluationJob request %j', request);
@@ -2713,7 +2713,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'evaluation_job.name': request.evaluationJob!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEvaluationJob request %j', request);
@@ -2858,7 +2858,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationJob request %j', request);
@@ -3004,7 +3004,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pauseEvaluationJob request %j', request);
@@ -3150,7 +3150,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resumeEvaluationJob request %j', request);
@@ -3295,7 +3295,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluationJob request %j', request);
@@ -3455,7 +3455,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3512,7 +3512,7 @@ export class DataLabelingServiceClient {
     this._log.info('importData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3638,7 +3638,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3695,7 +3695,7 @@ export class DataLabelingServiceClient {
     this._log.info('exportData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3829,7 +3829,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3886,7 +3886,7 @@ export class DataLabelingServiceClient {
     this._log.info('labelImage long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4020,7 +4020,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4077,7 +4077,7 @@ export class DataLabelingServiceClient {
     this._log.info('labelVideo long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4203,7 +4203,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4260,7 +4260,7 @@ export class DataLabelingServiceClient {
     this._log.info('labelText long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4375,7 +4375,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4432,7 +4432,7 @@ export class DataLabelingServiceClient {
     this._log.info('createInstruction long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4547,7 +4547,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4622,7 +4622,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatasets stream %j', request);
@@ -4679,7 +4679,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDatasets iterate %j', request);
@@ -4792,7 +4792,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4867,7 +4867,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataItems stream %j', request);
@@ -4924,7 +4924,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataItems iterate %j', request);
@@ -5036,7 +5036,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5111,7 +5111,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listAnnotatedDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnnotatedDatasets stream %j', request);
@@ -5168,7 +5168,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listAnnotatedDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnnotatedDatasets iterate %j', request);
@@ -5282,7 +5282,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5359,7 +5359,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExamples stream %j', request);
@@ -5418,7 +5418,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExamples iterate %j', request);
@@ -5530,7 +5530,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5605,7 +5605,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listAnnotationSpecSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnnotationSpecSets stream %j', request);
@@ -5662,7 +5662,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listAnnotationSpecSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnnotationSpecSets iterate %j', request);
@@ -5774,7 +5774,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5849,7 +5849,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listInstructions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstructions stream %j', request);
@@ -5906,7 +5906,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listInstructions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInstructions iterate %j', request);
@@ -6050,7 +6050,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6157,7 +6157,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['searchEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchEvaluations stream %j', request);
@@ -6246,7 +6246,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['searchEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchEvaluations iterate %j', request);
@@ -6362,7 +6362,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6439,7 +6439,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['searchExampleComparisons'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchExampleComparisons stream %j', request);
@@ -6498,7 +6498,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['searchExampleComparisons'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchExampleComparisons iterate %j', request);
@@ -6618,7 +6618,7 @@ export class DataLabelingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6700,7 +6700,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationJobs stream %j', request);
@@ -6764,7 +6764,7 @@ export class DataLabelingServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationJobs iterate %j', request);
@@ -7192,7 +7192,7 @@ export class DataLabelingServiceClient {
    */
   close(): Promise<void> {
     if (this.dataLabelingServiceStub && !this._terminated) {
-      return this.dataLabelingServiceStub.then((stub) => {
+      return this.dataLabelingServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

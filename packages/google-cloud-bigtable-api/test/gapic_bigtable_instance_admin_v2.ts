@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as bigtableinstanceadminModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -286,7 +286,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.bigtableInstanceAdminStub, undefined);
@@ -294,13 +294,13 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(client.bigtableInstanceAdminStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.bigtableInstanceAdminStub);
@@ -309,15 +309,15 @@ describe('v2.BigtableInstanceAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.bigtableInstanceAdminStub, undefined);
@@ -326,7 +326,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -348,7 +348,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -372,7 +372,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getInstance without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -404,7 +404,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getInstance without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getInstance with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getInstance with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -497,7 +497,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -508,7 +508,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listInstances without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -540,7 +540,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listInstances without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listInstances with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -620,7 +620,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listInstances with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -633,7 +633,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listInstances(request), expectedError);
@@ -644,7 +644,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateInstance without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -676,7 +676,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateInstance without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateInstance with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateInstance with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -769,7 +769,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateInstance(request), expectedError);
@@ -780,7 +780,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteInstance without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -812,7 +812,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteInstance without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteInstance with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -892,7 +892,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteInstance with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -905,7 +905,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteInstance(request), expectedError);
@@ -916,7 +916,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getCluster without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -948,7 +948,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getCluster without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -996,7 +996,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getCluster with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1028,7 +1028,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getCluster with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1041,7 +1041,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -1052,7 +1052,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listClusters without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listClusters without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listClusters with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1164,7 +1164,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listClusters with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1177,7 +1177,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listClusters(request), expectedError);
@@ -1188,7 +1188,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteCluster without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1220,7 +1220,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteCluster without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1268,7 +1268,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteCluster with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1300,7 +1300,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteCluster with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1313,10 +1313,146 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCluster(request), expectedError);
+    });
+  });
+
+  describe('getMemoryLayer', () => {
+    it('invokes getMemoryLayer without error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.GetMemoryLayerRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.GetMemoryLayerRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.MemoryLayer(),
+      );
+      client.innerApiCalls.getMemoryLayer = stubSimpleCall(expectedResponse);
+      const [response] = await client.getMemoryLayer(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMemoryLayer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMemoryLayer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMemoryLayer without error using callback', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.GetMemoryLayerRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.GetMemoryLayerRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.MemoryLayer(),
+      );
+      client.innerApiCalls.getMemoryLayer =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getMemoryLayer(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.bigtable.admin.v2.IMemoryLayer | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMemoryLayer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMemoryLayer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMemoryLayer with error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.GetMemoryLayerRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.GetMemoryLayerRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getMemoryLayer = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getMemoryLayer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getMemoryLayer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMemoryLayer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMemoryLayer with closed client', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.GetMemoryLayerRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.GetMemoryLayerRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getMemoryLayer(request), expectedError);
     });
   });
 
@@ -1324,7 +1460,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createAppProfile without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1356,7 +1492,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createAppProfile without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1404,7 +1540,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createAppProfile with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1436,7 +1572,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createAppProfile with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1449,7 +1585,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAppProfile(request), expectedError);
@@ -1460,7 +1596,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getAppProfile without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1492,7 +1628,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getAppProfile without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1540,7 +1676,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getAppProfile with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1572,7 +1708,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getAppProfile with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1585,7 +1721,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAppProfile(request), expectedError);
@@ -1596,7 +1732,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteAppProfile without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1628,7 +1764,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteAppProfile without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1676,7 +1812,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteAppProfile with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1708,7 +1844,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteAppProfile with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1721,7 +1857,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAppProfile(request), expectedError);
@@ -1732,7 +1868,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1764,7 +1900,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1812,7 +1948,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1844,7 +1980,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getIamPolicy with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1857,7 +1993,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1868,7 +2004,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1900,7 +2036,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1948,7 +2084,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1980,7 +2116,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes setIamPolicy with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1993,7 +2129,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2004,7 +2140,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2037,7 +2173,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2085,7 +2221,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2117,7 +2253,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes testIamPermissions with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2130,7 +2266,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2141,7 +2277,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getLogicalView without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2173,7 +2309,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getLogicalView without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2221,7 +2357,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getLogicalView with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2253,7 +2389,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getLogicalView with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2266,7 +2402,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLogicalView(request), expectedError);
@@ -2277,7 +2413,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteLogicalView without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2309,7 +2445,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteLogicalView without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2357,7 +2493,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteLogicalView with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2389,7 +2525,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteLogicalView with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2402,7 +2538,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteLogicalView(request), expectedError);
@@ -2413,7 +2549,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getMaterializedView without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2446,7 +2582,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getMaterializedView without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2494,7 +2630,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getMaterializedView with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2526,7 +2662,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes getMaterializedView with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2539,7 +2675,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMaterializedView(request), expectedError);
@@ -2550,7 +2686,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteMaterializedView without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2583,7 +2719,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteMaterializedView without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2631,7 +2767,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteMaterializedView with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2666,7 +2802,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes deleteMaterializedView with closed client', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2679,7 +2815,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2693,7 +2829,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createInstance without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2727,7 +2863,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createInstance without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2782,7 +2918,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createInstance with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2814,7 +2950,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createInstance with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2848,7 +2984,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2856,8 +2992,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -2871,7 +3007,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2893,7 +3029,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes partialUpdateInstance without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2928,7 +3064,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes partialUpdateInstance without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2984,7 +3120,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes partialUpdateInstance with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3020,7 +3156,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes partialUpdateInstance with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3055,7 +3191,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkPartialUpdateInstanceProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3063,8 +3199,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPartialUpdateInstanceProgress(
@@ -3078,7 +3214,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkPartialUpdateInstanceProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3100,7 +3236,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createCluster without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3134,7 +3270,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createCluster without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3189,7 +3325,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createCluster with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3221,7 +3357,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createCluster with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3255,7 +3391,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkCreateClusterProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3263,8 +3399,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClusterProgress(
@@ -3278,7 +3414,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkCreateClusterProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3300,7 +3436,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateCluster without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3334,7 +3470,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateCluster without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3389,7 +3525,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateCluster with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3421,7 +3557,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateCluster with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3455,7 +3591,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkUpdateClusterProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3463,8 +3599,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateClusterProgress(
@@ -3478,7 +3614,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkUpdateClusterProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3500,7 +3636,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes partialUpdateCluster without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3535,7 +3671,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes partialUpdateCluster without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3591,7 +3727,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes partialUpdateCluster with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3624,7 +3760,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes partialUpdateCluster with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3659,7 +3795,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkPartialUpdateClusterProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3667,8 +3803,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPartialUpdateClusterProgress(
@@ -3682,7 +3818,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkPartialUpdateClusterProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3700,11 +3836,215 @@ describe('v2.BigtableInstanceAdminClient', () => {
     });
   });
 
+  describe('updateMemoryLayer', () => {
+    it('invokes updateMemoryLayer without error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.UpdateMemoryLayerRequest(),
+      );
+      request.memoryLayer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.UpdateMemoryLayerRequest',
+        ['memoryLayer', 'name'],
+      );
+      request.memoryLayer.name = defaultValue1;
+      const expectedHeaderRequestParams = `memory_layer.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateMemoryLayer =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateMemoryLayer(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMemoryLayer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMemoryLayer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMemoryLayer without error using callback', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.UpdateMemoryLayerRequest(),
+      );
+      request.memoryLayer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.UpdateMemoryLayerRequest',
+        ['memoryLayer', 'name'],
+      );
+      request.memoryLayer.name = defaultValue1;
+      const expectedHeaderRequestParams = `memory_layer.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateMemoryLayer =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateMemoryLayer(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.bigtable.admin.v2.IMemoryLayer,
+              protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.bigtable.admin.v2.IMemoryLayer,
+        protos.google.bigtable.admin.v2.IUpdateMemoryLayerMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMemoryLayer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMemoryLayer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMemoryLayer with call error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.UpdateMemoryLayerRequest(),
+      );
+      request.memoryLayer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.UpdateMemoryLayerRequest',
+        ['memoryLayer', 'name'],
+      );
+      request.memoryLayer.name = defaultValue1;
+      const expectedHeaderRequestParams = `memory_layer.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMemoryLayer = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateMemoryLayer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMemoryLayer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMemoryLayer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMemoryLayer with LRO error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.UpdateMemoryLayerRequest(),
+      );
+      request.memoryLayer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.UpdateMemoryLayerRequest',
+        ['memoryLayer', 'name'],
+      );
+      request.memoryLayer.name = defaultValue1;
+      const expectedHeaderRequestParams = `memory_layer.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMemoryLayer = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateMemoryLayer(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMemoryLayer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMemoryLayer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateMemoryLayerProgress without error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateMemoryLayerProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateMemoryLayerProgress with error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateMemoryLayerProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('updateAppProfile', () => {
     it('invokes updateAppProfile without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3739,7 +4079,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateAppProfile without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3795,7 +4135,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateAppProfile with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3828,7 +4168,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateAppProfile with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3863,7 +4203,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkUpdateAppProfileProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3871,8 +4211,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAppProfileProgress(
@@ -3886,7 +4226,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkUpdateAppProfileProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3908,7 +4248,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createLogicalView without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3942,7 +4282,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createLogicalView without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3997,7 +4337,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createLogicalView with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4029,7 +4369,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createLogicalView with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4063,7 +4403,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkCreateLogicalViewProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4071,8 +4411,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateLogicalViewProgress(
@@ -4086,7 +4426,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkCreateLogicalViewProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4108,7 +4448,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateLogicalView without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4143,7 +4483,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateLogicalView without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4199,7 +4539,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateLogicalView with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4232,7 +4572,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateLogicalView with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4267,7 +4607,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkUpdateLogicalViewProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4275,8 +4615,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateLogicalViewProgress(
@@ -4290,7 +4630,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkUpdateLogicalViewProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4312,7 +4652,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createMaterializedView without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4346,7 +4686,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createMaterializedView without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4401,7 +4741,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createMaterializedView with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4436,7 +4776,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes createMaterializedView with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4470,7 +4810,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkCreateMaterializedViewProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4478,8 +4818,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMaterializedViewProgress(
@@ -4493,7 +4833,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkCreateMaterializedViewProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4515,7 +4855,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateMaterializedView without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4550,7 +4890,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateMaterializedView without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4606,7 +4946,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateMaterializedView with call error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4642,7 +4982,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes updateMaterializedView with LRO error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4677,7 +5017,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkUpdateMaterializedViewProgress without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4685,8 +5025,8 @@ describe('v2.BigtableInstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMaterializedViewProgress(
@@ -4700,7 +5040,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes checkUpdateMaterializedViewProgress with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4718,11 +5058,343 @@ describe('v2.BigtableInstanceAdminClient', () => {
     });
   });
 
+  describe('listMemoryLayers', () => {
+    it('invokes listMemoryLayers without error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.ListMemoryLayersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.ListMemoryLayersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+      ];
+      client.innerApiCalls.listMemoryLayers = stubSimpleCall(expectedResponse);
+      const [response] = await client.listMemoryLayers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMemoryLayers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMemoryLayers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMemoryLayers without error using callback', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.ListMemoryLayersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.ListMemoryLayersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+      ];
+      client.innerApiCalls.listMemoryLayers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listMemoryLayers(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.bigtable.admin.v2.IMemoryLayer[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMemoryLayers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMemoryLayers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMemoryLayers with error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.ListMemoryLayersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.ListMemoryLayersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listMemoryLayers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listMemoryLayers(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listMemoryLayers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMemoryLayers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMemoryLayersStream without error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.ListMemoryLayersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.ListMemoryLayersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+      ];
+      client.descriptors.page.listMemoryLayers.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listMemoryLayersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.bigtable.admin.v2.MemoryLayer[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.bigtable.admin.v2.MemoryLayer) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listMemoryLayers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMemoryLayers, request),
+      );
+      assert(
+        (client.descriptors.page.listMemoryLayers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listMemoryLayersStream with error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.ListMemoryLayersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.ListMemoryLayersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMemoryLayers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listMemoryLayersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.bigtable.admin.v2.MemoryLayer[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.bigtable.admin.v2.MemoryLayer) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listMemoryLayers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMemoryLayers, request),
+      );
+      assert(
+        (client.descriptors.page.listMemoryLayers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listMemoryLayers without error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.ListMemoryLayersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.ListMemoryLayersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+        generateSampleMessage(
+          new protos.google.bigtable.admin.v2.MemoryLayer(),
+        ),
+      ];
+      client.descriptors.page.listMemoryLayers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.bigtable.admin.v2.IMemoryLayer[] = [];
+      const iterable = client.listMemoryLayersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMemoryLayers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listMemoryLayers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listMemoryLayers with error', async () => {
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.bigtable.admin.v2.ListMemoryLayersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.bigtable.admin.v2.ListMemoryLayersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMemoryLayers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listMemoryLayersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.bigtable.admin.v2.IMemoryLayer[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMemoryLayers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listMemoryLayers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
   describe('listAppProfiles', () => {
     it('invokes listAppProfiles without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4756,7 +5428,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listAppProfiles without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4806,7 +5478,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listAppProfiles with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4838,7 +5510,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listAppProfilesStream without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4884,16 +5556,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listAppProfiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAppProfilesStream with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4934,16 +5606,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listAppProfiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAppProfiles without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4978,16 +5650,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listAppProfiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAppProfiles with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5019,9 +5691,9 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listAppProfiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5030,7 +5702,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listHotTablets without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5064,7 +5736,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listHotTablets without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5114,7 +5786,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listHotTablets with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5146,7 +5818,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listHotTabletsStream without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5192,16 +5864,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listHotTablets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listHotTabletsStream with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5242,16 +5914,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listHotTablets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHotTablets without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5286,16 +5958,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listHotTablets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHotTablets with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5327,9 +5999,9 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listHotTablets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5338,7 +6010,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listLogicalViews without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5378,7 +6050,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listLogicalViews without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5434,7 +6106,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listLogicalViews with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5466,7 +6138,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listLogicalViewsStream without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5518,16 +6190,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listLogicalViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLogicalViewsStream with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5568,16 +6240,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listLogicalViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLogicalViews without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5618,16 +6290,16 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listLogicalViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLogicalViews with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5659,9 +6331,9 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listLogicalViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5670,7 +6342,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listMaterializedViews without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5711,7 +6383,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listMaterializedViews without error using callback', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5767,7 +6439,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listMaterializedViews with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5802,7 +6474,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listMaterializedViewsStream without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5870,7 +6542,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('invokes listMaterializedViewsStream with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5927,7 +6599,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('uses async iteration with listMaterializedViews without error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5981,7 +6653,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
     it('uses async iteration with listMaterializedViews with error', async () => {
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6035,7 +6707,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6101,7 +6773,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6179,7 +6851,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6255,7 +6927,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6321,7 +6993,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6396,7 +7068,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6447,7 +7119,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6512,7 +7184,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6572,6 +7244,71 @@ describe('v2.BigtableInstanceAdminClient', () => {
       });
     });
 
+    describe('memoryLayer', async () => {
+      const fakePath = '/rendered/path/memoryLayer';
+      const expectedParameters = {
+        project: 'projectValue',
+        instance: 'instanceValue',
+        cluster: 'clusterValue',
+      };
+      const client =
+        new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.memoryLayerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.memoryLayerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('memoryLayerPath', () => {
+        const result = client.memoryLayerPath(
+          'projectValue',
+          'instanceValue',
+          'clusterValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.memoryLayerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromMemoryLayerName', () => {
+        const result = client.matchProjectFromMemoryLayerName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.memoryLayerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromMemoryLayerName', () => {
+        const result = client.matchInstanceFromMemoryLayerName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.memoryLayerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchClusterFromMemoryLayerName', () => {
+        const result = client.matchClusterFromMemoryLayerName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.memoryLayerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -6579,7 +7316,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6621,7 +7358,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6698,7 +7435,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6774,7 +7511,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       };
       const client =
         new bigtableinstanceadminModule.v2.BigtableInstanceAdminClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
