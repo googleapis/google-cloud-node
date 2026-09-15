@@ -23,9 +23,10 @@ import * as protobuf from 'protobufjs';
 import * as sinon from 'sinon';
 import echoProtoJson = require('../fixtures/echo.json');
 import {GrpcClient} from '../../src/fallback';
-import {ClientStubOptions, GoogleAuth, GoogleError} from '../../src';
+import {ClientStubOptions, GoogleAuth, GoogleError, Status} from '../../src';
+import {StreamArrayParser} from '../../src/streamArrayParser';
 import {PassThroughClient} from 'google-auth-library';
-import {setMockFallbackResponse} from './utils';
+import {setMockFallbackError, setMockFallbackResponse} from './utils';
 
 let authClient = new PassThroughClient();
 let opts = {
@@ -538,5 +539,142 @@ describe('grpc-fallback', () => {
 
     const stub = await gaxGrpc.createStub(echoService, stubOptions);
     stub.close({}, {}, {}, () => {});
+  });
+
+  describe('transport error translation', () => {
+    // Errors surfaced by the transport must carry a numeric gRPC status code:
+    // retry logic in normalCalls/retries.ts matches `err.code` against the
+    // numeric retry codes from the service config, and client libraries branch
+    // on the same codes.
+    function callEcho(): Promise<GoogleError> {
+      return gaxGrpc.createStub(echoService, stubOptions).then(
+        echoStub =>
+          new Promise<GoogleError>(resolve => {
+            echoStub.echo({content: 'test-content'}, {}, {}, (err?: Error) =>
+              resolve(err as GoogleError),
+            );
+          }),
+      );
+    }
+
+    it('should translate a connection failure into UNAVAILABLE', async () => {
+      // e.g. a "socket hang up" when the server closes a keep-alive socket.
+      const fetchError = Object.assign(
+        new Error(
+          'request to https://foo.example.com failed, reason: socket hang up',
+        ),
+        {code: 'ECONNRESET'},
+      );
+      setMockFallbackError(gaxGrpc, fetchError);
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.UNAVAILABLE);
+      assert.strictEqual(err.cause, fetchError);
+    });
+
+    it('should translate a timeout into DEADLINE_EXCEEDED', async () => {
+      setMockFallbackError(
+        gaxGrpc,
+        Object.assign(new Error('The operation was aborted due to timeout'), {
+          code: 'TimeoutError',
+        }),
+      );
+
+      const err = await callEcho();
+
+      assert.strictEqual(err.code, Status.DEADLINE_EXCEEDED);
+    });
+
+    it('should translate an aborted request into CANCELLED', async () => {
+      setMockFallbackError(
+        gaxGrpc,
+        Object.assign(new Error('This operation was aborted'), {
+          code: 'AbortError',
+        }),
+      );
+
+      const err = await callEcho();
+
+      assert.strictEqual(err.code, Status.CANCELLED);
+    });
+
+    it('should use UNKNOWN for an unrecognized transport error', async () => {
+      setMockFallbackError(gaxGrpc, new Error('something unexpected'));
+
+      const err = await callEcho();
+
+      assert.strictEqual(err.code, Status.UNKNOWN);
+      assert.strictEqual(err.message, 'something unexpected');
+    });
+
+    it('should map a rejection carrying an HTTP status onto a gRPC status', async () => {
+      // 401 and 403 responses are rejected by the transport on purpose, so that
+      // the auth client can refresh credentials and retry.
+      setMockFallbackError(
+        gaxGrpc,
+        Object.assign(
+          new Error('Request had invalid authentication credentials'),
+          {
+            status: 401,
+          },
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert.strictEqual(err.code, Status.UNAUTHENTICATED);
+    });
+
+    it('should not rewrap an error that is already a GoogleError', async () => {
+      const googleError = new GoogleError('already translated');
+      googleError.code = Status.FAILED_PRECONDITION;
+      setMockFallbackError(gaxGrpc, googleError);
+
+      const err = await callEcho();
+
+      assert.strictEqual(err, googleError);
+      assert.strictEqual(err.code, Status.FAILED_PRECONDITION);
+    });
+
+    it('should translate transport errors on server streaming calls', async () => {
+      setMockFallbackError(
+        gaxGrpc,
+        Object.assign(new Error('socket hang up'), {code: 'ECONNRESET'}),
+      );
+
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+      const stream = echoStub.expand(
+        {content: 'test content'},
+        {},
+        {},
+        () => {},
+      );
+
+      const err = await new Promise<GoogleError>(resolve => {
+        (stream as StreamArrayParser).on('error', resolve);
+      });
+
+      assert.strictEqual(err.code, Status.UNAVAILABLE);
+    });
+
+    it('should let the auth client handle 401 and 403, and decode every other status', async () => {
+      const requestOptions = setMockFallbackError(gaxGrpc, new Error('unused'));
+
+      await callEcho();
+
+      const validateStatus = requestOptions[0].validateStatus;
+      assert(validateStatus, 'the transport must set validateStatus');
+      // Rejected, so that AuthClient can refresh credentials and retry.
+      assert.strictEqual(validateStatus(401), false);
+      assert.strictEqual(validateStatus(403), false);
+      // Resolved, so that the response is decoded into a GoogleError with a
+      // gRPC status code rather than surfacing as a raw transport error.
+      assert.strictEqual(validateStatus(404), true);
+      assert.strictEqual(validateStatus(429), true);
+      assert.strictEqual(validateStatus(503), true);
+      assert.strictEqual(validateStatus(200), true);
+    });
   });
 });

@@ -22,6 +22,8 @@ import * as serializer from 'proto3-json-serializer';
 import {isNodeJS} from './featureDetection';
 import {StreamArrayParser} from './streamArrayParser';
 import {defaultToObjectOptions} from './fallback';
+import {GoogleError} from './googleError';
+import {rpcCodeFromHttpStatusCode, Status} from './status';
 import {pipeline, PipelineSource} from 'stream';
 import type {Agent as HttpAgent} from 'http';
 import type {Agent as HttpsAgent} from 'https';
@@ -80,6 +82,79 @@ function _formatEmptyResponse(rpc: protobuf.Method) {
     defaultToObjectOptions,
   );
   return resp;
+}
+
+/**
+ * Translates an error thrown by the underlying fetch implementation into a
+ * {@link GoogleError} carrying a numeric gRPC status code.
+ *
+ * Retry logic (see `normalCalls/retries.ts`) and user code both match on
+ * numeric gRPC status codes. An untranslated error from `auth.fetch()` carries
+ * either a system error string (e.g. `'ECONNRESET'` for a socket hang up) or an
+ * HTTP status number, so it never matches a retry code and is silently treated
+ * as a permanent failure.
+ *
+ * @param err The error thrown by `auth.fetch()`.
+ * @returns A GoogleError with a numeric `code`, or the original value if it is
+ *   not an Error.
+ */
+function _toGoogleError(err: unknown): unknown {
+  if (err instanceof GoogleError) {
+    return err;
+  }
+  if (!(err instanceof Error)) {
+    return err;
+  }
+
+  const error = new GoogleError(err.message);
+  error.cause = err;
+
+  // `GaxiosError` shape, described structurally to avoid depending on the
+  // error instance originating from any particular copy of gaxios.
+  const fetchError = err as Partial<{
+    status: number;
+    response: {status?: number};
+    code: string | number;
+  }>;
+
+  // Errors that carry an HTTP status (e.g. the 401 and 403 responses that we
+  // deliberately let the fetch implementation reject with, so that the auth
+  // client can refresh credentials and retry) map through the standard
+  // HTTP-to-gRPC table.
+  const httpStatus =
+    typeof fetchError.status === 'number'
+      ? fetchError.status
+      : fetchError.response?.status;
+  if (typeof httpStatus === 'number') {
+    error.code = rpcCodeFromHttpStatusCode(httpStatus);
+    return error;
+  }
+
+  // Otherwise this is a connection-level failure identified by a system error
+  // code. gRPC reports these conditions as UNAVAILABLE.
+  switch (fetchError.code) {
+    case 'ECONNRESET':
+    case 'ECONNREFUSED':
+    case 'ECONNABORTED':
+    case 'EPIPE':
+    case 'ENOTFOUND':
+    case 'EAI_AGAIN':
+    case 'ENETUNREACH':
+    case 'EHOSTUNREACH':
+      error.code = Status.UNAVAILABLE;
+      break;
+    case 'ETIMEDOUT':
+    case 'TimeoutError':
+      error.code = Status.DEADLINE_EXCEEDED;
+      break;
+    case 'AbortError':
+      error.code = Status.CANCELLED;
+      break;
+    default:
+      error.code = Status.UNKNOWN;
+      break;
+  }
+  return error;
 }
 
 export function generateServiceStub(
@@ -164,6 +239,10 @@ export function generateServiceStub(
         method: fetchParameters.method,
         signal: cancelSignal,
         responseType: 'stream', // ensure gaxios returns the data directly so that it handle data/streams itself
+        // Error responses must resolve so that they are decoded below into a
+        // GoogleError carrying a gRPC status code. 401 and 403 keep rejecting
+        // so that the auth client can refresh credentials and retry.
+        validateStatus: (status: number) => status !== 401 && status !== 403,
         agent: agentOption || undefined,
       };
 
@@ -245,15 +324,16 @@ export function generateServiceStub(
           }
         })
         .catch((err: unknown) => {
+          const translated = _toGoogleError(err);
           if (rpc.responseStream) {
             if (callback) {
-              callback(err);
+              callback(translated);
             }
-            streamArrayParser.emit('error', err);
+            streamArrayParser.emit('error', translated);
           } else if (callback) {
-            callback(err);
+            callback(translated);
           } else {
-            throw err;
+            throw translated;
           }
         });
 
