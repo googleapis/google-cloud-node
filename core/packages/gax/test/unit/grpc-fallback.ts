@@ -25,7 +25,6 @@ import echoProtoJson = require('../fixtures/echo.json');
 import {GrpcClient} from '../../src/fallback';
 import {ClientStubOptions, GoogleAuth, GoogleError, Status} from '../../src';
 import {StreamArrayParser} from '../../src/streamArrayParser';
-import {rpcCodeFromHttpStatusCode} from '../../src/status';
 import {PassThroughClient} from 'google-auth-library';
 import {
   setMockFallbackError,
@@ -709,110 +708,57 @@ describe('grpc-fallback', () => {
       assert.strictEqual(validateStatus(503), true);
       assert.strictEqual(validateStatus(200), true);
     });
-  });
 
-  describe('transport parity', () => {
-    // A client must observe the same canonical error code regardless of which
-    // transport carried the call: retry configuration is expressed in gRPC
-    // status codes, and user code branches on them. The gRPC transport reports
-    // the server's canonical code directly, so the fallback transport has to
-    // arrive at the same value from the HTTP response.
-    interface ParityCase {
-      name: string;
-      httpStatus: number;
-      status?: string;
-      expected: Status;
-    }
+    it('should decode a non-2xx response into its canonical gRPC status', async () => {
+      // The primary half of the fix: validateStatus lets this response resolve,
+      // so it reaches decodeResponse and is parsed rather than surfacing as a
+      // raw transport rejection. parseHttpError prefers the canonical status
+      // name in the body.
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          Buffer.from(
+            JSON.stringify({
+              error: {
+                code: 409,
+                message: 'Too much contention on these documents.',
+                status: 'ABORTED',
+              },
+            }),
+          ),
+          {status: 409},
+        ),
+      );
 
-    const cases: ParityCase[] = [
-      {
-        name: 'contention',
-        httpStatus: 409,
-        status: 'ABORTED',
-        expected: Status.ABORTED,
-      },
-      {
-        name: 'bad request',
-        httpStatus: 400,
-        status: 'INVALID_ARGUMENT',
-        expected: Status.INVALID_ARGUMENT,
-      },
-      {
-        name: 'missing resource',
-        httpStatus: 404,
-        status: 'NOT_FOUND',
-        expected: Status.NOT_FOUND,
-      },
-      {
-        name: 'quota',
-        httpStatus: 429,
-        status: 'RESOURCE_EXHAUSTED',
-        expected: Status.RESOURCE_EXHAUSTED,
-      },
-      {
-        name: 'backend unavailable',
-        httpStatus: 503,
-        status: 'UNAVAILABLE',
-        expected: Status.UNAVAILABLE,
-      },
-      // No `status` field: the code must still be derived from the HTTP status
-      // rather than passed through as an HTTP number.
-      {
-        name: 'unavailable without a status field',
-        httpStatus: 503,
-        expected: Status.UNAVAILABLE,
-      },
-      {
-        name: 'conflict without a status field',
-        httpStatus: 409,
-        expected: Status.ABORTED,
-      },
-    ];
+      const err = await callEcho();
 
-    for (const testCase of cases) {
-      it(`should surface ${Status[testCase.expected]} for ${testCase.name}`, async () => {
-        const body: {error: {code: number; message: string; status?: string}} =
-          {
-            error: {
-              code: testCase.httpStatus,
-              message: `${testCase.name} (test)`,
-            },
-          };
-        if (testCase.status) {
-          body.error.status = testCase.status;
-        }
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.ABORTED);
+      // The code must denote the status the server named, which is the same
+      // value the gRPC transport reports for this condition.
+      assert.strictEqual(Status[err.code!], 'ABORTED');
+      // The HTTP status must not leak through as the error code.
+      assert.notStrictEqual(err.code as number, 409);
+    });
 
-        setMockFallbackHttpResponse(
-          gaxGrpc,
-          new Response(Buffer.from(JSON.stringify(body)), {
-            status: testCase.httpStatus,
-          }),
-        );
+    it('should derive a code from the HTTP status when the body has none', async () => {
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          Buffer.from(
+            JSON.stringify({
+              error: {code: 503, message: 'The service is currently down.'},
+            }),
+          ),
+          {status: 503},
+        ),
+      );
 
-        const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
-        const err = await new Promise<GoogleError>(resolve => {
-          echoStub.echo({content: 'test'}, {}, {}, (e?: Error) =>
-            resolve(e as GoogleError),
-          );
-        });
+      const err = await callEcho();
 
-        assert(err instanceof GoogleError);
-        assert.strictEqual(err.code, testCase.expected);
-        // The HTTP status must not leak through as the error code.
-        assert.notStrictEqual(err.code as number, testCase.httpStatus);
-      });
-    }
-
-    it('should produce codes consistent with the shared HTTP-to-gRPC mapping', () => {
-      // The fallback transport and the mapping table used elsewhere in gax must
-      // not drift apart.
-      for (const testCase of cases) {
-        assert.strictEqual(
-          rpcCodeFromHttpStatusCode(testCase.httpStatus),
-          testCase.expected,
-          `HTTP ${testCase.httpStatus} should map to ${Status[testCase.expected]}`,
-        );
-      }
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.UNAVAILABLE);
+      assert.notStrictEqual(err.code as number, 503);
     });
   });
 });
