@@ -128,6 +128,20 @@ function _toGoogleError(err: unknown): unknown {
     return error;
   }
 
+  // Cancellations and timeouts are reported as a DOMException by native fetch,
+  // where `code` is a numeric DOMException value (20 and 23) rather than a
+  // string, and by name alone under node-fetch. Match on `name`, as the rest of
+  // this file does when it detects cancellation, and accept a string `code` too
+  // because gaxios matches errors in that form.
+  if (err.name === 'AbortError' || fetchError.code === 'AbortError') {
+    error.code = Status.CANCELLED;
+    return error;
+  }
+  if (err.name === 'TimeoutError' || fetchError.code === 'TimeoutError') {
+    error.code = Status.DEADLINE_EXCEEDED;
+    return error;
+  }
+
   // Otherwise this is a connection-level failure identified by a system error
   // code. gRPC reports these conditions as UNAVAILABLE.
   switch (fetchError.code) {
@@ -142,11 +156,7 @@ function _toGoogleError(err: unknown): unknown {
       error.code = Status.UNAVAILABLE;
       break;
     case 'ETIMEDOUT':
-    case 'TimeoutError':
       error.code = Status.DEADLINE_EXCEEDED;
-      break;
-    case 'AbortError':
-      error.code = Status.CANCELLED;
       break;
     default:
       error.code = Status.UNKNOWN;
