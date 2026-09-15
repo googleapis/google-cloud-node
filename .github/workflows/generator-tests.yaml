@@ -71,7 +71,7 @@ jobs:
       run: |
         mkdir -p ~/artifacts
         cp bazel-testlogs/unit_tests/test.outputs/outputs.zip ~/artifacts/
-        bazelisk run -- @pnpm//:pnpm --dir $PWD install
+        bazelisk run -- @pnpm//:pnpm --dir $PWD install --ignore-workspace
         tar cfz ~/artifacts/node_modules.tar.gz node_modules
 
     - name: Save artifacts
@@ -82,25 +82,34 @@ jobs:
 
     - name: Test generated libraries
       working-directory: core/generator/gapic-generator-typescript
+      shell: bash
       run: |
         set -ex
         npm install -g pnpm@10.0.0 --silent
         cp ../../../.mocharc.cjs .
         unzip ~/artifacts/outputs.zip -d library
         FAIL=0
+        PIDS=()
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
           (
             set -ex
             echo "--- Testing library $lib ---"
-            cd library/.test-out-$lib
-            pnpm install --no-frozen-lockfile --silent
+            cd "library/.test-out-$lib"
+            pnpm install --no-frozen-lockfile --ignore-workspace --silent
             pnpm test
             pnpm run compile
             pnpm run system-test
           ) &
+          PIDS+=($!)
+          if [ "${#PIDS[@]}" -ge 4 ]; then
+            for pid in "${PIDS[@]}"; do
+              wait "$pid" || FAIL=1
+            done
+            PIDS=()
+          fi
         done
-        for job in $(jobs -p); do
-          wait "$job" || FAIL=1
+        for pid in "${PIDS[@]}"; do
+          wait "$pid" || FAIL=1
         done
         if [ "$FAIL" -ne 0 ]; then
           echo "Some library tests failed!"
@@ -109,23 +118,32 @@ jobs:
 
     - name: Test generated ESM libraries
       working-directory: core/generator/gapic-generator-typescript
+      shell: bash
       run: |
         set -ex
         cp ../../../.mocharc.cjs .
         FAIL=0
+        PIDS=()
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
           (
             set -ex
             echo "--- Testing ESM library $lib ---"
-            cd library/.test-out-$lib-esm
-            pnpm install --no-frozen-lockfile --silent
+            cd "library/.test-out-$lib-esm"
+            pnpm install --no-frozen-lockfile --ignore-workspace --silent
             pnpm test
             pnpm run compile
             pnpm run system-test
           ) &
+          PIDS+=($!)
+          if [ "${#PIDS[@]}" -ge 4 ]; then
+            for pid in "${PIDS[@]}"; do
+              wait "$pid" || FAIL=1
+            done
+            PIDS=()
+          fi
         done
-        for job in $(jobs -p); do
-          wait "$job" || FAIL=1
+        for pid in "${PIDS[@]}"; do
+          wait "$pid" || FAIL=1
         done
         if [ "$FAIL" -ne 0 ]; then
           echo "Some ESM library tests failed!"
@@ -142,7 +160,7 @@ jobs:
       run: |
         set -ex
         cd generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
-        pnpm install --no-frozen-lockfile --silent
+        pnpm install --no-frozen-lockfile --ignore-workspace --silent
         pnpm test
         pnpm run system-test
 
@@ -157,6 +175,6 @@ jobs:
       run: |
         set -ex
         cd generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
-        pnpm install --no-frozen-lockfile --silent
+        pnpm install --no-frozen-lockfile --ignore-workspace --silent
         pnpm test
         pnpm run system-test

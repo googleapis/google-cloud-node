@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/compute",
   "description": "Google Compute Engine Client Library for Node.js",
-  "version": "7.3.0",
+  "version": "7.4.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -145,10 +145,5 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-compute",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }
