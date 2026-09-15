@@ -857,9 +857,10 @@ describe('TracerHelper', () => {
         assert.strictEqual(spans[0].ended, true);
       });
 
-      it('does not wrap the callback for stream calls', () => {
+      it('wraps the callback for stream calls and ends the span once', () => {
         const emitter = new EventEmitter();
-        let received: APICallback | undefined = (() => {}) as APICallback;
+        let received: APICallback | undefined;
+        let userCallbackCalls = 0;
 
         traceCall(
           dynamicArgs,
@@ -869,13 +870,39 @@ describe('TracerHelper', () => {
             return emitter;
           },
           true,
+          () => {
+            userCallbackCalls++;
+          },
+        );
+
+        // The callback is wrapped, so it can close the span itself.
+        assert.notStrictEqual(received, undefined);
+        assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+        received!(null);
+        assert.strictEqual(userCallbackCalls, 1);
+        assert.strictEqual(harness.getSpans('google-gax').length, 1);
+
+        // handleStream is still attached, so 'end' arrives second and must be
+        // absorbed rather than producing a second span.
+        emitter.emit('end');
+        assert.strictEqual(harness.getSpans('google-gax').length, 1);
+      });
+
+      it('lets stream events end the span when the callback never fires', () => {
+        const emitter = new EventEmitter();
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          () => emitter,
+          true,
           () => {},
         );
 
-        // Stream calls manage span lifetime via handleStream, not the callback.
-        assert.strictEqual(received, undefined);
         assert.strictEqual(harness.getSpans('google-gax').length, 0);
 
+        // Wrapping the callback must not disarm handleStream.
         emitter.emit('end');
         assert.strictEqual(harness.getSpans('google-gax').length, 1);
       });
@@ -999,6 +1026,40 @@ describe('TracerHelper', () => {
         const status = lastStatus();
         assert.strictEqual(status.code, SpanStatusCode.ERROR);
         assert.strictEqual(status.message, 'stream boom');
+      });
+
+      it('ignores a stream error that arrives after the callback closed the span', () => {
+        // Both the callback and the stream can terminate a stream call, so the
+        // loser of that race can still surface an error afterwards. The span is
+        // already exported by then and OTel drops writes to an ended span, so
+        // the late error must not reopen, restatus or re-export it.
+        const emitter = new EventEmitter();
+        let invokedCallback: APICallback | undefined;
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            invokedCallback = tracedCallback;
+            return emitter;
+          },
+          true,
+          () => {},
+        );
+
+        invokedCallback!(null, {ok: true});
+        assert.strictEqual(lastStatus().code, SpanStatusCode.OK);
+
+        emitter.emit('error', new Error('too late'));
+
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 1);
+        assert.strictEqual(spans[0].status.code, SpanStatusCode.OK);
+        // No phantom exception event tacked onto the finished span.
+        assert.strictEqual(
+          spans[0].events.filter(e => e.name === 'exception').length,
+          0,
+        );
       });
     });
   });

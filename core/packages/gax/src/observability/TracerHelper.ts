@@ -197,8 +197,8 @@ export function handleStream(
   let spanEnded = false;
 
   // Client-streaming calls hand back a write-only stream: the readable side is
-  // never opened, so 'end' and 'close' never fire and 'finish' is the only
-  // signal that the call completed.
+  // never opened, so 'end' never fires, and when the transport also suppresses
+  // 'close' then 'finish' is the only signal left that the call completed.
   //
   // 'finish' must NOT be used for readable streams. On bidi streams it fires as
   // soon as the caller stops writing, which is typically long before the server
@@ -214,11 +214,11 @@ export function handleStream(
     (!('readable' in stream) || stream.readable !== true);
 
   // A supplied callback is the authoritative completion signal: it fires when
-  // the server has responded. 'finish' only means the client stopped writing,
-  // which on a callback-driven client-streaming call happens before the
-  // response arrives, so subscribing to it would end the span early and hide
-  // any error reported through the callback. 'end', 'close' and 'error' still
-  // terminate the span, so this cannot leak.
+  // the server has responded, and traceCall wraps it so that it ends the span.
+  // 'finish' only means the client stopped writing, which on a callback-driven
+  // client-streaming call happens before the response arrives, so subscribing
+  // to it would end the span early and hide any error reported through the
+  // callback. 'end', 'close' and 'error' stay attached either way.
   const useFinish = isWriteOnly && !hasCallback;
 
   const cleanup = () => {
@@ -273,19 +273,20 @@ export function handleStream(
  *
  * To avoid spans ending prematurely with callback functions, pass the user's
  * `callback` as the fifth argument. `fn` then receives a traced replacement
- * to hand to the RPC, and the span stays open until that callback fires.
+ * to hand to the RPC, and on a non-stream call the span stays open until that
+ * callback fires.
  *
- * Stream calls keep managing their own span lifetime, so `fn` receives
- * `undefined` and the user's `callback` is handed back unwrapped. The callback
- * is still reported to `handleStream`, which then stops treating 'finish' as a
- * completion signal because the callback, not the end of the write side,
- * marks the end of the RPC.
+ * Stream calls are wrapped too. The stream's events and the callback then both
+ * race to finish the span, and whichever fires first wins because `endSpan` is
+ * idempotent. That is the point: a callback-driven client-streaming call
+ * reports completion through the callback, while a plain stream reports it
+ * through 'end'/'close', and neither has to know which one is in play.
  *
  * @template T
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the RPC call.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
  * @param {function} fn - The operation to trace. Receives the traced callback
- *   when `callback` is supplied on a non-stream call, otherwise `undefined`.
+ *   when `callback` is supplied, otherwise `undefined`.
  * @param {boolean} [isStreamCall=false] - Whether the operation is a stream call (true) or promise call (false).
  * @param {APICallback} [callback] - The user callback for callback-style invocations.
  * @returns {T} The result of the traced operation.
@@ -375,23 +376,25 @@ export function traceCall(
     };
 
     // For callback-style invocations the span's lifetime is bound to the
-    // callback rather than to a promise or stream. Declared as a `function` and
+    // callback rather than to a promise. Declared as a `function` and
     // forwarding `arguments` via `apply` so the caller's `this` binding and the
     // full argument list (err, response, next, rawResponse) are preserved.
     //
     // The span is ended *before* the user callback runs so the span measures the
     // RPC itself, and so a throwing user callback cannot leak the span.
-    const tracedCallback: APICallback | undefined =
-      !isStreamCall && callback
-        ? function (this: unknown, ...args: Parameters<APICallback>) {
-            const err = args[0];
-            if (err) {
-              recordError(err);
-            }
-            endSpan();
-            callback.apply(this, args);
+    //
+    // Stream calls are wrapped as well. `handleStream` still watches the
+    // stream, so the two simply race and `endSpan` keeps the result idempotent.
+    const tracedCallback: APICallback | undefined = callback
+      ? function (this: unknown, ...args: Parameters<APICallback>) {
+          const err = args[0];
+          if (err) {
+            recordError(err);
           }
-        : undefined;
+          endSpan();
+          callback.apply(this, args);
+        }
+      : undefined;
 
     try {
       const result = fn(tracedCallback);
