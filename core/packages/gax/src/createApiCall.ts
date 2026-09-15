@@ -204,10 +204,11 @@ export function createApiCall(
         dynamicArgs,
         staticArgs,
         (tracedCallback?: APICallback) => {
-          // `traceCall` only supplies a traced callback for callback-style,
-          // non-streaming invocations. When it is undefined the span is bound
-          // to the returned promise or stream instead, so pass the user's
-          // callback straight through.
+          // `traceCall` wraps the user's callback whenever one was supplied,
+          // for stream and non-stream calls alike, and that wrapper is what
+          // closes the span. It is undefined only when there is no callback to
+          // wrap, in which case the span is bound to the returned promise or
+          // stream instead; the fallback keeps this correct either way.
           return invokeCall(request, callOptions, tracedCallback ?? callback);
         },
         isStreamingCall,
