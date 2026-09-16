@@ -34,12 +34,14 @@ if [ -f .kokoro/pre-samples-test.sh ]; then
 fi
 
 if [ -f samples/package.json ]; then
-    npm install
+    npm install -g pnpm@9
+    pnpm install
 
     # Install and link samples
     cd samples/
     npm link ../
-    npm install
+    npm install -g pnpm@9
+    pnpm install
     cd ..
     # If tests are running against main branch, configure flakybot
     # to open issues on failures:
@@ -59,7 +61,7 @@ if [ -f samples/package.json ]; then
       fi
     fi
 
-    npm run samples-test
+    pnpm run samples-test
 fi
 
 # codecov combines coverage across integration and unit tests. Include

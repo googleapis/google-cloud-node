@@ -296,6 +296,11 @@ export class SecureSourceManagerClient {
         'nextPageToken',
         'treeEntries',
       ),
+      fetchRefs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'refs',
+      ),
       listIssues: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -809,6 +814,7 @@ export class SecureSourceManagerClient {
       'listPullRequestFileDiffs',
       'fetchTree',
       'fetchBlob',
+      'fetchRefs',
       'createIssue',
       'getIssue',
       'listIssues',
@@ -924,7 +930,10 @@ export class SecureSourceManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/securesourcemanager.read-write',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -9533,6 +9542,244 @@ export class SecureSourceManagerClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.ITreeEntry>;
+  }
+  /**
+   * Fetches git references from a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the references from.
+   * @param {google.cloud.securesourcemanager.v1.Ref.RefType} [request.type]
+   *   Optional. The type of reference to fetch (eg. branch, tag). By default, all
+   *   references are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Ref|Ref}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchRefsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchRefs(
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IRef[],
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse,
+    ]
+  >;
+  fetchRefs(
+    request: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRef
+    >,
+  ): void;
+  fetchRefs(
+    request: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRef
+    >,
+  ): void;
+  fetchRefs(
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+          | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IRef
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRef
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IRef[],
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+          | protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IRef
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchRefs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchRefs request %j', request);
+    return this.innerApiCalls
+      .fetchRefs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IRef[],
+          protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IFetchRefsResponse,
+        ]) => {
+          this._log.info('fetchRefs values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `fetchRefs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the references from.
+   * @param {google.cloud.securesourcemanager.v1.Ref.RefType} [request.type]
+   *   Optional. The type of reference to fetch (eg. branch, tag). By default, all
+   *   references are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Ref|Ref} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchRefsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchRefsStream(
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchRefs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchRefs stream %j', request);
+    return this.descriptors.page.fetchRefs.createStream(
+      this.innerApiCalls.fetchRefs as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `fetchRefs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the references from.
+   * @param {google.cloud.securesourcemanager.v1.Ref.RefType} [request.type]
+   *   Optional. The type of reference to fetch (eg. branch, tag). By default, all
+   *   references are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.Ref|Ref}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.fetch_refs.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_FetchRefs_async
+   */
+  fetchRefsAsync(
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchRefsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IRef> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchRefs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchRefs iterate %j', request);
+    return this.descriptors.page.fetchRefs.asyncIterate(
+      this.innerApiCalls['fetchRefs'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IRef>;
   }
   /**
    * Lists issues in a repository.

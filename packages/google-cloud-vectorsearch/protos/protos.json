@@ -2785,7 +2785,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "searchField": {
@@ -2799,7 +2799,7 @@
                           "type": "EmbeddingTaskType",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "outputFields": {
@@ -2877,6 +2877,168 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "structuredQuery": {
+                          "type": "StructuredQuery",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StructuredQuery": {
+                      "oneofs": {
+                        "queryType": {
+                          "oneof": [
+                            "text",
+                            "unary",
+                            "combine"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "TextQuery",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "unary": {
+                          "type": "UnaryQuery",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "combine": {
+                          "type": "CombinedQuery",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "boost": {
+                          "type": "float",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TextQuery": {
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "fields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "matchType": {
+                          "type": "MatchType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "queryEnhancement": {
+                          "type": "QueryEnhancement",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MatchType": {
+                          "values": {
+                            "MATCH_TYPE_UNSPECIFIED": 0,
+                            "TEXT": 1,
+                            "EXACT": 2
+                          }
+                        }
+                      }
+                    },
+                    "QueryEnhancement": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UnaryQuery": {
+                      "fields": {
+                        "op": {
+                          "type": "Operator",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subQuery": {
+                          "type": "StructuredQuery",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Operator": {
+                          "values": {
+                            "OPERATOR_UNSPECIFIED": 0,
+                            "NOT": 1
+                          }
+                        }
+                      }
+                    },
+                    "CombinedQuery": {
+                      "fields": {
+                        "op": {
+                          "type": "Operator",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subQueries": {
+                          "rule": "repeated",
+                          "type": "StructuredQuery",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Operator": {
+                          "values": {
+                            "OPERATOR_UNSPECIFIED": 0,
+                            "AND": 1,
+                            "OR": 2
                           }
                         }
                       }
@@ -3312,14 +3474,14 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "taskType": {
                           "type": "EmbeddingTaskType",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

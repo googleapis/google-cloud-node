@@ -267,6 +267,7 @@ export class SnapshotsClient {
       'aggregatedList',
       'delete',
       'get',
+      'getEffectiveRecycleBinRule',
       'getIamPolicy',
       'insert',
       'list',
@@ -674,6 +675,154 @@ export class SnapshotsClient {
           {} | undefined,
         ]) => {
           this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Returns the effective recycle bin rule for a snapshot by merging org and
+   * project level rules. If no rules are defined at org and project level, the
+   * standard default rule is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.snapshot
+   *   Name of the Snapshot resource to get the effective recycle bin rule for.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.SnapshotsGetEffectiveRecycleBinRuleResponse|SnapshotsGetEffectiveRecycleBinRuleResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/snapshots.get_effective_recycle_bin_rule.js</caption>
+   * region_tag:compute_v1beta_generated_Snapshots_GetEffectiveRecycleBinRule_async
+   */
+  getEffectiveRecycleBinRule(
+    request?: protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      (
+        | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getEffectiveRecycleBinRule(
+    request: protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getEffectiveRecycleBinRule(
+    request: protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getEffectiveRecycleBinRule(
+    request?: protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+          | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+      (
+        | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        snapshot: request.snapshot ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEffectiveRecycleBinRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+          | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEffectiveRecycleBinRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEffectiveRecycleBinRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.ISnapshotsGetEffectiveRecycleBinRuleResponse,
+          (
+            | protos.google.cloud.compute.v1beta.IGetEffectiveRecycleBinRuleSnapshotRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEffectiveRecycleBinRule response %j', response);
           return [response, options, rawResponse];
         },
       )
