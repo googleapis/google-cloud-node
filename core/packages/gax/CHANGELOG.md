@@ -6,6 +6,14 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.3.0...google-gax-v6.4.0) (2026-09-15)
+
+
+### Features
+
+* **gax:** O11y tracer helper updates ([#9269](https://github.com/googleapis/google-cloud-node/issues/9269)) ([ee3b95b](https://github.com/googleapis/google-cloud-node/commit/ee3b95b4dc5c4128adf22656f50675cdd2845597))
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.2.0...google-gax-v6.3.0) (2026-09-09)
 
 
