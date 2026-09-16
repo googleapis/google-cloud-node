@@ -80,6 +80,8 @@ async function main(processArgv: string[]) {
     .describe('service-yaml', 'Path to service yaml')
     .alias('package-name', 'package_name')
     .describe('package-name', 'Publish package name')
+    .alias('directory', 'package_dir')
+    .describe('directory', 'Monorepo directory of the package (e.g. packages/google-cloud-workflows)')
     .alias('main-service', 'main_service')
     .describe(
       'main_service',
@@ -146,6 +148,7 @@ async function main(processArgv: string[]) {
   const bundleConfig = argv.bundleConfig as string | undefined;
   const serviceYaml = argv.serviceYaml as string | undefined;
   const packageName = argv.packageName as string | undefined;
+  const directory = argv.directory as string | undefined;
   const mainServiceName = argv.mainService as string | undefined;
   const template = argv.template as string | undefined;
   const gapicValidatorOut = argv.gapicValidatorOut as string | undefined;
@@ -214,6 +217,9 @@ async function main(processArgv: string[]) {
   }
   if (packageName) {
     protocCommand.push(`--typescript_gapic_opt="package-name=${packageName}"`);
+  }
+  if (directory) {
+    protocCommand.push(`--typescript_gapic_opt="directory=${directory}"`);
   }
   if (mainServiceName) {
     protocCommand.push(

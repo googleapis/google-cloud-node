@@ -31,6 +31,7 @@ export class API {
   port?: string;
   // This field is for users passing proper publish package name like @google-cloud/text-to-speech.
   publishName: string;
+  directory?: string;
   // The short name we'll use for the package (e.g. @google-cloud/text-to-speech -> text-to-speech)
   loggingName: string;
   // For historical reasons, Webpack library name matches "the main" service of the client library.
@@ -103,6 +104,7 @@ export class API {
     // users specify the actual package name, if not, set it to product name.
     this.publishName =
       options.publishName || this.naming.productName.toKebabCase();
+    this.directory = options.directory;
     this.loggingName =
       this.publishName.match(/[^/]+\/(.*)/)?.[1] ?? this.publishName;
     this.handwrittenLayer = options.handwrittenLayer ?? false;
