@@ -4,6 +4,32 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "435bcae6aa20c9fd50da0c8b67fe443c946e44cc",
+          "message": "Allow uninitialized client references in pipeline sources",
+          "issues": [
+            "9318"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "9cb091ce-93be-4b49-b3a2-10dc77c2d075",
+      "createTime": "2026-09-16T08:41:22.919Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
           "message": "PNPM workspace",
@@ -94899,5 +94925,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-15T17:49:40.964Z"
+  "updateTime": "2026-09-16T08:41:22.919Z"
 }
