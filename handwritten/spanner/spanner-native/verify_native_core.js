@@ -212,10 +212,15 @@ async function runOnce(useNativeCore, bounds) {
   // absence of stock-stream calls is not safe: upstream added a run() path
   // that calls neither, which would make such a check pass vacuously.
   let nativeCalls = 0;
-  const origNative = nativeCore.runStreamNative;
+  const origStreamNative = nativeCore.runStreamNative;
   nativeCore.runStreamNative = function (...args) {
     nativeCalls++;
-    return origNative.apply(this, args);
+    return origStreamNative.apply(this, args);
+  };
+  const origRunNative = nativeCore.runNative;
+  nativeCore.runNative = function (...args) {
+    nativeCalls++;
+    return origRunNative.apply(this, args);
   };
 
   const spanner = new Spanner({projectId: PROJECT});

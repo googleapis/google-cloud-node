@@ -55,6 +55,7 @@ extern "C" {
         int meta_count,
         const char* req_bytes,
         int req_len,
+        int skip_metadata,
         StreamDataCallback cb,
         void* user_data
     );
@@ -356,6 +357,13 @@ napi_value ExecuteStreamingSqlNative(napi_env env, napi_callback_info info) {
         }
     }
 
+    // 4.5. Check if JS already has cached ResultSetMetadata for this query
+    bool skip_metadata = false;
+    napi_valuetype arg4_type;
+    if (napi_typeof(env, args[4], &arg4_type) == napi_ok && arg4_type == napi_boolean) {
+        napi_get_value_bool(env, args[4], &skip_metadata);
+    }
+
     // 5. Callback function
     napi_value callback_val = args[5];
 
@@ -393,6 +401,7 @@ napi_value ExecuteStreamingSqlNative(napi_env env, napi_callback_info info) {
         (int)meta_keys_ptr.size(),
         static_cast<const char*>(req_data),
         (int)req_len,
+        skip_metadata ? 1 : 0,
         OnGoStreamData,
         cb_ctx
     );

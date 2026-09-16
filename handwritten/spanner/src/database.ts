@@ -58,6 +58,8 @@ import {
   isNativeCoreEnabled,
   isNativeEligible,
   runStreamNative,
+  runNative,
+  encodeReadOnlyBounds,
   DatabaseLike as NativeDatabaseLike,
 } from './native-core';
 import {Session} from './session';
@@ -2924,7 +2926,24 @@ class Database extends common.GrpcServiceObject {
     // be unsupported). When the core is disabled this branch is skipped
     // entirely and run() behaves exactly as it does upstream.
     if (isNativeCoreEnabled() && isNativeEligible(query as unknown)) {
-      this._runLegacy(query, options, callback!);
+      const readOnly = encodeReadOnlyBounds(
+        options as Record<string, unknown>,
+        opts => Snapshot.encodeTimestampBounds(opts),
+      );
+      runNative(
+        this as unknown as NativeDatabaseLike,
+        query as unknown as string | Record<string, unknown>,
+        readOnly,
+        (err, rows, stats, metadata) => {
+          callback!(
+            err as grpc.ServiceError | null,
+            rows as Row[],
+            stats as ResultSetStats,
+            metadata as ResultSetMetadata,
+          );
+        },
+        () => this._run(query, options, callback!),
+      );
       return;
     }
     this._run(query, options, callback!);
@@ -3330,12 +3349,16 @@ class Database extends common.GrpcServiceObject {
     // stream is used instead. That decision is always made before any row is
     // emitted, so the caller sees a single coherent stream either way.
     if (isNativeCoreEnabled() && isNativeEligible(query as unknown)) {
+      const readOnly = encodeReadOnlyBounds(
+        options as Record<string, unknown>,
+        opts => Snapshot.encodeTimestampBounds(opts),
+      );
       return runStreamNative(
         this as unknown as NativeDatabaseLike,
         query as unknown as string | Record<string, unknown>,
         () =>
           this.runStreamStock_(query, options) as unknown as NodeJS.ReadableStream,
-        Snapshot.encodeTimestampBounds(options || {}),
+        readOnly,
       ) as unknown as PartialResultStream;
     }
     return this.runStreamStock_(query, options);

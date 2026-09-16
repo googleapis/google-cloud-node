@@ -69,12 +69,18 @@ import (
 	"google.golang.org/protobuf/types/known/structpb"
 )
 
+type goSchemaCacheEntry struct {
+	fieldCount int
+	bytes      []byte
+}
+
 var (
 	clientRegistryMutex sync.RWMutex
 	clientRegistry      = make(map[uintptr]*CoreClient)
 	nextClientId        uintptr = 1
 	logEncodingOnce     sync.Once
 	logFirstErrOnce     sync.Once
+	schemaBytesCache    sync.Map
 )
 
 func registerClient(client *CoreClient) uintptr {
@@ -289,6 +295,7 @@ func ExecuteStreamingSqlGo(
 	metaCount C.int,
 	reqBytesPtr *C.char,
 	reqLen C.int,
+	skipMetadata C.int,
 	cb C.StreamDataCallback,
 	userData unsafe.Pointer,
 ) {
@@ -413,11 +420,25 @@ func ExecuteStreamingSqlGo(
 
 				if rowType == nil && chunk.Metadata != nil && chunk.Metadata.RowType != nil {
 					rowType = chunk.Metadata.RowType.Fields
-					// Serialize the full ResultSetMetadata exactly once so the
-					// Node layer can construct column names + Spanner types
-					// with full fidelity (including type annotations).
-					if mdBytes, mdErr := proto.Marshal(chunk.Metadata); mdErr == nil {
-						pendingMetadata = mdBytes
+					if skipMetadata == 0 {
+						fieldCount := len(rowType)
+						if cachedVal, ok := schemaBytesCache.Load(req.Sql); ok {
+							if cached, ok2 := cachedVal.(goSchemaCacheEntry); ok2 && cached.fieldCount == fieldCount {
+								pendingMetadata = cached.bytes
+							}
+						}
+						if pendingMetadata == nil {
+							schemaOnly := &spannerpb.ResultSetMetadata{
+								RowType: chunk.Metadata.RowType,
+							}
+							if mdBytes, mdErr := proto.Marshal(schemaOnly); mdErr == nil {
+								pendingMetadata = mdBytes
+								schemaBytesCache.Store(req.Sql, goSchemaCacheEntry{
+									fieldCount: fieldCount,
+									bytes:      mdBytes,
+								})
+							}
+						}
 					}
 				}
 

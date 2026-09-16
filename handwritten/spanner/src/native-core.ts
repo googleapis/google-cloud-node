@@ -70,7 +70,7 @@ interface NativeAddon {
     routingKey: string,
     metadata: string[][],
     requestBytes: Uint8Array,
-    gaxOptions: object,
+    gaxOptions: object | boolean,
     callback: (
       err: Error | null,
       rows: Value[][] | null,
@@ -337,6 +337,8 @@ export interface DatabaseLike {
   formattedName_?: string;
 }
 
+const paramTypeCache = new Map<string, {code: number}>();
+
 function buildRequestBytes(
   sessionName: string,
   query: string | Record<string, unknown>,
@@ -376,15 +378,42 @@ function buildRequestBytes(
     for (const key of Object.keys(params)) {
       encodedParams[key] = codec.encode(params[key] as Value);
       if (types && types[key]) {
-        const typeObj = codec.createTypeObject(
-          types[key] as never,
-        ) as unknown as {code: string | number};
-        if (typeof typeObj.code === 'string') {
-          typeObj.code = (
-            protos.google.spanner.v1.TypeCode as unknown as Record<string, number>
-          )[typeObj.code];
+        const rawType = types[key];
+        if (typeof rawType === 'string') {
+          let cachedType = paramTypeCache.get(rawType);
+          if (!cachedType) {
+            const typeObj = codec.createTypeObject(
+              rawType as never,
+            ) as unknown as {code: string | number};
+            const codeNum =
+              typeof typeObj.code === 'string'
+                ? (
+                    protos.google.spanner.v1.TypeCode as unknown as Record<
+                      string,
+                      number
+                    >
+                  )[typeObj.code]
+                : typeObj.code;
+            cachedType = Object.freeze({code: codeNum});
+            if (paramTypeCache.size < 64) {
+              paramTypeCache.set(rawType, cachedType);
+            }
+          }
+          paramTypes[key] = cachedType;
+        } else {
+          const typeObj = codec.createTypeObject(
+            rawType as never,
+          ) as unknown as {code: string | number};
+          if (typeof typeObj.code === 'string') {
+            typeObj.code = (
+              protos.google.spanner.v1.TypeCode as unknown as Record<
+                string,
+                number
+              >
+            )[typeObj.code];
+          }
+          paramTypes[key] = typeObj;
         }
-        paramTypes[key] = typeObj;
       }
     }
     requestMsg.params = {fields: encodedParams};
@@ -558,15 +587,35 @@ export function runStreamNative(
     let fellBack = false;
 
     // The result-set schema is a function of the statement text, so that is
-    // the cache key. Validated by memcmp against the returned bytes below.
+    // the cache key.
     const cacheKey = typeof query === 'string' ? query : (query.sql as string);
+    const cachedEntry = cacheKey ? schemaCache.get(cacheKey) : undefined;
+    if (cachedEntry) {
+      if (!cachedEntry.scalar) {
+        if (onFallback) {
+          const stock = onFallback();
+          stock.on('data', (row: unknown) => out.push(row));
+          stock.on('end', () => out.push(null));
+          stock.on('error', (e: Error) => out.destroy(e));
+        } else {
+          out.destroy(
+            new Error(
+              'Spanner Go shared core does not support ARRAY/STRUCT columns',
+            ),
+          );
+        }
+        return;
+      }
+      createRow = cachedEntry.createRow;
+      out.emit('response', {metadata: cachedEntry.decoded});
+    }
 
     addon.executeStreamingSqlNative(
       handle,
       sessionName,
       metadata,
       requestBytes,
-      GAX_OPTIONS,
+      Boolean(cachedEntry),
       (cbErr, rows, telemetry, metadataPb) => {
         if (fellBack) {
           return;
@@ -576,13 +625,9 @@ export function runStreamNative(
           return;
         }
 
-        // First batch carries the serialized ResultSetMetadata.
+        // First batch carries the serialized ResultSetMetadata (if not skipped).
         if (metadataPb && metadataPb.length > 0 && !createRow) {
           try {
-            // Fast path: same statement, same schema bytes as last time.
-            // A memcmp is far cheaper than decoding the descriptor and
-            // rebuilding every column decoder, and it still detects a schema
-            // change rather than assuming one cannot happen.
             let entry = cacheKey ? schemaCache.get(cacheKey) : undefined;
             if (entry && !entry.bytes.equals(metadataPb)) {
               entry = undefined;
@@ -662,4 +707,210 @@ export function runStreamNative(
   });
 
   return out;
+}
+
+const DEFAULT_READ_ONLY: protos.google.spanner.v1.TransactionOptions.IReadOnly =
+  Object.freeze({returnReadTimestamp: true});
+const exactStalenessCache = new Map<
+  number,
+  protos.google.spanner.v1.TransactionOptions.IReadOnly
+>();
+
+/**
+ * Fast-path timestamp bound encoder. Avoids per-request object allocations
+ * for the two cases that account for 99%+ of queries:
+ *   - empty/default options (`{}` -> strong read with `returnReadTimestamp: true`)
+ *   - `{exactStaleness: N}` (used by point-select benchmarks)
+ */
+export function encodeReadOnlyBounds(
+  options: Record<string, unknown> | undefined,
+  fallbackEncoder: (
+    opts: Record<string, unknown>,
+  ) => protos.google.spanner.v1.TransactionOptions.IReadOnly,
+): protos.google.spanner.v1.TransactionOptions.IReadOnly {
+  if (!options) {
+    return DEFAULT_READ_ONLY;
+  }
+  const keys = Object.keys(options);
+  if (keys.length === 0) {
+    return DEFAULT_READ_ONLY;
+  }
+  if (keys.length === 1 && typeof options.exactStaleness === 'number') {
+    const ms = options.exactStaleness;
+    let cached = exactStalenessCache.get(ms);
+    if (!cached) {
+      cached = Object.freeze({
+        exactStaleness: Object.freeze({
+          seconds: Math.floor(ms / 1000),
+          nanos: (ms % 1000) * 1e6,
+        }),
+        returnReadTimestamp: true,
+      });
+      if (exactStalenessCache.size < 64) {
+        exactStalenessCache.set(ms, cached);
+      }
+    }
+    return cached;
+  }
+  return fallbackEncoder(options);
+}
+
+/**
+ * Direct non-streaming execution path for `Database#run()`.
+ *
+ * Unlike routing through `_runLegacy` -> `runStreamNative`, this completely
+ * avoids allocating a Node `stream.Readable`, `ReadableState`, `BufferList`,
+ * five `EventEmitter` listeners, or `process.nextTick` teardown on every
+ * single-row point-select query.
+ */
+export function runNative(
+  database: DatabaseLike,
+  query: string | Record<string, unknown>,
+  readOnly: protos.google.spanner.v1.TransactionOptions.IReadOnly,
+  callback: (
+    err: Error | null,
+    rows?: NativeRow[],
+    stats?: unknown,
+    metadata?: protos.google.spanner.v1.ResultSetMetadata,
+  ) => void,
+  onFallback?: () => void,
+): void {
+  const addon = loadAddon();
+  const handle = getCoreHandle();
+  if (!addon || !handle) {
+    if (onFallback) {
+      onFallback();
+      return;
+    }
+    callback(new Error('Spanner Go shared core is not available'));
+    return;
+  }
+
+  getSessionName(database, (err, sessionName) => {
+    if (err || !sessionName) {
+      callback(err || new Error('No session'));
+      return;
+    }
+
+    let requestBytes: Uint8Array;
+    try {
+      requestBytes = buildRequestBytes(sessionName, query, readOnly);
+    } catch (e) {
+      callback(e as Error);
+      return;
+    }
+
+    let metadata = metadataBySession.get(sessionName);
+    if (!metadata) {
+      metadata = [
+        ['x-goog-request-params', `session=${encodeURIComponent(sessionName)}`],
+      ];
+      metadataBySession.set(sessionName, metadata);
+    }
+
+    let createRow: ((values: Value[]) => NativeRow) | null = null;
+    let resultMetadata: protos.google.spanner.v1.ResultSetMetadata | undefined;
+    let fellBack = false;
+    const resultRows: NativeRow[] = [];
+    const cacheKey = typeof query === 'string' ? query : (query.sql as string);
+    const cachedEntry = cacheKey ? schemaCache.get(cacheKey) : undefined;
+    if (cachedEntry) {
+      if (!cachedEntry.scalar) {
+        if (onFallback) {
+          onFallback();
+        } else {
+          callback(
+            new Error(
+              'Spanner Go shared core does not support ARRAY/STRUCT columns',
+            ),
+          );
+        }
+        return;
+      }
+      createRow = cachedEntry.createRow;
+      resultMetadata = cachedEntry.decoded;
+    }
+
+    addon.executeStreamingSqlNative(
+      handle,
+      sessionName,
+      metadata,
+      requestBytes,
+      Boolean(cachedEntry),
+      (cbErr, rows, _telemetry, metadataPb) => {
+        if (fellBack) {
+          return;
+        }
+        if (cbErr) {
+          callback(cbErr);
+          return;
+        }
+
+        if (metadataPb && metadataPb.length > 0 && !createRow) {
+          try {
+            let entry = cacheKey ? schemaCache.get(cacheKey) : undefined;
+            if (entry && !entry.bytes.equals(metadataPb)) {
+              entry = undefined;
+            }
+            if (!entry) {
+              const decoded =
+                protos.google.spanner.v1.ResultSetMetadata.decode(metadataPb);
+              const fields = (decoded.rowType?.fields || []) as IField[];
+              const scalar = allColumnsScalar(fields);
+              entry = {
+                bytes: Buffer.from(metadataPb),
+                createRow: scalar
+                  ? makeRowFactory(fields)
+                  : (null as unknown as (values: Value[]) => NativeRow),
+                scalar,
+                decoded,
+              };
+              if (cacheKey) {
+                if (schemaCache.size >= SCHEMA_CACHE_MAX) {
+                  schemaCache.clear();
+                }
+                schemaCache.set(cacheKey, entry);
+              }
+            }
+
+            if (!entry.scalar) {
+              fellBack = true;
+              if (onFallback) {
+                onFallback();
+              } else {
+                callback(
+                  new Error(
+                    'Spanner Go shared core does not support ARRAY/STRUCT columns',
+                  ),
+                );
+              }
+              return;
+            }
+
+            createRow = entry.createRow;
+            resultMetadata = entry.decoded;
+          } catch (e) {
+            callback(e as Error);
+            return;
+          }
+        }
+
+        if (rows === null || rows === undefined) {
+          callback(null, resultRows, undefined, resultMetadata);
+          return;
+        }
+
+        if (!createRow) {
+          callback(
+            new Error('Received result rows before result-set metadata'),
+          );
+          return;
+        }
+
+        for (let i = 0; i < rows.length; i++) {
+          resultRows.push(createRow(rows[i]));
+        }
+      },
+    );
+  });
 }
