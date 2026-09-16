@@ -28,7 +28,7 @@ import {
   MeterProvider,
   MetricReader,
 } from '@opentelemetry/sdk-metrics';
-import {Resource} from '@opentelemetry/resources';
+import {Resource, resourceFromAttributes} from '@opentelemetry/resources';
 import {
   Attributes,
   Counter,
@@ -84,7 +84,7 @@ describe('transform', () => {
     sandbox.stub(MetricsTracerFactory, 'getInstance').returns(mockFactory);
 
     reader = new InMemoryMetricReader();
-    resource = new Resource({
+    resource = resourceFromAttributes({
       ['project_id']: 'project_id',
       ['client_hash']: 'test_hash',
       ['location']: 'test_location',
