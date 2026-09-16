@@ -1,0 +1,18 @@
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io",
+    "node_modules/",
+    "CHANGELOG.md",
+    "https://console.cloud.google.com",
+    "https://support.google.com"
+  ],
+  "silent": true,
+  "concurrency": 10,
+  "retry": true,
+  "retryErrors": true,
+  "retryErrorsCount": 5,
+  "retryErrorsJitter": 3000
+}
