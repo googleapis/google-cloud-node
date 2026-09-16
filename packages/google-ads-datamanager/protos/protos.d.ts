@@ -53,6 +53,9 @@ export namespace google {
                     /** AdEvent deviceInfo */
                     deviceInfo?: (google.ads.datamanager.v1.IDeviceInfo|null);
 
+                    /** AdEvent ipAddress */
+                    ipAddress?: (string|null);
+
                     /** AdEvent mobileDeviceId */
                     mobileDeviceId?: (string|null);
 
@@ -161,6 +164,9 @@ export namespace google {
 
                     /** AdEvent deviceInfo. */
                     public deviceInfo?: (google.ads.datamanager.v1.IDeviceInfo|null);
+
+                    /** AdEvent ipAddress. */
+                    public ipAddress: string;
 
                     /** AdEvent mobileDeviceId. */
                     public mobileDeviceId: string;
@@ -2904,7 +2910,8 @@ export namespace google {
                         DATA_PARTNER = 4,
                         GOOGLE_ANALYTICS_PROPERTY = 5,
                         GOOGLE_AD_MANAGER_AUDIENCE_LINK = 6,
-                        FLOODLIGHT_CONFIG = 7
+                        FLOODLIGHT_CONFIG = 7,
+                        GOOGLE_AD_MANAGER = 8
                     }
                 }
 
@@ -3636,7 +3643,9 @@ export namespace google {
                     BASELINE_LOCATION_AUTO_DETECTION_FAILED = 122,
                     INSIGHTS_MISSING_FOR_DIMENSION = 123,
                     REQUIRED_PREREQUISITE_LINK_MISSING = 124,
-                    INVALID_REMOVE_AS_OF_TIME = 125
+                    INVALID_REMOVE_AS_OF_TIME = 125,
+                    REQUEST_TOO_OLD = 126,
+                    CONVERSION_ACTION_TOO_RECENTLY_CREATED = 127
                 }
 
                 /** Properties of an Event. */
@@ -3900,6 +3909,12 @@ export namespace google {
 
                     /** AdIdentifiers encryptedUserIds */
                     encryptedUserIds?: (google.ads.datamanager.v1.IEncryptedUserId[]|null);
+
+                    /** AdIdentifiers ppid */
+                    ppid?: (string|null);
+
+                    /** AdIdentifiers visitorPpid */
+                    visitorPpid?: (string|null);
                 }
 
                 /** Represents an AdIdentifiers. */
@@ -3940,6 +3955,12 @@ export namespace google {
 
                     /** AdIdentifiers encryptedUserIds. */
                     public encryptedUserIds: google.ads.datamanager.v1.IEncryptedUserId[];
+
+                    /** AdIdentifiers ppid. */
+                    public ppid: string;
+
+                    /** AdIdentifiers visitorPpid. */
+                    public visitorPpid: string;
 
                     /**
                      * Creates a new AdIdentifiers instance using the specified properties.

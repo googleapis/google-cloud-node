@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/error-reporting",
   "description": "Error Reporting Client Library for Node.js",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -21,14 +21,14 @@
   "scripts": {
     "docs": "compodoc src/",
     "lint": "gts check",
-    "presystem-test": "npm run compile",
+    "presystem-test": "pnpm run compile",
     "system-test": "MOCHA_THROW_DEPRECATION=false c8 mocha build/system-test",
     "test": "c8 mocha --recursive build/test/unit",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "pnpm run compile",
     "license-check": "jsgl --local .",
     "precompile": "gts clean"
   },
@@ -69,12 +69,6 @@
     "undici": "5.28.4",
     "tablesort": "5.6.0",
     "cheerio": "1.0.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "tablesort": "5.6.0",
-      "cheerio": "1.0.0"
-    }
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/error-reporting"
 }

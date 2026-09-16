@@ -38,7 +38,7 @@ const subdirs = [
   'cloud/location',
 ];
 
-async function main(directory: string) {
+export async function main(directory: string) {
   await fsp.rm(path.join(directory, 'protos', 'google'), {
     recursive: true,
     force: true,

@@ -34,9 +34,9 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  Optional. Maximum number of members to return. The service might return
-   *  fewer than this value. If unspecified, at most 25 members are returned. The
-   *  maximum value is 100; values above 100 are coerced to 100. Maximum might
-   *  change in the future.
+   *  fewer than this value. If unspecified or set to 0, at most 250 members are
+   *  returned. The maximum value is 500; values above 500 are coerced to 500.
+   *  Maximum might change in the future.
    */
   // const pageSize = 1234
   /**

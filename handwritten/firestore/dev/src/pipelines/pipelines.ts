@@ -15,7 +15,8 @@
 import * as firestore from '@google-cloud/firestore';
 import * as deepEqual from 'fast-deep-equal';
 import {google} from '../../protos/firestore_v1_proto_api';
-import Firestore, {
+import {
+  Firestore,
   CollectionReference,
   FieldPath,
   Query,
@@ -185,8 +186,7 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
   ): Pipeline;
   collectionGroup(
     collectionIdOrOptions:
-      | string
-      | firestore.Pipelines.CollectionGroupStageOptions,
+      string | firestore.Pipelines.CollectionGroupStageOptions,
   ): Pipeline {
     const options: InternalCollectionGroupStageOptions = isString(
       collectionIdOrOptions,
@@ -279,19 +279,31 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
   _validateReference(
     reference: firestore.CollectionReference | firestore.DocumentReference,
   ): reference is CollectionReference | DocumentReference {
-    if (
-      !(
-        reference instanceof CollectionReference ||
-        reference instanceof DocumentReference
-      )
-    ) {
+    if (!(
+      reference instanceof CollectionReference ||
+      reference instanceof DocumentReference
+    )) {
       throw new Error(
         'Invalid reference. The value may not be a CollectionReference or DocumentReference. Or, it may be an object from a different SDK build.',
       );
     }
 
-    const refDbId = reference.firestore.formattedName;
-    if (refDbId !== this.db.formattedName) {
+    // References created from the same Firestore instance always target the same database.
+    if (reference.firestore === this.db) {
+      return true;
+    }
+
+    const getDatabaseName = (db: Firestore): string => {
+      const projectId = (db as unknown as {_projectId?: string})._projectId;
+      return projectId
+        ? `projects/${projectId}/databases/${db.databaseId}`
+        : `databases/${db.databaseId}`;
+    };
+
+    const refDbId = getDatabaseName(reference.firestore);
+    const targetDbId = getDatabaseName(this.db);
+
+    if (refDbId !== targetDbId) {
       throw new Error(
         `Invalid ${
           reference instanceof CollectionReference
@@ -299,7 +311,7 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
             : 'DocumentReference'
         }. ` +
           `The database name ("${refDbId}") of this reference does not match ` +
-          `the database name ("${this.db.formattedName}") of the target database of this Pipeline.`,
+          `the database name ("${targetDbId}") of the target database of this Pipeline.`,
       );
     }
 
@@ -1481,8 +1493,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   union(options: firestore.Pipelines.UnionStageOptions): Pipeline;
   union(
     otherOrOptions:
-      | firestore.Pipelines.Pipeline
-      | firestore.Pipelines.UnionStageOptions,
+      firestore.Pipelines.Pipeline | firestore.Pipelines.UnionStageOptions,
   ): Pipeline {
     const options = isPipeline(otherOrOptions) ? {} : otherOrOptions;
 
@@ -1570,8 +1581,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   unnest(options: firestore.Pipelines.UnnestStageOptions): Pipeline;
   unnest(
     selectableOrOptions:
-      | firestore.Pipelines.Selectable
-      | firestore.Pipelines.UnnestStageOptions,
+      firestore.Pipelines.Selectable | firestore.Pipelines.UnnestStageOptions,
     indexField?: string,
   ): Pipeline {
     const options = isSelectable(selectableOrOptions)
@@ -1704,8 +1714,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   sort(options: firestore.Pipelines.SortStageOptions): Pipeline;
   sort(
     orderingOrOptions:
-      | firestore.Pipelines.Ordering
-      | firestore.Pipelines.SortStageOptions,
+      firestore.Pipelines.Ordering | firestore.Pipelines.SortStageOptions,
     ...additionalOrderings: firestore.Pipelines.Ordering[]
   ): Pipeline {
     const options = isOrdering(orderingOrOptions) ? {} : orderingOrOptions;
