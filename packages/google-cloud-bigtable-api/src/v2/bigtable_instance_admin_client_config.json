@@ -88,6 +88,18 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateMemoryLayer": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListMemoryLayers": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetMemoryLayer": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateAppProfile": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",

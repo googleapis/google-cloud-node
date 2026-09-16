@@ -73,6 +73,7 @@ import {
   RunCallback,
   RunResponse,
   RunUpdateCallback,
+  Rows,
   Snapshot,
   TimestampBounds,
   Transaction,
@@ -2891,9 +2892,6 @@ class Database extends common.GrpcServiceObject {
     optionsOrCallback?: TimestampBounds | RunCallback,
     cb?: RunCallback,
   ): void | Promise<RunResponse> {
-    let stats: ResultSetStats;
-    let metadata: ResultSetMetadata;
-    const rows: Row[] = [];
     const callback =
       typeof optionsOrCallback === 'function'
         ? (optionsOrCallback as RunCallback)
@@ -2903,7 +2901,33 @@ class Database extends common.GrpcServiceObject {
         ? (optionsOrCallback as TimestampBounds)
         : {};
 
-    return startTrace(
+    if (
+      this.runStream !== Database.prototype.runStream ||
+      !this.sessionFactory_.isMultiplexedEnabled()
+    ) {
+      this._runLegacy(query, options, callback!);
+      return;
+    }
+    this._run(query, options, callback!);
+  }
+
+  /**
+   * Always runs the query through the full streaming pipeline (Database.prototype.runStream).
+   * Used when runStream has been overridden on Database, or when multiplexed
+   * sessions are disabled (requiring standard session pool checkout and session-not-found retries).
+   *
+   * @private
+   */
+  private _runLegacy(
+    query: string | ExecuteSqlRequest,
+    options: TimestampBounds,
+    callback: RunCallback,
+  ): void {
+    const rows: Row[] = [];
+    let stats: ResultSetStats;
+    let metadata: ResultSetMetadata;
+
+    startTrace(
       'Database.run',
       {
         ...(query as ExecuteSqlRequest),
@@ -2931,6 +2955,134 @@ class Database extends common.GrpcServiceObject {
           });
       },
     );
+  }
+
+  /**
+   * Executes a query using an optimized streaming model:
+   * 1. If all results are returned in a single PartialResultSet, the internal streaming
+   *    pipeline is simplified and rows are decoded directly, bypassing Stream overhead.
+   * 2. If there are more than one PartialResultSets, it seamlessly falls back to
+   *    the standard streaming model.
+   *
+   * @private
+   */
+  private _run(
+    query: string | ExecuteSqlRequest,
+    options: TimestampBounds,
+    callback: RunCallback,
+  ): void {
+    const traceConfig = {
+      ...(query as ExecuteSqlRequest),
+      ...this._traceConfig,
+    };
+
+    startTrace('Database.run', traceConfig, runSpan => {
+      startTrace('Database.runStream', traceConfig, streamSpan => {
+        this._executeRunOnSession(
+          query,
+          options,
+          runSpan,
+          streamSpan,
+          callback,
+        );
+      });
+    });
+  }
+
+  /**
+   * Acquires a session and executes the query on a snapshot, managing span
+   * lifetimes and session release.
+   *
+   * @private
+   */
+  private _executeRunOnSession(
+    query: string | ExecuteSqlRequest,
+    options: TimestampBounds,
+    runSpan: Span,
+    streamSpan: Span,
+    callback: RunCallback,
+  ): void {
+    let snapshot: Snapshot | undefined;
+    let completed = false;
+
+    const complete = (
+      error: grpc.ServiceError | null,
+      rows: Rows = [],
+      stats?: ResultSetStats,
+      metadata?: ResultSetMetadata,
+    ) => {
+      if (completed) {
+        return;
+      }
+      completed = true;
+      if (error) {
+        setSpanError(streamSpan, error as Error);
+        setSpanError(runSpan, error as Error);
+      }
+      snapshot?.end();
+      streamSpan.end();
+      runSpan.end();
+      callback!(error, rows, stats!, metadata!);
+    };
+
+    this.sessionFactory_.getSession((error, session) => {
+      if (error) {
+        complete(error as grpc.ServiceError);
+        return;
+      }
+
+      streamSpan.addEvent('Using Session', {'session.id': session?.id});
+      snapshot = session!.snapshot(options, this.queryOptions_);
+      this._runOnSnapshot(snapshot, session!, query, complete);
+    });
+  }
+
+  /**
+   * Executes the query on the snapshot and binds session release to snapshot end.
+   *
+   * @private
+   */
+  private _runOnSnapshot(
+    snapshot: Snapshot,
+    session: Session,
+    query: string | ExecuteSqlRequest,
+    callback: (
+      error: grpc.ServiceError | null,
+      rows?: Rows,
+      stats?: ResultSetStats,
+      metadata?: ResultSetMetadata,
+    ) => void,
+  ): void {
+    snapshot.once('end', () => {
+      try {
+        this.sessionFactory_.release(session);
+      } catch (releaseError) {
+        this.emit('error', releaseError);
+      }
+    });
+
+    const snapshotWithRun = snapshot as Snapshot & {
+      _run?: (
+        query: string | ExecuteSqlRequest,
+        callback: RunCallback,
+        options?: {startRunSpan?: boolean},
+      ) => void;
+    };
+
+    try {
+      if (
+        typeof snapshotWithRun._run === 'function' &&
+        snapshot.runStream === Snapshot.prototype.runStream
+      ) {
+        snapshotWithRun._run(query, callback as RunCallback, {
+          startRunSpan: false,
+        });
+      } else {
+        snapshot.run(query, callback as RunCallback);
+      }
+    } catch (syncError) {
+      callback(syncError as grpc.ServiceError);
+    }
   }
   /**
    * Partitioned DML transactions are used to execute DML statements with a

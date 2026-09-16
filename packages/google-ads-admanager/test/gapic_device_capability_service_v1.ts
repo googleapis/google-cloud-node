@@ -1288,6 +1288,59 @@ describe('v1.DeviceCapabilityServiceClient', () => {
       });
     });
 
+    describe('breakTemplate', async () => {
+      const fakePath = '/rendered/path/breakTemplate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        break_template: 'breakTemplateValue',
+      };
+      const client =
+        new devicecapabilityserviceModule.v1.DeviceCapabilityServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.breakTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.breakTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('breakTemplatePath', () => {
+        const result = client.breakTemplatePath(
+          'networkCodeValue',
+          'breakTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromBreakTemplateName', () => {
+        const result = client.matchNetworkCodeFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBreakTemplateFromBreakTemplateName', () => {
+        const result = client.matchBreakTemplateFromBreakTemplateName(fakePath);
+        assert.strictEqual(result, 'breakTemplateValue');
+        assert(
+          (client.pathTemplates.breakTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('browser', async () => {
       const fakePath = '/rendered/path/browser';
       const expectedParameters = {
