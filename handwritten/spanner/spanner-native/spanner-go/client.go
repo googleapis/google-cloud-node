@@ -3,8 +3,10 @@ package main
 import (
 	"context"
 	"crypto/tls"
+	"crypto/x509"
 	"fmt"
 	"net"
+	"net/http"
 	"os"
 	"sync"
 	"sync/atomic"
@@ -22,9 +24,10 @@ import (
 )
 
 const (
-	spannerEndpoint = "spanner.googleapis.com:443"
-	spannerDomain   = "spanner.googleapis.com"
-	spannerScope    = "https://www.googleapis.com/auth/spanner.data"
+	spannerEndpoint   = "spanner.googleapis.com:443"
+	spannerDomain     = "spanner.googleapis.com"
+	spannerScope      = "https://www.googleapis.com/auth/spanner.data"
+	nodeBundledCAPath = "/tmp/spanner-node-bundled-ca.pem"
 )
 
 func isDirectPathEnabled() bool {
@@ -38,6 +41,32 @@ func init() {
 		_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
 		_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
 	}
+}
+
+// buildRootCertPool returns a root CA pool containing both the OS system roots
+// (if present) and Node's bundled Mozilla root CAs exported by native-core.ts.
+// Slim container images such as `node:22-slim` (used by spanner-client-benchmarks)
+// purge `ca-certificates`, so `/etc/ssl/certs/ca-certificates.crt` does not exist;
+// without this fallback every Go TLS handshake fails with
+// `x509: certificate signed by unknown authority`.
+func buildRootCertPool() *x509.CertPool {
+	pool, err := x509.SystemCertPool()
+	if err != nil || pool == nil {
+		pool = x509.NewCertPool()
+	}
+	candidates := []string{
+		os.Getenv("SSL_CERT_FILE"),
+		nodeBundledCAPath,
+	}
+	for _, p := range candidates {
+		if p == "" {
+			continue
+		}
+		if pemBytes, readErr := os.ReadFile(p); readErr == nil && len(pemBytes) > 0 {
+			pool.AppendCertsFromPEM(pemBytes)
+		}
+	}
+	return pool
 }
 
 // CoreClient manages multiplexed gRPC connections, authentication, and request routing.
@@ -62,8 +91,22 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		limit = 1
 	}
 
+	rootCAs := buildRootCertPool()
+
+	// Configure oauth2 HTTP client with the combined RootCAs pool so token
+	// fetches to https://oauth2.googleapis.com succeed in slim containers.
+	oauthHTTPClient := &http.Client{
+		Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+			TLSClientConfig: &tls.Config{
+				RootCAs: rootCAs,
+			},
+		},
+	}
+	oauthCtx := context.WithValue(ctx, oauth2.HTTPClient, oauthHTTPClient)
+
 	// 1. Initialize GCP Application Default Credentials TokenSource (cached & thread-safe)
-	tokenSource, err := google.DefaultTokenSource(ctx, spannerScope)
+	tokenSource, err := google.DefaultTokenSource(oauthCtx, spannerScope)
 	if err != nil {
 		// In mock/test environments without ADC, allow fallback
 		tokenSource = oauth2.StaticTokenSource(&oauth2.Token{
@@ -77,7 +120,7 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
 		os.Unsetenv("DISABLE_DIRECT_PATH")
 
-		gapicClient, err := gapic.NewClient(ctx, option.WithGRPCConnectionPool(limit))
+		gapicClient, err := gapic.NewClient(oauthCtx, option.WithGRPCConnectionPool(limit))
 		if err != nil {
 			cancel()
 			return nil, fmt.Errorf("failed to initialize Spanner GAPIC client for DirectPath: %w", err)
@@ -129,7 +172,10 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 	if plaintext {
 		creds = insecure.NewCredentials()
 	} else {
-		creds = credentials.NewTLS(&tls.Config{ServerName: serverName})
+		creds = credentials.NewTLS(&tls.Config{
+			ServerName: serverName,
+			RootCAs:    rootCAs,
+		})
 	}
 
 	if os.Getenv("SPANNER_NATIVE_DEBUG") != "" {

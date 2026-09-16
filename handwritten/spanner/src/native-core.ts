@@ -39,7 +39,10 @@
  */
 
 import {Readable} from 'stream';
+import * as fs from 'fs';
+import * as os from 'os';
 import * as path from 'path';
+import * as tls from 'tls';
 import {codec, Field, Json, JSONOptions, Value} from './codec';
 import {protos} from '@google-cloud/spanner-api';
 
@@ -81,12 +84,48 @@ interface NativeAddon {
 // Addon loading (lazy, cached, never throws)
 // ---------------------------------------------------------------------------
 
+const NODE_BUNDLED_CA_PATH = '/tmp/spanner-node-bundled-ca.pem';
+let caBundledWritten = false;
+
+/**
+ * Slim container images (e.g. `node:22-slim` used by spanner-client-benchmarks)
+ * purge the `ca-certificates` Debian package, so `/etc/ssl/certs` is empty.
+ * Pure Node works because root CAs are compiled into the `node` binary
+ * (`tls.rootCertificates`), whereas Go's `crypto/x509` reads root CAs from disk
+ * and fails every RPC with `x509: certificate signed by unknown authority`.
+ *
+ * Exporting Node's built-in root CAs to a file and pointing `SSL_CERT_FILE`
+ * at it before `dlopen`ing the Go shared library ensures Go's TLS stack has
+ * a complete root CA bundle in any container image.
+ */
+function ensureRootCertificatesForGo(): void {
+  if (caBundledWritten) {
+    return;
+  }
+  caBundledWritten = true;
+  try {
+    if (tls.rootCertificates && tls.rootCertificates.length > 0) {
+      fs.writeFileSync(
+        NODE_BUNDLED_CA_PATH,
+        tls.rootCertificates.join('\n') + '\n',
+        'utf8',
+      );
+      if (!process.env.SSL_CERT_FILE) {
+        process.env.SSL_CERT_FILE = NODE_BUNDLED_CA_PATH;
+      }
+    }
+  } catch (e) {
+    // Best-effort; client.go also reads NODE_BUNDLED_CA_PATH directly.
+  }
+}
+
 let addonCache: NativeAddon | null | undefined;
 
 function loadAddon(): NativeAddon | null {
   if (addonCache !== undefined) {
     return addonCache;
   }
+  ensureRootCertificatesForGo();
   const candidates = [
     // build/src/native-core.js -> <pkg>/spanner-native/spanner_go.node
     path.resolve(__dirname, '..', '..', 'spanner-native', 'spanner_go.node'),

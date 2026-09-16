@@ -74,6 +74,7 @@ var (
 	clientRegistry      = make(map[uintptr]*CoreClient)
 	nextClientId        uintptr = 1
 	logEncodingOnce     sync.Once
+	logFirstErrOnce     sync.Once
 )
 
 func registerClient(client *CoreClient) uintptr {
@@ -181,6 +182,9 @@ func sendBatch(
 
 	if errMsg != "" {
 		cBatch.error_msg = C.CString(errMsg)
+		logFirstErrOnce.Do(func() {
+			fmt.Fprintf(os.Stderr, "[Spanner-Go] ERROR: first Spanner RPC failed in Go shared core (code=%d): %s\n", errCode, errMsg)
+		})
 	}
 	if serverTiming != "" {
 		cBatch.server_timing = C.CString(serverTiming)
