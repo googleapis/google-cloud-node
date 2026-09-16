@@ -24,7 +24,6 @@ import {
   RequestError,
   SkipReason,
 } from './file.js';
-import pLimit from 'p-limit';
 import * as path from 'path';
 import {createReadStream, existsSync, promises as fsp} from 'fs';
 import {CRC32C} from './crc32c.js';
@@ -35,7 +34,11 @@ import {ApiError} from './nodejs-common/index.js';
 import {GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
-import {getRuntimeTrackingString, getUserAgentString} from './util.js';
+import {
+  getRuntimeTrackingString,
+  getUserAgentString,
+  getPLimit,
+} from './util.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
@@ -495,6 +498,7 @@ export class TransferManager {
       };
     }
 
+    const pLimit = await getPLimit();
     const limit = pLimit(
       options.concurrencyLimit || DEFAULT_PARALLEL_UPLOAD_LIMIT
     );
@@ -622,6 +626,7 @@ export class TransferManager {
     filesOrFolder: File[] | string[] | string,
     options: DownloadManyFilesOptions = {}
   ): Promise<void | DownloadResponse[]> {
+    const pLimit = await getPLimit();
     const limit = pLimit(
       options.concurrencyLimit || DEFAULT_PARALLEL_DOWNLOAD_LIMIT
     );
@@ -795,6 +800,7 @@ export class TransferManager {
     fileOrName: File | string,
     options: DownloadFileInChunksOptions = {}
   ): Promise<void | DownloadResponse> {
+    const pLimit = await getPLimit();
     let chunkSize =
       options.chunkSizeBytes || DOWNLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE;
     let limit = pLimit(
@@ -922,6 +928,7 @@ export class TransferManager {
     options: UploadFileInChunksOptions = {},
     generator: MultiPartHelperGenerator = defaultMultiPartGenerator
   ): Promise<GaxiosResponse | undefined> {
+    const pLimit = await getPLimit();
     const chunkSize =
       options.chunkSizeBytes || UPLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE;
     const limit = pLimit(
