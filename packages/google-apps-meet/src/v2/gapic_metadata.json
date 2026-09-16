@@ -40,6 +40,11 @@
                 "getTranscriptEntry"
               ]
             },
+            "GetSmartNote": {
+              "methods": [
+                "getSmartNote"
+              ]
+            },
             "ListConferenceRecords": {
               "methods": [
                 "listConferenceRecords",
@@ -80,6 +85,13 @@
                 "listTranscriptEntries",
                 "listTranscriptEntriesStream",
                 "listTranscriptEntriesAsync"
+              ]
+            },
+            "ListSmartNotes": {
+              "methods": [
+                "listSmartNotes",
+                "listSmartNotesStream",
+                "listSmartNotesAsync"
               ]
             }
           }
@@ -117,6 +129,11 @@
                 "getTranscriptEntry"
               ]
             },
+            "GetSmartNote": {
+              "methods": [
+                "getSmartNote"
+              ]
+            },
             "ListConferenceRecords": {
               "methods": [
                 "listConferenceRecords",
@@ -158,6 +175,13 @@
                 "listTranscriptEntriesStream",
                 "listTranscriptEntriesAsync"
               ]
+            },
+            "ListSmartNotes": {
+              "methods": [
+                "listSmartNotes",
+                "listSmartNotesStream",
+                "listSmartNotesAsync"
+              ]
             }
           }
         }
@@ -187,6 +211,38 @@
               "methods": [
                 "endActiveConference"
               ]
+            },
+            "CreateMember": {
+              "methods": [
+                "createMember"
+              ]
+            },
+            "GetMember": {
+              "methods": [
+                "getMember"
+              ]
+            },
+            "DeleteMember": {
+              "methods": [
+                "deleteMember"
+              ]
+            },
+            "UpdateMember": {
+              "methods": [
+                "updateMember"
+              ]
+            },
+            "BatchUpdateMembers": {
+              "methods": [
+                "batchUpdateMembers"
+              ]
+            },
+            "ListMembers": {
+              "methods": [
+                "listMembers",
+                "listMembersStream",
+                "listMembersAsync"
+              ]
             }
           }
         },
@@ -211,6 +267,38 @@
             "EndActiveConference": {
               "methods": [
                 "endActiveConference"
+              ]
+            },
+            "CreateMember": {
+              "methods": [
+                "createMember"
+              ]
+            },
+            "GetMember": {
+              "methods": [
+                "getMember"
+              ]
+            },
+            "DeleteMember": {
+              "methods": [
+                "deleteMember"
+              ]
+            },
+            "UpdateMember": {
+              "methods": [
+                "updateMember"
+              ]
+            },
+            "BatchUpdateMembers": {
+              "methods": [
+                "batchUpdateMembers"
+              ]
+            },
+            "ListMembers": {
+              "methods": [
+                "listMembers",
+                "listMembersStream",
+                "listMembersAsync"
               ]
             }
           }

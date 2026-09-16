@@ -218,6 +218,9 @@ export class ConferenceRecordsServiceClient {
       recordingPathTemplate: new this._gaxModule.PathTemplate(
         'conferenceRecords/{conference_record}/recordings/{recording}',
       ),
+      smartNotePathTemplate: new this._gaxModule.PathTemplate(
+        'conferenceRecords/{conference_record}/smartNotes/{smart_note}',
+      ),
       spacePathTemplate: new this._gaxModule.PathTemplate('spaces/{space}'),
       transcriptPathTemplate: new this._gaxModule.PathTemplate(
         'conferenceRecords/{conference_record}/transcripts/{transcript}',
@@ -260,6 +263,11 @@ export class ConferenceRecordsServiceClient {
         'pageToken',
         'nextPageToken',
         'transcriptEntries',
+      ),
+      listSmartNotes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'smartNotes',
       ),
     };
 
@@ -326,6 +334,8 @@ export class ConferenceRecordsServiceClient {
       'listTranscripts',
       'getTranscriptEntry',
       'listTranscriptEntries',
+      'getSmartNote',
+      'listSmartNotes',
     ];
     for (const methodName of conferenceRecordsServiceStubMethods) {
       const callPromise = this.conferenceRecordsServiceStub.then(
@@ -1106,7 +1116,8 @@ export class ConferenceRecordsServiceClient {
    *
    * Note: The transcript entries returned by the Google Meet API might not
    * match the transcription found in the Google Docs transcript file. This can
-   * occur when the Google Docs transcript file is modified after generation.
+   * occur when 1) we have interleaved speakers within milliseconds, or
+   * 2) the Google Docs transcript file is modified after generation.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1219,6 +1230,135 @@ export class ConferenceRecordsServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('getTranscriptEntry response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets smart notes by smart note ID.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the smart note.
+   *   Format: conferenceRecords/{conference_record}/smartNotes/{smart_note}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2beta.SmartNote|SmartNote}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/conference_records_service.get_smart_note.js</caption>
+   * region_tag:meet_v2beta_generated_ConferenceRecordsService_GetSmartNote_async
+   */
+  getSmartNote(
+    request?: protos.google.apps.meet.v2beta.IGetSmartNoteRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2beta.ISmartNote,
+      protos.google.apps.meet.v2beta.IGetSmartNoteRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getSmartNote(
+    request: protos.google.apps.meet.v2beta.IGetSmartNoteRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.apps.meet.v2beta.ISmartNote,
+      protos.google.apps.meet.v2beta.IGetSmartNoteRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getSmartNote(
+    request: protos.google.apps.meet.v2beta.IGetSmartNoteRequest,
+    callback: Callback<
+      protos.google.apps.meet.v2beta.ISmartNote,
+      protos.google.apps.meet.v2beta.IGetSmartNoteRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getSmartNote(
+    request?: protos.google.apps.meet.v2beta.IGetSmartNoteRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.apps.meet.v2beta.ISmartNote,
+          | protos.google.apps.meet.v2beta.IGetSmartNoteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.apps.meet.v2beta.ISmartNote,
+      protos.google.apps.meet.v2beta.IGetSmartNoteRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2beta.ISmartNote,
+      protos.google.apps.meet.v2beta.IGetSmartNoteRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSmartNote request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2beta.ISmartNote,
+          | protos.google.apps.meet.v2beta.IGetSmartNoteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSmartNote response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSmartNote(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2beta.ISmartNote,
+          protos.google.apps.meet.v2beta.IGetSmartNoteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSmartNote response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2501,7 +2641,8 @@ export class ConferenceRecordsServiceClient {
    *
    * Note: The transcript entries returned by the Google Meet API might not
    * match the transcription found in the Google Docs transcript file. This can
-   * occur when the Google Docs transcript file is modified after generation.
+   * occur when 1) we have interleaved speakers within milliseconds, or
+   * 2) the Google Docs transcript file is modified after generation.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2735,6 +2876,230 @@ export class ConferenceRecordsServiceClient {
       callSettings,
     ) as AsyncIterable<protos.google.apps.meet.v2beta.ITranscriptEntry>;
   }
+  /**
+   * Lists the set of smart notes from the conference record. By default,
+   * ordered by start time and in ascending order.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `conferenceRecords/{conference_record}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of smart notes to return. The service might return
+   *   fewer than this value. If unspecified, at most 10 smart notes are returned.
+   *   The maximum value is 100; values above 100 are coerced to 100.
+   *   Maximum might change in the future.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token returned from previous List Call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.apps.meet.v2beta.SmartNote|SmartNote}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSmartNotesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSmartNotes(
+    request?: protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2beta.ISmartNote[],
+      protos.google.apps.meet.v2beta.IListSmartNotesRequest | null,
+      protos.google.apps.meet.v2beta.IListSmartNotesResponse,
+    ]
+  >;
+  listSmartNotes(
+    request: protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+      protos.google.apps.meet.v2beta.IListSmartNotesResponse | null | undefined,
+      protos.google.apps.meet.v2beta.ISmartNote
+    >,
+  ): void;
+  listSmartNotes(
+    request: protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+    callback: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+      protos.google.apps.meet.v2beta.IListSmartNotesResponse | null | undefined,
+      protos.google.apps.meet.v2beta.ISmartNote
+    >,
+  ): void;
+  listSmartNotes(
+    request?: protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+          | protos.google.apps.meet.v2beta.IListSmartNotesResponse
+          | null
+          | undefined,
+          protos.google.apps.meet.v2beta.ISmartNote
+        >,
+    callback?: PaginationCallback<
+      protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+      protos.google.apps.meet.v2beta.IListSmartNotesResponse | null | undefined,
+      protos.google.apps.meet.v2beta.ISmartNote
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2beta.ISmartNote[],
+      protos.google.apps.meet.v2beta.IListSmartNotesRequest | null,
+      protos.google.apps.meet.v2beta.IListSmartNotesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+          | protos.google.apps.meet.v2beta.IListSmartNotesResponse
+          | null
+          | undefined,
+          protos.google.apps.meet.v2beta.ISmartNote
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSmartNotes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSmartNotes request %j', request);
+    return this.innerApiCalls
+      .listSmartNotes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2beta.ISmartNote[],
+          protos.google.apps.meet.v2beta.IListSmartNotesRequest | null,
+          protos.google.apps.meet.v2beta.IListSmartNotesResponse,
+        ]) => {
+          this._log.info('listSmartNotes values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listSmartNotes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `conferenceRecords/{conference_record}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of smart notes to return. The service might return
+   *   fewer than this value. If unspecified, at most 10 smart notes are returned.
+   *   The maximum value is 100; values above 100 are coerced to 100.
+   *   Maximum might change in the future.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token returned from previous List Call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.apps.meet.v2beta.SmartNote|SmartNote} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSmartNotesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSmartNotesStream(
+    request?: protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSmartNotes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSmartNotes stream %j', request);
+    return this.descriptors.page.listSmartNotes.createStream(
+      this.innerApiCalls.listSmartNotes as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listSmartNotes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `conferenceRecords/{conference_record}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of smart notes to return. The service might return
+   *   fewer than this value. If unspecified, at most 10 smart notes are returned.
+   *   The maximum value is 100; values above 100 are coerced to 100.
+   *   Maximum might change in the future.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token returned from previous List Call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.apps.meet.v2beta.SmartNote|SmartNote}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/conference_records_service.list_smart_notes.js</caption>
+   * region_tag:meet_v2beta_generated_ConferenceRecordsService_ListSmartNotes_async
+   */
+  listSmartNotesAsync(
+    request?: protos.google.apps.meet.v2beta.IListSmartNotesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.apps.meet.v2beta.ISmartNote> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSmartNotes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSmartNotes iterate %j', request);
+    return this.descriptors.page.listSmartNotes.asyncIterate(
+      this.innerApiCalls['listSmartNotes'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.apps.meet.v2beta.ISmartNote>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2937,6 +3302,44 @@ export class ConferenceRecordsServiceClient {
   matchRecordingFromRecordingName(recordingName: string) {
     return this.pathTemplates.recordingPathTemplate.match(recordingName)
       .recording;
+  }
+
+  /**
+   * Return a fully-qualified smartNote resource name string.
+   *
+   * @param {string} conference_record
+   * @param {string} smart_note
+   * @returns {string} Resource name string.
+   */
+  smartNotePath(conferenceRecord: string, smartNote: string) {
+    return this.pathTemplates.smartNotePathTemplate.render({
+      conference_record: conferenceRecord,
+      smart_note: smartNote,
+    });
+  }
+
+  /**
+   * Parse the conference_record from SmartNote resource.
+   *
+   * @param {string} smartNoteName
+   *   A fully-qualified path representing SmartNote resource.
+   * @returns {string} A string representing the conference_record.
+   */
+  matchConferenceRecordFromSmartNoteName(smartNoteName: string) {
+    return this.pathTemplates.smartNotePathTemplate.match(smartNoteName)
+      .conference_record;
+  }
+
+  /**
+   * Parse the smart_note from SmartNote resource.
+   *
+   * @param {string} smartNoteName
+   *   A fully-qualified path representing SmartNote resource.
+   * @returns {string} A string representing the smart_note.
+   */
+  matchSmartNoteFromSmartNoteName(smartNoteName: string) {
+    return this.pathTemplates.smartNotePathTemplate.match(smartNoteName)
+      .smart_note;
   }
 
   /**

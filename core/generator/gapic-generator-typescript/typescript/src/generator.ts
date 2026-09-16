@@ -129,14 +129,17 @@ export class Generator {
           'INTERNAL ERROR: Cannot find ServiceConfig type in proto JSON',
         );
       }
-      const deserialized = serializer.fromProto3JSON(ServiceConfig, json);
+      const deserialized = serializer.fromProto3JSON(
+        ServiceConfig as protobuf.Type,
+        json,
+      );
       if (!deserialized) {
         throw new Error(
           'ERROR: Cannot parse the content of gRPC service config',
         );
       }
       this.grpcServiceConfig = ServiceConfig.toObject(
-        deserialized,
+        deserialized as protobuf.Message,
       ) as protos.grpc.service_config.ServiceConfig;
     }
   }

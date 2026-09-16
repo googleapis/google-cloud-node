@@ -3213,11 +3213,11 @@
     "library_type": "GAPIC_AUTO",
     "name": "meet",
     "name_pretty": "Google Meet",
-    "product_documentation": "https://developers.google.com/meet/api/guides/overview",
+    "product_documentation": "https://developers.google.com/workspace/meet/api/guides/overview",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-node",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-apps-meet",
-    "support_documentation": "https://developers.google.com/meet/api/guides/overview/docs/getting-support"
+    "support_documentation": "https://developers.google.com/workspace/meet/api/guides/overview/docs/getting-support"
   },
   {
     "api_description": "The Google Workspace Events API lets you subscribe to events and manage\nchange notifications across Google Workspace applications.",

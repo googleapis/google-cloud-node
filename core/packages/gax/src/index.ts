@@ -133,7 +133,7 @@ export {
   checkTelemetryEnabled,
 } from './util';
 
-export {StaticTraceContext} from './observability/TracerHelper';
+export {StaticTraceContext, traceCall} from './observability/TracerHelper';
 
 export {ServiceError, ChannelCredentials} from '@grpc/grpc-js';
 export {warn} from './warnings';

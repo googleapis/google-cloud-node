@@ -22,7 +22,7 @@
                     "SecureSourceManager": {
                       "options": {
                         "(google.api.default_host)": "securesourcemanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/securesourcemanager.read-write"
                       },
                       "methods": {
                         "ListInstances": {
@@ -749,6 +749,20 @@
                             }
                           ]
                         },
+                        "FetchRefs": {
+                          "requestType": "FetchRefsRequest",
+                          "responseType": "FetchRefsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{repository=projects/*/locations/*/repositories/*}:fetchRefs"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{repository=projects/*/locations/*/repositories/*}:fetchRefs"
+                              }
+                            }
+                          ]
+                        },
                         "CreateIssue": {
                           "requestType": "CreateIssueRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1323,6 +1337,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1722,7 +1750,8 @@
                           "values": {
                             "UNSPECIFIED": 0,
                             "PUSH": 1,
-                            "PULL_REQUEST": 2
+                            "PULL_REQUEST": 2,
+                            "PULL_REQUEST_COMMENT": 3
                           }
                         },
                         "PushOption": {
@@ -2291,6 +2320,40 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "Ref": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "type": {
+                          "type": "RefType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RefType": {
+                          "values": {
+                            "REF_TYPE_UNSPECIFIED": 0,
+                            "REF_TYPE_BRANCH": 1,
+                            "REF_TYPE_TAG": 2
                           }
                         }
                       }
@@ -3286,6 +3349,52 @@
                           "id": 1
                         },
                         "content": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FetchRefsRequest": {
+                      "fields": {
+                        "repository": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securesourcemanager.googleapis.com/Repository"
+                          }
+                        },
+                        "type": {
+                          "type": "Ref.RefType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FetchRefsResponse": {
+                      "fields": {
+                        "refs": {
+                          "rule": "repeated",
+                          "type": "Ref",
+                          "id": 1
+                        },
+                        "nextPageToken": {
                           "type": "string",
                           "id": 2
                         }
