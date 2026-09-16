@@ -15,12 +15,11 @@
  */
 
 import * as assert from 'assert';
-import {before, beforeEach, afterEach, describe, it} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import {afterEach, beforeEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
+import * as vm from 'vm';
 import {Big} from 'big.js';
 import {PreciseDate} from '@google-cloud/precise-date';
-import {GrpcService} from '../src/common-grpc/service';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
 import {GoogleError} from 'google-gax';
@@ -28,24 +27,14 @@ import {util} from 'protobufjs';
 import * as crypto from 'crypto';
 import Long = util.Long;
 import {isString} from '../src/helper';
+import {codec as realCodec} from '../src/codec';
+// Typed as any to support legacy test fixtures that pass duck-typed objects or loose parameters.
+const codec: any = realCodec;
 const singer = require('./data/singer');
 const music = singer.examples.spanner.music;
 
 describe('codec', () => {
-  let codec;
-
   const sandbox = sinon.createSandbox();
-
-  before(() => {
-    codec = proxyquire('../src/codec.js', {
-      './common-grpc/service': {GrpcService},
-    }).codec;
-  });
-
-  beforeEach(() => {
-    sandbox.stub(GrpcService, 'encodeValue_').callsFake(value => value);
-    sandbox.stub(GrpcService, 'decodeValue_').callsFake(value => value);
-  });
 
   afterEach(() => sandbox.restore());
 
@@ -1221,7 +1210,6 @@ describe('codec', () => {
     });
 
     it('should return null values as null', () => {
-      (GrpcService.decodeValue_ as sinon.SinonStub).returns(null);
       const decoded = codec.decode(null, BYPASS_FIELD);
       assert.strictEqual(decoded, null);
     });
@@ -2078,16 +2066,17 @@ describe('codec', () => {
   });
 
   describe('encode', () => {
-    it('should return the value from the common encoder', () => {
-      const value = {};
-      const defaultEncodedValue = '{}';
+    it('should encode NULL', () => {
+      assert.deepStrictEqual(codec.encode(null), {nullValue: 0});
+    });
 
-      (GrpcService.encodeValue_ as sinon.SinonStub)
-        .withArgs(value)
-        .returns(defaultEncodedValue);
+    it('should encode BOOL', () => {
+      assert.deepStrictEqual(codec.encode(true), {boolValue: true});
+      assert.deepStrictEqual(codec.encode(false), {boolValue: false});
+    });
 
-      const encoded = codec.encode(value);
-      assert.strictEqual(encoded, defaultEncodedValue);
+    it('should encode STRING', () => {
+      assert.deepStrictEqual(codec.encode('hi'), {stringValue: 'hi'});
     });
 
     it('should encode BYTES', () => {
@@ -2095,7 +2084,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.toString('base64'));
+      assert.deepStrictEqual(encoded, {stringValue: value.toString('base64')});
     });
 
     it('should encode ProtoMessage', () => {
@@ -2115,10 +2104,11 @@ describe('codec', () => {
 
       const encoded = codec.encode(protoMessage);
 
-      assert.strictEqual(
-        encoded,
-        music.SingerInfo.encode(singerInfo).finish().toString('base64'),
-      );
+      assert.deepStrictEqual(encoded, {
+        stringValue: music.SingerInfo.encode(singerInfo)
+          .finish()
+          .toString('base64'),
+      });
     });
 
     it('should encode ProtoEnum', () => {
@@ -2131,19 +2121,87 @@ describe('codec', () => {
 
       const encoded = codec.encode(protoEnum);
 
-      assert.strictEqual(encoded, genre.toString());
+      assert.deepStrictEqual(encoded, {stringValue: genre.toString()});
+    });
+
+    it('should encode ProtoEnum with numeric value', () => {
+      const protoEnum = new codec.ProtoEnum({
+        value: 3,
+        fullName: 'examples.spanner.music.Genre',
+      });
+
+      const encoded = codec.encode(protoEnum);
+
+      assert.deepStrictEqual(encoded, {stringValue: '3'});
+    });
+
+    it('should encode ProtoEnum with string enum resolving to numeric value', () => {
+      const protoEnum = new codec.ProtoEnum({
+        value: 'ROCK',
+        enumObject: music.Genre,
+        fullName: 'examples.spanner.music.Genre',
+      });
+
+      const encoded = codec.encode(protoEnum);
+
+      assert.deepStrictEqual(encoded, {numberValue: music.Genre.ROCK});
     });
 
     it('should encode structs', () => {
       const value = codec.Struct.fromJSON({a: 'b', c: 'd'});
+
       const encoded = codec.encode(value);
-      assert.deepStrictEqual(encoded, ['b', 'd']);
+
+      assert.deepStrictEqual(encoded, {
+        listValue: {values: [{stringValue: 'b'}, {stringValue: 'd'}]},
+      });
+    });
+
+    it('should encode nested structs', () => {
+      const value = codec.Struct.fromJSON({
+        a: codec.Struct.fromJSON({b: 5}),
+      });
+
+      const encoded = codec.encode(value);
+
+      assert.deepStrictEqual(encoded, {
+        listValue: {
+          values: [{listValue: {values: [{stringValue: '5'}]}}],
+        },
+      });
+    });
+
+    it('should encode an empty struct', () => {
+      const encoded = codec.encode(codec.Struct.fromJSON({}));
+
+      assert.deepStrictEqual(encoded, {listValue: {values: []}});
+    });
+
+    it('should encode an array containing structs', () => {
+      const value = [codec.Struct.fromJSON({a: 'b'})];
+
+      const encoded = codec.encode(value);
+
+      assert.deepStrictEqual(encoded, {
+        listValue: {
+          values: [{listValue: {values: [{stringValue: 'b'}]}}],
+        },
+      });
+    });
+
+    it('should throw if a struct field value is undefined', () => {
+      assert.throws(
+        () => codec.encode(codec.Struct.fromJSON({a: undefined})),
+        /Value of type undefined not recognized\./,
+      );
     });
 
     it('should stringify Infinity', () => {
       const value = Infinity;
+
       const encoded = codec.encode(value);
-      assert.strictEqual(encoded, value.toString());
+
+      assert.deepStrictEqual(encoded, {stringValue: value.toString()});
     });
 
     it('should stringify -Infinity', () => {
@@ -2151,7 +2209,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.toString());
+      assert.deepStrictEqual(encoded, {stringValue: value.toString()});
     });
 
     it('should stringify NaN', () => {
@@ -2159,7 +2217,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.toString());
+      assert.deepStrictEqual(encoded, {stringValue: value.toString()});
     });
 
     it('should stringify INT64', () => {
@@ -2167,7 +2225,34 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.toString());
+      assert.deepStrictEqual(encoded, {stringValue: value.toString()});
+    });
+
+    it('should stringify -0', () => {
+      const encoded = codec.encode(-0);
+
+      assert.deepStrictEqual(encoded, {stringValue: '0'});
+    });
+
+    it('should encode a non-integer number as a number', () => {
+      const encoded = codec.encode(3.14);
+
+      assert.deepStrictEqual(encoded, {numberValue: 3.14});
+    });
+
+    it('should encode Float with NaN and Infinity as numbers', () => {
+      assert.deepStrictEqual(codec.encode(new codec.Float(NaN)), {
+        numberValue: NaN,
+      });
+      assert.deepStrictEqual(codec.encode(new codec.Float(Infinity)), {
+        numberValue: Infinity,
+      });
+      assert.deepStrictEqual(codec.encode(new codec.Float(-Infinity)), {
+        numberValue: -Infinity,
+      });
+      assert.deepStrictEqual(codec.encode(new codec.Float32(NaN)), {
+        numberValue: NaN,
+      });
     });
 
     it('should stringify NUMERIC', () => {
@@ -2175,7 +2260,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.value);
+      assert.deepStrictEqual(encoded, {stringValue: value.value});
     });
 
     it('should stringify PG NUMERIC', () => {
@@ -2183,7 +2268,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.value);
+      assert.deepStrictEqual(encoded, {stringValue: value.value});
     });
 
     it('should encode ARRAY and inner members', () => {
@@ -2191,9 +2276,48 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.deepStrictEqual(encoded, [
-        value.toString(), // (tests that it is stringified)
-      ]);
+      assert.deepStrictEqual(encoded, {
+        listValue: {
+          // Tests that the inner member is stringified.
+          values: [{stringValue: '5'}],
+        },
+      });
+    });
+
+    it('should encode nested ARRAYs', () => {
+      const value = [['a'], [null]];
+
+      const encoded = codec.encode(value);
+
+      assert.deepStrictEqual(encoded, {
+        listValue: {
+          values: [
+            {listValue: {values: [{stringValue: 'a'}]}},
+            {listValue: {values: [{nullValue: 0}]}},
+          ],
+        },
+      });
+    });
+
+    it('should encode an empty ARRAY', () => {
+      const encoded = codec.encode([]);
+
+      assert.deepStrictEqual(encoded, {listValue: {values: []}});
+    });
+
+    it('should throw if an array has an undefined value or hole', () => {
+      const sparseArray: unknown[] = [];
+      sparseArray[2] = 1;
+
+      assert.throws(
+        () => codec.encode(sparseArray),
+        /Value of type undefined not recognized\./,
+      );
+
+      assert.throws(
+        () => codec.encode([undefined]),
+        /Value of type undefined not recognized\./,
+      );
     });
 
     it('should encode TIMESTAMP', () => {
@@ -2201,7 +2325,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.toJSON());
+      assert.deepStrictEqual(encoded, {stringValue: value.toJSON()});
     });
 
     it('should encode DATE', () => {
@@ -2209,13 +2333,37 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value.toJSON());
+      assert.deepStrictEqual(encoded, {stringValue: value.toJSON()});
+    });
+
+    it('should encode an invalid date as NULL', () => {
+      const encoded = codec.encode(new Date('not-a-date'));
+
+      assert.deepStrictEqual(encoded, {nullValue: 0});
+    });
+
+    it('should encode cross-realm Date', () => {
+      const crossRealmDate = vm.runInNewContext('new Date(0)');
+      const encoded = codec.encode(crossRealmDate);
+
+      assert.deepStrictEqual(encoded, {
+        stringValue: '1970-01-01T00:00:00.000Z',
+      });
+    });
+
+    it('should encode cross-realm invalid Date as NULL', () => {
+      const crossRealmInvalidDate = vm.runInNewContext('new Date("nope")');
+      const encoded = codec.encode(crossRealmInvalidDate);
+
+      assert.deepStrictEqual(encoded, {nullValue: 0});
     });
 
     it('should encode INTERVAL', () => {
       const value = new codec.Interval(17, -20, BigInt(30001));
+
       const encoded = codec.encode(value);
-      assert.strictEqual(encoded, 'P1Y5M-20DT0.000030001S');
+
+      assert.deepStrictEqual(encoded, {stringValue: 'P1Y5M-20DT0.000030001S'});
     });
 
     it('should encode INT64', () => {
@@ -2223,7 +2371,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, '10');
+      assert.deepStrictEqual(encoded, {stringValue: '10'});
     });
 
     it('should encode PG OID', () => {
@@ -2231,7 +2379,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, '10');
+      assert.deepStrictEqual(encoded, {stringValue: '10'});
     });
 
     it('should encode UUID', () => {
@@ -2239,7 +2387,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, value);
+      assert.deepStrictEqual(encoded, {stringValue: value});
     });
 
     it('should encode FLOAT32', () => {
@@ -2247,7 +2395,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, 10);
+      assert.deepStrictEqual(encoded, {numberValue: 10});
     });
 
     it('should encode FLOAT64', () => {
@@ -2255,7 +2403,7 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.strictEqual(encoded, 10);
+      assert.deepStrictEqual(encoded, {numberValue: 10});
     });
 
     it('should encode JSON', () => {
@@ -2264,7 +2412,15 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.deepStrictEqual(encoded, expected);
+      assert.deepStrictEqual(encoded, {stringValue: expected});
+    });
+
+    it('should encode PG JSONB', () => {
+      const value = new codec.PGJsonb({result: true});
+
+      const encoded = codec.encode(value);
+
+      assert.deepStrictEqual(encoded, {stringValue: '{"result":true}'});
     });
 
     it('should encode complex object as JSON', () => {
@@ -2277,10 +2433,10 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.deepStrictEqual(
-        encoded,
-        '{"boolKey":true,"numberKey":3.14,"stringKey":"test","objectKey":{"innerKey":"inner-value"}}',
-      );
+      assert.deepStrictEqual(encoded, {
+        stringValue:
+          '{"boolKey":true,"numberKey":3.14,"stringKey":"test","objectKey":{"innerKey":"inner-value"}}',
+      });
     });
 
     it('should encode deeply-nested object as JSON', () => {
@@ -2294,9 +2450,66 @@ describe('codec', () => {
 
       const encoded = codec.encode(value);
 
-      assert.deepStrictEqual(
-        encoded,
-        '{"k":'.repeat(nesting).concat('"v"').concat('}'.repeat(nesting)),
+      assert.deepStrictEqual(encoded, {
+        stringValue: '{"k":'
+          .repeat(nesting)
+          .concat('"v"')
+          .concat('}'.repeat(nesting)),
+      });
+    });
+
+    it('should encode boxed primitives', () => {
+      assert.deepStrictEqual(codec.encode(new Number(5)), {stringValue: '5'});
+      assert.deepStrictEqual(codec.encode(new Number(3.14)), {
+        numberValue: 3.14,
+      });
+      assert.deepStrictEqual(codec.encode(new String('hi')), {
+        stringValue: 'hi',
+      });
+      assert.deepStrictEqual(codec.encode(new Boolean(true)), {
+        boolValue: true,
+      });
+      assert.deepStrictEqual(codec.encode(new Boolean(false)), {
+        boolValue: false,
+      });
+    });
+
+    it('should throw if an object toJSON method returns undefined', () => {
+      assert.throws(
+        () => codec.encode({toJSON: () => undefined}),
+        /Value of type object not recognized\./,
+      );
+    });
+
+    it('should throw for unsupported values', () => {
+      assert.throws(
+        () => codec.encode(undefined),
+        /Value of type undefined not recognized\./,
+      );
+
+      assert.throws(
+        () => codec.encode(new Map()),
+        /Value of type object not recognized\./,
+      );
+
+      assert.throws(
+        () => codec.encode(new Set([1])),
+        /Value of type object not recognized\./,
+      );
+
+      assert.throws(
+        () => codec.encode(BigInt(1)),
+        /Value of type bigint not recognized\./,
+      );
+
+      assert.throws(
+        () => codec.encode(Symbol('s')),
+        /Value of type symbol not recognized\./,
+      );
+
+      assert.throws(
+        () => codec.encode(() => {}),
+        /Value of type function not recognized\./,
       );
     });
 
