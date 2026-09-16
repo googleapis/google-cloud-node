@@ -25,10 +25,9 @@ const REGION_END_REGEX = /\[END/;
 
 const sampleCache = new Map();
 exports.loadSampleCache = function () {
-  const sampleCandidates = [
-    ...glob.sync(`${SAMPLES_DIRECTORY}/**/*.js`, {ignore: ['node_modules']}),
-    ...glob.sync(`${SAMPLES_DIRECTORY}/**/*.ts`, {ignore: ['node_modules']}),
-  ];
+  const sampleCandidates = glob.sync(`${SAMPLES_DIRECTORY}/**/*.{js,ts}`, {
+    ignore: ['node_modules'],
+  });
   for (const candidate of sampleCandidates) {
     const stat = statSync(candidate);
     if (!stat.isFile()) continue;
