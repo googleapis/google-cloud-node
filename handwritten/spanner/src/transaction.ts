@@ -334,7 +334,7 @@ type PrecommitTokenProvider =
 export class Snapshot extends EventEmitter {
   protected _options!: spannerClient.spanner.v1.ITransactionOptions;
   protected _seqno = 1;
-  protected _waitingRequests: Array<() => void>;
+  protected _waitingRequests: Array<(err?: Error) => void>;
   protected _inlineBeginStarted;
   protected _useInRunner = false;
   protected _latestPreCommitToken:
@@ -1131,7 +1131,7 @@ export class Snapshot extends EventEmitter {
     }
 
     this.ended = true;
-    this._releaseWaitingRequests();
+    this._releaseWaitingRequests(new Error('Transaction has ended.'));
     process.nextTick(() => this.emit('end'));
 
     if (this._affinityKey) {
@@ -2323,7 +2323,11 @@ export class Snapshot extends EventEmitter {
         read() {},
       });
 
-      this._waitingRequests.push(() => {
+      this._waitingRequests.push((err?: Error) => {
+        if (err) {
+          streamProxy.destroy(err);
+          return;
+        }
         makeRequest(resumeToken)
           .on('data', chunk => streamProxy.emit('data', chunk))
           .on('error', err => streamProxy.emit('error', err))
@@ -2334,10 +2338,10 @@ export class Snapshot extends EventEmitter {
     };
   }
 
-  _releaseWaitingRequests() {
+  _releaseWaitingRequests(err?: Error) {
     while (this._waitingRequests.length > 0) {
       const request = this._waitingRequests.shift();
-      request?.();
+      request?.(err);
     }
   }
 

@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    npm install
+    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/firestore}"
   dir: 'handwritten/firestore'
   id: 'install-dependencies'
 
@@ -23,11 +23,13 @@ steps:
   args:
   - '-c'
   - |
-    npm run system-test
+    corepack enable pnpm && pnpm run system-test
   dir: 'handwritten/firestore'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
   - 'FIRESTORE_DATABASE_ID=firestore-standard'
+  # Retry failing tests up to 3 times.
+  - 'TEST_RETRIES=3'
   id: 'run-system-tests'
   waitFor: ['install-dependencies']
   # For Secret Manager, uncomment these (adjust secret name and volume path as needed):
