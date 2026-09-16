@@ -1753,9 +1753,12 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     const destinationFile = convertToFile(destination);
     callback = callback || util.noop;
 
-    if (!destinationFile.metadata.contentType) {
-      const destinationContentType =
-        mime.getType(destinationFile.name) || undefined;
+    void (async () => {
+      try {
+        if (!destinationFile.metadata.contentType) {
+          const mime = await getMime();
+          const destinationContentType =
+            mime.getType(destinationFile.name) || undefined;
 
       if (destinationContentType) {
         destinationFile.metadata.contentType = destinationContentType;
@@ -2341,6 +2344,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     (async () => {
       try {
         let promises = [];
+        const pLimit = await getPLimit();
         const limit = pLimit(MAX_PARALLEL_LIMIT);
         const filesStream = this.getFilesStream(query);
 
@@ -4762,6 +4766,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     void (async () => {
       try {
         const [files] = await this.getFiles(options);
+        const pLimit = await getPLimit();
         const limit = pLimit(MAX_PARALLEL_LIMIT);
         const promises = files.map(file => {
           return limit(() => processFile(file));
