@@ -41,8 +41,11 @@ jobs:
       with:
         node-version: 24.x
 
-    - name: Install Node dependencies with npm
-      run: npm install
+    - name: Install pnpm
+      run: npm install -g pnpm@10.0.0 --silent
+
+    - name: Install Node dependencies with pnpm
+      run: pnpm install --ignore-workspace
       working-directory: core/generator/gapic-generator-typescript
       
     - name: Strip local GCC 15 flags for CI
@@ -85,7 +88,6 @@ jobs:
       shell: bash
       run: |
         set -ex
-        npm install -g pnpm@10.0.0 --silent
         cp ../../../.mocharc.cjs .
         unzip ~/artifacts/outputs.zip -d library
         FAIL=0
