@@ -47,7 +47,7 @@
     "storage"
   ],
   "scripts": {
-    "all-test": "npm test && npm run system-test",
+    "all-test": "pnpm test && pnpm run system-test",
     "benchwrapper": "node bin/benchwrapper.js",
     "check": "gts check",
     "clean": "rm -rf build/",
@@ -61,12 +61,12 @@
     "postcompile": "cp ./src/package-json-helper.cjs ./build/cjs/src && cp ./src/package-json-helper.cjs ./build/esm/src",
     "postcompile:cjs": "babel --plugins gapic-tools/build/src/replaceImportMetaUrl,gapic-tools/build/src/toggleESMFlagVariable build/cjs/src/util.js -o build/cjs/src/util.js && cp internal-tooling/helpers/package.cjs.json build/cjs/package.json",
     "precompile": "rm -rf build/",
-    "preconformance-test": "npm run compile:cjs -- --sourceMap",
-    "predocs": "npm run compile:cjs -- --sourceMap",
+    "preconformance-test": "pnpm run compile:cjs --sourceMap",
+    "predocs": "pnpm run compile:cjs --sourceMap",
     "prepare": "npm run compile",
-    "presystem-test:esm": "npm run compile:esm",
-    "presystem-test": "npm run compile -- --sourceMap",
-    "pretest": "npm run compile -- --sourceMap",
+    "presystem-test:esm": "pnpm run compile:esm",
+    "presystem-test": "pnpm run compile --sourceMap",
+    "pretest": "pnpm run compile --sourceMap",
     "system-test:esm": "mkdir -p $HOME/.config && mocha build/esm/system-test --timeout 600000 --exit",
     "system-test": "mkdir -p $HOME/.config && mocha build/cjs/system-test --timeout 600000 --exit",
     "test": "c8 mocha build/cjs/test"

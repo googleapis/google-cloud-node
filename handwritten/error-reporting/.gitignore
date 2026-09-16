@@ -10,6 +10,5 @@ system-test/secrets.js
 system-test/*key.json
 build
 .vscode
-package-lock.json
 key.json
 __pycache__
