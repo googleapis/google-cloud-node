@@ -2108,7 +2108,6 @@ describe('File', () => {
         .stub()
         .callsFake((stream, options) => {
           assert.strictEqual(options.metadata.contentType, 'image/png');
-          done();
         });
 
       writable.write('data');
