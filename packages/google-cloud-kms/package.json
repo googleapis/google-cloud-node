@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/kms",
   "description": "Google Cloud Key Management Service (KMS) API client for Node.js",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -67,10 +67,5 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-kms",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }
