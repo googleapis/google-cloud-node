@@ -3222,8 +3222,8 @@ importers:
         specifier: ^6.0.2
         version: 6.7.1(encoding@0.1.13)
       google-auth-library:
-        specifier: ^9.6.3
-        version: 9.15.1(encoding@0.1.13)
+        specifier: ^11.0.0
+        version: 11.0.2
       html-entities:
         specifier: ^2.5.2
         version: 2.6.0

@@ -93,7 +93,7 @@ export class Service {
   private projectIdRequired: boolean;
   providedUserAgent?: string;
   makeAuthenticatedRequest: MakeAuthenticatedRequest;
-  authClient: GoogleAuth<AuthClient>;
+  authClient: GoogleAuth;
   apiEndpoint: string;
   timeout?: number;
   universeDomain: string;

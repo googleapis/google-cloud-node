@@ -144,7 +144,7 @@ export interface MakeAuthenticatedRequest {
   getCredentials: (
     callback: (err?: Error | null, credentials?: CredentialBody) => void
   ) => void;
-  authClient: GoogleAuth<AuthClient>;
+  authClient: GoogleAuth;
 }
 
 export interface Abortable {
@@ -643,7 +643,7 @@ export class Util {
       delete googleAutoAuthConfig.projectId;
     }
 
-    let authClient: GoogleAuth<AuthClient>;
+    let authClient: GoogleAuth;
 
     if (googleAutoAuthConfig.authClient instanceof GoogleAuth) {
       // Use an existing `GoogleAuth`
@@ -652,7 +652,8 @@ export class Util {
       // Pass an `AuthClient` & `clientOptions` to `GoogleAuth`, if available
       authClient = new GoogleAuth({
         ...googleAutoAuthConfig,
-        authClient: googleAutoAuthConfig.authClient,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        authClient: googleAutoAuthConfig.authClient as any,
         clientOptions: googleAutoAuthConfig.clientOptions,
       });
     }
