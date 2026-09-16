@@ -554,23 +554,27 @@ describe('unit test', () => {
     secondary.done();
   });
 
-  it('should safely handle circular error cause chains and empty AggregateError in getErrorCodes', () => {
-    const cyclicErrorA: Record<string, unknown> = {message: 'cycle A'};
-    const cyclicErrorB: Record<string, unknown> = {
-      message: 'cycle B',
-      cause: cyclicErrorA,
-    };
+  it('should safely handle circular error cause chains and empty AggregateError in isAvailable', async () => {
+    const cyclicErrorA = new Error('cycle A') as Error & {cause?: unknown};
+    const cyclicErrorB = new Error('cycle B') as Error & {cause?: unknown};
+    cyclicErrorB.cause = cyclicErrorA;
     cyclicErrorA.cause = cyclicErrorB;
 
-    assert.deepStrictEqual(gcp.getErrorCodes(cyclicErrorA), ['UNKNOWN']);
-    assert.deepStrictEqual(
-      gcp.getErrorCodes(new AggregateError([], 'empty aggregate')),
-      ['UNKNOWN'],
-    );
-    assert.deepStrictEqual(
-      gcp.getErrorCodes({name: 'TimeoutError', message: 'timed out'}),
-      ['ETIMEDOUT'],
-    );
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(cyclicErrorA);
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(new AggregateError([], 'empty aggregate'));
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(String(emitWarningStub.firstCall.args[0]), /code = UNKNOWN/);
+    primary.done();
+    secondary.done();
   });
 
   it('should return first successful response', async () => {

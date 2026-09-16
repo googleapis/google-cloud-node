@@ -318,11 +318,7 @@ function detectGCPAvailableRetries(): number {
 
 let cachedIsAvailableResponse: Promise<boolean> | undefined;
 
-/**
- * Interface representing structured error properties that may appear on network
- * or HTTP errors thrown by fetch/Gaxios/Node.js runtime during metadata lookup.
- */
-export interface ErrorWithDetails {
+interface ErrorWithDetails {
   readonly name?: string;
   readonly message?: string;
   readonly code?: string | number;
@@ -335,11 +331,7 @@ export interface ErrorWithDetails {
   readonly error?: unknown;
 }
 
-/**
- * Expected network error codes when probing the GCP metadata server from a
- * non-GCP environment (where 169.254.169.254 and metadata.google.internal are unreachable).
- */
-export const EXPECTED_NETWORK_ERROR_CODES: ReadonlySet<string> = new Set([
+const EXPECTED_NETWORK_ERROR_CODES: ReadonlySet<string> = new Set([
   'EHOSTDOWN',
   'EHOSTUNREACH',
   'ENETUNREACH',
@@ -364,18 +356,12 @@ function isErrorWithDetails(val: unknown): val is ErrorWithDetails {
   return typeof val === 'object' && val !== null;
 }
 
-function sanitizeForLog(val: unknown, maxLen = 256): string {
-  return String(val ?? '')
-    .replace(/[\r\n\t]+/g, ' ')
-    .slice(0, maxLen);
-}
-
 /**
  * Recursively extracts and normalizes POSIX/network error codes from potentially
  * nested Error objects (`AggregateError.errors` from `Promise.any`, `.cause`, `.error`).
  * Guards against circular references and deep recursion.
  */
-export function getErrorCodes(
+function getErrorCodes(
   err: unknown,
   visited = new Set<unknown>(),
   depth = 0,
@@ -445,64 +431,66 @@ export async function isAvailable() {
     }
   }
 
-  // If a user is instantiating several GCP libraries at the same time,
-  // this may result in multiple calls to isAvailable(), to detect the
-  // runtime environment. We use the same promise for each of these calls
-  // to reduce the network load.
-  if (cachedIsAvailableResponse === undefined) {
-    cachedIsAvailableResponse = (async () => {
-      try {
-        await metadataAccessor(
-          'instance',
-          undefined,
-          detectGCPAvailableRetries(),
-          // If the default HOST_ADDRESS has been overridden, we should not
-          // make an effort to try SECONDARY_HOST_ADDRESS (as we are likely in
-          // a non-GCP environment):
-          !(process.env.GCE_METADATA_IP || process.env.GCE_METADATA_HOST),
-        );
-        return true;
-      } catch (e: unknown) {
-        if (process.env.DEBUG_AUTH) {
-          console.info(e);
-        }
-
-        if (!isErrorWithDetails(e)) {
-          process.emitWarning(
-            `received unexpected error = ${sanitizeForLog(e)} code = UNKNOWN`,
-            'MetadataLookupWarning',
-            'METADATA_LOOKUP_WARNING',
+  try {
+    // If a user is instantiating several GCP libraries at the same time,
+    // this may result in multiple calls to isAvailable(), to detect the
+    // runtime environment. We use the same promise for each of these calls
+    // to reduce the network load.
+    if (cachedIsAvailableResponse === undefined) {
+      cachedIsAvailableResponse = (async () => {
+        try {
+          await metadataAccessor(
+            'instance',
+            undefined,
+            detectGCPAvailableRetries(),
+            // If the default HOST_ADDRESS has been overridden, we should not
+            // make an effort to try SECONDARY_HOST_ADDRESS (as we are likely in
+            // a non-GCP environment):
+            !(process.env.GCE_METADATA_IP || process.env.GCE_METADATA_HOST),
           );
+          return true;
+        } catch (e: unknown) {
+          if (process.env.DEBUG_AUTH) {
+            console.info(e);
+          }
+
+          if (!isErrorWithDetails(e)) {
+            process.emitWarning(
+              `received unexpected error = ${String(e)} code = UNKNOWN`,
+              'MetadataLookupWarning',
+            );
+            return false;
+          }
+
+          if (e.type === 'request-timeout' || e.response?.status === 404) {
+            // If running in a GCP environment, metadata endpoint should return
+            // within ms.
+            return false;
+          }
+
+          const codes = getErrorCodes(e);
+          const isExpected =
+            codes.length > 0 &&
+            codes.every(code => EXPECTED_NETWORK_ERROR_CODES.has(code));
+
+          if (!isExpected) {
+            const code = [...new Set(codes)].join(', ');
+            process.emitWarning(
+              `received unexpected error = ${e.message} code = ${code}`,
+              'MetadataLookupWarning',
+            );
+          }
+
+          // Failure to resolve the metadata service means that it is not available.
           return false;
         }
-
-        if (e.type === 'request-timeout' || e.response?.status === 404) {
-          // If running in a GCP environment, metadata endpoint should return
-          // within ms.
-          return false;
-        }
-
-        const codes = getErrorCodes(e);
-        const isExpected =
-          codes.length > 0 &&
-          codes.every(code => EXPECTED_NETWORK_ERROR_CODES.has(code));
-
-        if (!isExpected) {
-          const code = sanitizeForLog([...new Set(codes)].join(', '), 64);
-          const safeMessage = sanitizeForLog(e.message);
-          process.emitWarning(
-            `received unexpected error = ${safeMessage} code = ${code}`,
-            'MetadataLookupWarning',
-            'METADATA_LOOKUP_WARNING',
-          );
-        }
-
-        // Failure to resolve the metadata service means that it is not available.
-        return false;
-      }
-    })();
+      })();
+    }
+    return await cachedIsAvailableResponse;
+  } catch (e) {
+    // This block should technically not be reached because the async IIFE catches its own errors
+    return false;
   }
-  return cachedIsAvailableResponse;
 }
 
 /**

@@ -107,9 +107,10 @@ export class GCPResidencyUtil {
   removeServerlessEnvironmentVariables() {
     const customEnv = {...process.env};
 
-    for (const envVar of gcpResidency.SERVERLESS_ENV_VARS) {
-      delete customEnv[envVar];
-    }
+    delete customEnv.CLOUD_RUN_JOB;
+    delete customEnv.FUNCTION_NAME;
+    delete customEnv.K_SERVICE;
+    delete customEnv.CLOUD_RUN_WORKER_POOL;
 
     this.stubs.processEnv ??= this.sandbox.stub(process, 'env');
     this.stubs.processEnv.value(customEnv);

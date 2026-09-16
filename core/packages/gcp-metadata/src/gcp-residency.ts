@@ -31,7 +31,7 @@ const GCE_MAC_ADDRESS_REGEX = /^42:01/;
  * Environment variables used to detect Google Cloud Serverless environments
  * (Cloud Run Services, Cloud Run Jobs, Cloud Run Worker Pools, and Cloud Functions).
  */
-export const SERVERLESS_ENV_VARS = [
+const SERVERLESS_ENV_VARS = [
   'CLOUD_RUN_JOB',
   'FUNCTION_NAME',
   'K_SERVICE',
