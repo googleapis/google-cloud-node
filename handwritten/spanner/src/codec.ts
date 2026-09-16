@@ -1464,7 +1464,7 @@ interface FieldType extends Type {
  * // {type: 'float64'}
  * ```
  */
-function getType(value: Value): Type {
+function getType(value: Value, enableUuidAsUntyped?: boolean): Type {
   const isSpecialNumber =
     isInfinite(value) || (isNumber(value) && isNaN(value));
 
@@ -1512,7 +1512,12 @@ function getType(value: Value): Type {
     return {type: 'bool'};
   }
 
-  if (process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] === 'true') {
+  const isUuidUntyped =
+    enableUuidAsUntyped !== undefined
+      ? enableUuidAsUntyped
+      : process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] === 'true';
+
+  if (isUuidUntyped) {
     if (!uuidUntypedFlagWarned) {
       process.emitWarning(
         'SPANNER_ENABLE_UUID_AS_UNTYPED environment variable is deprecated and will be removed in a future release.',
@@ -1545,7 +1550,7 @@ function getType(value: Value): Type {
     return {
       type: 'struct',
       fields: Array.from(value).map(({name, value}) => {
-        return Object.assign({name}, getType(value));
+        return Object.assign({name}, getType(value, isUuidUntyped));
       }),
     };
   }
@@ -1563,7 +1568,7 @@ function getType(value: Value): Type {
 
     return {
       type: 'array',
-      child: getType(child),
+      child: getType(child, isUuidUntyped),
     };
   }
 
