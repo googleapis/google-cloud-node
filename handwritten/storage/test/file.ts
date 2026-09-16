@@ -2050,6 +2050,46 @@ describe('File', () => {
       writable.write('data');
     });
 
+    it('should not call getMime if contentType is provided', done => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const utilModule = require('../src/util.js');
+      const getMimeSpy = sandbox.spy(utilModule, 'getMime');
+
+      const f = new File(BUCKET, 'test.png');
+      const writable = f.createWriteStream({contentType: 'text/plain'});
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      f.startResumableUpload_ = (
+        stream: {},
+        options: {metadata: {contentType?: string}},
+      ) => {
+        assert.strictEqual(options.metadata.contentType, 'text/plain');
+        assert.strictEqual(getMimeSpy.called, false);
+        done();
+      };
+      writable.write('data');
+    });
+
+    it('should not call getMime if metadata.contentType is provided', done => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const utilModule = require('../src/util.js');
+      const getMimeSpy = sandbox.spy(utilModule, 'getMime');
+
+      const f = new File(BUCKET, 'test.png');
+      const writable = f.createWriteStream({
+        metadata: {contentType: 'application/json'},
+      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      f.startResumableUpload_ = (
+        stream: {},
+        options: {metadata: {contentType?: string}},
+      ) => {
+        assert.strictEqual(options.metadata.contentType, 'application/json');
+        assert.strictEqual(getMimeSpy.called, false);
+        done();
+      };
+      writable.write('data');
+    });
+
     it('should detect contentType with contentType:auto', () => {
       const writable = file.createWriteStream({contentType: 'auto'});
       file.startResumableUpload_ = sandbox
