@@ -5,6 +5,44 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.13.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.12.0...spanner-v8.13.0) (2026-09-14)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+
+### Bug Fixes
+
+* **spanner:** Do not execute queued queries on ended transactions ([#9305](https://github.com/googleapis/google-cloud-node/issues/9305)) ([f74f198](https://github.com/googleapis/google-cloud-node/commit/f74f198914bd1ad62de684386249dc1b01c80df2))
+
+
+### Performance Improvements
+
+* **spanner:** Avoid cloning metadata map in metrics interceptor ([#9307](https://github.com/googleapis/google-cloud-node/issues/9307)) ([6eec761](https://github.com/googleapis/google-cloud-node/commit/6eec761501734b837a934b30cac440f53486163c))
+* **spanner:** Avoid redundant clock reads in isGlobalTracingEnabled ([#9311](https://github.com/googleapis/google-cloud-node/issues/9311)) ([c42f144](https://github.com/googleapis/google-cloud-node/commit/c42f14440b5afd3bb7e4be997a47d55037bcc8aa))
+* **spanner:** Bypass stream pipeline for single-chunk query results ([#9279](https://github.com/googleapis/google-cloud-node/issues/9279)) ([e46a407](https://github.com/googleapis/google-cloud-node/commit/e46a4076dcfea61104fcb99bf6f5d834fa0c1896))
+
+## [8.12.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.11.0...spanner-v8.12.0) (2026-09-11)
+
+
+### Features
+
+* **spanner:** Add send and ack mutations Cloud Spanner Queues ([#9200](https://github.com/googleapis/google-cloud-node/issues/9200)) ([ee88e46](https://github.com/googleapis/google-cloud-node/commit/ee88e46133ec2eab9a658e849dfa3fa415a83ee6))
+
+
+### Bug Fixes
+
+* **spanner:** Complete query stream on PartialResultSet.last without resumeToken ([#9258](https://github.com/googleapis/google-cloud-node/issues/9258)) ([2fe3bf8](https://github.com/googleapis/google-cloud-node/commit/2fe3bf841a2e05509ef01533b1ff230feec16e99))
+
+
+### Performance Improvements
+
+* Optimize stream pipeline by eliminating events-intercept ([#9221](https://github.com/googleapis/google-cloud-node/issues/9221)) ([e76fac2](https://github.com/googleapis/google-cloud-node/commit/e76fac28c96ffb0b082419f6a3ac36b727128e67))
+* **spanner:** Eliminate throwaway transactions ([#9260](https://github.com/googleapis/google-cloud-node/issues/9260)) ([5da6e08](https://github.com/googleapis/google-cloud-node/commit/5da6e08b8cb3bb5a7b307d565c1e8a32705aa7d7))
+* **spanner:** Optimize row creation by using a shared prototype for toJSON ([#9259](https://github.com/googleapis/google-cloud-node/issues/9259)) ([9377680](https://github.com/googleapis/google-cloud-node/commit/937768022b61092d3af50204cdce5f43b24fcc4d))
+
 ## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.10.0...spanner-v8.11.0) (2026-08-19)
 
 

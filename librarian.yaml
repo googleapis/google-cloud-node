@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.42.0
+version: v0.44.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 00ff8fcb95cafbac573cc449b0d1a039244f1b4b
-    sha256: 4adc70162aadcea34de8e9ec269851bca7486fa8dca31d70dc43cdeb1e7a2617
+    commit: 0fad50179076be3c908551df3c7cd388e0928df1
+    sha256: 077e42e858aa0b2ad7e67cb90f6d1d1b1381ce47593f6c7361e6ad299d1cab94
 tools:
   pnpm:
     - name: gapic-generator-typescript
@@ -52,9 +52,23 @@ default:
     - CHANGELOG.md
     - .readme-partials.yaml
   output: packages
+  nodejs:
+    custom_package_prefixes:
+      google/ads: '@google-ads'
+      google/ai: '@google-ai'
+      google/analytics: '@google-analytics'
+      google/apps: '@google-apps'
+      google/area120: '@google/area120'
+      google/chat: '@google-apps/chat'
+      google/developers: '@google/developer'
+      google/maps: '@googlemaps'
+      google/maps/isochrones: '@google-maps/isochrones'
+      google/marketingplatform: '@google-ads/marketing-platform'
+      google/shopping: '@google-shopping'
+      google/shopping/merchant: '@google-shopping'
 libraries:
   - name: google-ads-admanager
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -169,7 +183,7 @@ libraries:
       package_name: '@google-cloud/subscriptions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/workspaceevents/latest
   - name: google-apps-meet
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/apps/meet/v2
       - path: google/apps/meet/v2beta
@@ -227,90 +241,10 @@ libraries:
     version: 7.4.0
     apis:
       - path: google/cloud/aiplatform/v1
-        nodejs:
-          additional_protos:
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_tables.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_video_object_tracking.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_text_sentiment.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_video_classification.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/export_evaluated_data_items_config.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_image_object_detection.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_text_extraction.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_image_segmentation.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_text_classification.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_image_classification.proto
-            - google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_video_action_recognition.proto
-            - google/cloud/aiplatform/v1/schema/predict/params/image_object_detection.proto
-            - google/cloud/aiplatform/v1/schema/predict/params/video_classification.proto
-            - google/cloud/aiplatform/v1/schema/predict/params/image_segmentation.proto
-            - google/cloud/aiplatform/v1/schema/predict/params/image_classification.proto
-            - google/cloud/aiplatform/v1/schema/predict/params/video_action_recognition.proto
-            - google/cloud/aiplatform/v1/schema/predict/params/video_object_tracking.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/text_sentiment.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/image_object_detection.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/video_classification.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/image_segmentation.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/tabular_regression.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/text_extraction.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/classification.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/video_action_recognition.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/video_object_tracking.proto
-            - google/cloud/aiplatform/v1/schema/predict/prediction/tabular_classification.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/text_sentiment.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/image_object_detection.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/video_classification.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/image_segmentation.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/image_classification.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/text_classification.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/text_extraction.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/video_action_recognition.proto
-            - google/cloud/aiplatform/v1/schema/predict/instance/video_object_tracking.proto
       - path: google/cloud/aiplatform/v1beta1
         nodejs:
-          additional_protos:
-            - google/cloud/aiplatform/v1beta1/schema/geometry.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_tables.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_video_object_tracking.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_text_sentiment.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_video_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/export_evaluated_data_items_config.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_image_object_detection.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_text_extraction.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_image_segmentation.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_text_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_image_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_video_action_recognition.proto
-            - google/cloud/aiplatform/v1beta1/schema/trainingjob/definition/automl_time_series_forecasting.proto
-            - google/cloud/aiplatform/v1beta1/schema/annotation_payload.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/params/image_object_detection.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/params/video_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/params/image_segmentation.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/params/image_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/params/video_action_recognition.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/params/video_object_tracking.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/text_sentiment.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/image_object_detection.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/video_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/image_segmentation.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/tabular_regression.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/text_extraction.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/video_action_recognition.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/video_object_tracking.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/tabular_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/prediction/time_series_forecasting.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/text_sentiment.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/image_object_detection.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/video_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/image_segmentation.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/image_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/text_classification.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/text_extraction.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/video_action_recognition.proto
-            - google/cloud/aiplatform/v1beta1/schema/predict/instance/video_object_tracking.proto
-            - google/cloud/aiplatform/v1beta1/schema/annotation_spec_color.proto
-            - google/cloud/aiplatform/v1beta1/schema/data_item_payload.proto
-            - google/cloud/aiplatform/v1beta1/schema/dataset_metadata.proto
+          exclude_protos:
+            - google/cloud/aiplatform/v1beta1/schema/io_format.proto
     copyright_year: "2026"
     keep:
       - src/decorator.ts
@@ -324,7 +258,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-alloydb
-    version: 3.2.0
+    version: 3.3.0
     apis:
       - path: google/cloud/alloydb/v1
       - path: google/cloud/alloydb/v1beta
@@ -333,7 +267,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-apigateway
-    version: 5.1.0
+    version: 5.2.0
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
@@ -412,7 +346,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/assured-workloads'
   - name: google-cloud-auditmanager
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/auditmanager/v1
     copyright_year: "2026"
@@ -564,7 +498,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -632,7 +566,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/cloud/chronicle/v1
         nodejs:
@@ -684,7 +618,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.3.0
+    version: 7.4.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -895,7 +829,7 @@ libraries:
       default_version: v2
       main_service: dialogflow
   - name: google-cloud-dialogflow-cx
-    version: 6.1.0
+    version: 6.2.0
     apis:
       - path: google/cloud/dialogflow/cx/v3
         nodejs:
@@ -1027,7 +961,7 @@ libraries:
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
       - path: google/cloud/geminidataanalytics/v1beta
@@ -1120,14 +1054,14 @@ libraries:
       default_version: v1
       main_service: iot
   - name: google-cloud-kms
-    version: 6.1.0
+    version: 6.2.0
     apis:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-kms-inventory
-    version: 3.1.0
+    version: 3.2.0
     apis:
       - path: google/cloud/kms/inventory/v1
     copyright_year: "2026"
@@ -1438,7 +1372,7 @@ libraries:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
   - name: google-cloud-pubsub-api
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/pubsub/v1
     nodejs:
@@ -1495,7 +1429,7 @@ libraries:
       default_version: v3
       package_name: '@google-cloud/resource-manager'
   - name: google-cloud-retail
-    version: 5.2.0
+    version: 5.3.0
     apis:
       - path: google/cloud/retail/v2
         nodejs:
@@ -1543,7 +1477,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/secret-manager'
   - name: google-cloud-securesourcemanager
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/cloud/securesourcemanager/v1
     copyright_year: "2026"
@@ -1746,7 +1680,7 @@ libraries:
         extend: ^3.0.2
         is-html: ^2.0.0
   - name: google-cloud-vectorsearch
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/vectorsearch/v1
       - path: google/cloud/vectorsearch/v1beta
@@ -1818,7 +1752,7 @@ libraries:
         '@google-cloud/promisify': ^5.0.0
       main_service: vision
   - name: google-cloud-visionai
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/visionai/v1
     copyright_year: "2026"
@@ -2214,7 +2148,7 @@ libraries:
       package_name: '@google-shopping/lfp'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-loyaltycustomers
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/shopping/merchant/loyaltycustomers/v1
     copyright_year: "2026"
@@ -2293,7 +2227,7 @@ libraries:
       package_name: '@google-shopping/reviews'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-storage-control
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/storage/v2
       - path: google/storage/control/v2
