@@ -85,7 +85,6 @@ import {
   StorageQueryParameters,
   StorageRequestOptions,
 } from './storage-transport.js';
-import mime from 'mime';
 
 export type GetExpirationDateResponse = [Date];
 export interface GetExpirationDateCallback {
@@ -2253,23 +2252,9 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const emitStream = new PassThroughShim();
 
-    let hashCalculatingStream: HashStreamValidator | null = null;
-
-    if (crc32c || md5) {
-      const crc32cInstance = options.resumeCRC32C
-        ? CRC32C.from(options.resumeCRC32C)
-        : undefined;
-
-      hashCalculatingStream = new HashStreamValidator({
-        crc32c,
-        crc32cInstance,
-        md5,
-        crc32cGenerator: this.crc32cGenerator,
-        updateHashesOnly: true,
-      });
-
-      transformStreams.push(hashCalculatingStream);
-    }
+    // If `writeStream` is destroyed before the `writing` event, `emitStream` will not have any listeners. This prevents an unhandled error.
+    const noop = () => {};
+    emitStream.on('error', noop);
 
     const fileWriteStream = duplexify();
     let fileWriteStreamMetadataReceived = false;
@@ -2284,15 +2269,26 @@ class File extends ServiceObject<File, FileMetadata> {
       fileWriteStreamMetadataReceived = true;
     });
 
-    writeStream.once('writing', () => {
-      pipeline(
-        emitStream,
-        ...(transformStreams as [Transform]),
-        fileWriteStream,
-        async e => {
-          if (e) {
-            return pipelineCallback(e);
+    writeStream.once('writing', async () => {
+      try {
+        if (
+          !options!.metadata!.contentType ||
+          options!.metadata!.contentType === 'auto'
+        ) {
+          const mime = await getMime();
+          const detectedContentType = mime.getType(this.name);
+          if (detectedContentType) {
+            options!.metadata!.contentType = detectedContentType;
           }
+        }
+
+        let gzip = options.gzip;
+
+        if (gzip === 'auto') {
+          gzip = COMPRESSIBLE_MIME_REGEX.test(
+            options!.metadata!.contentType || '',
+          );
+        }
 
         if (gzip) {
           options!.metadata!.contentEncoding = 'gzip';
@@ -2320,12 +2316,6 @@ class File extends ServiceObject<File, FileMetadata> {
           });
 
           transformStreams.push(hashCalculatingStream);
-        }
-
-        if (options.resumable === false) {
-          this.startSimpleUpload_(fileWriteStream, options);
-        } else {
-          this.startResumableUpload_(fileWriteStream, options);
         }
 
         // remove temporary noop listener as we now create a pipeline that handles the errors
@@ -2410,39 +2400,19 @@ class File extends ServiceObject<File, FileMetadata> {
             } catch (e) {
               pipelineCallback(e as Error);
             }
-          }
-
-          // Emit the local CRC32C value for future validation, if validation is enabled.
-          if (hashCalculatingStream?.crc32c) {
-            writeStream.emit('crc32c', hashCalculatingStream.crc32c);
-          }
-
-          try {
-            // Metadata may not be ready if the upload is a partial upload,
-            // nothing to validate yet.
-            const metadataNotReady = options.isPartialUpload && !this.metadata;
-
-            if (hashCalculatingStream && !metadataNotReady) {
-              await this.#validateIntegrity(hashCalculatingStream, {
-                crc32c,
-                md5,
-              });
-            }
-
-            pipelineCallback();
-          } catch (e) {
-            pipelineCallback(e as Error);
-          }
-        },
-      );
-
-      if (options.resumable === false) {
-        this.startSimpleUpload_(
-          fileWriteStream,
-          options as CreateWriteStreamOptionsInternal,
+          },
         );
-      } else {
-        this.startResumableUpload_(fileWriteStream, options);
+
+        if (options.resumable === false) {
+          this.startSimpleUpload_(
+            fileWriteStream,
+            options as CreateWriteStreamOptionsInternal,
+          );
+        } else {
+          this.startResumableUpload_(fileWriteStream, options);
+        }
+      } catch (e) {
+        pipelineCallback(e as Error);
       }
     });
 
