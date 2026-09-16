@@ -711,6 +711,424 @@ describe('PartialResultStream', () => {
       });
       stream.end();
     });
+
+    describe('event-driven backpressure', () => {
+      it('should hold completion callback and emit paused when downstream push returns false', done => {
+        const stream = new PartialResultStream({});
+        let pausedEmitted = false;
+        stream.on('paused', () => {
+          pausedEmitted = true;
+        });
+
+        // Stub push to simulate downstream backpressure on rows.
+        const pushStub = sandbox.stub(stream, 'push');
+        // Accept first row, reject second row to trigger backpressure.
+        pushStub.onFirstCall().returns(true);
+        pushStub.onSecondCall().returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        let writeCallbackCalled = false;
+
+        stream.write(
+          {
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row1'), convertToIValue('row2')],
+          },
+          () => {
+            writeCallbackCalled = true;
+          },
+        );
+
+        // The write callback should NOT have been called because the stream is paused.
+        assert.strictEqual(writeCallbackCalled, false);
+        assert.strictEqual(pausedEmitted, true);
+        assert.strictEqual(
+          typeof (stream as unknown as {_resumeCallback?: Function})
+            ._resumeCallback,
+          'function',
+        );
+        done();
+      });
+
+      it('should resume and invoke held callback when _read is called', done => {
+        const stream = new PartialResultStream({});
+        let resumedEmitted = false;
+        stream.on('resumed', () => {
+          resumedEmitted = true;
+        });
+
+        const pushStub = sandbox.stub(stream, 'push');
+        pushStub.returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        let writeCallbackCalled = false;
+
+        stream.write(
+          {
+            metadata: {rowType: {fields}},
+            values: [convertToIValue('row1')],
+          },
+          () => {
+            writeCallbackCalled = true;
+          },
+        );
+
+        assert.strictEqual(writeCallbackCalled, false);
+
+        // Simulate Node readable machinery calling _read when readable buffer drains.
+        (stream as unknown as {_read: (size: number) => void})._read(1);
+
+        assert.strictEqual(writeCallbackCalled, true);
+        assert.strictEqual(resumedEmitted, true);
+        assert.strictEqual(
+          (stream as unknown as {_resumeCallback?: Function})._resumeCallback,
+          undefined,
+        );
+        done();
+      });
+
+      it('should clear _resumeCallback when stream is destroyed while paused', done => {
+        const stream = new PartialResultStream({});
+        const pushStub = sandbox.stub(stream, 'push');
+        pushStub.returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: [convertToIValue('row1')],
+        });
+
+        assert.strictEqual(
+          typeof (stream as unknown as {_resumeCallback?: Function})
+            ._resumeCallback,
+          'function',
+        );
+
+        stream.destroy();
+
+        assert.strictEqual(
+          (stream as unknown as {_resumeCallback?: Function})._resumeCallback,
+          undefined,
+        );
+        done();
+      });
+
+      it('should stream all rows to a slow writable stream with backpressure', done => {
+        const stream = new PartialResultStream({});
+        const rows: Row[] = [];
+        let pausedCount = 0;
+        let resumedCount = 0;
+
+        stream.on('paused', () => {
+          pausedCount++;
+        });
+        stream.on('resumed', () => {
+          resumedCount++;
+        });
+
+        const slowSink = new Transform({
+          objectMode: true,
+          highWaterMark: 1,
+          transform(chunk, encoding, callback) {
+            rows.push(chunk);
+            setImmediate(callback);
+          },
+        });
+
+        stream.pipe(slowSink);
+
+        const totalRows = 25;
+        slowSink.on('finish', () => {
+          try {
+            assert.strictEqual(rows.length, totalRows);
+            assert.ok(pausedCount > 0, 'should have paused at least once');
+            assert.ok(resumedCount > 0, 'should have resumed at least once');
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const values1: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = 0; i < 20; i++) {
+          values1.push(convertToIValue(`row${i}`));
+        }
+        const values2: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = 20; i < totalRows; i++) {
+          values2.push(convertToIValue(`row${i}`));
+        }
+
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: values1,
+          last: false,
+        });
+        stream.write({
+          values: values2,
+          last: true,
+        });
+        stream.end();
+      });
+
+      it('should emit paused only once per transition even with multiple unaccepted rows in a chunk', done => {
+        const stream = new PartialResultStream({});
+        let pausedCount = 0;
+        stream.on('paused', () => {
+          pausedCount++;
+        });
+
+        const pushStub = sandbox.stub(stream, 'push');
+        // Accept first row, reject all subsequent rows
+        pushStub.onFirstCall().returns(true);
+        pushStub.returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const values = [
+          convertToIValue('row1'),
+          convertToIValue('row2'),
+          convertToIValue('row3'),
+          convertToIValue('row4'),
+          convertToIValue('row5'),
+        ];
+
+        stream.write(
+          {
+            metadata: {rowType: {fields}},
+            values,
+          },
+          () => {},
+        );
+
+        // Even though rows 2..5 were rejected by push(), paused should only be emitted ONCE
+        assert.strictEqual(pausedCount, 1);
+        done();
+      });
+
+      it('should handle backpressure cleanly during single-chunk optimization', done => {
+        const stream = new PartialResultStream({});
+        let pausedCount = 0;
+        stream.on('paused', () => pausedCount++);
+
+        const rows: Row[] = [];
+        const slowSink = new Transform({
+          objectMode: true,
+          highWaterMark: 1,
+          transform(chunk, encoding, callback) {
+            rows.push(chunk);
+            setImmediate(callback);
+          },
+        });
+
+        stream.pipe(slowSink);
+
+        const totalRows = 25;
+        slowSink.on('finish', () => {
+          try {
+            assert.strictEqual(rows.length, totalRows);
+            assert.ok(pausedCount > 0, 'should emit paused on backpressure');
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const values: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = 0; i < totalRows; i++) {
+          values.push(convertToIValue(`single_chunk_row_${i}`));
+        }
+
+        // First chunk with last=true triggers _addSingleChunk
+        stream.write({
+          metadata: {rowType: {fields}},
+          values,
+          last: true,
+        });
+        stream.end();
+      });
+
+      it('should handle multiple sequential pause and resume cycles across chunks', done => {
+        const stream = new PartialResultStream({});
+        let pausedCount = 0;
+        let resumedCount = 0;
+        stream.on('paused', () => pausedCount++);
+        stream.on('resumed', () => resumedCount++);
+
+        const rows: Row[] = [];
+        const slowSink = new Transform({
+          objectMode: true,
+          highWaterMark: 1,
+          transform(chunk, encoding, callback) {
+            rows.push(chunk);
+            setImmediate(callback);
+          },
+        });
+
+        stream.pipe(slowSink);
+
+        const totalRows = 45;
+        slowSink.on('finish', () => {
+          try {
+            assert.strictEqual(rows.length, totalRows);
+            for (let i = 0; i < totalRows; i++) {
+              assert.strictEqual(rows[i][0].value, `val_${i}`);
+            }
+            assert.ok(
+              pausedCount >= 2,
+              `expected at least 2 pauses, got ${pausedCount}`,
+            );
+            assert.ok(
+              resumedCount >= 2,
+              `expected at least 2 resumes, got ${resumedCount}`,
+            );
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const chunkSizes = [20, 20, 5];
+        let offset = 0;
+        for (let chunkIndex = 0; chunkIndex < chunkSizes.length; chunkIndex++) {
+          const count = chunkSizes[chunkIndex];
+          const values: Array<ReturnType<typeof convertToIValue>> = [];
+          for (let i = 0; i < count; i++) {
+            values.push(convertToIValue(`val_${offset + i}`));
+          }
+          offset += count;
+          stream.write({
+            ...(chunkIndex === 0 ? {metadata: {rowType: {fields}}} : {}),
+            values,
+            last: chunkIndex === chunkSizes.length - 1,
+          });
+        }
+        stream.end();
+      });
+
+      it('should preserve row assembly when backpressure occurs across chunked values', done => {
+        const stream = new PartialResultStream({});
+        const rows: Row[] = [];
+
+        const slowSink = new Transform({
+          objectMode: true,
+          highWaterMark: 1,
+          transform(chunk, encoding, callback) {
+            rows.push(chunk);
+            setImmediate(callback);
+          },
+        });
+
+        stream.pipe(slowSink);
+
+        slowSink.on('finish', () => {
+          try {
+            assert.strictEqual(rows.length, 2);
+            assert.strictEqual(rows[0][0].value, 'first_row');
+            assert.strictEqual(rows[1][0].value, 'chunked_part1_part2');
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+
+        // Chunk 1: first complete row + start of chunked row
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: [
+            convertToIValue('first_row'),
+            convertToIValue('chunked_part1_'),
+          ],
+          chunkedValue: true,
+          last: false,
+        });
+
+        // Chunk 2: continuation of chunked row
+        stream.write({
+          values: [convertToIValue('part2')],
+          chunkedValue: false,
+          last: true,
+        });
+        stream.end();
+      });
+
+      it('should propagate error and clean up held callback when destroyed with error while paused', done => {
+        const stream = new PartialResultStream({});
+        const pushStub = sandbox.stub(stream, 'push');
+        pushStub.returns(false);
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        stream.write({
+          metadata: {rowType: {fields}},
+          values: [convertToIValue('row1')],
+        });
+
+        assert.strictEqual(
+          typeof (stream as unknown as {_resumeCallback?: Function})
+            ._resumeCallback,
+          'function',
+        );
+
+        const testError = new Error('simulated failure');
+        stream.on('error', err => {
+          try {
+            assert.strictEqual(err, testError);
+            assert.strictEqual(
+              (stream as unknown as {_resumeCallback?: Function})
+                ._resumeCallback,
+              undefined,
+            );
+            done();
+          } catch (assertionErr) {
+            done(assertionErr);
+          }
+        });
+
+        stream.destroy(testError);
+      });
+
+      it('should not emit paused or resumed when consumer is fast', done => {
+        const stream = new PartialResultStream({});
+        let pausedEmitted = false;
+        let resumedEmitted = false;
+
+        stream.on('paused', () => {
+          pausedEmitted = true;
+        });
+        stream.on('resumed', () => {
+          resumedEmitted = true;
+        });
+
+        const rows: Row[] = [];
+        stream.on('data', row => rows.push(row));
+        stream.on('end', () => {
+          try {
+            assert.strictEqual(rows.length, 10);
+            assert.strictEqual(pausedEmitted, false);
+            assert.strictEqual(resumedEmitted, false);
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+
+        const fields = [{name: NAME, type: {code: 'STRING'}}];
+        const values: Array<ReturnType<typeof convertToIValue>> = [];
+        for (let i = 0; i < 10; i++) {
+          values.push(convertToIValue(`row_${i}`));
+        }
+
+        stream.write({
+          metadata: {rowType: {fields}},
+          values,
+          last: true,
+        });
+        stream.end();
+      });
+    });
   });
 
   describe('partialResultStream', () => {
@@ -1577,6 +1995,61 @@ describe('PartialResultStream', () => {
         values: [convertToIValue('9223372036854775807')],
         last: true,
       });
+    });
+
+    it('should handle downstream backpressure through the full pipeline without dropping rows', done => {
+      const rows: Row[] = [];
+      let pausedCount = 0;
+      let resumedCount = 0;
+
+      stream.on('paused', () => pausedCount++);
+      stream.on('resumed', () => resumedCount++);
+
+      const slowSink = new Transform({
+        objectMode: true,
+        highWaterMark: 1,
+        transform(chunk, encoding, callback) {
+          rows.push(chunk);
+          setImmediate(callback);
+        },
+      });
+
+      stream.pipe(slowSink);
+
+      const totalRows = 25;
+      slowSink.on('finish', () => {
+        try {
+          assert.strictEqual(rows.length, totalRows);
+          assert.ok(pausedCount > 0, 'pipeline should pause on backpressure');
+          assert.ok(resumedCount > 0, 'pipeline should resume on drain');
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+
+      const fields = [{name: NAME, type: {code: 'STRING'}}];
+      const values1: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 0; i < 20; i++) {
+        values1.push(convertToIValue(`pipeline_row_${i}`));
+      }
+      const values2: Array<ReturnType<typeof convertToIValue>> = [];
+      for (let i = 20; i < totalRows; i++) {
+        values2.push(convertToIValue(`pipeline_row_${i}`));
+      }
+
+      fakeRequestStream.push({
+        metadata: {rowType: {fields}},
+        values: values1,
+        resumeToken: 'token1',
+        last: false,
+      });
+      fakeRequestStream.push({
+        values: values2,
+        resumeToken: 'token2',
+        last: true,
+      });
+      fakeRequestStream.push(null);
     });
   });
 

@@ -45,11 +45,9 @@ interface RequestFunction {
  * @property {boolean} [json=false] Indicates if the Row objects should be
  *     formatted into JSON.
  * @property {JSONOptions} [jsonOptions] JSON options.
- * @property {number} [maxResumeRetries=20] The maximum number of times that the
- *     stream will retry to push data downstream, when the downstream indicates
- *     that it is not ready for any more data. Increase this value if you
- *     experience 'Stream is still not ready to receive data' errors as a
- *     result of a slow writer in your receiving stream.
+ * @property {number} [maxResumeRetries] @deprecated Backpressure is now handled
+ *     automatically via stream flow control. This option is no longer used by
+ *     streaming queries and is retained only for backward compatibility.
  * @property {object} [columnsMetadata] An object map that can be used to pass
  * additional properties for each column type which can help in deserializing
  * the data coming from backend. (Eg: We need to pass Proto Function and Enum
@@ -368,13 +366,13 @@ export class PartialResultStream extends Transform implements ResultEvents {
   private _pendingValue?: p.IValue;
   private _pendingValueForResume?: p.IValue;
   private _values: p.IValue[];
-  private _numPushFailed = 0;
+  private _resumeCallback?: () => void;
   private _isFirstChunk = true;
   constructor(options = {}) {
     super({objectMode: true});
 
     this._destroyed = false;
-    this._options = Object.assign({maxResumeRetries: 20}, options);
+    this._options = Object.assign({}, options);
     this._values = [];
     this._isFirstChunk = true;
   }
@@ -389,6 +387,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     this._destroyed = true;
+    this._resumeCallback = undefined;
 
     process.nextTick(() => {
       if (err) {
@@ -447,42 +446,21 @@ export class PartialResultStream extends Transform implements ResultEvents {
     if (res) {
       next();
     } else {
-      // Wait a little before we push any more data into the pipeline as a
-      // component downstream has indicated that a break is needed. Pause the
-      // request stream to prevent it from filling up the buffer while we are
-      // waiting.
-      // The stream will initially pause for 2ms, and then double the pause time
-      // for each new pause.
-      const initialPauseMs = 2;
-      setTimeout(() => {
-        this._tryResume(next, 2 * initialPauseMs);
-      }, initialPauseMs);
+      // Downstream buffer has reached highWaterMark and cannot accept more data
+      // at the moment. Hold the completion callback until the downstream consumer
+      // drains and Node invokes _read(), resuming the upstream request stream.
+      this._resumeCallback = next as () => void;
     }
   }
 
-  private _tryResume(next: Function, timeout: number) {
-    // Try to push an empty chunk to check whether more data can be accepted.
-    if (this.push(undefined)) {
-      this._numPushFailed = 0;
+  _read(size: number): void {
+    if (this._resumeCallback) {
+      const callback = this._resumeCallback;
+      this._resumeCallback = undefined;
       this.emit('resumed');
-      next();
-    } else {
-      // Downstream returned false indicating that it is still not ready for
-      // more data.
-      this._numPushFailed++;
-      if (this._numPushFailed === this._options.maxResumeRetries) {
-        this.destroy(
-          new Error(
-            `Stream is still not ready to receive data after ${this._numPushFailed} attempts to resume.`,
-          ),
-        );
-        return;
-      }
-      setTimeout(() => {
-        const nextTimeout = Math.min(timeout * 2, 1024);
-        this._tryResume(next, nextTimeout);
-      }, timeout);
+      callback();
     }
+    super._read(size);
   }
 
   _resetPendingValues() {
@@ -541,15 +519,16 @@ export class PartialResultStream extends Transform implements ResultEvents {
       delete this._pendingValueForResume;
     }
 
-    let res = true;
+    let canAcceptMore = true;
     const len = values.length;
     for (let i = 0; i < len; i++) {
-      res = this._addValue(values[i]) && res;
-      if (!res) {
+      const accepted = this._addValue(values[i]);
+      if (!accepted && canAcceptMore) {
+        canAcceptMore = false;
         this.emit('paused');
       }
     }
-    return res;
+    return canAcceptMore;
   }
 
   /**
