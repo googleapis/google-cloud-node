@@ -13,12 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-  type GaxiosError,
-  type GaxiosOptions,
-  type GaxiosResponse,
-  request,
-} from 'gaxios';
+import {type GaxiosOptions, type GaxiosResponse, request} from 'gaxios';
 import jsonBigint = require('json-bigint');
 import {detectGCPResidency} from './gcp-residency';
 import * as logger from 'google-logging-utils';
@@ -324,6 +319,105 @@ function detectGCPAvailableRetries(): number {
 let cachedIsAvailableResponse: Promise<boolean> | undefined;
 
 /**
+ * Interface representing structured error properties that may appear on network
+ * or HTTP errors thrown by fetch/Gaxios/Node.js runtime during metadata lookup.
+ */
+export interface ErrorWithDetails {
+  readonly name?: string;
+  readonly message?: string;
+  readonly code?: string | number;
+  readonly type?: string;
+  readonly response?: {
+    readonly status?: number;
+  };
+  readonly errors?: readonly unknown[];
+  readonly cause?: unknown;
+  readonly error?: unknown;
+}
+
+/**
+ * Expected network error codes when probing the GCP metadata server from a
+ * non-GCP environment (where 169.254.169.254 and metadata.google.internal are unreachable).
+ */
+export const EXPECTED_NETWORK_ERROR_CODES: ReadonlySet<string> = new Set([
+  'EHOSTDOWN',
+  'EHOSTUNREACH',
+  'ENETUNREACH',
+  'ENOENT',
+  'ENOTFOUND',
+  'ECONNREFUSED',
+]);
+
+const TIMEOUT_NAMES_AND_CODES: ReadonlySet<string | number> = new Set([
+  'AbortError',
+  'TimeoutError',
+]);
+
+const TIMEOUT_TYPES: ReadonlySet<string> = new Set([
+  'aborted',
+  'request-timeout',
+]);
+
+const MAX_ERROR_DEPTH = 20;
+
+function isErrorWithDetails(val: unknown): val is ErrorWithDetails {
+  return typeof val === 'object' && val !== null;
+}
+
+function sanitizeForLog(val: unknown, maxLen = 256): string {
+  return String(val ?? '')
+    .replace(/[\r\n\t]+/g, ' ')
+    .slice(0, maxLen);
+}
+
+/**
+ * Recursively extracts and normalizes POSIX/network error codes from potentially
+ * nested Error objects (`AggregateError.errors` from `Promise.any`, `.cause`, `.error`).
+ * Guards against circular references and deep recursion.
+ */
+export function getErrorCodes(
+  err: unknown,
+  visited = new Set<unknown>(),
+  depth = 0,
+): string[] {
+  if (!isErrorWithDetails(err) || visited.has(err) || depth > MAX_ERROR_DEPTH) {
+    return ['UNKNOWN'];
+  }
+  visited.add(err);
+
+  if (err.name === 'AggregateError' && Array.isArray(err.errors)) {
+    if (err.errors.length === 0) {
+      return ['UNKNOWN'];
+    }
+    return err.errors.flatMap(subErr =>
+      getErrorCodes(subErr, visited, depth + 1),
+    );
+  }
+
+  if (
+    (err.name !== undefined && TIMEOUT_NAMES_AND_CODES.has(err.name)) ||
+    (err.code !== undefined && TIMEOUT_NAMES_AND_CODES.has(err.code)) ||
+    (err.type !== undefined && TIMEOUT_TYPES.has(err.type))
+  ) {
+    return ['ETIMEDOUT'];
+  }
+
+  if (
+    (typeof err.code === 'string' || typeof err.code === 'number') &&
+    err.code !== ''
+  ) {
+    return [String(err.code)];
+  }
+
+  const nested = err.cause ?? err.error;
+  if (nested !== undefined) {
+    return getErrorCodes(nested, visited, depth + 1);
+  }
+
+  return ['UNKNOWN'];
+}
+
+/**
  * Determine if the metadata server is currently available.
  */
 export async function isAvailable() {
@@ -351,85 +445,64 @@ export async function isAvailable() {
     }
   }
 
-  try {
-    // If a user is instantiating several GCP libraries at the same time,
-    // this may result in multiple calls to isAvailable(), to detect the
-    // runtime environment. We use the same promise for each of these calls
-    // to reduce the network load.
-    if (cachedIsAvailableResponse === undefined) {
-      cachedIsAvailableResponse = (async () => {
-        try {
-          await metadataAccessor(
-            'instance',
-            undefined,
-            detectGCPAvailableRetries(),
-            // If the default HOST_ADDRESS has been overridden, we should not
-            // make an effort to try SECONDARY_HOST_ADDRESS (as we are likely in
-            // a non-GCP environment):
-            !(process.env.GCE_METADATA_IP || process.env.GCE_METADATA_HOST),
-          );
-          return true;
-        } catch (e) {
-          const err = e as GaxiosError & {type: string};
-          if (process.env.DEBUG_AUTH) {
-            console.info(err);
-          }
-
-          if (err.type === 'request-timeout') {
-            // If running in a GCP environment, metadata endpoint should return
-            // within ms.
-            return false;
-          }
-          if (err.response && err.response.status === 404) {
-            return false;
-          } else {
-            const errObj = e as any;
-            const getErrorCodes = (err: any): string[] => {
-              if (!err) return ['UNKNOWN'];
-              if (err.name === 'AggregateError' && Array.isArray(err.errors)) {
-                return err.errors.flatMap(getErrorCodes);
-              }
-              if (err.code) {
-                return [err.code.toString()];
-              }
-              if (err.cause) {
-                return getErrorCodes(err.cause);
-              }
-              return ['UNKNOWN'];
-            };
-
-            const codes = getErrorCodes(errObj);
-
-            const isExpected = codes.every((code: string) =>
-              [
-                'EHOSTDOWN',
-                'EHOSTUNREACH',
-                'ENETUNREACH',
-                'ENOENT',
-                'ENOTFOUND',
-                'ECONNREFUSED',
-              ].includes(code),
-            );
-
-            if (!isExpected) {
-              const code = err.code ? err.code.toString() : 'UNKNOWN';
-              process.emitWarning(
-                `received unexpected error = ${err.message} code = ${code}`,
-                'MetadataLookupWarning',
-              );
-            }
-
-            // Failure to resolve the metadata service means that it is not available.
-            return false;
-          }
+  // If a user is instantiating several GCP libraries at the same time,
+  // this may result in multiple calls to isAvailable(), to detect the
+  // runtime environment. We use the same promise for each of these calls
+  // to reduce the network load.
+  if (cachedIsAvailableResponse === undefined) {
+    cachedIsAvailableResponse = (async () => {
+      try {
+        await metadataAccessor(
+          'instance',
+          undefined,
+          detectGCPAvailableRetries(),
+          // If the default HOST_ADDRESS has been overridden, we should not
+          // make an effort to try SECONDARY_HOST_ADDRESS (as we are likely in
+          // a non-GCP environment):
+          !(process.env.GCE_METADATA_IP || process.env.GCE_METADATA_HOST),
+        );
+        return true;
+      } catch (e: unknown) {
+        if (process.env.DEBUG_AUTH) {
+          console.info(e);
         }
-      })();
-    }
-    return await cachedIsAvailableResponse;
-  } catch (e) {
-    // This block should technically not be reached because the async IIFE catches its own errors
-    return false;
+
+        if (!isErrorWithDetails(e)) {
+          process.emitWarning(
+            `received unexpected error = ${sanitizeForLog(e)} code = UNKNOWN`,
+            'MetadataLookupWarning',
+            'METADATA_LOOKUP_WARNING',
+          );
+          return false;
+        }
+
+        if (e.type === 'request-timeout' || e.response?.status === 404) {
+          // If running in a GCP environment, metadata endpoint should return
+          // within ms.
+          return false;
+        }
+
+        const codes = getErrorCodes(e);
+        const isExpected =
+          codes.length > 0 &&
+          codes.every(code => EXPECTED_NETWORK_ERROR_CODES.has(code));
+
+        if (!isExpected) {
+          const code = sanitizeForLog([...new Set(codes)].join(', '), 64);
+          const safeMessage = sanitizeForLog(e.message);
+          process.emitWarning(
+            `received unexpected error = ${safeMessage} code = ${code}`,
+            'MetadataLookupWarning',
+            'METADATA_LOOKUP_WARNING',
+          );
+        }
+
+        // Failure to resolve the metadata service means that it is not available.
+        return false;
+      }
+    })();
   }
+  return cachedIsAvailableResponse;
 }
 
 /**

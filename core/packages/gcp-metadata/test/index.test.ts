@@ -237,7 +237,7 @@ describe('unit test', () => {
 
     try {
       await gcp.instance();
-    } catch (err: any) {
+    } catch (err: unknown) {
       assert(err instanceof GaxiosError);
       assert.strictEqual(err.status, 404);
     }
@@ -530,6 +530,47 @@ describe('unit test', () => {
     await secondary;
     primary.done();
     assert.strictEqual(false, isGCE);
+  });
+
+  it('should emit MetadataLookupWarning with unwrapped error codes when AggregateError contains unexpected errors', async () => {
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'Request aborted', code: 'AbortError'});
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(String(emitWarningStub.firstCall.args[0]), /code = ETIMEDOUT/);
+    assert.strictEqual(
+      emitWarningStub.firstCall.args[1],
+      'MetadataLookupWarning',
+    );
+    primary.done();
+    secondary.done();
+  });
+
+  it('should safely handle circular error cause chains and empty AggregateError in getErrorCodes', () => {
+    const cyclicErrorA: Record<string, unknown> = {message: 'cycle A'};
+    const cyclicErrorB: Record<string, unknown> = {
+      message: 'cycle B',
+      cause: cyclicErrorA,
+    };
+    cyclicErrorA.cause = cyclicErrorB;
+
+    assert.deepStrictEqual(gcp.getErrorCodes(cyclicErrorA), ['UNKNOWN']);
+    assert.deepStrictEqual(
+      gcp.getErrorCodes(new AggregateError([], 'empty aggregate')),
+      ['UNKNOWN'],
+    );
+    assert.deepStrictEqual(
+      gcp.getErrorCodes({name: 'TimeoutError', message: 'timed out'}),
+      ['ETIMEDOUT'],
+    );
   });
 
   it('should return first successful response', async () => {
