@@ -534,29 +534,43 @@ describe('unit test', () => {
 
   it('should emit MetadataLookupWarning with unwrapped error codes when AggregateError contains unexpected errors', async () => {
     const primary = nock(HOST)
-      .persist()
       .get(`${PATH}/${TYPE}`)
-      .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
+      .replyWithError({message: 'Request aborted', code: 'AbortError'});
     const secondary = nock(SECONDARY_HOST)
-      .persist()
       .get(`${PATH}/${TYPE}`)
       .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
 
-    let emittedWarning = '';
-    const originalEmitWarning = process.emitWarning;
-    process.emitWarning = ((warning: string | Error) => {
-      emittedWarning = warning.toString();
-    }) as typeof process.emitWarning;
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
 
-    try {
-      const isGCE = await gcp.isAvailable();
-      assert.strictEqual(false, isGCE);
-      assert.match(emittedWarning, /code = ETIMEDOUT/);
-    } finally {
-      process.emitWarning = originalEmitWarning;
-      primary.done();
-      secondary.done();
-    }
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(String(emitWarningStub.firstCall.args[0]), /code = ETIMEDOUT/);
+    assert.strictEqual(
+      emitWarningStub.firstCall.args[1],
+      'MetadataLookupWarning',
+    );
+    primary.done();
+    secondary.done();
+  });
+
+  it('should safely handle circular error cause chains and empty AggregateError in getErrorCodes', () => {
+    const cyclicErrorA: Record<string, unknown> = {message: 'cycle A'};
+    const cyclicErrorB: Record<string, unknown> = {
+      message: 'cycle B',
+      cause: cyclicErrorA,
+    };
+    cyclicErrorA.cause = cyclicErrorB;
+
+    assert.deepStrictEqual(gcp.getErrorCodes(cyclicErrorA), ['UNKNOWN']);
+    assert.deepStrictEqual(
+      gcp.getErrorCodes(new AggregateError([], 'empty aggregate')),
+      ['UNKNOWN'],
+    );
+    assert.deepStrictEqual(
+      gcp.getErrorCodes({name: 'TimeoutError', message: 'timed out'}),
+      ['ETIMEDOUT'],
+    );
   });
 
   it('should return first successful response', async () => {

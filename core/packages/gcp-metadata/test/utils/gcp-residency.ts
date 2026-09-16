@@ -25,16 +25,16 @@ export class GCPResidencyUtil {
   /**
    * Stubs used in this utility. These are used within the provided sandbox.
    * */
-  stubs: {
-    [
-      key in
-        | 'fsReadFileSync'
-        | 'fsStatSync'
-        | 'processEnv'
-        | 'osNetworkInterfaces'
-        | 'osPlatform'
-    ]?: SinonStub | void;
-  } = {};
+  stubs: Partial<
+    Record<
+      | 'fsReadFileSync'
+      | 'fsStatSync'
+      | 'processEnv'
+      | 'osNetworkInterfaces'
+      | 'osPlatform',
+      SinonStub
+    >
+  > = {};
 
   constructor(public sandbox: SinonSandbox) {}
 
@@ -107,10 +107,9 @@ export class GCPResidencyUtil {
   removeServerlessEnvironmentVariables() {
     const customEnv = {...process.env};
 
-    delete customEnv.CLOUD_RUN_JOB;
-    delete customEnv.FUNCTION_NAME;
-    delete customEnv.K_SERVICE;
-    delete customEnv.CLOUD_RUN_WORKER_POOL;
+    for (const envVar of gcpResidency.SERVERLESS_ENV_VARS) {
+      delete customEnv[envVar];
+    }
 
     this.stubs.processEnv ??= this.sandbox.stub(process, 'env');
     this.stubs.processEnv.value(customEnv);
