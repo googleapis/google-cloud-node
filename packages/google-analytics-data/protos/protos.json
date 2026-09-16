@@ -6322,6 +6322,11 @@
                           "rule": "repeated",
                           "type": "SamplingMetadata",
                           "id": 9
+                        },
+                        "dataTruncationReasons": {
+                          "rule": "repeated",
+                          "type": "DataTruncationReason",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -6354,6 +6359,100 @@
                                   "rule": "repeated",
                                   "type": "RestrictedMetricType",
                                   "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "DataTruncationReason": {
+                          "oneofs": {
+                            "_dataTruncationType": {
+                              "oneof": [
+                                "dataTruncationType"
+                              ]
+                            },
+                            "_dataTruncationMessage": {
+                              "oneof": [
+                                "dataTruncationMessage"
+                              ]
+                            },
+                            "_dataTruncationDate": {
+                              "oneof": [
+                                "dataTruncationDate"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "dataTruncationType": {
+                              "type": "DataTruncationType",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationMessage": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationDate": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataTruncationDateRanges": {
+                              "rule": "repeated",
+                              "type": "DataTruncationDateRange",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "DataTruncationType": {
+                              "values": {
+                                "DATA_TRUNCATION_TYPE_UNSPECIFIED": 0,
+                                "DATA_TRUNCATION_TYPE_RULES_BASED_MODELS": 1,
+                                "DATA_TRUNCATION_TYPE_DATA_DRIVEN_ATTRIBUTION": 2,
+                                "DATA_TRUNCATION_TYPE_DV360": 3,
+                                "DATA_TRUNCATION_TYPE_CM360": 4,
+                                "DATA_TRUNCATION_TYPE_ITEM_SCOPED_ECOMMERCE_METRICS": 5,
+                                "DATA_TRUNCATION_TYPE_EVENT_SCOPED_ECOMMERCE_METRICS": 6,
+                                "DATA_TRUNCATION_TYPE_DATE_RANGE": 7,
+                                "DATA_TRUNCATION_TYPE_PROPERTY": 8,
+                                "DATA_TRUNCATION_TYPE_CONVERSIONS": 9,
+                                "DATA_TRUNCATION_TYPE_GOOGLE_ADS": 10
+                              }
+                            },
+                            "DataTruncationDateRange": {
+                              "oneofs": {
+                                "_startDate": {
+                                  "oneof": [
+                                    "startDate"
+                                  ]
+                                },
+                                "_endDate": {
+                                  "oneof": [
+                                    "endDate"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "startDate": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "endDate": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
                                 }
                               }
                             }

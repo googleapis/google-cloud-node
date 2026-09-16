@@ -23791,6 +23791,9 @@ export namespace google {
 
                     /** ResponseMetaData samplingMetadatas */
                     samplingMetadatas?: (google.analytics.data.v1beta.ISamplingMetadata[]|null);
+
+                    /** ResponseMetaData dataTruncationReasons */
+                    dataTruncationReasons?: (google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason[]|null);
                 }
 
                 /** Represents a ResponseMetaData. */
@@ -23822,6 +23825,9 @@ export namespace google {
 
                     /** ResponseMetaData samplingMetadatas. */
                     public samplingMetadatas: google.analytics.data.v1beta.ISamplingMetadata[];
+
+                    /** ResponseMetaData dataTruncationReasons. */
+                    public dataTruncationReasons: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason[];
 
                     /**
                      * Creates a new ResponseMetaData instance using the specified properties.
@@ -24099,6 +24105,242 @@ export namespace google {
 
                             /**
                              * Gets the default type url for ActiveMetricRestriction
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a DataTruncationReason. */
+                    interface IDataTruncationReason {
+
+                        /** DataTruncationReason dataTruncationType */
+                        dataTruncationType?: (google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationType|keyof typeof google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationType|null);
+
+                        /** DataTruncationReason dataTruncationMessage */
+                        dataTruncationMessage?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDate */
+                        dataTruncationDate?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDateRanges */
+                        dataTruncationDateRanges?: (google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange[]|null);
+                    }
+
+                    /** Represents a DataTruncationReason. */
+                    class DataTruncationReason implements IDataTruncationReason {
+
+                        /**
+                         * Constructs a new DataTruncationReason.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason);
+
+                        /** DataTruncationReason dataTruncationType. */
+                        public dataTruncationType?: (google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationType|keyof typeof google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationType|null);
+
+                        /** DataTruncationReason dataTruncationMessage. */
+                        public dataTruncationMessage?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDate. */
+                        public dataTruncationDate?: (string|null);
+
+                        /** DataTruncationReason dataTruncationDateRanges. */
+                        public dataTruncationDateRanges: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange[];
+
+                        /**
+                         * Creates a new DataTruncationReason instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataTruncationReason instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Encodes the specified DataTruncationReason message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.verify|verify} messages.
+                         * @param message DataTruncationReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataTruncationReason message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.verify|verify} messages.
+                         * @param message DataTruncationReason message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.ResponseMetaData.IDataTruncationReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataTruncationReason message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataTruncationReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Decodes a DataTruncationReason message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataTruncationReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Verifies a DataTruncationReason message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataTruncationReason message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataTruncationReason
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason;
+
+                        /**
+                         * Creates a plain object from a DataTruncationReason message. Also converts values to other types if specified.
+                         * @param message DataTruncationReason
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataTruncationReason to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataTruncationReason
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataTruncationReason {
+
+                        /** DataTruncationType enum. */
+                        enum DataTruncationType {
+                            DATA_TRUNCATION_TYPE_UNSPECIFIED = 0,
+                            DATA_TRUNCATION_TYPE_RULES_BASED_MODELS = 1,
+                            DATA_TRUNCATION_TYPE_DATA_DRIVEN_ATTRIBUTION = 2,
+                            DATA_TRUNCATION_TYPE_DV360 = 3,
+                            DATA_TRUNCATION_TYPE_CM360 = 4,
+                            DATA_TRUNCATION_TYPE_ITEM_SCOPED_ECOMMERCE_METRICS = 5,
+                            DATA_TRUNCATION_TYPE_EVENT_SCOPED_ECOMMERCE_METRICS = 6,
+                            DATA_TRUNCATION_TYPE_DATE_RANGE = 7,
+                            DATA_TRUNCATION_TYPE_PROPERTY = 8,
+                            DATA_TRUNCATION_TYPE_CONVERSIONS = 9,
+                            DATA_TRUNCATION_TYPE_GOOGLE_ADS = 10
+                        }
+
+                        /** Properties of a DataTruncationDateRange. */
+                        interface IDataTruncationDateRange {
+
+                            /** DataTruncationDateRange startDate */
+                            startDate?: (string|null);
+
+                            /** DataTruncationDateRange endDate */
+                            endDate?: (string|null);
+                        }
+
+                        /** Represents a DataTruncationDateRange. */
+                        class DataTruncationDateRange implements IDataTruncationDateRange {
+
+                            /**
+                             * Constructs a new DataTruncationDateRange.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange);
+
+                            /** DataTruncationDateRange startDate. */
+                            public startDate?: (string|null);
+
+                            /** DataTruncationDateRange endDate. */
+                            public endDate?: (string|null);
+
+                            /**
+                             * Creates a new DataTruncationDateRange instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataTruncationDateRange instance
+                             */
+                            public static create(properties?: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Encodes the specified DataTruncationDateRange message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange.verify|verify} messages.
+                             * @param message DataTruncationDateRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataTruncationDateRange message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange.verify|verify} messages.
+                             * @param message DataTruncationDateRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.IDataTruncationDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataTruncationDateRange message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataTruncationDateRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Decodes a DataTruncationDateRange message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataTruncationDateRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Verifies a DataTruncationDateRange message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataTruncationDateRange message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataTruncationDateRange
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange;
+
+                            /**
+                             * Creates a plain object from a DataTruncationDateRange message. Also converts values to other types if specified.
+                             * @param message DataTruncationDateRange
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.analytics.data.v1beta.ResponseMetaData.DataTruncationReason.DataTruncationDateRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataTruncationDateRange to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataTruncationDateRange
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
