@@ -383,8 +383,18 @@ export async function isAvailable() {
           if (err.response && err.response.status === 404) {
             return false;
           } else {
-            const errObj = e as any;
-            const getErrorCodes = (err: any): string[] => {
+            interface ErrorWithDetails {
+              name?: string;
+              code?: string | number;
+              type?: string;
+              errors?: ErrorWithDetails[];
+              cause?: ErrorWithDetails;
+              error?: ErrorWithDetails;
+            }
+            const errObj = e as ErrorWithDetails;
+            const getErrorCodes = (
+              err: ErrorWithDetails | undefined,
+            ): string[] => {
               if (!err) return ['UNKNOWN'];
               if (err.name === 'AggregateError' && Array.isArray(err.errors)) {
                 return err.errors.flatMap(getErrorCodes);

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import {strict as assert} from 'assert';
 import fs from 'fs';
 import os from 'os';
 
@@ -27,12 +26,14 @@ export class GCPResidencyUtil {
    * Stubs used in this utility. These are used within the provided sandbox.
    * */
   stubs: {
-    [key in
-      | 'fsReadFileSync'
-      | 'fsStatSync'
-      | 'processEnv'
-      | 'osNetworkInterfaces'
-      | 'osPlatform']?: SinonStub | void;
+    [
+      key in
+        | 'fsReadFileSync'
+        | 'fsStatSync'
+        | 'processEnv'
+        | 'osNetworkInterfaces'
+        | 'osPlatform'
+    ]?: SinonStub | void;
   } = {};
 
   constructor(public sandbox: SinonSandbox) {}
