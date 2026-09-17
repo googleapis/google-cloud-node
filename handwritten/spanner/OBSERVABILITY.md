@@ -49,6 +49,7 @@ const {
 } = require('@opentelemetry/sdk-trace-node');
 const {
   BatchSpanProcessor,
+  TraceIdRatioBasedSampler,
 } = require('@opentelemetry/sdk-trace-base');
 const {
   TraceExporter,

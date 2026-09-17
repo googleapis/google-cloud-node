@@ -266,4 +266,20 @@ describe('Export', () => {
     const callbackResult = resultCallbackSpy.getCall(0).args[0];
     assert.strictEqual(callbackResult.code, ExportResultCode.SUCCESS);
   });
+
+  it('should invoke resultCallback with SUCCESS when throttled by MIN_EXPORT_FREQUENCY_MS', async () => {
+    const {resourceMetrics} = await reader.collect();
+    // Simulate an export that just occurred 1 second ago
+    (exporter as any)._lastExported = new Date();
+
+    const resultCallbackSpy = sinon.spy();
+    exporter.export(resourceMetrics, resultCallbackSpy);
+
+    // Must be called synchronously / immediately rather than hanging
+    assert.strictEqual(resultCallbackSpy.calledOnce, true);
+    assert.strictEqual(
+      resultCallbackSpy.getCall(0).args[0].code,
+      ExportResultCode.SUCCESS,
+    );
+  });
 });
