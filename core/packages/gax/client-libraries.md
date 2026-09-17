@@ -154,14 +154,14 @@ const [response] = await client.sampleMethod(request, options);
 Some APIs expose methods that upload large payloads through the resumable
 upload protocol. For these methods, the client method no
 longer returns the response directly; it returns a
-[`ResumableUpload`](https://googleapis.dev/nodejs/google-gax/latest/classes/ResumableUpload.html)
-helper. Call `start()` with a `NodeJS.ReadableStream` and await `finished()`
-for the final response:
+[`ResumableUploadSession`](https://googleapis.dev/nodejs/google-gax/latest/classes/ResumableUploadSession.html)
+helper. Call `start()` with a `ResumableSource` (see `getResumableSource()`
+below) and await `finished()` for the final response:
 
 ```ts
 const helper = await client.createResumableUpload(request);
 await helper.start({
-  uploadStream: dataStream,
+  uploadSource: client.getResumableSource(filePath),
   chunkSize: 8 * 1024 * 1024, // 8MB chunks
   onProgress: status => {
     console.log(`Committed ${status.bytesUploaded} bytes to ${status.uploadUrl}`);
@@ -173,12 +173,12 @@ const response = await helper.finished();
 The session URL is available as `helper.uploadUrl` once the upload has
 started. Save it if you need to resume the upload later — for example after a
 process crash or network drop. To resume, pass the saved URL to `start()` on a
-new helper, along with a fresh stream of the same payload:
+new helper, along with a new source for the same payload:
 
 ```ts
 const helper = await client.createResumableUpload();
 await helper.start({
-  uploadStream: dataStream,
+  uploadSource: client.getResumableSource(filePath),
   resumeUrl: savedUploadUrl,
 });
 const response = await helper.finished();

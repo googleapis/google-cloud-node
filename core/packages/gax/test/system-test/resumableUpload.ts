@@ -179,10 +179,16 @@ const fakeAuth = {
     body?: string | Buffer;
     signal?: AbortSignal;
   }) {
+    // fetch()'s BodyInit does not accept Buffer<ArrayBufferLike>, so copy the
+    // bytes into a plain Uint8Array before forwarding them.
+    const body =
+      typeof opts.body === 'string' || opts.body === undefined
+        ? opts.body
+        : Uint8Array.from(opts.body);
     return fetch(opts.url!, {
       method: opts.method,
       headers: opts.headers,
-      body: opts.body,
+      body,
       signal: opts.signal,
     });
   },

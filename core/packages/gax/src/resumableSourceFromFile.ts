@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import {createReadStream} from 'fs';
-import {statSync} from 'fs';
+import {createReadStream, statSync} from 'fs';
 
 import {ResumableSource} from './resumableUpload';
 

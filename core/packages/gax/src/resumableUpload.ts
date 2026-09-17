@@ -52,7 +52,7 @@ export const DEFAULT_PER_REQUEST_TIMEOUT_MS = 60 * 1000;
 export const DEFAULT_STALL_TIMEOUT_MS = 15 * 1000;
 // Assumed sustained upload throughput, in bytes per millisecond, used to
 // scale the global deadline when `uploadSize` is provided (~5 MB/s).
-const DEFAULT_UPLOAD_RATE_BYTES_PER_MS = 5 * 1024 * 1024;
+const DEFAULT_UPLOAD_RATE_BYTES_PER_MS = (5 * 1024 * 1024) / 1000;
 
 // Resumable upload protocol headers.
 const UPLOAD_PROTOCOL_HEADER = 'x-goog-upload-protocol';
@@ -76,7 +76,7 @@ const COMMAND_UPLOAD_FINALIZE = 'upload, finalize';
 const CATEGORY_1_RETRY_CODES = new Set([408, 429, 500, 502, 503, 504]);
 // Category 2 errors are state mismatches; recovery must query the server for
 // the committed byte offset before retrying.
-const CATEGORY_2_RETRY_CODES = new Set([400, 412, 416]);
+const CATEGORY_2_RETRY_CODES = new Set([400, 409, 412, 416]);
 
 /** The possible states of a resumable upload session. */
 export enum ResumableUploadState {
@@ -725,7 +725,10 @@ export class ResumableUploadSession {
 
   private async runTransmission(sessionUrl: string): Promise<void> {
     try {
-      let buffer = Buffer.alloc(0);
+      // Annotated rather than inferred: Buffer.alloc() narrows to
+      // Buffer<ArrayBuffer>, while the remainder returned by readNextChunk()
+      // and skipBytes() is the wider Buffer<ArrayBufferLike>.
+      let buffer: Buffer = Buffer.alloc(0);
       let offset = this.committedBytes_;
       let previousChunk: Buffer | null = null;
       let response: {} | null = null;
