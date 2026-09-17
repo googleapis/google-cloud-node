@@ -23,6 +23,7 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/protobuf/proto"
 )
 
 const (
@@ -281,6 +282,90 @@ func NewCoreClient(channelCount int, customEndpoint string) (*CoreClient, error)
 		ctx:         ctx,
 		cancel:      cancel,
 	}, nil
+}
+
+// rawProtoCodec allows passing raw pre-encoded protobuf []byte buffers directly to/from
+// gRPC streams and unary calls without unmarshaling or re-marshaling in Go, while
+// still supporting standard proto.Message structs (e.g., PartialResultSet).
+type rawProtoCodec struct{}
+
+func (rawProtoCodec) Marshal(v interface{}) ([]byte, error) {
+	if b, ok := v.([]byte); ok {
+		return b, nil
+	}
+	if bp, ok := v.(*[]byte); ok {
+		return *bp, nil
+	}
+	return proto.Marshal(v.(proto.Message))
+}
+
+func (rawProtoCodec) Unmarshal(data []byte, v interface{}) error {
+	if bp, ok := v.(*[]byte); ok {
+		*bp = append((*bp)[:0], data...)
+		return nil
+	}
+	return proto.Unmarshal(data, v.(proto.Message))
+}
+
+func (rawProtoCodec) Name() string {
+	return ""
+}
+
+type rawStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *rawStreamClient) Recv() (*spannerpb.PartialResultSet, error) {
+	m := new(spannerpb.PartialResultSet)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+var streamingSqlStreamDesc = &grpc.StreamDesc{
+	StreamName:    "ExecuteStreamingSql",
+	ServerStreams: true,
+}
+
+// ExecuteStreamingSqlRaw dispatches ExecuteStreamingSql using raw request bytes from Node.js
+// without unmarshaling/re-marshaling the request in Go, while decoding PartialResultSet in Go.
+func (c *CoreClient) ExecuteStreamingSqlRaw(ctx context.Context, routingKey string, reqBytes []byte) (spannerpb.Spanner_ExecuteStreamingSqlClient, error) {
+	if c.useGapic && c.gapicClient != nil {
+		var req spannerpb.ExecuteSqlRequest
+		if err := proto.Unmarshal(reqBytes, &req); err != nil {
+			return nil, err
+		}
+		return c.gapicClient.ExecuteStreamingSql(ctx, &req)
+	}
+	conn := c.GetConnByKey(routingKey)
+	if conn == nil {
+		return nil, fmt.Errorf("no active gRPC connection available")
+	}
+	stream, err := conn.NewStream(ctx, streamingSqlStreamDesc, "/google.spanner.v1.Spanner/ExecuteStreamingSql", grpc.ForceCodec(rawProtoCodec{}))
+	if err != nil {
+		return nil, err
+	}
+	if err := stream.SendMsg(reqBytes); err != nil {
+		return nil, err
+	}
+	if err := stream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return &rawStreamClient{stream}, nil
+}
+
+// InvokeRaw dispatches a unary gRPC call using raw pre-encoded protobuf request bytes
+// and returns raw wire-level protobuf response bytes without unmarshaling/marshaling in Go.
+func (c *CoreClient) InvokeRaw(ctx context.Context, routingKey string, method string, reqBytes []byte) ([]byte, metadata.MD, error) {
+	conn := c.GetConnByKey(routingKey)
+	if conn == nil {
+		return nil, nil, fmt.Errorf("no active gRPC connection available")
+	}
+	var respBytes []byte
+	var trailer metadata.MD
+	err := conn.Invoke(ctx, method, reqBytes, &respBytes, grpc.ForceCodec(rawProtoCodec{}), grpc.Trailer(&trailer))
+	return respBytes, trailer, err
 }
 
 // ExecuteStreamingSql dispatches the streaming SQL call over DirectPath or the connection pool.

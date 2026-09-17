@@ -57,6 +57,8 @@ typedef struct {
     int resp_len;
     void* tx_pb;
     int tx_len;
+    int64_t row_count;
+    int has_row_count;
     char* error_msg;
     int error_code;
     void* retry_info_pb;
@@ -75,26 +77,6 @@ static void bridge_unary_callback(
     }
 }
 
-typedef enum {
-    MUTATION_OP_INSERT = 0,
-    MUTATION_OP_UPDATE = 1,
-    MUTATION_OP_INSERT_OR_UPDATE = 2,
-    MUTATION_OP_REPLACE = 3,
-    MUTATION_OP_DELETE = 4,
-    MUTATION_OP_RAW_PB = 5
-} MutationOp;
-
-typedef struct {
-    int op;
-    const char* table;
-    int col_count;
-    const char** columns;
-    int row_count;
-    CSpannerCell* cells;
-    const uint8_t* raw_pb;
-    int raw_pb_len;
-} CSpannerMutation;
-
 typedef struct {
     const char* routing_key;
     const char** meta_keys;
@@ -106,8 +88,6 @@ typedef struct {
     const uint8_t* begin_req_pb;
     int begin_req_len;
     int is_mux_rw;
-    int mutation_count;
-    CSpannerMutation* mutations;
 } CSpannerCommitRequest;
 
 typedef struct {
@@ -124,6 +104,15 @@ typedef struct {
     const char** meta_keys;
     const char** meta_vals;
     int meta_count;
+    const char* session;
+    const uint8_t* tx_id;
+    int tx_id_len;
+    int begin_rw;
+    const uint8_t* prev_tx_id;
+    int prev_tx_id_len;
+    int64_t seqno;
+    const char* transaction_tag;
+    const char* request_tag;
     const uint8_t* base_req_pb;
     int base_req_len;
     int stmt_count;
@@ -390,6 +379,11 @@ func ExecuteStreamingSqlGo(
 		return
 	}
 
+	var rk string
+	if routingKey != nil {
+		rk = C.GoString(routingKey)
+	}
+
 	// Copy metadata headers
 	count := int(metaCount)
 	metaMap := make(map[string]string, count)
@@ -419,6 +413,8 @@ func ExecuteStreamingSqlGo(
 		var currentRow []*structpb.Value
 		batch := make([][]*structpb.Value, 0, 100)
 
+		sqlStr := string(extractBytesFieldFromUnknown(rawBytes, 3))
+
 		// Serialized ResultSetMetadata, handed to Node on the first batch only.
 		// takeMetadata() returns it once and then always returns nil, so the
 		// per-row streaming path stays untouched.
@@ -435,16 +431,12 @@ func ExecuteStreamingSqlGo(
 		for {
 			attemptCount++
 
-			// 1. Decode ExecuteSqlRequest protobuf bytes
-			var req spannerpb.ExecuteSqlRequest
-			if err := proto.Unmarshal(rawBytes, &req); err != nil {
-				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true, nil)
-				return
-			}
-
-			// Attach resume token if retrying
+			// 1. Prepare request bytes (attach resume_token field 6 if retrying)
+			attemptBytes := rawBytes
 			if len(lastResumeToken) > 0 {
-				req.ResumeToken = lastResumeToken
+				attemptBytes = append([]byte(nil), rawBytes...)
+				attemptBytes = protowire.AppendTag(attemptBytes, 6, protowire.BytesType)
+				attemptBytes = protowire.AppendBytes(attemptBytes, lastResumeToken)
 			}
 
 			// 2. Prepare outgoing gRPC context with metadata headers
@@ -462,8 +454,8 @@ func ExecuteStreamingSqlGo(
 
 			ctx := metadata.NewOutgoingContext(client.ctx, md)
 
-			// 3. Dispatch streaming SQL request
-			stream, err := client.ExecuteStreamingSql(ctx, &req)
+			// 3. Dispatch streaming SQL request using raw request bytes (response decoded in Go)
+			stream, err := client.ExecuteStreamingSqlRaw(ctx, rk, attemptBytes)
 			if err != nil {
 				st, _ := status.FromError(err)
 				if (st.Code() == codes.Unavailable || st.Code() == codes.Internal) && len(lastResumeToken) > 0 {
@@ -514,12 +506,12 @@ func ExecuteStreamingSqlGo(
 						}
 						if chunk.Metadata.RowType != nil {
 							fieldCount := len(chunk.Metadata.RowType.Fields)
-							if _, loaded := schemaBytesCache.Load(req.Sql); !loaded {
+							if _, loaded := schemaBytesCache.Load(sqlStr); !loaded {
 								schemaOnly := &spannerpb.ResultSetMetadata{
 									RowType: chunk.Metadata.RowType,
 								}
 								if soBytes, soErr := proto.Marshal(schemaOnly); soErr == nil {
-									schemaBytesCache.Store(req.Sql, goSchemaCacheEntry{
+									schemaBytesCache.Store(sqlStr, goSchemaCacheEntry{
 										fieldCount: fieldCount,
 										bytes:      soBytes,
 									})
@@ -528,7 +520,7 @@ func ExecuteStreamingSqlGo(
 						}
 					} else if skipMetadata == 0 && chunk.Metadata.RowType != nil && pendingMetadata == nil {
 						fieldCount := len(rowType)
-						if cachedVal, ok := schemaBytesCache.Load(req.Sql); ok {
+						if cachedVal, ok := schemaBytesCache.Load(sqlStr); ok {
 							if cached, ok2 := cachedVal.(goSchemaCacheEntry); ok2 && cached.fieldCount == fieldCount {
 								pendingMetadata = cached.bytes
 							}
@@ -539,7 +531,7 @@ func ExecuteStreamingSqlGo(
 							}
 							if mdBytes, mdErr := proto.Marshal(schemaOnly); mdErr == nil {
 								pendingMetadata = mdBytes
-								schemaBytesCache.Store(req.Sql, goSchemaCacheEntry{
+								schemaBytesCache.Store(sqlStr, goSchemaCacheEntry{
 									fieldCount: fieldCount,
 									bytes:      mdBytes,
 								})
@@ -669,93 +661,6 @@ func cellToProtoValue(cell *C.CSpannerCell) *structpb.Value {
 		return structpb.NewNullValue()
 	default:
 		return structpb.NewNullValue()
-	}
-}
-
-func buildGoMutation(m *C.CSpannerMutation) *spannerpb.Mutation {
-	if m.op == C.MUTATION_OP_RAW_PB {
-		if m.raw_pb_len > 0 && m.raw_pb != nil {
-			raw := C.GoBytes(unsafe.Pointer(m.raw_pb), C.int(m.raw_pb_len))
-			var mut spannerpb.Mutation
-			if err := proto.Unmarshal(raw, &mut); err == nil {
-				return &mut
-			}
-		}
-		return &spannerpb.Mutation{}
-	}
-
-	var tableName string
-	if m.table != nil {
-		tableName = C.GoString(m.table)
-	}
-	rowCount := int(m.row_count)
-	colCount := int(m.col_count)
-
-	if m.op == C.MUTATION_OP_DELETE {
-		keys := make([]*structpb.ListValue, rowCount)
-		if rowCount > 0 && colCount > 0 && m.cells != nil {
-			cellSlice := (*[1 << 28]C.CSpannerCell)(unsafe.Pointer(m.cells))[: rowCount*colCount : rowCount*colCount]
-			for r := 0; r < rowCount; r++ {
-				kVals := make([]*structpb.Value, colCount)
-				rowOffset := r * colCount
-				for c := 0; c < colCount; c++ {
-					kVals[c] = cellToProtoValue(&cellSlice[rowOffset+c])
-				}
-				keys[r] = &structpb.ListValue{Values: kVals}
-			}
-		}
-		return &spannerpb.Mutation{
-			Operation: &spannerpb.Mutation_Delete_{
-				Delete: &spannerpb.Mutation_Delete{
-					Table: tableName,
-					KeySet: &spannerpb.KeySet{
-						Keys: keys,
-					},
-				},
-			},
-		}
-	}
-
-	cols := make([]string, colCount)
-	if colCount > 0 && m.columns != nil {
-		colSlice := (*[1 << 28]*C.char)(unsafe.Pointer(m.columns))[:colCount:colCount]
-		for c := 0; c < colCount; c++ {
-			if colSlice[c] != nil {
-				cols[c] = C.GoString(colSlice[c])
-			}
-		}
-	}
-
-	values := make([]*structpb.ListValue, rowCount)
-	if rowCount > 0 && colCount > 0 && m.cells != nil {
-		cellSlice := (*[1 << 28]C.CSpannerCell)(unsafe.Pointer(m.cells))[: rowCount*colCount : rowCount*colCount]
-		for r := 0; r < rowCount; r++ {
-			rVals := make([]*structpb.Value, colCount)
-			rowOffset := r * colCount
-			for c := 0; c < colCount; c++ {
-				rVals[c] = cellToProtoValue(&cellSlice[rowOffset+c])
-			}
-			values[r] = &structpb.ListValue{Values: rVals}
-		}
-	}
-
-	write := &spannerpb.Mutation_Write{
-		Table:   tableName,
-		Columns: cols,
-		Values:  values,
-	}
-
-	switch m.op {
-	case C.MUTATION_OP_INSERT:
-		return &spannerpb.Mutation{Operation: &spannerpb.Mutation_Insert{Insert: write}}
-	case C.MUTATION_OP_UPDATE:
-		return &spannerpb.Mutation{Operation: &spannerpb.Mutation_Update{Update: write}}
-	case C.MUTATION_OP_INSERT_OR_UPDATE:
-		return &spannerpb.Mutation{Operation: &spannerpb.Mutation_InsertOrUpdate{InsertOrUpdate: write}}
-	case C.MUTATION_OP_REPLACE:
-		return &spannerpb.Mutation{Operation: &spannerpb.Mutation_Replace{Replace: write}}
-	default:
-		return &spannerpb.Mutation{Operation: &spannerpb.Mutation_Insert{Insert: write}}
 	}
 }
 
@@ -974,6 +879,37 @@ func sendUnaryResponse(
 	C.bridge_unary_callback(cb, userData, cResp)
 }
 
+func sendUnaryDmlResponse(
+	cb C.UnaryCallback,
+	userData unsafe.Pointer,
+	precommitBytes []byte,
+	txBytes []byte,
+	rowCount int64,
+) {
+	cResp := (*C.CUnaryResponse)(C.malloc(C.size_t(unsafe.Sizeof(C.CUnaryResponse{}))))
+	*cResp = C.CUnaryResponse{
+		has_row_count: 1,
+		row_count:     C.int64_t(rowCount),
+	}
+	if len(precommitBytes) > 0 {
+		cResp.resp_len = C.int(len(precommitBytes))
+		cResp.resp_pb = C.CBytes(precommitBytes)
+	}
+	if len(txBytes) > 0 {
+		cResp.tx_len = C.int(len(txBytes))
+		cResp.tx_pb = C.CBytes(txBytes)
+	}
+	C.bridge_unary_callback(cb, userData, cResp)
+}
+
+var scalarTypes = func() [18]*spannerpb.Type {
+	var arr [18]*spannerpb.Type
+	for i := 1; i < 18; i++ {
+		arr[i] = &spannerpb.Type{Code: spannerpb.TypeCode(i)}
+	}
+	return arr
+}()
+
 func buildStatementParams(stmt *C.CSpannerStatement) (*structpb.Struct, map[string]*spannerpb.Type) {
 	paramCount := int(stmt.param_count)
 	if paramCount <= 0 || stmt.param_names == nil || stmt.param_cells == nil {
@@ -1009,12 +945,65 @@ func buildStatementParams(stmt *C.CSpannerStatement) (*structpb.Struct, map[stri
 			}
 		}
 		if cell.type_code > 0 {
-			paramTypes[name] = &spannerpb.Type{
-				Code: spannerpb.TypeCode(cell.type_code),
+			tc := int(cell.type_code)
+			if tc > 0 && tc < len(scalarTypes) && scalarTypes[tc] != nil {
+				paramTypes[name] = scalarTypes[tc]
+			} else {
+				paramTypes[name] = &spannerpb.Type{
+					Code: spannerpb.TypeCode(cell.type_code),
+				}
 			}
 		}
 	}
 	return &structpb.Struct{Fields: fields}, paramTypes
+}
+
+func setPreviousTxIdOnReadWrite(rw *spannerpb.TransactionOptions_ReadWrite, prevTxId []byte) {
+	if rw == nil || len(prevTxId) == 0 {
+		return
+	}
+	raw := rw.ProtoReflect().GetUnknown()
+	raw = protowire.AppendTag(raw, 2, protowire.BytesType)
+	raw = protowire.AppendBytes(raw, prevTxId)
+	rw.ProtoReflect().SetUnknown(raw)
+}
+
+func extractBytesFieldFromUnknown(raw []byte, fieldNum protowire.Number) []byte {
+	for len(raw) > 0 {
+		num, wtype, n := protowire.ConsumeTag(raw)
+		if n < 0 {
+			break
+		}
+		raw = raw[n:]
+		if num == fieldNum && wtype == protowire.BytesType {
+			valBytes, vn := protowire.ConsumeBytes(raw)
+			if vn >= 0 && len(valBytes) > 0 {
+				return valBytes
+			}
+			break
+		}
+		vn := protowire.ConsumeFieldValue(num, wtype, raw)
+		if vn < 0 {
+			break
+		}
+		raw = raw[vn:]
+	}
+	return nil
+}
+
+func extractResultSetPrecommitToken(resp *spannerpb.ResultSet) []byte {
+	if resp == nil {
+		return nil
+	}
+	if tok := extractBytesFieldFromUnknown(resp.ProtoReflect().GetUnknown(), 8); len(tok) > 0 {
+		return tok
+	}
+	if tx := resp.GetMetadata().GetTransaction(); tx != nil {
+		if tok := extractBytesFieldFromUnknown(tx.ProtoReflect().GetUnknown(), 3); len(tok) > 0 {
+			return tok
+		}
+	}
+	return nil
 }
 
 //export CommitNativeGo
@@ -1036,31 +1025,16 @@ func CommitNativeGo(
 	}
 	metaMap := extractMetadataMap(cReq.meta_keys, cReq.meta_vals, cReq.meta_count, true)
 
-	var commitReq spannerpb.CommitRequest
+	var baseBytes []byte
 	if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
-		baseBytes := C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
-		_ = proto.Unmarshal(baseBytes, &commitReq)
+		baseBytes = C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
 	}
-
-	mutCount := int(cReq.mutation_count)
-	mutations := make([]*spannerpb.Mutation, mutCount)
-	if mutCount > 0 && cReq.mutations != nil {
-		mutSlice := (*[1 << 28]C.CSpannerMutation)(unsafe.Pointer(cReq.mutations))[:mutCount:mutCount]
-		for i := 0; i < mutCount; i++ {
-			mutations[i] = buildGoMutation(&mutSlice[i])
-		}
-	}
-	commitReq.Mutations = mutations
 
 	inlineBegin := cReq.inline_begin != 0
 	isMuxRW := cReq.is_mux_rw != 0
-	var beginReq spannerpb.BeginTransactionRequest
+	var beginBytes []byte
 	if inlineBegin && cReq.begin_req_len > 0 && cReq.begin_req_pb != nil {
-		beginBytes := C.GoBytes(unsafe.Pointer(cReq.begin_req_pb), cReq.begin_req_len)
-		_ = proto.Unmarshal(beginBytes, &beginReq)
-		if isMuxRW && len(mutations) > 0 {
-			attachMutationKeyToBeginReq(&beginReq, selectMutationKey(mutations))
-		}
+		beginBytes = C.GoBytes(unsafe.Pointer(cReq.begin_req_pb), cReq.begin_req_len)
 	}
 
 	go func() {
@@ -1074,19 +1048,44 @@ func CommitNativeGo(
 		}
 		ctx := metadata.NewOutgoingContext(client.ctx, metadata.New(metaMap))
 
-		var txBytes []byte
-		if inlineBegin {
-			txResp, trailerMD, beginErr := client.BeginTransaction(ctx, routingKey, &beginReq)
-			if beginErr != nil {
-				sendUnaryResponse(cb, userData, nil, nil, beginErr, trailerMD)
+		// Fast path: raw byte buffer transfer for Commit (zero proto.Unmarshal/Marshal in Go)
+		if !inlineBegin {
+			respBytes, trailerMD, commitErr := client.InvokeRaw(ctx, routingKey, "/google.spanner.v1.Spanner/Commit", baseBytes)
+			if commitErr == nil {
+				if retryToken := extractBytesFieldFromUnknown(respBytes, 4); len(retryToken) > 0 {
+					retryReq := append([]byte(nil), baseBytes...)
+					retryReq = protowire.AppendTag(retryReq, 7, protowire.BytesType)
+					retryReq = protowire.AppendBytes(retryReq, retryToken)
+					respBytes, trailerMD, commitErr = client.InvokeRaw(ctx, routingKey, "/google.spanner.v1.Spanner/Commit", retryReq)
+				}
+			}
+			if commitErr != nil {
+				sendUnaryResponse(cb, userData, nil, nil, commitErr, trailerMD)
 				return
 			}
-			commitReq.Transaction = &spannerpb.CommitRequest_TransactionId{
-				TransactionId: txResp.Id,
-			}
-			copyPrecommitTokenToCommitReq(txResp, &commitReq)
-			txBytes, _ = proto.Marshal(txResp)
+			sendUnaryResponse(cb, userData, respBytes, nil, nil, nil)
+			return
 		}
+
+		// Inline-begin fallback path
+		var commitReq spannerpb.CommitRequest
+		_ = proto.Unmarshal(baseBytes, &commitReq)
+		var beginReq spannerpb.BeginTransactionRequest
+		_ = proto.Unmarshal(beginBytes, &beginReq)
+		if isMuxRW && len(commitReq.Mutations) > 0 && len(extractBytesFieldFromUnknown(beginReq.ProtoReflect().GetUnknown(), 4)) == 0 {
+			attachMutationKeyToBeginReq(&beginReq, selectMutationKey(commitReq.Mutations))
+		}
+
+		txResp, trailerMD, beginErr := client.BeginTransaction(ctx, routingKey, &beginReq)
+		if beginErr != nil {
+			sendUnaryResponse(cb, userData, nil, nil, beginErr, trailerMD)
+			return
+		}
+		commitReq.Transaction = &spannerpb.CommitRequest_TransactionId{
+			TransactionId: txResp.Id,
+		}
+		copyPrecommitTokenToCommitReq(txResp, &commitReq)
+		txBytes, _ := proto.Marshal(txResp)
 
 		commitResp, trailerMD, commitErr := client.Commit(ctx, routingKey, &commitReq)
 		if commitErr == nil {
@@ -1131,6 +1130,45 @@ func ExecuteBatchDmlNativeGo(
 	if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
 		baseBytes := C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
 		_ = proto.Unmarshal(baseBytes, &req)
+	} else {
+		if cReq.session != nil {
+			req.Session = C.GoString(cReq.session)
+		}
+		req.Seqno = int64(cReq.seqno)
+		if cReq.tx_id_len > 0 && cReq.tx_id != nil {
+			req.Transaction = &spannerpb.TransactionSelector{
+				Selector: &spannerpb.TransactionSelector_Id{
+					Id: C.GoBytes(unsafe.Pointer(cReq.tx_id), cReq.tx_id_len),
+				},
+			}
+		} else if cReq.begin_rw != 0 {
+			rw := &spannerpb.TransactionOptions_ReadWrite{}
+			if cReq.prev_tx_id_len > 0 && cReq.prev_tx_id != nil {
+				setPreviousTxIdOnReadWrite(rw, C.GoBytes(unsafe.Pointer(cReq.prev_tx_id), cReq.prev_tx_id_len))
+			}
+			req.Transaction = &spannerpb.TransactionSelector{
+				Selector: &spannerpb.TransactionSelector_Begin{
+					Begin: &spannerpb.TransactionOptions{
+						Mode: &spannerpb.TransactionOptions_ReadWrite_{
+							ReadWrite: rw,
+						},
+					},
+				},
+			}
+		}
+		var txTag, reqTag string
+		if cReq.transaction_tag != nil {
+			txTag = C.GoString(cReq.transaction_tag)
+		}
+		if cReq.request_tag != nil {
+			reqTag = C.GoString(cReq.request_tag)
+		}
+		if txTag != "" || reqTag != "" {
+			req.RequestOptions = &spannerpb.RequestOptions{
+				TransactionTag: txTag,
+				RequestTag:     reqTag,
+			}
+		}
 	}
 
 	stmtCount := int(cReq.stmt_count)
@@ -1201,6 +1239,45 @@ func ExecuteSqlDmlNativeGo(
 	if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
 		baseBytes := C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
 		_ = proto.Unmarshal(baseBytes, &req)
+	} else {
+		if cReq.session != nil {
+			req.Session = C.GoString(cReq.session)
+		}
+		req.Seqno = int64(cReq.seqno)
+		if cReq.tx_id_len > 0 && cReq.tx_id != nil {
+			req.Transaction = &spannerpb.TransactionSelector{
+				Selector: &spannerpb.TransactionSelector_Id{
+					Id: C.GoBytes(unsafe.Pointer(cReq.tx_id), cReq.tx_id_len),
+				},
+			}
+		} else if cReq.begin_rw != 0 {
+			rw := &spannerpb.TransactionOptions_ReadWrite{}
+			if cReq.prev_tx_id_len > 0 && cReq.prev_tx_id != nil {
+				setPreviousTxIdOnReadWrite(rw, C.GoBytes(unsafe.Pointer(cReq.prev_tx_id), cReq.prev_tx_id_len))
+			}
+			req.Transaction = &spannerpb.TransactionSelector{
+				Selector: &spannerpb.TransactionSelector_Begin{
+					Begin: &spannerpb.TransactionOptions{
+						Mode: &spannerpb.TransactionOptions_ReadWrite_{
+							ReadWrite: rw,
+						},
+					},
+				},
+			}
+		}
+		var txTag, reqTag string
+		if cReq.transaction_tag != nil {
+			txTag = C.GoString(cReq.transaction_tag)
+		}
+		if cReq.request_tag != nil {
+			reqTag = C.GoString(cReq.request_tag)
+		}
+		if txTag != "" || reqTag != "" {
+			req.RequestOptions = &spannerpb.RequestOptions{
+				TransactionTag: txTag,
+				RequestTag:     reqTag,
+			}
+		}
 	}
 
 	if int(cReq.stmt_count) > 0 && cReq.statements != nil {
@@ -1230,12 +1307,22 @@ func ExecuteSqlDmlNativeGo(
 			sendUnaryResponse(cb, userData, nil, nil, rpcErr, trailerMD)
 			return
 		}
-		respBytes, marshalErr := proto.Marshal(resp)
-		if marshalErr != nil {
-			sendUnaryResponse(cb, userData, nil, nil, status.Errorf(codes.Internal, "Failed to marshal ResultSet: %v", marshalErr), nil)
-			return
+		precommitBytes := extractResultSetPrecommitToken(resp)
+		var txBytes []byte
+		if cReq.tx_id_len == 0 {
+			if tx := resp.GetMetadata().GetTransaction(); tx != nil {
+				txBytes, _ = proto.Marshal(tx)
+			}
 		}
-		sendUnaryResponse(cb, userData, respBytes, nil, nil, nil)
+		var rowCount int64
+		if stats := resp.GetStats(); stats != nil {
+			if rc, ok := stats.RowCount.(*spannerpb.ResultSetStats_RowCountExact); ok {
+				rowCount = rc.RowCountExact
+			} else if rc, ok := stats.RowCount.(*spannerpb.ResultSetStats_RowCountLowerBound); ok {
+				rowCount = rc.RowCountLowerBound
+			}
+		}
+		sendUnaryDmlResponse(cb, userData, precommitBytes, txBytes, rowCount)
 	}()
 }
 
@@ -1263,10 +1350,9 @@ func BeginTransactionNativeGo(
 	}
 	metaMap := extractMetadataMap(metaKeys, metaVals, metaCount, true)
 
-	var req spannerpb.BeginTransactionRequest
+	var rawBytes []byte
 	if reqLen > 0 && reqBytesPtr != nil {
-		rawBytes := C.GoBytes(unsafe.Pointer(reqBytesPtr), reqLen)
-		_ = proto.Unmarshal(rawBytes, &req)
+		rawBytes = C.GoBytes(unsafe.Pointer(reqBytesPtr), reqLen)
 	}
 
 	go func() {
@@ -1280,14 +1366,9 @@ func BeginTransactionNativeGo(
 		}
 		ctx := metadata.NewOutgoingContext(client.ctx, metadata.New(metaMap))
 
-		resp, trailerMD, rpcErr := client.BeginTransaction(ctx, rk, &req)
+		respBytes, trailerMD, rpcErr := client.InvokeRaw(ctx, rk, "/google.spanner.v1.Spanner/BeginTransaction", rawBytes)
 		if rpcErr != nil {
 			sendUnaryResponse(cb, userData, nil, nil, rpcErr, trailerMD)
-			return
-		}
-		respBytes, marshalErr := proto.Marshal(resp)
-		if marshalErr != nil {
-			sendUnaryResponse(cb, userData, nil, nil, status.Errorf(codes.Internal, "Failed to marshal Transaction: %v", marshalErr), nil)
 			return
 		}
 		sendUnaryResponse(cb, userData, respBytes, nil, nil, nil)

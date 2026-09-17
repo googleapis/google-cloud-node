@@ -575,11 +575,7 @@ export class Snapshot extends EventEmitter {
       // highest number of values
       const {bestCandidates} = lowPriority.reduce(
         (acc, mutation) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const size = (mutation as any)._nativeWrite
-            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (mutation as any)._nativeWrite.rows.length
-            : mutation.insert?.values?.length || 0;
+          const size = mutation.insert?.values?.length || 0;
 
           if (size > acc.maxSize) {
             // New largest size found, start a new list
@@ -2879,12 +2875,10 @@ export class Transaction extends Dml {
       };
 
       if (nativeEnabled) {
-        const baseReqBytes =
-          protos.google.spanner.v1.ExecuteBatchDmlRequest.encode(reqOpts).finish();
         const handled = executeNativeBatchUpdate(
           this,
           queries,
-          baseReqBytes,
+          reqOpts,
           headers,
           (err, resp) => handleResponse(err as grpc.ServiceError | null, resp),
         );
@@ -3783,11 +3777,6 @@ function buildMutation(
   const mutation: spannerClient.spanner.v1.IMutation = {
     [method]: writeObj,
   };
-  Object.defineProperty(mutation, '_nativeWrite', {
-    enumerable: false,
-    configurable: true,
-    value: {op: method, table, columns, rows},
-  });
   return mutation as spannerClient.spanner.v1.Mutation;
 }
 
@@ -3821,11 +3810,6 @@ function buildDeleteMutation(
   const mutation: spannerClient.spanner.v1.IMutation = {
     delete: {table, keySet},
   };
-  Object.defineProperty(mutation, '_nativeDelete', {
-    enumerable: false,
-    configurable: true,
-    value: {table, keys: keysArr},
-  });
   return mutation as spannerClient.spanner.v1.Mutation;
 }
 

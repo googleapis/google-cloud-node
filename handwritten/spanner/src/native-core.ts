@@ -84,12 +84,10 @@ interface NativeAddon {
     handle: CoreHandle,
     routingKey: string,
     metadata: string[][],
-    baseReqBytes: Uint8Array,
+    reqBytes: Uint8Array,
     inlineBegin: boolean,
     beginReqBytes: Uint8Array | null,
     isMuxRw: boolean,
-    mutations: unknown[],
-    fallbackEncoder: (val: unknown) => unknown,
     callback: (
       err: (Error & {retryInfoPb?: Buffer; code?: number; metadata?: grpc.Metadata}) | null,
       respPb?: Buffer | null,
@@ -100,7 +98,7 @@ interface NativeAddon {
     handle: CoreHandle,
     routingKey: string,
     metadata: string[][],
-    baseReqBytes: Uint8Array,
+    dmlReqInput: Uint8Array | object,
     statements: unknown[],
     fallbackEncoder: (val: unknown) => unknown,
     isSingleSql: boolean,
@@ -108,6 +106,7 @@ interface NativeAddon {
       err: (Error & {retryInfoPb?: Buffer; code?: number; metadata?: grpc.Metadata}) | null,
       respPb?: Buffer | null,
       txPb?: Buffer | null,
+      directRowCount?: number | null,
     ) => void,
   ): void;
   beginTransactionNative(
@@ -1001,14 +1000,15 @@ export function runNative(
 // ---------------------------------------------------------------------------
 
 const TYPE_NAME_TO_CODE: Record<string, number> = {
+  unspecified: 0,
   bool: 1,
+  boolean: 1,
   int64: 2,
   pgOid: 2,
   float64: 3,
   timestamp: 4,
   date: 5,
   string: 6,
-  uuid: 6,
   bytes: 7,
   array: 8,
   struct: 9,
@@ -1016,18 +1016,76 @@ const TYPE_NAME_TO_CODE: Record<string, number> = {
   pgNumeric: 10,
   json: 11,
   pgJsonb: 11,
-  proto: 12,
-  enum: 13,
-  interval: 14,
+  proto: 13,
+  enum: 14,
   float32: 15,
+  interval: 16,
+  uuid: 17,
 };
 
-const MUTATION_OP_MAP: Record<string, number> = {
-  insert: 0,
-  update: 1,
-  insertOrUpdate: 2,
-  replace: 3,
+const SCALAR_TYPE_TO_CODE: Record<string, number> = {
+  bool: 1,
+  boolean: 1,
+  BOOL: 1,
+  BOOLEAN: 1,
+  int64: 2,
+  INT64: 2,
+  float64: 3,
+  FLOAT64: 3,
+  timestamp: 4,
+  TIMESTAMP: 4,
+  date: 5,
+  DATE: 5,
+  string: 6,
+  STRING: 6,
+  bytes: 7,
+  BYTES: 7,
+  numeric: 10,
+  NUMERIC: 10,
+  json: 11,
+  JSON: 11,
+  float32: 15,
+  FLOAT32: 15,
+  interval: 16,
+  INTERVAL: 16,
+  uuid: 17,
+  UUID: 17,
 };
+
+function resolveScalarTypeCode(typeSpec: unknown): number {
+  if (!typeSpec) return 0;
+  if (typeof typeSpec === 'string') {
+    return SCALAR_TYPE_TO_CODE[typeSpec] || 0;
+  }
+  if (typeof typeSpec === 'object') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const obj = typeSpec as any;
+    if (
+      obj.child ||
+      obj.fields ||
+      obj.arrayElementType ||
+      obj.structType ||
+      obj.protoTypeFqn ||
+      obj.typeAnnotation
+    ) {
+      return 0;
+    }
+    if (typeof obj.type === 'string') {
+      return SCALAR_TYPE_TO_CODE[obj.type] || 0;
+    }
+    if (typeof obj.code === 'number') {
+      if (
+        (obj.code >= 1 && obj.code <= 7) ||
+        obj.code === 10 ||
+        obj.code === 11 ||
+        (obj.code >= 15 && obj.code <= 17)
+      ) {
+        return obj.code;
+      }
+    }
+  }
+  return 0;
+}
 
 /**
  * Fallback encoder invoked from C++ only when a cell value is an Object wrapper
@@ -1056,10 +1114,10 @@ export function fallbackEncodeCell(val: unknown): {
     return {kind: 1, typeCode, boolVal: encoded.boolValue ? 1 : 0};
   }
   if (encoded.numberValue !== undefined && encoded.numberValue !== null) {
-    return {kind: 2, typeCode, numVal: encoded.numberValue};
+    return {kind: 2, typeCode, numVal: Number(encoded.numberValue)};
   }
   if (encoded.stringValue !== undefined && encoded.stringValue !== null) {
-    return {kind: 3, typeCode, strVal: encoded.stringValue};
+    return {kind: 3, typeCode, strVal: String(encoded.stringValue)};
   }
   const pbBytes = protos.google.protobuf.Value.encode(encoded).finish();
   return {kind: 4, typeCode, pbBytes};
@@ -1082,9 +1140,8 @@ function headersToMetadataArray(
   return meta;
 }
 
-function attachRetryMetadata(
-  err: Error & {retryInfoPb?: Buffer; metadata?: grpc.Metadata},
-): void {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function attachRetryMetadata(err: any) {
   if (err && err.retryInfoPb && err.retryInfoPb.length > 0) {
     if (!err.metadata) {
       err.metadata = new grpc.Metadata();
@@ -1093,6 +1150,7 @@ function attachRetryMetadata(
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function normalizeTypeProto(typeObj: any): any {
   if (!typeObj || typeof typeObj !== 'object') {
     return typeObj;
@@ -1130,10 +1188,12 @@ function normalizeTypeProto(typeObj: any): any {
   return copy;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function prepareNativeStatements(queries: Array<string | any>): Array<{
   sql: string;
   paramNames: string[];
   paramValues: unknown[];
+  paramTypeCodes: number[];
   paramTypesPb: Array<Uint8Array | null>;
 }> {
   const result = new Array(queries.length);
@@ -1144,6 +1204,7 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
         sql: q,
         paramNames: [],
         paramValues: [],
+        paramTypeCodes: [],
         paramTypesPb: [],
       };
       continue;
@@ -1155,12 +1216,14 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
         sql,
         paramNames: [],
         paramValues: [],
+        paramTypeCodes: [],
         paramTypesPb: [],
       };
       continue;
     }
     const paramNames = Object.keys(params);
     const paramValues = new Array(paramNames.length);
+    const paramTypeCodes = new Array<number>(paramNames.length);
     const paramTypesPb = new Array<Uint8Array | null>(paramNames.length);
     const explicitTypes = q.types;
 
@@ -1170,16 +1233,26 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
       paramValues[i] = val;
 
       if (explicitTypes && explicitTypes[name]) {
-        const typeObj = normalizeTypeProto(
-          codec.createTypeObject(explicitTypes[name]),
-        );
-        paramTypesPb[i] = protos.google.spanner.v1.Type.encode(typeObj).finish();
+        const scalarCode = resolveScalarTypeCode(explicitTypes[name]);
+        if (scalarCode > 0) {
+          paramTypeCodes[i] = scalarCode;
+          paramTypesPb[i] = null;
+        } else {
+          paramTypeCodes[i] = 0;
+          const typeObj = normalizeTypeProto(
+            codec.createTypeObject(explicitTypes[name]),
+          );
+          paramTypesPb[i] =
+            protos.google.spanner.v1.Type.encode(typeObj).finish();
+        }
+      } else if (val === null || val === undefined) {
+        paramTypeCodes[i] = 0;
+        paramTypesPb[i] = null;
       } else if (
-        val === null ||
-        val === undefined ||
         Array.isArray(val) ||
         (typeof val === 'object' &&
           !Buffer.isBuffer(val) &&
+          !(val instanceof Uint8Array) &&
           !(val instanceof codec.Int) &&
           !(val instanceof codec.Float) &&
           !(val instanceof codec.Float32) &&
@@ -1189,10 +1262,12 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
           !(val instanceof PreciseDate) &&
           !(val instanceof codec.Interval))
       ) {
+        paramTypeCodes[i] = 0;
         const t = codec.getType(val as Value);
         const typeObj = normalizeTypeProto(codec.createTypeObject(t));
         paramTypesPb[i] = protos.google.spanner.v1.Type.encode(typeObj).finish();
       } else {
+        paramTypeCodes[i] = 0;
         paramTypesPb[i] = null;
       }
     }
@@ -1201,6 +1276,7 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
       sql,
       paramNames,
       paramValues,
+      paramTypeCodes,
       paramTypesPb,
     };
   }
@@ -1209,7 +1285,7 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
 
 /**
  * Dispatches `Transaction#commit` through the Go shared core.
- * Supports 1-RTT pipelined `BeginTransaction` + `Commit` when `!transaction.id && transaction._useInRunner`.
+ * Request encoding and response decoding happen in Node.js; only raw byte buffers cross FFI.
  */
 export function executeNativeCommit(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1239,7 +1315,7 @@ export function executeNativeCommit(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baseReq: any = {
     session: sessionName,
-    mutations: [],
+    mutations,
     requestOptions: Object.assign(
       requestOptions || {},
       transaction.requestOptions,
@@ -1257,11 +1333,18 @@ export function executeNativeCommit(
   if (options && 'maxCommitDelay' in options && options.maxCommitDelay) {
     baseReq.maxCommitDelay = options.maxCommitDelay;
   }
-  const baseReqBytes =
+  const reqBytes =
     protos.google.spanner.v1.CommitRequest.encode(baseReq).finish();
 
   let beginReqBytes: Uint8Array | null = null;
   if (inlineBegin) {
+    if (
+      isMuxRw &&
+      mutations.length > 0 &&
+      typeof transaction._setMutationKey === 'function'
+    ) {
+      transaction._setMutationKey(mutations);
+    }
     const beginOptions = Object.assign({}, transaction._options);
     if (
       transaction.multiplexedSessionPreviousTransactionId &&
@@ -1278,35 +1361,14 @@ export function executeNativeCommit(
       session: sessionName,
       options: beginOptions,
     };
+    if (transaction._mutationKey) {
+      beginReq.mutationKey = transaction._mutationKey;
+    }
     if (transaction.requestOptions) {
       beginReq.requestOptions = transaction.requestOptions;
     }
     beginReqBytes =
       protos.google.spanner.v1.BeginTransactionRequest.encode(beginReq).finish();
-  }
-
-  const nativeMutations = new Array(mutations.length);
-  for (let i = 0; i < mutations.length; i++) {
-    const m = mutations[i];
-    if (m._nativeWrite) {
-      nativeMutations[i] = {
-        op: MUTATION_OP_MAP[m._nativeWrite.op] ?? 0,
-        table: m._nativeWrite.table,
-        columns: m._nativeWrite.columns,
-        rows: m._nativeWrite.rows,
-      };
-    } else if (m._nativeDelete) {
-      nativeMutations[i] = {
-        op: 4,
-        table: m._nativeDelete.table,
-        keys: m._nativeDelete.keys,
-      };
-    } else {
-      nativeMutations[i] = {
-        op: 5,
-        rawPb: protos.google.spanner.v1.Mutation.encode(m).finish(),
-      };
-    }
   }
 
   const metadata = headersToMetadataArray(sessionName, headersObj);
@@ -1315,12 +1377,10 @@ export function executeNativeCommit(
     handle,
     routingKey,
     metadata,
-    baseReqBytes,
+    reqBytes,
     inlineBegin,
     beginReqBytes,
     isMuxRw,
-    nativeMutations,
-    fallbackEncodeCell,
     (err, respPb, txPb) => {
       if (txPb && txPb.length > 0) {
         try {
@@ -1354,7 +1414,8 @@ export function executeNativeBatchUpdate(
   transaction: any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   queries: Array<string | any>,
-  baseReqBytes: Uint8Array,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  reqOptsOrBytes: Uint8Array | any,
   headersObj: Record<string, string>,
   callback: (
     err: Error | null,
@@ -1372,11 +1433,43 @@ export function executeNativeBatchUpdate(
   const metadata = headersToMetadataArray(sessionName, headersObj);
   const nativeStatements = prepareNativeStatements(queries);
 
+  let dmlReqInput: Uint8Array | object;
+  if (
+    reqOptsOrBytes instanceof Uint8Array ||
+    Buffer.isBuffer(reqOptsOrBytes)
+  ) {
+    dmlReqInput = reqOptsOrBytes;
+  } else if (reqOptsOrBytes?.requestOptions?.priority) {
+    dmlReqInput =
+      protos.google.spanner.v1.ExecuteBatchDmlRequest.encode(
+        reqOptsOrBytes,
+      ).finish();
+  } else {
+    const database = transaction.session.parent;
+    dmlReqInput = {
+      session: sessionName,
+      txId: transaction.id || null,
+      beginRw: !transaction.id && Boolean(transaction._options?.readWrite),
+      prevTxId:
+        (!transaction.id &&
+          database &&
+          database.isMuxEnabledForRW_ &&
+          transaction.multiplexedSessionPreviousTransactionId) ||
+        null,
+      seqno: reqOptsOrBytes?.seqno ?? 0,
+      transactionTag:
+        reqOptsOrBytes?.requestOptions?.transactionTag ||
+        transaction.requestOptions?.transactionTag ||
+        '',
+      requestTag: reqOptsOrBytes?.requestOptions?.requestTag || '',
+    };
+  }
+
   addon.executeBatchDmlNative(
     handle,
     routingKey,
     metadata,
-    baseReqBytes,
+    dmlReqInput,
     nativeStatements,
     fallbackEncodeCell,
     false,
@@ -1400,6 +1493,7 @@ export function executeNativeBatchUpdate(
 
 /**
  * Dispatches `Transaction#runUpdate` / `Dml#runUpdate` through the Go shared core via unary `ExecuteSql`.
+ * Request encoding happens natively in Go; steady-state responses return rowCount directly.
  */
 export function executeNativeSqlDml(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1419,41 +1513,65 @@ export function executeNativeSqlDml(
   const routingKey: string = transaction._affinityKey || sessionName;
   const database = transaction.session.parent;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const txSelector: any = {};
-  if (transaction.id) {
-    txSelector.id = transaction.id;
-  } else if (transaction._options.readWrite) {
-    txSelector.begin = transaction._options;
-    if (database && database.isMuxEnabledForRW_) {
-      transaction._setPreviousTransactionId(txSelector);
+  let dmlReqInput: Uint8Array | object;
+  const hasQueryOptions = Boolean(
+    query.queryOptions || transaction.queryOptions,
+  );
+  const isSingleUse = !transaction.id && !transaction._options?.readWrite;
+
+  if (hasQueryOptions || isSingleUse) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const txSelector: any = {};
+    if (transaction.id) {
+      txSelector.id = transaction.id;
+    } else if (transaction._options?.readWrite) {
+      txSelector.begin = transaction._options;
+      if (database && database.isMuxEnabledForRW_) {
+        transaction._setPreviousTransactionId(txSelector);
+      }
+    } else {
+      txSelector.singleUse = transaction._options;
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const baseReq: any = {
+      session: sessionName,
+      transaction: txSelector,
+      sql: typeof query === 'string' ? query : query.sql,
+      seqno: transaction._seqno++,
+      requestOptions: transaction.configureTagOptions(
+        typeof txSelector.singleUse !== 'undefined',
+        transaction.requestOptions?.transactionTag ?? undefined,
+        query.requestOptions,
+      ),
+    };
+    if (hasQueryOptions) {
+      baseReq.queryOptions = Object.assign(
+        {},
+        transaction.queryOptions,
+        query.queryOptions,
+      );
+    }
+
+    dmlReqInput =
+      protos.google.spanner.v1.ExecuteSqlRequest.encode(baseReq).finish();
   } else {
-    txSelector.singleUse = transaction._options;
+    dmlReqInput = {
+      session: sessionName,
+      txId: transaction.id || null,
+      beginRw: !transaction.id && Boolean(transaction._options?.readWrite),
+      prevTxId:
+        (!transaction.id &&
+          database &&
+          database.isMuxEnabledForRW_ &&
+          transaction.multiplexedSessionPreviousTransactionId) ||
+        null,
+      seqno: transaction._seqno++,
+      transactionTag: transaction.requestOptions?.transactionTag || '',
+      requestTag: query.requestOptions?.requestTag || '',
+    };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const baseReq: any = {
-    session: sessionName,
-    transaction: txSelector,
-    sql: typeof query === 'string' ? query : query.sql,
-    seqno: transaction._seqno++,
-    requestOptions: transaction.configureTagOptions(
-      typeof txSelector.singleUse !== 'undefined',
-      transaction.requestOptions?.transactionTag ?? undefined,
-      query.requestOptions,
-    ),
-  };
-  if (query.queryOptions || transaction.queryOptions) {
-    baseReq.queryOptions = Object.assign(
-      {},
-      transaction.queryOptions,
-      query.queryOptions,
-    );
-  }
-
-  const baseReqBytes =
-    protos.google.spanner.v1.ExecuteSqlRequest.encode(baseReq).finish();
   const metadata = headersToMetadataArray(sessionName, headersObj);
   const nativeStatements = prepareNativeStatements([query]);
 
@@ -1461,31 +1579,39 @@ export function executeNativeSqlDml(
     handle,
     routingKey,
     metadata,
-    baseReqBytes,
+    dmlReqInput,
     nativeStatements,
     fallbackEncodeCell,
     true,
-    (err, respPb) => {
+    (err, respPb, txPb, directRowCount) => {
       if (err) {
         attachRetryMetadata(err);
         callback(err, 0);
         return;
       }
-      let rowCount = 0;
-      if (respPb && respPb.length > 0) {
-        const resp = protos.google.spanner.v1.ResultSet.decode(respPb);
-        transaction._updatePrecommitToken(resp);
-        if (!transaction.id && resp.metadata?.transaction) {
-          transaction._update(resp.metadata.transaction);
-        }
-        const stats = resp.stats as protos.google.spanner.v1.ResultSetStats | null | undefined;
-        if (stats && stats.rowCount) {
-          rowCount = Math.floor(
-            Number((stats as unknown as Record<string, unknown>)[stats.rowCount]),
-          );
+      if (txPb && txPb.length > 0) {
+        try {
+          const txResp = protos.google.spanner.v1.Transaction.decode(txPb);
+          transaction._updatePrecommitToken(txResp);
+          if (!transaction.id) {
+            transaction._update(txResp);
+          }
+        } catch (e) {
+          // ignore
         }
       }
-      callback(null, rowCount);
+      if (respPb && respPb.length > 0) {
+        try {
+          const precommitToken =
+            protos.google.spanner.v1.MultiplexedSessionPrecommitToken.decode(
+              respPb,
+            );
+          transaction._updatePrecommitToken({precommitToken});
+        } catch (e) {
+          // ignore
+        }
+      }
+      callback(null, typeof directRowCount === 'number' ? directRowCount : 0);
     },
   );
   return true;
