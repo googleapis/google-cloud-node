@@ -165,8 +165,7 @@ async function main(processArgv: string[]) {
   const restNumericEnums = argv.restNumericEnums as boolean | undefined;
   const mixins = argv.mixins as string | undefined;
   const enableTelemetryTracing = argv.enableTelemetryTracing as
-    | boolean
-    | undefined;
+    boolean | undefined;
 
   // --protoc can be taken from environment or from the command line
   let protocParameter = argv.protoc as string | string[] | undefined;
