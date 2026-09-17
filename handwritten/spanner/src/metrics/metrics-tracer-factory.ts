@@ -250,6 +250,20 @@ export class MetricsTracerFactory {
   }
 
   /**
+   * Returns the detected client location.
+   */
+  get location(): string {
+    return this._location;
+  }
+
+  /**
+   * Returns true if the MeterProvider is initialized with at least one MetricReader.
+   */
+  public hasMetricReaders(): boolean {
+    return this._metricReaders.length > 0;
+  }
+
+  /**
    * Creates a new MetricsTracer for a given resource name and method, and stores it for later retrieval.
    * Returns null if metrics are disabled.
    * @param formattedName The formatted resource name (e.g., full database path).

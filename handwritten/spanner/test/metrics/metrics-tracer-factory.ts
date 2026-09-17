@@ -25,6 +25,7 @@ import * as Constants from '../../src/metrics/constants';
 import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
 import {transformResourceMetricToTimeSeriesArray} from '../../src/metrics/transform';
 import {CloudMonitoringMetricsExporter} from '../../src/metrics/spanner-metrics-exporter';
+import {Spanner} from '../../src';
 
 describe('MetricsTracerFactory', () => {
   let sandbox: sinon.SinonSandbox;
@@ -520,6 +521,50 @@ describe('MetricsTracerFactory exported location', () => {
 
     await reader.shutdown();
   });
+
+  it('should export the detected GCP location via reader.collect() without requiring waitForAsyncAttributes', async () => {
+    let resolveLocation!: (location: string) => void;
+    const locationPromise = new Promise<string>(resolve => {
+      resolveLocation = resolve;
+    });
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .returns(locationPromise);
+
+    class DirectCollectReader extends MetricReader {
+      protected async onForceFlush(): Promise<void> {}
+      protected async onShutdown(): Promise<void> {}
+    }
+
+    const reader = new DirectCollectReader();
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    factory.getMeterProvider([reader]);
+    assert.strictEqual(factory.location, 'global');
+
+    const tracer = factory.createMetricsTracer(
+      'some-method',
+      'projects/test-project/instances/inst/databases/db',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    tracer!.recordOperationStart();
+    tracer!.recordOperationCompletion();
+
+    resolveLocation('us-central1');
+    await locationPromise;
+    await Promise.resolve();
+    assert.strictEqual(factory.location, 'us-central1');
+
+    // Collect directly via MetricReader.collect() (which does NOT invoke waitForAsyncAttributes)
+    const {resourceMetrics} = await reader.collect();
+    const timeSeries = transformResourceMetricToTimeSeriesArray(
+      resourceMetrics,
+      'test-project',
+    );
+    assert.ok(timeSeries.length > 0);
+    assert.strictEqual(timeSeries[0].resource!.labels!.location, 'us-central1');
+
+    await reader.shutdown();
+  });
 });
 
 describe('MetricsTracerFactory getMeterProvider readers', () => {
@@ -545,6 +590,16 @@ describe('MetricsTracerFactory getMeterProvider readers', () => {
     sandbox = sinon.createSandbox();
     warnStub = sandbox.stub(console, 'warn');
     MetricsTracerFactory.enabled = true;
+    if (
+      Object.prototype.hasOwnProperty.call(
+        process.env,
+        'SPANNER_DISABLE_BUILTIN_METRICS',
+      )
+    ) {
+      sandbox.replace(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS', 'false');
+    } else {
+      sandbox.define(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS', 'false');
+    }
     await MetricsTracerFactory.resetInstance();
     sandbox
       .stub(MetricsTracerFactory as any, '_detectClientLocation')
@@ -559,10 +614,13 @@ describe('MetricsTracerFactory getMeterProvider readers', () => {
   it('should bind MetricReader passed to getMeterProvider([reader]) even if getMeterProvider() was called earlier', async () => {
     const factory = MetricsTracerFactory.getInstance('test-project')!;
 
+    assert.strictEqual(factory.hasMetricReaders(), false);
     const initialMeterProvider = factory.getMeterProvider();
+    assert.strictEqual(factory.hasMetricReaders(), false);
 
     const reader = new InMemoryMetricReader();
     const rebuiltMeterProvider = factory.getMeterProvider([reader]);
+    assert.strictEqual(factory.hasMetricReaders(), true);
 
     assert.notStrictEqual(rebuiltMeterProvider, initialMeterProvider);
 
@@ -604,5 +662,24 @@ describe('MetricsTracerFactory getMeterProvider readers', () => {
     assert.ok(resourceMetrics.scopeMetrics.length > 0);
 
     await boundReader.shutdown();
+  });
+
+  it('should initialize metrics synchronously when projectId is known and avoid duplicate warnings for multiple instances', () => {
+    const spanner1 = new Spanner({
+      projectId: 'test-project',
+    });
+    assert.ok(spanner1);
+
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    assert.ok(factory);
+    assert.strictEqual(factory.hasMetricReaders(), true);
+
+    const spanner2 = new Spanner({
+      projectId: 'test-project',
+    });
+    assert.ok(spanner2);
+
+    // Must not log a warning because hasMetricReaders() prevented re-registering
+    assert.ok(warnStub.notCalled);
   });
 });

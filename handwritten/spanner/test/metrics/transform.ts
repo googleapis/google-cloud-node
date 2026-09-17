@@ -244,7 +244,7 @@ describe('transform', () => {
 
   it('should extract metric and resource labels', () => {
     const dataLabels = _extractLabels(sumDataPoint, 'project_id');
-    const resourceLabels = _extractLabels(resource, 'project_id');
+    const resourceLabels = _extractLabels(resource, 'project_id', true);
 
     // Metric Labels
     assert.strictEqual(dataLabels.metricLabels['client_uid'], 'test_uid');
