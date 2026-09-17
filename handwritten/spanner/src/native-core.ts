@@ -78,6 +78,7 @@ interface NativeAddon {
       rows: Value[][] | null,
       telemetry: Telemetry | null,
       metadataPb?: Buffer | null,
+      isLast?: boolean,
     ) => void,
   ): void;
   commitNative(
@@ -696,7 +697,7 @@ export function runStreamNative(
       metadata,
       requestBytes,
       Boolean(cachedEntry),
-      (cbErr, rows, telemetry, metadataPb) => {
+      (cbErr, rows, telemetry, metadataPb, isLast) => {
         if (fellBack) {
           return;
         }
@@ -781,6 +782,9 @@ export function runStreamNative(
 
         for (let i = 0; i < rows.length; i++) {
           out.push(createRow(rows[i]));
+        }
+        if (isLast) {
+          out.push(null);
         }
       },
     );
@@ -917,7 +921,7 @@ export function runNative(
       metadata,
       requestBytes,
       Boolean(cachedEntry),
-      (cbErr, rows, _telemetry, metadataPb) => {
+      (cbErr, rows, _telemetry, metadataPb, isLast) => {
         if (fellBack) {
           return;
         }
@@ -989,6 +993,9 @@ export function runNative(
 
         for (let i = 0; i < rows.length; i++) {
           resultRows.push(createRow(rows[i]));
+        }
+        if (isLast) {
+          callback(null, resultRows, undefined, resultMetadata);
         }
       },
     );
@@ -1123,15 +1130,29 @@ export function fallbackEncodeCell(val: unknown): {
   return {kind: 4, typeCode, pbBytes};
 }
 
+const sessionParamPairCache = new Map<string, [string, string]>();
+
 function headersToMetadataArray(
   sessionName: string,
   headersObj?: Record<string, string>,
 ): string[][] {
-  const meta: string[][] = [
-    ['x-goog-request-params', `session=${encodeURIComponent(sessionName)}`],
-  ];
+  let sessionPair = sessionParamPairCache.get(sessionName);
+  if (!sessionPair) {
+    sessionPair = [
+      'x-goog-request-params',
+      `session=${encodeURIComponent(sessionName)}`,
+    ];
+    if (sessionParamPairCache.size > 1000) {
+      sessionParamPairCache.clear();
+    }
+    sessionParamPairCache.set(sessionName, sessionPair);
+  }
+  const meta: string[][] = [sessionPair];
   if (headersObj) {
-    for (const [k, v] of Object.entries(headersObj)) {
+    const keys = Object.keys(headersObj);
+    for (let i = 0; i < keys.length; i++) {
+      const k = keys[i];
+      const v = headersObj[k];
       if (v !== undefined && v !== null) {
         meta.push([k.toLowerCase(), String(v)]);
       }
@@ -1721,9 +1742,7 @@ export function executeNativeTransactionRun(
     resultMetadata = cachedEntry.decoded;
   }
 
-  const needsInlineBeginTx =
-    !transaction.id && Boolean(transaction._options?.readWrite);
-  const skipMetadata = Boolean(cachedEntry) && !needsInlineBeginTx;
+  const skipMetadata = Boolean(cachedEntry);
 
   addon.executeStreamingSqlNative(
     handle,
@@ -1731,7 +1750,7 @@ export function executeNativeTransactionRun(
     metadata,
     requestBytes,
     skipMetadata,
-    (cbErr, rows, _telemetry, metadataPb) => {
+    (cbErr, rows, _telemetry, metadataPb, isLast) => {
       if (fellBack) {
         return;
       }
@@ -1801,6 +1820,9 @@ export function executeNativeTransactionRun(
 
       for (let i = 0; i < rows.length; i++) {
         resultRows.push(createRow(rows[i]));
+      }
+      if (isLast) {
+        callback(null, resultRows, undefined, resultMetadata);
       }
     },
   );

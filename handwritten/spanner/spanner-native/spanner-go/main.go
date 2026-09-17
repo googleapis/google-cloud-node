@@ -131,6 +131,7 @@ import (
 	"unsafe"
 
 	spannerpb "cloud.google.com/go/spanner/apiv1/spannerpb"
+	"golang.org/x/oauth2"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
@@ -373,38 +374,23 @@ func ExecuteStreamingSqlGo(
 	cb C.StreamDataCallback,
 	userData unsafe.Pointer,
 ) {
-	client := getClient(uintptr(handle))
-	if client == nil {
-		sendBatch(cb, userData, nil, nil, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true, nil)
-		return
-	}
-
-	var rk string
-	if routingKey != nil {
-		rk = C.GoString(routingKey)
-	}
-
-	// Copy metadata headers
-	count := int(metaCount)
-	metaMap := make(map[string]string, count)
-	if count > 0 && metaKeys != nil && metaVals != nil {
-		keysSlice := (*[1 << 28]*C.char)(unsafe.Pointer(metaKeys))[:count:count]
-		valsSlice := (*[1 << 28]*C.char)(unsafe.Pointer(metaVals))[:count:count]
-		for i := 0; i < count; i++ {
-			if keysSlice[i] != nil && valsSlice[i] != nil {
-				k := C.GoString(keysSlice[i])
-				v := C.GoString(valsSlice[i])
-				metaMap[k] = v
-			}
-		}
-	}
-
-	// Copy request bytes
-	length := int(reqLen)
-	rawBytes := C.GoBytes(unsafe.Pointer(reqBytesPtr), C.int(length))
-
-	// Execute gRPC streaming in a separate goroutine
+	// Execute gRPC streaming and setup in a separate goroutine
 	go func() {
+		client := getClient(uintptr(handle))
+		if client == nil {
+			sendBatch(cb, userData, nil, nil, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true, nil)
+			return
+		}
+
+		var rk string
+		if routingKey != nil {
+			rk = C.GoString(routingKey)
+		}
+
+		// Copy request bytes
+		length := int(reqLen)
+		rawBytes := C.GoBytes(unsafe.Pointer(reqBytesPtr), C.int(length))
+
 		var lastResumeToken []byte
 		attemptCount := 0
 
@@ -413,7 +399,10 @@ func ExecuteStreamingSqlGo(
 		var currentRow []*structpb.Value
 		batch := make([][]*structpb.Value, 0, 100)
 
-		sqlStr := string(extractBytesFieldFromUnknown(rawBytes, 3))
+		var sqlStr string
+		if skipMetadata == 0 {
+			sqlStr = string(extractBytesFieldFromUnknown(rawBytes, 3))
+		}
 
 		// Serialized ResultSetMetadata, handed to Node on the first batch only.
 		// takeMetadata() returns it once and then always returns nil, so the
@@ -439,19 +428,13 @@ func ExecuteStreamingSqlGo(
 				attemptBytes = protowire.AppendBytes(attemptBytes, lastResumeToken)
 			}
 
-			// 2. Prepare outgoing gRPC context with metadata headers
-			md := metadata.New(metaMap)
-
-			// Fetch OAuth2 bearer token from memory cache
+			// 2. Fetch OAuth2 bearer token and prepare outgoing gRPC context directly
 			token, err := client.GetToken()
 			if err != nil {
 				sendBatch(cb, userData, nil, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true, nil)
 				return
 			}
-			if token != nil && token.AccessToken != "" {
-				md.Set("authorization", "Bearer "+token.AccessToken)
-			}
-
+			md := extractMetadataMD(metaKeys, metaVals, metaCount, false, token)
 			ctx := metadata.NewOutgoingContext(client.ctx, md)
 
 			// 3. Dispatch streaming SQL request using raw request bytes (response decoded in Go)
@@ -501,10 +484,18 @@ func ExecuteStreamingSqlGo(
 					}
 					if chunk.Metadata.Transaction != nil {
 						copyChunkPrecommitTokenToTransaction(chunk, chunk.Metadata.Transaction)
-						if mdBytes, mdErr := proto.Marshal(chunk.Metadata); mdErr == nil {
+						var mdToMarshal *spannerpb.ResultSetMetadata
+						if skipMetadata != 0 {
+							mdToMarshal = &spannerpb.ResultSetMetadata{
+								Transaction: chunk.Metadata.Transaction,
+							}
+						} else {
+							mdToMarshal = chunk.Metadata
+						}
+						if mdBytes, mdErr := proto.Marshal(mdToMarshal); mdErr == nil {
 							pendingMetadata = mdBytes
 						}
-						if chunk.Metadata.RowType != nil {
+						if skipMetadata == 0 && chunk.Metadata.RowType != nil {
 							fieldCount := len(chunk.Metadata.RowType.Fields)
 							if _, loaded := schemaBytesCache.Load(sqlStr); !loaded {
 								schemaOnly := &spannerpb.ResultSetMetadata{
@@ -634,6 +625,29 @@ func extractMetadataMap(metaKeys **C.char, metaVals **C.char, metaCount C.int, e
 		metaMap["x-goog-spanner-route-to-leader"] = "true"
 	}
 	return metaMap
+}
+
+func extractMetadataMD(metaKeys **C.char, metaVals **C.char, metaCount C.int, ensureLeader bool, token *oauth2.Token) metadata.MD {
+	count := int(metaCount)
+	md := make(metadata.MD, count+2)
+	if count > 0 && metaKeys != nil && metaVals != nil {
+		keysSlice := (*[1 << 28]*C.char)(unsafe.Pointer(metaKeys))[:count:count]
+		valsSlice := (*[1 << 28]*C.char)(unsafe.Pointer(metaVals))[:count:count]
+		for i := 0; i < count; i++ {
+			if keysSlice[i] != nil && valsSlice[i] != nil {
+				k := strings.ToLower(C.GoString(keysSlice[i]))
+				v := C.GoString(valsSlice[i])
+				md[k] = []string{v}
+			}
+		}
+	}
+	if ensureLeader {
+		md["x-goog-spanner-route-to-leader"] = []string{"true"}
+	}
+	if token != nil && token.AccessToken != "" {
+		md["authorization"] = []string{"Bearer " + token.AccessToken}
+	}
+	return md
 }
 
 func cellToProtoValue(cell *C.CSpannerCell) *structpb.Value {
@@ -800,6 +814,28 @@ func setPrecommitTokenOnCommitReq(commitReq *spannerpb.CommitRequest, tokenBytes
 	filtered = protowire.AppendTag(filtered, 9, protowire.BytesType)
 	filtered = protowire.AppendBytes(filtered, tokenBytes)
 	commitReq.ProtoReflect().SetUnknown(filtered)
+}
+
+func setRawPrecommitTokenOnCommitBytes(baseBytes []byte, tokenBytes []byte) []byte {
+	var filtered []byte
+	raw := baseBytes
+	for len(raw) > 0 {
+		num, wtype, n := protowire.ConsumeTag(raw)
+		if n < 0 {
+			break
+		}
+		vn := protowire.ConsumeFieldValue(num, wtype, raw[n:])
+		if vn < 0 {
+			break
+		}
+		if num != 9 {
+			filtered = append(filtered, raw[:n+vn]...)
+		}
+		raw = raw[n+vn:]
+	}
+	filtered = protowire.AppendTag(filtered, 9, protowire.BytesType)
+	filtered = protowire.AppendBytes(filtered, tokenBytes)
+	return filtered
 }
 
 func checkAndExtractRetryPrecommitToken(commitResp *spannerpb.CommitResponse) []byte {
@@ -1013,49 +1049,44 @@ func CommitNativeGo(
 	cb C.UnaryCallback,
 	userData unsafe.Pointer,
 ) {
-	client := getClient(uintptr(handle))
-	if client == nil {
-		sendUnaryResponse(cb, userData, nil, nil, status.Error(codes.InvalidArgument, "Invalid or closed CoreClient handle"), nil)
-		return
-	}
-
-	var routingKey string
-	if cReq.routing_key != nil {
-		routingKey = C.GoString(cReq.routing_key)
-	}
-	metaMap := extractMetadataMap(cReq.meta_keys, cReq.meta_vals, cReq.meta_count, true)
-
-	var baseBytes []byte
-	if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
-		baseBytes = C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
-	}
-
-	inlineBegin := cReq.inline_begin != 0
-	isMuxRW := cReq.is_mux_rw != 0
-	var beginBytes []byte
-	if inlineBegin && cReq.begin_req_len > 0 && cReq.begin_req_pb != nil {
-		beginBytes = C.GoBytes(unsafe.Pointer(cReq.begin_req_pb), cReq.begin_req_len)
-	}
-
 	go func() {
+		client := getClient(uintptr(handle))
+		if client == nil {
+			sendUnaryResponse(cb, userData, nil, nil, status.Error(codes.InvalidArgument, "Invalid or closed CoreClient handle"), nil)
+			return
+		}
+
+		var routingKey string
+		if cReq.routing_key != nil {
+			routingKey = C.GoString(cReq.routing_key)
+		}
+
+		var baseBytes []byte
+		if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
+			baseBytes = C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
+		}
+
+		inlineBegin := cReq.inline_begin != 0
+		isMuxRW := cReq.is_mux_rw != 0
+		var beginBytes []byte
+		if inlineBegin && cReq.begin_req_len > 0 && cReq.begin_req_pb != nil {
+			beginBytes = C.GoBytes(unsafe.Pointer(cReq.begin_req_pb), cReq.begin_req_len)
+		}
+
 		token, err := client.GetToken()
 		if err != nil {
 			sendUnaryResponse(cb, userData, nil, nil, status.Errorf(codes.Unauthenticated, "Failed to get GCP auth token: %v", err), nil)
 			return
 		}
-		if token != nil && token.AccessToken != "" {
-			metaMap["authorization"] = "Bearer " + token.AccessToken
-		}
-		ctx := metadata.NewOutgoingContext(client.ctx, metadata.New(metaMap))
+		md := extractMetadataMD(cReq.meta_keys, cReq.meta_vals, cReq.meta_count, true, token)
+		ctx := metadata.NewOutgoingContext(client.ctx, md)
 
 		// Fast path: raw byte buffer transfer for Commit (zero proto.Unmarshal/Marshal in Go)
 		if !inlineBegin {
 			respBytes, trailerMD, commitErr := client.InvokeRaw(ctx, routingKey, "/google.spanner.v1.Spanner/Commit", baseBytes)
 			if commitErr == nil {
 				if retryToken := extractBytesFieldFromUnknown(respBytes, 4); len(retryToken) > 0 {
-					retryReq := append([]byte(nil), baseBytes...)
-					retryReq = protowire.AppendTag(retryReq, 7, protowire.BytesType)
-					retryReq = protowire.AppendBytes(retryReq, retryToken)
+					retryReq := setRawPrecommitTokenOnCommitBytes(baseBytes, retryToken)
 					respBytes, trailerMD, commitErr = client.InvokeRaw(ctx, routingKey, "/google.spanner.v1.Spanner/Commit", retryReq)
 				}
 			}
@@ -1114,93 +1145,90 @@ func ExecuteBatchDmlNativeGo(
 	cb C.UnaryCallback,
 	userData unsafe.Pointer,
 ) {
-	client := getClient(uintptr(handle))
-	if client == nil {
-		sendUnaryResponse(cb, userData, nil, nil, status.Error(codes.InvalidArgument, "Invalid or closed CoreClient handle"), nil)
-		return
-	}
-
-	var routingKey string
-	if cReq.routing_key != nil {
-		routingKey = C.GoString(cReq.routing_key)
-	}
-	metaMap := extractMetadataMap(cReq.meta_keys, cReq.meta_vals, cReq.meta_count, true)
-
-	var req spannerpb.ExecuteBatchDmlRequest
-	if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
-		baseBytes := C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
-		_ = proto.Unmarshal(baseBytes, &req)
-	} else {
-		if cReq.session != nil {
-			req.Session = C.GoString(cReq.session)
+	go func() {
+		client := getClient(uintptr(handle))
+		if client == nil {
+			sendUnaryResponse(cb, userData, nil, nil, status.Error(codes.InvalidArgument, "Invalid or closed CoreClient handle"), nil)
+			return
 		}
-		req.Seqno = int64(cReq.seqno)
-		if cReq.tx_id_len > 0 && cReq.tx_id != nil {
-			req.Transaction = &spannerpb.TransactionSelector{
-				Selector: &spannerpb.TransactionSelector_Id{
-					Id: C.GoBytes(unsafe.Pointer(cReq.tx_id), cReq.tx_id_len),
-				},
+
+		var routingKey string
+		if cReq.routing_key != nil {
+			routingKey = C.GoString(cReq.routing_key)
+		}
+
+		var req spannerpb.ExecuteBatchDmlRequest
+		if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
+			baseBytes := C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
+			_ = proto.Unmarshal(baseBytes, &req)
+		} else {
+			if cReq.session != nil {
+				req.Session = C.GoString(cReq.session)
 			}
-		} else if cReq.begin_rw != 0 {
-			rw := &spannerpb.TransactionOptions_ReadWrite{}
-			if cReq.prev_tx_id_len > 0 && cReq.prev_tx_id != nil {
-				setPreviousTxIdOnReadWrite(rw, C.GoBytes(unsafe.Pointer(cReq.prev_tx_id), cReq.prev_tx_id_len))
-			}
-			req.Transaction = &spannerpb.TransactionSelector{
-				Selector: &spannerpb.TransactionSelector_Begin{
-					Begin: &spannerpb.TransactionOptions{
-						Mode: &spannerpb.TransactionOptions_ReadWrite_{
-							ReadWrite: rw,
+			req.Seqno = int64(cReq.seqno)
+			if cReq.tx_id_len > 0 && cReq.tx_id != nil {
+				req.Transaction = &spannerpb.TransactionSelector{
+					Selector: &spannerpb.TransactionSelector_Id{
+						Id: C.GoBytes(unsafe.Pointer(cReq.tx_id), cReq.tx_id_len),
+					},
+				}
+			} else if cReq.begin_rw != 0 {
+				rw := &spannerpb.TransactionOptions_ReadWrite{}
+				if cReq.prev_tx_id_len > 0 && cReq.prev_tx_id != nil {
+					setPreviousTxIdOnReadWrite(rw, C.GoBytes(unsafe.Pointer(cReq.prev_tx_id), cReq.prev_tx_id_len))
+				}
+				req.Transaction = &spannerpb.TransactionSelector{
+					Selector: &spannerpb.TransactionSelector_Begin{
+						Begin: &spannerpb.TransactionOptions{
+							Mode: &spannerpb.TransactionOptions_ReadWrite_{
+								ReadWrite: rw,
+							},
 						},
 					},
-				},
+				}
+			}
+			var txTag, reqTag string
+			if cReq.transaction_tag != nil {
+				txTag = C.GoString(cReq.transaction_tag)
+			}
+			if cReq.request_tag != nil {
+				reqTag = C.GoString(cReq.request_tag)
+			}
+			if txTag != "" || reqTag != "" {
+				req.RequestOptions = &spannerpb.RequestOptions{
+					TransactionTag: txTag,
+					RequestTag:     reqTag,
+				}
 			}
 		}
-		var txTag, reqTag string
-		if cReq.transaction_tag != nil {
-			txTag = C.GoString(cReq.transaction_tag)
-		}
-		if cReq.request_tag != nil {
-			reqTag = C.GoString(cReq.request_tag)
-		}
-		if txTag != "" || reqTag != "" {
-			req.RequestOptions = &spannerpb.RequestOptions{
-				TransactionTag: txTag,
-				RequestTag:     reqTag,
-			}
-		}
-	}
 
-	stmtCount := int(cReq.stmt_count)
-	statements := make([]*spannerpb.ExecuteBatchDmlRequest_Statement, stmtCount)
-	if stmtCount > 0 && cReq.statements != nil {
-		stmtSlice := (*[1 << 28]C.CSpannerStatement)(unsafe.Pointer(cReq.statements))[:stmtCount:stmtCount]
-		for i := 0; i < stmtCount; i++ {
-			cStmt := &stmtSlice[i]
-			var sqlStr string
-			if cStmt.sql != nil {
-				sqlStr = C.GoString(cStmt.sql)
-			}
-			params, paramTypes := buildStatementParams(cStmt)
-			statements[i] = &spannerpb.ExecuteBatchDmlRequest_Statement{
-				Sql:        sqlStr,
-				Params:     params,
-				ParamTypes: paramTypes,
+		stmtCount := int(cReq.stmt_count)
+		statements := make([]*spannerpb.ExecuteBatchDmlRequest_Statement, stmtCount)
+		if stmtCount > 0 && cReq.statements != nil {
+			stmtSlice := (*[1 << 28]C.CSpannerStatement)(unsafe.Pointer(cReq.statements))[:stmtCount:stmtCount]
+			for i := 0; i < stmtCount; i++ {
+				cStmt := &stmtSlice[i]
+				var sqlStr string
+				if cStmt.sql != nil {
+					sqlStr = C.GoString(cStmt.sql)
+				}
+				params, paramTypes := buildStatementParams(cStmt)
+				statements[i] = &spannerpb.ExecuteBatchDmlRequest_Statement{
+					Sql:        sqlStr,
+					Params:     params,
+					ParamTypes: paramTypes,
+				}
 			}
 		}
-	}
-	req.Statements = statements
+		req.Statements = statements
 
-	go func() {
 		token, err := client.GetToken()
 		if err != nil {
 			sendUnaryResponse(cb, userData, nil, nil, status.Errorf(codes.Unauthenticated, "Failed to get GCP auth token: %v", err), nil)
 			return
 		}
-		if token != nil && token.AccessToken != "" {
-			metaMap["authorization"] = "Bearer " + token.AccessToken
-		}
-		ctx := metadata.NewOutgoingContext(client.ctx, metadata.New(metaMap))
+		md := extractMetadataMD(cReq.meta_keys, cReq.meta_vals, cReq.meta_count, true, token)
+		ctx := metadata.NewOutgoingContext(client.ctx, md)
 
 		resp, trailerMD, rpcErr := client.ExecuteBatchDml(ctx, routingKey, &req)
 		if rpcErr != nil {
@@ -1223,84 +1251,81 @@ func ExecuteSqlDmlNativeGo(
 	cb C.UnaryCallback,
 	userData unsafe.Pointer,
 ) {
-	client := getClient(uintptr(handle))
-	if client == nil {
-		sendUnaryResponse(cb, userData, nil, nil, status.Error(codes.InvalidArgument, "Invalid or closed CoreClient handle"), nil)
-		return
-	}
-
-	var routingKey string
-	if cReq.routing_key != nil {
-		routingKey = C.GoString(cReq.routing_key)
-	}
-	metaMap := extractMetadataMap(cReq.meta_keys, cReq.meta_vals, cReq.meta_count, true)
-
-	var req spannerpb.ExecuteSqlRequest
-	if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
-		baseBytes := C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
-		_ = proto.Unmarshal(baseBytes, &req)
-	} else {
-		if cReq.session != nil {
-			req.Session = C.GoString(cReq.session)
+	go func() {
+		client := getClient(uintptr(handle))
+		if client == nil {
+			sendUnaryResponse(cb, userData, nil, nil, status.Error(codes.InvalidArgument, "Invalid or closed CoreClient handle"), nil)
+			return
 		}
-		req.Seqno = int64(cReq.seqno)
-		if cReq.tx_id_len > 0 && cReq.tx_id != nil {
-			req.Transaction = &spannerpb.TransactionSelector{
-				Selector: &spannerpb.TransactionSelector_Id{
-					Id: C.GoBytes(unsafe.Pointer(cReq.tx_id), cReq.tx_id_len),
-				},
+
+		var routingKey string
+		if cReq.routing_key != nil {
+			routingKey = C.GoString(cReq.routing_key)
+		}
+
+		var req spannerpb.ExecuteSqlRequest
+		if cReq.base_req_len > 0 && cReq.base_req_pb != nil {
+			baseBytes := C.GoBytes(unsafe.Pointer(cReq.base_req_pb), cReq.base_req_len)
+			_ = proto.Unmarshal(baseBytes, &req)
+		} else {
+			if cReq.session != nil {
+				req.Session = C.GoString(cReq.session)
 			}
-		} else if cReq.begin_rw != 0 {
-			rw := &spannerpb.TransactionOptions_ReadWrite{}
-			if cReq.prev_tx_id_len > 0 && cReq.prev_tx_id != nil {
-				setPreviousTxIdOnReadWrite(rw, C.GoBytes(unsafe.Pointer(cReq.prev_tx_id), cReq.prev_tx_id_len))
-			}
-			req.Transaction = &spannerpb.TransactionSelector{
-				Selector: &spannerpb.TransactionSelector_Begin{
-					Begin: &spannerpb.TransactionOptions{
-						Mode: &spannerpb.TransactionOptions_ReadWrite_{
-							ReadWrite: rw,
+			req.Seqno = int64(cReq.seqno)
+			if cReq.tx_id_len > 0 && cReq.tx_id != nil {
+				req.Transaction = &spannerpb.TransactionSelector{
+					Selector: &spannerpb.TransactionSelector_Id{
+						Id: C.GoBytes(unsafe.Pointer(cReq.tx_id), cReq.tx_id_len),
+					},
+				}
+			} else if cReq.begin_rw != 0 {
+				rw := &spannerpb.TransactionOptions_ReadWrite{}
+				if cReq.prev_tx_id_len > 0 && cReq.prev_tx_id != nil {
+					setPreviousTxIdOnReadWrite(rw, C.GoBytes(unsafe.Pointer(cReq.prev_tx_id), cReq.prev_tx_id_len))
+				}
+				req.Transaction = &spannerpb.TransactionSelector{
+					Selector: &spannerpb.TransactionSelector_Begin{
+						Begin: &spannerpb.TransactionOptions{
+							Mode: &spannerpb.TransactionOptions_ReadWrite_{
+								ReadWrite: rw,
+							},
 						},
 					},
-				},
+				}
+			}
+			var txTag, reqTag string
+			if cReq.transaction_tag != nil {
+				txTag = C.GoString(cReq.transaction_tag)
+			}
+			if cReq.request_tag != nil {
+				reqTag = C.GoString(cReq.request_tag)
+			}
+			if txTag != "" || reqTag != "" {
+				req.RequestOptions = &spannerpb.RequestOptions{
+					TransactionTag: txTag,
+					RequestTag:     reqTag,
+				}
 			}
 		}
-		var txTag, reqTag string
-		if cReq.transaction_tag != nil {
-			txTag = C.GoString(cReq.transaction_tag)
-		}
-		if cReq.request_tag != nil {
-			reqTag = C.GoString(cReq.request_tag)
-		}
-		if txTag != "" || reqTag != "" {
-			req.RequestOptions = &spannerpb.RequestOptions{
-				TransactionTag: txTag,
-				RequestTag:     reqTag,
+
+		if int(cReq.stmt_count) > 0 && cReq.statements != nil {
+			stmtSlice := (*[1 << 28]C.CSpannerStatement)(unsafe.Pointer(cReq.statements))[:1:1]
+			cStmt := &stmtSlice[0]
+			if cStmt.sql != nil {
+				req.Sql = C.GoString(cStmt.sql)
 			}
+			params, paramTypes := buildStatementParams(cStmt)
+			req.Params = params
+			req.ParamTypes = paramTypes
 		}
-	}
 
-	if int(cReq.stmt_count) > 0 && cReq.statements != nil {
-		stmtSlice := (*[1 << 28]C.CSpannerStatement)(unsafe.Pointer(cReq.statements))[:1:1]
-		cStmt := &stmtSlice[0]
-		if cStmt.sql != nil {
-			req.Sql = C.GoString(cStmt.sql)
-		}
-		params, paramTypes := buildStatementParams(cStmt)
-		req.Params = params
-		req.ParamTypes = paramTypes
-	}
-
-	go func() {
 		token, err := client.GetToken()
 		if err != nil {
 			sendUnaryResponse(cb, userData, nil, nil, status.Errorf(codes.Unauthenticated, "Failed to get GCP auth token: %v", err), nil)
 			return
 		}
-		if token != nil && token.AccessToken != "" {
-			metaMap["authorization"] = "Bearer " + token.AccessToken
-		}
-		ctx := metadata.NewOutgoingContext(client.ctx, metadata.New(metaMap))
+		md := extractMetadataMD(cReq.meta_keys, cReq.meta_vals, cReq.meta_count, true, token)
+		ctx := metadata.NewOutgoingContext(client.ctx, md)
 
 		resp, trailerMD, rpcErr := client.ExecuteSql(ctx, routingKey, &req)
 		if rpcErr != nil {
@@ -1338,33 +1363,30 @@ func BeginTransactionNativeGo(
 	cb C.UnaryCallback,
 	userData unsafe.Pointer,
 ) {
-	client := getClient(uintptr(handle))
-	if client == nil {
-		sendUnaryResponse(cb, userData, nil, nil, status.Error(codes.InvalidArgument, "Invalid or closed CoreClient handle"), nil)
-		return
-	}
-
-	var rk string
-	if routingKey != nil {
-		rk = C.GoString(routingKey)
-	}
-	metaMap := extractMetadataMap(metaKeys, metaVals, metaCount, true)
-
-	var rawBytes []byte
-	if reqLen > 0 && reqBytesPtr != nil {
-		rawBytes = C.GoBytes(unsafe.Pointer(reqBytesPtr), reqLen)
-	}
-
 	go func() {
+		client := getClient(uintptr(handle))
+		if client == nil {
+			sendUnaryResponse(cb, userData, nil, nil, status.Error(codes.InvalidArgument, "Invalid or closed CoreClient handle"), nil)
+			return
+		}
+
+		var rk string
+		if routingKey != nil {
+			rk = C.GoString(routingKey)
+		}
+
+		var rawBytes []byte
+		if reqLen > 0 && reqBytesPtr != nil {
+			rawBytes = C.GoBytes(unsafe.Pointer(reqBytesPtr), reqLen)
+		}
+
 		token, err := client.GetToken()
 		if err != nil {
 			sendUnaryResponse(cb, userData, nil, nil, status.Errorf(codes.Unauthenticated, "Failed to get GCP auth token: %v", err), nil)
 			return
 		}
-		if token != nil && token.AccessToken != "" {
-			metaMap["authorization"] = "Bearer " + token.AccessToken
-		}
-		ctx := metadata.NewOutgoingContext(client.ctx, metadata.New(metaMap))
+		md := extractMetadataMD(metaKeys, metaVals, metaCount, true, token)
+		ctx := metadata.NewOutgoingContext(client.ctx, md)
 
 		respBytes, trailerMD, rpcErr := client.InvokeRaw(ctx, rk, "/google.spanner.v1.Spanner/BeginTransaction", rawBytes)
 		if rpcErr != nil {

@@ -80,7 +80,7 @@ else
     fi
     
     echo "Compiling spanner_go.node using ${CXX_COMPILER}..."
-    $CXX_COMPILER -O3 -std=c++17 -shared -fPIC \
+    $CXX_COMPILER -O3 -std=c++17 -pthread -shared -fPIC \
         -DNODE_GYP_MODULE_NAME=spanner_go \
         -I"$NODE_INCLUDE" -I"$SCRIPT_DIR" \
         "$PARENT_DIR/spanner_go_napi.cc" \
