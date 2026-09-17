@@ -58,7 +58,7 @@ export interface ServiceAccount {
 export type GetServiceAccountResponse = [ServiceAccount, unknown];
 export interface GetServiceAccountCallback {
   (
-    err: GaxiosError | null,
+    err: Error | null,
     serviceAccount?: ServiceAccount,
     apiResponse?: unknown,
   ): void;

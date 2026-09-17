@@ -505,7 +505,9 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     if (callback) {
       this.storageTransport
         .makeRequest<K>(req, (err, data, resp) => {
-          this.metadata = data!;
+          if (!err && data) {
+            this.metadata = data;
+          }
           callback(err, data!, resp);
         })
         .catch(err => callback!(err));
