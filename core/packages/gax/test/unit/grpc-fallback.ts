@@ -933,6 +933,39 @@ describe('grpc-fallback', () => {
       );
     });
 
+    it('should settle a cancelled unary call as CANCELLED', async () => {
+      rejectDuringBodyRead(gaxGrpc);
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const settled = new Promise<Error | undefined>(resolve => {
+        const call = echoStub.echo({content: 'test'}, {}, {}, (err?: Error) =>
+          resolve(err),
+        );
+        (call as {cancel: () => void}).cancel();
+      });
+
+      const timedOut = Symbol('timed out');
+      const result = await Promise.race([
+        settled,
+        new Promise(resolve => setTimeout(() => resolve(timedOut), 100)),
+      ]);
+
+      // A unary call has to be settled even when the caller is the one who
+      // ended it. `OngoingCall.cancel()` only invokes the canceller once one is
+      // registered; nothing else resolves the promise, so a transport that
+      // stays silent here leaves `OngoingCallPromise.promise` — and the
+      // OpenTelemetry span the traced callback ends — pending forever. This
+      // handler used to skip the callback entirely for a cancelled call.
+      assert.notStrictEqual(
+        result,
+        timedOut,
+        'cancelling a unary call left it unsettled',
+      );
+      assert(result instanceof GoogleError);
+      // The same status `OngoingCall.cancel()` reports when it has no canceller
+      // to defer to, so both paths look identical to the caller.
+      assert.strictEqual(result.code, Status.CANCELLED);
+    });
   });
 
   describe('transport error translation', () => {

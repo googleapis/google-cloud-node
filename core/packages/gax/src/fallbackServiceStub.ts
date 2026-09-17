@@ -397,6 +397,7 @@ export function generateServiceStub(
               .then(([ok, buffer]: [boolean, Buffer | ArrayBuffer]) => {
                 const response = responseDecoder(rpc, ok, buffer);
                 callback!(null, response);
+                return;
               })
               .catch((err: Error) => {
                 // The deadline can expire after the response headers arrive but
@@ -408,37 +409,54 @@ export function generateServiceStub(
                   rpcName,
                   timeoutMs,
                 });
-                // A caller that cancelled does not need the resulting abort
-                // reported back to it, but a deadline always does. This used to
-                // test `err.name !== 'AbortError'`; gaxios wraps node-fetch's
-                // AbortError and never sets its own `name`, leaving the
-                // inherited 'Error', so the check never matched and cancelled
-                // calls still reported an error. Use the state we recorded.
-                if (timedOut || !cancelRequested) {
-                  if (rpc.responseStream) {
+                if (rpc.responseStream) {
+                  // A caller that cancelled a stream has already torn it down
+                  // and stopped listening, so reporting the resulting abort
+                  // would surface as an unhandled 'error' event. A deadline is
+                  // always reported, because nobody asked for it.
+                  //
+                  // This used to test `err.name !== 'AbortError'`; gaxios wraps
+                  // node-fetch's AbortError and never sets its own `name`,
+                  // leaving the inherited 'Error', so the check never matched
+                  // and cancelled streams reported an error anyway. Use the
+                  // state we recorded.
+                  if (timedOut || !cancelRequested) {
                     if (callback) {
                       callback(callErr);
                     }
                     streamArrayParser.emit('error', callErr);
-                  } else {
-                    // This supports a legacy Apiary behavior that allows
-                    // empty 204 responses. If we do not intercept this potential error
-                    // from decodeResponse in fallbackRest
-                    // it will cause libraries to erroneously throw an
-                    // error when the call succeeded. This error cannot be checked in
-                    // fallbackRest.ts because decodeResponse does not have the necessary
-                    // context about the response to validate the status code + ok-ness
-                    if (!response204Ok) {
-                      // by this point, we're guaranteed to have added a callback
-                      // it is added in the library before calling this.innerApiCalls
-                      callback!(callErr);
-                    } else {
-                      const resp = _formatEmptyResponse(rpc);
-                      // by this point, we're guaranteed to have added a callback
-                      // it is added in the library before calling this.innerApiCalls
-                      callback!(null, resp);
-                    }
                   }
+                  return;
+                }
+
+                // A unary call must always be settled, a cancellation included.
+                // Once a canceller is registered, `OngoingCall.cancel()` only
+                // invokes it and reports nothing itself (see `call.ts`); it is
+                // the transport calling back that rejects
+                // `OngoingCallPromise.promise` and runs the traced callback
+                // that ends the OpenTelemetry span. Staying silent here would
+                // leave both outstanding for the lifetime of the process.
+                //
+                // `_toGoogleError` has already mapped a cancellation that beat
+                // the deadline to CANCELLED, which is the status
+                // `OngoingCall.cancel()` reports when no canceller is set.
+                //
+                // This supports a legacy Apiary behavior that allows
+                // empty 204 responses. If we do not intercept this potential error
+                // from decodeResponse in fallbackRest
+                // it will cause libraries to erroneously throw an
+                // error when the call succeeded. This error cannot be checked in
+                // fallbackRest.ts because decodeResponse does not have the necessary
+                // context about the response to validate the status code + ok-ness
+                if (!response204Ok) {
+                  // by this point, we're guaranteed to have added a callback
+                  // it is added in the library before calling this.innerApiCalls
+                  callback!(callErr);
+                } else {
+                  const resp = _formatEmptyResponse(rpc);
+                  // by this point, we're guaranteed to have added a callback
+                  // it is added in the library before calling this.innerApiCalls
+                  callback!(null, resp);
                 }
               });
           }
