@@ -518,15 +518,13 @@ export class LocationsClient {
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
-  close(): Promise<void> {
+  async close(): Promise<void> {
     this.initialize().catch(console.error);
     if (!this._terminated) {
-      return this.locationsStub!.then(stub => {
-        this._terminated = true;
-        stub.close();
-      });
+      const stub = await this.locationsStub!;
+      this._terminated = true;
+      stub.close();
     }
-    return Promise.resolve();
   }
 }
 

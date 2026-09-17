@@ -164,10 +164,13 @@ export class PagedApiCaller implements APICaller {
     const maxResults = settings.maxResults || -1;
 
     const resourceCollector = new ResourceCollector(apiCall, maxResults);
-    resourceCollector.processAllPages(request).then(
-      resources => ongoingCall.callback(null, resources),
-      err => ongoingCall.callback(err),
-    );
+    resourceCollector
+      .processAllPages(request)
+      .then(resources => {
+        ongoingCall.callback(null, resources);
+        return null;
+      })
+      .catch(err => ongoingCall.callback(err));
   }
 
   fail(ongoingCall: OngoingCallPromise, err: GoogleError): void {

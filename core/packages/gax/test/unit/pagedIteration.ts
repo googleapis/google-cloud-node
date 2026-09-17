@@ -80,6 +80,7 @@ describe('paged iteration', () => {
         );
         warnStub.restore();
         done();
+        return null;
       })
       .catch(done);
   });
@@ -94,6 +95,7 @@ describe('paged iteration', () => {
         assert.ok(Array.isArray(results));
         assert.deepStrictEqual(results[0], expected);
         done();
+        return null;
       })
       .catch(done);
   });
@@ -146,6 +148,7 @@ describe('paged iteration', () => {
           expected++;
         }
         done();
+        return null;
       })
       .catch(done);
   });
@@ -209,6 +212,7 @@ describe('paged iteration', () => {
         // @ts-ignore response type
         assert.strictEqual(resources[0].length, pageSize * pagesToStream);
         done();
+        return null;
       })
       .catch(done);
   });
@@ -229,6 +233,7 @@ describe('paged iteration', () => {
         expected++;
       }
       assert.strictEqual(spy.callCount, 3);
+      return null;
     });
   });
 

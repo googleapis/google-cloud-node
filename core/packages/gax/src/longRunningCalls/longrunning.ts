@@ -200,7 +200,7 @@ export class Operation extends EventEmitter {
           callback(err);
           return;
         }
-        return Promise.reject(err);
+        throw err;
       },
     );
 

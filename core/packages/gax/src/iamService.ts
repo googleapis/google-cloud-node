@@ -381,15 +381,13 @@ export class IamClient {
    *
    * The client will no longer be usable and all future behavior is undefined.
    */
-  close(): Promise<void> {
+  async close(): Promise<void> {
     this.initialize().catch(console.error);
     if (!this._terminated) {
-      return this.iamPolicyStub!.then(stub => {
-        this._terminated = true;
-        stub.close();
-      });
+      const stub = await this.iamPolicyStub!;
+      this._terminated = true;
+      stub.close();
     }
-    return Promise.resolve();
   }
 }
 export interface IamClient {
