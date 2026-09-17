@@ -294,7 +294,7 @@ describe('Test metrics with mock server', () => {
           attributes,
         );
         // Since we only have one attempt, the attempt latency should be fairly close to the operation latency
-        assertApprox(operationLatency, attemptLatency, 100);
+        assertApprox(operationLatency, attemptLatency, 30);
 
         const gfeLatency = getAggregatedValue(gfeLatenciesData, attributes);
         assert.strictEqual(gfeLatency, 123);
@@ -719,7 +719,7 @@ describe('Test metrics with mock server', () => {
           attributes,
         );
         // Since we only have one attempt, the attempt latency should be fairly close to the operation latency
-        assertApprox(operationLatency, attemptLatency, 100);
+        assertApprox(operationLatency, attemptLatency, 30);
 
         const gfeLatency = getAggregatedValue(gfeLatenciesData, attributes);
         assert.strictEqual(gfeLatency, 123);
