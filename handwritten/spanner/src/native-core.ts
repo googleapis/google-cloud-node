@@ -1093,6 +1093,43 @@ function attachRetryMetadata(
   }
 }
 
+function normalizeTypeProto(typeObj: any): any {
+  if (!typeObj || typeof typeObj !== 'object') {
+    return typeObj;
+  }
+  const copy = Object.assign({}, typeObj);
+  if (typeof copy.code === 'string') {
+    copy.code =
+      (protos.google.spanner.v1.TypeCode as unknown as Record<string, number>)[
+        copy.code
+      ] || 0;
+  }
+  if (typeof copy.typeAnnotation === 'string') {
+    copy.typeAnnotation =
+      (
+        protos.google.spanner.v1.TypeAnnotationCode as unknown as Record<
+          string,
+          number
+        >
+      )[copy.typeAnnotation] || 0;
+  }
+  if (copy.arrayElementType) {
+    copy.arrayElementType = normalizeTypeProto(copy.arrayElementType);
+  }
+  if (copy.structType && Array.isArray(copy.structType.fields)) {
+    copy.structType = {
+      fields: copy.structType.fields.map(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (f: any) => ({
+          name: f.name,
+          type: normalizeTypeProto(f.type),
+        }),
+      ),
+    };
+  }
+  return copy;
+}
+
 function prepareNativeStatements(queries: Array<string | any>): Array<{
   sql: string;
   paramNames: string[];
@@ -1133,7 +1170,9 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
       paramValues[i] = val;
 
       if (explicitTypes && explicitTypes[name]) {
-        const typeObj = codec.createTypeObject(explicitTypes[name]);
+        const typeObj = normalizeTypeProto(
+          codec.createTypeObject(explicitTypes[name]),
+        );
         paramTypesPb[i] = protos.google.spanner.v1.Type.encode(typeObj).finish();
       } else if (
         val === null ||
@@ -1151,7 +1190,7 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
           !(val instanceof codec.Interval))
       ) {
         const t = codec.getType(val as Value);
-        const typeObj = codec.createTypeObject(t);
+        const typeObj = normalizeTypeProto(codec.createTypeObject(t));
         paramTypesPb[i] = protos.google.spanner.v1.Type.encode(typeObj).finish();
       } else {
         paramTypesPb[i] = null;
@@ -1528,6 +1567,15 @@ export function executeNativeTransactionRun(
 
   const sessionName: string = transaction.session.formattedName_!;
   const routingKey: string = transaction._affinityKey || sessionName;
+  if (formattedRequest.paramTypes) {
+    const normalizedParamTypes: Record<string, unknown> = {};
+    for (const k of Object.keys(formattedRequest.paramTypes)) {
+      normalizedParamTypes[k] = normalizeTypeProto(formattedRequest.paramTypes[k]);
+    }
+    formattedRequest = Object.assign({}, formattedRequest, {
+      paramTypes: normalizedParamTypes,
+    });
+  }
   const requestBytes =
     protos.google.spanner.v1.ExecuteSqlRequest.encode(formattedRequest).finish();
   const metadata = headersToMetadataArray(sessionName, headersObj);
