@@ -85,6 +85,30 @@ function _formatEmptyResponse(rpc: protobuf.Method) {
 }
 
 /**
+ * State recorded by the caller about how a request ended.
+ *
+ * Passed in rather than inferred from the error, because the error carries no
+ * usable evidence of it. Measured against a server that accepts a connection
+ * and never replies: node-fetch discards `signal.reason` and throws its own
+ * AbortError, gaxios wraps that in a GaxiosError which never sets `name` (so it
+ * stays the inherited 'Error') and only copies `code` from a DOMException
+ * cause, which this is not. A cancel and an expired deadline therefore arrive
+ * here byte-identical — `name: 'Error'`, `code: undefined`, `cause.name:
+ * 'AbortError'` for both. Only the caller, which armed the timer, knows which
+ * one happened.
+ */
+interface CallOutcome {
+  /** Whether the deadline armed for this call fired. */
+  timedOut: boolean;
+  /** Whether the caller invoked `cancel()`. */
+  cancelRequested: boolean;
+  /** Method name, for the deadline message. */
+  rpcName: string;
+  /** The deadline that was armed, for the deadline message. */
+  timeoutMs?: number;
+}
+
+/**
  * Translates an error thrown by the underlying fetch implementation into a
  * {@link GoogleError} carrying a numeric gRPC status code.
  *
@@ -100,10 +124,11 @@ function _formatEmptyResponse(rpc: protobuf.Method) {
  * deadline (DEADLINE_EXCEEDED).
  *
  * @param err The error thrown by `auth.fetch()`.
+ * @param outcome What the caller recorded about how the call ended.
  * @returns A GoogleError with a numeric `code`, or the original value if it is
  *   not an Error.
  */
-function _toGoogleError(err: unknown): unknown {
+function _toGoogleError(err: unknown, outcome: CallOutcome): unknown {
   if (err instanceof GoogleError) {
     return err;
   }
@@ -123,7 +148,8 @@ function _toGoogleError(err: unknown): unknown {
   }>;
 
   // Errors that carry an HTTP status map through the standard HTTP-to-gRPC
-  // table.
+  // table. Checked first: a response arrived, so it outranks the abort
+  // bookkeeping below.
   const httpStatus =
     typeof fetchError.status === 'number'
       ? fetchError.status
@@ -134,11 +160,28 @@ function _toGoogleError(err: unknown): unknown {
   }
 
   // An explicit cancellation and an elapsed deadline are distinct conditions in
-  // gRPC, so they are separated out before the general case below. Native fetch
-  // reports both as a DOMException, where `code` is a numeric DOMException
-  // value (20 and 23) rather than a string, so match on `name` as the rest of
-  // this file does when it detects cancellation. A string `code` is also
-  // accepted, because gaxios normalizes a DOMException's name onto `code`.
+  // gRPC. They are resolved from the state the caller recorded, because — as
+  // described on `CallOutcome` — the error itself cannot distinguish them on
+  // the node-fetch path gaxios currently takes.
+  if (outcome.timedOut) {
+    const timedOutError = new GoogleError(
+      `Deadline exceeded: ${outcome.rpcName} did not respond within ${outcome.timeoutMs} milliseconds.`,
+      {cause: err},
+    );
+    timedOutError.code = Status.DEADLINE_EXCEEDED;
+    return timedOutError;
+  }
+  if (outcome.cancelRequested) {
+    error.code = Status.CANCELLED;
+    return error;
+  }
+
+  // Retained for the case the recorded state does not cover: a future gaxios on
+  // native fetch reports both conditions as a DOMException, where `code` is a
+  // numeric DOMException value (20 and 23) rather than a string, so match on
+  // `name` as the rest of this file does when it detects cancellation. A string
+  // `code` is also accepted, because gaxios normalizes a DOMException's name
+  // onto `code`.
   if (err.name === 'AbortError' || fetchError.code === 'AbortError') {
     error.code = Status.CANCELLED;
     return error;
@@ -189,13 +232,38 @@ export function generateServiceStub(
     },
   };
   for (const [rpcName, rpc] of Object.entries(rpcs)) {
+    // Named for what gax actually passes, which is its `UnaryCall` order:
+    // (request, metadata, options, callback). `FallbackServiceStub` declares
+    // the middle two the other way round, so the third argument — the one gRPC
+    // calls `options`, carrying the deadline — reads as metadata there and was
+    // long ignored as such.
     serviceStub[rpcName] = (
       request: {},
-      options?: {[name: string]: string},
-      _metadata?: {} | Function,
+      metadata?: {[name: string]: string},
+      callOptions?: {deadline?: Date},
       callback?: Function,
     ) => {
-      options ??= {};
+      metadata ??= {};
+
+      // `addTimeoutArg` sets a deadline on every call and `CallSettings.timeout`
+      // defaults to 30s, so one is essentially always present. gRPC enforces its
+      // own deadline, but nothing here ever read this one, so an endpoint that
+      // accepted the connection and then went quiet left the request — and the
+      // promise or callback waiting on it — outstanding forever. Convert it to
+      // the remaining duration and arm an abort signal with it below.
+      //
+      // Server-streaming RPCs are deliberately excluded. Their response is
+      // long-lived by design and the signal stays armed once the body starts
+      // flowing, so forwarding the deadline would abort a healthy stream
+      // mid-read. Bounding those is a separate, user-visible change.
+      let timeoutMs: number | undefined;
+      if (callOptions?.deadline && !rpc.responseStream) {
+        // `AbortSignal.timeout` rejects a negative delay with a RangeError, so
+        // an already-expired deadline is clamped. Zero is a fine value here: it
+        // aborts on the next tick, which is the right answer for a deadline
+        // that has already passed.
+        timeoutMs = Math.max(0, callOptions.deadline.getTime() - Date.now());
+      }
 
       // We cannot use async-await in this function because we need to return the canceller object as soon as possible.
       // Using plain old promises instead.
@@ -225,10 +293,26 @@ export function generateServiceStub(
       const cancelController = new AbortController();
       const cancelSignal = cancelController.signal as AbortSignal;
       let cancelRequested = false;
+
+      // Arm the deadline here rather than handing `timeout` to gaxios, which
+      // would build the identical `AbortSignal.timeout` internally. The
+      // difference is bookkeeping: both a deadline expiry and a `cancel()`
+      // abort the same request and surface the same error, so unless we record
+      // which one fired, the handlers below cannot tell them apart.
+      let timedOut = false;
+      let requestSignal = cancelSignal;
+      if (timeoutMs !== undefined) {
+        const timeoutSignal = AbortSignal.timeout(timeoutMs);
+        timeoutSignal.addEventListener('abort', () => (timedOut = true), {
+          once: true,
+        });
+        requestSignal = AbortSignal.any([cancelSignal, timeoutSignal]);
+      }
+
       const url = fetchParameters.url;
       const headers = new Headers(fetchParameters.headers);
-      for (const key of Object.keys(options)) {
-        headers.set(key, options[key][0]);
+      for (const key of Object.keys(metadata)) {
+        headers.set(key, metadata[key][0]);
       }
       const streamArrayParser = new StreamArrayParser(rpc);
       let response204Ok = false;
@@ -239,11 +323,16 @@ export function generateServiceStub(
             ? fetchParameters.body
             : Buffer.from(fetchParameters.body),
         method: fetchParameters.method,
-        signal: cancelSignal,
+        signal: requestSignal,
         responseType: 'stream', // ensure gaxios returns the data directly so that it handle data/streams itself
         // Error responses must resolve so that they are decoded below into a
         // GoogleError carrying a gRPC status code. 401 and 403 keep rejecting
         // so that the auth client can refresh credentials and retry.
+        //
+        // Those two therefore never reach the decoder: they are mapped from the
+        // HTTP status alone, so an ErrorInfo or statusDetails payload in a 401
+        // or 403 body is not promoted onto the error the way it is for every
+        // other failing status.
         validateStatus: (status: number) => status !== 401 && status !== 403,
         agent: agentOption || undefined,
       };
@@ -296,12 +385,27 @@ export function generateServiceStub(
                 callback!(null, response);
               })
               .catch((err: Error) => {
-                if (!cancelRequested || err.name !== 'AbortError') {
+                // The deadline can expire after the response headers arrive but
+                // before the body is fully read, which rejects here rather than
+                // in the outer handler.
+                const callErr = _toGoogleError(err, {
+                  timedOut,
+                  cancelRequested,
+                  rpcName,
+                  timeoutMs,
+                });
+                // A caller that cancelled does not need the resulting abort
+                // reported back to it, but a deadline always does. This used to
+                // test `err.name !== 'AbortError'`; gaxios wraps node-fetch's
+                // AbortError and never sets its own `name`, leaving the
+                // inherited 'Error', so the check never matched and cancelled
+                // calls still reported an error. Use the state we recorded.
+                if (timedOut || !cancelRequested) {
                   if (rpc.responseStream) {
                     if (callback) {
-                      callback(err);
+                      callback(callErr);
                     }
-                    streamArrayParser.emit('error', err);
+                    streamArrayParser.emit('error', callErr);
                   } else {
                     // This supports a legacy Apiary behavior that allows
                     // empty 204 responses. If we do not intercept this potential error
@@ -313,7 +417,7 @@ export function generateServiceStub(
                     if (!response204Ok) {
                       // by this point, we're guaranteed to have added a callback
                       // it is added in the library before calling this.innerApiCalls
-                      callback!(err);
+                      callback!(callErr);
                     } else {
                       const resp = _formatEmptyResponse(rpc);
                       // by this point, we're guaranteed to have added a callback
@@ -325,17 +429,25 @@ export function generateServiceStub(
               });
           }
         })
-        .catch((err: unknown) => {
-          const translated = _toGoogleError(err);
+        .catch((rawErr: unknown) => {
+          // The usual failure path: the request rejected before any response
+          // was received — an expired deadline, a cancellation, or a transport
+          // error — so it is translated to a gRPC status here.
+          const err = _toGoogleError(rawErr, {
+            timedOut,
+            cancelRequested,
+            rpcName,
+            timeoutMs,
+          });
           if (rpc.responseStream) {
             if (callback) {
-              callback(translated);
+              callback(err);
             }
-            streamArrayParser.emit('error', translated);
+            streamArrayParser.emit('error', err);
           } else if (callback) {
-            callback(translated);
+            callback(err);
           } else {
-            throw translated;
+            throw err;
           }
         });
 
