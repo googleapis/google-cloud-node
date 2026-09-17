@@ -534,7 +534,7 @@ class Spanner extends GrpcService {
     if (!this.clients_.has(clientName)) {
       this.clients_.set(
         clientName,
-        new v1[clientName](this.options as ClientOptions),
+        new v1.InstanceAdminClient(this.options as ClientOptions),
       );
     }
     return this.clients_.get(clientName)! as v1.InstanceAdminClient;
@@ -558,7 +558,7 @@ class Spanner extends GrpcService {
     if (!this.clients_.has(clientName)) {
       this.clients_.set(
         clientName,
-        new v1[clientName](this.options as ClientOptions),
+        new v1.DatabaseAdminClient(this.options as ClientOptions),
       );
     }
     return this.clients_.get(clientName)! as v1.DatabaseAdminClient;
@@ -615,13 +615,12 @@ class Spanner extends GrpcService {
 
     if (callback) {
       // process.nextTick prevents Unhandled Promise Rejections if callback throws
-      res.then(
-        () => process.nextTick(() => callback(null)),
-        err => process.nextTick(() => callback(err)),
-      );
-    } else {
-      return res;
+      res
+        .then(() => process.nextTick(() => callback(null)))
+        .catch(err => process.nextTick(() => callback(err)));
+      return;
     }
+    return res;
   }
 
   /**
@@ -1727,7 +1726,11 @@ class Spanner extends GrpcService {
       const clientName = config.client;
       try {
         if (!this.clients_.has(clientName)) {
-          this.clients_.set(clientName, new v1[clientName](this.options));
+          const v1Clients: {[key: string]: any} = v1;
+          this.clients_.set(
+            clientName,
+            new v1Clients[clientName](this.options),
+          );
         }
       } catch (err) {
         callback(err, null);
@@ -1791,52 +1794,70 @@ class Spanner extends GrpcService {
         }),
       );
 
-      // Wrap requestFn to inject the spanner request id into every returned error.
-      const wrappedRequestFn = (...args) => {
-        const hasCallback =
-          args &&
-          args.length > 0 &&
-          typeof args[args.length - 1] === 'function';
+      // Extract a lightweight config reference containing only headers so error
+      // enrichment is decoupled from the caller's mutable config object.
+      const errorConfig = {headers: config?.headers};
 
-        switch (hasCallback) {
-          case true: {
-            const cb = args[args.length - 1];
-            const priorArgs = args.slice(0, args.length - 1);
-            requestFn(...priorArgs, (...results) => {
-              if (results && results.length > 0) {
-                const err = results[0] as Error;
-                injectRequestIDIntoError(config, err);
+      // Wrap requestFn to inject the Spanner request ID (x-goog-spanner-request-id)
+      // into any error returned via callback, rejected promise, stream event, or
+      // synchronous exception.
+      //
+      // Because reqOpts and gaxOpts are already pre-bound to requestFn, wrappedRequestFn
+      // receives at most one argument: an optional callback.
+      const wrappedRequestFn = (callback?: Function) => {
+        // Callback mode: invoke requestFn with an intercepted callback to enrich
+        // the error parameter before delegating to the caller's callback.
+        if (typeof callback === 'function') {
+          try {
+            requestFn((...results: unknown[]) => {
+              if (results[0]) {
+                injectRequestIDIntoError(errorConfig, results[0] as Error);
               }
-
-              cb(...results);
+              callback(...results);
             });
-            return;
+          } catch (err) {
+            injectRequestIDIntoError(errorConfig, err as Error);
+            throw err;
           }
-
-          case false: {
-            const res = requestFn(...args);
-            const stream = res as EventEmitter;
-            if (stream) {
-              stream.on('error', err => {
-                injectRequestIDIntoError(config, err as Error);
-              });
-            }
-
-            const originallyPromise = res instanceof Promise;
-            if (!originallyPromise) {
-              return res;
-            }
-
-            return new Promise((resolve, reject) => {
-              requestFn(...args)
-                .then(resolve)
-                .catch(err => {
-                  injectRequestIDIntoError(config, err as Error);
-                  reject(err);
-                });
-            });
-          }
+          return;
         }
+
+        // Non-callback mode: invoke requestFn() for Promise or Stream callers.
+        let res;
+        try {
+          res = requestFn();
+        } catch (err) {
+          injectRequestIDIntoError(errorConfig, err as Error);
+          throw err;
+        }
+
+        // Handle Promise / Thenable return values (e.g. unary requests).
+        // Attach a rejection handler to inject the request ID into rejected errors.
+        // If the promise is cancellable (e.g. google-gax CancellablePromise), preserve
+        // its .cancel() method so callers can cancel the underlying operation.
+        if (res && typeof (res as PromiseLike<unknown>).then === 'function') {
+          const chained = (res as PromiseLike<unknown>).then(null, err => {
+            injectRequestIDIntoError(errorConfig, err as Error);
+            throw err;
+          });
+          if (typeof (res as {cancel?: Function}).cancel === 'function') {
+            (chained as {cancel?: Function}).cancel = (
+              res as {cancel: Function}
+            ).cancel.bind(res);
+          }
+          return chained;
+        }
+
+        // Handle Stream return values (e.g. streaming reads or queries).
+        // Listen for 'error' events to enrich the emitted error with the request ID.
+        const stream = res as EventEmitter;
+        if (stream && typeof stream.on === 'function') {
+          stream.on('error', err => {
+            injectRequestIDIntoError(errorConfig, err as Error);
+          });
+        }
+
+        return res;
       };
 
       callback(null, wrappedRequestFn);
@@ -1896,6 +1917,7 @@ class Spanner extends GrpcService {
                 .then(val => {
                   metricsTracer?.recordOperationCompletion();
                   resolve(val);
+                  return val;
                 })
                 .catch(error => {
                   metricsTracer?.recordOperationCompletion();
