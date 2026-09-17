@@ -14,12 +14,16 @@
 
 import {
   MeterProvider,
+  MetricReader,
   PeriodicExportingMetricReader,
+  ResourceMetrics,
 } from '@opentelemetry/sdk-metrics';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
+import {gcpDetector} from '@opentelemetry/resource-detector-gcp';
 import * as Constants from '../../src/metrics/constants';
 import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
+import {transformResourceMetricToTimeSeriesArray} from '../../src/metrics/transform';
 import {CloudMonitoringMetricsExporter} from '../../src/metrics/spanner-metrics-exporter';
 
 describe('MetricsTracerFactory', () => {
@@ -65,6 +69,9 @@ describe('MetricsTracerFactory', () => {
       .returns({add: addGfeConnectivityErrorCountStub});
 
     sandbox.stub(MeterProvider.prototype, 'getMeter').returns(meterStub as any);
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .resolves('global');
 
     // metrics provider and related objects
     mockExporter = sandbox.createStubInstance(CloudMonitoringMetricsExporter);
@@ -196,13 +203,20 @@ describe('MetricsTracerFactory', () => {
 
 describe('getInstanceAttributes', () => {
   let factory: MetricsTracerFactory;
+  let sandbox: sinon.SinonSandbox;
+
   beforeEach(() => {
+    sandbox = sinon.createSandbox();
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .resolves('global');
     factory = new (MetricsTracerFactory as any)();
   });
 
   afterEach(async () => {
     await factory.resetMeterProvider();
     clearInterval(factory['_intervalTracerCleanup']);
+    sandbox.restore();
   });
 
   it('should extract project, instance, and database from full resource path', () => {
@@ -246,9 +260,14 @@ describe('getInstanceAttributes', () => {
 
 describe('MetricsTracerFactory with set clock', () => {
   let clock: sinon.SinonFakeTimers;
+  let sandbox: sinon.SinonSandbox;
 
   beforeEach(async () => {
     MetricsTracerFactory.enabled = true;
+    sandbox = sinon.createSandbox();
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .resolves('global');
     await MetricsTracerFactory.resetInstance();
     // Use fake timers to control the clock
     clock = sinon.useFakeTimers();
@@ -257,6 +276,7 @@ describe('MetricsTracerFactory with set clock', () => {
   afterEach(() => {
     // Restore the real timers
     clock.restore();
+    sandbox.restore();
   });
 
   describe('_cleanMetricTracers', () => {
@@ -309,5 +329,280 @@ describe('MetricsTracerFactory with set clock', () => {
       assert.ok(factory['_currentOperationTracers'].has('1.1a2b3c.1.1.1'));
       assert.ok(factory['_currentOperationTracers'].has('2.1a2b3c.1.1.1'));
     });
+  });
+});
+
+describe('MetricsTracerFactory location detection failures', () => {
+  let sandbox: sinon.SinonSandbox;
+  let warnStub: sinon.SinonStub;
+
+  beforeEach(async () => {
+    sandbox = sinon.createSandbox();
+    warnStub = sandbox.stub(console, 'warn');
+    MetricsTracerFactory.enabled = true;
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  afterEach(async () => {
+    sandbox.restore();
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  it('should not trigger an UnhandledPromiseRejection if _detectClientLocation rejects', async () => {
+    let rejectLocation!: (err: Error) => void;
+    const locationPromise = new Promise<string>((_resolve, reject) => {
+      rejectLocation = reject;
+    });
+
+    let unhandledError: Error | null = null;
+    const onUnhandledRejection = (err: Error) => {
+      unhandledError = err;
+    };
+    process.once('unhandledRejection', onUnhandledRejection);
+
+    try {
+      sandbox
+        .stub(MetricsTracerFactory as any, '_detectClientLocation')
+        .returns(locationPromise);
+
+      const factory = MetricsTracerFactory.getInstance('test-project');
+
+      rejectLocation(new Error('Unexpected detector failure'));
+      await locationPromise.catch(() => {});
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      assert.strictEqual(unhandledError, null);
+      assert.ok(warnStub.calledWith('Unable to detect location.'));
+      assert.strictEqual(factory!['_location'], 'global');
+    } finally {
+      process.removeListener('unhandledRejection', onUnhandledRejection);
+    }
+  });
+});
+
+describe('MetricsTracerFactory._detectClientLocation', () => {
+  let sandbox: sinon.SinonSandbox;
+
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
+  });
+
+  afterEach(() => {
+    sandbox.restore();
+  });
+
+  const stubDetectedAttributes = (attributes: Record<string, string>) => {
+    sandbox.stub(gcpDetector, 'detect').returns({
+      attributes: Object.fromEntries(
+        Object.entries(attributes).map(([key, value]) => [
+          key,
+          Promise.resolve(value),
+        ]),
+      ),
+    } as any);
+  };
+
+  it('should detect client location on a zonal GKE cluster where cloud.availability_zone is set', async () => {
+    stubDetectedAttributes({
+      'cloud.platform': 'gcp_kubernetes_engine',
+      'cloud.availability_zone': 'us-central1-a',
+    });
+
+    const detectedLocation = await (
+      MetricsTracerFactory as any
+    )._detectClientLocation();
+
+    assert.strictEqual(detectedLocation, 'us-central1-a');
+  });
+
+  it('should detect client location on a regional GKE cluster where cloud.region is set', async () => {
+    stubDetectedAttributes({
+      'cloud.platform': 'gcp_kubernetes_engine',
+      'cloud.region': 'us-central1',
+    });
+
+    const detectedLocation = await (
+      MetricsTracerFactory as any
+    )._detectClientLocation();
+
+    assert.strictEqual(detectedLocation, 'us-central1');
+  });
+
+  it('should prefer cloud.region over cloud.availability_zone when both are set', async () => {
+    stubDetectedAttributes({
+      'cloud.platform': 'gcp_compute_engine',
+      'cloud.availability_zone': 'us-central1-a',
+      'cloud.region': 'us-central1',
+    });
+
+    const detectedLocation = await (
+      MetricsTracerFactory as any
+    )._detectClientLocation();
+
+    assert.strictEqual(detectedLocation, 'us-central1');
+  });
+
+  it('should fall back to global when neither attribute is set', async () => {
+    stubDetectedAttributes({});
+
+    const detectedLocation = await (
+      MetricsTracerFactory as any
+    )._detectClientLocation();
+
+    assert.strictEqual(detectedLocation, 'global');
+  });
+});
+
+describe('MetricsTracerFactory exported location', () => {
+  let sandbox: sinon.SinonSandbox;
+
+  beforeEach(async () => {
+    sandbox = sinon.createSandbox();
+    MetricsTracerFactory.enabled = true;
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  afterEach(async () => {
+    sandbox.restore();
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  it('should export the detected GCP location rather than global when _detectClientLocation resolves asynchronously', async () => {
+    let resolveLocation!: (location: string) => void;
+    const locationPromise = new Promise<string>(resolve => {
+      resolveLocation = resolve;
+    });
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .returns(locationPromise);
+
+    const exported: ResourceMetrics[] = [];
+    const capturingExporter = {
+      export: (
+        resourceMetrics: ResourceMetrics,
+        resultCallback: (result: {code: number}) => void,
+      ) => {
+        exported.push(resourceMetrics);
+        resultCallback({code: 0});
+      },
+      forceFlush: async () => {},
+      shutdown: async () => {},
+    };
+    const reader = new PeriodicExportingMetricReader({
+      exporter: capturingExporter as any,
+      exportIntervalMillis: 60000,
+    });
+
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    factory.getMeterProvider([reader]);
+    assert.strictEqual(factory['_location'], 'global');
+
+    const tracer = factory.createMetricsTracer(
+      'some-method',
+      'projects/test-project/instances/inst/databases/db',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    tracer!.recordOperationStart();
+    tracer!.recordOperationCompletion();
+
+    resolveLocation('us-central1');
+    await locationPromise;
+
+    await reader.forceFlush();
+
+    assert.strictEqual(exported.length, 1);
+    const timeSeries = transformResourceMetricToTimeSeriesArray(
+      exported[0],
+      'test-project',
+    );
+    assert.ok(timeSeries.length > 0);
+    assert.strictEqual(timeSeries[0].resource!.labels!.location, 'us-central1');
+
+    await reader.shutdown();
+  });
+});
+
+describe('MetricsTracerFactory getMeterProvider readers', () => {
+  let sandbox: sinon.SinonSandbox;
+  let warnStub: sinon.SinonStub;
+
+  class InMemoryMetricReader extends MetricReader {
+    protected async onForceFlush(): Promise<void> {}
+    protected async onShutdown(): Promise<void> {}
+  }
+
+  const recordOperation = (factory: MetricsTracerFactory) => {
+    const tracer = factory.createMetricsTracer(
+      'some-method',
+      'projects/test-project/instances/inst/databases/db',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    tracer!.recordOperationStart();
+    tracer!.recordOperationCompletion();
+  };
+
+  beforeEach(async () => {
+    sandbox = sinon.createSandbox();
+    warnStub = sandbox.stub(console, 'warn');
+    MetricsTracerFactory.enabled = true;
+    await MetricsTracerFactory.resetInstance();
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .resolves('us-central1');
+  });
+
+  afterEach(async () => {
+    sandbox.restore();
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  it('should bind MetricReader passed to getMeterProvider([reader]) even if getMeterProvider() was called earlier', async () => {
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+
+    const initialMeterProvider = factory.getMeterProvider();
+
+    const reader = new InMemoryMetricReader();
+    const rebuiltMeterProvider = factory.getMeterProvider([reader]);
+
+    assert.notStrictEqual(rebuiltMeterProvider, initialMeterProvider);
+
+    recordOperation(factory);
+
+    const {resourceMetrics} = await reader.collect();
+    assert.ok(resourceMetrics.scopeMetrics.length > 0);
+
+    await reader.shutdown();
+  });
+
+  it('should keep returning the same MeterProvider for calls without readers', () => {
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    const reader = new InMemoryMetricReader();
+
+    const meterProvider = factory.getMeterProvider([reader]);
+
+    assert.strictEqual(factory.getMeterProvider(), meterProvider);
+    assert.ok(warnStub.notCalled);
+  });
+
+  it('should warn instead of silently ignoring readers once readers are bound', async () => {
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    const boundReader = new InMemoryMetricReader();
+    const meterProvider = factory.getMeterProvider([boundReader]);
+
+    const ignoredReader = new InMemoryMetricReader();
+    const sameMeterProvider = factory.getMeterProvider([ignoredReader]);
+
+    assert.strictEqual(sameMeterProvider, meterProvider);
+    assert.ok(
+      warnStub.calledWithMatch(
+        'MeterProvider is already initialized with metric readers.',
+      ),
+    );
+
+    recordOperation(factory);
+    const {resourceMetrics} = await boundReader.collect();
+    assert.ok(resourceMetrics.scopeMetrics.length > 0);
+
+    await boundReader.shutdown();
   });
 });

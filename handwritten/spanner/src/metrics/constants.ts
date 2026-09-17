@@ -22,6 +22,7 @@ export const TRACER_CLEANUP_INTERVAL_MS = 30 * 60 * 1000; // 30 Minutes
 // OTel semantic conventions
 // See https://github.com/open-telemetry/opentelemetry-js/blob/main/semantic-conventions/README.md#unstable-semconv
 export const ATTR_CLOUD_REGION = 'cloud.region';
+export const ATTR_CLOUD_AVAILABILITY_ZONE = 'cloud.availability_zone';
 
 // Minimum period that must past between metric exports
 export const MIN_EXPORT_FREQUENCY_MS = 30 * 1000;
