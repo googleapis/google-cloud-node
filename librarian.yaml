@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.43.0
+version: v0.44.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -321,7 +321,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-apptopology
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/apptopology/v1
     copyright_year: "2026"
@@ -931,7 +931,7 @@ libraries:
       metadata_name_override: firestore-api
       name_pretty_override: Firestore API
   - name: google-cloud-ftp
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/ftp/v1
     copyright_year: "2026"
@@ -1623,7 +1623,7 @@ libraries:
       default_version: v4
       main_service: talent
   - name: google-cloud-tasks
-    version: 7.1.0
+    version: 7.1.1
     apis:
       - path: google/cloud/tasks/v2
       - path: google/cloud/tasks/v2beta3
@@ -1813,7 +1813,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-workloadidentity
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/workloadidentity/v1
     copyright_year: "2026"
@@ -2148,7 +2148,7 @@ libraries:
       package_name: '@google-shopping/lfp'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-loyaltycustomers
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/shopping/merchant/loyaltycustomers/v1
     copyright_year: "2026"
