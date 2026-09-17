@@ -42,6 +42,15 @@ import {
   traceConfig,
 } from './instrument';
 import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
+import {
+  isNativeCoreEnabled,
+  isNativeEligible,
+  executeNativeCommit,
+  executeNativeBatchUpdate,
+  executeNativeSqlDml,
+  executeNativeBeginTransaction,
+  executeNativeTransactionRun,
+} from './native-core';
 import {protos} from '@google-cloud/spanner-api';
 import spannerClient = protos.google;
 import google = protos.google;
@@ -566,7 +575,11 @@ export class Snapshot extends EventEmitter {
       // highest number of values
       const {bestCandidates} = lowPriority.reduce(
         (acc, mutation) => {
-          const size = mutation.insert?.values?.length || 0;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const size = (mutation as any)._nativeWrite
+            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (mutation as any)._nativeWrite.rows.length
+            : mutation.insert?.values?.length || 0;
 
           if (size > acc.maxSize) {
             // New largest size found, start a new list
@@ -715,13 +728,35 @@ export class Snapshot extends EventEmitter {
       span => {
         span.addEvent('Begin Transaction');
 
+        const reqHeaders = injectRequestIDIntoHeaders(headers, this.session);
+        if (isNativeCoreEnabled()) {
+          const handled = executeNativeBeginTransaction(
+            this,
+            reqOpts,
+            reqHeaders,
+            (err, resp) => {
+              if (err) {
+                setSpanError(span, err);
+              } else if (resp) {
+                this._updatePrecommitToken(resp);
+                this._update(resp, span);
+              }
+              span.end();
+              callback!(err as grpc.ServiceError | null, resp || undefined);
+            },
+          );
+          if (handled) {
+            return;
+          }
+        }
+
         this.request(
           {
             client: 'SpannerClient',
             method: 'beginTransaction',
             reqOpts,
             gaxOpts,
-            headers: injectRequestIDIntoHeaders(headers, this.session),
+            headers: reqHeaders,
           },
           (
             err: null | grpc.ServiceError,
@@ -1592,6 +1627,46 @@ export class Snapshot extends EventEmitter {
         );
       };
 
+      if (isNativeCoreEnabled() && isNativeEligible(query)) {
+        try {
+          sanitizeRequest();
+        } catch (e) {
+          complete(e as Error);
+          return;
+        }
+        const reqHeaders = injectRequestIDIntoHeaders(
+          headers,
+          this.session,
+          nthRequest,
+          1,
+        );
+        let fallbackTriggered = false;
+        const handled = executeNativeTransactionRun(
+          this,
+          formattedRequest,
+          query,
+          reqHeaders,
+          (err, rows, stats, metadata) => {
+            if (fallbackTriggered) {
+              return;
+            }
+            complete(
+              err,
+              (rows || []) as Rows,
+              stats as ResultStats,
+              metadata as ResultMetadata,
+            );
+          },
+          () => {
+            fallbackTriggered = true;
+            formattedRequest = undefined;
+          },
+        );
+        if (handled && !fallbackTriggered) {
+          return;
+        }
+      }
+
       const makeRequest = (resumeToken?: ResumeToken): Readable => {
         attempt++;
         if (!resumeToken) {
@@ -2280,14 +2355,16 @@ export class Snapshot extends EventEmitter {
    */
   protected _update(
     resp: spannerClient.spanner.v1.ITransaction,
-    span: Span,
+    span?: Span,
   ): void {
     const {id, readTimestamp} = resp;
 
     this.id = id!;
     this.metadata = resp;
 
-    span.addEvent('Transaction Creation Done', {id: this.id.toString()});
+    if (span) {
+      span.addEvent('Transaction Creation Done', {id: this.id.toString()});
+    }
 
     if (readTimestamp) {
       this.readTimestampProto = readTimestamp;
@@ -2420,6 +2497,34 @@ export class Dml extends Snapshot {
         requestTag: query.requestOptions?.requestTag,
       },
       span => {
+        if (isNativeCoreEnabled()) {
+          const headers = {...this.commonHeaders_};
+          if (this._getSpanner().routeToLeaderEnabled) {
+            addLeaderAwareRoutingHeader(headers);
+          }
+          const reqHeaders = injectRequestIDIntoHeaders(
+            headers,
+            this.session,
+            nextNthRequest(this.session.parent as Database),
+            1,
+          );
+          const handled = executeNativeSqlDml(
+            this,
+            query,
+            reqHeaders,
+            (err, rowCount) => {
+              if (err) {
+                setSpanError(span, err);
+              }
+              span.end();
+              callback!(err as grpc.ServiceError | null, rowCount);
+            },
+          );
+          if (handled) {
+            return;
+          }
+        }
+
         this.run(
           query,
           (
@@ -2666,15 +2771,18 @@ export class Transaction extends Dml {
       return;
     }
 
+    const nativeEnabled = isNativeCoreEnabled();
     const statements: spannerClient.spanner.v1.ExecuteBatchDmlRequest.IStatement[] =
-      queries.map(query => {
-        if (typeof query === 'string') {
-          return {sql: query};
-        }
-        const {sql} = query;
-        const {params, paramTypes} = Snapshot.encodeParams(query);
-        return {sql, params, paramTypes};
-      });
+      nativeEnabled
+        ? []
+        : queries.map(query => {
+            if (typeof query === 'string') {
+              return {sql: query};
+            }
+            const {sql} = query;
+            const {params, paramTypes} = Snapshot.encodeParams(query);
+            return {sql, params, paramTypes};
+          });
 
     const transaction: spannerClient.spanner.v1.ITransactionSelector = {};
     if (this.id) {
@@ -2721,6 +2829,70 @@ export class Transaction extends Dml {
       requestTag: (options as BatchUpdateOptions)?.requestOptions?.requestTag,
     };
     return startTrace('Transaction.batchUpdate', traceConfig, span => {
+      const handleResponse = (
+        err: null | grpc.ServiceError,
+        resp?: spannerClient.spanner.v1.ExecuteBatchDmlResponse | null,
+      ) => {
+        let batchUpdateError: BatchUpdateError;
+
+        if (err) {
+          const rowCounts: number[] = [];
+          batchUpdateError = Object.assign(err, {rowCounts});
+          setSpanError(span, batchUpdateError);
+          span.end();
+          callback!(batchUpdateError, rowCounts, resp || undefined);
+          return;
+        }
+
+        this._updatePrecommitToken(resp!);
+
+        const {resultSets, status} = resp!;
+        for (const resultSet of resultSets) {
+          if (!this.id && resultSet.metadata?.transaction) {
+            this._update(resultSet.metadata.transaction, span);
+          }
+        }
+        const rowCounts: number[] = resultSets.map(({stats}) => {
+          return (
+            (stats &&
+              Number(
+                stats[
+                  (stats as spannerClient.spanner.v1.ResultSetStats).rowCount!
+                ],
+              )) ||
+            0
+          );
+        });
+
+        if (status && status.code !== 0) {
+          const error = new Error(status.message!);
+          batchUpdateError = Object.assign(error, {
+            code: status.code,
+            metadata: Transaction.extractKnownMetadata(status.details!),
+            rowCounts,
+          }) as BatchUpdateError;
+          setSpanError(span, batchUpdateError);
+        }
+
+        span.end();
+        callback!(batchUpdateError!, rowCounts, resp!);
+      };
+
+      if (nativeEnabled) {
+        const baseReqBytes =
+          protos.google.spanner.v1.ExecuteBatchDmlRequest.encode(reqOpts).finish();
+        const handled = executeNativeBatchUpdate(
+          this,
+          queries,
+          baseReqBytes,
+          headers,
+          (err, resp) => handleResponse(err as grpc.ServiceError | null, resp),
+        );
+        if (handled) {
+          return;
+        }
+      }
+
       this.request(
         {
           client: 'SpannerClient',
@@ -2729,54 +2901,7 @@ export class Transaction extends Dml {
           gaxOpts,
           headers: headers,
         },
-        (
-          err: null | grpc.ServiceError,
-          resp: spannerClient.spanner.v1.ExecuteBatchDmlResponse,
-        ) => {
-          let batchUpdateError: BatchUpdateError;
-
-          if (err) {
-            const rowCounts: number[] = [];
-            batchUpdateError = Object.assign(err, {rowCounts});
-            setSpanError(span, batchUpdateError);
-            span.end();
-            callback!(batchUpdateError, rowCounts, resp);
-            return;
-          }
-
-          this._updatePrecommitToken(resp);
-
-          const {resultSets, status} = resp;
-          for (const resultSet of resultSets) {
-            if (!this.id && resultSet.metadata?.transaction) {
-              this._update(resultSet.metadata.transaction, span);
-            }
-          }
-          const rowCounts: number[] = resultSets.map(({stats}) => {
-            return (
-              (stats &&
-                Number(
-                  stats[
-                    (stats as spannerClient.spanner.v1.ResultSetStats).rowCount!
-                  ],
-                )) ||
-              0
-            );
-          });
-
-          if (status && status.code !== 0) {
-            const error = new Error(status.message!);
-            batchUpdateError = Object.assign(error, {
-              code: status.code,
-              metadata: Transaction.extractKnownMetadata(status.details!),
-              rowCounts,
-            }) as BatchUpdateError;
-            setSpanError(span, batchUpdateError);
-          }
-
-          span.end();
-          callback!(batchUpdateError!, rowCounts, resp);
-        },
+        handleResponse,
       );
     });
   }
@@ -2904,6 +3029,49 @@ export class Transaction extends Dml {
         ...this._traceConfig,
       },
       span => {
+        if (isNativeCoreEnabled()) {
+          const headers = {...this.commonHeaders_};
+          if (this._getSpanner().routeToLeaderEnabled) {
+            addLeaderAwareRoutingHeader(headers);
+          }
+          const reqHeaders = injectRequestIDIntoHeaders(
+            headers,
+            this.session,
+            nextNthRequest(this.session.parent as Database),
+            1,
+          );
+          span.addEvent('Starting Commit');
+          const handled = executeNativeCommit(
+            this,
+            options,
+            reqHeaders,
+            (err, resp) => {
+              this.end();
+              if (err) {
+                span.addEvent('Commit failed');
+                setSpanError(span, err);
+              } else {
+                span.addEvent('Commit Done');
+              }
+              if (resp && resp.commitTimestamp) {
+                this.commitTimestampProto = resp.commitTimestamp;
+                this.commitTimestamp = new PreciseDate(
+                  resp.commitTimestamp as DateStruct,
+                );
+              }
+              err = Transaction.decorateCommitError(
+                err as ServiceError,
+                mutations,
+              );
+              span.end();
+              callback!(err as ServiceError | null, resp || undefined);
+            },
+          );
+          if (handled) {
+            return;
+          }
+        }
+
         if (this.id) {
           reqOpts.transactionId = this.id as Uint8Array;
         } else if (!this._useInRunner) {
@@ -3573,26 +3741,53 @@ function buildMutation(
   const rows: object[] = toArray(keyVals);
   const columns = Transaction.getUniqueKeys(rows);
 
-  const values = rows.map((row, index) => {
+  for (let index = 0; index < rows.length; index++) {
+    const row = rows[index];
     const keys = Object.keys(row);
-    const missingColumns = columns.filter(column => !keys.includes(column));
-
-    if (missingColumns.length > 0) {
-      throw new GoogleError(
-        [
-          `Row at index ${index} does not contain the correct number of columns.`,
-          `Missing columns: ${JSON.stringify(missingColumns)}`,
-        ].join('\n\n'),
-      );
+    if (keys.length < columns.length) {
+      const missingColumns = columns.filter(column => !keys.includes(column));
+      if (missingColumns.length > 0) {
+        throw new GoogleError(
+          [
+            `Row at index ${index} does not contain the correct number of columns.`,
+            `Missing columns: ${JSON.stringify(missingColumns)}`,
+          ].join('\n\n'),
+        );
+      }
     }
+  }
 
-    const values = columns.map(column => row[column]);
-    return codec.convertToListValue(values);
+  let cachedValues: spannerClient.protobuf.IListValue[] | undefined;
+  const writeObj: spannerClient.spanner.v1.Mutation.IWrite = {
+    table,
+    columns,
+  };
+  Object.defineProperty(writeObj, 'values', {
+    enumerable: true,
+    configurable: true,
+    get() {
+      if (!cachedValues) {
+        cachedValues = rows.map(row => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const vals = columns.map(column => (row as any)[column]);
+          return codec.convertToListValue(vals);
+        });
+      }
+      return cachedValues;
+    },
+    set(v) {
+      cachedValues = v;
+    },
   });
 
   const mutation: spannerClient.spanner.v1.IMutation = {
-    [method]: {table, columns, values},
+    [method]: writeObj,
   };
+  Object.defineProperty(mutation, '_nativeWrite', {
+    enumerable: false,
+    configurable: true,
+    value: {op: method, table, columns, rows},
+  });
   return mutation as spannerClient.spanner.v1.Mutation;
 }
 
@@ -3607,12 +3802,30 @@ function buildDeleteMutation(
   table: string,
   keys: Key[],
 ): spannerClient.spanner.v1.Mutation {
-  const keySet: spannerClient.spanner.v1.IKeySet = {
-    keys: toArray(keys).map(codec.convertToListValue),
-  };
+  const keysArr = toArray(keys);
+  let cachedKeys: spannerClient.protobuf.IListValue[] | undefined;
+  const keySet: spannerClient.spanner.v1.IKeySet = {};
+  Object.defineProperty(keySet, 'keys', {
+    enumerable: true,
+    configurable: true,
+    get() {
+      if (!cachedKeys) {
+        cachedKeys = keysArr.map(codec.convertToListValue);
+      }
+      return cachedKeys;
+    },
+    set(v) {
+      cachedKeys = v;
+    },
+  });
   const mutation: spannerClient.spanner.v1.IMutation = {
     delete: {table, keySet},
   };
+  Object.defineProperty(mutation, '_nativeDelete', {
+    enumerable: false,
+    configurable: true,
+    value: {table, keys: keysArr},
+  });
   return mutation as spannerClient.spanner.v1.Mutation;
 }
 

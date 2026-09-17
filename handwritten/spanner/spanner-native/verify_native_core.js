@@ -85,6 +85,10 @@ const ROW_COUNT = 3;
  * same single-use transaction) -- not merely that they return the same rows.
  */
 const capturedRequests = [];
+const capturedCommits = [];
+const capturedBeginTx = [];
+const capturedBatchDml = [];
+const capturedSqlDml = [];
 
 function startMockServer() {
   const packageDefinition = protoLoader.loadSync(
@@ -124,10 +128,29 @@ function startMockServer() {
     },
     DeleteSession: (call, callback) => callback(null, {}),
     BeginTransaction: (call, callback) => {
+      capturedBeginTx.push(call.request);
       callback(null, {id: Buffer.from('tx-1')});
     },
-    Commit: (call, callback) => callback(null, {commitTimestamp: {seconds: 1}}),
+    Commit: (call, callback) => {
+      capturedCommits.push(call.request);
+      callback(null, {commitTimestamp: {seconds: 1700000000, nanos: 123456000}});
+    },
     Rollback: (call, callback) => callback(null, {}),
+    ExecuteBatchDml: (call, callback) => {
+      capturedBatchDml.push(call.request);
+      const stmts = call.request.statements || [];
+      callback(null, {
+        resultSets: stmts.map(() => ({stats: {rowCountExact: 5}})),
+        status: {code: 0},
+      });
+    },
+    ExecuteSql: (call, callback) => {
+      capturedSqlDml.push(call.request);
+      callback(null, {
+        stats: {rowCountExact: 7},
+        metadata: {transaction: {id: Buffer.from('tx-dml-1')}},
+      });
+    },
 
     ExecuteStreamingSql: call => {
       capturedRequests.push(call.request);
@@ -137,8 +160,40 @@ function startMockServer() {
           JSON.stringify(call.request, null, 2),
         );
       }
+      if (call.request.sql && call.request.sql.startsWith('UPDATE')) {
+        call.write({
+          stats: {rowCountExact: 7},
+          metadata: {
+            rowType: {fields: []},
+            transaction: {id: Buffer.from('tx-dml-1')},
+          },
+        });
+        call.end();
+        return;
+      }
+      const txMeta =
+        call.request.transaction && call.request.transaction.begin
+          ? {id: Buffer.from('tx-stream-inline')}
+          : undefined;
+
+      if (call.request.sql && call.request.sql.includes('999999')) {
+        call.write({
+          metadata: {
+            rowType: {fields: FIELDS},
+            transaction: txMeta,
+          },
+        });
+        call.end();
+        return;
+      }
+
       // First chunk: metadata only.
-      call.write({metadata: {rowType: {fields: FIELDS}}});
+      call.write({
+        metadata: {
+          rowType: {fields: FIELDS},
+          transaction: txMeta,
+        },
+      });
       // Then one chunk per row.
       for (let i = 0; i < ROW_COUNT; i++) {
         call.write({values: makeRowValues(i)});
@@ -485,6 +540,91 @@ async function main() {
       ],
     ];
 
+    console.log('\n--- Running Write / Update / Mutation tests (stock vs Go shared core) ---');
+    const stockWrite = await runWriteAndUpdateOnce(false);
+    const nativeWrite = await runWriteAndUpdateOnce(true);
+
+    checks.push(
+      [
+        'write/update stock run did NOT touch Go shared core (provenance)',
+        () => {
+          assert.strictEqual(stockWrite.nativeCommitCalls, 0);
+          assert.strictEqual(stockWrite.nativeBatchUpdateCalls, 0);
+          assert.strictEqual(stockWrite.nativeSqlDmlCalls, 0);
+          assert.strictEqual(stockWrite.nativeTxRunCalls, 0);
+        },
+      ],
+      [
+        'write/update native run DID dispatch into Go shared core (provenance)',
+        () => {
+          assert.strictEqual(nativeWrite.nativeCommitCalls, 8, 'expected 8 commits through native core');
+          assert.strictEqual(nativeWrite.nativeBatchUpdateCalls, 1, 'expected 1 batchUpdate through native core');
+          assert.strictEqual(nativeWrite.nativeSqlDmlCalls, 3, 'expected 3 runUpdate calls through native core');
+          assert.strictEqual(nativeWrite.nativeTxRunCalls, 2, 'expected 2 transaction.run(SELECT) calls through native core');
+        },
+      ],
+      [
+        'select-update benchmark flow (SELECT -> runUpdate -> commit) works end-to-end on native core',
+        () => {
+          assert.strictEqual(nativeWrite.selectUpdateFoundCount, 3);
+          assert.strictEqual(nativeWrite.selectUpdateZeroRowsCount, 0);
+        },
+      ],
+      [
+        'table.insert / upsert / update / deleteRows wire CommitRequest mutations match stock byte-for-byte',
+        () => {
+          assert.strictEqual(nativeWrite.commits.length, stockWrite.commits.length);
+          for (let i = 0; i < stockWrite.commits.length; i++) {
+            assert.deepStrictEqual(
+              normalize(nativeWrite.commits[i].mutations),
+              normalize(stockWrite.commits[i].mutations),
+              `CommitRequest[${i}].mutations differ between stock and Go shared core`,
+            );
+          }
+        },
+      ],
+      [
+        'transaction.batchUpdate wire ExecuteBatchDmlRequest statements and params match stock byte-for-byte',
+        () => {
+          assert.strictEqual(nativeWrite.batchDml.length, 1);
+          assert.deepStrictEqual(
+            normalize(nativeWrite.batchDml[0].statements),
+            normalize(stockWrite.batchDml[0].statements),
+            'ExecuteBatchDmlRequest statements differ between stock and Go shared core',
+          );
+          assert.deepStrictEqual(nativeWrite.batchRowCounts, stockWrite.batchRowCounts);
+          assert.deepStrictEqual(nativeWrite.batchRowCounts, [5, 5]);
+        },
+      ],
+      [
+        'transaction.runUpdate wire ExecuteSqlRequest statement and params match stock byte-for-byte',
+        () => {
+          assert.strictEqual(nativeWrite.sqlDml.length, 3);
+          const stockDmls = stockWrite.streamingRequests.filter(
+            r => r.sql && (r.sql.startsWith('UPDATE') || r.sql.startsWith('INSERT')),
+          );
+          assert.strictEqual(stockDmls.length, 3);
+          for (let i = 0; i < 3; i++) {
+            const stockDml = stockDmls[i];
+            const nativeDml = nativeWrite.sqlDml[i];
+            assert.strictEqual(nativeDml.sql, stockDml.sql);
+            assert.deepStrictEqual(
+              normalize(nativeDml.params),
+              normalize(stockDml.params),
+              `ExecuteSqlRequest[${i}] params differ between stock and Go shared core`,
+            );
+            assert.deepStrictEqual(
+              normalize(nativeDml.paramTypes),
+              normalize(stockDml.paramTypes),
+              `ExecuteSqlRequest[${i}] paramTypes differ between stock and Go shared core`,
+            );
+          }
+          assert.strictEqual(nativeWrite.singleRowCount, stockWrite.singleRowCount);
+          assert.strictEqual(nativeWrite.singleRowCount, 7);
+        },
+      ],
+    );
+
     for (const [name, fn] of checks) {
       try {
         fn();
@@ -508,6 +648,181 @@ async function main() {
       : `\n${failures} check(s) FAILED.`,
   );
   process.exit(failures === 0 ? 0 : 1);
+}
+
+async function runWriteAndUpdateOnce(useNativeCore) {
+  capturedRequests.length = 0;
+  capturedCommits.length = 0;
+  capturedBeginTx.length = 0;
+  capturedBatchDml.length = 0;
+  capturedSqlDml.length = 0;
+
+  for (const key of Object.keys(require.cache)) {
+    if (key.includes(`${path.sep}spanner${path.sep}build${path.sep}src`)) {
+      delete require.cache[key];
+    }
+  }
+
+  process.env.SPANNER_NATIVE_CORE = useNativeCore ? 'go' : 'off';
+
+  const {Spanner} = require(path.join(SPANNER_PKG, 'build', 'src', 'index.js'));
+  const nativeCore = require(
+    path.join(SPANNER_PKG, 'build', 'src', 'native-core.js'),
+  );
+
+  let nativeCommitCalls = 0;
+  let nativeBatchUpdateCalls = 0;
+  let nativeSqlDmlCalls = 0;
+  let nativeTxRunCalls = 0;
+
+  const origCommit = nativeCore.executeNativeCommit;
+  nativeCore.executeNativeCommit = function (...args) {
+    nativeCommitCalls++;
+    return origCommit.apply(this, args);
+  };
+  const origBatch = nativeCore.executeNativeBatchUpdate;
+  nativeCore.executeNativeBatchUpdate = function (...args) {
+    nativeBatchUpdateCalls++;
+    return origBatch.apply(this, args);
+  };
+  const origSqlDml = nativeCore.executeNativeSqlDml;
+  nativeCore.executeNativeSqlDml = function (...args) {
+    nativeSqlDmlCalls++;
+    return origSqlDml.apply(this, args);
+  };
+  const origTxRun = nativeCore.executeNativeTransactionRun;
+  nativeCore.executeNativeTransactionRun = function (...args) {
+    nativeTxRunCalls++;
+    return origTxRun.apply(this, args);
+  };
+
+  const spanner = new Spanner({projectId: PROJECT});
+  const database = spanner.instance(INSTANCE).database(DATABASE);
+  database.on('error', () => {});
+  const table = database.table('Users');
+
+  const rows = [
+    {
+      id: 101,
+      name: 'Alice',
+      score: 98.75,
+      active: true,
+      payload: Buffer.from('hello-bytes-1'),
+      amount: Spanner.numeric('1234.5678'),
+      day: Spanner.date('2026-03-16'),
+      created: new Date('2026-03-16T12:34:56.789Z'),
+      missing: null,
+    },
+    {
+      id: 102,
+      name: 'Bob',
+      score: -42.5,
+      active: false,
+      payload: Buffer.from('hello-bytes-2'),
+      amount: Spanner.numeric('99999.0001'),
+      day: Spanner.date('2026-03-17'),
+      created: new Date('2026-03-17T00:00:00.000Z'),
+      missing: 'not-null',
+    },
+  ];
+
+  let batchRowCounts = null;
+  let singleRowCount = null;
+
+  try {
+    // 1. table.insert (batch insert)
+    await table.insert(rows);
+
+    // 2. table.upsert (batch upsert)
+    await table.upsert(rows);
+
+    // 3. table.update (batch update)
+    await table.update(rows);
+
+    // 4. table.deleteRows (batch delete)
+    await table.deleteRows([101, 102]);
+
+    // 5. transaction.batchUpdate + transaction.commit
+    await database.runTransactionAsync(async tx => {
+      const [counts] = await tx.batchUpdate([
+        {
+          sql: 'INSERT INTO Users (id, name, score, active) VALUES (@id, @name, @score, @active)',
+          params: {id: 103, name: 'Charlie', score: 77.25, active: true},
+        },
+        {
+          sql: 'UPDATE Users SET amount = @amount WHERE id = @id',
+          params: {id: 103, amount: Spanner.numeric('555.55')},
+        },
+      ]);
+      batchRowCounts = counts;
+      await tx.commit();
+    });
+
+    // 6. transaction.runUpdate + transaction.commit
+    await database.runTransactionAsync(async tx => {
+      const [count] = await tx.runUpdate({
+        sql: 'UPDATE Users SET score = @score, payload = @payload WHERE id = @id',
+        params: {
+          id: 101,
+          score: 100.0,
+          payload: Buffer.from('updated-bytes'),
+        },
+      });
+      singleRowCount = count;
+      await tx.commit();
+    });
+
+    // 7. select-update benchmark flow (existing row: SELECT -> UPDATE -> COMMIT)
+    let selectUpdateFoundCount = 0;
+    await database.runTransactionAsync(async tx => {
+      const [foundRows] = await tx.run({
+        sql: 'SELECT * FROM Users WHERE id = @id',
+        params: {id: 101},
+        types: {id: 'int64'},
+      });
+      selectUpdateFoundCount = foundRows.length;
+      await tx.runUpdate({
+        sql: 'UPDATE Users SET name = @name WHERE id = @id',
+        params: {id: 101, name: 'UpdatedAlice'},
+      });
+      await tx.commit();
+    });
+
+    // 8. select-update benchmark flow (0 rows found: SELECT -> INSERT -> COMMIT)
+    let selectUpdateZeroRowsCount = -1;
+    await database.runTransactionAsync(async tx => {
+      const [zeroRows] = await tx.run({
+        sql: 'SELECT * FROM Users WHERE id = 999999',
+      });
+      selectUpdateZeroRowsCount = zeroRows.length;
+      await tx.runUpdate({
+        sql: 'INSERT INTO Users (id, name) VALUES (@id, @name)',
+        params: {id: 999999, name: 'NewUser'},
+      });
+      await tx.commit();
+    });
+
+    return {
+      nativeCommitCalls,
+      nativeBatchUpdateCalls,
+      nativeSqlDmlCalls,
+      nativeTxRunCalls,
+      selectUpdateFoundCount,
+      selectUpdateZeroRowsCount,
+      commits: capturedCommits.slice(),
+      batchDml: capturedBatchDml.slice(),
+      sqlDml: capturedSqlDml.slice(),
+      streamingRequests: capturedRequests.slice(),
+      batchRowCounts,
+      singleRowCount,
+    };
+  } finally {
+    try {
+      await database.close();
+    } catch (e) {
+      /* ignore */
+    }
+  }
 }
 
 main();

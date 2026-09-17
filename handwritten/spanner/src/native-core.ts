@@ -43,6 +43,8 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as tls from 'tls';
+import {grpc} from 'google-gax';
+import {PreciseDate, DateStruct} from '@google-cloud/precise-date';
 import {codec, Field, Json, JSONOptions, Value} from './codec';
 import {protos} from '@google-cloud/spanner-api';
 
@@ -64,7 +66,7 @@ interface CoreHandle {
 }
 
 interface NativeAddon {
-  CoreClientHandle: new (channelCount: number) => CoreHandle;
+  CoreClientHandle: new (channelCount: number, endpoint?: string) => CoreHandle;
   executeStreamingSqlNative(
     handle: CoreHandle,
     routingKey: string,
@@ -76,6 +78,47 @@ interface NativeAddon {
       rows: Value[][] | null,
       telemetry: Telemetry | null,
       metadataPb?: Buffer | null,
+    ) => void,
+  ): void;
+  commitNative(
+    handle: CoreHandle,
+    routingKey: string,
+    metadata: string[][],
+    baseReqBytes: Uint8Array,
+    inlineBegin: boolean,
+    beginReqBytes: Uint8Array | null,
+    isMuxRw: boolean,
+    mutations: unknown[],
+    fallbackEncoder: (val: unknown) => unknown,
+    callback: (
+      err: (Error & {retryInfoPb?: Buffer; code?: number; metadata?: grpc.Metadata}) | null,
+      respPb?: Buffer | null,
+      txPb?: Buffer | null,
+    ) => void,
+  ): void;
+  executeBatchDmlNative(
+    handle: CoreHandle,
+    routingKey: string,
+    metadata: string[][],
+    baseReqBytes: Uint8Array,
+    statements: unknown[],
+    fallbackEncoder: (val: unknown) => unknown,
+    isSingleSql: boolean,
+    callback: (
+      err: (Error & {retryInfoPb?: Buffer; code?: number; metadata?: grpc.Metadata}) | null,
+      respPb?: Buffer | null,
+      txPb?: Buffer | null,
+    ) => void,
+  ): void;
+  beginTransactionNative(
+    handle: CoreHandle,
+    routingKey: string,
+    metadata: string[][],
+    reqBytes: Uint8Array,
+    callback: (
+      err: (Error & {retryInfoPb?: Buffer; code?: number; metadata?: grpc.Metadata}) | null,
+      respPb?: Buffer | null,
+      txPb?: Buffer | null,
     ) => void,
   ): void;
 }
@@ -150,9 +193,38 @@ function loadAddon(): NativeAddon | null {
 // ---------------------------------------------------------------------------
 
 let coreHandle: CoreHandle | null | undefined;
+let coreHandleEndpoint: string | undefined;
 
-function getCoreHandle(): CoreHandle | null {
-  if (coreHandle !== undefined) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function resolveCustomEndpoint(target?: any): string {
+  if (process.env.SPANNER_EMULATOR_HOST) {
+    return process.env.SPANNER_EMULATOR_HOST;
+  }
+  const spanner = target?._getSpanner
+    ? target._getSpanner()
+    : target?.session?.parent?._getSpanner
+      ? target.session.parent._getSpanner()
+      : target?.parent?._getSpanner
+        ? target.parent._getSpanner()
+        : target;
+  const opts = spanner?.options;
+  if (opts && opts.apiEndpoint) {
+    const ep = String(opts.apiEndpoint);
+    if (opts.port && !ep.includes(':')) {
+      return `${ep}:${opts.port}`;
+    }
+    return ep;
+  }
+  return '';
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getCoreHandle(target?: any): CoreHandle | null {
+  const endpoint = resolveCustomEndpoint(target);
+  if (
+    coreHandle !== undefined &&
+    (coreHandleEndpoint === endpoint || (!endpoint && coreHandleEndpoint === ''))
+  ) {
     return coreHandle;
   }
   const addon = loadAddon();
@@ -160,9 +232,17 @@ function getCoreHandle(): CoreHandle | null {
     coreHandle = null;
     return coreHandle;
   }
+  if (coreHandle && coreHandleEndpoint !== endpoint) {
+    try {
+      coreHandle.close();
+    } catch (e) {
+      // ignore
+    }
+  }
   const channels = Number(process.env.SPANNER_NATIVE_CHANNELS || '4') || 4;
   try {
-    coreHandle = new addon.CoreClientHandle(channels);
+    coreHandle = new addon.CoreClientHandle(channels, endpoint);
+    coreHandleEndpoint = endpoint;
   } catch (e) {
     coreHandle = null;
   }
@@ -179,6 +259,7 @@ export function closeNativeCore(): void {
     }
   }
   coreHandle = undefined;
+  coreHandleEndpoint = undefined;
   enabledCache = undefined;
 }
 
@@ -228,7 +309,7 @@ export function isNativeCoreEnabled(): boolean {
   enabledCache = getCoreHandle() !== null;
   announceCoreState(
     enabledCache
-      ? 'Go shared core ACTIVE for single-use read-only SQL queries.'
+      ? 'Go shared core ACTIVE for single-use read-only SQL queries and Write/Update/Mutation APIs.'
       : 'Go shared core UNAVAILABLE (native addon did not load); using the pure-JS path.',
   );
   return enabledCache;
@@ -546,7 +627,7 @@ export function runStreamNative(
   });
 
   const addon = loadAddon();
-  const handle = getCoreHandle();
+  const handle = getCoreHandle(database);
   if (!addon || !handle) {
     process.nextTick(() =>
       out.destroy(new Error('Spanner Go shared core is not available')),
@@ -776,7 +857,7 @@ export function runNative(
   onFallback?: () => void,
 ): void {
   const addon = loadAddon();
-  const handle = getCoreHandle();
+  const handle = getCoreHandle(database);
   if (!addon || !handle) {
     if (onFallback) {
       onFallback();
@@ -914,3 +995,642 @@ export function runNative(
     );
   });
 }
+
+// ---------------------------------------------------------------------------
+// Write / Mutation / DML execution path (Commit, ExecuteBatchDml, ExecuteSql)
+// ---------------------------------------------------------------------------
+
+const TYPE_NAME_TO_CODE: Record<string, number> = {
+  bool: 1,
+  int64: 2,
+  pgOid: 2,
+  float64: 3,
+  timestamp: 4,
+  date: 5,
+  string: 6,
+  uuid: 6,
+  bytes: 7,
+  array: 8,
+  struct: 9,
+  numeric: 10,
+  pgNumeric: 10,
+  json: 11,
+  pgJsonb: 11,
+  proto: 12,
+  enum: 13,
+  interval: 14,
+  float32: 15,
+};
+
+const MUTATION_OP_MAP: Record<string, number> = {
+  insert: 0,
+  update: 1,
+  insertOrUpdate: 2,
+  replace: 3,
+};
+
+/**
+ * Fallback encoder invoked from C++ only when a cell value is an Object wrapper
+ * (Int, Float, Float32, Numeric, Date, PreciseDate, SpannerDate, Interval, Array, Struct).
+ * Primitive types (null, boolean, number, string, Buffer) are encoded directly in C++.
+ */
+export function fallbackEncodeCell(val: unknown): {
+  kind: number;
+  typeCode: number;
+  boolVal?: number;
+  numVal?: number;
+  strVal?: string;
+  pbBytes?: Uint8Array;
+} {
+  if (val === null || val === undefined) {
+    return {kind: 0, typeCode: 0};
+  }
+  const t = codec.getType(val as Value);
+  const typeCode = TYPE_NAME_TO_CODE[t.type] || 0;
+  const encoded = codec.encode(val as Value);
+
+  if (encoded.nullValue !== undefined && encoded.nullValue !== null) {
+    return {kind: 0, typeCode};
+  }
+  if (encoded.boolValue !== undefined && encoded.boolValue !== null) {
+    return {kind: 1, typeCode, boolVal: encoded.boolValue ? 1 : 0};
+  }
+  if (encoded.numberValue !== undefined && encoded.numberValue !== null) {
+    return {kind: 2, typeCode, numVal: encoded.numberValue};
+  }
+  if (encoded.stringValue !== undefined && encoded.stringValue !== null) {
+    return {kind: 3, typeCode, strVal: encoded.stringValue};
+  }
+  const pbBytes = protos.google.protobuf.Value.encode(encoded).finish();
+  return {kind: 4, typeCode, pbBytes};
+}
+
+function headersToMetadataArray(
+  sessionName: string,
+  headersObj?: Record<string, string>,
+): string[][] {
+  const meta: string[][] = [
+    ['x-goog-request-params', `session=${encodeURIComponent(sessionName)}`],
+  ];
+  if (headersObj) {
+    for (const [k, v] of Object.entries(headersObj)) {
+      if (v !== undefined && v !== null) {
+        meta.push([k.toLowerCase(), String(v)]);
+      }
+    }
+  }
+  return meta;
+}
+
+function attachRetryMetadata(
+  err: Error & {retryInfoPb?: Buffer; metadata?: grpc.Metadata},
+): void {
+  if (err && err.retryInfoPb && err.retryInfoPb.length > 0) {
+    if (!err.metadata) {
+      err.metadata = new grpc.Metadata();
+    }
+    err.metadata.add('google.rpc.retryinfo-bin', err.retryInfoPb);
+  }
+}
+
+function prepareNativeStatements(queries: Array<string | any>): Array<{
+  sql: string;
+  paramNames: string[];
+  paramValues: unknown[];
+  paramTypesPb: Array<Uint8Array | null>;
+}> {
+  const result = new Array(queries.length);
+  for (let qIdx = 0; qIdx < queries.length; qIdx++) {
+    const q = queries[qIdx];
+    if (typeof q === 'string') {
+      result[qIdx] = {
+        sql: q,
+        paramNames: [],
+        paramValues: [],
+        paramTypesPb: [],
+      };
+      continue;
+    }
+    const sql = q.sql || '';
+    const params = q.params;
+    if (!params || typeof params !== 'object') {
+      result[qIdx] = {
+        sql,
+        paramNames: [],
+        paramValues: [],
+        paramTypesPb: [],
+      };
+      continue;
+    }
+    const paramNames = Object.keys(params);
+    const paramValues = new Array(paramNames.length);
+    const paramTypesPb = new Array<Uint8Array | null>(paramNames.length);
+    const explicitTypes = q.types;
+
+    for (let i = 0; i < paramNames.length; i++) {
+      const name = paramNames[i];
+      const val = params[name];
+      paramValues[i] = val;
+
+      if (explicitTypes && explicitTypes[name]) {
+        const typeObj = codec.createTypeObject(explicitTypes[name]);
+        paramTypesPb[i] = protos.google.spanner.v1.Type.encode(typeObj).finish();
+      } else if (
+        val === null ||
+        val === undefined ||
+        Array.isArray(val) ||
+        (typeof val === 'object' &&
+          !Buffer.isBuffer(val) &&
+          !(val instanceof codec.Int) &&
+          !(val instanceof codec.Float) &&
+          !(val instanceof codec.Float32) &&
+          !(val instanceof codec.Numeric) &&
+          !(val instanceof codec.SpannerDate) &&
+          !(val instanceof Date) &&
+          !(val instanceof PreciseDate) &&
+          !(val instanceof codec.Interval))
+      ) {
+        const t = codec.getType(val as Value);
+        const typeObj = codec.createTypeObject(t);
+        paramTypesPb[i] = protos.google.spanner.v1.Type.encode(typeObj).finish();
+      } else {
+        paramTypesPb[i] = null;
+      }
+    }
+
+    result[qIdx] = {
+      sql,
+      paramNames,
+      paramValues,
+      paramTypesPb,
+    };
+  }
+  return result;
+}
+
+/**
+ * Dispatches `Transaction#commit` through the Go shared core.
+ * Supports 1-RTT pipelined `BeginTransaction` + `Commit` when `!transaction.id && transaction._useInRunner`.
+ */
+export function executeNativeCommit(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transaction: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options: any,
+  headersObj: Record<string, string>,
+  callback: (
+    err: Error | null,
+    resp?: protos.google.spanner.v1.ICommitResponse | null,
+  ) => void,
+): boolean {
+  const addon = loadAddon();
+  const handle = getCoreHandle(transaction);
+  if (!addon || !handle) {
+    return false;
+  }
+
+  const mutations = transaction._queuedMutations || [];
+  const sessionName: string = transaction.session.formattedName_!;
+  const routingKey: string = transaction._affinityKey || sessionName;
+  const database = transaction.session.parent;
+  const isMuxRw = Boolean(database && database.isMuxEnabledForRW_);
+  const inlineBegin = !transaction.id && Boolean(transaction._useInRunner);
+
+  const requestOptions = options?.requestOptions;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const baseReq: any = {
+    session: sessionName,
+    mutations: [],
+    requestOptions: Object.assign(
+      requestOptions || {},
+      transaction.requestOptions,
+    ),
+    precommitToken: transaction._latestPreCommitToken,
+  };
+  if (transaction.id) {
+    baseReq.transactionId = transaction.id;
+  } else if (!transaction._useInRunner) {
+    baseReq.singleUseTransaction = transaction._options;
+  }
+  if (options && 'returnCommitStats' in options && options.returnCommitStats) {
+    baseReq.returnCommitStats = options.returnCommitStats;
+  }
+  if (options && 'maxCommitDelay' in options && options.maxCommitDelay) {
+    baseReq.maxCommitDelay = options.maxCommitDelay;
+  }
+  const baseReqBytes =
+    protos.google.spanner.v1.CommitRequest.encode(baseReq).finish();
+
+  let beginReqBytes: Uint8Array | null = null;
+  if (inlineBegin) {
+    const beginOptions = Object.assign({}, transaction._options);
+    if (
+      transaction.multiplexedSessionPreviousTransactionId &&
+      isMuxRw &&
+      beginOptions.readWrite
+    ) {
+      beginOptions.readWrite = Object.assign({}, beginOptions.readWrite, {
+        multiplexedSessionPreviousTransactionId:
+          transaction.multiplexedSessionPreviousTransactionId,
+      });
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const beginReq: any = {
+      session: sessionName,
+      options: beginOptions,
+    };
+    if (transaction.requestOptions) {
+      beginReq.requestOptions = transaction.requestOptions;
+    }
+    beginReqBytes =
+      protos.google.spanner.v1.BeginTransactionRequest.encode(beginReq).finish();
+  }
+
+  const nativeMutations = new Array(mutations.length);
+  for (let i = 0; i < mutations.length; i++) {
+    const m = mutations[i];
+    if (m._nativeWrite) {
+      nativeMutations[i] = {
+        op: MUTATION_OP_MAP[m._nativeWrite.op] ?? 0,
+        table: m._nativeWrite.table,
+        columns: m._nativeWrite.columns,
+        rows: m._nativeWrite.rows,
+      };
+    } else if (m._nativeDelete) {
+      nativeMutations[i] = {
+        op: 4,
+        table: m._nativeDelete.table,
+        keys: m._nativeDelete.keys,
+      };
+    } else {
+      nativeMutations[i] = {
+        op: 5,
+        rawPb: protos.google.spanner.v1.Mutation.encode(m).finish(),
+      };
+    }
+  }
+
+  const metadata = headersToMetadataArray(sessionName, headersObj);
+
+  addon.commitNative(
+    handle,
+    routingKey,
+    metadata,
+    baseReqBytes,
+    inlineBegin,
+    beginReqBytes,
+    isMuxRw,
+    nativeMutations,
+    fallbackEncodeCell,
+    (err, respPb, txPb) => {
+      if (txPb && txPb.length > 0) {
+        try {
+          const txResp = protos.google.spanner.v1.Transaction.decode(txPb);
+          transaction._updatePrecommitToken(txResp);
+          transaction._update(txResp);
+        } catch (e) {
+          // ignore
+        }
+      }
+      if (err) {
+        attachRetryMetadata(err);
+        callback(err, null);
+        return;
+      }
+      let resp: protos.google.spanner.v1.ICommitResponse = {};
+      if (respPb && respPb.length > 0) {
+        resp = protos.google.spanner.v1.CommitResponse.decode(respPb);
+      }
+      callback(null, resp);
+    },
+  );
+  return true;
+}
+
+/**
+ * Dispatches `Transaction#batchUpdate` through the Go shared core.
+ */
+export function executeNativeBatchUpdate(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transaction: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  queries: Array<string | any>,
+  baseReqBytes: Uint8Array,
+  headersObj: Record<string, string>,
+  callback: (
+    err: Error | null,
+    resp?: protos.google.spanner.v1.ExecuteBatchDmlResponse | null,
+  ) => void,
+): boolean {
+  const addon = loadAddon();
+  const handle = getCoreHandle(transaction);
+  if (!addon || !handle) {
+    return false;
+  }
+
+  const sessionName: string = transaction.session.formattedName_!;
+  const routingKey: string = transaction._affinityKey || sessionName;
+  const metadata = headersToMetadataArray(sessionName, headersObj);
+  const nativeStatements = prepareNativeStatements(queries);
+
+  addon.executeBatchDmlNative(
+    handle,
+    routingKey,
+    metadata,
+    baseReqBytes,
+    nativeStatements,
+    fallbackEncodeCell,
+    false,
+    (err, respPb) => {
+      if (err) {
+        attachRetryMetadata(err);
+        callback(err, null);
+        return;
+      }
+      let resp: protos.google.spanner.v1.ExecuteBatchDmlResponse;
+      if (respPb && respPb.length > 0) {
+        resp = protos.google.spanner.v1.ExecuteBatchDmlResponse.decode(respPb);
+      } else {
+        resp = new protos.google.spanner.v1.ExecuteBatchDmlResponse();
+      }
+      callback(null, resp);
+    },
+  );
+  return true;
+}
+
+/**
+ * Dispatches `Transaction#runUpdate` / `Dml#runUpdate` through the Go shared core via unary `ExecuteSql`.
+ */
+export function executeNativeSqlDml(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transaction: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  query: any,
+  headersObj: Record<string, string>,
+  callback: (err: Error | null, rowCount: number) => void,
+): boolean {
+  const addon = loadAddon();
+  const handle = getCoreHandle(transaction);
+  if (!addon || !handle) {
+    return false;
+  }
+
+  const sessionName: string = transaction.session.formattedName_!;
+  const routingKey: string = transaction._affinityKey || sessionName;
+  const database = transaction.session.parent;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const txSelector: any = {};
+  if (transaction.id) {
+    txSelector.id = transaction.id;
+  } else if (transaction._options.readWrite) {
+    txSelector.begin = transaction._options;
+    if (database && database.isMuxEnabledForRW_) {
+      transaction._setPreviousTransactionId(txSelector);
+    }
+  } else {
+    txSelector.singleUse = transaction._options;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const baseReq: any = {
+    session: sessionName,
+    transaction: txSelector,
+    sql: typeof query === 'string' ? query : query.sql,
+    seqno: transaction._seqno++,
+    requestOptions: transaction.configureTagOptions(
+      typeof txSelector.singleUse !== 'undefined',
+      transaction.requestOptions?.transactionTag ?? undefined,
+      query.requestOptions,
+    ),
+  };
+  if (query.queryOptions || transaction.queryOptions) {
+    baseReq.queryOptions = Object.assign(
+      {},
+      transaction.queryOptions,
+      query.queryOptions,
+    );
+  }
+
+  const baseReqBytes =
+    protos.google.spanner.v1.ExecuteSqlRequest.encode(baseReq).finish();
+  const metadata = headersToMetadataArray(sessionName, headersObj);
+  const nativeStatements = prepareNativeStatements([query]);
+
+  addon.executeBatchDmlNative(
+    handle,
+    routingKey,
+    metadata,
+    baseReqBytes,
+    nativeStatements,
+    fallbackEncodeCell,
+    true,
+    (err, respPb) => {
+      if (err) {
+        attachRetryMetadata(err);
+        callback(err, 0);
+        return;
+      }
+      let rowCount = 0;
+      if (respPb && respPb.length > 0) {
+        const resp = protos.google.spanner.v1.ResultSet.decode(respPb);
+        transaction._updatePrecommitToken(resp);
+        if (!transaction.id && resp.metadata?.transaction) {
+          transaction._update(resp.metadata.transaction);
+        }
+        const stats = resp.stats as protos.google.spanner.v1.ResultSetStats | null | undefined;
+        if (stats && stats.rowCount) {
+          rowCount = Math.floor(
+            Number((stats as unknown as Record<string, unknown>)[stats.rowCount]),
+          );
+        }
+      }
+      callback(null, rowCount);
+    },
+  );
+  return true;
+}
+
+/**
+ * Dispatches `Snapshot#begin` through the Go shared core.
+ */
+export function executeNativeBeginTransaction(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transaction: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  reqOpts: any,
+  headersObj: Record<string, string>,
+  callback: (
+    err: Error | null,
+    resp?: protos.google.spanner.v1.ITransaction | null,
+  ) => void,
+): boolean {
+  const addon = loadAddon();
+  const handle = getCoreHandle(transaction);
+  if (!addon || !handle) {
+    return false;
+  }
+
+  const sessionName: string = transaction.session.formattedName_!;
+  const routingKey: string = transaction._affinityKey || sessionName;
+  const reqBytes =
+    protos.google.spanner.v1.BeginTransactionRequest.encode(reqOpts).finish();
+  const metadata = headersToMetadataArray(sessionName, headersObj);
+
+  addon.beginTransactionNative(
+    handle,
+    routingKey,
+    metadata,
+    reqBytes,
+    (err, respPb) => {
+      if (err) {
+        attachRetryMetadata(err);
+        callback(err, null);
+        return;
+      }
+      let resp: protos.google.spanner.v1.ITransaction = {};
+      if (respPb && respPb.length > 0) {
+        resp = protos.google.spanner.v1.Transaction.decode(respPb);
+      }
+      callback(null, resp);
+    },
+  );
+  return true;
+}
+
+/**
+ * Dispatches `Snapshot#_run` / `Transaction#run` through the Go shared core via `executeStreamingSqlNative`.
+ * Preserves transaction channel affinity by routing on `transaction._affinityKey || sessionName`
+ * and updates `transaction.id` and `precommitToken` when inline `begin` metadata is returned.
+ */
+export function executeNativeTransactionRun(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transaction: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  formattedRequest: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  query: any,
+  headersObj: Record<string, string>,
+  callback: (
+    err: Error | null,
+    rows?: NativeRow[],
+    stats?: unknown,
+    metadata?: protos.google.spanner.v1.ResultSetMetadata,
+  ) => void,
+  onFallback: () => void,
+): boolean {
+  const addon = loadAddon();
+  const handle = getCoreHandle(transaction);
+  if (!addon || !handle) {
+    return false;
+  }
+
+  const sessionName: string = transaction.session.formattedName_!;
+  const routingKey: string = transaction._affinityKey || sessionName;
+  const requestBytes =
+    protos.google.spanner.v1.ExecuteSqlRequest.encode(formattedRequest).finish();
+  const metadata = headersToMetadataArray(sessionName, headersObj);
+
+  let createRow: ((values: Value[]) => NativeRow) | null = null;
+  let resultMetadata: protos.google.spanner.v1.ResultSetMetadata | undefined;
+  let fellBack = false;
+  const resultRows: NativeRow[] = [];
+  const cacheKey = typeof query === 'string' ? query : (query.sql as string);
+  const cachedEntry = cacheKey ? schemaCache.get(cacheKey) : undefined;
+  if (cachedEntry) {
+    if (!cachedEntry.scalar) {
+      onFallback();
+      return true;
+    }
+    createRow = cachedEntry.createRow;
+    resultMetadata = cachedEntry.decoded;
+  }
+
+  const needsInlineBeginTx =
+    !transaction.id && Boolean(transaction._options?.readWrite);
+  const skipMetadata = Boolean(cachedEntry) && !needsInlineBeginTx;
+
+  addon.executeStreamingSqlNative(
+    handle,
+    routingKey,
+    metadata,
+    requestBytes,
+    skipMetadata,
+    (cbErr, rows, _telemetry, metadataPb) => {
+      if (fellBack) {
+        return;
+      }
+      if (cbErr) {
+        attachRetryMetadata(
+          cbErr as Error & {retryInfoPb?: Buffer; metadata?: grpc.Metadata},
+        );
+        callback(cbErr);
+        return;
+      }
+
+      if (metadataPb && metadataPb.length > 0) {
+        try {
+          const decoded =
+            protos.google.spanner.v1.ResultSetMetadata.decode(metadataPb);
+          if (decoded.transaction) {
+            transaction._updatePrecommitToken(decoded.transaction);
+            if (!transaction.id && decoded.transaction.id) {
+              transaction._update(decoded.transaction);
+            }
+          }
+          if (!createRow && decoded.rowType?.fields) {
+            const fields = (decoded.rowType.fields || []) as IField[];
+            const scalar = allColumnsScalar(fields);
+            if (!scalar) {
+              fellBack = true;
+              onFallback();
+              return;
+            }
+            const schemaOnly = new protos.google.spanner.v1.ResultSetMetadata({
+              rowType: decoded.rowType,
+            });
+            const entry: SchemaCacheEntry = {
+              bytes: Buffer.from(
+                protos.google.spanner.v1.ResultSetMetadata.encode(
+                  schemaOnly,
+                ).finish(),
+              ),
+              createRow: makeRowFactory(fields),
+              scalar: true,
+              decoded: schemaOnly,
+            };
+            if (cacheKey) {
+              if (schemaCache.size >= SCHEMA_CACHE_MAX) {
+                schemaCache.clear();
+              }
+              schemaCache.set(cacheKey, entry);
+            }
+            createRow = entry.createRow;
+          }
+          resultMetadata = decoded;
+        } catch (e) {
+          callback(e as Error);
+          return;
+        }
+      }
+
+      if (rows === null || rows === undefined) {
+        callback(null, resultRows, undefined, resultMetadata);
+        return;
+      }
+
+      if (!createRow) {
+        callback(new Error('Received result rows before result-set metadata'));
+        return;
+      }
+
+      for (let i = 0; i < rows.length; i++) {
+        resultRows.push(createRow(rows[i]));
+      }
+    },
+  );
+  return true;
+}
+
+

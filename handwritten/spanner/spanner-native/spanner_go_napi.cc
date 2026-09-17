@@ -4,6 +4,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdint>
+#include <cmath>
 #include <iostream>
 
 // Callback signature matching Go exported C type
@@ -11,13 +12,14 @@ typedef enum {
     CELL_KIND_NULL = 0,
     CELL_KIND_BOOL = 1,
     CELL_KIND_NUMBER = 2,
-    CELL_KIND_STRING = 3
+    CELL_KIND_STRING = 3,
+    CELL_KIND_PROTO_VALUE = 4
 } CellKind;
 
 typedef struct {
     uint8_t kind;
     uint8_t bool_val;
-    uint16_t _pad;
+    uint16_t type_code;
     uint32_t str_len;
     double number_val;
     const char* str_val;
@@ -43,9 +45,77 @@ typedef struct {
 
 typedef void (*StreamDataCallback)(void* user_data, CSpannerBatch* batch);
 
+typedef struct {
+    void* resp_pb;
+    int resp_len;
+    void* tx_pb;
+    int tx_len;
+    char* error_msg;
+    int error_code;
+    void* retry_info_pb;
+    int retry_info_len;
+} CUnaryResponse;
+
+typedef void (*UnaryCallback)(void* user_data, CUnaryResponse* resp);
+
+typedef enum {
+    MUTATION_OP_INSERT = 0,
+    MUTATION_OP_UPDATE = 1,
+    MUTATION_OP_INSERT_OR_UPDATE = 2,
+    MUTATION_OP_REPLACE = 3,
+    MUTATION_OP_DELETE = 4,
+    MUTATION_OP_RAW_PB = 5
+} MutationOp;
+
+typedef struct {
+    int op;
+    const char* table;
+    int col_count;
+    const char** columns;
+    int row_count;
+    CSpannerCell* cells;
+    const uint8_t* raw_pb;
+    int raw_pb_len;
+} CSpannerMutation;
+
+typedef struct {
+    const char* routing_key;
+    const char** meta_keys;
+    const char** meta_vals;
+    int meta_count;
+    const uint8_t* base_req_pb;
+    int base_req_len;
+    int inline_begin;
+    const uint8_t* begin_req_pb;
+    int begin_req_len;
+    int is_mux_rw;
+    int mutation_count;
+    CSpannerMutation* mutations;
+} CSpannerCommitRequest;
+
+typedef struct {
+    const char* sql;
+    int param_count;
+    const char** param_names;
+    CSpannerCell* param_cells;
+    const uint8_t** param_types_pb;
+    int* param_types_len;
+} CSpannerStatement;
+
+typedef struct {
+    const char* routing_key;
+    const char** meta_keys;
+    const char** meta_vals;
+    int meta_count;
+    const uint8_t* base_req_pb;
+    int base_req_len;
+    int stmt_count;
+    CSpannerStatement* statements;
+} CSpannerBatchDmlRequest;
+
 // Declarations of Go C-shared exported functions
 extern "C" {
-    uintptr_t InitGoCoreClient(int channel_count);
+    uintptr_t InitGoCoreClient(int channel_count, const char* custom_endpoint);
     void CloseGoCoreClient(uintptr_t handle);
     void ExecuteStreamingSqlGo(
         uintptr_t handle,
@@ -57,6 +127,35 @@ extern "C" {
         int req_len,
         int skip_metadata,
         StreamDataCallback cb,
+        void* user_data
+    );
+    void CommitNativeGo(
+        uintptr_t handle,
+        CSpannerCommitRequest* req,
+        UnaryCallback cb,
+        void* user_data
+    );
+    void ExecuteBatchDmlNativeGo(
+        uintptr_t handle,
+        CSpannerBatchDmlRequest* req,
+        UnaryCallback cb,
+        void* user_data
+    );
+    void ExecuteSqlDmlNativeGo(
+        uintptr_t handle,
+        CSpannerBatchDmlRequest* req,
+        UnaryCallback cb,
+        void* user_data
+    );
+    void BeginTransactionNativeGo(
+        uintptr_t handle,
+        const char* routing_key,
+        const char** meta_keys,
+        const char** meta_vals,
+        int meta_count,
+        const char* req_bytes,
+        int req_len,
+        UnaryCallback cb,
         void* user_data
     );
 }
@@ -111,8 +210,17 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
             napi_value argv[4] = { err_obj, null_val, null_val, null_val };
             napi_call_function(env, global, js_cb, 4, argv, nullptr);
         } else if (batch->is_last && batch->row_count == 0) {
-            // End of stream signal
-            napi_value argv[4] = { null_val, null_val, null_val, null_val };
+            // End of stream signal (may carry metadata_pb if 0 rows were returned)
+            napi_value metadata_val = null_val;
+            if (batch->metadata_pb != nullptr && batch->metadata_len > 0) {
+                void* copy_data = nullptr;
+                napi_create_buffer_copy(env,
+                                        (size_t)batch->metadata_len,
+                                        batch->metadata_pb,
+                                        &copy_data,
+                                        &metadata_val);
+            }
+            napi_value argv[4] = { null_val, null_val, null_val, metadata_val };
             napi_call_function(env, global, js_cb, 4, argv, nullptr);
         } else {
             napi_value rows_val = null_val;
@@ -241,8 +349,8 @@ void CoreClientHandleDestructor(napi_env env, void* nativeObject, void* finalize
 
 napi_value CoreClientHandleConstructor(napi_env env, napi_callback_info info) {
     napi_value jsthis;
-    size_t argc = 1;
-    napi_value args[1];
+    size_t argc = 2;
+    napi_value args[2];
     napi_get_cb_info(env, info, &argc, args, &jsthis, nullptr);
 
     int channel_count = 1;
@@ -253,7 +361,13 @@ napi_value CoreClientHandleConstructor(napi_env env, napi_callback_info info) {
         }
     }
 
-    uintptr_t handle = InitGoCoreClient(channel_count);
+    char endpoint_buf[256] = {0};
+    if (argc >= 2) {
+        size_t ep_len = 0;
+        napi_get_value_string_utf8(env, args[1], endpoint_buf, sizeof(endpoint_buf), &ep_len);
+    }
+
+    uintptr_t handle = InitGoCoreClient(channel_count, endpoint_buf);
     CoreClientHandleWrapper* wrap = new CoreClientHandleWrapper{ handle };
 
     napi_wrap(env, jsthis, wrap, CoreClientHandleDestructor, nullptr, nullptr);
@@ -411,6 +525,928 @@ napi_value ExecuteStreamingSqlNative(napi_env env, napi_callback_info info) {
     return undef;
 }
 
+// ---------------------------------------------------------------------------
+// Native Write / Update / Mutation Core (N-API Bridge)
+// ---------------------------------------------------------------------------
+
+struct UnaryCallbackContext {
+    napi_threadsafe_function tsfn;
+};
+
+extern "C" void OnGoUnaryResponse(void* user_data, CUnaryResponse* resp) {
+    UnaryCallbackContext* ctx = static_cast<UnaryCallbackContext*>(user_data);
+    if (!ctx || !ctx->tsfn) {
+        if (resp) {
+            if (resp->resp_pb) free(resp->resp_pb);
+            if (resp->tx_pb) free(resp->tx_pb);
+            if (resp->error_msg) free(resp->error_msg);
+            if (resp->retry_info_pb) free(resp->retry_info_pb);
+            free(resp);
+        }
+        return;
+    }
+    napi_call_threadsafe_function(ctx->tsfn, resp, napi_tsfn_nonblocking);
+}
+
+void CallJsUnaryHandler(napi_env env, napi_value js_cb, void* context, void* data) {
+    CUnaryResponse* resp = static_cast<CUnaryResponse*>(data);
+    UnaryCallbackContext* ctx = static_cast<UnaryCallbackContext*>(context);
+
+    if (env != nullptr && js_cb != nullptr && resp != nullptr) {
+        napi_value global;
+        napi_get_global(env, &global);
+
+        napi_value null_val;
+        napi_get_null(env, &null_val);
+
+        if (resp->error_msg != nullptr) {
+            napi_value err_obj, err_msg_val, err_code_val;
+            napi_create_string_utf8(env, resp->error_msg, NAPI_AUTO_LENGTH, &err_msg_val);
+            napi_create_error(env, nullptr, err_msg_val, &err_obj);
+            napi_create_int32(env, resp->error_code, &err_code_val);
+            napi_set_named_property(env, err_obj, "code", err_code_val);
+
+            if (resp->retry_info_pb != nullptr && resp->retry_info_len > 0) {
+                napi_value retry_buf;
+                void* copy_data = nullptr;
+                napi_create_buffer_copy(env, (size_t)resp->retry_info_len, resp->retry_info_pb, &copy_data, &retry_buf);
+                napi_set_named_property(env, err_obj, "retryInfoPb", retry_buf);
+            }
+
+            napi_value tx_val = null_val;
+            if (resp->tx_pb != nullptr && resp->tx_len > 0) {
+                void* copy_data = nullptr;
+                napi_create_buffer_copy(env, (size_t)resp->tx_len, resp->tx_pb, &copy_data, &tx_val);
+            }
+
+            napi_value argv[3] = { err_obj, null_val, tx_val };
+            napi_call_function(env, global, js_cb, 3, argv, nullptr);
+        } else {
+            napi_value resp_val = null_val;
+            if (resp->resp_pb != nullptr && resp->resp_len > 0) {
+                void* copy_data = nullptr;
+                napi_create_buffer_copy(env, (size_t)resp->resp_len, resp->resp_pb, &copy_data, &resp_val);
+            }
+
+            napi_value tx_val = null_val;
+            if (resp->tx_pb != nullptr && resp->tx_len > 0) {
+                void* copy_data = nullptr;
+                napi_create_buffer_copy(env, (size_t)resp->tx_len, resp->tx_pb, &copy_data, &tx_val);
+            }
+
+            napi_value argv[3] = { null_val, resp_val, tx_val };
+            napi_call_function(env, global, js_cb, 3, argv, nullptr);
+        }
+    }
+
+    if (resp != nullptr) {
+        if (resp->resp_pb != nullptr) free(resp->resp_pb);
+        if (resp->tx_pb != nullptr) free(resp->tx_pb);
+        if (resp->error_msg != nullptr) free(resp->error_msg);
+        if (resp->retry_info_pb != nullptr) free(resp->retry_info_pb);
+        free(resp);
+    }
+
+    if (ctx != nullptr) {
+        if (ctx->tsfn != nullptr) {
+            napi_release_threadsafe_function(ctx->tsfn, napi_tsfn_release);
+            ctx->tsfn = nullptr;
+        }
+        delete ctx;
+    }
+}
+
+struct Arena {
+    std::vector<char*> blocks;
+    char* current = nullptr;
+    size_t offset = 0;
+    size_t cap = 0;
+
+    ~Arena() {
+        for (char* b : blocks) {
+            free(b);
+        }
+    }
+
+    char* alloc(size_t size) {
+        if (size == 0) return nullptr;
+        // Align to 8 bytes
+        size_t aligned = (size + 7) & ~static_cast<size_t>(7);
+        if (offset + aligned > cap) {
+            size_t new_cap = aligned > 65536 ? aligned : 65536;
+            current = static_cast<char*>(malloc(new_cap));
+            blocks.push_back(current);
+            offset = 0;
+            cap = new_cap;
+        }
+        char* ptr = current + offset;
+        offset += aligned;
+        return ptr;
+    }
+
+    char* copy_str(napi_env env, napi_value str_val, size_t* out_len = nullptr) {
+        size_t len = 0;
+        napi_get_value_string_utf8(env, str_val, nullptr, 0, &len);
+        char* dst = alloc(len + 1);
+        napi_get_value_string_utf8(env, str_val, dst, len + 1, &len);
+        dst[len] = '\0';
+        if (out_len) *out_len = len;
+        return dst;
+    }
+};
+
+static const char B64_TABLE[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+size_t Base64Encode(const uint8_t* src, size_t len, char* dst) {
+    size_t i = 0, j = 0;
+    while (i + 2 < len) {
+        uint32_t v = (static_cast<uint32_t>(src[i]) << 16) |
+                     (static_cast<uint32_t>(src[i + 1]) << 8) |
+                     static_cast<uint32_t>(src[i + 2]);
+        dst[j++] = B64_TABLE[(v >> 18) & 0x3F];
+        dst[j++] = B64_TABLE[(v >> 12) & 0x3F];
+        dst[j++] = B64_TABLE[(v >> 6) & 0x3F];
+        dst[j++] = B64_TABLE[v & 0x3F];
+        i += 3;
+    }
+    if (i < len) {
+        uint32_t v = static_cast<uint32_t>(src[i]) << 16;
+        if (i + 1 < len) v |= static_cast<uint32_t>(src[i + 1]) << 8;
+        dst[j++] = B64_TABLE[(v >> 18) & 0x3F];
+        dst[j++] = B64_TABLE[(v >> 12) & 0x3F];
+        if (i + 1 < len) {
+            dst[j++] = B64_TABLE[(v >> 6) & 0x3F];
+        } else {
+            dst[j++] = '=';
+        }
+        dst[j++] = '=';
+    }
+    return j;
+}
+
+void ExtractBytesInfo(napi_env env, napi_value val, const uint8_t** out_ptr, int* out_len) {
+    *out_ptr = nullptr;
+    *out_len = 0;
+    if (val == nullptr) return;
+    napi_valuetype vt;
+    if (napi_typeof(env, val, &vt) != napi_ok || vt == napi_null || vt == napi_undefined) return;
+
+    bool is_typedarray = false;
+    napi_is_typedarray(env, val, &is_typedarray);
+    if (is_typedarray) {
+        napi_typedarray_type type;
+        napi_value arraybuffer;
+        size_t byte_offset = 0, byte_len = 0;
+        void* data = nullptr;
+        if (napi_get_typedarray_info(env, val, &type, &byte_len, &data, &arraybuffer, &byte_offset) == napi_ok) {
+            *out_ptr = static_cast<const uint8_t*>(data);
+            *out_len = static_cast<int>(byte_len);
+        }
+        return;
+    }
+    bool is_buffer = false;
+    napi_is_buffer(env, val, &is_buffer);
+    if (is_buffer) {
+        void* data = nullptr;
+        size_t byte_len = 0;
+        if (napi_get_buffer_info(env, val, &data, &byte_len) == napi_ok) {
+            *out_ptr = static_cast<const uint8_t*>(data);
+            *out_len = static_cast<int>(byte_len);
+        }
+    }
+}
+
+void ExtractMetadata(
+    napi_env env,
+    napi_value meta_arr,
+    std::vector<std::string>& keys_str,
+    std::vector<std::string>& vals_str,
+    std::vector<const char*>& keys_ptr,
+    std::vector<const char*>& vals_ptr
+) {
+    uint32_t meta_len = 0;
+    if (napi_get_array_length(env, meta_arr, &meta_len) != napi_ok) return;
+
+    keys_str.reserve(meta_len);
+    vals_str.reserve(meta_len);
+    keys_ptr.reserve(meta_len);
+    vals_ptr.reserve(meta_len);
+
+    for (uint32_t i = 0; i < meta_len; i++) {
+        napi_value pair_val;
+        napi_get_element(env, meta_arr, i, &pair_val);
+        uint32_t pair_len = 0;
+        napi_get_array_length(env, pair_val, &pair_len);
+        if (pair_len == 2) {
+            napi_value k_val, v_val;
+            napi_get_element(env, pair_val, 0, &k_val);
+            napi_get_element(env, pair_val, 1, &v_val);
+
+            char k_buf[512], v_buf[512];
+            size_t k_len = 0, v_len = 0;
+            napi_get_value_string_utf8(env, k_val, k_buf, sizeof(k_buf), &k_len);
+            napi_get_value_string_utf8(env, v_val, v_buf, sizeof(v_buf), &v_len);
+
+            keys_str.emplace_back(k_buf, k_len);
+            vals_str.emplace_back(v_buf, v_len);
+        }
+    }
+    for (size_t i = 0; i < keys_str.size(); i++) {
+        keys_ptr.push_back(keys_str[i].c_str());
+        vals_ptr.push_back(vals_str[i].c_str());
+    }
+}
+
+void ExtractCellFromJsValue(
+    napi_env env,
+    napi_value val,
+    napi_value fallback_fn,
+    CSpannerCell* cell,
+    Arena& arena,
+    bool need_type_code = false
+) {
+    memset(cell, 0, sizeof(CSpannerCell));
+    napi_valuetype vtype = napi_undefined;
+    napi_typeof(env, val, &vtype);
+
+    switch (vtype) {
+        case napi_null:
+        case napi_undefined:
+            cell->kind = CELL_KIND_NULL;
+            cell->type_code = 0;
+            return;
+
+        case napi_boolean: {
+            bool b = false;
+            napi_get_value_bool(env, val, &b);
+            cell->kind = CELL_KIND_BOOL;
+            cell->bool_val = b ? 1 : 0;
+            cell->type_code = 1; // BOOL
+            return;
+        }
+
+        case napi_string: {
+            size_t len = 0;
+            char* dst = arena.copy_str(env, val, &len);
+            cell->kind = CELL_KIND_STRING;
+            cell->str_val = dst;
+            cell->str_len = static_cast<uint32_t>(len);
+            cell->type_code = 6; // STRING
+            return;
+        }
+
+        case napi_number: {
+            double d = 0;
+            napi_get_value_double(env, val, &d);
+            if (std::isfinite(d) && std::fmod(d, 1.0) == 0.0 &&
+                d >= -9007199254740991.0 && d <= 9007199254740991.0) {
+                char buf[32];
+                int len = snprintf(buf, sizeof(buf), "%.0f", d);
+                char* dst = arena.alloc(len + 1);
+                memcpy(dst, buf, len + 1);
+                cell->kind = CELL_KIND_STRING;
+                cell->str_val = dst;
+                cell->str_len = static_cast<uint32_t>(len);
+                cell->type_code = 2; // INT64
+            } else if (!std::isfinite(d)) {
+                const char* s = std::isnan(d) ? "NaN" : (d > 0 ? "Infinity" : "-Infinity");
+                size_t len = strlen(s);
+                char* dst = arena.alloc(len + 1);
+                memcpy(dst, s, len + 1);
+                cell->kind = CELL_KIND_STRING;
+                cell->str_val = dst;
+                cell->str_len = static_cast<uint32_t>(len);
+                cell->type_code = 3; // FLOAT64
+            } else {
+                cell->kind = CELL_KIND_NUMBER;
+                cell->number_val = d;
+                cell->type_code = 3; // FLOAT64
+            }
+            return;
+        }
+
+        case napi_object: {
+            bool is_buf = false;
+            napi_is_buffer(env, val, &is_buf);
+            if (is_buf) {
+                void* data = nullptr;
+                size_t len = 0;
+                napi_get_buffer_info(env, val, &data, &len);
+                size_t b64_len = ((len + 2) / 3) * 4;
+                char* dst = arena.alloc(b64_len + 1);
+                size_t actual = Base64Encode(static_cast<const uint8_t*>(data), len, dst);
+                dst[actual] = '\0';
+                cell->kind = CELL_KIND_STRING;
+                cell->str_val = dst;
+                cell->str_len = static_cast<uint32_t>(actual);
+                cell->type_code = 7; // BYTES
+                return;
+            }
+
+            bool has_val = false;
+            if (napi_has_named_property(env, val, "value", &has_val) == napi_ok && has_val) {
+                napi_value inner_val;
+                if (napi_get_named_property(env, val, "value", &inner_val) == napi_ok) {
+                    napi_valuetype iv_type = napi_undefined;
+                    napi_typeof(env, inner_val, &iv_type);
+                    if (iv_type == napi_string) {
+                        size_t len = 0;
+                        char* dst = arena.copy_str(env, inner_val, &len);
+                        cell->kind = CELL_KIND_STRING;
+                        cell->str_val = dst;
+                        cell->str_len = static_cast<uint32_t>(len);
+                        cell->type_code = 6;
+                        if (need_type_code) {
+                            napi_value ctor, ctor_name;
+                            if (napi_get_named_property(env, val, "constructor", &ctor) == napi_ok &&
+                                napi_get_named_property(env, ctor, "name", &ctor_name) == napi_ok) {
+                                char cname[32];
+                                size_t clen = 0;
+                                napi_get_value_string_utf8(env, ctor_name, cname, sizeof(cname), &clen);
+                                if (strcmp(cname, "Int") == 0) cell->type_code = 2;
+                                else if (strcmp(cname, "Numeric") == 0 || strcmp(cname, "PGNumeric") == 0) cell->type_code = 10;
+                                else if (strcmp(cname, "SpannerDate") == 0) cell->type_code = 5;
+                            }
+                        }
+                        return;
+                    } else if (iv_type == napi_number) {
+                        double d = 0;
+                        napi_get_value_double(env, inner_val, &d);
+                        if (!std::isfinite(d)) {
+                            const char* s = std::isnan(d) ? "NaN" : (d > 0 ? "Infinity" : "-Infinity");
+                            size_t len = strlen(s);
+                            char* dst = arena.alloc(len + 1);
+                            memcpy(dst, s, len + 1);
+                            cell->kind = CELL_KIND_STRING;
+                            cell->str_val = dst;
+                            cell->str_len = static_cast<uint32_t>(len);
+                        } else {
+                            cell->kind = CELL_KIND_NUMBER;
+                            cell->number_val = d;
+                        }
+                        cell->type_code = 3;
+                        if (need_type_code) {
+                            napi_value ctor, ctor_name;
+                            if (napi_get_named_property(env, val, "constructor", &ctor) == napi_ok &&
+                                napi_get_named_property(env, ctor, "name", &ctor_name) == napi_ok) {
+                                char cname[32];
+                                size_t clen = 0;
+                                napi_get_value_string_utf8(env, ctor_name, cname, sizeof(cname), &clen);
+                                if (strcmp(cname, "Float32") == 0) cell->type_code = 15;
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+
+            bool is_date = false;
+            napi_is_date(env, val, &is_date);
+            if (is_date) {
+                napi_value ctor, ctor_name;
+                char cname[32] = {0};
+                if (napi_get_named_property(env, val, "constructor", &ctor) == napi_ok &&
+                    napi_get_named_property(env, ctor, "name", &ctor_name) == napi_ok) {
+                    size_t clen = 0;
+                    napi_get_value_string_utf8(env, ctor_name, cname, sizeof(cname), &clen);
+                }
+                if (strcmp(cname, "Date") == 0) {
+                    double ms = 0;
+                    if (napi_get_date_value(env, val, &ms) == napi_ok && std::isfinite(ms)) {
+                        int64_t total_ms = static_cast<int64_t>(ms);
+                        time_t sec = static_cast<time_t>(total_ms / 1000);
+                        int millis = static_cast<int>(total_ms % 1000);
+                        if (millis < 0) {
+                            sec -= 1;
+                            millis += 1000;
+                        }
+                        struct tm tm_val;
+                        gmtime_r(&sec, &tm_val);
+                        char buf[32];
+                        int len = snprintf(
+                            buf,
+                            sizeof(buf),
+                            "%04d-%02d-%02dT%02d:%02d:%02d.%03dZ",
+                            tm_val.tm_year + 1900,
+                            tm_val.tm_mon + 1,
+                            tm_val.tm_mday,
+                            tm_val.tm_hour,
+                            tm_val.tm_min,
+                            tm_val.tm_sec,
+                            millis
+                        );
+                        char* dst = arena.alloc(len + 1);
+                        memcpy(dst, buf, len + 1);
+                        cell->kind = CELL_KIND_STRING;
+                        cell->str_val = dst;
+                        cell->str_len = static_cast<uint32_t>(len);
+                        cell->type_code = 4; // TIMESTAMP
+                        return;
+                    }
+                } else if (strcmp(cname, "SpannerDate") == 0 || strcmp(cname, "PreciseDate") == 0) {
+                    napi_value to_json_fn, str_res;
+                    if (napi_get_named_property(env, val, "toJSON", &to_json_fn) == napi_ok &&
+                        napi_call_function(env, val, to_json_fn, 0, nullptr, &str_res) == napi_ok) {
+                        size_t len = 0;
+                        char* dst = arena.copy_str(env, str_res, &len);
+                        cell->kind = CELL_KIND_STRING;
+                        cell->str_val = dst;
+                        cell->str_len = static_cast<uint32_t>(len);
+                        cell->type_code = (strcmp(cname, "SpannerDate") == 0) ? 5 : 4;
+                        return;
+                    }
+                }
+            }
+            break;
+        }
+
+        default:
+            break;
+    }
+
+    // Fallback for wrapper classes (Int, Float, Float32, Numeric, Date, PreciseDate, SpannerDate, Array, Struct)
+    if (fallback_fn != nullptr) {
+        napi_value global, res;
+        napi_get_global(env, &global);
+        if (napi_call_function(env, global, fallback_fn, 1, &val, &res) == napi_ok && res != nullptr) {
+            napi_value kind_val, type_code_val;
+            int32_t kind = 0, type_code = 0;
+            if (napi_get_named_property(env, res, "kind", &kind_val) == napi_ok) {
+                napi_get_value_int32(env, kind_val, &kind);
+            }
+            if (napi_get_named_property(env, res, "typeCode", &type_code_val) == napi_ok) {
+                napi_get_value_int32(env, type_code_val, &type_code);
+            }
+            cell->type_code = static_cast<uint16_t>(type_code);
+
+            if (kind == CELL_KIND_NULL) {
+                cell->kind = CELL_KIND_NULL;
+            } else if (kind == CELL_KIND_BOOL) {
+                napi_value b_val;
+                int32_t b = 0;
+                if (napi_get_named_property(env, res, "boolVal", &b_val) == napi_ok) {
+                    napi_get_value_int32(env, b_val, &b);
+                }
+                cell->kind = CELL_KIND_BOOL;
+                cell->bool_val = b ? 1 : 0;
+            } else if (kind == CELL_KIND_NUMBER) {
+                napi_value n_val;
+                double d = 0;
+                if (napi_get_named_property(env, res, "numVal", &n_val) == napi_ok) {
+                    napi_get_value_double(env, n_val, &d);
+                }
+                cell->kind = CELL_KIND_NUMBER;
+                cell->number_val = d;
+            } else if (kind == CELL_KIND_STRING) {
+                napi_value s_val;
+                if (napi_get_named_property(env, res, "strVal", &s_val) == napi_ok) {
+                    size_t len = 0;
+                    char* dst = arena.copy_str(env, s_val, &len);
+                    cell->kind = CELL_KIND_STRING;
+                    cell->str_val = dst;
+                    cell->str_len = static_cast<uint32_t>(len);
+                }
+            } else if (kind == CELL_KIND_PROTO_VALUE) {
+                napi_value pb_val;
+                if (napi_get_named_property(env, res, "pbBytes", &pb_val) == napi_ok) {
+                    const uint8_t* pb_ptr = nullptr;
+                    int pb_len = 0;
+                    ExtractBytesInfo(env, pb_val, &pb_ptr, &pb_len);
+                    if (pb_ptr != nullptr && pb_len > 0) {
+                        char* dst = arena.alloc(pb_len);
+                        memcpy(dst, pb_ptr, pb_len);
+                        cell->kind = CELL_KIND_PROTO_VALUE;
+                        cell->str_val = dst;
+                        cell->str_len = static_cast<uint32_t>(pb_len);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Function: commitNative
+napi_value CommitNative(napi_env env, napi_callback_info info) {
+    size_t argc = 10;
+    napi_value args[10];
+    napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
+
+    if (argc < 10) {
+        napi_throw_type_error(env, nullptr, "Wrong number of arguments for commitNative");
+        return nullptr;
+    }
+
+    CoreClientHandleWrapper* wrap = nullptr;
+    napi_unwrap(env, args[0], reinterpret_cast<void**>(&wrap));
+    if (wrap == nullptr || wrap->handle == 0) {
+        napi_throw_error(env, nullptr, "Invalid CoreClientHandle");
+        return nullptr;
+    }
+
+    Arena arena;
+
+    size_t rk_len = 0;
+    char* routing_key_ptr = arena.copy_str(env, args[1], &rk_len);
+
+    std::vector<std::string> meta_keys_str, meta_vals_str;
+    std::vector<const char*> meta_keys_ptr, meta_vals_ptr;
+    ExtractMetadata(env, args[2], meta_keys_str, meta_vals_str, meta_keys_ptr, meta_vals_ptr);
+
+    const uint8_t* base_req_ptr = nullptr;
+    int base_req_len = 0;
+    ExtractBytesInfo(env, args[3], &base_req_ptr, &base_req_len);
+
+    bool inline_begin = false;
+    napi_get_value_bool(env, args[4], &inline_begin);
+
+    const uint8_t* begin_req_ptr = nullptr;
+    int begin_req_len = 0;
+    ExtractBytesInfo(env, args[5], &begin_req_ptr, &begin_req_len);
+
+    bool is_mux_rw = false;
+    napi_get_value_bool(env, args[6], &is_mux_rw);
+
+    napi_value mutations_arr = args[7];
+    napi_value fallback_fn = args[8];
+    napi_value callback_val = args[9];
+
+    uint32_t mut_count = 0;
+    napi_get_array_length(env, mutations_arr, &mut_count);
+
+    CSpannerMutation* c_mutations = nullptr;
+    if (mut_count > 0) {
+        c_mutations = reinterpret_cast<CSpannerMutation*>(arena.alloc(sizeof(CSpannerMutation) * mut_count));
+        memset(c_mutations, 0, sizeof(CSpannerMutation) * mut_count);
+    }
+
+    for (uint32_t i = 0; i < mut_count; i++) {
+        napi_value mut_obj;
+        napi_get_element(env, mutations_arr, i, &mut_obj);
+
+        CSpannerMutation& cm = c_mutations[i];
+
+        napi_value op_val;
+        int32_t op = 0;
+        if (napi_get_named_property(env, mut_obj, "op", &op_val) == napi_ok) {
+            napi_get_value_int32(env, op_val, &op);
+        }
+        cm.op = op;
+
+        if (op == MUTATION_OP_RAW_PB) {
+            napi_value raw_val;
+            if (napi_get_named_property(env, mut_obj, "rawPb", &raw_val) == napi_ok) {
+                ExtractBytesInfo(env, raw_val, &cm.raw_pb, &cm.raw_pb_len);
+            }
+            continue;
+        }
+
+        napi_value table_val;
+        if (napi_get_named_property(env, mut_obj, "table", &table_val) == napi_ok) {
+            cm.table = arena.copy_str(env, table_val);
+        }
+
+        if (op == MUTATION_OP_DELETE) {
+            napi_value keys_arr;
+            if (napi_get_named_property(env, mut_obj, "keys", &keys_arr) == napi_ok) {
+                uint32_t row_count = 0;
+                napi_get_array_length(env, keys_arr, &row_count);
+                cm.row_count = static_cast<int>(row_count);
+                if (row_count > 0) {
+                    napi_value first_key;
+                    napi_get_element(env, keys_arr, 0, &first_key);
+                    bool is_arr = false;
+                    napi_is_array(env, first_key, &is_arr);
+                    uint32_t col_count = 1;
+                    if (is_arr) {
+                        napi_get_array_length(env, first_key, &col_count);
+                    }
+                    cm.col_count = static_cast<int>(col_count);
+                    cm.cells = reinterpret_cast<CSpannerCell*>(arena.alloc(sizeof(CSpannerCell) * row_count * col_count));
+
+                    for (uint32_t r = 0; r < row_count; r++) {
+                        napi_value key_item;
+                        napi_get_element(env, keys_arr, r, &key_item);
+                        bool item_is_arr = false;
+                        napi_is_array(env, key_item, &item_is_arr);
+                        if (item_is_arr) {
+                            for (uint32_t c = 0; c < col_count; c++) {
+                                napi_value elem;
+                                napi_get_element(env, key_item, c, &elem);
+                                ExtractCellFromJsValue(env, elem, fallback_fn, &cm.cells[r * col_count + c], arena);
+                            }
+                        } else {
+                            ExtractCellFromJsValue(env, key_item, fallback_fn, &cm.cells[r * col_count], arena);
+                        }
+                    }
+                }
+            }
+            continue;
+        }
+
+        // Write operations (Insert, Update, InsertOrUpdate, Replace)
+        napi_value cols_arr, rows_arr;
+        uint32_t col_count = 0, row_count = 0;
+        if (napi_get_named_property(env, mut_obj, "columns", &cols_arr) == napi_ok) {
+            napi_get_array_length(env, cols_arr, &col_count);
+        }
+        if (napi_get_named_property(env, mut_obj, "rows", &rows_arr) == napi_ok) {
+            napi_get_array_length(env, rows_arr, &row_count);
+        }
+
+        cm.col_count = static_cast<int>(col_count);
+        cm.row_count = static_cast<int>(row_count);
+
+        std::vector<napi_value> col_prop_keys(col_count);
+        if (col_count > 0) {
+            cm.columns = reinterpret_cast<const char**>(arena.alloc(sizeof(const char*) * col_count));
+            for (uint32_t c = 0; c < col_count; c++) {
+                napi_value col_val;
+                napi_get_element(env, cols_arr, c, &col_val);
+                col_prop_keys[c] = col_val;
+                cm.columns[c] = arena.copy_str(env, col_val);
+            }
+        }
+
+        if (row_count > 0 && col_count > 0) {
+            cm.cells = reinterpret_cast<CSpannerCell*>(arena.alloc(sizeof(CSpannerCell) * row_count * col_count));
+            for (uint32_t r = 0; r < row_count; r++) {
+                napi_value row_obj;
+                napi_get_element(env, rows_arr, r, &row_obj);
+                bool row_is_arr = false;
+                napi_is_array(env, row_obj, &row_is_arr);
+                uint32_t row_offset = r * col_count;
+                if (row_is_arr) {
+                    for (uint32_t c = 0; c < col_count; c++) {
+                        napi_value cell_val;
+                        napi_get_element(env, row_obj, c, &cell_val);
+                        ExtractCellFromJsValue(env, cell_val, fallback_fn, &cm.cells[row_offset + c], arena);
+                    }
+                } else {
+                    for (uint32_t c = 0; c < col_count; c++) {
+                        napi_value cell_val;
+                        napi_get_property(env, row_obj, col_prop_keys[c], &cell_val);
+                        ExtractCellFromJsValue(env, cell_val, fallback_fn, &cm.cells[row_offset + c], arena);
+                    }
+                }
+            }
+        }
+    }
+
+    CSpannerCommitRequest c_req;
+    memset(&c_req, 0, sizeof(c_req));
+    c_req.routing_key = routing_key_ptr;
+    c_req.meta_keys = meta_keys_ptr.data();
+    c_req.meta_vals = meta_vals_ptr.data();
+    c_req.meta_count = static_cast<int>(meta_keys_ptr.size());
+    c_req.base_req_pb = base_req_ptr;
+    c_req.base_req_len = base_req_len;
+    c_req.inline_begin = inline_begin ? 1 : 0;
+    c_req.begin_req_pb = begin_req_ptr;
+    c_req.begin_req_len = begin_req_len;
+    c_req.is_mux_rw = is_mux_rw ? 1 : 0;
+    c_req.mutation_count = static_cast<int>(mut_count);
+    c_req.mutations = c_mutations;
+
+    UnaryCallbackContext* cb_ctx = new UnaryCallbackContext();
+    napi_value resource_name;
+    napi_create_string_utf8(env, "SpannerGoCommit", NAPI_AUTO_LENGTH, &resource_name);
+
+    napi_status status = napi_create_threadsafe_function(
+        env,
+        callback_val,
+        nullptr,
+        resource_name,
+        0,
+        1,
+        nullptr,
+        nullptr,
+        cb_ctx,
+        CallJsUnaryHandler,
+        &(cb_ctx->tsfn)
+    );
+    if (status != napi_ok) {
+        delete cb_ctx;
+        napi_throw_error(env, nullptr, "Failed to create threadsafe function for commitNative");
+        return nullptr;
+    }
+
+    CommitNativeGo(wrap->handle, &c_req, OnGoUnaryResponse, cb_ctx);
+
+    napi_value undef;
+    napi_get_undefined(env, &undef);
+    return undef;
+}
+
+// Function: executeBatchDmlNative
+napi_value ExecuteBatchDmlNative(napi_env env, napi_callback_info info) {
+    size_t argc = 8;
+    napi_value args[8];
+    napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
+
+    if (argc < 8) {
+        napi_throw_type_error(env, nullptr, "Wrong number of arguments for executeBatchDmlNative");
+        return nullptr;
+    }
+
+    CoreClientHandleWrapper* wrap = nullptr;
+    napi_unwrap(env, args[0], reinterpret_cast<void**>(&wrap));
+    if (wrap == nullptr || wrap->handle == 0) {
+        napi_throw_error(env, nullptr, "Invalid CoreClientHandle");
+        return nullptr;
+    }
+
+    Arena arena;
+
+    size_t rk_len = 0;
+    char* routing_key_ptr = arena.copy_str(env, args[1], &rk_len);
+
+    std::vector<std::string> meta_keys_str, meta_vals_str;
+    std::vector<const char*> meta_keys_ptr, meta_vals_ptr;
+    ExtractMetadata(env, args[2], meta_keys_str, meta_vals_str, meta_keys_ptr, meta_vals_ptr);
+
+    const uint8_t* base_req_ptr = nullptr;
+    int base_req_len = 0;
+    ExtractBytesInfo(env, args[3], &base_req_ptr, &base_req_len);
+
+    napi_value stmts_arr = args[4];
+    napi_value fallback_fn = args[5];
+    bool is_single_sql = false;
+    napi_get_value_bool(env, args[6], &is_single_sql);
+    napi_value callback_val = args[7];
+
+    uint32_t stmt_count = 0;
+    napi_get_array_length(env, stmts_arr, &stmt_count);
+
+    CSpannerStatement* c_stmts = nullptr;
+    if (stmt_count > 0) {
+        c_stmts = reinterpret_cast<CSpannerStatement*>(arena.alloc(sizeof(CSpannerStatement) * stmt_count));
+        memset(c_stmts, 0, sizeof(CSpannerStatement) * stmt_count);
+    }
+
+    for (uint32_t i = 0; i < stmt_count; i++) {
+        napi_value stmt_obj;
+        napi_get_element(env, stmts_arr, i, &stmt_obj);
+
+        CSpannerStatement& cs = c_stmts[i];
+
+        napi_value sql_val;
+        if (napi_get_named_property(env, stmt_obj, "sql", &sql_val) == napi_ok) {
+            cs.sql = arena.copy_str(env, sql_val);
+        }
+
+        napi_value names_arr, vals_arr, types_arr;
+        uint32_t param_count = 0;
+        if (napi_get_named_property(env, stmt_obj, "paramNames", &names_arr) == napi_ok) {
+            napi_get_array_length(env, names_arr, &param_count);
+        }
+        cs.param_count = static_cast<int>(param_count);
+
+        if (param_count > 0) {
+            napi_get_named_property(env, stmt_obj, "paramValues", &vals_arr);
+            bool has_types = (napi_get_named_property(env, stmt_obj, "paramTypesPb", &types_arr) == napi_ok);
+
+            cs.param_names = reinterpret_cast<const char**>(arena.alloc(sizeof(const char*) * param_count));
+            cs.param_cells = reinterpret_cast<CSpannerCell*>(arena.alloc(sizeof(CSpannerCell) * param_count));
+            cs.param_types_pb = reinterpret_cast<const uint8_t**>(arena.alloc(sizeof(const uint8_t*) * param_count));
+            cs.param_types_len = reinterpret_cast<int*>(arena.alloc(sizeof(int) * param_count));
+
+            for (uint32_t p = 0; p < param_count; p++) {
+                napi_value name_val, val_item;
+                napi_get_element(env, names_arr, p, &name_val);
+                napi_get_element(env, vals_arr, p, &val_item);
+
+                cs.param_names[p] = arena.copy_str(env, name_val);
+                ExtractCellFromJsValue(env, val_item, fallback_fn, &cs.param_cells[p], arena, true);
+
+                cs.param_types_pb[p] = nullptr;
+                cs.param_types_len[p] = 0;
+                if (has_types) {
+                    napi_value type_pb_val;
+                    if (napi_get_element(env, types_arr, p, &type_pb_val) == napi_ok) {
+                        ExtractBytesInfo(env, type_pb_val, &cs.param_types_pb[p], &cs.param_types_len[p]);
+                    }
+                }
+            }
+        }
+    }
+
+    CSpannerBatchDmlRequest c_req;
+    memset(&c_req, 0, sizeof(c_req));
+    c_req.routing_key = routing_key_ptr;
+    c_req.meta_keys = meta_keys_ptr.data();
+    c_req.meta_vals = meta_vals_ptr.data();
+    c_req.meta_count = static_cast<int>(meta_keys_ptr.size());
+    c_req.base_req_pb = base_req_ptr;
+    c_req.base_req_len = base_req_len;
+    c_req.stmt_count = static_cast<int>(stmt_count);
+    c_req.statements = c_stmts;
+
+    UnaryCallbackContext* cb_ctx = new UnaryCallbackContext();
+    napi_value resource_name;
+    napi_create_string_utf8(env, "SpannerGoDml", NAPI_AUTO_LENGTH, &resource_name);
+
+    napi_status status = napi_create_threadsafe_function(
+        env,
+        callback_val,
+        nullptr,
+        resource_name,
+        0,
+        1,
+        nullptr,
+        nullptr,
+        cb_ctx,
+        CallJsUnaryHandler,
+        &(cb_ctx->tsfn)
+    );
+    if (status != napi_ok) {
+        delete cb_ctx;
+        napi_throw_error(env, nullptr, "Failed to create threadsafe function for executeBatchDmlNative");
+        return nullptr;
+    }
+
+    if (is_single_sql) {
+        ExecuteSqlDmlNativeGo(wrap->handle, &c_req, OnGoUnaryResponse, cb_ctx);
+    } else {
+        ExecuteBatchDmlNativeGo(wrap->handle, &c_req, OnGoUnaryResponse, cb_ctx);
+    }
+
+    napi_value undef;
+    napi_get_undefined(env, &undef);
+    return undef;
+}
+
+// Function: beginTransactionNative
+napi_value BeginTransactionNative(napi_env env, napi_callback_info info) {
+    size_t argc = 5;
+    napi_value args[5];
+    napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
+
+    if (argc < 5) {
+        napi_throw_type_error(env, nullptr, "Wrong number of arguments for beginTransactionNative");
+        return nullptr;
+    }
+
+    CoreClientHandleWrapper* wrap = nullptr;
+    napi_unwrap(env, args[0], reinterpret_cast<void**>(&wrap));
+    if (wrap == nullptr || wrap->handle == 0) {
+        napi_throw_error(env, nullptr, "Invalid CoreClientHandle");
+        return nullptr;
+    }
+
+    char routing_key_buf[256];
+    size_t rk_len = 0;
+    napi_get_value_string_utf8(env, args[1], routing_key_buf, sizeof(routing_key_buf), &rk_len);
+
+    std::vector<std::string> meta_keys_str, meta_vals_str;
+    std::vector<const char*> meta_keys_ptr, meta_vals_ptr;
+    ExtractMetadata(env, args[2], meta_keys_str, meta_vals_str, meta_keys_ptr, meta_vals_ptr);
+
+    const uint8_t* req_ptr = nullptr;
+    int req_len = 0;
+    ExtractBytesInfo(env, args[3], &req_ptr, &req_len);
+
+    napi_value callback_val = args[4];
+
+    UnaryCallbackContext* cb_ctx = new UnaryCallbackContext();
+    napi_value resource_name;
+    napi_create_string_utf8(env, "SpannerGoBeginTx", NAPI_AUTO_LENGTH, &resource_name);
+
+    napi_status status = napi_create_threadsafe_function(
+        env,
+        callback_val,
+        nullptr,
+        resource_name,
+        0,
+        1,
+        nullptr,
+        nullptr,
+        cb_ctx,
+        CallJsUnaryHandler,
+        &(cb_ctx->tsfn)
+    );
+    if (status != napi_ok) {
+        delete cb_ctx;
+        napi_throw_error(env, nullptr, "Failed to create threadsafe function for beginTransactionNative");
+        return nullptr;
+    }
+
+    BeginTransactionNativeGo(
+        wrap->handle,
+        routing_key_buf,
+        meta_keys_ptr.data(),
+        meta_vals_ptr.data(),
+        static_cast<int>(meta_keys_ptr.size()),
+        reinterpret_cast<const char*>(req_ptr),
+        req_len,
+        OnGoUnaryResponse,
+        cb_ctx
+    );
+
+    napi_value undef;
+    napi_get_undefined(env, &undef);
+    return undef;
+}
+
 // Module initialization
 napi_value Init(napi_env env, napi_value exports) {
     napi_property_descriptor properties[] = {
@@ -432,10 +1468,13 @@ napi_value Init(napi_env env, napi_value exports) {
     napi_create_reference(env, cons, 1, &constructor_ref);
     napi_set_named_property(env, exports, "CoreClientHandle", cons);
 
-    napi_property_descriptor fn_prop = {
-        "executeStreamingSqlNative", nullptr, ExecuteStreamingSqlNative, nullptr, nullptr, nullptr, napi_default, nullptr
+    napi_property_descriptor fn_props[] = {
+        { "executeStreamingSqlNative", nullptr, ExecuteStreamingSqlNative, nullptr, nullptr, nullptr, napi_default, nullptr },
+        { "commitNative", nullptr, CommitNative, nullptr, nullptr, nullptr, napi_default, nullptr },
+        { "executeBatchDmlNative", nullptr, ExecuteBatchDmlNative, nullptr, nullptr, nullptr, napi_default, nullptr },
+        { "beginTransactionNative", nullptr, BeginTransactionNative, nullptr, nullptr, nullptr, napi_default, nullptr }
     };
-    napi_define_properties(env, exports, 1, &fn_prop);
+    napi_define_properties(env, exports, 4, fn_props);
 
     return exports;
 }

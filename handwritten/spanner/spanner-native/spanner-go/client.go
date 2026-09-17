@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"hash/fnv"
 	"net"
 	"net/http"
 	"os"
@@ -21,6 +22,7 @@ import (
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/metadata"
 )
 
 const (
@@ -83,7 +85,7 @@ type CoreClient struct {
 // NewCoreClient initializes the Go Spanner Core client.
 // When GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS=true, it uses gapic.NewClient with a gRPC connection pool to enable DirectPath.
 // Otherwise, it explicitly disables gRPC DirectPath to maintain an apples-to-apples network comparison with the Rust prototype and Node.js baseline.
-func NewCoreClient(channelCount int) (*CoreClient, error) {
+func NewCoreClient(channelCount int, customEndpoint string) (*CoreClient, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	limit := channelCount
@@ -115,7 +117,7 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		})
 	}
 
-	if isDirectPathEnabled() {
+	if isDirectPathEnabled() && customEndpoint == "" {
 		// Enable gRPC DirectPath via GAPIC client with connection pooling matching channelCount
 		os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
 		os.Unsetenv("DISABLE_DIRECT_PATH")
@@ -149,14 +151,24 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
 
 	// 3. Resolve the target endpoint. Production (GFE + TLS) is the default;
-	// SPANNER_EMULATOR_HOST selects a plaintext local emulator and
-	// SPANNER_NATIVE_ENDPOINT overrides the host while keeping TLS. Neither is
-	// set in benchmark runs, so the production path is byte-for-byte unchanged.
+	// customEndpoint or SPANNER_EMULATOR_HOST selects a plaintext local emulator and
+	// SPANNER_NATIVE_ENDPOINT overrides the host while keeping TLS.
 	endpoint := spannerEndpoint
 	serverName := spannerDomain
 	plaintext := false
 
-	if h := os.Getenv("SPANNER_EMULATOR_HOST"); h != "" {
+	if customEndpoint != "" {
+		endpoint = customEndpoint
+		if host, _, splitErr := net.SplitHostPort(customEndpoint); splitErr == nil {
+			if host == "127.0.0.1" || host == "localhost" || host == "0.0.0.0" {
+				plaintext = true
+			} else {
+				serverName = host
+			}
+		} else if customEndpoint == "127.0.0.1" || customEndpoint == "localhost" {
+			plaintext = true
+		}
+	} else if h := os.Getenv("SPANNER_EMULATOR_HOST"); h != "" {
 		endpoint = h
 		plaintext = true
 	} else if h := os.Getenv("SPANNER_NATIVE_ENDPOINT"); h != "" {
@@ -292,6 +304,64 @@ func (c *CoreClient) GetConn() *grpc.ClientConn {
 	}
 	idx := atomic.AddUint64(&c.reqCounter, 1) % count
 	return c.conns[idx]
+}
+
+// GetConnByKey returns a connection pinned to routingKey if non-empty, or round-robin otherwise.
+func (c *CoreClient) GetConnByKey(routingKey string) *grpc.ClientConn {
+	count := uint64(len(c.conns))
+	if count == 0 {
+		return nil
+	}
+	if routingKey == "" {
+		return c.GetConn()
+	}
+	h := fnv.New64a()
+	_, _ = h.Write([]byte(routingKey))
+	return c.conns[h.Sum64()%count]
+}
+
+// BeginTransaction dispatches a unary BeginTransaction call.
+func (c *CoreClient) BeginTransaction(ctx context.Context, routingKey string, req *spannerpb.BeginTransactionRequest) (*spannerpb.Transaction, metadata.MD, error) {
+	conn := c.GetConnByKey(routingKey)
+	if conn == nil {
+		return nil, nil, fmt.Errorf("no active gRPC connection available")
+	}
+	var trailer metadata.MD
+	resp, err := spannerpb.NewSpannerClient(conn).BeginTransaction(ctx, req, grpc.Trailer(&trailer))
+	return resp, trailer, err
+}
+
+// Commit dispatches a unary Commit call.
+func (c *CoreClient) Commit(ctx context.Context, routingKey string, req *spannerpb.CommitRequest) (*spannerpb.CommitResponse, metadata.MD, error) {
+	conn := c.GetConnByKey(routingKey)
+	if conn == nil {
+		return nil, nil, fmt.Errorf("no active gRPC connection available")
+	}
+	var trailer metadata.MD
+	resp, err := spannerpb.NewSpannerClient(conn).Commit(ctx, req, grpc.Trailer(&trailer))
+	return resp, trailer, err
+}
+
+// ExecuteBatchDml dispatches a unary ExecuteBatchDml call.
+func (c *CoreClient) ExecuteBatchDml(ctx context.Context, routingKey string, req *spannerpb.ExecuteBatchDmlRequest) (*spannerpb.ExecuteBatchDmlResponse, metadata.MD, error) {
+	conn := c.GetConnByKey(routingKey)
+	if conn == nil {
+		return nil, nil, fmt.Errorf("no active gRPC connection available")
+	}
+	var trailer metadata.MD
+	resp, err := spannerpb.NewSpannerClient(conn).ExecuteBatchDml(ctx, req, grpc.Trailer(&trailer))
+	return resp, trailer, err
+}
+
+// ExecuteSql dispatches a unary ExecuteSql call (used for DML runUpdate).
+func (c *CoreClient) ExecuteSql(ctx context.Context, routingKey string, req *spannerpb.ExecuteSqlRequest) (*spannerpb.ResultSet, metadata.MD, error) {
+	conn := c.GetConnByKey(routingKey)
+	if conn == nil {
+		return nil, nil, fmt.Errorf("no active gRPC connection available")
+	}
+	var trailer metadata.MD
+	resp, err := spannerpb.NewSpannerClient(conn).ExecuteSql(ctx, req, grpc.Trailer(&trailer))
+	return resp, trailer, err
 }
 
 // GetToken retrieves the cached OAuth2 bearer token.
