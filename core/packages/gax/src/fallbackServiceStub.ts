@@ -262,7 +262,13 @@ export function generateServiceStub(
         // an already-expired deadline is clamped. Zero is a fine value here: it
         // aborts on the next tick, which is the right answer for a deadline
         // that has already passed.
-        timeoutMs = Math.max(0, callOptions.deadline.getTime() - Date.now());
+        const deadlineMs =
+          callOptions.deadline instanceof Date
+            ? callOptions.deadline.getTime()
+            : Number(callOptions.deadline);
+        if (Number.isFinite(deadlineMs)) {
+          timeoutMs = Math.max(0, Math.trunc(deadlineMs - Date.now()));
+        }
       }
 
       // We cannot use async-await in this function because we need to return the canceller object as soon as possible.

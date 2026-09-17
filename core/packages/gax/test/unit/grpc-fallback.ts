@@ -815,6 +815,64 @@ describe('grpc-fallback', () => {
       assert.strictEqual(await abortedWithin(signalOf(requests[0]), 100), true);
     });
 
+    it('should ignore a deadline that is not a valid date', async () => {
+      const requests = recordRequests(
+        gaxGrpc,
+        new Response(Buffer.from(JSON.stringify({content: 'test'}))),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      // `new Date('nonsense').getTime()` is NaN, and NaN survives both the
+      // subtraction and `Math.max`. `AbortSignal.timeout(NaN)` does not
+      // coerce it to zero: it throws a RangeError, synchronously, out of the
+      // stub and past the callback, so a caller that mistyped a date got an
+      // exception from a layer it never called instead of an RPC result.
+      const err = await new Promise<unknown>(resolve => {
+        echoStub.echo(
+          {content: 'test'},
+          {},
+          {deadline: new Date('not a date')},
+          (callErr?: unknown) => resolve(callErr),
+        );
+      });
+
+      // A deadline we cannot read is no deadline: the call runs to completion
+      // rather than being aborted on an arbitrary schedule.
+      assert.strictEqual(err, null);
+      assert.strictEqual(
+        await abortedWithin(signalOf(requests[0]), 100),
+        false,
+      );
+    });
+
+    it('should honour a deadline given as epoch milliseconds', async () => {
+      const requests = recordRequests(
+        gaxGrpc,
+        new Response(Buffer.from(JSON.stringify({content: 'test'}))),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      // The stub types `deadline` as a `Date`, but the value is whatever the
+      // caller put in `CallOptions` and nothing checks that at runtime. gRPC
+      // expresses deadlines as epoch milliseconds, so a number is an easy
+      // thing to arrive with, and `.getTime()` is not a function on one:
+      // reaching for it directly threw a TypeError out of the stub instead of
+      // honouring a deadline that is perfectly readable.
+      await new Promise<void>(resolve => {
+        echoStub.echo(
+          {content: 'test'},
+          {},
+          {deadline: Date.now() + 50} as unknown as {deadline: Date},
+          () => resolve(),
+        );
+      });
+
+      assert.strictEqual(
+        await abortedWithin(signalOf(requests[0]), 1000),
+        true,
+      );
+    });
+
     it('should not bound server-streaming calls by the deadline', async () => {
       const responseStream = new stream.Readable();
       responseStream.push(JSON.stringify([{content: 'test'}]));
