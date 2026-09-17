@@ -50,6 +50,11 @@
                 "getReportTask"
               ]
             },
+            "Chat": {
+              "methods": [
+                "chat"
+              ]
+            },
             "RunReport": {
               "methods": [
                 "runReport"
@@ -134,6 +139,11 @@
             "GetReportTask": {
               "methods": [
                 "getReportTask"
+              ]
+            },
+            "Chat": {
+              "methods": [
+                "chat"
               ]
             },
             "RunReport": {
