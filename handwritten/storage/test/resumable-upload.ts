@@ -2445,6 +2445,99 @@ describe('resumable-upload', () => {
       );
     });
 
+    it('should set encryption headers when reqOpts.headers is a Headers instance', async () => {
+      const key = crypto.randomBytes(32);
+      up = upload({
+        bucket: 'BUCKET',
+        file: FILE,
+        key,
+        authConfig: {keyFile},
+        retryOptions: RETRY_OPTIONS,
+      });
+      const reqHeaders = new Headers({'x-custom-header': 'custom-val'});
+      const reqOpts: GaxiosOptions = {
+        ...REQ_OPTS,
+        headers: reqHeaders,
+      };
+      const scopes = [
+        mockAuthorizeRequest(),
+        nock(REQ_OPTS.url!)
+          .matchHeader('x-goog-encryption-algorithm', 'AES256')
+          .matchHeader('x-goog-encryption-key', up.encryption.key)
+          .matchHeader('x-goog-encryption-key-sha256', up.encryption.hash)
+          .matchHeader('x-custom-header', 'custom-val')
+          .get('/')
+          .reply(200, {}),
+      ];
+      const res = await up.makeRequest(reqOpts);
+      scopes.forEach(x => x.done());
+      assert.strictEqual(
+        reqHeaders.get('x-goog-encryption-algorithm'),
+        'AES256'
+      );
+      assert.strictEqual(
+        reqHeaders.get('x-goog-encryption-key'),
+        up.encryption.key
+      );
+      assert.strictEqual(
+        reqHeaders.get('x-goog-encryption-key-sha256'),
+        up.encryption.hash
+      );
+      const headers = res.config.headers;
+      assert.strictEqual(
+        getHeader(headers, 'x-goog-encryption-algorithm'),
+        'AES256'
+      );
+      assert.strictEqual(
+        getHeader(headers, 'x-goog-encryption-key'),
+        up.encryption.key
+      );
+      assert.strictEqual(
+        getHeader(headers, 'x-goog-encryption-key-sha256'),
+        up.encryption.hash
+      );
+    });
+
+    it('should set encryption headers when reqOpts.headers is a tuple array', async () => {
+      const key = crypto.randomBytes(32);
+      up = upload({
+        bucket: 'BUCKET',
+        file: FILE,
+        key,
+        authConfig: {keyFile},
+        retryOptions: RETRY_OPTIONS,
+      });
+      const reqOpts: GaxiosOptions = {
+        ...REQ_OPTS,
+        headers: [['x-custom-header', 'custom-val']],
+      };
+      const scopes = [
+        mockAuthorizeRequest(),
+        nock(REQ_OPTS.url!)
+          .matchHeader('x-goog-encryption-algorithm', 'AES256')
+          .matchHeader('x-goog-encryption-key', up.encryption.key)
+          .matchHeader('x-goog-encryption-key-sha256', up.encryption.hash)
+          .matchHeader('x-custom-header', 'custom-val')
+          .get('/')
+          .reply(200, {}),
+      ];
+      const res = await up.makeRequest(reqOpts);
+      scopes.forEach(x => x.done());
+      const headers = res.config.headers;
+      assert.strictEqual(
+        getHeader(headers, 'x-goog-encryption-algorithm'),
+        'AES256'
+      );
+      assert.strictEqual(
+        getHeader(headers, 'x-goog-encryption-key'),
+        up.encryption.key
+      );
+      assert.strictEqual(
+        getHeader(headers, 'x-goog-encryption-key-sha256'),
+        up.encryption.hash
+      );
+    });
+
     it('should set userProject', async () => {
       const scopes = [
         mockAuthorizeRequest(),

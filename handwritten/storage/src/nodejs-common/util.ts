@@ -144,7 +144,7 @@ export interface MakeAuthenticatedRequest {
   getCredentials: (
     callback: (err?: Error | null, credentials?: CredentialBody) => void
   ) => void;
-  authClient: GoogleAuth;
+  authClient: GoogleAuth<AuthClient>;
 }
 
 export interface Abortable {
@@ -195,7 +195,7 @@ export interface MakeAuthenticatedRequestFactoryConfig extends Omit<
    * A pre-instantiated `AuthClient` or `GoogleAuth` client that should be used.
    * A new client will be created if this is not set.
    */
-  authClient?: AuthClient | GoogleAuth;
+  authClient?: AuthClient | GoogleAuth<AuthClient>;
 
   /**
    * Determines if a projectId is required for authenticated requests. Defaults to `true`.
@@ -643,7 +643,7 @@ export class Util {
       delete googleAutoAuthConfig.projectId;
     }
 
-    let authClient: GoogleAuth;
+    let authClient: GoogleAuth<AuthClient>;
 
     if (googleAutoAuthConfig.authClient instanceof GoogleAuth) {
       // Use an existing `GoogleAuth`
@@ -652,8 +652,7 @@ export class Util {
       // Pass an `AuthClient` & `clientOptions` to `GoogleAuth`, if available
       authClient = new GoogleAuth({
         ...googleAutoAuthConfig,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        authClient: googleAutoAuthConfig.authClient as any,
+        authClient: googleAutoAuthConfig.authClient,
         clientOptions: googleAutoAuthConfig.clientOptions,
       });
     }
@@ -1095,7 +1094,12 @@ export function decorateHeaders(
   headers?: CoreOptions['headers'],
   options?: DecorateHeadersOptions
 ): DecorateHeadersResult {
-  const sanitizedHeaders: Headers = {...headers};
+  const sanitizedHeaders: Headers =
+    headers instanceof globalThis.Headers
+      ? Object.assign(Object.fromEntries(headers.entries()), headers)
+      : Array.isArray(headers)
+        ? Object.fromEntries(headers)
+        : {...headers};
   const userTokenKey = Object.keys(sanitizedHeaders).find(
     key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
   );

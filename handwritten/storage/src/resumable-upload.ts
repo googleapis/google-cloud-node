@@ -608,6 +608,40 @@ export class Upload extends Writable {
   }
 
   /**
+   * Sets a header on a headers object, supporting global Headers instances,
+   * tuple arrays, and plain objects.
+   */
+  #setHeader(headers: GaxiosOptions['headers'], key: string, value: string) {
+    if (!headers) {
+      return;
+    }
+    if (headers instanceof Headers) {
+      headers.set(key, value);
+    } else if (Array.isArray(headers)) {
+      headers.push([key, value]);
+    } else {
+      (headers as Record<string, string>)[key] = value;
+    }
+  }
+
+  /**
+   * Converts a GaxiosOptions['headers'] object (which may be a Headers instance,
+   * tuple array, or plain object) into a plain object record.
+   */
+  #headersToObject(headers: GaxiosOptions['headers']): gaxios.Headers {
+    if (!headers) {
+      return {};
+    }
+    if (headers instanceof Headers) {
+      return Object.assign(Object.fromEntries(headers.entries()), headers);
+    }
+    if (Array.isArray(headers)) {
+      return Object.fromEntries(headers);
+    }
+    return {...headers};
+  }
+
+  /**
    * Builds and applies the X-Goog-Hash header to the request options
    * using either calculated hashes from #hashValidator or pre-calculated
    * client-side hashes. This should only be called on the final request.
@@ -630,15 +664,7 @@ export class Upload extends Writable {
     }
 
     if (checksums.length > 0 && headers) {
-      const value = checksums.join(',');
-
-      if (headers instanceof Headers) {
-        headers.set('X-Goog-Hash', value);
-      } else if (Array.isArray(headers)) {
-        headers.push(['X-Goog-Hash', value]);
-      } else {
-        (headers as Record<string, string>)['X-Goog-Hash'] = value;
-      }
+      this.#setHeader(headers, 'X-Goog-Hash', checksums.join(','));
     }
   }
 
@@ -826,7 +852,7 @@ export class Upload extends Writable {
 
     const {headers: reqHeaders, idempotencyToken} = decorateHeaders(
       {
-        ...this.customRequestOptions?.headers,
+        ...this.#headersToObject(this.customRequestOptions?.headers),
         ...headers,
       },
       {
@@ -1015,7 +1041,7 @@ export class Upload extends Writable {
     });
 
     const {headers, idempotencyToken} = decorateHeaders(
-      this.customRequestOptions?.headers,
+      this.#headersToObject(this.customRequestOptions?.headers),
       {
         idempotencyToken: this.currentInvocationId.chunk,
         gcclGcsCmd: this.#gcclGcsCmd,
@@ -1224,7 +1250,7 @@ export class Upload extends Writable {
     config: CheckUploadStatusConfig = {}
   ): Promise<GaxiosResponse<FileMetadata | void>> {
     const localHeaders: Record<string, unknown> = {
-      ...this.customRequestOptions?.headers,
+      ...this.#headersToObject(this.customRequestOptions?.headers),
       'Content-Length': 0,
       'Content-Range': 'bytes */*',
     };
@@ -1302,14 +1328,17 @@ export class Upload extends Writable {
   private async makeRequest(reqOpts: GaxiosOptions): GaxiosPromise {
     if (this.encryption) {
       reqOpts.headers = reqOpts.headers || {};
-      (reqOpts.headers as Record<string, string>)[
-        'x-goog-encryption-algorithm'
-      ] = 'AES256';
-      (reqOpts.headers as Record<string, string>)['x-goog-encryption-key'] =
-        this.encryption.key.toString();
-      (reqOpts.headers as Record<string, string>)[
-        'x-goog-encryption-key-sha256'
-      ] = this.encryption.hash.toString();
+      this.#setHeader(reqOpts.headers, 'x-goog-encryption-algorithm', 'AES256');
+      this.#setHeader(
+        reqOpts.headers,
+        'x-goog-encryption-key',
+        this.encryption.key.toString()
+      );
+      this.#setHeader(
+        reqOpts.headers,
+        'x-goog-encryption-key-sha256',
+        this.encryption.hash.toString()
+      );
     }
 
     if (this.userProject) {
@@ -1328,8 +1357,8 @@ export class Upload extends Writable {
       ...this.customRequestOptions,
       ...reqOpts,
       headers: {
-        ...this.customRequestOptions.headers,
-        ...reqOpts.headers,
+        ...this.#headersToObject(this.customRequestOptions.headers),
+        ...this.#headersToObject(reqOpts.headers),
       },
     };
 
@@ -1371,8 +1400,8 @@ export class Upload extends Writable {
       ...this.customRequestOptions,
       ...reqOpts,
       headers: {
-        ...this.customRequestOptions.headers,
-        ...reqOpts.headers,
+        ...this.#headersToObject(this.customRequestOptions.headers),
+        ...this.#headersToObject(reqOpts.headers),
       },
     };
 
