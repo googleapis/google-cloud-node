@@ -7,7 +7,7 @@ support added in the `scotty-1` work:
   [gapic-showcase](https://github.com/googleapis/gapic-showcase)
   `ResumableUploadService`, produced by the generator in this repo with
   `--resumable_upload_methods=ResumableUploadService.UploadMedia`.
-* `sample.js` — end-to-end test scenarios exercising `client.uploadMedia()`,
+* `sample.ts` — end-to-end test scenarios exercising `client.uploadMedia()`,
   `client.getResumableSource()`, `session.start()`, and all `gapic-showcase`
   `X-Goog-Test-Scenario` / `X-Goog-Test-Scenario-Config` failure-injection modes:
   1. **Multi-block upload**: Uploads a payload spanning multiple `256 KiB`
@@ -39,7 +39,7 @@ support added in the `scotty-1` work:
      automatic recovery/stream re-opening and global deadline timeout
      (`globalDeadlineMs`) with manual session resumption via `resumeUrl`.
 * `run.sh` — downloads/starts a gapic-showcase server, builds the local
-  google-gax checkout and the generated client, then runs `sample.js`.
+  google-gax checkout and the generated client, then runs `sample.ts`.
 
 Run it from anywhere:
 
