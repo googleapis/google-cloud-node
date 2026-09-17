@@ -294,20 +294,47 @@ export function generateServiceStub(
       const cancelSignal = cancelController.signal as AbortSignal;
       let cancelRequested = false;
 
+      // Constructed up here, ahead of the request, so that the cancel signal it
+      // carries can be composed into the one the request is made with below.
+      const streamArrayParser = new StreamArrayParser(rpc);
+
       // Arm the deadline here rather than handing `timeout` to gaxios, which
       // would build the identical `AbortSignal.timeout` internally. The
       // difference is bookkeeping: both a deadline expiry and a `cancel()`
       // abort the same request and surface the same error, so unless we record
       // which one fired, the handlers below cannot tell them apart.
       let timedOut = false;
-      let requestSignal = cancelSignal;
+      const requestSignals: AbortSignal[] = [cancelSignal];
       if (timeoutMs !== undefined) {
         const timeoutSignal = AbortSignal.timeout(timeoutMs);
         timeoutSignal.addEventListener('abort', () => (timedOut = true), {
           once: true,
         });
-        requestSignal = AbortSignal.any([cancelSignal, timeoutSignal]);
+        requestSignals.push(timeoutSignal);
       }
+
+      // A server-streaming call is handed the parser itself rather than a
+      // canceller object, so `StreamArrayParser.cancel()` is the only way a
+      // caller can end one. It has always aborted a controller of its own, but
+      // nothing ever listened to it — the request was made with `cancelSignal`
+      // above — so a cancel ended the local stream and left the request in
+      // flight, and the pipeline then reported the resulting teardown as a
+      // spurious 'Premature close' error. Compose the two signals, and record
+      // the cancel the way the unary canceller does so that the handlers below
+      // recognise it as one.
+      if (rpc.responseStream) {
+        streamArrayParser.cancelSignal.addEventListener(
+          'abort',
+          () => (cancelRequested = true),
+          {once: true},
+        );
+        requestSignals.push(streamArrayParser.cancelSignal);
+      }
+
+      const requestSignal =
+        requestSignals.length === 1
+          ? cancelSignal
+          : AbortSignal.any(requestSignals);
 
       const url = fetchParameters.url;
       const headers = new Headers(fetchParameters.headers);
@@ -328,7 +355,6 @@ export function generateServiceStub(
           headers.set(key, String(value));
         }
       }
-      const streamArrayParser = new StreamArrayParser(rpc);
       let response204Ok = false;
       const fetchRequest: gaxios.GaxiosOptions = {
         headers: headers,
@@ -376,11 +402,15 @@ export function generateServiceStub(
               response.body as PipelineSource<unknown>,
               streamArrayParser,
               (err: unknown) => {
-                if (
-                  err &&
-                  (!cancelRequested ||
-                    (err instanceof Error && err.name !== 'AbortError'))
-                ) {
+                // A caller that cancelled has already torn this stream down
+                // and is not waiting to be told about the consequences. The
+                // teardown does not arrive as an AbortError, which is what
+                // this used to test for: ending the parser makes `pipeline`
+                // destroy the response body and report 'Premature close', an
+                // ordinary Error. That check therefore never matched and every
+                // cancelled stream emitted a spurious error. Use the recorded
+                // state, as the handlers below do.
+                if (err && (timedOut || !cancelRequested)) {
                   if (callback) {
                     callback(err);
                   }
@@ -472,10 +502,18 @@ export function generateServiceStub(
             timeoutMs,
           });
           if (rpc.responseStream) {
-            if (callback) {
-              callback(err);
+            // Now that a stream cancel aborts the request, this handler is
+            // where that abort lands when it happens before any response
+            // arrives. Same reasoning as the two handlers above: the caller
+            // ended the stream, so it does not need the abort reported, and
+            // emitting here would raise an unhandled 'error' on a stream
+            // nobody is listening to any more.
+            if (timedOut || !cancelRequested) {
+              if (callback) {
+                callback(err);
+              }
+              streamArrayParser.emit('error', err);
             }
-            streamArrayParser.emit('error', err);
           } else if (callback) {
             callback(err);
           } else {

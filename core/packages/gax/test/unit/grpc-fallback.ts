@@ -968,6 +968,106 @@ describe('grpc-fallback', () => {
     });
   });
 
+  describe('server stream cancellation', () => {
+    // A response whose body stays open, so the call is still in flight when
+    // cancel() lands and the teardown is actually observable.
+    function openStream(): gaxios.GaxiosOptions[] {
+      const body = new stream.Readable({read() {}});
+      // A valid JSON array that has begun but not finished.
+      body.push('[{"content":"one"}');
+      return recordRequests(gaxGrpc, new Response(body as unknown as BodyInit));
+    }
+
+    it('should abort the underlying request when the stream is cancelled', async () => {
+      const requests = openStream();
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const parser = echoStub.expand(
+        {content: 'test'},
+        {},
+        {},
+        () => {},
+      ) as StreamArrayParser;
+      parser.on('data', () => {});
+      parser.on('error', () => {});
+
+      await new Promise<void>(resolve => setTimeout(resolve, 50));
+      assert.strictEqual(signalOf(requests[0])?.aborted, false);
+
+      parser.cancel();
+
+      // `StreamArrayParser` has always aborted a cancel controller of its own,
+      // but nothing was listening to it, so the request outlived the stream
+      // the caller had already given up on.
+      assert.strictEqual(
+        await abortedWithin(signalOf(requests[0]), 100),
+        true,
+        'cancelling the stream did not abort the request',
+      );
+    });
+
+    // `new Response(body)` converts a Node Readable into a web ReadableStream,
+    // and `pipeline` tears one of those down silently. node-fetch hands back
+    // the Node Readable itself, and `pipeline` reports 'Premature close' when
+    // the parser ends early. Only the latter reaches the guard under test, so
+    // this mock delivers the body unconverted.
+    function openNodeStream(): stream.Readable {
+      const body = new stream.Readable({read() {}});
+      body.push('[{"content":"one"}');
+      class NodeBodyAuthClient extends PassThroughClient {
+        async request<T>(): Promise<gaxios.GaxiosResponse<T>> {
+          return {
+            ok: true,
+            status: 200,
+            headers: new Headers(),
+            body,
+            data: body,
+          } as unknown as gaxios.GaxiosResponse<T>;
+        }
+      }
+      gaxGrpc.auth = new GoogleAuth({authClient: new NodeBodyAuthClient()});
+      return body;
+    }
+
+    it('should not report an error when the stream is cancelled', async () => {
+      openNodeStream();
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const reported: string[] = [];
+      const received: {}[] = [];
+      const parser = echoStub.expand({content: 'test'}, {}, {}, (err?: Error) =>
+        reported.push(`callback:${err?.message}`),
+      ) as StreamArrayParser;
+      parser.on('data', d => received.push(d));
+      parser.on('error', err =>
+        reported.push(`error:${(err as Error).message}`),
+      );
+
+      await new Promise<void>(resolve => setTimeout(resolve, 50));
+      // Without this the cancel could land before the pipeline was ever wired
+      // up, and the test would pass without exercising the teardown at all.
+      assert.deepStrictEqual(
+        received,
+        [{content: 'one'}],
+        'the stream was not flowing when it was cancelled',
+      );
+
+      parser.cancel();
+      await new Promise<void>(resolve => setTimeout(resolve, 100));
+
+      // Ending the parser makes `pipeline` destroy the response body and
+      // report 'Premature close'. The guard meant to swallow that tested
+      // `err.name !== 'AbortError'`, which a 'Premature close' Error never
+      // matches, so a clean cancel used to surface an error on both the
+      // callback and the stream.
+      assert.deepStrictEqual(
+        reported,
+        [],
+        `a cancelled stream reported: ${reported.join(', ')}`,
+      );
+    });
+  });
+
   describe('transport error translation', () => {
     // Errors surfaced by the transport must carry a numeric gRPC status code:
     // retry logic in normalCalls/retries.ts matches `err.code` against the
