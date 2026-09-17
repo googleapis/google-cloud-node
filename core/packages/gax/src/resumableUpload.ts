@@ -76,7 +76,7 @@ const COMMAND_UPLOAD_FINALIZE = 'upload, finalize';
 const CATEGORY_1_RETRY_CODES = new Set([408, 429, 500, 502, 503, 504]);
 // Category 2 errors are state mismatches; recovery must query the server for
 // the committed byte offset before retrying.
-const CATEGORY_2_RETRY_CODES = new Set([400, 412, 416]);
+const CATEGORY_2_RETRY_CODES = new Set([400, 409, 412, 416]);
 
 /** The possible states of a resumable upload session. */
 export enum ResumableUploadState {
