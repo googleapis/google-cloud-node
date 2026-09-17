@@ -17,7 +17,7 @@
 # google-gax checkout in this monorepo.
 #
 # Env overrides:
-#   SHOWCASE_VERSION  gapic-showcase release to download (default: 0.43.1)
+#   SHOWCASE_VERSION  gapic-showcase release to download (default: 0.44.0)
 #   SHOWCASE_BIN      path to an existing gapic-showcase binary
 #   SHOWCASE_PORT     port for the showcase server (default: 7469)
 #   UPLOAD_FILE       file to upload (default: a generated 512 KiB file)
@@ -30,7 +30,7 @@ GAX_DIR="$(cd "$HARNESS_DIR/../.." && pwd)"
 REPO_ROOT="$(cd "$GAX_DIR/../../.." && pwd)"
 TOOLS_DIR="$REPO_ROOT/core/packages/tools"
 
-SHOWCASE_VERSION="${SHOWCASE_VERSION:-0.43.1}"
+SHOWCASE_VERSION="${SHOWCASE_VERSION:-0.44.0}"
 SHOWCASE_PORT="${SHOWCASE_PORT:-7469}"
 SHOWCASE_BIN="${SHOWCASE_BIN:-}"
 
