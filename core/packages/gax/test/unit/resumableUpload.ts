@@ -515,6 +515,82 @@ describe('resumable upload', () => {
     );
   });
 
+  it('recovers from a partial commit (503 followed by 409 Conflict) by querying and sending the tail', async () => {
+    const requests: MockRequestOptions[] = [];
+    const partialBytes = GRANULARITY / 2;
+    let uploadCalls = 0;
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'upload') {
+        uploadCalls += 1;
+        if (uploadCalls === 1) {
+          // Server partially commits half the chunk, then fails with 503.
+          return resumableUploadResponse(503, {
+            'x-goog-upload-status': 'active',
+          });
+        }
+        if (uploadCalls === 2 && offsetOf(opts) === 0) {
+          // Inner retry sends offset 0; server returns 409 Conflict because offset is now partialBytes.
+          return resumableUploadResponse(409, {
+            'x-goog-upload-status': 'active',
+          });
+        }
+        return resumableUploadResponse(200, {'x-goog-upload-status': 'active'});
+      }
+      if (command === 'query') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': String(partialBytes),
+        });
+      }
+      if (command === 'finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const payload = Buffer.concat([
+      Buffer.alloc(partialBytes, 0x11),
+      Buffer.alloc(partialBytes, 0x22),
+    ]);
+    const helper = new gax.ResumableUploadSession(buildContext(auth));
+    await helper.start({
+      uploadSource: bufferSource(payload).source,
+      chunkSize: GRANULARITY,
+      retry: {
+        backoffSettings: {
+          initialRetryDelayMillis: 1,
+          retryDelayMultiplier: 1.1,
+          maxRetryDelayMillis: 5,
+          maxRetries: 3,
+        },
+      },
+    });
+    await helper.finished();
+
+    assert.deepStrictEqual(
+      requests.map(r => commandOf(r)),
+      ['start', 'upload', 'upload', 'query', 'upload', 'finalize'],
+    );
+    assert.strictEqual(offsetOf(requests[4]), partialBytes);
+    assert.ok(
+      Buffer.from(requests[4].body as Buffer).equals(
+        payload.subarray(partialBytes),
+      ),
+    );
+  });
+
   it('continues from the committed offset when the chunk was saved', async () => {
     const requests: MockRequestOptions[] = [];
     const auth = mockAuth(async opts => {
