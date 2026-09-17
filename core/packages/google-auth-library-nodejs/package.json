@@ -71,7 +71,7 @@
   "scripts": {
     "test": "c8 mocha build/test",
     "clean": "gts clean",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "lint": "gts check --no-inline-config",
     "compile": "tsc -p .",
     "fix": "gts fix",

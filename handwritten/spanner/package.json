@@ -42,7 +42,7 @@
     "fix": "gts fix",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build && cp -r test/data build/test",
-    "prepare": "cp -r protos build && npm run compile",
+    "prepublishOnly": "cp -r protos build && npm run compile",
     "pretest": "pnpm run compile",
     "presystem-test": "pnpm run compile",
     "preobservability-test": "pnpm run compile",

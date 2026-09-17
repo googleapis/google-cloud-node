@@ -37,7 +37,7 @@
     "compile": "pnpm run compile:esm && pnpm run compile:cjs",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "pnpm run compile",
     "test:esm": "c8 mocha build/esm/test/unit/**/*.js",
     "test:cjs": "c8 mocha build/cjs/test/unit/**/*.js",

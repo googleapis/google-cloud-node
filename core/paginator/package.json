@@ -14,7 +14,7 @@
     "compile": "tsc -p .",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "samples-test": "echo 'no samples test'",

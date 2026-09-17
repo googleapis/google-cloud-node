@@ -21,7 +21,7 @@
     "system-test": "c8 mocha build/system-test --timeout 600000",
     "presystem-test": "npm run compile",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "lint": "gts check",
     "samples-test": "mocha build/samples-test",

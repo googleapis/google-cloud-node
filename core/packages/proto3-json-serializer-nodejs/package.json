@@ -29,7 +29,7 @@
     "clean": "gts clean && rm -f tsconfig.tsbuildinfo",
     "compile": "tsc --build",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "compile-test-protos": "cd test-fixtures/proto && pbjs -t json test.proto > test.json",
     "docs": "jsdoc -c .jsdoc.js",

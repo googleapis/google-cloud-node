@@ -19,7 +19,7 @@
     "lint": "gts check",
     "docs": "jsdoc -c .jsdoc.js",
     "prelint": "cd samples; npm link ../; npm install",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "pnpm run compile && node-gyp rebuild --directory node_modules/pprof",
     "license-check": "jsgl --local .",
     "precompile": "gts clean"

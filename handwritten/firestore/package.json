@@ -60,7 +60,7 @@
     "compile": "tsc -p .",
     "postcompile": "node scripts/init-directories.js && cp -r dev/protos build && cp dev/conformance/test-definition.proto build/conformance && cp dev/conformance/conformance-tests/*.json build/conformance/conformance-tests && minifyProtoJson",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "precompile": "gts clean"
   },
   "dependencies": {

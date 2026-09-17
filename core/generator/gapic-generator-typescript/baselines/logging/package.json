@@ -37,7 +37,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepublishOnly": "npm run compile-protos && npm run compile",
     "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },

@@ -76,7 +76,7 @@
     "compile-status-protos": "pbjs -t json google/rpc/status.proto google/rpc/error_details.proto -p ./protos > protos/status.json",
     "compile-http-protos": "pbjs -t static-module -r http_proto --keep-case google/api/http.proto -p ./protos > protos/http.js && pbts protos/http.js -o protos/http.d.ts",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "system-test": "c8 mocha build/test/system-test --timeout 600000 && pnpm run test-application",
     "samples-test": "cd samples/ && pnpm link ../ && pnpm test && cd ../",
     "browser-test": "cd test/browser-test && pnpm run prefetch && pnpm install && pnpm test",

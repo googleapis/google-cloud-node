@@ -8,13 +8,13 @@
     "build/src"
   ],
   "scripts": {
-    "pretest": "npm run prepare",
+    "pretest": "npm run compile",
     "test": "c8 mocha build/test",
     "lint": "gts check test src samples",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "precompile": "gts clean",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "echo no system tests 🙀",

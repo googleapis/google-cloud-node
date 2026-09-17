@@ -36,7 +36,7 @@
     "fix": "gts fix",
     "prelint": "cd samples; pnpm link ../; pnpm install",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepublishOnly": "npm run compile-protos && npm run compile",
     "samples-test": "cd samples/ && pnpm link ../ && pnpm install && pnpm test && cd ../",
     "snippet-test": "mocha samples/api-reference-doc-snippets/tests/*.js --timeout 600000 --retries 3",
     "presystem-test": "pnpm run compile",

@@ -41,7 +41,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "precompile": "gts clean"
   },
   "dependencies": {

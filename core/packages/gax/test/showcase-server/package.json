@@ -11,7 +11,7 @@
   "keywords": [],
   "scripts": {
     "compile": "tsc",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run lint",
     "start": "node build/src/index.js"

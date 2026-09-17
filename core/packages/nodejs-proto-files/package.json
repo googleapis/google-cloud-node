@@ -28,7 +28,7 @@
     "grpc"
   ],
   "scripts": {
-    "prepare": "npm run compile && node ./build/tools/prepublish.js",
+    "prepublishOnly": "npm run compile && node ./build/tools/prepublish.js",
     "lint": "gts check",
     "test": "c8 mocha build/test",
     "fix": "gts fix",
@@ -37,7 +37,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "pretest": "npm run prepare && npm run compile",
+    "pretest": "npm run prepublishOnly && npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },

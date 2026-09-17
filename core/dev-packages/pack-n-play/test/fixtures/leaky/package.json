@@ -11,7 +11,7 @@
   ],
   "main": "build/src/index.js",
   "scripts": {
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "compile": "tsc -p tsconfig.json",
     "test": "mocha build/test",
     "pretest": "npm run compile",
