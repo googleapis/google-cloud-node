@@ -628,7 +628,9 @@ export class Upload extends Writable {
    * Converts a GaxiosOptions['headers'] object (which may be a Headers instance,
    * tuple array, or plain object) into a plain object record.
    */
-  #headersToObject(headers: GaxiosOptions['headers']): gaxios.Headers {
+  #headersToObject(
+    headers: GaxiosOptions['headers']
+  ): Record<string, string | undefined> {
     if (!headers) {
       return {};
     }
@@ -638,7 +640,7 @@ export class Upload extends Writable {
     if (Array.isArray(headers)) {
       return Object.fromEntries(headers);
     }
-    return {...headers};
+    return {...headers} as Record<string, string | undefined>;
   }
 
   /**
@@ -832,7 +834,7 @@ export class Upload extends Writable {
 
   protected async createURIAsync(): Promise<string> {
     const metadata = {...this.metadata};
-    const headers: gaxios.Headers = {};
+    const headers: Record<string, string> = {};
 
     // Delete content length and content type from metadata if they exist.
     // These are headers and should not be sent as part of the metadata.
@@ -842,7 +844,7 @@ export class Upload extends Writable {
     }
 
     if (metadata.contentType) {
-      headers!['X-Upload-Content-Type'] = metadata.contentType;
+      headers['X-Upload-Content-Type'] = metadata.contentType;
       delete metadata.contentType;
     }
 
@@ -878,12 +880,19 @@ export class Upload extends Writable {
     };
 
     if (metadata.contentLength) {
-      reqOpts.headers!['X-Upload-Content-Length'] =
-        metadata.contentLength.toString();
+      this.#setHeader(
+        reqOpts.headers,
+        'X-Upload-Content-Length',
+        metadata.contentLength.toString()
+      );
     }
 
     if (metadata.contentType) {
-      reqOpts.headers!['X-Upload-Content-Type'] = metadata.contentType;
+      this.#setHeader(
+        reqOpts.headers,
+        'X-Upload-Content-Type',
+        metadata.contentType
+      );
     }
 
     if (typeof this.generation !== 'undefined') {
@@ -899,7 +908,7 @@ export class Upload extends Writable {
     }
 
     if (this.origin) {
-      reqOpts.headers!.Origin = this.origin;
+      this.#setHeader(reqOpts.headers, 'Origin', this.origin);
     }
     const uri = await AsyncRetry(
       async (bail: (err: Error) => void) => {
