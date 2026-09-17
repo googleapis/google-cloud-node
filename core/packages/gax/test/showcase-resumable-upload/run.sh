@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Runs sample.js against the gapic-showcase ResumableUploadService using the
+# Runs sample.ts against the gapic-showcase ResumableUploadService using the
 # google-gax checkout in this monorepo.
 #
 # Env overrides:
@@ -109,5 +109,5 @@ if [[ -n "$PAYLOAD_CLEANUP" ]]; then
   trap 'cleanup; rm -f "$PAYLOAD_CLEANUP"' EXIT
 fi
 
-echo "Running sample.js"
-(cd "$HARNESS_DIR" && SHOWCASE_PORT="$SHOWCASE_PORT" UPLOAD_FILE="$PAYLOAD_FILE" node sample.js)
+echo "Running sample.ts (compiled to $GAX_DIR/build/test/showcase-resumable-upload/sample.js)"
+(cd "$HARNESS_DIR" && SHOWCASE_PORT="$SHOWCASE_PORT" UPLOAD_FILE="$PAYLOAD_FILE" node "$GAX_DIR/build/test/showcase-resumable-upload/sample.js")
