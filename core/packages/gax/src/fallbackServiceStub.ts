@@ -22,6 +22,8 @@ import * as serializer from 'proto3-json-serializer';
 import {isNodeJS} from './featureDetection';
 import {StreamArrayParser} from './streamArrayParser';
 import {defaultToObjectOptions} from './fallback';
+import {GoogleError} from './googleError';
+import {rpcCodeFromHttpStatusCode, Status} from './status';
 import {pipeline, PipelineSource} from 'stream';
 import type {Agent as HttpAgent} from 'http';
 import type {Agent as HttpsAgent} from 'https';
@@ -80,6 +82,81 @@ function _formatEmptyResponse(rpc: protobuf.Method) {
     defaultToObjectOptions,
   );
   return resp;
+}
+
+/**
+ * Translates an error thrown by the underlying fetch implementation into a
+ * {@link GoogleError} carrying a numeric gRPC status code.
+ *
+ * Retry logic (see `normalCalls/retries.ts`) and user code both match on
+ * numeric gRPC status codes. An untranslated error from `auth.fetch()` carries
+ * either a system error string (e.g. `'ECONNRESET'` for a socket hang up) or an
+ * HTTP status number, so it never matches a retry code and is silently treated
+ * as a permanent failure.
+ *
+ * An error carrying an HTTP status maps through `rpcCodeFromHttpStatusCode`.
+ * Otherwise the call failed before producing a response, which is reported as
+ * UNAVAILABLE, except for an explicit cancellation (CANCELLED) or an elapsed
+ * deadline (DEADLINE_EXCEEDED).
+ *
+ * @param err The error thrown by `auth.fetch()`.
+ * @returns A GoogleError with a numeric `code`, or the original value if it is
+ *   not an Error.
+ */
+function _toGoogleError(err: unknown): unknown {
+  if (err instanceof GoogleError) {
+    return err;
+  }
+  if (!(err instanceof Error)) {
+    return err;
+  }
+
+  const error = new GoogleError(err.message);
+  error.cause = err;
+
+  // `GaxiosError` shape, described structurally to avoid depending on the
+  // error instance originating from any particular copy of gaxios.
+  const fetchError = err as Partial<{
+    status: number;
+    response: {status?: number};
+    code: string | number;
+  }>;
+
+  // Errors that carry an HTTP status map through the standard HTTP-to-gRPC
+  // table.
+  const httpStatus =
+    typeof fetchError.status === 'number'
+      ? fetchError.status
+      : fetchError.response?.status;
+  if (typeof httpStatus === 'number') {
+    error.code = rpcCodeFromHttpStatusCode(httpStatus);
+    return error;
+  }
+
+  // An explicit cancellation and an elapsed deadline are distinct conditions in
+  // gRPC, so they are separated out before the general case below. Native fetch
+  // reports both as a DOMException, where `code` is a numeric DOMException
+  // value (20 and 23) rather than a string, so match on `name` as the rest of
+  // this file does when it detects cancellation. A string `code` is also
+  // accepted, because gaxios normalizes a DOMException's name onto `code`.
+  if (err.name === 'AbortError' || fetchError.code === 'AbortError') {
+    error.code = Status.CANCELLED;
+    return error;
+  }
+  if (err.name === 'TimeoutError' || fetchError.code === 'TimeoutError') {
+    error.code = Status.DEADLINE_EXCEEDED;
+    return error;
+  }
+
+  // Anything else that rejects here failed before producing a response, which
+  // gRPC reports as UNAVAILABLE irrespective of the underlying system error:
+  // @grpc/grpc-js defaults transport failures to UNAVAILABLE and only inspects
+  // errno to refine an HTTP/2 INTERNAL_ERROR. Enumerating errnos here would
+  // classify anything left off the list as non-retryable, so follow gRPC and
+  // treat the whole category uniformly. Errors raised while decoding a response
+  // are handled nearer the decoder and do not reach this point.
+  error.code = Status.UNAVAILABLE;
+  return error;
 }
 
 export function generateServiceStub(
@@ -164,6 +241,10 @@ export function generateServiceStub(
         method: fetchParameters.method,
         signal: cancelSignal,
         responseType: 'stream', // ensure gaxios returns the data directly so that it handle data/streams itself
+        // Error responses must resolve so that they are decoded below into a
+        // GoogleError carrying a gRPC status code. 401 and 403 keep rejecting
+        // so that the auth client can refresh credentials and retry.
+        validateStatus: (status: number) => status !== 401 && status !== 403,
         agent: agentOption || undefined,
       };
 
@@ -245,15 +326,16 @@ export function generateServiceStub(
           }
         })
         .catch((err: unknown) => {
+          const translated = _toGoogleError(err);
           if (rpc.responseStream) {
             if (callback) {
-              callback(err);
+              callback(translated);
             }
-            streamArrayParser.emit('error', err);
+            streamArrayParser.emit('error', translated);
           } else if (callback) {
-            callback(err);
+            callback(translated);
           } else {
-            throw err;
+            throw translated;
           }
         });
 

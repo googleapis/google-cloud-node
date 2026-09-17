@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/firestore",
   "description": "Firestore Client Library for Node.js",
-  "version": "9.1.0",
+  "version": "9.2.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -121,16 +121,6 @@
   "overrides": {
     "@sinonjs/fake-timers": "15.1.1",
     "brace-expansion": "^2.0.1"
-  },
-  "resolutions": {
-    "@sinonjs/fake-timers": "15.1.1",
-    "brace-expansion": "^2.0.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.1.1",
-      "brace-expansion": "^2.0.1"
-    }
   },
   "exports": {
     ".": {
