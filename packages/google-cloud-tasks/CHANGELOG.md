@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [7.1.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v7.1.0...tasks-v7.1.1) (2026-09-16)
+
+
+### Bug Fixes
+
+* Remove unintentionally added file ([#9356](https://github.com/googleapis/google-cloud-node/issues/9356)) ([99f6657](https://github.com/googleapis/google-cloud-node/commit/99f6657d912f8fd44b96ae5199624f11f77ced09))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v7.0.0...tasks-v7.1.0) (2026-09-08)
 
 
