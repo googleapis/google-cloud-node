@@ -168,6 +168,16 @@
               "methods": [
                 "calendarMode"
               ]
+            },
+            "Capacity": {
+              "methods": [
+                "capacity"
+              ]
+            },
+            "CapacityHistory": {
+              "methods": [
+                "capacityHistory"
+              ]
             }
           }
         },
@@ -177,6 +187,16 @@
             "CalendarMode": {
               "methods": [
                 "calendarMode"
+              ]
+            },
+            "Capacity": {
+              "methods": [
+                "capacity"
+              ]
+            },
+            "CapacityHistory": {
+              "methods": [
+                "capacityHistory"
               ]
             }
           }
@@ -6043,6 +6063,30 @@
                 "listXpnHosts",
                 "listXpnHostsStream",
                 "listXpnHostsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProjectViews": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectViewsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectViewsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
               ]
             }
           }
