@@ -21,7 +21,9 @@
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
     "prepublishOnly": "npm run compile",
+    "presystem-test": "pnpm run compile",
     "system-test": "c8 mocha build/system-test --timeout 600000",
+    "pretest": "pnpm run compile",
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "precompile": "gts clean"

@@ -42,6 +42,7 @@
     "test:esm": "c8 mocha build/esm/test/unit/**/*.js",
     "test:cjs": "c8 mocha build/cjs/test/unit/**/*.js",
     "test": "pnpm run test:esm && pnpm run test:cjs",
+    "presystem-test": "pnpm run compile",
     "system-test": "mocha build/esm/system-test/**/*.js --timeout 60000",
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },

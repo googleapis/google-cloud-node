@@ -18,7 +18,7 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
-    "prepublishOnly": "npm run compile",
+    "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check"
   },

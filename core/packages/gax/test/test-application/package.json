@@ -16,7 +16,7 @@
     "prefetch-showcase-echo-client": "cd ../showcase-echo-client && npm run prefetch && npm install && npm pack && mv showcase-echo-client*.tgz ../test-application/showcase-echo-client.tgz",
     "prefetch-showcase-server": "cd ../showcase-server && npm install && npm pack && mv showcase-server*.tgz ../test-application/showcase-server.tgz",
     "prefetch": "npm run prefetch-cleanup && npm run prefetch-google-gax && npm run prefetch-showcase-echo-client && npm run prefetch-showcase-server",
-    "prepublishOnly": "npm run compile",
+    "prepare": "npm run compile",
     "start": "node build/src/index.js"
   },
   "devDependencies": {

@@ -72,9 +72,9 @@ fi
 
 if [ ! -d "build" ] && [ "${TEST_TYPE}" != "lint" ]; then
     if grep -q '"prepublishOnly":' package.json; then
-        ${TEST_CMD} run prepublishOnly
+        ${TEST_CMD} prepublishOnly
     elif grep -q '"compile":' package.json; then
-        ${TEST_CMD} run compile
+        ${TEST_CMD} compile
     fi
 fi
 
