@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "fe5ed0f2-7d0f-42df-822a-cd7e14a16432",
+      "createTime": "2026-09-17T14:33:17.947Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "435bcae6aa20c9fd50da0c8b67fe443c946e44cc",
           "message": "Allow uninitialized client references in pipeline sources",
@@ -95040,5 +95057,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-16T21:15:48.434Z"
+  "updateTime": "2026-09-17T14:33:17.947Z"
 }
