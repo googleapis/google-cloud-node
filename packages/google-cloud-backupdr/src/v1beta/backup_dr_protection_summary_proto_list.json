@@ -1,0 +1,17 @@
+[
+  "../../protos/google/cloud/backupdr/v1beta/appliedautoprotectionpolicy.proto",
+  "../../protos/google/cloud/backupdr/v1beta/autoprotectionpolicy.proto",
+  "../../protos/google/cloud/backupdr/v1beta/autoprotectionpolicybinding.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupdr.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupplan.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupplanassociation.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupvault.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupvault_alloydb.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupvault_ba.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupvault_cloudsql.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupvault_disk.proto",
+  "../../protos/google/cloud/backupdr/v1beta/backupvault_gce.proto",
+  "../../protos/google/cloud/backupdr/v1beta/bindingmatchingresource.proto",
+  "../../protos/google/cloud/backupdr/v1beta/datasourcereference.proto",
+  "../../protos/google/cloud/backupdr/v1beta/protection_summary.proto"
+]

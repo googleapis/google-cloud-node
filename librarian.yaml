@@ -365,6 +365,7 @@ libraries:
     version: 0.11.0
     apis:
       - path: google/cloud/backupdr/v1
+      - path: google/cloud/backupdr/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
