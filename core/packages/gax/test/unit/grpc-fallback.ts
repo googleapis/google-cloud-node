@@ -611,6 +611,58 @@ describe('grpc-fallback', () => {
     });
   }
 
+  describe('call metadata', () => {
+    async function headersSentFor(metadata: {
+      [name: string]: string | string[];
+    }): Promise<Headers> {
+      const requests = recordRequests(
+        gaxGrpc,
+        new Response(Buffer.from(JSON.stringify({content: 'test'}))),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      await new Promise<void>(resolve => {
+        echoStub.echo({content: 'test'}, metadata, {}, () => resolve());
+      });
+
+      return requests[0].headers as Headers;
+    }
+
+    it('should send every value of a multi-valued header', async () => {
+      const headers = await headersSentFor({'x-multi': ['a', 'b', 'c']});
+
+      // gRPC metadata is multi-valued and `buildMetadata` normalizes every
+      // value to an array precisely because of that. Reading index 0 silently
+      // dropped the rest. The Headers API joins repeated values with ', '.
+      assert.strictEqual(headers.get('x-multi'), 'a, b, c');
+    });
+
+    it('should send a single-valued header as its only value', async () => {
+      const headers = await headersSentFor({'x-single': ['one']});
+
+      assert.strictEqual(headers.get('x-single'), 'one');
+    });
+
+    it('should send a plain string value whole', async () => {
+      const headers = await headersSentFor({'x-plain': 'hello'});
+
+      // Indexing a string yields its first character, so this used to arrive
+      // as 'h'. The declared parameter type said the values were strings while
+      // the code indexed them as arrays; both could not be right.
+      assert.strictEqual(headers.get('x-plain'), 'hello');
+    });
+
+    it('should let metadata replace a header set by the request encoder', async () => {
+      const headers = await headersSentFor({
+        'content-type': ['application/x-custom'],
+      });
+
+      // The previous `headers.set` replaced rather than appended, so keeping
+      // every value must not turn an override into an accumulation.
+      assert.strictEqual(headers.get('content-type'), 'application/x-custom');
+    });
+  });
+
   describe('call deadline', () => {
     // The error an aborted request actually produces, measured end to end
     // against a server that accepts the connection and never replies:
