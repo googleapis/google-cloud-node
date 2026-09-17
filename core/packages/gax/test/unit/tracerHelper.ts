@@ -702,18 +702,15 @@ describe('TracerHelper', () => {
         cancel(): void {}
         then<TResult1 = string, TResult2 = never>(
           onfulfilled?:
-            | ((value: string) => TResult1 | PromiseLike<TResult1>)
-            | null,
+            ((value: string) => TResult1 | PromiseLike<TResult1>) | null,
           onrejected?:
-            | ((reason: unknown) => TResult2 | PromiseLike<TResult2>)
-            | null,
+            ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null,
         ): Promise<TResult1 | TResult2> {
           return this.promise.then(onfulfilled, onrejected);
         }
         catch<TResult = never>(
           onrejected?:
-            | ((reason: unknown) => TResult | PromiseLike<TResult>)
-            | null,
+            ((reason: unknown) => TResult | PromiseLike<TResult>) | null,
         ): Promise<string | TResult> {
           return this.promise.catch(onrejected);
         }
