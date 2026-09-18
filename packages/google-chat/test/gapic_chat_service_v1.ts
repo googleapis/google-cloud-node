@@ -2692,6 +2692,270 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('createMessagePin', () => {
+    it('invokes createMessagePin without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.CreateMessagePinRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.CreateMessagePinRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.MessagePin(),
+      );
+      client.innerApiCalls.createMessagePin = stubSimpleCall(expectedResponse);
+      const [response] = await client.createMessagePin(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createMessagePin as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMessagePin as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMessagePin without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.CreateMessagePinRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.CreateMessagePinRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.MessagePin(),
+      );
+      client.innerApiCalls.createMessagePin =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createMessagePin(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IMessagePin | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createMessagePin as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMessagePin as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMessagePin with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.CreateMessagePinRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.CreateMessagePinRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMessagePin = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createMessagePin(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createMessagePin as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMessagePin as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMessagePin with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.CreateMessagePinRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.CreateMessagePinRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createMessagePin(request), expectedError);
+    });
+  });
+
+  describe('deleteMessagePin', () => {
+    it('invokes deleteMessagePin without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.DeleteMessagePinRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.DeleteMessagePinRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteMessagePin = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteMessagePin(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteMessagePin as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMessagePin as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMessagePin without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.DeleteMessagePinRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.DeleteMessagePinRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteMessagePin =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteMessagePin(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteMessagePin as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMessagePin as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMessagePin with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.DeleteMessagePinRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.DeleteMessagePinRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteMessagePin = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteMessagePin(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteMessagePin as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMessagePin as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMessagePin with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.DeleteMessagePinRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.DeleteMessagePinRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteMessagePin(request), expectedError);
+    });
+  });
+
   describe('createCustomEmoji', () => {
     it('invokes createCustomEmoji without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
@@ -6984,6 +7248,301 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('listMessagePins', () => {
+    it('invokes listMessagePins without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListMessagePinsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListMessagePinsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+      ];
+      client.innerApiCalls.listMessagePins = stubSimpleCall(expectedResponse);
+      const [response] = await client.listMessagePins(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMessagePins as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessagePins as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessagePins without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListMessagePinsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListMessagePinsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+      ];
+      client.innerApiCalls.listMessagePins =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listMessagePins(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IMessagePin[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMessagePins as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessagePins as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessagePins with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListMessagePinsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListMessagePinsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listMessagePins = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listMessagePins(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listMessagePins as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMessagePins as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMessagePinsStream without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListMessagePinsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListMessagePinsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+      ];
+      client.descriptors.page.listMessagePins.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listMessagePinsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.MessagePin[] = [];
+        stream.on('data', (response: protos.google.chat.v1.MessagePin) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listMessagePins.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMessagePins, request),
+      );
+      assert(
+        (client.descriptors.page.listMessagePins.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listMessagePinsStream with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListMessagePinsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListMessagePinsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMessagePins.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listMessagePinsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.MessagePin[] = [];
+        stream.on('data', (response: protos.google.chat.v1.MessagePin) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listMessagePins.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMessagePins, request),
+      );
+      assert(
+        (client.descriptors.page.listMessagePins.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listMessagePins without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListMessagePinsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListMessagePinsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+        generateSampleMessage(new protos.google.chat.v1.MessagePin()),
+      ];
+      client.descriptors.page.listMessagePins.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.chat.v1.IMessagePin[] = [];
+      const iterable = client.listMessagePinsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMessagePins.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listMessagePins.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listMessagePins with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListMessagePinsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListMessagePinsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMessagePins.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listMessagePinsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.chat.v1.IMessagePin[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMessagePins.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listMessagePins.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
   describe('listCustomEmojis', () => {
     it('invokes listCustomEmojis without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
@@ -8305,6 +8864,55 @@ describe('v1.ChatServiceClient', () => {
         assert.strictEqual(result, 'messageValue');
         assert(
           (client.pathTemplates.messagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('messagePin', async () => {
+      const fakePath = '/rendered/path/messagePin';
+      const expectedParameters = {
+        space: 'spaceValue',
+        message_pin: 'messagePinValue',
+      };
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.messagePinPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.messagePinPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('messagePinPath', () => {
+        const result = client.messagePinPath('spaceValue', 'messagePinValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.messagePinPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchSpaceFromMessagePinName', () => {
+        const result = client.matchSpaceFromMessagePinName(fakePath);
+        assert.strictEqual(result, 'spaceValue');
+        assert(
+          (client.pathTemplates.messagePinPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMessagePinFromMessagePinName', () => {
+        const result = client.matchMessagePinFromMessagePinName(fakePath);
+        assert.strictEqual(result, 'messagePinValue');
+        assert(
+          (client.pathTemplates.messagePinPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

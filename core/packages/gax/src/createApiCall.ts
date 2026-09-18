@@ -33,6 +33,12 @@ import {retryable} from './normalCalls/retries';
 import {addTimeoutArg} from './normalCalls/timeout';
 import {StreamingApiCaller} from './streamingCalls/streamingApiCaller';
 import {warn} from './warnings';
+import {
+  traceCall,
+  StaticTraceContext,
+  DynamicTraceContext,
+} from './observability/TracerHelper';
+import {checkTelemetryEnabled} from './util';
 
 /**
  * Converts an rpc call into an API call governed by the settings.
@@ -66,6 +72,9 @@ export function createApiCall(
   const funcPromise = typeof func === 'function' ? Promise.resolve(func) : func;
   // the following apiCaller will be used for all calls of this function...
   const apiCaller = createAPICaller(settings, descriptor);
+
+  const tracingEnabled = checkTelemetryEnabled(settings);
+
   const invokeCall = (
     request: RequestType,
     callOptions?: CallOptions,
@@ -168,5 +177,45 @@ export function createApiCall(
     // or to cancel the ongoing call.
     return currentApiCaller.result(ongoingCall);
   };
-  return invokeCall;
+
+  if (tracingEnabled) {
+    const staticArgs: StaticTraceContext = {
+      gcpClientService:
+        settings.otherArgs?.internalTelemetryInfo?.gcpClientService,
+      gcpVersion: settings.otherArgs?.internalTelemetryInfo?.gcpVersion,
+      gcpRepo: settings.otherArgs?.internalTelemetryInfo?.gcpRepo,
+      gcpArtifact: settings.otherArgs?.internalTelemetryInfo?.gcpArtifact,
+    };
+
+    const serviceName = settings.apiName?.split('.').pop() ?? '';
+    const isFallback = Boolean(_fallback);
+    const dynamicArgs: DynamicTraceContext = {
+      clientName: serviceName ? `${serviceName}Client` : '',
+      methodName: settings.otherArgs?.internalMethodName ?? '',
+      rpcType: isFallback ? 'http' : 'grpc',
+    };
+    const isStreamingCall = apiCaller instanceof StreamingApiCaller;
+    return (
+      request: RequestType,
+      callOptions?: CallOptions,
+      callback?: APICallback,
+    ) => {
+      return traceCall(
+        dynamicArgs,
+        staticArgs,
+        (tracedCallback?: APICallback) => {
+          // `traceCall` wraps the user's callback whenever one was supplied,
+          // for stream and non-stream calls alike, and that wrapper is what
+          // closes the span. It is undefined only when there is no callback to
+          // wrap, in which case the span is bound to the returned promise or
+          // stream instead; the fallback keeps this correct either way.
+          return invokeCall(request, callOptions, tracedCallback ?? callback);
+        },
+        isStreamingCall,
+        callback,
+      );
+    };
+  } else {
+    return invokeCall;
+  }
 }
