@@ -49,9 +49,21 @@ function main(location) {
    */
   // const exactQualityRequired = true
   /**
-   *  Optional. Specifies the pre-GA features to enable.
+   *  Optional. Specifies the pre-GA experiments to enable. Requests using this
+   *  field are classified as a pre-GA offering under the Google Maps Platform
+   *  Service Specific
+   *  Terms (https://cloud.google.com/maps-platform/terms/maps-service-terms).
+   *  See launch stage
+   *  descriptions (https://cloud.google.com/maps-platform/terms/launch-stages)
+   *  for more details.
    */
   // const experiments = [1,2,3,4]
+  /**
+   *  Optional. A list of
+   *  additional_insights google.maps.solar.v1.FindClosestBuildingInsightsRequest.additional_insights 
+   *  to be included in the response.
+   */
+  // const additionalInsights = [1,2,3,4]
 
   // Imports the Solar library
   const {SolarClient} = require('@googlemaps/solar').v1;

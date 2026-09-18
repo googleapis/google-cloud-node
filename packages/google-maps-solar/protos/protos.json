@@ -98,6 +98,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "additionalInsights": {
+                          "rule": "repeated",
+                          "type": "AdditionalInsights",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -158,6 +166,34 @@
                         "imageryQuality": {
                           "type": "ImageryQuality",
                           "id": 10
+                        },
+                        "detectedArrays": {
+                          "type": "DetectedArrays",
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "DetectedArrays": {
+                          "fields": {
+                            "detectionStatus": {
+                              "type": "DetectionStatus",
+                              "id": 1
+                            },
+                            "latestCaptureDate": {
+                              "type": "google.type.Date",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "DetectionStatus": {
+                              "values": {
+                                "DETECTION_STATUS_UNSPECIFIED": 0,
+                                "DETECTION_STATUS_DATA_UNAVAILABLE": 1,
+                                "DETECTION_STATUS_ARRAYS_DETECTED": 2,
+                                "DETECTION_STATUS_NO_ARRAYS_DETECTED": 3
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -707,6 +743,12 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
+                      }
+                    },
+                    "AdditionalInsights": {
+                      "values": {
+                        "ADDITIONAL_INSIGHTS_UNSPECIFIED": 0,
+                        "DETECTED_ARRAYS": 2
                       }
                     },
                     "DataLayerView": {

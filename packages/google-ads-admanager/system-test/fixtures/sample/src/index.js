@@ -49,6 +49,7 @@ function main() {
   const customTargetingValueServiceClient = new admanager.CustomTargetingValueServiceClient();
   const daiAuthenticationKeyServiceClient = new admanager.DaiAuthenticationKeyServiceClient();
   const daiEncodingProfileServiceClient = new admanager.DaiEncodingProfileServiceClient();
+  const daiSessionServiceClient = new admanager.DaiSessionServiceClient();
   const deviceCapabilityServiceClient = new admanager.DeviceCapabilityServiceClient();
   const deviceCategoryServiceClient = new admanager.DeviceCategoryServiceClient();
   const deviceManufacturerServiceClient = new admanager.DeviceManufacturerServiceClient();
