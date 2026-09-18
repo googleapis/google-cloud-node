@@ -171,6 +171,25 @@ describe('Transaction', () => {
         assert.strictEqual(REQUEST_STREAM.callCount, 1);
       });
 
+      it('should keep `request` and `requestStream` usable when detached', () => {
+        REQUEST.resetHistory();
+        REQUEST_STREAM.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+
+        // `TransactionRunner#_interceptErrors` and user code hold on to these
+        // methods without their receiver, so they must be pre-bound.
+        const {request, requestStream} = txn;
+
+        request({client: 'SpannerClient'}, () => {});
+        requestStream({client: 'SpannerClient'});
+
+        assert.strictEqual(REQUEST.callCount, 1);
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+      });
+
       it('should generate _affinityKey for multiplexed sessions', () => {
         const multiplexedSession = Object.assign({}, SESSION, {
           metadata: {multiplexed: true},
@@ -212,6 +231,33 @@ describe('Transaction', () => {
         assert.strictEqual(REQUEST_STREAM.callCount, 1);
         const arg = REQUEST_STREAM.lastCall.args[0];
         assert.deepStrictEqual(arg.gaxOpts, txn._bindGaxOpts);
+      });
+
+      it('should merge the affinity key into caller supplied gaxOpts', () => {
+        REQUEST.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+        const gaxOpts = {
+          timeout: 1000,
+          otherArgs: {options: {unbind: true}},
+        };
+
+        txn.request({client: 'SpannerClient', gaxOpts}, () => {});
+
+        const arg = REQUEST.lastCall.args[0];
+        assert.deepStrictEqual(arg.gaxOpts, {
+          timeout: 1000,
+          otherArgs: {
+            options: {unbind: true, affinityKey: txn._affinityKey},
+          },
+        });
+        // The caller supplied gax options must not be modified.
+        assert.deepStrictEqual(gaxOpts, {
+          timeout: 1000,
+          otherArgs: {options: {unbind: true}},
+        });
       });
 
       it('should set the commonHeaders_', () => {

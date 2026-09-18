@@ -18,7 +18,6 @@ import {grpc, CallOptions, Operation as GaxOperation} from 'google-gax';
 import {protos} from '@google-cloud/spanner-api';
 import instanceAdmin = protos.google;
 import databaseAdmin = protos.google;
-import {Spanner} from '.';
 
 export type IOperation = instanceAdmin.longrunning.IOperation;
 
@@ -113,13 +112,13 @@ export function getCommonHeaders(
   const headers: {[k: string]: string} = {};
 
   if (
-    process.env.SPANNER_ENABLE_END_TO_END_TRACING === 'true' ||
+    process.env.SPANNER_ENABLE_END_TO_END_TRACING?.toLowerCase() === 'true' ||
     enableTracing
   ) {
     headers[END_TO_END_TRACING_HEADER] = 'true';
   }
 
-  if (Spanner.isAFEServerTimingEnabled()) {
+  if (process.env.SPANNER_DISABLE_AFE_SERVER_TIMING?.toLowerCase() !== 'true') {
     headers[AFE_SERVER_TIMING_HEADER] = 'true';
   }
 

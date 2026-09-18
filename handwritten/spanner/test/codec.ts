@@ -2421,7 +2421,7 @@ describe('codec', () => {
       assert.deepStrictEqual(codec.getType(new Date()), {type: 'timestamp'});
     });
 
-    it.skip('should determine if the value is a interval', () => {
+    it('should determine if the value is an interval', () => {
       assert.deepStrictEqual(
         codec.getType(new codec.Interval(1, 2, BigInt(3))),
         {
@@ -2449,8 +2449,31 @@ describe('codec', () => {
       });
     });
 
+    it('should skip leading nulls in arrays to determine child type', () => {
+      assert.deepStrictEqual(codec.getType([null, null, 'hello']), {
+        type: 'array',
+        child: {type: 'string'},
+      });
+    });
+
+    it('should type empty arrays as array with unspecified child', () => {
+      assert.deepStrictEqual(codec.getType([]), {
+        type: 'array',
+        child: {type: 'unspecified'},
+      });
+    });
+
     it('should return unspecified for unknown values', () => {
       assert.deepStrictEqual(codec.getType(null), {type: 'unspecified'});
+      assert.deepStrictEqual(codec.getType(undefined), {type: 'unspecified'});
+      assert.deepStrictEqual(codec.getType(BigInt(42)), {type: 'unspecified'});
+      assert.deepStrictEqual(codec.getType(Symbol('sym')), {
+        type: 'unspecified',
+      });
+      assert.deepStrictEqual(
+        codec.getType(() => {}),
+        {type: 'unspecified'},
+      );
 
       assert.deepStrictEqual(codec.getType([null]), {
         type: 'array',
@@ -2466,10 +2489,228 @@ describe('codec', () => {
       });
     });
 
+    it('should determine if the value is a PGJsonb', () => {
+      assert.deepStrictEqual(codec.getType(new codec.PGJsonb({key: 'value'})), {
+        type: 'pgJsonb',
+      });
+    });
+
     it('should determine if the value is a PGOid', () => {
       assert.deepStrictEqual(codec.getType(new codec.PGOid(5678)), {
         type: 'pgOid',
       });
+    });
+
+    it('should determine if the value is a ProtoMessage', () => {
+      const protoMessage = new codec.ProtoMessage({
+        value: Buffer.from('abc'),
+        fullName: 'my.proto.Message',
+      });
+      assert.deepStrictEqual(codec.getType(protoMessage), {
+        type: 'proto',
+        fullName: 'my.proto.Message',
+      });
+    });
+
+    it('should determine if the value is a ProtoEnum', () => {
+      const protoEnum = new codec.ProtoEnum({
+        value: 1,
+        fullName: 'my.proto.Enum',
+      });
+      assert.deepStrictEqual(codec.getType(protoEnum), {
+        type: 'enum',
+        fullName: 'my.proto.Enum',
+      });
+    });
+
+    it('should determine if zero and negative numbers are typed correctly', () => {
+      assert.deepStrictEqual(codec.getType(0), {type: 'int64'});
+      assert.deepStrictEqual(codec.getType(-0), {type: 'int64'});
+      assert.deepStrictEqual(codec.getType(-42), {type: 'int64'});
+      assert.deepStrictEqual(codec.getType(-3.14), {type: 'float64'});
+    });
+
+    it('should determine if false is a boolean', () => {
+      assert.deepStrictEqual(codec.getType(false), {type: 'bool'});
+    });
+
+    it('should determine if the uuid value is unspecified when enableUuidAsUntyped is true without emitting warning', () => {
+      codec._resetUuidUntypedFlagWarnedForTest();
+      const emitWarningStub = sandbox.stub(process, 'emitWarning');
+      try {
+        assert.deepStrictEqual(codec.getType(crypto.randomUUID(), true), {
+          type: 'unspecified',
+        });
+        assert.strictEqual(emitWarningStub.called, false);
+      } finally {
+        emitWarningStub.restore();
+      }
+    });
+
+    it('should determine if the uuid value is unspecified when SPANNER_ENABLE_UUID_AS_UNTYPED is case-insensitively TRUE', () => {
+      codec._resetUuidUntypedFlagWarnedForTest();
+      const emitWarningStub = sandbox.stub(process, 'emitWarning');
+      try {
+        process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = 'TRUE';
+        assert.deepStrictEqual(codec.getType(crypto.randomUUID()), {
+          type: 'unspecified',
+        });
+        assert.strictEqual(emitWarningStub.calledOnce, true);
+        assert.strictEqual(
+          emitWarningStub.firstCall.args[0],
+          'SPANNER_ENABLE_UUID_AS_UNTYPED environment variable is deprecated and will be removed in a future release.',
+        );
+      } finally {
+        delete process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'];
+        emitWarningStub.restore();
+      }
+    });
+
+    it('should not evaluate SPANNER_ENABLE_UUID_AS_UNTYPED for non-string types', () => {
+      codec._resetUuidUntypedFlagWarnedForTest();
+      const emitWarningStub = sandbox.stub(process, 'emitWarning');
+      try {
+        process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = 'true';
+        assert.deepStrictEqual(codec.getType(123), {type: 'int64'});
+        assert.deepStrictEqual(codec.getType(true), {type: 'bool'});
+        assert.deepStrictEqual(codec.getType(Buffer.from('a')), {
+          type: 'bytes',
+        });
+        assert.deepStrictEqual(codec.getType(new Date()), {type: 'timestamp'});
+        assert.strictEqual(emitWarningStub.called, false);
+      } finally {
+        delete process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'];
+        emitWarningStub.restore();
+      }
+    });
+
+    it('should determine if the uuid value is string when enableUuidAsUntyped is false', () => {
+      try {
+        process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = 'true';
+        assert.deepStrictEqual(codec.getType(crypto.randomUUID(), false), {
+          type: 'string',
+        });
+      } finally {
+        delete process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'];
+      }
+    });
+
+    it('should determine if non-uuid string is string when enableUuidAsUntyped is true', () => {
+      assert.deepStrictEqual(codec.getType('not-a-uuid', true), {
+        type: 'string',
+      });
+    });
+
+    it('should recursively propagate enableUuidAsUntyped to array elements', () => {
+      const uuid = crypto.randomUUID();
+      assert.deepStrictEqual(codec.getType([uuid], true), {
+        type: 'array',
+        child: {type: 'unspecified'},
+      });
+      assert.deepStrictEqual(codec.getType([uuid], false), {
+        type: 'array',
+        child: {type: 'string'},
+      });
+    });
+
+    it('should recursively propagate enableUuidAsUntyped to struct fields', () => {
+      const uuid = crypto.randomUUID();
+      const struct = codec.Struct.fromJSON({id: uuid});
+      assert.deepStrictEqual(codec.getType(struct, true), {
+        type: 'struct',
+        fields: [{name: 'id', type: 'unspecified'}],
+      });
+      assert.deepStrictEqual(codec.getType(struct, false), {
+        type: 'struct',
+        fields: [{name: 'id', type: 'string'}],
+      });
+    });
+
+    it('should determine type of boxed primitives', () => {
+      assert.deepStrictEqual(codec.getType(new String('hello')), {
+        type: 'string',
+      });
+      assert.deepStrictEqual(codec.getType(new Number(42)), {type: 'int64'});
+      assert.deepStrictEqual(codec.getType(new Number(3.14)), {
+        type: 'float64',
+      });
+      assert.deepStrictEqual(codec.getType(new Boolean(false)), {type: 'bool'});
+      assert.deepStrictEqual(codec.getType(new Boolean(true)), {type: 'bool'});
+    });
+
+    it('should return frozen singletons for parameterless types', () => {
+      assert.strictEqual(codec.getType('abc'), codec.getType('def'));
+      assert.strictEqual(codec.getType(123), codec.getType(456));
+      assert.strictEqual(codec.getType(123), codec.getType(new codec.Int(1)));
+      assert.strictEqual(codec.getType(1.23), codec.getType(4.56));
+      assert.strictEqual(codec.getType(1.23), codec.getType(NaN));
+      assert.strictEqual(
+        codec.getType(1.23),
+        codec.getType(new codec.Float(1.1)),
+      );
+      assert.strictEqual(
+        codec.getType(new codec.Float32(1.1)),
+        codec.getType(new codec.Float32(2.2)),
+      );
+      assert.strictEqual(codec.getType(true), codec.getType(false));
+      assert.strictEqual(codec.getType(null), codec.getType(undefined));
+      assert.strictEqual(
+        codec.getType(Buffer.from('a')),
+        codec.getType(Buffer.from('b')),
+      );
+      assert.strictEqual(
+        codec.getType(new codec.SpannerDate()),
+        codec.getType(new codec.SpannerDate('2025-01-01')),
+      );
+      assert.strictEqual(
+        codec.getType(new Date()),
+        codec.getType(new PreciseDate()),
+      );
+      assert.strictEqual(
+        codec.getType(new codec.Numeric('1')),
+        codec.getType(new codec.Numeric('2')),
+      );
+      assert.strictEqual(
+        codec.getType(new codec.PGNumeric('1')),
+        codec.getType(new codec.PGNumeric('2')),
+      );
+      assert.strictEqual(
+        codec.getType(new codec.PGJsonb({})),
+        codec.getType(new codec.PGJsonb({a: 1})),
+      );
+      assert.strictEqual(
+        codec.getType(new codec.PGOid(1)),
+        codec.getType(new codec.PGOid(2)),
+      );
+      assert.strictEqual(
+        codec.getType(new codec.Interval(1, 2, BigInt(3))),
+        codec.getType(new codec.Interval(4, 5, BigInt(6))),
+      );
+      assert.strictEqual(codec.getType({a: 1}), codec.getType({b: 2}));
+
+      assert(Object.isFrozen(codec.getType('abc')));
+      assert(Object.isFrozen(codec.getType(123)));
+      assert(Object.isFrozen(codec.getType(1.23)));
+      assert(Object.isFrozen(codec.getType(new codec.Float32(1.1))));
+      assert(Object.isFrozen(codec.getType(true)));
+      assert(Object.isFrozen(codec.getType(null)));
+      assert(Object.isFrozen(codec.getType(Buffer.from('a'))));
+      assert(Object.isFrozen(codec.getType(new codec.SpannerDate())));
+      assert(Object.isFrozen(codec.getType(new Date())));
+      assert(Object.isFrozen(codec.getType(new codec.Numeric('1'))));
+      assert(Object.isFrozen(codec.getType(new codec.PGNumeric('1'))));
+      assert(Object.isFrozen(codec.getType(new codec.PGJsonb({}))));
+      assert(Object.isFrozen(codec.getType(new codec.PGOid(1))));
+      assert(
+        Object.isFrozen(codec.getType(new codec.Interval(1, 2, BigInt(3)))),
+      );
+      assert(Object.isFrozen(codec.getType({a: 1})));
+    });
+
+    it('should use frozen singletons for array child types', () => {
+      const arrayType = codec.getType(['abc']);
+      assert.strictEqual(arrayType.child, codec.getType('abc'));
+      assert(Object.isFrozen(arrayType.child));
     });
   });
 
@@ -2721,6 +2962,24 @@ describe('codec', () => {
       assert.deepStrictEqual(type, {
         code: google.spanner.v1.TypeCode[google.spanner.v1.TypeCode.INT64],
         typeAnnotation: google.spanner.v1.TypeAnnotationCode.PG_OID,
+      });
+    });
+
+    it('should set code and typeAnnotation for pgJsonb string', () => {
+      const type = codec.createTypeObject('pgJsonb');
+
+      assert.deepStrictEqual(type, {
+        code: google.spanner.v1.TypeCode[google.spanner.v1.TypeCode.JSON],
+        typeAnnotation: google.spanner.v1.TypeAnnotationCode.PG_JSONB,
+      });
+    });
+
+    it('should set code and typeAnnotation for pgJsonb friendlyType object', () => {
+      const type = codec.createTypeObject({type: 'pgJsonb'});
+
+      assert.deepStrictEqual(type, {
+        code: google.spanner.v1.TypeCode[google.spanner.v1.TypeCode.JSON],
+        typeAnnotation: google.spanner.v1.TypeAnnotationCode.PG_JSONB,
       });
     });
   });
