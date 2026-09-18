@@ -139,7 +139,7 @@ export function getCommonHeaders(
   const headers: {[k: string]: string} = {};
 
   if (
-    process.env.SPANNER_ENABLE_END_TO_END_TRACING === 'true' ||
+    process.env.SPANNER_ENABLE_END_TO_END_TRACING?.toLowerCase() === 'true' ||
     enableTracing
   ) {
     headers[END_TO_END_TRACING_HEADER] = 'true';

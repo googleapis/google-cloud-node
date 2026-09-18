@@ -38,7 +38,11 @@ import {
 } from 'google-gax';
 import {Backup} from './backup';
 import {BatchTransaction, TransactionIdentifier} from './batch-transaction';
-import {SessionFactory, SessionFactoryInterface} from './session-factory';
+import {
+  GetSessionCallback,
+  SessionFactory,
+  SessionFactoryInterface,
+} from './session-factory';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
 import databaseAdmin = protos.google;
@@ -2531,7 +2535,7 @@ class Database extends common.GrpcServiceObject {
     callback?: PoolRequestCallback,
   ): void | Promise<Session> {
     const sessionFactory_ = this.sessionFactory_;
-    sessionFactory_.getSessionForReadWrite((err, session) => {
+    const onSession: GetSessionCallback = (err, session) => {
       if (err) {
         callback!(err as ServiceError, null);
         return;
@@ -2544,7 +2548,17 @@ class Database extends common.GrpcServiceObject {
         sessionFactory_.release(session!);
         callback!(err, ...args);
       });
-    });
+    };
+
+    const session = sessionFactory_.isMultiplexedEnabledForRW?.()
+      ? sessionFactory_.getSessionSync?.()
+      : null;
+    if (session) {
+      onSession(null, session);
+      return;
+    }
+
+    sessionFactory_.getSessionForReadWrite(onSession);
   }
 
   /**
@@ -3025,16 +3039,30 @@ class Database extends common.GrpcServiceObject {
       callback!(error, rows, stats!, metadata!);
     };
 
-    this.sessionFactory_.getSession((error, session) => {
+    const onSession: GetSessionCallback = (error, session) => {
       if (error) {
         complete(error as grpc.ServiceError);
         return;
       }
 
       streamSpan.addEvent('Using Session', {'session.id': session?.id});
-      snapshot = session!.snapshot(options, this.queryOptions_);
-      this._runOnSnapshot(snapshot, session!, query, complete);
-    });
+      try {
+        snapshot = session!.snapshot(options, this.queryOptions_);
+        this._runOnSnapshot(snapshot, session!, query, complete);
+      } catch (syncError) {
+        // Defer error delivery via nextTick so callback callers never experience
+        // synchronous callback execution (Zalgo) when getSessionSync() returns synchronously.
+        process.nextTick(() => complete(syncError as grpc.ServiceError));
+      }
+    };
+
+    const session = this.sessionFactory_.getSessionSync?.();
+    if (session) {
+      onSession(null, session);
+      return;
+    }
+
+    this.sessionFactory_.getSession(onSession);
   }
 
   /**
@@ -3081,7 +3109,9 @@ class Database extends common.GrpcServiceObject {
         snapshot.run(query, callback as RunCallback);
       }
     } catch (syncError) {
-      callback(syncError as grpc.ServiceError);
+      // Defer error delivery via nextTick so callback callers never experience
+      // synchronous callback execution (Zalgo) when getSessionSync() returns synchronously.
+      process.nextTick(() => callback(syncError as grpc.ServiceError));
     }
   }
   /**
