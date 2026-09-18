@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import * as vm from 'vm';
 import {EventEmitter} from 'events';
 import {Duplex, Writable} from 'stream';
 import {SpanStatusCode} from '@opentelemetry/api';
@@ -406,6 +407,80 @@ describe('TracerHelper', () => {
         assert.strictEqual(span.attributes['error.type'], '_OTHER');
         harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}, {span});
         assert.strictEqual(span.events.length, 0);
+        // Nothing better is available for an object with no message, so the
+        // String() fallback stands and the status code above is what has to
+        // carry the meaning.
+        assert.strictEqual(span.status.message, '[object Object]');
+      });
+
+      it('describes an error-shaped object from its message property', async () => {
+        // `code` is already read off whatever was thrown rather than off an
+        // Error; the description is resolved the same way, so an object that
+        // carries a perfectly good message is not reduced to '[object Object]'.
+        const span = await failWith({
+          code: Status.NOT_FOUND,
+          message: 'object does not exist',
+        });
+
+        assert.strictEqual(span.status.message, 'object does not exist');
+        assert.strictEqual(span.attributes['error.type'], '_OTHER');
+        harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}, {span});
+      });
+
+      it('describes an Error that crossed a realm boundary', async () => {
+        // A value from another realm fails `instanceof Error`, so it takes the
+        // non-Error branch despite being a real Error. Reading `message`
+        // directly keeps the description intact; String() would have prefixed
+        // it with the class name.
+        const crossRealm = vm.runInNewContext(
+          "new Error('cross realm boom')",
+        ) as Error;
+        assert.strictEqual(crossRealm instanceof Error, false);
+
+        const span = await failWith(crossRealm);
+
+        assert.strictEqual(span.status.message, 'cross realm boom');
+      });
+
+      it('falls back to String() for a message that is not a string', async () => {
+        // A non-string `message` is not a description, and passing it through
+        // would hand OTel a value its status API does not accept.
+        const span = await failWith({message: {nested: 'object'}});
+
+        assert.strictEqual(span.status.message, '[object Object]');
+        assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+      });
+
+      it('keeps the description empty when the error has no message', async () => {
+        // `new Error()` has an empty message, and it must be reported as such.
+        // Substituting a placeholder would invent a description that no error
+        // actually carried; the failure is already conveyed by the status code
+        // and error.type.
+        const span = await failWith(new Error());
+
+        assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(span.status.message, '');
+        assert.strictEqual(span.attributes['error.type'], 'Error');
+      });
+
+      it('keeps the first description when a second, different failure arrives', async () => {
+        // The first failure is the one that ended the call; a later error is
+        // fallout from the teardown. Overwriting the description would replace
+        // the cause with its symptom, which is the harder direction to debug.
+        const emitter = new EventEmitter();
+        // Attached up front: handleStream removes its own 'error' listener once
+        // the span is ended, and an EventEmitter with no 'error' listener
+        // throws on emit.
+        emitter.on('error', () => {});
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
+
+        emitter.emit('error', new Error('connection reset'));
+        emitter.emit('error', new Error('premature close'));
+
+        const span = harness.requireSingleSpan('google-gax');
+        assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(span.status.message, 'connection reset');
+        assert.strictEqual(span.events.length, 1);
       });
 
       it('survives a thrown null', async () => {
@@ -1292,6 +1367,24 @@ describe('TracerHelper', () => {
         assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
       });
 
+      it('sets ERROR when a client-streaming call fails', () => {
+        // The write-only path reaches endSpan through 'finish' rather than
+        // 'end', so its failure route is separate from the readable one above
+        // and needs its own description assertion.
+        const writable = new Writable({
+          objectMode: true,
+          write(_chunk, _enc, cb) {
+            cb();
+          },
+        });
+        traceCall(dynamicArgs, staticArgs, () => writable, true);
+        writable.emit('error', new GoogleError('upload aborted'));
+
+        const status = lastStatus();
+        assert.strictEqual(status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(status.message, 'upload aborted');
+      });
+
       it('leaves the status unset when the callback reports success', () => {
         let invokedCallback: APICallback | undefined;
         traceCall(
@@ -1367,6 +1460,9 @@ describe('TracerHelper', () => {
         const spans = harness.getSpans('google-gax');
         assert.strictEqual(spans.length, 1);
         assert.strictEqual(spans[0].status.code, SpanStatusCode.UNSET);
+        // The late failure must not leave a description behind either: a
+        // described UNSET status reads as a success that also failed.
+        assert.strictEqual(spans[0].status.message, undefined);
         // No phantom exception event tacked onto the finished span.
         assert.strictEqual(
           spans[0].events.filter(e => e.name === 'exception').length,
