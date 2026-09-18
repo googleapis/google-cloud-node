@@ -41,9 +41,15 @@ jobs:
       with:
         node-version: 24.x
 
-    - name: Install Node dependencies with npm
-      run: npm install
+    - name: Install global CLI tools
+      run: npm install -g @bazel/bazelisk pnpm@10.0.0 --silent
+
+    - name: Install generator with pnpm
       working-directory: core/generator/gapic-generator-typescript
+      run: |
+        pnpm install --ignore-workspace --frozen-lockfile --config.auto-install-peers=true
+        pnpm run compile
+        pnpm add -g "$PWD"
       
     - name: Strip local GCC 15 flags for CI
       working-directory: core/generator/gapic-generator-typescript
@@ -85,7 +91,6 @@ jobs:
       shell: bash
       run: |
         set -ex
-        npm install -g pnpm@10.0.0 --silent
         cp ../../../.mocharc.cjs .
         unzip ~/artifacts/outputs.zip -d library
         FAIL=0
