@@ -68,7 +68,7 @@
     "postpack": "minifyProtoJson build/cjs && minifyProtoJson build/esm",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepublishOnly": "npm run compile-protos && npm run compile",
     "system-test:cjs": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/cjs/system-test",
     "system-test:esm": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/esm/system-test",
     "system-test": "npm run system-test:esm && npm run system-test:cjs",

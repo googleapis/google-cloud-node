@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "compile": "tsc -p .",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test --recursive",
     "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",

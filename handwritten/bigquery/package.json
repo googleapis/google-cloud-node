@@ -43,7 +43,7 @@
     "compile": "tsc -p . && cp src/types.d.ts build/src/",
     "fix": "gts fix",
     "predocs": "pnpm run compile",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "pnpm run compile",
     "types": "node scripts/gen-types.js",
     "prelint": "cd samples; pnpm link ../; pnpm install",

@@ -15,7 +15,7 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "docs": "mkdir docs && touch docs/noop.html",
     "presystem-test": "npm run compile",

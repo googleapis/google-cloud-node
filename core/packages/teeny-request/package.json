@@ -14,7 +14,7 @@
     "lint": "gts check",
     "clean": "gts clean",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "echo no system test",
     "samples-test": "echo no samples",

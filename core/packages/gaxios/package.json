@@ -31,7 +31,7 @@
     "system-test": "mocha build/esm/system-test --timeout 80000",
     "compile": "tsc -b ./tsconfig.json ./tsconfig.cjs.json && node utils/enable-esm.mjs",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "webpack": "webpack",
     "prebrowser-test": "npm run compile",

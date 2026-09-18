@@ -43,7 +43,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "pnpm run compile",
     "benchwrapper": "node bin/benchwrapper.js",
     "prelint": "cd samples; pnpm link ../; pnpm install",

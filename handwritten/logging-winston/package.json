@@ -46,7 +46,7 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "pnpm run compile",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"

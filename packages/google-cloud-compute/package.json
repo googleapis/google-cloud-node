@@ -115,7 +115,7 @@
     "docs": "node --max-old-space-size=8192 ./node_modules/.bin/jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",

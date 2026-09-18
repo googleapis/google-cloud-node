@@ -17,7 +17,7 @@
     "compile": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p .",
     "fix": "gts fix",
     "pretest": "npm run compile",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/system-test --timeout 600000",

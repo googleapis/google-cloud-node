@@ -40,7 +40,7 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "pnpm run compile",
     "prelint": "cd samples; pnpm link ../; pnpm install",
     "precompile": "gts clean"

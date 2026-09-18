@@ -9,13 +9,13 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "pretest": "npm run prepare",
+    "pretest": "npm run compile",
     "test": "c8 mocha build/test",
     "lint": "gts check test src",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r test/fixtures build/test",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "precompile": "gts clean",
     "system-test": "echo 'no system-test'",
     "samples-test": "echo 'no samples'",

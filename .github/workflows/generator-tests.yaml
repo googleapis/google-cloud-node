@@ -96,8 +96,8 @@ jobs:
             echo "--- Testing library $lib ---"
             cd "library/.test-out-$lib"
             pnpm install --no-frozen-lockfile --ignore-workspace --silent
+            pnpm run prepublishOnly
             pnpm test
-            pnpm run compile
             pnpm run system-test
           ) &
           PIDS+=($!)
@@ -130,8 +130,8 @@ jobs:
             echo "--- Testing ESM library $lib ---"
             cd "library/.test-out-$lib-esm"
             pnpm install --no-frozen-lockfile --ignore-workspace --silent
+            pnpm run prepublishOnly
             pnpm test
-            pnpm run compile
             pnpm run system-test
           ) &
           PIDS+=($!)
@@ -161,6 +161,7 @@ jobs:
         set -ex
         cd generator/gapic-generator-typescript/test-fixtures/google-cloud-speech
         pnpm install --no-frozen-lockfile --ignore-workspace --silent
+        pnpm run prepublishOnly
         pnpm test
         pnpm run system-test
 
@@ -176,5 +177,6 @@ jobs:
         set -ex
         cd generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks
         pnpm install --no-frozen-lockfile --ignore-workspace --silent
+        pnpm run prepublishOnly
         pnpm test
         pnpm run system-test

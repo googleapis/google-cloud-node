@@ -63,7 +63,7 @@
     "precompile": "rm -rf build/",
     "preconformance-test": "pnpm run compile:cjs --sourceMap",
     "predocs": "pnpm run compile:cjs --sourceMap",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "presystem-test:esm": "pnpm run compile:esm",
     "presystem-test": "pnpm run compile --sourceMap",
     "pretest": "pnpm run compile --sourceMap",

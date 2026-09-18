@@ -24,7 +24,7 @@
     "docs": "echo no docs needed",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile",
+    "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "samples-test": "echo 'no test'",
     "system-test": "echo 'no test'",
