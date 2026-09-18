@@ -24,6 +24,7 @@ export {AdUnitServiceClient} from './ad_unit_service_client';
 export {ApplicationServiceClient} from './application_service_client';
 export {AudienceSegmentServiceClient} from './audience_segment_service_client';
 export {BandwidthGroupServiceClient} from './bandwidth_group_service_client';
+export {BreakTemplateServiceClient} from './break_template_service_client';
 export {BrowserLanguageServiceClient} from './browser_language_service_client';
 export {BrowserServiceClient} from './browser_service_client';
 export {CdnConfigServiceClient} from './cdn_config_service_client';
@@ -43,6 +44,7 @@ export {CustomTargetingKeyServiceClient} from './custom_targeting_key_service_cl
 export {CustomTargetingValueServiceClient} from './custom_targeting_value_service_client';
 export {DaiAuthenticationKeyServiceClient} from './dai_authentication_key_service_client';
 export {DaiEncodingProfileServiceClient} from './dai_encoding_profile_service_client';
+export {DaiSessionServiceClient} from './dai_session_service_client';
 export {DeviceCapabilityServiceClient} from './device_capability_service_client';
 export {DeviceCategoryServiceClient} from './device_category_service_client';
 export {DeviceManufacturerServiceClient} from './device_manufacturer_service_client';

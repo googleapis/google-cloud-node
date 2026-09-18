@@ -47,7 +47,10 @@ import {
   BatchWriteOptions,
   CommitCallback,
   CommitOptions,
+  ExecuteSqlRequest,
   MutationSet,
+  RunCallback,
+  RunResponse,
 } from '../src/transaction';
 import {SessionFactory} from '../src/session-factory';
 import {RunTransactionOptions} from '../src/transaction-runner';
@@ -138,6 +141,9 @@ export class FakeMultiplexedSession extends EventEmitter {
   }
   createSession() {}
   getSession() {}
+  getSessionSync(): FakeSession | null {
+    return null;
+  }
 }
 
 export class FakeSessionFactory extends EventEmitter {
@@ -147,6 +153,9 @@ export class FakeSessionFactory extends EventEmitter {
     this.calledWith_ = arguments;
   }
   getSession() {}
+  getSessionSync(): FakeSession | null {
+    return null;
+  }
   getSessionForPartitionedOps() {}
   getSessionForReadWrite() {}
   getPool(): FakeSessionPool {
@@ -184,6 +193,13 @@ class FakeTransaction extends EventEmitter {
   }
   begin() {}
   end() {}
+  run(_query?: any, _callback?: any): void | Promise<any> {}
+  _run(
+    query?: ExecuteSqlRequest | string,
+    callback?: RunCallback,
+  ): void | Promise<RunResponse> {
+    return this.run(query, callback);
+  }
   runStream(): Transform {
     return through.obj();
   }
@@ -1616,6 +1632,9 @@ describe('Database', () => {
         callback(null, SESSION);
       };
 
+      SESSIONFACTORY.isMultiplexedEnabledForRW = () => false;
+      SESSIONFACTORY.getSessionSync = () => null;
+
       SESSIONFACTORY.release = util.noop;
     });
 
@@ -1680,6 +1699,51 @@ describe('Database', () => {
 
       database.makePooledRequest_(CONFIG, (...args) => {
         assert.deepStrictEqual(args, originalArgs);
+        done();
+      });
+    });
+
+    it('should use synchronous multiplexed session hand-off when available', done => {
+      const getSessionForReadWriteStub = sandbox.stub(
+        SESSIONFACTORY,
+        'getSessionForReadWrite',
+      );
+      sandbox.stub(SESSIONFACTORY, 'isMultiplexedEnabledForRW').returns(true);
+      sandbox.stub(SESSIONFACTORY, 'getSessionSync').returns(SESSION);
+
+      let requestCalledSynchronously = false;
+      database.request = (config, callback) => {
+        requestCalledSynchronously = true;
+        assert.strictEqual(config.reqOpts.session, SESSION.formattedName_);
+        callback(null, 'response');
+      };
+
+      database.makePooledRequest_(CONFIG, (err, res) => {
+        assert.ifError(err);
+        assert.strictEqual(res, 'response');
+        assert.strictEqual(getSessionForReadWriteStub.callCount, 0);
+        done();
+      });
+      assert.strictEqual(requestCalledSynchronously, true);
+    });
+
+    it('should fall back to getSessionForReadWrite when getSessionSync returns null', done => {
+      const getSessionForReadWriteSpy = sandbox.spy(
+        SESSIONFACTORY,
+        'getSessionForReadWrite',
+      );
+      sandbox.stub(SESSIONFACTORY, 'isMultiplexedEnabledForRW').returns(true);
+      sandbox.stub(SESSIONFACTORY, 'getSessionSync').returns(null);
+
+      database.request = (config, callback) => {
+        assert.strictEqual(config.reqOpts.session, SESSION.formattedName_);
+        callback(null, 'response');
+      };
+
+      database.makePooledRequest_(CONFIG, (err, res) => {
+        assert.ifError(err);
+        assert.strictEqual(res, 'response');
+        assert.strictEqual(getSessionForReadWriteSpy.callCount, 1);
         done();
       });
     });
@@ -1938,6 +2002,287 @@ describe('Database', () => {
         assert.strictEqual(err, error);
         done();
       });
+    });
+  });
+
+  describe('run fast-path', () => {
+    const QUERY = 'SELECT 1';
+    let fakeSessionFactory: FakeSessionFactory;
+    let fakeSession: FakeSession;
+    let fakeSnapshot: FakeTransaction;
+    let getSessionStub: sinon.SinonStub;
+    let snapshotStub: sinon.SinonStub;
+    let runStub: sinon.SinonStub;
+
+    beforeEach(() => {
+      fakeSessionFactory = database.sessionFactory_;
+      fakeSession = new FakeSession();
+      fakeSnapshot = new FakeTransaction(
+        {} as google.spanner.v1.TransactionOptions.ReadOnly,
+      );
+
+      getSessionStub = (
+        sandbox.stub(fakeSessionFactory, 'getSession') as sinon.SinonStub
+      ).callsFake(callback => callback(null, fakeSession));
+
+      snapshotStub = sandbox
+        .stub(fakeSession, 'snapshot')
+        .returns(fakeSnapshot);
+
+      runStub = (
+        sandbox.stub(fakeSnapshot, 'run') as sinon.SinonStub
+      ).callsFake((query, optionsOrCallback, cb) => {
+        const callback =
+          typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
+        if (callback) {
+          callback(null, [{id: 1}]);
+        }
+      });
+
+      sandbox.stub(fakeSessionFactory, 'isMultiplexedEnabled').returns(true);
+    });
+
+    it('should execute query via snapshot.run fast-path and end snapshot', done => {
+      const endStub = sandbox.stub(fakeSnapshot, 'end');
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        assert.strictEqual(getSessionStub.callCount, 1);
+        assert.strictEqual(runStub.callCount, 1);
+        assert.strictEqual(runStub.lastCall.args[0], QUERY);
+        assert.strictEqual(endStub.callCount, 1);
+        done();
+      });
+    });
+
+    it('should release the session on snapshot end', done => {
+      const releaseStub = sandbox.stub(
+        fakeSessionFactory,
+        'release',
+      ) as sinon.SinonStub;
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        fakeSnapshot.emit('end');
+        assert.strictEqual(releaseStub.callCount, 1);
+        assert.strictEqual(releaseStub.lastCall.args[0], fakeSession);
+        done();
+      });
+    });
+
+    it('should propagate getSession error', done => {
+      const fakeError = new Error('No session');
+      getSessionStub.callsFake(callback => callback(fakeError));
+
+      database.run(QUERY, (err, rows) => {
+        assert.strictEqual(err, fakeError);
+        assert.deepStrictEqual(rows, []);
+        done();
+      });
+    });
+
+    it('should pass options to session.snapshot', done => {
+      const options = {strong: true};
+      database.run(QUERY, options, (err, rows) => {
+        assert.ifError(err);
+        assert.strictEqual(snapshotStub.lastCall.args[0], options);
+        done();
+      });
+    });
+
+    it('should propagate runMethod error', done => {
+      const queryError = Object.assign(new Error('Query execution failed'), {
+        code: grpc.status.INVALID_ARGUMENT,
+      });
+      runStub.callsFake((query, optionsOrCallback, cb) => {
+        const callback =
+          typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
+        if (callback) {
+          callback(queryError);
+        }
+      });
+
+      database.run(QUERY, (err, rows) => {
+        assert.strictEqual(err, queryError);
+        assert.deepStrictEqual(rows, []);
+        done();
+      });
+    });
+
+    it('should emit error if session release throws on snapshot end', done => {
+      const releaseError = new Error('Release failed');
+      const releaseStub = sandbox
+        .stub(fakeSessionFactory, 'release')
+        .throws(releaseError);
+
+      database.once('error', err => {
+        assert.strictEqual(err, releaseError);
+        assert.strictEqual(releaseStub.callCount, 1);
+        done();
+      });
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        fakeSnapshot.emit('end');
+      });
+    });
+
+    it('should use synchronous multiplexed session hand-off via getSessionSync when available', done => {
+      sandbox.stub(fakeSessionFactory, 'getSessionSync').returns(fakeSession);
+
+      let snapshotCreatedSynchronously = false;
+      snapshotStub.callsFake(() => {
+        snapshotCreatedSynchronously = true;
+        return fakeSnapshot;
+      });
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        assert.strictEqual(getSessionStub.callCount, 0);
+        assert.strictEqual(snapshotStub.callCount, 1);
+        done();
+      });
+
+      assert.strictEqual(snapshotCreatedSynchronously, true);
+    });
+
+    it('should fall back to streaming path when multiplexed session is disabled', done => {
+      (fakeSessionFactory.isMultiplexedEnabled as sinon.SinonStub).returns(
+        false,
+      );
+      const runLegacyStub = sandbox
+        .stub(database as any, '_runLegacy')
+        .callsFake((query, options, callback: any) => {
+          assert.strictEqual(query, QUERY);
+          callback(null, [{id: 99}]);
+        });
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 99}]);
+        assert.strictEqual(runLegacyStub.callCount, 1);
+        assert.strictEqual(getSessionStub.callCount, 0);
+        done();
+      });
+    });
+
+    it('should fall back to streaming path when runStream is overridden', done => {
+      database.runStream = () => through.obj() as any;
+      const runLegacyStub = sandbox
+        .stub(database as any, '_runLegacy')
+        .callsFake((query, options, callback: any) => {
+          assert.strictEqual(query, QUERY);
+          callback(null, [{id: 100}]);
+        });
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 100}]);
+        assert.strictEqual(runLegacyStub.callCount, 1);
+        assert.strictEqual(getSessionStub.callCount, 0);
+        done();
+      });
+    });
+
+    it('should support Promise-based execution via promisify', async () => {
+      const runPromise = pfy.promisify(database.run.bind(database));
+      const [rows] = await runPromise(QUERY);
+      assert.deepStrictEqual(rows, [{id: 1}]);
+      assert.strictEqual(runStub.callCount, 1);
+    });
+
+    it('should use synchronous multiplexed session hand-off with Promise-based run', async () => {
+      sandbox.stub(fakeSessionFactory, 'getSessionSync').returns(fakeSession);
+      const runPromise = pfy.promisify(database.run.bind(database));
+      const [rows] = await runPromise(QUERY);
+      assert.deepStrictEqual(rows, [{id: 1}]);
+      assert.strictEqual(getSessionStub.callCount, 0);
+      assert.strictEqual(snapshotStub.callCount, 1);
+    });
+
+    it('should fall back to snapshot.run when snapshot.runStream is overridden', done => {
+      fakeSnapshot.runStream = () => through.obj() as any;
+      const snapshotRunStub = sandbox.stub(fakeSnapshot, '_run');
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        assert.strictEqual(runStub.callCount, 1);
+        assert.strictEqual(snapshotRunStub.callCount, 0);
+        assert.strictEqual(runStub.lastCall.args.length, 2);
+        done();
+      });
+    });
+
+    it('should fall back to getSession when getSessionSync returns null', done => {
+      sandbox.stub(fakeSessionFactory, 'getSessionSync').returns(null);
+
+      database.run(QUERY, (err, rows) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        assert.strictEqual(getSessionStub.callCount, 1);
+        assert.strictEqual(snapshotStub.callCount, 1);
+        done();
+      });
+    });
+
+    it('should catch synchronous error in runMethod, end snapshot and propagate error asynchronously', done => {
+      sandbox.stub(fakeSessionFactory, 'getSessionSync').returns(fakeSession);
+      const syncError = new Error('Synchronous parameter failure');
+      const endStub = sandbox.stub(fakeSnapshot, 'end');
+      runStub.throws(syncError);
+
+      let isSynchronous = true;
+      database.run(QUERY, (err, rows) => {
+        assert.strictEqual(isSynchronous, false);
+        assert.strictEqual(err, syncError);
+        assert.deepStrictEqual(rows, []);
+        assert.strictEqual(endStub.callCount, 1);
+        done();
+      });
+      isSynchronous = false;
+    });
+
+    it('should catch synchronous error in session.snapshot and propagate error asynchronously', done => {
+      sandbox.stub(fakeSessionFactory, 'getSessionSync').returns(fakeSession);
+      const snapshotError = new Error('Invalid timestamp bounds');
+      snapshotStub.throws(snapshotError);
+
+      let isSynchronous = true;
+      database.run(QUERY, (err, rows) => {
+        assert.strictEqual(isSynchronous, false);
+        assert.strictEqual(err, snapshotError);
+        assert.deepStrictEqual(rows, []);
+        done();
+      });
+      isSynchronous = false;
+    });
+
+    it('should dispatch query synchronously on getSessionSync fast-path while invoking callback asynchronously', done => {
+      sandbox.stub(fakeSessionFactory, 'getSessionSync').returns(fakeSession);
+      let queryDispatchedSynchronously = false;
+      runStub.callsFake((query, optionsOrCallback, cb) => {
+        queryDispatchedSynchronously = true;
+        const callback =
+          typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
+        if (callback) {
+          process.nextTick(() => callback(null, [{id: 1}]));
+        }
+      });
+
+      let isSynchronous = true;
+      database.run(QUERY, (err, rows) => {
+        assert.strictEqual(isSynchronous, false);
+        assert.ifError(err);
+        assert.deepStrictEqual(rows, [{id: 1}]);
+        done();
+      });
+      assert.strictEqual(queryDispatchedSynchronously, true);
+      isSynchronous = false;
     });
   });
 
@@ -3251,6 +3596,78 @@ describe('Database', () => {
         assert.strictEqual(err, fakeError);
         assert.strictEqual(releaseStub.callCount, 1);
         done();
+      });
+    });
+
+    it('should emit an error on database when session release fails after successful run', done => {
+      const releaseError = new Error('release failed');
+      const releaseStub = (
+        sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
+      )
+        .withArgs(SESSION)
+        .throws(releaseError);
+
+      sandbox.stub(FakeTransactionRunner.prototype, 'run').resolves();
+
+      const runFunction = sandbox.spy();
+
+      database.on('error', error => {
+        try {
+          assert.strictEqual(error, releaseError);
+          assert.strictEqual(releaseStub.callCount, 1);
+          sinon.assert.notCalled(runFunction);
+          done();
+        } catch (assertionError) {
+          done(assertionError);
+        }
+      });
+
+      database.runTransaction(runFunction);
+    });
+
+    it('should emit an error on database when session release fails after runner failure', done => {
+      const runnerError = new Error('transaction failed');
+      const releaseError = new Error('release failed');
+      const releaseStub = (
+        sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
+      )
+        .withArgs(SESSION)
+        .throws(releaseError);
+
+      sandbox.stub(FakeTransactionRunner.prototype, 'run').rejects(runnerError);
+
+      let databaseErrorReceived = false;
+      let runnerCallbackReceived = false;
+
+      const checkBoth = () => {
+        if (databaseErrorReceived && runnerCallbackReceived) {
+          try {
+            assert.strictEqual(releaseStub.callCount, 1);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        }
+      };
+
+      database.on('error', error => {
+        try {
+          assert.strictEqual(error, releaseError);
+          databaseErrorReceived = true;
+          checkBoth();
+        } catch (assertionError) {
+          done(assertionError);
+        }
+      });
+
+      database.runTransaction(error => {
+        try {
+          assert.strictEqual(error, runnerError);
+          runnerCallbackReceived = true;
+          checkBoth();
+        } catch (assertionError) {
+          done(assertionError);
+        }
       });
     });
   });

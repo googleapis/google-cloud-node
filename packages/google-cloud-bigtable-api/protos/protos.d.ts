@@ -215,6 +215,48 @@ export namespace google {
                     public deleteCluster(request: google.bigtable.admin.v2.IDeleteClusterRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls UpdateMemoryLayer.
+                     * @param request UpdateMemoryLayerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateMemoryLayer(request: google.bigtable.admin.v2.IUpdateMemoryLayerRequest, callback: google.bigtable.admin.v2.BigtableInstanceAdmin.UpdateMemoryLayerCallback): void;
+
+                    /**
+                     * Calls UpdateMemoryLayer.
+                     * @param request UpdateMemoryLayerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMemoryLayer(request: google.bigtable.admin.v2.IUpdateMemoryLayerRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListMemoryLayers.
+                     * @param request ListMemoryLayersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMemoryLayersResponse
+                     */
+                    public listMemoryLayers(request: google.bigtable.admin.v2.IListMemoryLayersRequest, callback: google.bigtable.admin.v2.BigtableInstanceAdmin.ListMemoryLayersCallback): void;
+
+                    /**
+                     * Calls ListMemoryLayers.
+                     * @param request ListMemoryLayersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMemoryLayers(request: google.bigtable.admin.v2.IListMemoryLayersRequest): Promise<google.bigtable.admin.v2.ListMemoryLayersResponse>;
+
+                    /**
+                     * Calls GetMemoryLayer.
+                     * @param request GetMemoryLayerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MemoryLayer
+                     */
+                    public getMemoryLayer(request: google.bigtable.admin.v2.IGetMemoryLayerRequest, callback: google.bigtable.admin.v2.BigtableInstanceAdmin.GetMemoryLayerCallback): void;
+
+                    /**
+                     * Calls GetMemoryLayer.
+                     * @param request GetMemoryLayerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMemoryLayer(request: google.bigtable.admin.v2.IGetMemoryLayerRequest): Promise<google.bigtable.admin.v2.MemoryLayer>;
+
+                    /**
                      * Calls CreateAppProfile.
                      * @param request CreateAppProfileRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and AppProfile
@@ -566,6 +608,27 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteClusterCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.bigtable.admin.v2.BigtableInstanceAdmin|updateMemoryLayer}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateMemoryLayerCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.bigtable.admin.v2.BigtableInstanceAdmin|listMemoryLayers}.
+                     * @param error Error, if any
+                     * @param [response] ListMemoryLayersResponse
+                     */
+                    type ListMemoryLayersCallback = (error: (Error|null), response?: google.bigtable.admin.v2.ListMemoryLayersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.bigtable.admin.v2.BigtableInstanceAdmin|getMemoryLayer}.
+                     * @param error Error, if any
+                     * @param [response] MemoryLayer
+                     */
+                    type GetMemoryLayerCallback = (error: (Error|null), response?: google.bigtable.admin.v2.MemoryLayer) => void;
 
                     /**
                      * Callback as used by {@link google.bigtable.admin.v2.BigtableInstanceAdmin|createAppProfile}.
@@ -2612,6 +2675,533 @@ export namespace google {
 
                     /**
                      * Gets the default type url for PartialUpdateClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMemoryLayerRequest. */
+                interface IUpdateMemoryLayerRequest {
+
+                    /** UpdateMemoryLayerRequest memoryLayer */
+                    memoryLayer?: (google.bigtable.admin.v2.IMemoryLayer|null);
+
+                    /** UpdateMemoryLayerRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateMemoryLayerRequest. */
+                class UpdateMemoryLayerRequest implements IUpdateMemoryLayerRequest {
+
+                    /**
+                     * Constructs a new UpdateMemoryLayerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.admin.v2.IUpdateMemoryLayerRequest);
+
+                    /** UpdateMemoryLayerRequest memoryLayer. */
+                    public memoryLayer?: (google.bigtable.admin.v2.IMemoryLayer|null);
+
+                    /** UpdateMemoryLayerRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateMemoryLayerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMemoryLayerRequest instance
+                     */
+                    public static create(properties?: google.bigtable.admin.v2.IUpdateMemoryLayerRequest): google.bigtable.admin.v2.UpdateMemoryLayerRequest;
+
+                    /**
+                     * Encodes the specified UpdateMemoryLayerRequest message. Does not implicitly {@link google.bigtable.admin.v2.UpdateMemoryLayerRequest.verify|verify} messages.
+                     * @param message UpdateMemoryLayerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.admin.v2.IUpdateMemoryLayerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMemoryLayerRequest message, length delimited. Does not implicitly {@link google.bigtable.admin.v2.UpdateMemoryLayerRequest.verify|verify} messages.
+                     * @param message UpdateMemoryLayerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.admin.v2.IUpdateMemoryLayerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMemoryLayerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMemoryLayerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.admin.v2.UpdateMemoryLayerRequest;
+
+                    /**
+                     * Decodes an UpdateMemoryLayerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMemoryLayerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.admin.v2.UpdateMemoryLayerRequest;
+
+                    /**
+                     * Verifies an UpdateMemoryLayerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMemoryLayerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMemoryLayerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.admin.v2.UpdateMemoryLayerRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMemoryLayerRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMemoryLayerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.admin.v2.UpdateMemoryLayerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMemoryLayerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMemoryLayerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMemoryLayerMetadata. */
+                interface IUpdateMemoryLayerMetadata {
+
+                    /** UpdateMemoryLayerMetadata originalRequest */
+                    originalRequest?: (google.bigtable.admin.v2.IUpdateMemoryLayerRequest|null);
+
+                    /** UpdateMemoryLayerMetadata requestTime */
+                    requestTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UpdateMemoryLayerMetadata finishTime */
+                    finishTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an UpdateMemoryLayerMetadata. */
+                class UpdateMemoryLayerMetadata implements IUpdateMemoryLayerMetadata {
+
+                    /**
+                     * Constructs a new UpdateMemoryLayerMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.admin.v2.IUpdateMemoryLayerMetadata);
+
+                    /** UpdateMemoryLayerMetadata originalRequest. */
+                    public originalRequest?: (google.bigtable.admin.v2.IUpdateMemoryLayerRequest|null);
+
+                    /** UpdateMemoryLayerMetadata requestTime. */
+                    public requestTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UpdateMemoryLayerMetadata finishTime. */
+                    public finishTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new UpdateMemoryLayerMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMemoryLayerMetadata instance
+                     */
+                    public static create(properties?: google.bigtable.admin.v2.IUpdateMemoryLayerMetadata): google.bigtable.admin.v2.UpdateMemoryLayerMetadata;
+
+                    /**
+                     * Encodes the specified UpdateMemoryLayerMetadata message. Does not implicitly {@link google.bigtable.admin.v2.UpdateMemoryLayerMetadata.verify|verify} messages.
+                     * @param message UpdateMemoryLayerMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.admin.v2.IUpdateMemoryLayerMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMemoryLayerMetadata message, length delimited. Does not implicitly {@link google.bigtable.admin.v2.UpdateMemoryLayerMetadata.verify|verify} messages.
+                     * @param message UpdateMemoryLayerMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.admin.v2.IUpdateMemoryLayerMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMemoryLayerMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMemoryLayerMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.admin.v2.UpdateMemoryLayerMetadata;
+
+                    /**
+                     * Decodes an UpdateMemoryLayerMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMemoryLayerMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.admin.v2.UpdateMemoryLayerMetadata;
+
+                    /**
+                     * Verifies an UpdateMemoryLayerMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMemoryLayerMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMemoryLayerMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.admin.v2.UpdateMemoryLayerMetadata;
+
+                    /**
+                     * Creates a plain object from an UpdateMemoryLayerMetadata message. Also converts values to other types if specified.
+                     * @param message UpdateMemoryLayerMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.admin.v2.UpdateMemoryLayerMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMemoryLayerMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMemoryLayerMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMemoryLayersRequest. */
+                interface IListMemoryLayersRequest {
+
+                    /** ListMemoryLayersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMemoryLayersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMemoryLayersRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListMemoryLayersRequest. */
+                class ListMemoryLayersRequest implements IListMemoryLayersRequest {
+
+                    /**
+                     * Constructs a new ListMemoryLayersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.admin.v2.IListMemoryLayersRequest);
+
+                    /** ListMemoryLayersRequest parent. */
+                    public parent: string;
+
+                    /** ListMemoryLayersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMemoryLayersRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListMemoryLayersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMemoryLayersRequest instance
+                     */
+                    public static create(properties?: google.bigtable.admin.v2.IListMemoryLayersRequest): google.bigtable.admin.v2.ListMemoryLayersRequest;
+
+                    /**
+                     * Encodes the specified ListMemoryLayersRequest message. Does not implicitly {@link google.bigtable.admin.v2.ListMemoryLayersRequest.verify|verify} messages.
+                     * @param message ListMemoryLayersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.admin.v2.IListMemoryLayersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMemoryLayersRequest message, length delimited. Does not implicitly {@link google.bigtable.admin.v2.ListMemoryLayersRequest.verify|verify} messages.
+                     * @param message ListMemoryLayersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.admin.v2.IListMemoryLayersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMemoryLayersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMemoryLayersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.admin.v2.ListMemoryLayersRequest;
+
+                    /**
+                     * Decodes a ListMemoryLayersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMemoryLayersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.admin.v2.ListMemoryLayersRequest;
+
+                    /**
+                     * Verifies a ListMemoryLayersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMemoryLayersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMemoryLayersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.admin.v2.ListMemoryLayersRequest;
+
+                    /**
+                     * Creates a plain object from a ListMemoryLayersRequest message. Also converts values to other types if specified.
+                     * @param message ListMemoryLayersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.admin.v2.ListMemoryLayersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMemoryLayersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMemoryLayersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMemoryLayersResponse. */
+                interface IListMemoryLayersResponse {
+
+                    /** ListMemoryLayersResponse memoryLayers */
+                    memoryLayers?: (google.bigtable.admin.v2.IMemoryLayer[]|null);
+
+                    /** ListMemoryLayersResponse failedLocations */
+                    failedLocations?: (string[]|null);
+
+                    /** ListMemoryLayersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListMemoryLayersResponse. */
+                class ListMemoryLayersResponse implements IListMemoryLayersResponse {
+
+                    /**
+                     * Constructs a new ListMemoryLayersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.admin.v2.IListMemoryLayersResponse);
+
+                    /** ListMemoryLayersResponse memoryLayers. */
+                    public memoryLayers: google.bigtable.admin.v2.IMemoryLayer[];
+
+                    /** ListMemoryLayersResponse failedLocations. */
+                    public failedLocations: string[];
+
+                    /** ListMemoryLayersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListMemoryLayersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMemoryLayersResponse instance
+                     */
+                    public static create(properties?: google.bigtable.admin.v2.IListMemoryLayersResponse): google.bigtable.admin.v2.ListMemoryLayersResponse;
+
+                    /**
+                     * Encodes the specified ListMemoryLayersResponse message. Does not implicitly {@link google.bigtable.admin.v2.ListMemoryLayersResponse.verify|verify} messages.
+                     * @param message ListMemoryLayersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.admin.v2.IListMemoryLayersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMemoryLayersResponse message, length delimited. Does not implicitly {@link google.bigtable.admin.v2.ListMemoryLayersResponse.verify|verify} messages.
+                     * @param message ListMemoryLayersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.admin.v2.IListMemoryLayersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMemoryLayersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMemoryLayersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.admin.v2.ListMemoryLayersResponse;
+
+                    /**
+                     * Decodes a ListMemoryLayersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMemoryLayersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.admin.v2.ListMemoryLayersResponse;
+
+                    /**
+                     * Verifies a ListMemoryLayersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMemoryLayersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMemoryLayersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.admin.v2.ListMemoryLayersResponse;
+
+                    /**
+                     * Creates a plain object from a ListMemoryLayersResponse message. Also converts values to other types if specified.
+                     * @param message ListMemoryLayersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.admin.v2.ListMemoryLayersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMemoryLayersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMemoryLayersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMemoryLayerRequest. */
+                interface IGetMemoryLayerRequest {
+
+                    /** GetMemoryLayerRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMemoryLayerRequest. */
+                class GetMemoryLayerRequest implements IGetMemoryLayerRequest {
+
+                    /**
+                     * Constructs a new GetMemoryLayerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.admin.v2.IGetMemoryLayerRequest);
+
+                    /** GetMemoryLayerRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMemoryLayerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMemoryLayerRequest instance
+                     */
+                    public static create(properties?: google.bigtable.admin.v2.IGetMemoryLayerRequest): google.bigtable.admin.v2.GetMemoryLayerRequest;
+
+                    /**
+                     * Encodes the specified GetMemoryLayerRequest message. Does not implicitly {@link google.bigtable.admin.v2.GetMemoryLayerRequest.verify|verify} messages.
+                     * @param message GetMemoryLayerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.admin.v2.IGetMemoryLayerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMemoryLayerRequest message, length delimited. Does not implicitly {@link google.bigtable.admin.v2.GetMemoryLayerRequest.verify|verify} messages.
+                     * @param message GetMemoryLayerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.admin.v2.IGetMemoryLayerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMemoryLayerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMemoryLayerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.admin.v2.GetMemoryLayerRequest;
+
+                    /**
+                     * Decodes a GetMemoryLayerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMemoryLayerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.admin.v2.GetMemoryLayerRequest;
+
+                    /**
+                     * Verifies a GetMemoryLayerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMemoryLayerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMemoryLayerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.admin.v2.GetMemoryLayerRequest;
+
+                    /**
+                     * Creates a plain object from a GetMemoryLayerRequest message. Also converts values to other types if specified.
+                     * @param message GetMemoryLayerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.admin.v2.GetMemoryLayerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMemoryLayerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMemoryLayerRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6098,6 +6688,230 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a MemoryLayer. */
+                interface IMemoryLayer {
+
+                    /** MemoryLayer name */
+                    name?: (string|null);
+
+                    /** MemoryLayer memoryConfig */
+                    memoryConfig?: (google.bigtable.admin.v2.MemoryLayer.IMemoryConfig|null);
+
+                    /** MemoryLayer etag */
+                    etag?: (string|null);
+
+                    /** MemoryLayer state */
+                    state?: (google.bigtable.admin.v2.MemoryLayer.State|keyof typeof google.bigtable.admin.v2.MemoryLayer.State|null);
+                }
+
+                /** Represents a MemoryLayer. */
+                class MemoryLayer implements IMemoryLayer {
+
+                    /**
+                     * Constructs a new MemoryLayer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.admin.v2.IMemoryLayer);
+
+                    /** MemoryLayer name. */
+                    public name: string;
+
+                    /** MemoryLayer memoryConfig. */
+                    public memoryConfig?: (google.bigtable.admin.v2.MemoryLayer.IMemoryConfig|null);
+
+                    /** MemoryLayer etag. */
+                    public etag: string;
+
+                    /** MemoryLayer state. */
+                    public state: (google.bigtable.admin.v2.MemoryLayer.State|keyof typeof google.bigtable.admin.v2.MemoryLayer.State);
+
+                    /**
+                     * Creates a new MemoryLayer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemoryLayer instance
+                     */
+                    public static create(properties?: google.bigtable.admin.v2.IMemoryLayer): google.bigtable.admin.v2.MemoryLayer;
+
+                    /**
+                     * Encodes the specified MemoryLayer message. Does not implicitly {@link google.bigtable.admin.v2.MemoryLayer.verify|verify} messages.
+                     * @param message MemoryLayer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.admin.v2.IMemoryLayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemoryLayer message, length delimited. Does not implicitly {@link google.bigtable.admin.v2.MemoryLayer.verify|verify} messages.
+                     * @param message MemoryLayer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.admin.v2.IMemoryLayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemoryLayer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemoryLayer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.admin.v2.MemoryLayer;
+
+                    /**
+                     * Decodes a MemoryLayer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemoryLayer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.admin.v2.MemoryLayer;
+
+                    /**
+                     * Verifies a MemoryLayer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemoryLayer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemoryLayer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.admin.v2.MemoryLayer;
+
+                    /**
+                     * Creates a plain object from a MemoryLayer message. Also converts values to other types if specified.
+                     * @param message MemoryLayer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.admin.v2.MemoryLayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemoryLayer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MemoryLayer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MemoryLayer {
+
+                    /** Properties of a MemoryConfig. */
+                    interface IMemoryConfig {
+
+                        /** MemoryConfig storageSizeGib */
+                        storageSizeGib?: (number|null);
+                    }
+
+                    /** Represents a MemoryConfig. */
+                    class MemoryConfig implements IMemoryConfig {
+
+                        /**
+                         * Constructs a new MemoryConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.bigtable.admin.v2.MemoryLayer.IMemoryConfig);
+
+                        /** MemoryConfig storageSizeGib. */
+                        public storageSizeGib: number;
+
+                        /**
+                         * Creates a new MemoryConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MemoryConfig instance
+                         */
+                        public static create(properties?: google.bigtable.admin.v2.MemoryLayer.IMemoryConfig): google.bigtable.admin.v2.MemoryLayer.MemoryConfig;
+
+                        /**
+                         * Encodes the specified MemoryConfig message. Does not implicitly {@link google.bigtable.admin.v2.MemoryLayer.MemoryConfig.verify|verify} messages.
+                         * @param message MemoryConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.bigtable.admin.v2.MemoryLayer.IMemoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MemoryConfig message, length delimited. Does not implicitly {@link google.bigtable.admin.v2.MemoryLayer.MemoryConfig.verify|verify} messages.
+                         * @param message MemoryConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.bigtable.admin.v2.MemoryLayer.IMemoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MemoryConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MemoryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.admin.v2.MemoryLayer.MemoryConfig;
+
+                        /**
+                         * Decodes a MemoryConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MemoryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.admin.v2.MemoryLayer.MemoryConfig;
+
+                        /**
+                         * Verifies a MemoryConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MemoryConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MemoryConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.bigtable.admin.v2.MemoryLayer.MemoryConfig;
+
+                        /**
+                         * Creates a plain object from a MemoryConfig message. Also converts values to other types if specified.
+                         * @param message MemoryConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.bigtable.admin.v2.MemoryLayer.MemoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MemoryConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MemoryConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_NOT_KNOWN = 0,
+                        READY = 1,
+                        ENABLING = 2,
+                        RESIZING = 3,
+                        DISABLED = 4
+                    }
+                }
+
                 /** Properties of an AppProfile. */
                 interface IAppProfile {
 
@@ -6561,6 +7375,9 @@ export namespace google {
 
                         /** StandardIsolation priority */
                         priority?: (google.bigtable.admin.v2.AppProfile.Priority|keyof typeof google.bigtable.admin.v2.AppProfile.Priority|null);
+
+                        /** StandardIsolation memoryConfig */
+                        memoryConfig?: (google.bigtable.admin.v2.AppProfile.StandardIsolation.IMemoryConfig|null);
                     }
 
                     /** Represents a StandardIsolation. */
@@ -6574,6 +7391,9 @@ export namespace google {
 
                         /** StandardIsolation priority. */
                         public priority: (google.bigtable.admin.v2.AppProfile.Priority|keyof typeof google.bigtable.admin.v2.AppProfile.Priority);
+
+                        /** StandardIsolation memoryConfig. */
+                        public memoryConfig?: (google.bigtable.admin.v2.AppProfile.StandardIsolation.IMemoryConfig|null);
 
                         /**
                          * Creates a new StandardIsolation instance using the specified properties.
@@ -6651,6 +7471,100 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StandardIsolation {
+
+                        /** Properties of a MemoryConfig. */
+                        interface IMemoryConfig {
+                        }
+
+                        /** Represents a MemoryConfig. */
+                        class MemoryConfig implements IMemoryConfig {
+
+                            /**
+                             * Constructs a new MemoryConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.bigtable.admin.v2.AppProfile.StandardIsolation.IMemoryConfig);
+
+                            /**
+                             * Creates a new MemoryConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MemoryConfig instance
+                             */
+                            public static create(properties?: google.bigtable.admin.v2.AppProfile.StandardIsolation.IMemoryConfig): google.bigtable.admin.v2.AppProfile.StandardIsolation.MemoryConfig;
+
+                            /**
+                             * Encodes the specified MemoryConfig message. Does not implicitly {@link google.bigtable.admin.v2.AppProfile.StandardIsolation.MemoryConfig.verify|verify} messages.
+                             * @param message MemoryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.bigtable.admin.v2.AppProfile.StandardIsolation.IMemoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MemoryConfig message, length delimited. Does not implicitly {@link google.bigtable.admin.v2.AppProfile.StandardIsolation.MemoryConfig.verify|verify} messages.
+                             * @param message MemoryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.bigtable.admin.v2.AppProfile.StandardIsolation.IMemoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MemoryConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MemoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.admin.v2.AppProfile.StandardIsolation.MemoryConfig;
+
+                            /**
+                             * Decodes a MemoryConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MemoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.admin.v2.AppProfile.StandardIsolation.MemoryConfig;
+
+                            /**
+                             * Verifies a MemoryConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MemoryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MemoryConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.bigtable.admin.v2.AppProfile.StandardIsolation.MemoryConfig;
+
+                            /**
+                             * Creates a plain object from a MemoryConfig message. Also converts values to other types if specified.
+                             * @param message MemoryConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.bigtable.admin.v2.AppProfile.StandardIsolation.MemoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MemoryConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MemoryConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a DataBoostIsolationReadOnly. */

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.5.0...google-cloud-pubsub-api-v0.6.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.4.0...google-cloud-pubsub-api-v0.5.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.3.0...google-cloud-pubsub-api-v0.4.0) (2026-09-02)
 
 

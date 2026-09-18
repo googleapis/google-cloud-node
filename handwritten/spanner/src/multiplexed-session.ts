@@ -51,6 +51,13 @@ export interface MultiplexedSessionInterface extends EventEmitter {
    * @param {GetSessionCallback} callback The callback function.
    */
   getSession(callback: GetSessionCallback): void;
+
+  /**
+   * When called returns a cached multiplexed session synchronously if available.
+   *
+   * @name MultiplexedSessionInterface#getSessionSync
+   */
+  getSessionSync(): Session | null;
 }
 
 /**
@@ -95,10 +102,11 @@ export class MultiplexedSession
     this._createSession()
       .then(() => {
         this._maintain();
+        return null;
       })
       // Ignore errors here. If this fails, the next user request will
       // automatically trigger a retry via `_getSession`.
-      .catch(err => {});
+      .catch(() => {});
   }
 
   /**
@@ -195,7 +203,25 @@ export class MultiplexedSession
   }
 
   /**
+   * Synchronously returns the cached multiplexed session if available,
+   * or null if no session is currently cached.
+   *
+   * @returns {Session|null} The cached multiplexed session or null.
+   */
+  getSessionSync(): Session | null {
+    if (this._multiplexedSession !== null) {
+      const span = getActiveOrNoopSpan();
+      span.addEvent('Cache hit: has usable multiplexed session');
+      return this._multiplexedSession;
+    }
+    return null;
+  }
+
+  /**
    * Retrieves a session asynchronously and invokes a callback with the session details.
+   * Note: The callback receives `(null, session)`. To prevent unnecessary allocations on
+   * read query paths, a `Transaction` is not created here. Callers requiring a read-write
+   * transaction should use `SessionFactory.prototype.getSessionForReadWrite`.
    *
    * @param {GetSessionCallback} callback - The callback to be invoked once the session is acquired or an error occurs.
    *
@@ -203,15 +229,28 @@ export class MultiplexedSession
    *
    */
   getSession(callback: GetSessionCallback): void {
-    this._getSession().then(
-      session =>
-        callback(
-          null,
-          session,
-          session!.transaction((session!.parent as Database).queryOptions_),
-        ),
-      callback,
-    );
+    const session = this.getSessionSync();
+    if (session !== null) {
+      // Use process.nextTick to guarantee asynchronous callback execution ("never release Zalgo").
+      // This avoids microtask and Promise allocation overhead while preventing race conditions
+      // where callers (such as Database.prototype.runStream) need to return their stream and
+      // register lifecycle listeners before the session callback executes.
+      process.nextTick(() => {
+        callback(null, session);
+      });
+      return;
+    }
+
+    this._getSession()
+      .then(session => {
+        callback(null, session);
+        return null;
+      }, callback)
+      .catch(err => {
+        process.nextTick(() => {
+          throw err;
+        });
+      });
   }
 
   /**
@@ -230,13 +269,13 @@ export class MultiplexedSession
    *
    */
   async _getSession(): Promise<Session | null> {
-    const span = getActiveOrNoopSpan();
     // Check if the multiplexed session is already available
-    if (this._multiplexedSession !== null) {
-      span.addEvent('Cache hit: has usable multiplexed session');
-      return this._multiplexedSession;
+    const cachedSession = this.getSessionSync();
+    if (cachedSession !== null) {
+      return cachedSession;
     }
 
+    const span = getActiveOrNoopSpan();
     span.addEvent('Waiting for a multiplexed session to become available');
 
     // If initialization is ALREADY in progress, join the existing line!

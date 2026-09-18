@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v3.2.0...dataform-v3.3.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v3.1.0...dataform-v3.2.0) (2026-08-21)
 
 

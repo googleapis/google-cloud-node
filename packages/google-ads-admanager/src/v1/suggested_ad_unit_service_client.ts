@@ -233,6 +233,9 @@ export class SuggestedAdUnitServiceClient {
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
       ),
+      breakTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/breakTemplates/{break_template}',
+      ),
       browserPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browsers/{browser}',
       ),
@@ -292,6 +295,9 @@ export class SuggestedAdUnitServiceClient {
       ),
       daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
+      ),
+      daiSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiSessions/{dai_session}',
       ),
       defaultThirdPartyDataDeclarationPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -1502,6 +1508,44 @@ export class SuggestedAdUnitServiceClient {
   }
 
   /**
+   * Return a fully-qualified breakTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} break_template
+   * @returns {string} Resource name string.
+   */
+  breakTemplatePath(networkCode: string, breakTemplate: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.render({
+      network_code: networkCode,
+      break_template: breakTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from BreakTemplate resource.
+   *
+   * @param {string} breakTemplateName
+   *   A fully-qualified path representing BreakTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBreakTemplateName(breakTemplateName: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.match(breakTemplateName)
+      .network_code;
+  }
+
+  /**
+   * Parse the break_template from BreakTemplate resource.
+   *
+   * @param {string} breakTemplateName
+   *   A fully-qualified path representing BreakTemplate resource.
+   * @returns {string} A string representing the break_template.
+   */
+  matchBreakTemplateFromBreakTemplateName(breakTemplateName: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.match(breakTemplateName)
+      .break_template;
+  }
+
+  /**
    * Return a fully-qualified browser resource name string.
    *
    * @param {string} network_code
@@ -2286,6 +2330,44 @@ export class SuggestedAdUnitServiceClient {
     return this.pathTemplates.daiEncodingProfilePathTemplate.match(
       daiEncodingProfileName,
     ).dai_encoding_profile;
+  }
+
+  /**
+   * Return a fully-qualified daiSession resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_session
+   * @returns {string} Resource name string.
+   */
+  daiSessionPath(networkCode: string, daiSession: string) {
+    return this.pathTemplates.daiSessionPathTemplate.render({
+      network_code: networkCode,
+      dai_session: daiSession,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiSession resource.
+   *
+   * @param {string} daiSessionName
+   *   A fully-qualified path representing DaiSession resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiSessionName(daiSessionName: string) {
+    return this.pathTemplates.daiSessionPathTemplate.match(daiSessionName)
+      .network_code;
+  }
+
+  /**
+   * Parse the dai_session from DaiSession resource.
+   *
+   * @param {string} daiSessionName
+   *   A fully-qualified path representing DaiSession resource.
+   * @returns {string} A string representing the dai_session.
+   */
+  matchDaiSessionFromDaiSessionName(daiSessionName: string) {
+    return this.pathTemplates.daiSessionPathTemplate.match(daiSessionName)
+      .dai_session;
   }
 
   /**

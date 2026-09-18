@@ -15,7 +15,11 @@
 import {it} from 'mocha';
 import {expect} from 'chai';
 import * as sinon from 'sinon';
-import {validateUserInput, Serializer} from '../src/serializer';
+import {
+  validateUserInput,
+  Serializer,
+  isTemporalInstant,
+} from '../src/serializer';
 import {DocumentReference, Firestore} from '../src';
 import {SinonStubbedInstance} from 'sinon';
 
@@ -246,6 +250,29 @@ describe('validateUserInput', () => {
       }),
     ).to.throw(/Input object is deeper than 20 levels/i);
   });
+
+  it('accepts Temporal.Instant', () => {
+    const Temporal =
+      (globalThis as Record<string, unknown>).Temporal ||
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require('@js-temporal/polyfill').Temporal;
+    const instant = Temporal.Instant.fromEpochNanoseconds(1488872578916123456n);
+    validateUserInput('instant', instant, 'Firestore Value', {
+      allowDeletes: 'none',
+      allowTransforms: false,
+      allowUndefined: false,
+    });
+    validateUserInput(
+      'nested',
+      {createdAt: instant, list: [instant]},
+      'Firestore Value',
+      {
+        allowDeletes: 'none',
+        allowTransforms: false,
+        allowUndefined: false,
+      },
+    );
+  });
 });
 
 describe('serializer', () => {
@@ -267,6 +294,66 @@ describe('serializer', () => {
     firestoreStub.doc.returns(mockResult as DocumentReference);
 
     serializer = new Serializer(firestoreStub);
+  });
+
+  describe('encodeValue', () => {
+    it('encodes Temporal.Instant with nanosecond precision', () => {
+      const Temporal =
+        (globalThis as Record<string, unknown>).Temporal ||
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require('@js-temporal/polyfill').Temporal;
+      const instant =
+        Temporal.Instant.fromEpochNanoseconds(1488872578916123456n);
+      const encoded = serializer!.encodeValue(instant);
+      expect(encoded).to.deep.equal({
+        timestampValue: {
+          seconds: '1488872578',
+          nanos: 916123456,
+        },
+      });
+    });
+
+    it('encodes negative Temporal.Instant', () => {
+      const Temporal =
+        (globalThis as Record<string, unknown>).Temporal ||
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require('@js-temporal/polyfill').Temporal;
+      // -1.25 seconds with 123 nanoseconds: -1249999877n
+      // seconds: -2, nanos: 750000123
+      const instant = Temporal.Instant.fromEpochNanoseconds(-1249999877n);
+      const encoded = serializer!.encodeValue(instant);
+      expect(encoded).to.deep.equal({
+        timestampValue: {
+          seconds: '-2',
+          nanos: 750000123,
+        },
+      });
+    });
+  });
+
+  describe('isTemporalInstant', () => {
+    it('identifies Temporal.Instant objects', () => {
+      const Temporal =
+        (globalThis as Record<string, unknown>).Temporal ||
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require('@js-temporal/polyfill').Temporal;
+      const instant = Temporal.Instant.fromEpochNanoseconds(1000n);
+      expect(isTemporalInstant(instant)).to.be.true;
+
+      // duck typed object
+      const duckInstant = {
+        [Symbol.toStringTag]: 'Temporal.Instant',
+        epochNanoseconds: 1000n,
+      };
+      expect(isTemporalInstant(duckInstant)).to.be.true;
+
+      expect(isTemporalInstant(null)).to.be.false;
+      expect(isTemporalInstant(undefined)).to.be.false;
+      expect(isTemporalInstant({})).to.be.false;
+      expect(isTemporalInstant(new Date())).to.be.false;
+      expect(isTemporalInstant('string')).to.be.false;
+      expect(isTemporalInstant(123)).to.be.false;
+    });
   });
 
   describe('decodeValue', () => {
