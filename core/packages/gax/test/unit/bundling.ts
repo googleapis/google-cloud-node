@@ -915,8 +915,8 @@ describe('bundleable', () => {
       warnStub.restore();
       done(err);
     }
-    apiCall({field2: 'id1'}, undefined).then(callback, error);
-    apiCall({field2: 'id2'}, undefined).then(callback, error);
+    apiCall({field2: 'id1'}, undefined).then(callback).catch(error);
+    apiCall({field2: 'id2'}, undefined).then(callback).catch(error);
   });
 
   it('suppresses bundling behavior by call options', done => {
@@ -965,11 +965,13 @@ describe('bundleable', () => {
         if (expectedSuccess && expectedFailure) {
           done();
         }
+        return null;
       })
       .catch(done);
     const p = apiCall({field1: [1, 2, 3], field2: 'id'}, undefined);
     p.then(() => {
       done(new Error('should not succeed'));
+      return null;
     }).catch(err => {
       assert(err instanceof GoogleError);
       assert.strictEqual(err!.code, status.CANCELLED);

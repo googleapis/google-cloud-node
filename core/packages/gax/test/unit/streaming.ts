@@ -27,13 +27,13 @@ import {
   RequestType,
   CancellableStream,
   SimpleCallbackFunction,
+  APICallback,
 } from '../../src/apitypes';
 import {createApiCall} from '../../src/createApiCall';
 import {StreamingApiCaller} from '../../src/streamingCalls/streamingApiCaller';
 import * as gax from '../../src/gax';
 import {StreamDescriptor} from '../../src/streamingCalls/streamDescriptor';
 import * as streaming from '../../src/streamingCalls/streaming';
-import {APICallback} from '../../src/apitypes';
 import * as warnings from '../../src/warnings';
 import internal = require('stream');
 import {StreamArrayParser} from '../../src/streamArrayParser';

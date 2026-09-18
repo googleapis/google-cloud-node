@@ -179,6 +179,7 @@ describe('longrunning', () => {
           assert.strictEqual(operation.metadata, METADATA_VAL);
           assert.deepStrictEqual(rawResponse, PENDING_OP);
           done();
+          return null;
         })
         .catch(done);
     });
@@ -266,6 +267,7 @@ describe('longrunning', () => {
               assert.strictEqual(client.getOperation.callCount, 0);
               done();
             });
+            return null;
           })
           .catch(done);
       });
@@ -294,6 +296,7 @@ describe('longrunning', () => {
               assert.strictEqual(client.getOperation.callCount, 1);
               done();
             });
+            return null;
           })
           .catch(error => {
             done(error);
@@ -327,6 +330,7 @@ describe('longrunning', () => {
               }),
               undefined,
             );
+            return null;
           })
           .catch(error => {
             done(error);
@@ -359,6 +363,7 @@ describe('longrunning', () => {
             assert.deepStrictEqual(rawResponse, SUCCESSFUL_OP);
             assert.strictEqual(client.getOperation.callCount, 1);
             done();
+            return null;
           })
           .catch(error => {
             done(error);
@@ -383,6 +388,7 @@ describe('longrunning', () => {
           })
           .then(() => {
             done(new Error('Should not get here.'));
+            return null;
           })
           .catch(error => {
             assert(error instanceof Error);
@@ -417,6 +423,7 @@ describe('longrunning', () => {
             assert.deepStrictEqual(rawResponse, SUCCESSFUL_OP);
             assert.strictEqual(client.getOperation.callCount, expectedCalls);
             done();
+            return null;
           })
           .catch(err => {
             done(err);
@@ -467,6 +474,7 @@ describe('longrunning', () => {
           })
           .then(() => {
             done(new Error('should not get here'));
+            return null;
           })
           .catch(err => {
             assert.strictEqual(client.getOperation.callCount, expectedCalls);
@@ -498,6 +506,7 @@ describe('longrunning', () => {
             assert.strictEqual(metadata, METADATA_VAL);
             assert.deepStrictEqual(rawResponse, BAD_OP);
             done();
+            return null;
           })
           .catch(done);
       });
@@ -528,12 +537,14 @@ describe('longrunning', () => {
                 assert.strictEqual(client.cancelOperation.called, true);
                 assert.strictEqual(client.cancelGetOperationSpy.called, true);
                 done();
+                return null;
               })
               .catch(done);
             return p;
           })
           .then(() => {
             done(new Error('should not get here'));
+            return null;
           })
           .catch(err => {
             done(err);
@@ -569,6 +580,7 @@ describe('longrunning', () => {
             operation.on('error', () => {
               done('should not get here');
             });
+            return null;
           })
           .catch(err => {
             done(err);
@@ -602,6 +614,7 @@ describe('longrunning', () => {
               assert.strictEqual(err.message, 'operation error');
               done();
             });
+            return null;
           })
           .catch(err => {
             done(err);
@@ -638,6 +651,7 @@ describe('longrunning', () => {
               assert.strictEqual(err.message, googleError.message);
               done();
             });
+            return null;
           })
           .catch(err => {
             done(err);
@@ -691,6 +705,7 @@ describe('longrunning', () => {
               operation.removeAllListeners();
               done();
             });
+            return null;
           })
           .catch(err => {
             done(err);
@@ -732,6 +747,7 @@ describe('longrunning', () => {
               );
               done();
             });
+            return null;
           })
           .catch(err => {
             done(err);
