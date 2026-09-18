@@ -12,6 +12,164 @@
           ]
         }
       ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "fe5ed0f2-7d0f-42df-822a-cd7e14a16432",
+      "createTime": "2026-09-17T14:33:17.947Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "435bcae6aa20c9fd50da0c8b67fe443c946e44cc",
+          "message": "Allow uninitialized client references in pipeline sources",
+          "issues": [
+            "9318"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "9cb091ce-93be-4b49-b3a2-10dc77c2d075",
+      "createTime": "2026-09-16T08:41:22.919Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "91ed9971-9c27-4a47-877b-91d005c6344f",
+      "createTime": "2026-09-16T21:15:48.434Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadidentity",
+      "id": "1bd7aaf0-35bb-4e49-943d-06135cd15c3c",
+      "createTime": "2026-09-16T21:15:48.409Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "99f6657d912f8fd44b96ae5199624f11f77ced09",
+          "message": "Remove unintentionally added file",
+          "issues": [
+            "9356"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "e65ad494-3267-4587-ba09-f2d381c7633a",
+      "createTime": "2026-09-16T21:15:48.368Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ftp",
+      "id": "75e7586e-5c2c-41fd-aac7-fc0f87a3b860",
+      "createTime": "2026-09-16T21:15:48.344Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apptopology",
+      "id": "91d83216-7d84-4bd5-ab8f-d6a3e93e2c66",
+      "createTime": "2026-09-16T21:15:48.318Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "10b654f12f0d3355845d4cb0833f493d43368222",
+          "message": "Support CLOUD_RUN_WORKER_POOL residency detection and harden isAvailable error unwrapping",
+          "issues": [
+            "9349"
+          ],
+          "scope": "gcp-metadata"
+        },
+        {
+          "type": "fix",
+          "sha": "e0ff8c5ac1ca2be2f78ef2977cb2b16b43367639",
+          "message": "Update IsGoogleCloudServerless function to check for Cloud Run Worker Pools",
+          "issues": [
+            "9226"
+          ]
+        }
+      ],
+      "version": "9.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "576eda8c-e34d-47aa-9abc-8d41c83e55ba",
+      "createTime": "2026-09-16T21:15:48.282Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
       "version": "0.12.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/storage-control",
@@ -94899,5 +95057,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-15T17:49:40.964Z"
+  "updateTime": "2026-09-17T14:33:17.947Z"
 }

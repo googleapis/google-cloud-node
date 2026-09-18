@@ -41,7 +41,7 @@ import {
   IProtoMessageParams,
   IProtoEnumParams,
 } from './codec';
-import {context, propagation} from '@opentelemetry/api';
+import {context, propagation, ROOT_CONTEXT} from '@opentelemetry/api';
 import {Backup} from './backup';
 import {Database} from './database';
 import {
@@ -534,7 +534,7 @@ class Spanner extends GrpcService {
     if (!this.clients_.has(clientName)) {
       this.clients_.set(
         clientName,
-        new v1[clientName](this.options as ClientOptions),
+        new v1.InstanceAdminClient(this.options as ClientOptions),
       );
     }
     return this.clients_.get(clientName)! as v1.InstanceAdminClient;
@@ -558,7 +558,7 @@ class Spanner extends GrpcService {
     if (!this.clients_.has(clientName)) {
       this.clients_.set(
         clientName,
-        new v1[clientName](this.options as ClientOptions),
+        new v1.DatabaseAdminClient(this.options as ClientOptions),
       );
     }
     return this.clients_.get(clientName)! as v1.DatabaseAdminClient;
@@ -615,10 +615,9 @@ class Spanner extends GrpcService {
 
     if (callback) {
       // process.nextTick prevents Unhandled Promise Rejections if callback throws
-      res.then(
-        () => process.nextTick(() => callback(null)),
-        err => process.nextTick(() => callback(err)),
-      );
+      res
+        .then(() => process.nextTick(() => callback(null)))
+        .catch(err => process.nextTick(() => callback(err)));
     } else {
       return res;
     }
@@ -1676,35 +1675,46 @@ class Spanner extends GrpcService {
       !metricsExplicitlyDisabled && !this._isInSecureCredentials;
     MetricsTracerFactory.enabled = this._metricsEnabled;
     if (this._metricsEnabled) {
-      try {
-        this.auth.getProjectId((err, projectId) => {
-          if (err || !projectId) {
-            console.error(
-              'Unable to get Project Id for client side metrics, will skip exporting client' +
-                ' side metrics' +
-                err,
-            );
-            return;
-          }
-
-          this.projectId_ = projectId;
-          const factory = MetricsTracerFactory.getInstance(projectId);
-          const periodicReader = new PeriodicExportingMetricReader({
-            exporter: new CloudMonitoringMetricsExporter(
-              {auth: this.auth},
-              projectId,
-            ),
-            exportIntervalMillis: 60000,
+      const initializeMetrics = (projectId: string) => {
+        this.projectId_ = projectId;
+        const factory = MetricsTracerFactory.getInstance(projectId);
+        if (factory && !factory.hasMetricReaders()) {
+          context.with(ROOT_CONTEXT, () => {
+            const periodicReader = new PeriodicExportingMetricReader({
+              exporter: new CloudMonitoringMetricsExporter(
+                {auth: this.auth},
+                projectId,
+              ),
+              exportIntervalMillis: 60000,
+            });
+            factory.getMeterProvider([periodicReader]);
           });
-          // Retrieve the MeterProvider to trigger construction
-          factory!.getMeterProvider([periodicReader]);
-        });
-      } catch (err) {
-        console.error(
-          'Unable to configure client side metrics, will skip exporting client' +
-            ' side metrics' +
-            err,
-        );
+        }
+      };
+
+      if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
+        initializeMetrics(this.projectId_);
+      } else {
+        try {
+          this.auth.getProjectId((err, projectId) => {
+            if (err || !projectId) {
+              console.error(
+                'Unable to get Project Id for client side metrics, will skip exporting client' +
+                  ' side metrics' +
+                  err,
+              );
+              return;
+            }
+
+            initializeMetrics(projectId);
+          });
+        } catch (err) {
+          console.error(
+            'Unable to configure client side metrics, will skip exporting client' +
+              ' side metrics' +
+              err,
+          );
+        }
       }
     }
   }
@@ -1727,7 +1737,10 @@ class Spanner extends GrpcService {
       const clientName = config.client;
       try {
         if (!this.clients_.has(clientName)) {
-          this.clients_.set(clientName, new v1[clientName](this.options));
+          this.clients_.set(
+            clientName,
+            new (v1 as Record<string, any>)[clientName](this.options),
+          );
         }
       } catch (err) {
         callback(err, null);
@@ -1860,7 +1873,8 @@ class Spanner extends GrpcService {
     if (
       this._metricsEnabled &&
       config.client === 'SpannerClient' &&
-      this.projectId_
+      this.projectId_ &&
+      this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
@@ -1896,6 +1910,7 @@ class Spanner extends GrpcService {
                 .then(val => {
                   metricsTracer?.recordOperationCompletion();
                   resolve(val);
+                  return val;
                 })
                 .catch(error => {
                   metricsTracer?.recordOperationCompletion();
@@ -1928,7 +1943,8 @@ class Spanner extends GrpcService {
     if (
       this._metricsEnabled &&
       config.client === 'SpannerClient' &&
-      this.projectId_
+      this.projectId_ &&
+      this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
