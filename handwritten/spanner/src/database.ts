@@ -54,6 +54,14 @@ import {
   GetDatabaseOperationsCallback,
 } from './instance';
 import {PartialResultStream, Row} from './partial-result-stream';
+import {
+  isNativeCoreEnabled,
+  isNativeEligible,
+  runStreamNative,
+  runNative,
+  encodeReadOnlyBounds,
+  DatabaseLike as NativeDatabaseLike,
+} from './native-core';
 import {Session} from './session';
 import {
   isSessionNotFoundError,
@@ -2908,6 +2916,36 @@ class Database extends common.GrpcServiceObject {
       this._runLegacy(query, options, callback!);
       return;
     }
+    // Go shared-core fast path.
+    //
+    // NOTE: _run() below is the optimised pure-JS pipeline and deliberately
+    // bypasses Database.prototype.runStream, so the dispatch inside
+    // runStream() is unreachable from run(). Eligible queries are therefore
+    // routed through the streaming pipeline, which does dispatch to the core
+    // (and transparently falls back to stock if the result set turns out to
+    // be unsupported). When the core is disabled this branch is skipped
+    // entirely and run() behaves exactly as it does upstream.
+    if (isNativeCoreEnabled() && isNativeEligible(query as unknown)) {
+      const readOnly = encodeReadOnlyBounds(
+        options as Record<string, unknown>,
+        opts => Snapshot.encodeTimestampBounds(opts),
+      );
+      runNative(
+        this as unknown as NativeDatabaseLike,
+        query as unknown as string | Record<string, unknown>,
+        readOnly,
+        (err, rows, stats, metadata) => {
+          callback!(
+            err as grpc.ServiceError | null,
+            rows as Row[],
+            stats as ResultSetStats,
+            metadata as ResultSetMetadata,
+          );
+        },
+        () => this._run(query, options, callback!),
+      );
+      return;
+    }
     this._run(query, options, callback!);
   }
 
@@ -3301,6 +3339,40 @@ class Database extends common.GrpcServiceObject {
     query: string | ExecuteSqlRequest,
     options?: TimestampBounds,
   ): PartialResultStream {
+    // Go shared-core fast path. Only single-use read-only SQL queries are
+    // eligible. Timestamp bounds are supported: they are encoded with the
+    // same helper the stock path uses and forwarded verbatim in the
+    // single-use transaction, so the wire request is identical.
+    //
+    // If the core turns out to be unable to represent the result set
+    // (ARRAY/STRUCT columns) it invokes the fallback factory and the stock JS
+    // stream is used instead. That decision is always made before any row is
+    // emitted, so the caller sees a single coherent stream either way.
+    if (isNativeCoreEnabled() && isNativeEligible(query as unknown)) {
+      const readOnly = encodeReadOnlyBounds(
+        options as Record<string, unknown>,
+        opts => Snapshot.encodeTimestampBounds(opts),
+      );
+      return runStreamNative(
+        this as unknown as NativeDatabaseLike,
+        query as unknown as string | Record<string, unknown>,
+        () =>
+          this.runStreamStock_(query, options) as unknown as NodeJS.ReadableStream,
+        readOnly,
+      ) as unknown as PartialResultStream;
+    }
+    return this.runStreamStock_(query, options);
+  }
+
+  /**
+   * The stock pure-JS streaming implementation of {@link Database#runStream}.
+   *
+   * @private
+   */
+  runStreamStock_(
+    query: string | ExecuteSqlRequest,
+    options?: TimestampBounds,
+  ): PartialResultStream {
     const proxyStream: Transform = through.obj();
     return startTrace(
       'Database.runStream',
@@ -3666,9 +3738,8 @@ class Database extends common.GrpcServiceObject {
         : {};
 
     let sessionId = '';
-    const getSession = this.sessionFactory_.getSessionForReadWrite.bind(
-      this.sessionFactory_,
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sf = this.sessionFactory_ as any;
 
     return startTrace(
       'Database.runTransactionAsync',
@@ -3682,11 +3753,27 @@ class Database extends common.GrpcServiceObject {
         // eslint-disable-next-line no-constant-condition
         while (true) {
           try {
-            const [session, transaction] = await promisify(getSession)();
-            transaction.requestOptions = Object.assign(
-              transaction.requestOptions || {},
-              options.requestOptions,
-            );
+            let session: Session;
+            let transaction: Transaction;
+            if (
+              sf.isMultiplexedRW &&
+              sf.multiplexedSession_?._multiplexedSession
+            ) {
+              session = sf.multiplexedSession_._multiplexedSession;
+              transaction = session.transaction(this.queryOptions_);
+            } else {
+              const getSession =
+                this.sessionFactory_.getSessionForReadWrite.bind(
+                  this.sessionFactory_,
+                );
+              [session, transaction] = await promisify(getSession)();
+            }
+            if (options?.requestOptions) {
+              transaction.requestOptions = Object.assign(
+                transaction.requestOptions || {},
+                options.requestOptions,
+              );
+            }
             transaction!.setReadWriteTransactionOptions(
               options as RunTransactionOptions,
             );
