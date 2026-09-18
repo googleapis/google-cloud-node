@@ -1042,7 +1042,7 @@ export function augmentService(parameters: AugmentServiceParameters) {
     augmentedService.httpRules = parameters.options.serviceYaml.http.rules;
   }
   augmentedService.comments = parameters.commentsMap.getServiceComment(
-    parameters.service.name!,
+    parameters.service.name ?? '',
   );
   augmentedService.commentsMap = parameters.commentsMap;
   augmentedService.retryableCodeMap = new RetryableCodeMap();
@@ -1054,7 +1054,7 @@ export function augmentService(parameters: AugmentServiceParameters) {
     bc => bc.serviceName === parameters.service.name,
   );
   const resumableUploadMethods = resumableUploadMethodNames(
-    parameters.service.name!,
+    parameters.service.name ?? '',
     parameters.options.resumableUploadMethods,
   );
   augmentedService.method =
