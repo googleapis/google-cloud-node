@@ -57,6 +57,7 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
       now.getTime() - this._lastExported.getTime() <=
       MIN_EXPORT_FREQUENCY_MS
     ) {
+      resultCallback({code: ExportResultCode.SUCCESS});
       return;
     }
 
@@ -81,6 +82,9 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private async _exportAsync(
     resourceMetrics: ResourceMetrics,
   ): Promise<ExportResult> {
+    if (resourceMetrics?.resource?.asyncAttributesPending) {
+      await resourceMetrics.resource.waitForAsyncAttributes?.();
+    }
     const timeSeriesList = transformResourceMetricToTimeSeriesArray(
       resourceMetrics,
       this._projectId,

@@ -218,6 +218,9 @@ export class ChatServiceClient {
       messagePathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/messages/{message}',
       ),
+      messagePinPathTemplate: new this._gaxModule.PathTemplate(
+        'spaces/{space}/messagePins/{message_pin}',
+      ),
       quotedMessageMetadataPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/messages/{message}/quotedMessageMetadata/{quoted_message_metadata}',
       ),
@@ -286,6 +289,11 @@ export class ChatServiceClient {
         'pageToken',
         'nextPageToken',
         'reactions',
+      ),
+      listMessagePins: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'messagePins',
       ),
       listCustomEmojis: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -385,6 +393,9 @@ export class ChatServiceClient {
       'createReaction',
       'listReactions',
       'deleteReaction',
+      'listMessagePins',
+      'createMessagePin',
+      'deleteMessagePin',
       'createCustomEmoji',
       'getCustomEmoji',
       'listCustomEmojis',
@@ -532,6 +543,8 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.messages.readonly',
       'https://www.googleapis.com/auth/chat.spaces',
       'https://www.googleapis.com/auth/chat.spaces.create',
+      'https://www.googleapis.com/auth/chat.spaces.pins',
+      'https://www.googleapis.com/auth/chat.spaces.pins.readonly',
       'https://www.googleapis.com/auth/chat.spaces.readonly',
       'https://www.googleapis.com/auth/chat.users.availability',
       'https://www.googleapis.com/auth/chat.users.availability.readonly',
@@ -3837,6 +3850,274 @@ export class ChatServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('deleteReaction response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates a message pin.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following [authorization
+   * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.spaces.pins`
+   *   - `https://www.googleapis.com/auth/chat.spaces`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent space in which to create the message pin.
+   *   Format: spaces/{space}
+   * @param {google.chat.v1.MessagePin} request.messagePin
+   *   Required. The MessagePin to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.MessagePin|MessagePin}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.create_message_pin.js</caption>
+   * region_tag:chat_v1_generated_ChatService_CreateMessagePin_async
+   */
+  createMessagePin(
+    request?: protos.google.chat.v1.ICreateMessagePinRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IMessagePin,
+      protos.google.chat.v1.ICreateMessagePinRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createMessagePin(
+    request: protos.google.chat.v1.ICreateMessagePinRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IMessagePin,
+      protos.google.chat.v1.ICreateMessagePinRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createMessagePin(
+    request: protos.google.chat.v1.ICreateMessagePinRequest,
+    callback: Callback<
+      protos.google.chat.v1.IMessagePin,
+      protos.google.chat.v1.ICreateMessagePinRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createMessagePin(
+    request?: protos.google.chat.v1.ICreateMessagePinRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IMessagePin,
+          protos.google.chat.v1.ICreateMessagePinRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IMessagePin,
+      protos.google.chat.v1.ICreateMessagePinRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IMessagePin,
+      protos.google.chat.v1.ICreateMessagePinRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createMessagePin request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IMessagePin,
+          protos.google.chat.v1.ICreateMessagePinRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMessagePin response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMessagePin(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IMessagePin,
+          protos.google.chat.v1.ICreateMessagePinRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMessagePin response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a message pin.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following [authorization
+   * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.spaces.pins`
+   *   - `https://www.googleapis.com/auth/chat.spaces`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the message pin to remove.
+   *   Format: spaces/{space}/messagePins/{message_pin}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.delete_message_pin.js</caption>
+   * region_tag:chat_v1_generated_ChatService_DeleteMessagePin_async
+   */
+  deleteMessagePin(
+    request?: protos.google.chat.v1.IDeleteMessagePinRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteMessagePinRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteMessagePin(
+    request: protos.google.chat.v1.IDeleteMessagePinRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteMessagePinRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteMessagePin(
+    request: protos.google.chat.v1.IDeleteMessagePinRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteMessagePinRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteMessagePin(
+    request?: protos.google.chat.v1.IDeleteMessagePinRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteMessagePinRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteMessagePinRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteMessagePinRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteMessagePin request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteMessagePinRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteMessagePin response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMessagePin(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteMessagePinRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMessagePin response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -9996,6 +10277,258 @@ export class ChatServiceClient {
     ) as AsyncIterable<protos.google.chat.v1.IReaction>;
   }
   /**
+   * Lists message pins in a space. Users can pin important messages in spaces
+   * for easy access. For more information, see [Pin or unpin a conversation in
+   * Google Chat](https://support.google.com/chat/answer/15622437).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following [authorization
+   * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.spaces.pins.readonly`
+   *   - `https://www.googleapis.com/auth/chat.spaces.pins`
+   *   - `https://www.googleapis.com/auth/chat.spaces.readonly`
+   *   - `https://www.googleapis.com/auth/chat.spaces`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent space which owns the collection of pinned items
+   *   Format: `spaces/{space}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of message pins returned. The service might
+   *   return fewer messages than this value. The maximum value is 100. If you use
+   *   a value more than 100, it's automatically changed to 100. If unspecified,
+   *   at most 100 message pins will be returned. Negative values return an
+   *   `INVALID_ARGUMENT` error.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous list message pins call.
+   *   Provide this parameter to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided should match the call that
+   *   provided the page token. Passing different values to the other parameters
+   *   might lead to unexpected results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.chat.v1.MessagePin|MessagePin}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMessagePinsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMessagePins(
+    request?: protos.google.chat.v1.IListMessagePinsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IMessagePin[],
+      protos.google.chat.v1.IListMessagePinsRequest | null,
+      protos.google.chat.v1.IListMessagePinsResponse,
+    ]
+  >;
+  listMessagePins(
+    request: protos.google.chat.v1.IListMessagePinsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.chat.v1.IListMessagePinsRequest,
+      protos.google.chat.v1.IListMessagePinsResponse | null | undefined,
+      protos.google.chat.v1.IMessagePin
+    >,
+  ): void;
+  listMessagePins(
+    request: protos.google.chat.v1.IListMessagePinsRequest,
+    callback: PaginationCallback<
+      protos.google.chat.v1.IListMessagePinsRequest,
+      protos.google.chat.v1.IListMessagePinsResponse | null | undefined,
+      protos.google.chat.v1.IMessagePin
+    >,
+  ): void;
+  listMessagePins(
+    request?: protos.google.chat.v1.IListMessagePinsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.chat.v1.IListMessagePinsRequest,
+          protos.google.chat.v1.IListMessagePinsResponse | null | undefined,
+          protos.google.chat.v1.IMessagePin
+        >,
+    callback?: PaginationCallback<
+      protos.google.chat.v1.IListMessagePinsRequest,
+      protos.google.chat.v1.IListMessagePinsResponse | null | undefined,
+      protos.google.chat.v1.IMessagePin
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IMessagePin[],
+      protos.google.chat.v1.IListMessagePinsRequest | null,
+      protos.google.chat.v1.IListMessagePinsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.IListMessagePinsRequest,
+          protos.google.chat.v1.IListMessagePinsResponse | null | undefined,
+          protos.google.chat.v1.IMessagePin
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMessagePins values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMessagePins request %j', request);
+    return this.innerApiCalls
+      .listMessagePins(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.IMessagePin[],
+          protos.google.chat.v1.IListMessagePinsRequest | null,
+          protos.google.chat.v1.IListMessagePinsResponse,
+        ]) => {
+          this._log.info('listMessagePins values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listMessagePins`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent space which owns the collection of pinned items
+   *   Format: `spaces/{space}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of message pins returned. The service might
+   *   return fewer messages than this value. The maximum value is 100. If you use
+   *   a value more than 100, it's automatically changed to 100. If unspecified,
+   *   at most 100 message pins will be returned. Negative values return an
+   *   `INVALID_ARGUMENT` error.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous list message pins call.
+   *   Provide this parameter to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided should match the call that
+   *   provided the page token. Passing different values to the other parameters
+   *   might lead to unexpected results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.chat.v1.MessagePin|MessagePin} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMessagePinsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMessagePinsStream(
+    request?: protos.google.chat.v1.IListMessagePinsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMessagePins'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMessagePins stream %j', request);
+    return this.descriptors.page.listMessagePins.createStream(
+      this.innerApiCalls.listMessagePins as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listMessagePins`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent space which owns the collection of pinned items
+   *   Format: `spaces/{space}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of message pins returned. The service might
+   *   return fewer messages than this value. The maximum value is 100. If you use
+   *   a value more than 100, it's automatically changed to 100. If unspecified,
+   *   at most 100 message pins will be returned. Negative values return an
+   *   `INVALID_ARGUMENT` error.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous list message pins call.
+   *   Provide this parameter to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided should match the call that
+   *   provided the page token. Passing different values to the other parameters
+   *   might lead to unexpected results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.chat.v1.MessagePin|MessagePin}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.list_message_pins.js</caption>
+   * region_tag:chat_v1_generated_ChatService_ListMessagePins_async
+   */
+  listMessagePinsAsync(
+    request?: protos.google.chat.v1.IListMessagePinsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.chat.v1.IMessagePin> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMessagePins'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMessagePins iterate %j', request);
+    return this.descriptors.page.listMessagePins.asyncIterate(
+      this.innerApiCalls['listMessagePins'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.chat.v1.IMessagePin>;
+  }
+  /**
    * Lists custom emojis visible to the authenticated user.
    *
    * Custom emojis are only available for Google Workspace accounts, and the
@@ -11491,6 +12024,44 @@ export class ChatServiceClient {
    */
   matchMessageFromMessageName(messageName: string) {
     return this.pathTemplates.messagePathTemplate.match(messageName).message;
+  }
+
+  /**
+   * Return a fully-qualified messagePin resource name string.
+   *
+   * @param {string} space
+   * @param {string} message_pin
+   * @returns {string} Resource name string.
+   */
+  messagePinPath(space: string, messagePin: string) {
+    return this.pathTemplates.messagePinPathTemplate.render({
+      space: space,
+      message_pin: messagePin,
+    });
+  }
+
+  /**
+   * Parse the space from MessagePin resource.
+   *
+   * @param {string} messagePinName
+   *   A fully-qualified path representing MessagePin resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromMessagePinName(messagePinName: string) {
+    return this.pathTemplates.messagePinPathTemplate.match(messagePinName)
+      .space;
+  }
+
+  /**
+   * Parse the message_pin from MessagePin resource.
+   *
+   * @param {string} messagePinName
+   *   A fully-qualified path representing MessagePin resource.
+   * @returns {string} A string representing the message_pin.
+   */
+  matchMessagePinFromMessagePinName(messagePinName: string) {
+    return this.pathTemplates.messagePinPathTemplate.match(messagePinName)
+      .message_pin;
   }
 
   /**
