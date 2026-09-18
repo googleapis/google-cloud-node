@@ -25,7 +25,7 @@ tools:
       package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.2.0.tar.gz
       checksum: a2afaa498c7938837e65a1eecb2041bda5b0bda232e6bdbd5117e012cdc7e75b
       build:
-        - pnpm install --frozen-lockfile --config.auto-install-peers=true
+        - pnpm install --no-frozen-lockfile --force --config.auto-install-peers=true
         - pnpm run compile
         - pnpm add -g "$PWD"
       src_dir: core/generator/gapic-generator-typescript
