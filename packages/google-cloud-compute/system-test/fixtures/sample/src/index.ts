@@ -73,6 +73,7 @@ import {
   PacketMirroringsClient,
   PreviewFeaturesClient,
   ProjectsClient,
+  ProjectViewsClient,
   PublicAdvertisedPrefixesClient,
   PublicDelegatedPrefixesClient,
   RegionAutoscalersClient,
@@ -347,6 +348,9 @@ function doStuffWithPreviewFeaturesClient(client: PreviewFeaturesClient) {
   client.close();
 }
 function doStuffWithProjectsClient(client: ProjectsClient) {
+  client.close();
+}
+function doStuffWithProjectViewsClient(client: ProjectViewsClient) {
   client.close();
 }
 function doStuffWithPublicAdvertisedPrefixesClient(
@@ -802,6 +806,9 @@ function main() {
   // check that the client instance can be created
   const projectsClient = new ProjectsClient();
   doStuffWithProjectsClient(projectsClient);
+  // check that the client instance can be created
+  const projectViewsClient = new ProjectViewsClient();
+  doStuffWithProjectViewsClient(projectViewsClient);
   // check that the client instance can be created
   const publicAdvertisedPrefixesClient = new PublicAdvertisedPrefixesClient();
   doStuffWithPublicAdvertisedPrefixesClient(publicAdvertisedPrefixesClient);
