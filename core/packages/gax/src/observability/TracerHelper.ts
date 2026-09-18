@@ -139,6 +139,25 @@ function resolveHttpStatusCode(e: unknown): number | undefined {
 }
 
 /**
+ * Resolves the human-readable description for a failure that is not an Error.
+ *
+ * `code` and `httpStatusCode` above are read off whatever was thrown rather
+ * than off an `Error`, because being handed an error-shaped non-Error is a
+ * real occurrence: a value crossing a realm boundary fails `instanceof` (the
+ * same hazard `isPromiseLike` documents below), and so does a plain object
+ * built by a custom transport. `message` is read the same way and for the same
+ * reason — `String()` on such an object yields '[object Object]', discarding a
+ * description that was right there.
+ *
+ * Anything without a string `message` falls back to `String(e)`, which is all
+ * a bare string, number, `null` or `undefined` can offer.
+ */
+function resolveErrorMessage(e: unknown): string {
+  const message = (e as {message?: unknown} | null)?.message;
+  return typeof message === 'string' ? message : String(e);
+}
+
+/**
  * Checks if a value behaves like a Promise or Thenable.
  *
  * Note: It is not sufficient to check `result instanceof Promise` because:
@@ -445,18 +464,23 @@ export function traceCall(
         span.recordException(e);
         setErrorStatus(e.message);
       } else {
-        // A non-Error throw carries no type, no message and no stack. `_OTHER`
-        // is the fallback semconv defines for exactly this, and reporting
-        // something matters: error.type is the dimension error-rate queries
-        // group on, so a failure missing it is invisible to them.
+        // A non-Error throw has no class worth reporting, so error.type falls
+        // back to `_OTHER`, the value semconv defines for exactly this.
+        // Reporting something matters: error.type is the dimension error-rate
+        // queries group on, so a failure missing it is invisible to them.
         //
-        // No exception event is emitted here. recordException on a bare string
-        // yields an event with no exception.type and no stacktrace, which adds
-        // nothing the status description does not already carry.
+        // The description is still resolved from a `message` property when one
+        // is there, so an error-shaped object is not reduced to
+        // '[object Object]'.
+        //
+        // No exception event is emitted here. recordException on a value that
+        // is not an Error yields an event with no exception.type and no
+        // stacktrace, which adds nothing the status description does not
+        // already carry.
         span.setAttributes({
           'error.type': '_OTHER',
         });
-        setErrorStatus(String(e));
+        setErrorStatus(resolveErrorMessage(e));
       }
     };
 
