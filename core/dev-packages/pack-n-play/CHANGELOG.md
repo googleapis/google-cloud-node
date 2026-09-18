@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v5.1.0...pack-n-play-v5.2.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v5.0.1...pack-n-play-v5.1.0) (2026-08-12)
 
 

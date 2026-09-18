@@ -351,6 +351,7 @@ export class AlphaAnalyticsDataClient {
       'queryReportTask',
       'getReportTask',
       'listReportTasks',
+      'chat',
       'runReport',
       'getMetadata',
     ];
@@ -450,6 +451,7 @@ export class AlphaAnalyticsDataClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/analytics',
+      'https://www.googleapis.com/auth/analytics.chatbot.read',
       'https://www.googleapis.com/auth/analytics.readonly',
     ];
   }
@@ -1766,6 +1768,151 @@ export class AlphaAnalyticsDataClient {
           {} | undefined,
         ]) => {
           this._log.info('getReportTask response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Provides a chat interface for interacting with Google Analytics data
+   * through the API.
+   *
+   * This product uses AI and may display inaccurate info. Your chat activity
+   * may be used to improve the product and your use is subject to Google's
+   * [Terms](https://policies.google.com/terms),
+   * [AI Use
+   * Policy](https://policies.google.com/terms/generative-ai/use-policy), and
+   * [Privacy Policy](https://policies.google.com/privacy).
+   * [Learn more about Chat AI
+   * Privacy](https://support.google.com/helpguide/answer/14185196).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   Required. The property to chat about.
+   *   Format: properties/{property}
+   * @param {string} request.userQuery
+   *   Required. The user's query.
+   * @param {string} [request.sessionId]
+   *   Optional. Provide this session ID to continue an existing conversation
+   *   and maintain context. If this field is empty or unset, a new chat
+   *   session is created. Invalid session IDs will result in an error.
+   * @param {boolean} [request.returnPropertyQuota]
+   *   Optional. If true, the response will include the current state of this
+   *   Analytics Property's quota. Quota is returned in
+   *   [PropertyChatQuota](#PropertyChatQuota).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.ChatResponse|ChatResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.chat.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_Chat_async
+   */
+  chat(
+    request?: protos.google.analytics.data.v1alpha.IChatRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  chat(
+    request: protos.google.analytics.data.v1alpha.IChatRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  chat(
+    request: protos.google.analytics.data.v1alpha.IChatRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  chat(
+    request?: protos.google.analytics.data.v1alpha.IChatRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1alpha.IChatResponse,
+          protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IChatResponse,
+      protos.google.analytics.data.v1alpha.IChatRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('chat request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1alpha.IChatResponse,
+          protos.google.analytics.data.v1alpha.IChatRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('chat response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .chat(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1alpha.IChatResponse,
+          protos.google.analytics.data.v1alpha.IChatRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('chat response %j', response);
           return [response, options, rawResponse];
         },
       )

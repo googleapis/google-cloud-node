@@ -44,6 +44,7 @@ export {CustomTargetingKeyServiceClient} from './custom_targeting_key_service_cl
 export {CustomTargetingValueServiceClient} from './custom_targeting_value_service_client';
 export {DaiAuthenticationKeyServiceClient} from './dai_authentication_key_service_client';
 export {DaiEncodingProfileServiceClient} from './dai_encoding_profile_service_client';
+export {DaiSessionServiceClient} from './dai_session_service_client';
 export {DeviceCapabilityServiceClient} from './device_capability_service_client';
 export {DeviceCategoryServiceClient} from './device_category_service_client';
 export {DeviceManufacturerServiceClient} from './device_manufacturer_service_client';

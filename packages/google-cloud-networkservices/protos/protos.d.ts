@@ -22509,6 +22509,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteLbRouteExtension(request: google.cloud.networkservices.v1beta1.IDeleteLbRouteExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListExtensionBindings.
+                     * @param request ListExtensionBindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListExtensionBindingsResponse
+                     */
+                    public listExtensionBindings(request: google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest, callback: google.cloud.networkservices.v1beta1.DepService.ListExtensionBindingsCallback): void;
+
+                    /**
+                     * Calls ListExtensionBindings.
+                     * @param request ListExtensionBindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listExtensionBindings(request: google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest): Promise<google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse>;
+
+                    /**
+                     * Calls GetExtensionBinding.
+                     * @param request GetExtensionBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExtensionBinding
+                     */
+                    public getExtensionBinding(request: google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest, callback: google.cloud.networkservices.v1beta1.DepService.GetExtensionBindingCallback): void;
+
+                    /**
+                     * Calls GetExtensionBinding.
+                     * @param request GetExtensionBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getExtensionBinding(request: google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest): Promise<google.cloud.networkservices.v1beta1.ExtensionBinding>;
+
+                    /**
+                     * Calls CreateExtensionBinding.
+                     * @param request CreateExtensionBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createExtensionBinding(request: google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest, callback: google.cloud.networkservices.v1beta1.DepService.CreateExtensionBindingCallback): void;
+
+                    /**
+                     * Calls CreateExtensionBinding.
+                     * @param request CreateExtensionBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createExtensionBinding(request: google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateExtensionBinding.
+                     * @param request UpdateExtensionBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateExtensionBinding(request: google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest, callback: google.cloud.networkservices.v1beta1.DepService.UpdateExtensionBindingCallback): void;
+
+                    /**
+                     * Calls UpdateExtensionBinding.
+                     * @param request UpdateExtensionBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateExtensionBinding(request: google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteExtensionBinding.
+                     * @param request DeleteExtensionBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteExtensionBinding(request: google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest, callback: google.cloud.networkservices.v1beta1.DepService.DeleteExtensionBindingCallback): void;
+
+                    /**
+                     * Calls DeleteExtensionBinding.
+                     * @param request DeleteExtensionBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteExtensionBinding(request: google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace DepService {
@@ -22582,6 +22652,41 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteLbRouteExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1beta1.DepService|listExtensionBindings}.
+                     * @param error Error, if any
+                     * @param [response] ListExtensionBindingsResponse
+                     */
+                    type ListExtensionBindingsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1beta1.DepService|getExtensionBinding}.
+                     * @param error Error, if any
+                     * @param [response] ExtensionBinding
+                     */
+                    type GetExtensionBindingCallback = (error: (Error|null), response?: google.cloud.networkservices.v1beta1.ExtensionBinding) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1beta1.DepService|createExtensionBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateExtensionBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1beta1.DepService|updateExtensionBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateExtensionBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1beta1.DepService|deleteExtensionBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteExtensionBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** EventType enum. */
@@ -24524,6 +24629,1669 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteLbRouteExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExtensionBinding. */
+                interface IExtensionBinding {
+
+                    /** ExtensionBinding name */
+                    name?: (string|null);
+
+                    /** ExtensionBinding createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExtensionBinding updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExtensionBinding description */
+                    description?: (string|null);
+
+                    /** ExtensionBinding labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ExtensionBinding etag */
+                    etag?: (string|null);
+
+                    /** ExtensionBinding producerExtension */
+                    producerExtension?: (string|null);
+
+                    /** ExtensionBinding target */
+                    target?: (google.cloud.networkservices.v1beta1.ExtensionBinding.ITarget|null);
+
+                    /** ExtensionBinding matchConditions */
+                    matchConditions?: (google.cloud.networkservices.v1beta1.ExtensionBinding.IMatchCondition[]|null);
+
+                    /** ExtensionBinding failOpen */
+                    failOpen?: (boolean|null);
+
+                    /** ExtensionBinding producerMetadata */
+                    producerMetadata?: ({ [k: string]: string }|null);
+
+                    /** ExtensionBinding priority */
+                    priority?: (number|null);
+                }
+
+                /** Represents an ExtensionBinding. */
+                class ExtensionBinding implements IExtensionBinding {
+
+                    /**
+                     * Constructs a new ExtensionBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1beta1.IExtensionBinding);
+
+                    /** ExtensionBinding name. */
+                    public name: string;
+
+                    /** ExtensionBinding createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExtensionBinding updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExtensionBinding description. */
+                    public description: string;
+
+                    /** ExtensionBinding labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ExtensionBinding etag. */
+                    public etag: string;
+
+                    /** ExtensionBinding producerExtension. */
+                    public producerExtension: string;
+
+                    /** ExtensionBinding target. */
+                    public target?: (google.cloud.networkservices.v1beta1.ExtensionBinding.ITarget|null);
+
+                    /** ExtensionBinding matchConditions. */
+                    public matchConditions: google.cloud.networkservices.v1beta1.ExtensionBinding.IMatchCondition[];
+
+                    /** ExtensionBinding failOpen. */
+                    public failOpen: boolean;
+
+                    /** ExtensionBinding producerMetadata. */
+                    public producerMetadata: { [k: string]: string };
+
+                    /** ExtensionBinding priority. */
+                    public priority: number;
+
+                    /**
+                     * Creates a new ExtensionBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExtensionBinding instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1beta1.IExtensionBinding): google.cloud.networkservices.v1beta1.ExtensionBinding;
+
+                    /**
+                     * Encodes the specified ExtensionBinding message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.verify|verify} messages.
+                     * @param message ExtensionBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1beta1.IExtensionBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExtensionBinding message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.verify|verify} messages.
+                     * @param message ExtensionBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1beta1.IExtensionBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExtensionBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExtensionBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding;
+
+                    /**
+                     * Decodes an ExtensionBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExtensionBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding;
+
+                    /**
+                     * Verifies an ExtensionBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExtensionBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExtensionBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding;
+
+                    /**
+                     * Creates a plain object from an ExtensionBinding message. Also converts values to other types if specified.
+                     * @param message ExtensionBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExtensionBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExtensionBinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExtensionBinding {
+
+                    /** Properties of a Target. */
+                    interface ITarget {
+
+                        /** Target resources */
+                        resources?: (string[]|null);
+
+                        /** Target scope */
+                        scope?: (google.cloud.networkservices.v1beta1.ExtensionBinding.Target.IScope|null);
+                    }
+
+                    /** Represents a Target. */
+                    class Target implements ITarget {
+
+                        /**
+                         * Constructs a new Target.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.ITarget);
+
+                        /** Target resources. */
+                        public resources: string[];
+
+                        /** Target scope. */
+                        public scope?: (google.cloud.networkservices.v1beta1.ExtensionBinding.Target.IScope|null);
+
+                        /**
+                         * Creates a new Target instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Target instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.ITarget): google.cloud.networkservices.v1beta1.ExtensionBinding.Target;
+
+                        /**
+                         * Encodes the specified Target message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.Target.verify|verify} messages.
+                         * @param message Target message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1beta1.ExtensionBinding.ITarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Target message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.Target.verify|verify} messages.
+                         * @param message Target message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ExtensionBinding.ITarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Target message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Target
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding.Target;
+
+                        /**
+                         * Decodes a Target message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Target
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding.Target;
+
+                        /**
+                         * Verifies a Target message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Target message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Target
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding.Target;
+
+                        /**
+                         * Creates a plain object from a Target message. Also converts values to other types if specified.
+                         * @param message Target
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding.Target, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Target to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Target
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Target {
+
+                        /** Properties of a Scope. */
+                        interface IScope {
+
+                            /** Scope parent */
+                            parent?: (string|null);
+
+                            /** Scope resourceTypes */
+                            resourceTypes?: (google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope.ResourceType[]|null);
+                        }
+
+                        /** Represents a Scope. */
+                        class Scope implements IScope {
+
+                            /**
+                             * Constructs a new Scope.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.Target.IScope);
+
+                            /** Scope parent. */
+                            public parent: string;
+
+                            /** Scope resourceTypes. */
+                            public resourceTypes: google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope.ResourceType[];
+
+                            /**
+                             * Creates a new Scope instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Scope instance
+                             */
+                            public static create(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.Target.IScope): google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope;
+
+                            /**
+                             * Encodes the specified Scope message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope.verify|verify} messages.
+                             * @param message Scope message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.networkservices.v1beta1.ExtensionBinding.Target.IScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Scope message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope.verify|verify} messages.
+                             * @param message Scope message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ExtensionBinding.Target.IScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Scope message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Scope
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope;
+
+                            /**
+                             * Decodes a Scope message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Scope
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope;
+
+                            /**
+                             * Verifies a Scope message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Scope message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Scope
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope;
+
+                            /**
+                             * Creates a plain object from a Scope message. Also converts values to other types if specified.
+                             * @param message Scope
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding.Target.Scope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Scope to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Scope
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Scope {
+
+                            /** ResourceType enum. */
+                            enum ResourceType {
+                                RESOURCE_TYPE_UNSPECIFIED = 0,
+                                AI_APPLICATION = 1,
+                                AGENT_GATEWAY = 2
+                            }
+                        }
+                    }
+
+                    /** Properties of a MatchCondition. */
+                    interface IMatchCondition {
+
+                        /** MatchCondition to */
+                        to?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.ITo|null);
+                    }
+
+                    /** Represents a MatchCondition. */
+                    class MatchCondition implements IMatchCondition {
+
+                        /**
+                         * Constructs a new MatchCondition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.IMatchCondition);
+
+                        /** MatchCondition to. */
+                        public to?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.ITo|null);
+
+                        /**
+                         * Creates a new MatchCondition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MatchCondition instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.IMatchCondition): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition;
+
+                        /**
+                         * Encodes the specified MatchCondition message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.verify|verify} messages.
+                         * @param message MatchCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1beta1.ExtensionBinding.IMatchCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MatchCondition message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.verify|verify} messages.
+                         * @param message MatchCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ExtensionBinding.IMatchCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MatchCondition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MatchCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition;
+
+                        /**
+                         * Decodes a MatchCondition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MatchCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition;
+
+                        /**
+                         * Verifies a MatchCondition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MatchCondition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MatchCondition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition;
+
+                        /**
+                         * Creates a plain object from a MatchCondition message. Also converts values to other types if specified.
+                         * @param message MatchCondition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MatchCondition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MatchCondition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MatchCondition {
+
+                        /** Properties of a StringMatch. */
+                        interface IStringMatch {
+
+                            /** StringMatch exact */
+                            exact?: (string|null);
+
+                            /** StringMatch prefix */
+                            prefix?: (string|null);
+
+                            /** StringMatch suffix */
+                            suffix?: (string|null);
+
+                            /** StringMatch contains */
+                            contains?: (string|null);
+
+                            /** StringMatch ignoreCase */
+                            ignoreCase?: (boolean|null);
+                        }
+
+                        /** Represents a StringMatch. */
+                        class StringMatch implements IStringMatch {
+
+                            /**
+                             * Constructs a new StringMatch.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch);
+
+                            /** StringMatch exact. */
+                            public exact?: (string|null);
+
+                            /** StringMatch prefix. */
+                            public prefix?: (string|null);
+
+                            /** StringMatch suffix. */
+                            public suffix?: (string|null);
+
+                            /** StringMatch contains. */
+                            public contains?: (string|null);
+
+                            /** StringMatch ignoreCase. */
+                            public ignoreCase: boolean;
+
+                            /** StringMatch matchPattern. */
+                            public matchPattern?: ("exact"|"prefix"|"suffix"|"contains");
+
+                            /**
+                             * Creates a new StringMatch instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StringMatch instance
+                             */
+                            public static create(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.StringMatch;
+
+                            /**
+                             * Encodes the specified StringMatch message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.StringMatch.verify|verify} messages.
+                             * @param message StringMatch message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StringMatch message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.StringMatch.verify|verify} messages.
+                             * @param message StringMatch message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StringMatch message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StringMatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.StringMatch;
+
+                            /**
+                             * Decodes a StringMatch message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StringMatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.StringMatch;
+
+                            /**
+                             * Verifies a StringMatch message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StringMatch message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StringMatch
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.StringMatch;
+
+                            /**
+                             * Creates a plain object from a StringMatch message. Also converts values to other types if specified.
+                             * @param message StringMatch
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.StringMatch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StringMatch to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StringMatch
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a HeaderMatch. */
+                        interface IHeaderMatch {
+
+                            /** HeaderMatch name */
+                            name?: (string|null);
+
+                            /** HeaderMatch value */
+                            value?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch|null);
+                        }
+
+                        /** Represents a HeaderMatch. */
+                        class HeaderMatch implements IHeaderMatch {
+
+                            /**
+                             * Constructs a new HeaderMatch.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IHeaderMatch);
+
+                            /** HeaderMatch name. */
+                            public name: string;
+
+                            /** HeaderMatch value. */
+                            public value?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch|null);
+
+                            /**
+                             * Creates a new HeaderMatch instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns HeaderMatch instance
+                             */
+                            public static create(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IHeaderMatch): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.HeaderMatch;
+
+                            /**
+                             * Encodes the specified HeaderMatch message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.HeaderMatch.verify|verify} messages.
+                             * @param message HeaderMatch message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IHeaderMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified HeaderMatch message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.HeaderMatch.verify|verify} messages.
+                             * @param message HeaderMatch message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IHeaderMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a HeaderMatch message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns HeaderMatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.HeaderMatch;
+
+                            /**
+                             * Decodes a HeaderMatch message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns HeaderMatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.HeaderMatch;
+
+                            /**
+                             * Verifies a HeaderMatch message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a HeaderMatch message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns HeaderMatch
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.HeaderMatch;
+
+                            /**
+                             * Creates a plain object from a HeaderMatch message. Also converts values to other types if specified.
+                             * @param message HeaderMatch
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.HeaderMatch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this HeaderMatch to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for HeaderMatch
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a To. */
+                        interface ITo {
+
+                            /** To destination */
+                            destination?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.IDestination|null);
+
+                            /** To notDestination */
+                            notDestination?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.IDestination|null);
+                        }
+
+                        /** Represents a To. */
+                        class To implements ITo {
+
+                            /**
+                             * Constructs a new To.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.ITo);
+
+                            /** To destination. */
+                            public destination?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.IDestination|null);
+
+                            /** To notDestination. */
+                            public notDestination?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.IDestination|null);
+
+                            /**
+                             * Creates a new To instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns To instance
+                             */
+                            public static create(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.ITo): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To;
+
+                            /**
+                             * Encodes the specified To message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.verify|verify} messages.
+                             * @param message To message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.ITo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified To message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.verify|verify} messages.
+                             * @param message To message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.ITo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a To message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns To
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To;
+
+                            /**
+                             * Decodes a To message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns To
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To;
+
+                            /**
+                             * Verifies a To message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a To message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns To
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To;
+
+                            /**
+                             * Creates a plain object from a To message. Also converts values to other types if specified.
+                             * @param message To
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this To to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for To
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace To {
+
+                            /** Properties of a Destination. */
+                            interface IDestination {
+
+                                /** Destination headerSet */
+                                headerSet?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.IHeaderSet|null);
+
+                                /** Destination resources */
+                                resources?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch[]|null);
+
+                                /** Destination hosts */
+                                hosts?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch[]|null);
+
+                                /** Destination paths */
+                                paths?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch[]|null);
+                            }
+
+                            /** Represents a Destination. */
+                            class Destination implements IDestination {
+
+                                /**
+                                 * Constructs a new Destination.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.IDestination);
+
+                                /** Destination headerSet. */
+                                public headerSet?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.IHeaderSet|null);
+
+                                /** Destination resources. */
+                                public resources: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch[];
+
+                                /** Destination hosts. */
+                                public hosts: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch[];
+
+                                /** Destination paths. */
+                                public paths: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IStringMatch[];
+
+                                /**
+                                 * Creates a new Destination instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Destination instance
+                                 */
+                                public static create(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.IDestination): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination;
+
+                                /**
+                                 * Encodes the specified Destination message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.verify|verify} messages.
+                                 * @param message Destination message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.IDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.verify|verify} messages.
+                                 * @param message Destination message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.IDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Destination message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Destination
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination;
+
+                                /**
+                                 * Decodes a Destination message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Destination
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination;
+
+                                /**
+                                 * Verifies a Destination message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Destination
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination;
+
+                                /**
+                                 * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                                 * @param message Destination
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Destination to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Destination
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace Destination {
+
+                                /** Properties of a HeaderSet. */
+                                interface IHeaderSet {
+
+                                    /** HeaderSet headers */
+                                    headers?: (google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IHeaderMatch[]|null);
+                                }
+
+                                /** Represents a HeaderSet. */
+                                class HeaderSet implements IHeaderSet {
+
+                                    /**
+                                     * Constructs a new HeaderSet.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.IHeaderSet);
+
+                                    /** HeaderSet headers. */
+                                    public headers: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.IHeaderMatch[];
+
+                                    /**
+                                     * Creates a new HeaderSet instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns HeaderSet instance
+                                     */
+                                    public static create(properties?: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.IHeaderSet): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.HeaderSet;
+
+                                    /**
+                                     * Encodes the specified HeaderSet message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.HeaderSet.verify|verify} messages.
+                                     * @param message HeaderSet message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.IHeaderSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified HeaderSet message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.HeaderSet.verify|verify} messages.
+                                     * @param message HeaderSet message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.IHeaderSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a HeaderSet message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns HeaderSet
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.HeaderSet;
+
+                                    /**
+                                     * Decodes a HeaderSet message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns HeaderSet
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.HeaderSet;
+
+                                    /**
+                                     * Verifies a HeaderSet message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a HeaderSet message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns HeaderSet
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.HeaderSet;
+
+                                    /**
+                                     * Creates a plain object from a HeaderSet message. Also converts values to other types if specified.
+                                     * @param message HeaderSet
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.networkservices.v1beta1.ExtensionBinding.MatchCondition.To.Destination.HeaderSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this HeaderSet to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for HeaderSet
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                /** Properties of a ListExtensionBindingsRequest. */
+                interface IListExtensionBindingsRequest {
+
+                    /** ListExtensionBindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListExtensionBindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListExtensionBindingsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListExtensionBindingsRequest. */
+                class ListExtensionBindingsRequest implements IListExtensionBindingsRequest {
+
+                    /**
+                     * Constructs a new ListExtensionBindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest);
+
+                    /** ListExtensionBindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListExtensionBindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListExtensionBindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListExtensionBindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExtensionBindingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest): google.cloud.networkservices.v1beta1.ListExtensionBindingsRequest;
+
+                    /**
+                     * Encodes the specified ListExtensionBindingsRequest message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ListExtensionBindingsRequest.verify|verify} messages.
+                     * @param message ListExtensionBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExtensionBindingsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ListExtensionBindingsRequest.verify|verify} messages.
+                     * @param message ListExtensionBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1beta1.IListExtensionBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExtensionBindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExtensionBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ListExtensionBindingsRequest;
+
+                    /**
+                     * Decodes a ListExtensionBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExtensionBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ListExtensionBindingsRequest;
+
+                    /**
+                     * Verifies a ListExtensionBindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExtensionBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExtensionBindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ListExtensionBindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListExtensionBindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListExtensionBindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1beta1.ListExtensionBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExtensionBindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExtensionBindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExtensionBindingsResponse. */
+                interface IListExtensionBindingsResponse {
+
+                    /** ListExtensionBindingsResponse extensionBindings */
+                    extensionBindings?: (google.cloud.networkservices.v1beta1.IExtensionBinding[]|null);
+
+                    /** ListExtensionBindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListExtensionBindingsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListExtensionBindingsResponse. */
+                class ListExtensionBindingsResponse implements IListExtensionBindingsResponse {
+
+                    /**
+                     * Constructs a new ListExtensionBindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse);
+
+                    /** ListExtensionBindingsResponse extensionBindings. */
+                    public extensionBindings: google.cloud.networkservices.v1beta1.IExtensionBinding[];
+
+                    /** ListExtensionBindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListExtensionBindingsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListExtensionBindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExtensionBindingsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse): google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse;
+
+                    /**
+                     * Encodes the specified ListExtensionBindingsResponse message. Does not implicitly {@link google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse.verify|verify} messages.
+                     * @param message ListExtensionBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExtensionBindingsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse.verify|verify} messages.
+                     * @param message ListExtensionBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1beta1.IListExtensionBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExtensionBindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExtensionBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse;
+
+                    /**
+                     * Decodes a ListExtensionBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExtensionBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse;
+
+                    /**
+                     * Verifies a ListExtensionBindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExtensionBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExtensionBindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListExtensionBindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListExtensionBindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1beta1.ListExtensionBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExtensionBindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExtensionBindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetExtensionBindingRequest. */
+                interface IGetExtensionBindingRequest {
+
+                    /** GetExtensionBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetExtensionBindingRequest. */
+                class GetExtensionBindingRequest implements IGetExtensionBindingRequest {
+
+                    /**
+                     * Constructs a new GetExtensionBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest);
+
+                    /** GetExtensionBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetExtensionBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetExtensionBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest): google.cloud.networkservices.v1beta1.GetExtensionBindingRequest;
+
+                    /**
+                     * Encodes the specified GetExtensionBindingRequest message. Does not implicitly {@link google.cloud.networkservices.v1beta1.GetExtensionBindingRequest.verify|verify} messages.
+                     * @param message GetExtensionBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetExtensionBindingRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.GetExtensionBindingRequest.verify|verify} messages.
+                     * @param message GetExtensionBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1beta1.IGetExtensionBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetExtensionBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetExtensionBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.GetExtensionBindingRequest;
+
+                    /**
+                     * Decodes a GetExtensionBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetExtensionBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.GetExtensionBindingRequest;
+
+                    /**
+                     * Verifies a GetExtensionBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetExtensionBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetExtensionBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.GetExtensionBindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetExtensionBindingRequest message. Also converts values to other types if specified.
+                     * @param message GetExtensionBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1beta1.GetExtensionBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetExtensionBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetExtensionBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateExtensionBindingRequest. */
+                interface ICreateExtensionBindingRequest {
+
+                    /** CreateExtensionBindingRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateExtensionBindingRequest extensionBindingId */
+                    extensionBindingId?: (string|null);
+
+                    /** CreateExtensionBindingRequest extensionBinding */
+                    extensionBinding?: (google.cloud.networkservices.v1beta1.IExtensionBinding|null);
+                }
+
+                /** Represents a CreateExtensionBindingRequest. */
+                class CreateExtensionBindingRequest implements ICreateExtensionBindingRequest {
+
+                    /**
+                     * Constructs a new CreateExtensionBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest);
+
+                    /** CreateExtensionBindingRequest parent. */
+                    public parent: string;
+
+                    /** CreateExtensionBindingRequest extensionBindingId. */
+                    public extensionBindingId: string;
+
+                    /** CreateExtensionBindingRequest extensionBinding. */
+                    public extensionBinding?: (google.cloud.networkservices.v1beta1.IExtensionBinding|null);
+
+                    /**
+                     * Creates a new CreateExtensionBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateExtensionBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest): google.cloud.networkservices.v1beta1.CreateExtensionBindingRequest;
+
+                    /**
+                     * Encodes the specified CreateExtensionBindingRequest message. Does not implicitly {@link google.cloud.networkservices.v1beta1.CreateExtensionBindingRequest.verify|verify} messages.
+                     * @param message CreateExtensionBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateExtensionBindingRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.CreateExtensionBindingRequest.verify|verify} messages.
+                     * @param message CreateExtensionBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1beta1.ICreateExtensionBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateExtensionBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateExtensionBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.CreateExtensionBindingRequest;
+
+                    /**
+                     * Decodes a CreateExtensionBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateExtensionBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.CreateExtensionBindingRequest;
+
+                    /**
+                     * Verifies a CreateExtensionBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateExtensionBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateExtensionBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.CreateExtensionBindingRequest;
+
+                    /**
+                     * Creates a plain object from a CreateExtensionBindingRequest message. Also converts values to other types if specified.
+                     * @param message CreateExtensionBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1beta1.CreateExtensionBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateExtensionBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateExtensionBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateExtensionBindingRequest. */
+                interface IUpdateExtensionBindingRequest {
+
+                    /** UpdateExtensionBindingRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateExtensionBindingRequest extensionBinding */
+                    extensionBinding?: (google.cloud.networkservices.v1beta1.IExtensionBinding|null);
+                }
+
+                /** Represents an UpdateExtensionBindingRequest. */
+                class UpdateExtensionBindingRequest implements IUpdateExtensionBindingRequest {
+
+                    /**
+                     * Constructs a new UpdateExtensionBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest);
+
+                    /** UpdateExtensionBindingRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateExtensionBindingRequest extensionBinding. */
+                    public extensionBinding?: (google.cloud.networkservices.v1beta1.IExtensionBinding|null);
+
+                    /**
+                     * Creates a new UpdateExtensionBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateExtensionBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest): google.cloud.networkservices.v1beta1.UpdateExtensionBindingRequest;
+
+                    /**
+                     * Encodes the specified UpdateExtensionBindingRequest message. Does not implicitly {@link google.cloud.networkservices.v1beta1.UpdateExtensionBindingRequest.verify|verify} messages.
+                     * @param message UpdateExtensionBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateExtensionBindingRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.UpdateExtensionBindingRequest.verify|verify} messages.
+                     * @param message UpdateExtensionBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1beta1.IUpdateExtensionBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateExtensionBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateExtensionBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.UpdateExtensionBindingRequest;
+
+                    /**
+                     * Decodes an UpdateExtensionBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateExtensionBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.UpdateExtensionBindingRequest;
+
+                    /**
+                     * Verifies an UpdateExtensionBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateExtensionBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateExtensionBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.UpdateExtensionBindingRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateExtensionBindingRequest message. Also converts values to other types if specified.
+                     * @param message UpdateExtensionBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1beta1.UpdateExtensionBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateExtensionBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateExtensionBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteExtensionBindingRequest. */
+                interface IDeleteExtensionBindingRequest {
+
+                    /** DeleteExtensionBindingRequest name */
+                    name?: (string|null);
+
+                    /** DeleteExtensionBindingRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteExtensionBindingRequest. */
+                class DeleteExtensionBindingRequest implements IDeleteExtensionBindingRequest {
+
+                    /**
+                     * Constructs a new DeleteExtensionBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest);
+
+                    /** DeleteExtensionBindingRequest name. */
+                    public name: string;
+
+                    /** DeleteExtensionBindingRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteExtensionBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteExtensionBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest): google.cloud.networkservices.v1beta1.DeleteExtensionBindingRequest;
+
+                    /**
+                     * Encodes the specified DeleteExtensionBindingRequest message. Does not implicitly {@link google.cloud.networkservices.v1beta1.DeleteExtensionBindingRequest.verify|verify} messages.
+                     * @param message DeleteExtensionBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteExtensionBindingRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1beta1.DeleteExtensionBindingRequest.verify|verify} messages.
+                     * @param message DeleteExtensionBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1beta1.IDeleteExtensionBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteExtensionBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteExtensionBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1beta1.DeleteExtensionBindingRequest;
+
+                    /**
+                     * Decodes a DeleteExtensionBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteExtensionBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1beta1.DeleteExtensionBindingRequest;
+
+                    /**
+                     * Verifies a DeleteExtensionBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteExtensionBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteExtensionBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1beta1.DeleteExtensionBindingRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteExtensionBindingRequest message. Also converts values to other types if specified.
+                     * @param message DeleteExtensionBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1beta1.DeleteExtensionBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteExtensionBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteExtensionBindingRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

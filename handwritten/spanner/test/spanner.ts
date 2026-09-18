@@ -30,6 +30,7 @@ import {
   Snapshot,
   Spanner,
   Transaction,
+  v1 as gapicV1,
 } from '../src';
 import * as mock from './mockserver/mockspanner';
 import {
@@ -384,6 +385,88 @@ describe('Spanner with mock server', () => {
         fail: false,
       });
       assert.notStrictEqual(dbWithDefaultOptions, dbWithWriteSessions);
+    });
+
+    it('should disable channelz by default and allow overriding it', async () => {
+      assert.strictEqual((spanner.options as any)['grpc.enable_channelz'], 0);
+
+      const client = new gapicV1.SpannerClient(spanner.options as any);
+      await client.initialize();
+      const stub = (await (client as any).spannerStub) as any;
+      const channel = stub.getChannel();
+      const pooledChannel = channel.channelRefs?.[0]?.channel as any;
+      assert.ok(pooledChannel, 'Expected pooledChannel to be initialized');
+      assert.strictEqual(pooledChannel.internalChannel?.channelzEnabled, false);
+
+      const customSpanner = new Spanner({
+        servicePath: 'localhost',
+        port,
+        sslCreds: grpc.credentials.createInsecure(),
+        'grpc.enable_channelz': 1,
+      });
+      try {
+        assert.strictEqual(
+          (customSpanner.options as any)['grpc.enable_channelz'],
+          1,
+        );
+        const customClient = new gapicV1.SpannerClient(
+          customSpanner.options as any,
+        );
+        await customClient.initialize();
+        const customStub = (await (customClient as any).spannerStub) as any;
+        const customChannel = customStub.getChannel();
+        const customPooledChannel = customChannel.channelRefs?.[0]
+          ?.channel as any;
+        assert.ok(
+          customPooledChannel,
+          'Expected customPooledChannel to be initialized',
+        );
+        assert.strictEqual(
+          customPooledChannel.internalChannel?.channelzEnabled,
+          true,
+        );
+      } finally {
+        await customSpanner.close();
+      }
+    });
+
+    it('should invoke promise-based GAPIC request exactly once against mock server', async () => {
+      const databaseName =
+        'projects/test-project/instances/instance/databases/gapic-test-db';
+      await new Promise<void>((resolve, reject) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (spanner as any).prepareGapicRequest_(
+          {
+            client: 'SpannerClient',
+            method: 'createSession',
+            reqOpts: {
+              database: databaseName,
+            },
+            headers: {
+              'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.1.1`,
+            },
+          },
+          async (err: Error | null, requestFn: Function) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            try {
+              const session = await requestFn();
+              assert.ok(session);
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+      const createSessionRequests = spannerMock
+        .getRequests()
+        .filter(
+          req => (req as v1.CreateSessionRequest).database === databaseName,
+        );
+      assert.strictEqual(createSessionRequests.length, 1);
     });
 
     it('should execute query', async () => {

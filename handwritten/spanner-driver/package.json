@@ -34,7 +34,7 @@
     "clean": "gts clean",
     "compile:esm": "tsc -p .",
     "compile:cjs": "tsc -p ./tsconfig.cjs.json && node -e \"require('fs').writeFileSync('build/cjs/package.json', JSON.stringify({type: 'commonjs'}))\"",
-    "compile": "npm run compile:esm && npm run compile:cjs",
+    "compile": "pnpm run compile:esm && pnpm run compile:cjs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",

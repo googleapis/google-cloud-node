@@ -41,7 +41,7 @@ import {
   IProtoMessageParams,
   IProtoEnumParams,
 } from './codec';
-import {context, propagation} from '@opentelemetry/api';
+import {context, propagation, ROOT_CONTEXT} from '@opentelemetry/api';
 import {Backup} from './backup';
 import {Database} from './database';
 import {
@@ -155,6 +155,8 @@ export type GetInstanceConfigOperationsCallback = PagedCallback<
  * DirectedReadOptions won't be set for readWrite transactions"
  * @property {ObservabilityOptions} [observabilityOptions] Sets the observability options to be used for OpenTelemetry tracing
  * @property {boolean} [disableBuiltInMetrics=True] If set to true, built-in metrics will be disabled.
+ * @property {number} ['grpc.enable_channelz'=0] Whether to enable gRPC Channelz service tracking.
+ * Defaults to 0 (disabled) to eliminate per-RPC tracking and allocation overhead. Set to 1 to enable.
  */
 export interface SpannerOptions extends GrpcClientOptions {
   apiEndpoint?: string;
@@ -182,6 +184,12 @@ export interface SpannerOptions extends GrpcClientOptions {
    */
   universe_domain?: string;
   universeDomain?: string;
+  /**
+   * Whether to enable gRPC Channelz service tracking.
+   * Defaults to `0` (disabled) to eliminate per-RPC allocation and tracking overhead.
+   * Set to `1` if live connection introspection via gRPC Channelz (e.g. grpcdebug) is required.
+   */
+  'grpc.enable_channelz'?: number;
 }
 export interface RequestConfig {
   client: string;
@@ -426,6 +434,8 @@ class Spanner extends GrpcService {
         scopes,
         // Add grpc keep alive setting
         'grpc.keepalive_time_ms': 120000,
+        // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
+        'grpc.enable_channelz': 0,
         // Enable grpc-gcp support
         'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
         'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
@@ -619,14 +629,11 @@ class Spanner extends GrpcService {
     if (callback) {
       // process.nextTick prevents Unhandled Promise Rejections if callback throws
       res
-        .then(
-          () => process.nextTick(() => callback(null)),
-          err => process.nextTick(() => callback(err)),
-        )
-        .catch(() => {});
-    } else {
-      return res;
+        .then(() => process.nextTick(() => callback(null)))
+        .catch(err => process.nextTick(() => callback(err)));
+      return;
     }
+    return res;
   }
 
   /**
@@ -1681,35 +1688,46 @@ class Spanner extends GrpcService {
       !metricsExplicitlyDisabled && !this._isInSecureCredentials;
     MetricsTracerFactory.enabled = this._metricsEnabled;
     if (this._metricsEnabled) {
-      try {
-        this.auth.getProjectId((err, projectId) => {
-          if (err || !projectId) {
-            console.error(
-              'Unable to get Project Id for client side metrics, will skip exporting client' +
-                ' side metrics' +
-                err,
-            );
-            return;
-          }
-
-          this.projectId_ = projectId;
-          const factory = MetricsTracerFactory.getInstance(projectId);
-          const periodicReader = new PeriodicExportingMetricReader({
-            exporter: new CloudMonitoringMetricsExporter(
-              {auth: this.auth},
-              projectId,
-            ),
-            exportIntervalMillis: 60000,
+      const initializeMetrics = (projectId: string) => {
+        this.projectId_ = projectId;
+        const factory = MetricsTracerFactory.getInstance(projectId);
+        if (factory && !factory.hasMetricReaders()) {
+          context.with(ROOT_CONTEXT, () => {
+            const periodicReader = new PeriodicExportingMetricReader({
+              exporter: new CloudMonitoringMetricsExporter(
+                {auth: this.auth},
+                projectId,
+              ),
+              exportIntervalMillis: 60000,
+            });
+            factory.getMeterProvider([periodicReader]);
           });
-          // Retrieve the MeterProvider to trigger construction
-          factory!.getMeterProvider([periodicReader]);
-        });
-      } catch (err) {
-        console.error(
-          'Unable to configure client side metrics, will skip exporting client' +
-            ' side metrics' +
-            err,
-        );
+        }
+      };
+
+      if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
+        initializeMetrics(this.projectId_);
+      } else {
+        try {
+          this.auth.getProjectId((err, projectId) => {
+            if (err || !projectId) {
+              console.error(
+                'Unable to get Project Id for client side metrics, will skip exporting client' +
+                  ' side metrics' +
+                  err,
+              );
+              return;
+            }
+
+            initializeMetrics(projectId);
+          });
+        } catch (err) {
+          console.error(
+            'Unable to configure client side metrics, will skip exporting client' +
+              ' side metrics' +
+              err,
+          );
+        }
       }
     }
   }
@@ -1785,8 +1803,10 @@ class Spanner extends GrpcService {
     try {
       const clientName = config.client;
       if (!this.clients_.has(clientName)) {
-        // eslint-disable-next-line import/namespace
-        this.clients_.set(clientName, new v1[clientName](this.options));
+        this.clients_.set(
+          clientName,
+          new (v1 as Record<string, any>)[clientName](this.options),
+        );
       }
       const gaxClient = this.clients_.get(clientName)!;
       let reqOpts = config.reqOpts;
@@ -1898,54 +1918,70 @@ class Spanner extends GrpcService {
         gaxOpts,
       );
 
-      // Wrap requestFn to inject the spanner request id into every returned error.
-      wrappedRequestFn = (...args) => {
-        const hasCallback =
-          args &&
-          args.length > 0 &&
-          typeof args[args.length - 1] === 'function';
+      // Extract a lightweight config reference containing only headers so error
+      // enrichment is decoupled from the caller's mutable config object.
+      const errorConfig = {headers: config?.headers};
 
-        switch (hasCallback) {
-          case true: {
-            const cb = args[args.length - 1];
-            const priorArgs = args.slice(0, args.length - 1);
-            requestFn(...priorArgs, (...results) => {
-              if (results && results.length > 0) {
-                const err = results[0] as Error;
-                injectRequestIDIntoError(config, err);
+      // Wrap requestFn to inject the Spanner request ID (x-goog-spanner-request-id)
+      // into any error returned via callback, rejected promise, stream event, or
+      // synchronous exception.
+      //
+      // Because reqOpts and gaxOpts are already pre-bound to requestFn, wrappedRequestFn
+      // receives at most one argument: an optional callback.
+      wrappedRequestFn = (callback?: Function) => {
+        // Callback mode: invoke requestFn with an intercepted callback to enrich
+        // the error parameter before delegating to the caller's callback.
+        if (typeof callback === 'function') {
+          try {
+            requestFn((...results: unknown[]) => {
+              if (results[0]) {
+                injectRequestIDIntoError(errorConfig, results[0] as Error);
               }
-
-              cb(...results);
+              callback(...results);
             });
-            return;
+          } catch (err) {
+            injectRequestIDIntoError(errorConfig, err as Error);
+            throw err;
           }
-
-          case false: {
-            let res;
-            try {
-              res = requestFn(...args);
-            } catch (err) {
-              injectRequestIDIntoError(config, err as Error);
-              throw err;
-            }
-
-            if (res instanceof Promise) {
-              return res.catch(err => {
-                injectRequestIDIntoError(config, err as Error);
-                throw err;
-              });
-            }
-
-            const stream = res as EventEmitter;
-            if (stream && typeof stream.on === 'function') {
-              stream.on('error', err => {
-                injectRequestIDIntoError(config, err as Error);
-              });
-            }
-
-            return res;
-          }
+          return;
         }
+
+        // Non-callback mode: invoke requestFn() for Promise or Stream callers.
+        let res;
+        try {
+          res = requestFn();
+        } catch (err) {
+          injectRequestIDIntoError(errorConfig, err as Error);
+          throw err;
+        }
+
+        // Handle Promise / Thenable return values (e.g. unary requests).
+        // Attach a rejection handler to inject the request ID into rejected errors.
+        // If the promise is cancellable (e.g. google-gax CancellablePromise), preserve
+        // its .cancel() method so callers can cancel the underlying operation.
+        if (res && typeof (res as PromiseLike<unknown>).then === 'function') {
+          const chained = (res as PromiseLike<unknown>).then(null, err => {
+            injectRequestIDIntoError(errorConfig, err as Error);
+            throw err;
+          });
+          if (typeof (res as {cancel?: Function}).cancel === 'function') {
+            (chained as {cancel?: Function}).cancel = (
+              res as {cancel: Function}
+            ).cancel.bind(res);
+          }
+          return chained;
+        }
+
+        // Handle Stream return values (e.g. streaming reads or queries).
+        // Listen for 'error' events to enrich the emitted error with the request ID.
+        const stream = res as EventEmitter;
+        if (stream && typeof stream.on === 'function') {
+          stream.on('error', err => {
+            injectRequestIDIntoError(errorConfig, err as Error);
+          });
+        }
+
+        return res;
       };
     } catch (error) {
       callback(error as Error, null);
@@ -1972,7 +2008,8 @@ class Spanner extends GrpcService {
     if (
       this._metricsEnabled &&
       config.client === 'SpannerClient' &&
-      this.projectId_
+      this.projectId_ &&
+      this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
@@ -2041,7 +2078,8 @@ class Spanner extends GrpcService {
     if (
       this._metricsEnabled &&
       config.client === 'SpannerClient' &&
-      this.projectId_
+      this.projectId_ &&
+      this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
