@@ -155,6 +155,8 @@ export type GetInstanceConfigOperationsCallback = PagedCallback<
  * DirectedReadOptions won't be set for readWrite transactions"
  * @property {ObservabilityOptions} [observabilityOptions] Sets the observability options to be used for OpenTelemetry tracing
  * @property {boolean} [disableBuiltInMetrics=True] If set to true, built-in metrics will be disabled.
+ * @property {number} ['grpc.enable_channelz'=0] Whether to enable gRPC Channelz service tracking.
+ * Defaults to 0 (disabled) to eliminate per-RPC tracking and allocation overhead. Set to 1 to enable.
  */
 export interface SpannerOptions extends GrpcClientOptions {
   apiEndpoint?: string;
@@ -182,6 +184,12 @@ export interface SpannerOptions extends GrpcClientOptions {
    */
   universe_domain?: string;
   universeDomain?: string;
+  /**
+   * Whether to enable gRPC Channelz service tracking.
+   * Defaults to `0` (disabled) to eliminate per-RPC allocation and tracking overhead.
+   * Set to `1` if live connection introspection via gRPC Channelz (e.g. grpcdebug) is required.
+   */
+  'grpc.enable_channelz'?: number;
 }
 export interface RequestConfig {
   client: string;
@@ -423,6 +431,8 @@ class Spanner extends GrpcService {
         scopes,
         // Add grpc keep alive setting
         'grpc.keepalive_time_ms': 120000,
+        // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
+        'grpc.enable_channelz': 0,
         // Enable grpc-gcp support
         'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
         'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
