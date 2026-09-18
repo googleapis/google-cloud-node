@@ -1857,11 +1857,11 @@ export class Snapshot extends EventEmitter {
    * @property {object} [gaxOptions] Request configuration options,
    *     See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions}
    *     for more details.
-   *  @property {number} [maxResumeRetries] The maximum number of times that the
-   *     stream will retry to push data downstream, when the downstream indicates
-   *     that it is not ready for any more data. Increase this value if you
-   *     experience 'Stream is still not ready to receive data' errors as a
-   *     result of a slow writer in your receiving stream.
+   * @property {number} [maxResumeRetries] The maximum number of times that the
+   *     query will retry on retryable errors (such as UNAVAILABLE). Only
+   *     applicable to non-streaming queries executed via {@link Snapshot#run}.
+   *     For streaming queries ({@link Snapshot#runStream}), this option is
+   *     deprecated as backpressure is managed automatically.
    *  @property {object} [directedReadOptions]
    *     Indicates which replicas or regions should be used for non-transactional reads or queries.
    */
