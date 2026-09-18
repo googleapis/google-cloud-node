@@ -3738,9 +3738,8 @@ class Database extends common.GrpcServiceObject {
         : {};
 
     let sessionId = '';
-    const getSession = this.sessionFactory_.getSessionForReadWrite.bind(
-      this.sessionFactory_,
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sf = this.sessionFactory_ as any;
 
     return startTrace(
       'Database.runTransactionAsync',
@@ -3754,11 +3753,27 @@ class Database extends common.GrpcServiceObject {
         // eslint-disable-next-line no-constant-condition
         while (true) {
           try {
-            const [session, transaction] = await promisify(getSession)();
-            transaction.requestOptions = Object.assign(
-              transaction.requestOptions || {},
-              options.requestOptions,
-            );
+            let session: Session;
+            let transaction: Transaction;
+            if (
+              sf.isMultiplexedRW &&
+              sf.multiplexedSession_?._multiplexedSession
+            ) {
+              session = sf.multiplexedSession_._multiplexedSession;
+              transaction = session.transaction(this.queryOptions_);
+            } else {
+              const getSession =
+                this.sessionFactory_.getSessionForReadWrite.bind(
+                  this.sessionFactory_,
+                );
+              [session, transaction] = await promisify(getSession)();
+            }
+            if (options?.requestOptions) {
+              transaction.requestOptions = Object.assign(
+                transaction.requestOptions || {},
+                options.requestOptions,
+              );
+            }
             transaction!.setReadWriteTransactionOptions(
               options as RunTransactionOptions,
             );

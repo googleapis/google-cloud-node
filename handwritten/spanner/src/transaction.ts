@@ -1624,12 +1624,6 @@ export class Snapshot extends EventEmitter {
       };
 
       if (isNativeCoreEnabled() && isNativeEligible(query)) {
-        try {
-          sanitizeRequest();
-        } catch (e) {
-          complete(e as Error);
-          return;
-        }
         const reqHeaders = injectRequestIDIntoHeaders(
           headers,
           this.session,
@@ -1639,7 +1633,7 @@ export class Snapshot extends EventEmitter {
         let fallbackTriggered = false;
         const handled = executeNativeTransactionRun(
           this,
-          formattedRequest,
+          seqno,
           query,
           reqHeaders,
           (err, rows, stats, metadata) => {

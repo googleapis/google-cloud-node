@@ -448,14 +448,7 @@ func ExecuteStreamingSqlGo(
 				return
 			}
 
-			// Read server-timing from header if present
 			serverTiming := ""
-			if headerMD, err := stream.Header(); err == nil {
-				if vals := headerMD.Get("server-timing"); len(vals) > 0 {
-					serverTiming = vals[0]
-				}
-			}
-
 			shouldRetry := false
 
 			// 4. Stream consumption loop
@@ -579,10 +572,17 @@ func ExecuteStreamingSqlGo(
 				continue
 			}
 
-			// Read server-timing from trailers if present
+			// Read server-timing from trailers or cached headers if present
 			if trailerMD := stream.Trailer(); trailerMD != nil {
 				if vals := trailerMD.Get("server-timing"); len(vals) > 0 {
 					serverTiming = vals[0]
+				}
+			}
+			if serverTiming == "" {
+				if headerMD, err := stream.Header(); err == nil && headerMD != nil {
+					if vals := headerMD.Get("server-timing"); len(vals) > 0 {
+						serverTiming = vals[0]
+					}
 				}
 			}
 

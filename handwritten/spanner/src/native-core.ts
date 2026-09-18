@@ -420,6 +420,15 @@ export interface DatabaseLike {
 
 const paramTypeCache = new Map<string, {code: number}>();
 
+/**
+ * Lookup table mapping protobuf `TypeCode` enum *names* (e.g. 'INT64') to their
+ * numeric wire values. `codec.createTypeObject()` yields string codes, but the
+ * protobuf encoder requires numbers, so hot paths use this map to convert
+ * without repeatedly re-casting the generated enum object.
+ */
+const TYPE_CODE_STR_TO_NUM =
+  protos.google.spanner.v1.TypeCode as unknown as Record<string, number>;
+
 function buildRequestBytes(
   sessionName: string,
   query: string | Record<string, unknown>,
@@ -1308,6 +1317,248 @@ function prepareNativeStatements(queries: Array<string | any>): Array<{
  * Dispatches `Transaction#commit` through the Go shared core.
  * Request encoding and response decoding happen in Node.js; only raw byte buffers cross FFI.
  */
+const sessionBytesCache = new Map<string, Buffer>();
+
+function getSessionBytes(sessionName: string): Buffer {
+  let buf = sessionBytesCache.get(sessionName);
+  if (!buf) {
+    buf = Buffer.from(sessionName, 'utf8');
+    if (sessionBytesCache.size < 64) {
+      sessionBytesCache.set(sessionName, buf);
+    }
+  }
+  return buf;
+}
+
+function writeVarint(buf: Buffer, offset: number, val: number): number {
+  while (val > 0x7f) {
+    buf[offset++] = (val & 0x7f) | 0x80;
+    val >>>= 7;
+  }
+  buf[offset++] = val & 0x7f;
+  return offset;
+}
+
+function varintLen(val: number): number {
+  let l = 1;
+  while (val > 0x7f) {
+    l++;
+    val >>>= 7;
+  }
+  return l;
+}
+
+function encodeSimpleCommitRequestFast(
+  sessionName: string,
+  txId: Uint8Array,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  precommitToken?: any,
+): Uint8Array {
+  const sessionBuf = getSessionBytes(sessionName);
+  let tokLen = 0;
+  let tokBodyLen = 0;
+  const tokBytes = precommitToken && precommitToken.precommitToken;
+  const seqNum = (precommitToken && precommitToken.seqNum) || 0;
+  if (tokBytes && tokBytes.length > 0) {
+    tokBodyLen += 1 + varintLen(tokBytes.length) + tokBytes.length;
+  }
+  if (seqNum > 0) {
+    tokBodyLen += 1 + varintLen(seqNum);
+  }
+  if (tokBodyLen > 0) {
+    tokLen = 1 + varintLen(tokBodyLen) + tokBodyLen;
+  }
+
+  const totalLen =
+    1 +
+    varintLen(sessionBuf.length) +
+    sessionBuf.length +
+    1 +
+    varintLen(txId.length) +
+    txId.length +
+    tokLen;
+
+  const out = Buffer.allocUnsafe(totalLen);
+  let pos = 0;
+  out[pos++] = 0x0a;
+  pos = writeVarint(out, pos, sessionBuf.length);
+  sessionBuf.copy(out, pos);
+  pos += sessionBuf.length;
+
+  out[pos++] = 0x12;
+  pos = writeVarint(out, pos, txId.length);
+  out.set(txId, pos);
+  pos += txId.length;
+
+  if (tokBodyLen > 0) {
+    out[pos++] = 0x4a;
+    pos = writeVarint(out, pos, tokBodyLen);
+    if (tokBytes && tokBytes.length > 0) {
+      out[pos++] = 0x0a;
+      pos = writeVarint(out, pos, tokBytes.length);
+      out.set(tokBytes, pos);
+      pos += tokBytes.length;
+    }
+    if (seqNum > 0) {
+      out[pos++] = 0x10;
+      pos = writeVarint(out, pos, seqNum);
+    }
+  }
+  return out;
+}
+
+function decodePrecommitTokenFast(
+  buf: Uint8Array,
+): {precommitToken: Uint8Array; seqNum: number} | null {
+  let pos = 0;
+  const len = buf.length;
+  let precommitToken: Uint8Array | null = null;
+  let seqNum = 0;
+  while (pos < len) {
+    const tag = buf[pos++];
+    if (tag === 0x0a) {
+      let bLen = 0;
+      let shift = 0;
+      while (pos < len) {
+        const b = buf[pos++];
+        bLen |= (b & 0x7f) << shift;
+        if ((b & 0x80) === 0) break;
+        shift += 7;
+      }
+      precommitToken = buf.subarray(pos, pos + bLen);
+      pos += bLen;
+    } else if (tag === 0x10) {
+      let val = 0;
+      let shift = 0;
+      while (pos < len) {
+        const b = buf[pos++];
+        val |= (b & 0x7f) << shift;
+        if ((b & 0x80) === 0) break;
+        shift += 7;
+      }
+      seqNum = val;
+    } else {
+      return protos.google.spanner.v1.MultiplexedSessionPrecommitToken.decode(
+        buf,
+      ) as unknown as {precommitToken: Uint8Array; seqNum: number};
+    }
+  }
+  if (!precommitToken) return null;
+  return {precommitToken, seqNum};
+}
+
+function decodeTxMetadataFast(buf: Uint8Array): {
+  id?: Uint8Array;
+  precommitToken?: {precommitToken: Uint8Array; seqNum: number} | null;
+} | null {
+  let pos = 0;
+  const len = buf.length;
+  while (pos < len) {
+    const tag = buf[pos++];
+    if (tag === 0x12) {
+      let txLen = 0;
+      let shift = 0;
+      while (pos < len) {
+        const b = buf[pos++];
+        txLen |= (b & 0x7f) << shift;
+        if ((b & 0x80) === 0) break;
+        shift += 7;
+      }
+      const txEnd = pos + txLen;
+      let id: Uint8Array | undefined;
+      let precommitToken: {precommitToken: Uint8Array; seqNum: number} | null =
+        null;
+      while (pos < txEnd) {
+        const txTag = buf[pos++];
+        if (txTag === 0x0a) {
+          let idLen = 0;
+          let s = 0;
+          while (pos < txEnd) {
+            const b = buf[pos++];
+            idLen |= (b & 0x7f) << s;
+            if ((b & 0x80) === 0) break;
+            s += 7;
+          }
+          id = buf.subarray(pos, pos + idLen);
+          pos += idLen;
+        } else if (txTag === 0x1a) {
+          let tokLen = 0;
+          let s = 0;
+          while (pos < txEnd) {
+            const b = buf[pos++];
+            tokLen |= (b & 0x7f) << s;
+            if ((b & 0x80) === 0) break;
+            s += 7;
+          }
+          precommitToken = decodePrecommitTokenFast(
+            buf.subarray(pos, pos + tokLen),
+          );
+          pos += tokLen;
+        } else {
+          return null;
+        }
+      }
+      return {id, precommitToken};
+    } else {
+      return null;
+    }
+  }
+  return null;
+}
+
+function decodeCommitResponseFast(
+  buf: Uint8Array,
+): protos.google.spanner.v1.ICommitResponse {
+  let pos = 0;
+  const len = buf.length;
+  while (pos < len) {
+    const tag = buf[pos++];
+    if (tag === 0x0a) {
+      let tsLen = 0;
+      let shift = 0;
+      while (pos < len) {
+        const b = buf[pos++];
+        tsLen |= (b & 0x7f) << shift;
+        if ((b & 0x80) === 0) break;
+        shift += 7;
+      }
+      const tsEnd = pos + tsLen;
+      let seconds = 0;
+      let nanos = 0;
+      while (pos < tsEnd) {
+        const tsTag = buf[pos++];
+        if (tsTag === 0x08) {
+          let val = 0n;
+          let s = 0n;
+          while (pos < tsEnd) {
+            const b = buf[pos++];
+            val |= BigInt(b & 0x7f) << s;
+            if ((b & 0x80) === 0) break;
+            s += 7n;
+          }
+          seconds = Number(val);
+        } else if (tsTag === 0x10) {
+          let val = 0;
+          let s = 0;
+          while (pos < tsEnd) {
+            const b = buf[pos++];
+            val |= (b & 0x7f) << s;
+            if ((b & 0x80) === 0) break;
+            s += 7;
+          }
+          nanos = val;
+        } else {
+          return protos.google.spanner.v1.CommitResponse.decode(buf);
+        }
+      }
+      return {commitTimestamp: {seconds, nanos}};
+    } else {
+      return protos.google.spanner.v1.CommitResponse.decode(buf);
+    }
+  }
+  return {};
+}
+
 export function executeNativeCommit(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transaction: any,
@@ -1333,29 +1584,53 @@ export function executeNativeCommit(
   const inlineBegin = !transaction.id && Boolean(transaction._useInRunner);
 
   const requestOptions = options?.requestOptions;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const baseReq: any = {
-    session: sessionName,
-    mutations,
-    requestOptions: Object.assign(
-      requestOptions || {},
-      transaction.requestOptions,
-    ),
-    precommitToken: transaction._latestPreCommitToken,
-  };
-  if (transaction.id) {
-    baseReq.transactionId = transaction.id;
-  } else if (!transaction._useInRunner) {
-    baseReq.singleUseTransaction = transaction._options;
+  const txTag =
+    requestOptions?.transactionTag || transaction.requestOptions?.transactionTag;
+  const hasStatsOrDelay = Boolean(
+    options &&
+      (('returnCommitStats' in options && options.returnCommitStats) ||
+        ('maxCommitDelay' in options && options.maxCommitDelay) ||
+        requestOptions?.priority),
+  );
+
+  let reqBytes: Uint8Array;
+  if (
+    mutations.length === 0 &&
+    !inlineBegin &&
+    transaction.id &&
+    !txTag &&
+    !hasStatsOrDelay
+  ) {
+    reqBytes = encodeSimpleCommitRequestFast(
+      sessionName,
+      transaction.id,
+      transaction._latestPreCommitToken,
+    );
+  } else {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const baseReq: any = {
+      session: sessionName,
+      mutations,
+      requestOptions: Object.assign(
+        requestOptions || {},
+        transaction.requestOptions,
+      ),
+      precommitToken: transaction._latestPreCommitToken,
+    };
+    if (transaction.id) {
+      baseReq.transactionId = transaction.id;
+    } else if (!transaction._useInRunner) {
+      baseReq.singleUseTransaction = transaction._options;
+    }
+    if (options && 'returnCommitStats' in options && options.returnCommitStats) {
+      baseReq.returnCommitStats = options.returnCommitStats;
+    }
+    if (options && 'maxCommitDelay' in options && options.maxCommitDelay) {
+      baseReq.maxCommitDelay = options.maxCommitDelay;
+    }
+    reqBytes =
+      protos.google.spanner.v1.CommitRequest.encode(baseReq).finish();
   }
-  if (options && 'returnCommitStats' in options && options.returnCommitStats) {
-    baseReq.returnCommitStats = options.returnCommitStats;
-  }
-  if (options && 'maxCommitDelay' in options && options.maxCommitDelay) {
-    baseReq.maxCommitDelay = options.maxCommitDelay;
-  }
-  const reqBytes =
-    protos.google.spanner.v1.CommitRequest.encode(baseReq).finish();
 
   let beginReqBytes: Uint8Array | null = null;
   if (inlineBegin) {
@@ -1419,7 +1694,7 @@ export function executeNativeCommit(
       }
       let resp: protos.google.spanner.v1.ICommitResponse = {};
       if (respPb && respPb.length > 0) {
-        resp = protos.google.spanner.v1.CommitResponse.decode(respPb);
+        resp = decodeCommitResponseFast(respPb);
       }
       callback(null, resp);
     },
@@ -1512,6 +1787,12 @@ export function executeNativeBatchUpdate(
   return true;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function hasNonEmptyQueryOptions(opts: any): boolean {
+  if (!opts) return false;
+  return Boolean(opts.optimizerVersion || opts.optimizerStatisticsPackage);
+}
+
 /**
  * Dispatches `Transaction#runUpdate` / `Dml#runUpdate` through the Go shared core via unary `ExecuteSql`.
  * Request encoding happens natively in Go; steady-state responses return rowCount directly.
@@ -1535,9 +1816,10 @@ export function executeNativeSqlDml(
   const database = transaction.session.parent;
 
   let dmlReqInput: Uint8Array | object;
-  const hasQueryOptions = Boolean(
-    query.queryOptions || transaction.queryOptions,
-  );
+  const hasQueryOptions =
+    hasNonEmptyQueryOptions(query.queryOptions) ||
+    hasNonEmptyQueryOptions(transaction.queryOptions) ||
+    Boolean(query.requestOptions?.priority);
   const isSingleUse = !transaction.id && !transaction._options?.readWrite;
 
   if (hasQueryOptions || isSingleUse) {
@@ -1623,11 +1905,10 @@ export function executeNativeSqlDml(
       }
       if (respPb && respPb.length > 0) {
         try {
-          const precommitToken =
-            protos.google.spanner.v1.MultiplexedSessionPrecommitToken.decode(
-              respPb,
-            );
-          transaction._updatePrecommitToken({precommitToken});
+          const precommitToken = decodePrecommitTokenFast(respPb);
+          if (precommitToken) {
+            transaction._updatePrecommitToken({precommitToken});
+          }
         } catch (e) {
           // ignore
         }
@@ -1694,7 +1975,7 @@ export function executeNativeTransactionRun(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transaction: any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  formattedRequest: any,
+  seqnoOrFormattedReq: any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   query: any,
   headersObj: Record<string, string>,
@@ -1714,15 +1995,103 @@ export function executeNativeTransactionRun(
 
   const sessionName: string = transaction.session.formattedName_!;
   const routingKey: string = transaction._affinityKey || sessionName;
-  if (formattedRequest.paramTypes) {
-    const normalizedParamTypes: Record<string, unknown> = {};
-    for (const k of Object.keys(formattedRequest.paramTypes)) {
-      normalizedParamTypes[k] = normalizeTypeProto(formattedRequest.paramTypes[k]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let formattedRequest: any;
+  if (typeof seqnoOrFormattedReq === 'number') {
+    const database = transaction.session.parent;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const txSelector: any = {};
+    if (transaction.id) {
+      txSelector.id = transaction.id;
+    } else if (transaction._options?.readWrite) {
+      txSelector.begin = transaction._options;
+      if (database && database.isMuxEnabledForRW_) {
+        transaction._setPreviousTransactionId(txSelector);
+      }
+    } else {
+      txSelector.singleUse = transaction._options;
     }
-    formattedRequest = Object.assign({}, formattedRequest, {
-      paramTypes: normalizedParamTypes,
-    });
+
+    formattedRequest = {
+      session: sessionName,
+      transaction: txSelector,
+      sql: typeof query === 'string' ? query : query.sql,
+      seqno: seqnoOrFormattedReq,
+    };
+
+    const reqTag = query?.requestOptions?.requestTag;
+    const txTag = transaction.requestOptions?.transactionTag;
+    if (reqTag || txTag || query?.requestOptions?.priority) {
+      formattedRequest.requestOptions = transaction.configureTagOptions(
+        typeof txSelector.singleUse !== 'undefined',
+        txTag ?? undefined,
+        query?.requestOptions,
+      );
+    }
+
+    if (
+      hasNonEmptyQueryOptions(query?.queryOptions) ||
+      hasNonEmptyQueryOptions(transaction.queryOptions)
+    ) {
+      formattedRequest.queryOptions = Object.assign(
+        {},
+        transaction.queryOptions,
+        query?.queryOptions,
+      );
+    }
+
+    const params = query?.params;
+    const types = query?.types;
+    if (params) {
+      const encodedParams: Record<string, unknown> = {};
+      let paramTypes: Record<string, unknown> | undefined;
+      const keys = Object.keys(params);
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        encodedParams[key] = codec.encode(params[key] as Value);
+        if (types && types[key]) {
+          if (!paramTypes) paramTypes = {};
+          const rawType = types[key];
+          if (typeof rawType === 'string') {
+            let cachedType = paramTypeCache.get(rawType);
+            if (!cachedType) {
+              const typeObj = codec.createTypeObject(
+                rawType as never,
+              ) as unknown as {code: string | number};
+              const codeNum =
+                typeof typeObj.code === 'string'
+                  ? (TYPE_CODE_STR_TO_NUM[typeObj.code] ?? 0)
+                  : typeObj.code;
+              cachedType = {code: codeNum};
+              paramTypeCache.set(rawType, cachedType);
+            }
+            paramTypes[key] = cachedType;
+          } else {
+            paramTypes[key] = normalizeTypeProto(rawType);
+          }
+        }
+      }
+      formattedRequest.params = {fields: encodedParams};
+      if (paramTypes) {
+        formattedRequest.paramTypes = paramTypes;
+      }
+    }
+  } else {
+    formattedRequest = seqnoOrFormattedReq;
+    if (formattedRequest.paramTypes) {
+      const normalizedParamTypes: Record<string, unknown> = {};
+      for (const k of Object.keys(formattedRequest.paramTypes)) {
+        normalizedParamTypes[k] = normalizeTypeProto(
+          formattedRequest.paramTypes[k],
+        );
+      }
+      formattedRequest = Object.assign({}, formattedRequest, {
+        paramTypes: normalizedParamTypes,
+      });
+    }
   }
+
   const requestBytes =
     protos.google.spanner.v1.ExecuteSqlRequest.encode(formattedRequest).finish();
   const metadata = headersToMetadataArray(sessionName, headersObj);
@@ -1763,48 +2132,77 @@ export function executeNativeTransactionRun(
       }
 
       if (metadataPb && metadataPb.length > 0) {
-        try {
-          const decoded =
-            protos.google.spanner.v1.ResultSetMetadata.decode(metadataPb);
-          if (decoded.transaction) {
-            transaction._updatePrecommitToken(decoded.transaction);
-            if (!transaction.id && decoded.transaction.id) {
-              transaction._update(decoded.transaction);
+        if (skipMetadata) {
+          const fastTx = decodeTxMetadataFast(metadataPb);
+          if (fastTx) {
+            if (fastTx.precommitToken) {
+              transaction._updatePrecommitToken({
+                precommitToken: fastTx.precommitToken,
+              });
             }
-          }
-          if (!createRow && decoded.rowType?.fields) {
-            const fields = (decoded.rowType.fields || []) as IField[];
-            const scalar = allColumnsScalar(fields);
-            if (!scalar) {
-              fellBack = true;
-              onFallback();
-              return;
+            if (!transaction.id && fastTx.id) {
+              transaction._update({id: fastTx.id});
             }
-            const schemaOnly = new protos.google.spanner.v1.ResultSetMetadata({
-              rowType: decoded.rowType,
-            });
-            const entry: SchemaCacheEntry = {
-              bytes: Buffer.from(
-                protos.google.spanner.v1.ResultSetMetadata.encode(
-                  schemaOnly,
-                ).finish(),
-              ),
-              createRow: makeRowFactory(fields),
-              scalar: true,
-              decoded: schemaOnly,
-            };
-            if (cacheKey) {
-              if (schemaCache.size >= SCHEMA_CACHE_MAX) {
-                schemaCache.clear();
+          } else {
+            try {
+              const decoded =
+                protos.google.spanner.v1.ResultSetMetadata.decode(metadataPb);
+              if (decoded.transaction) {
+                transaction._updatePrecommitToken(decoded.transaction);
+                if (!transaction.id && decoded.transaction.id) {
+                  transaction._update(decoded.transaction);
+                }
               }
-              schemaCache.set(cacheKey, entry);
+            } catch (e) {
+              // ignore
             }
-            createRow = entry.createRow;
           }
-          resultMetadata = decoded;
-        } catch (e) {
-          callback(e as Error);
-          return;
+        } else {
+          try {
+            const decoded =
+              protos.google.spanner.v1.ResultSetMetadata.decode(metadataPb);
+            if (decoded.transaction) {
+              transaction._updatePrecommitToken(decoded.transaction);
+              if (!transaction.id && decoded.transaction.id) {
+                transaction._update(decoded.transaction);
+              }
+            }
+            if (!createRow && decoded.rowType?.fields) {
+              const fields = (decoded.rowType.fields || []) as IField[];
+              const scalar = allColumnsScalar(fields);
+              if (!scalar) {
+                fellBack = true;
+                onFallback();
+                return;
+              }
+              const schemaOnly = new protos.google.spanner.v1.ResultSetMetadata(
+                {
+                  rowType: decoded.rowType,
+                },
+              );
+              const entry: SchemaCacheEntry = {
+                bytes: Buffer.from(
+                  protos.google.spanner.v1.ResultSetMetadata.encode(
+                    schemaOnly,
+                  ).finish(),
+                ),
+                createRow: makeRowFactory(fields),
+                scalar: true,
+                decoded: schemaOnly,
+              };
+              if (cacheKey) {
+                if (schemaCache.size >= SCHEMA_CACHE_MAX) {
+                  schemaCache.clear();
+                }
+                schemaCache.set(cacheKey, entry);
+              }
+              createRow = entry.createRow;
+            }
+            resultMetadata = decoded;
+          } catch (e) {
+            callback(e as Error);
+            return;
+          }
         }
       }
 
