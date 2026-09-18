@@ -6,6 +6,7 @@ packages:
   - 'core/promisify'
   - 'core/packages/*'
   - 'core/dev-packages/*'
+  - 'core/generator/gapic-generator-typescript'
   - 'packages/*'
   - 'handwritten/*'
   - 'containers/*'
