@@ -14,7 +14,7 @@
 
 import {status as Status} from '@grpc/grpc-js';
 import {Counter, Histogram} from '@opentelemetry/api';
-import {MetricsTracerFactory} from './metrics-tracer-factory';
+
 import {
   METRIC_LABEL_KEY_DATABASE,
   METRIC_LABEL_KEY_METHOD,
@@ -165,7 +165,7 @@ export class MetricsTracer {
     private _instance: string,
     private _projectId: string,
     private _methodName: string,
-    private _request: string,
+    private _request?: string,
   ) {
     this._clientAttributes[METRIC_LABEL_KEY_DATABASE] = _database;
     this._clientAttributes[METRIC_LABEL_KEY_METHOD] = _methodName;
@@ -222,8 +222,8 @@ export class MetricsTracer {
    * Increments the attempt count and creates a new MetricAttemptTracer.
    */
   public recordAttemptStart() {
-    if (!this.enabled) return;
-    this.currentOperation!.createNewAttempt();
+    if (!this.enabled || !this.currentOperation) return;
+    this.currentOperation.createNewAttempt();
   }
 
   /**
@@ -232,12 +232,13 @@ export class MetricsTracer {
    * @param status The status code of the attempt (default: Status.OK).
    */
   public recordAttemptCompletion(statusCode: Status = Status.OK) {
-    if (!this.enabled) return;
-    this.currentOperation!.currentAttempt!.status = Status[statusCode];
+    if (!this.enabled || !this.currentOperation?.currentAttempt) return;
+    this.currentOperation.currentAttempt.status =
+      Status[statusCode] ?? Status[Status.UNKNOWN];
     const attemptAttributes = this._createAttemptOtelAttributes();
     const endTime = performance.now();
     const attemptLatencyMilliseconds = this._getMillisecondTimeDifference(
-      this.currentOperation!.currentAttempt!.startTime,
+      this.currentOperation.currentAttempt.startTime,
       endTime,
     );
     this.instrumentAttemptLatency?.record(
@@ -268,7 +269,7 @@ export class MetricsTracer {
     const endTime = performance.now();
     const operationAttributes = this._createOperationOtelAttributes();
     const operationLatencyMilliseconds = this._getMillisecondTimeDifference(
-      this.currentOperation!.startTime,
+      this.currentOperation.startTime,
       endTime,
     );
 
@@ -277,9 +278,7 @@ export class MetricsTracer {
       operationLatencyMilliseconds,
       operationAttributes,
     );
-    MetricsTracerFactory.getInstance(this._projectId)!.clearCurrentTracer(
-      this._request,
-    );
+    this.currentOperation = null;
   }
 
   /**
@@ -319,7 +318,11 @@ export class MetricsTracer {
    */
   public recordGfeLatency(statusCode: Status) {
     if (!this.enabled) return;
-    if (!this.gfeLatency) {
+    if (
+      typeof this.gfeLatency !== 'number' ||
+      !Number.isFinite(this.gfeLatency) ||
+      this.gfeLatency < 0
+    ) {
       console.error(
         'ERROR: Attempted to record GFE metric with no latency value.',
       );
@@ -327,7 +330,8 @@ export class MetricsTracer {
     }
 
     const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    attributes[METRIC_LABEL_KEY_STATUS] =
+      Status[statusCode] ?? Status[Status.UNKNOWN];
 
     this._instrumentGfeLatency?.record(this.gfeLatency, attributes);
     this.gfeLatency = null; // Reset latency value
@@ -339,7 +343,8 @@ export class MetricsTracer {
   public recordGfeConnectivityErrorCount(statusCode: Status) {
     if (!this.enabled) return;
     const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    attributes[METRIC_LABEL_KEY_STATUS] =
+      Status[statusCode] ?? Status[Status.UNKNOWN];
     this._instrumentGfeConnectivityErrorCount?.add(1, attributes);
   }
 
@@ -349,7 +354,8 @@ export class MetricsTracer {
   public recordAfeConnectivityErrorCount(statusCode: Status) {
     if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
     const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    attributes[METRIC_LABEL_KEY_STATUS] =
+      Status[statusCode] ?? Status[Status.UNKNOWN];
     this._instrumentAfeConnectivityErrorCount?.add(1, attributes);
   }
 
@@ -359,7 +365,11 @@ export class MetricsTracer {
    */
   public recordAfeLatency(statusCode: Status) {
     if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
-    if (!this.afeLatency) {
+    if (
+      typeof this.afeLatency !== 'number' ||
+      !Number.isFinite(this.afeLatency) ||
+      this.afeLatency < 0
+    ) {
       console.error(
         'ERROR: Attempted to record AFE metric with no latency value.',
       );
@@ -367,7 +377,8 @@ export class MetricsTracer {
     }
 
     const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    attributes[METRIC_LABEL_KEY_STATUS] =
+      Status[statusCode] ?? Status[Status.UNKNOWN];
 
     this._instrumentAfeLatency?.record(this.afeLatency, attributes);
     this.afeLatency = null; // Reset latency value
@@ -381,7 +392,7 @@ export class MetricsTracer {
     if (!this.enabled) return {};
     const attributes = {...this._clientAttributes};
     attributes[METRIC_LABEL_KEY_STATUS] =
-      this.currentOperation!.currentAttempt?.status ?? Status[Status.UNKNOWN];
+      this.currentOperation?.currentAttempt?.status ?? Status[Status.UNKNOWN];
     return attributes;
   }
 
@@ -394,9 +405,12 @@ export class MetricsTracer {
   private _createAttemptOtelAttributes() {
     if (!this.enabled) return {};
     const attributes = {...this._clientAttributes};
-    if (this.currentOperation?.currentAttempt === null) return attributes;
+    if (!this.currentOperation?.currentAttempt) {
+      attributes[METRIC_LABEL_KEY_STATUS] = Status[Status.UNKNOWN];
+      return attributes;
+    }
     attributes[METRIC_LABEL_KEY_STATUS] =
-      this.currentOperation!.currentAttempt.status;
+      this.currentOperation.currentAttempt.status;
 
     return attributes;
   }

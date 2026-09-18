@@ -622,7 +622,6 @@ class Spanner extends GrpcService {
     };
 
     const res = performTeardown();
-
     if (callback) {
       // process.nextTick prevents Unhandled Promise Rejections if callback throws
       res
@@ -1782,6 +1781,7 @@ class Spanner extends GrpcService {
         });
         this.projectIdReplaced_ = true;
       }
+      config.headers = extend(true, {}, config.headers);
       config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
         config.headers[CLOUD_RESOURCE_HEADER],
         projectId!,
@@ -1797,7 +1797,10 @@ class Spanner extends GrpcService {
         attributeXGoogSpannerRequestIdToActiveSpan(config);
       }
       const interceptors: any[] = [];
-      if (this._metricsEnabled) {
+      if (
+        this._metricsEnabled &&
+        (config.client === 'SpannerClient' || config.metricsTracer)
+      ) {
         interceptors.push(MetricInterceptor);
       }
       const requestFn = gaxClient[config.method].bind(
@@ -1809,6 +1812,7 @@ class Spanner extends GrpcService {
             headers: config.headers,
             options: {
               interceptors: interceptors,
+              metricsTracer: config.metricsTracer,
             },
           },
         }),
@@ -1884,6 +1888,26 @@ class Spanner extends GrpcService {
     });
   }
 
+  private _getResourceName(reqOpts?: {
+    database?: string | object;
+    session?: string | object;
+    name?: string;
+  }): string {
+    if (!reqOpts) {
+      return '';
+    }
+    if (typeof reqOpts.database === 'string') {
+      return reqOpts.database;
+    }
+    if (typeof reqOpts.session === 'string') {
+      return reqOpts.session;
+    }
+    if (typeof reqOpts.name === 'string') {
+      return reqOpts.name;
+    }
+    return '';
+  }
+
   /**
    * Funnel all API requests through this method to be sure we have a project
    * ID.
@@ -1907,22 +1931,48 @@ class Spanner extends GrpcService {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
           config.method,
-          config.reqOpts.database ?? config.reqOpts.session,
-          config.headers['x-goog-spanner-request-id'],
+          this._getResourceName(config.reqOpts),
+          config.headers?.['x-goog-spanner-request-id'],
         ) ?? null;
     }
     metricsTracer?.recordOperationStart();
+    config.metricsTracer = metricsTracer ?? undefined;
     if (typeof callback === 'function') {
       this.prepareGapicRequest_(config, (err, requestFn) => {
         if (err) {
           callback(err);
           metricsTracer?.recordOperationCompletion();
         } else {
-          const wrappedCallback = (...args) => {
+          let callbackInvoked = false;
+          let callbackThrew = false;
+          let callbackError: unknown;
+          const wrappedCallback = (...args: unknown[]) => {
+            if (callbackInvoked) {
+              return;
+            }
+            callbackInvoked = true;
             metricsTracer?.recordOperationCompletion();
-            callback(...args);
+            try {
+              callback(...args);
+            } catch (error) {
+              callbackThrew = true;
+              callbackError = error;
+              throw error;
+            }
           };
-          requestFn(wrappedCallback);
+          try {
+            requestFn(wrappedCallback);
+          } catch (error) {
+            if (callbackThrew) {
+              throw callbackError;
+            }
+            if (callbackInvoked) {
+              return;
+            }
+            callbackInvoked = true;
+            metricsTracer?.recordOperationCompletion();
+            callback(error);
+          }
         }
       });
     } else {
@@ -1932,21 +1982,27 @@ class Spanner extends GrpcService {
             metricsTracer?.recordOperationCompletion();
             reject(err);
           } else {
-            const result = requestFn();
-            if (result && typeof result.then === 'function') {
-              result
-                .then(val => {
-                  metricsTracer?.recordOperationCompletion();
-                  resolve(val);
-                  return val;
-                })
-                .catch(error => {
-                  metricsTracer?.recordOperationCompletion();
-                  reject(error);
-                });
-            } else {
+            try {
+              const result = requestFn();
+              if (result && typeof result.then === 'function') {
+                result
+                  .then(val => {
+                    metricsTracer?.recordOperationCompletion();
+                    resolve(val);
+                    return val;
+                  })
+                  .catch(error => {
+                    metricsTracer?.recordOperationCompletion();
+                    reject(error);
+                    return null;
+                  });
+              } else {
+                metricsTracer?.recordOperationCompletion();
+                resolve(result);
+              }
+            } catch (error) {
               metricsTracer?.recordOperationCompletion();
-              resolve(result);
+              reject(error);
             }
           }
         });
@@ -1977,30 +2033,76 @@ class Spanner extends GrpcService {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
           config.method,
-          config.reqOpts.session ?? config.reqOpts.database,
-          config.headers['x-goog-spanner-request-id'],
+          this._getResourceName(config.reqOpts),
+          config.headers?.['x-goog-spanner-request-id'],
         ) ?? null;
     }
     metricsTracer?.recordOperationStart();
+    config.metricsTracer = metricsTracer ?? undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let callStream: any = null;
+    let cleanedUp = false;
+    const cleanup = () => {
+      if (cleanedUp) {
+        return;
+      }
+      cleanedUp = true;
+      if (
+        callStream &&
+        typeof callStream.destroy === 'function' &&
+        !callStream.destroyed
+      ) {
+        callStream.destroy();
+      }
+      metricsTracer?.recordOperationCompletion();
+    };
+
     const stream = streamEvents(through.obj());
+    const origDestroy = stream._destroy;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    stream._destroy = function (err: any, cb: any) {
+      cleanup();
+      if (typeof origDestroy === 'function') {
+        origDestroy.call(stream, err, cb);
+      } else if (typeof cb === 'function') {
+        cb(err);
+      }
+    };
     stream.once('reading', () => {
       this.prepareGapicRequest_(config, (err, requestFn) => {
+        if (stream.destroyed) {
+          cleanup();
+          return;
+        }
         if (err) {
           stream.destroy(err);
           return;
         }
-        requestFn()
-          .on('error', err => {
-            stream.destroy(err);
-          })
-          .pipe(stream);
+        try {
+          callStream = requestFn();
+          if (stream.destroyed) {
+            cleanup();
+            return;
+          }
+          if (callStream) {
+            callStream
+              .on('error', err => {
+                stream.destroy(err);
+              })
+              .pipe(stream);
+          } else {
+            stream.destroy(new Error('Failed to initialize request stream.'));
+          }
+        } catch (error) {
+          stream.destroy(error as Error);
+        }
       });
     });
     stream.on('finish', () => {
       stream.destroy();
     });
     stream.on('close', () => {
-      metricsTracer?.recordOperationCompletion();
+      cleanup();
     });
     return stream;
   }
