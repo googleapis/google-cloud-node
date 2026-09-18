@@ -107,7 +107,11 @@ system)
     retval=$?
     ;;
 units)
-    ${TEST_CMD} test
+    if [[ "${TEST_CMD}" == *"bun"* ]] && grep -q '"test:bun"' package.json; then
+        ${TEST_CMD} test:bun
+    else
+        ${TEST_CMD} test
+    fi
     retval=$?
     ;;
 *)
