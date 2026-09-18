@@ -2217,6 +2217,7 @@ export class Snapshot extends EventEmitter {
    * @returns {object}
    */
   static encodeParams(request: ExecuteSqlRequest) {
+    const isUuidUntyped = codec.isUuidUntypedEnv();
     const typeMap = request.types || {};
 
     const params: p.IStruct = {fields: request.params?.fields || {}};
@@ -2230,7 +2231,7 @@ export class Snapshot extends EventEmitter {
         const value = request.params![param];
 
         if (!typeMap[param]) {
-          typeMap[param] = codec.getType(value);
+          typeMap[param] = codec.getType(value, isUuidUntyped);
         }
         fields[param] = codec.encode(value);
       });
@@ -2241,7 +2242,7 @@ export class Snapshot extends EventEmitter {
     if (!isEmpty(typeMap)) {
       Object.keys(typeMap).forEach(param => {
         const type = typeMap[param];
-        if (process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] === 'true') {
+        if (isUuidUntyped) {
           const typeObject = codec.createTypeObject(type);
           if (
             (type.child &&
