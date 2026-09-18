@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {grpc} from 'google-gax';
+import {InterceptingListener, Metadata, StatusObject} from '@grpc/grpc-js';
 
 /**
  * Interceptor for recording metrics on gRPC calls.
@@ -32,13 +33,18 @@ export const MetricInterceptor = (options, nextCall) => {
       // The tracer is carried directly on the call options.
       const metricsTracer = options?.metricsTracer ?? null;
       metricsTracer?.recordAttemptStart();
-      const newListener = {
-        onReceiveMetadata: function (metadata, next) {
+
+      const interceptingListener: InterceptingListener = {
+        onReceiveMetadata: function (metadata: Metadata) {
           // Record GFE/AFE Metrics
           // GFE/AFE latency if available,
           // or else increase the GFE/AFE connectivity error count
           if (metricsTracer) {
-            const serverTimingHeader = metadata.getMap()['server-timing'];
+            const serverTimingEntries = metadata.get('server-timing');
+            const serverTimingHeader =
+              serverTimingEntries.length > 0
+                ? String(serverTimingEntries[0])
+                : undefined;
             const gfeTiming =
               metricsTracer?.extractGfeLatency(serverTimingHeader);
             metricsTracer.gfeLatency = gfeTiming ?? null;
@@ -47,12 +53,12 @@ export const MetricInterceptor = (options, nextCall) => {
             metricsTracer.afeLatency = afeTiming ?? null;
           }
 
-          next(metadata);
+          listener.onReceiveMetadata(metadata);
         },
-        onReceiveMessage: function (message, next) {
-          next(message);
+        onReceiveMessage: function (message: unknown) {
+          listener.onReceiveMessage(message);
         },
-        onReceiveStatus: function (status, next) {
+        onReceiveStatus: function (status: StatusObject) {
           if (metricsTracer) {
             // Record attempt metric completion before notifying downstream listener
             metricsTracer.recordAttemptCompletion(status?.code);
@@ -76,21 +82,11 @@ export const MetricInterceptor = (options, nextCall) => {
             }
           }
 
-          next(status);
+          listener.onReceiveStatus(status);
         },
       };
-      next(metadata, newListener);
-    },
-    sendMessage: function (message, next) {
-      next(message);
-    },
 
-    halfClose: function (next) {
-      next();
-    },
-
-    cancel: function (next) {
-      next();
+      next(metadata, interceptingListener);
     },
   });
 };

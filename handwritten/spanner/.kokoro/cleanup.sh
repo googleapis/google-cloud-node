@@ -24,6 +24,7 @@ export GCLOUD_PROJECT=long-door-651
 
 cd $(dirname $0)/..
 
-npm install
+npm install -g pnpm@9
+pnpm install
 
-npm run cleanup
+pnpm run cleanup
