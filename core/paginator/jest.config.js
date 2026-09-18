@@ -13,9 +13,12 @@
 // limitations under the License.
 
 module.exports = {
-  testMatch: ['<rootDir>/test/**/*.ts'],
+  testMatch: ['<rootDir>/test/**/*.test.ts'],
   transform: {
     '^.+\\.tsx?$': ['ts-jest', {tsconfig: 'tsconfig.json'}],
+  },
+  moduleNameMapper: {
+    '^bun:test$': '<rootDir>/test/bun-test-shim.ts',
   },
   clearMocks: true,
 };
