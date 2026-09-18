@@ -40,6 +40,9 @@ tools:
   protoc:
     version: "33.2"
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
+    sha256_by_platform:
+      osx-aarch_64: 5be1427127788c9f7dd7d606c3e69843dd3587327dea993917ffcb77e7234b44
+      osx-x86_64: dba51cfcc85076d56e7de01a647865c5a7f995c3dce427d5215b53e50b7be43f
 default:
   keep:
     - librarian.js
