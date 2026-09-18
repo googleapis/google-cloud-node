@@ -1475,6 +1475,135 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
   });
 
+  describe('chat', () => {
+    it('invokes chat without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ChatRequest',
+        ['property'],
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatResponse(),
+      );
+      client.innerApiCalls.chat = stubSimpleCall(expectedResponse);
+      const [response] = await client.chat(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.chat as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.chat as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes chat without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ChatRequest',
+        ['property'],
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatResponse(),
+      );
+      client.innerApiCalls.chat = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.chat(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IChatResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.chat as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.chat as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes chat with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ChatRequest',
+        ['property'],
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.chat = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.chat(request), expectedError);
+      const actualRequest = (client.innerApiCalls.chat as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.chat as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes chat with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ChatRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ChatRequest',
+        ['property'],
+      );
+      request.property = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.chat(request), expectedError);
+    });
+  });
+
   describe('runReport', () => {
     it('invokes runReport without error', async () => {
       const client =

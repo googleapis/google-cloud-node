@@ -41,7 +41,7 @@ import {
   IProtoMessageParams,
   IProtoEnumParams,
 } from './codec';
-import {context, propagation} from '@opentelemetry/api';
+import {context, propagation, ROOT_CONTEXT} from '@opentelemetry/api';
 import {Backup} from './backup';
 import {Database} from './database';
 import {
@@ -155,6 +155,8 @@ export type GetInstanceConfigOperationsCallback = PagedCallback<
  * DirectedReadOptions won't be set for readWrite transactions"
  * @property {ObservabilityOptions} [observabilityOptions] Sets the observability options to be used for OpenTelemetry tracing
  * @property {boolean} [disableBuiltInMetrics=True] If set to true, built-in metrics will be disabled.
+ * @property {number} ['grpc.enable_channelz'=0] Whether to enable gRPC Channelz service tracking.
+ * Defaults to 0 (disabled) to eliminate per-RPC tracking and allocation overhead. Set to 1 to enable.
  */
 export interface SpannerOptions extends GrpcClientOptions {
   apiEndpoint?: string;
@@ -182,6 +184,12 @@ export interface SpannerOptions extends GrpcClientOptions {
    */
   universe_domain?: string;
   universeDomain?: string;
+  /**
+   * Whether to enable gRPC Channelz service tracking.
+   * Defaults to `0` (disabled) to eliminate per-RPC allocation and tracking overhead.
+   * Set to `1` if live connection introspection via gRPC Channelz (e.g. grpcdebug) is required.
+   */
+  'grpc.enable_channelz'?: number;
 }
 export interface RequestConfig {
   client: string;
@@ -423,6 +431,8 @@ class Spanner extends GrpcService {
         scopes,
         // Add grpc keep alive setting
         'grpc.keepalive_time_ms': 120000,
+        // Disable Channelz by default to reduce per-RPC tracking and allocation overhead
+        'grpc.enable_channelz': 0,
         // Enable grpc-gcp support
         'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
         'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
@@ -1675,35 +1685,46 @@ class Spanner extends GrpcService {
       !metricsExplicitlyDisabled && !this._isInSecureCredentials;
     MetricsTracerFactory.enabled = this._metricsEnabled;
     if (this._metricsEnabled) {
-      try {
-        this.auth.getProjectId((err, projectId) => {
-          if (err || !projectId) {
-            console.error(
-              'Unable to get Project Id for client side metrics, will skip exporting client' +
-                ' side metrics' +
-                err,
-            );
-            return;
-          }
-
-          this.projectId_ = projectId;
-          const factory = MetricsTracerFactory.getInstance(projectId);
-          const periodicReader = new PeriodicExportingMetricReader({
-            exporter: new CloudMonitoringMetricsExporter(
-              {auth: this.auth},
-              projectId,
-            ),
-            exportIntervalMillis: 60000,
+      const initializeMetrics = (projectId: string) => {
+        this.projectId_ = projectId;
+        const factory = MetricsTracerFactory.getInstance(projectId);
+        if (factory && !factory.hasMetricReaders()) {
+          context.with(ROOT_CONTEXT, () => {
+            const periodicReader = new PeriodicExportingMetricReader({
+              exporter: new CloudMonitoringMetricsExporter(
+                {auth: this.auth},
+                projectId,
+              ),
+              exportIntervalMillis: 60000,
+            });
+            factory.getMeterProvider([periodicReader]);
           });
-          // Retrieve the MeterProvider to trigger construction
-          factory!.getMeterProvider([periodicReader]);
-        });
-      } catch (err) {
-        console.error(
-          'Unable to configure client side metrics, will skip exporting client' +
-            ' side metrics' +
-            err,
-        );
+        }
+      };
+
+      if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
+        initializeMetrics(this.projectId_);
+      } else {
+        try {
+          this.auth.getProjectId((err, projectId) => {
+            if (err || !projectId) {
+              console.error(
+                'Unable to get Project Id for client side metrics, will skip exporting client' +
+                  ' side metrics' +
+                  err,
+              );
+              return;
+            }
+
+            initializeMetrics(projectId);
+          });
+        } catch (err) {
+          console.error(
+            'Unable to configure client side metrics, will skip exporting client' +
+              ' side metrics' +
+              err,
+          );
+        }
       }
     }
   }
@@ -1726,10 +1747,9 @@ class Spanner extends GrpcService {
       const clientName = config.client;
       try {
         if (!this.clients_.has(clientName)) {
-          const v1Clients: {[key: string]: any} = v1;
           this.clients_.set(
             clientName,
-            new v1Clients[clientName](this.options),
+            new (v1 as Record<string, any>)[clientName](this.options),
           );
         }
       } catch (err) {
@@ -1881,7 +1901,8 @@ class Spanner extends GrpcService {
     if (
       this._metricsEnabled &&
       config.client === 'SpannerClient' &&
-      this.projectId_
+      this.projectId_ &&
+      this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
@@ -1950,7 +1971,8 @@ class Spanner extends GrpcService {
     if (
       this._metricsEnabled &&
       config.client === 'SpannerClient' &&
-      this.projectId_
+      this.projectId_ &&
+      this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
