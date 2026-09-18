@@ -47,10 +47,7 @@ const {
   NodeTracerProvider,
   TraceIdRatioBasedSampler,
 } = require('@opentelemetry/sdk-trace-node');
-const {
-  BatchSpanProcessor,
-  TraceIdRatioBasedSampler,
-} = require('@opentelemetry/sdk-trace-base');
+const {BatchSpanProcessor} = require('@opentelemetry/sdk-trace-base');
 const {
   TraceExporter,
 } = require('@google-cloud/opentelemetry-cloud-trace-exporter');

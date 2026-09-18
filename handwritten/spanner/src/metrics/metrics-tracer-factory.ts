@@ -83,6 +83,9 @@ export class MetricsTracerFactory {
         .catch(error => {
           console.warn('Unable to detect location.', error);
           return this._location;
+        })
+        .finally(() => {
+          this._locationPromise = null;
         });
     }
 
@@ -160,6 +163,7 @@ export class MetricsTracerFactory {
         [Constants.MONITORED_RES_LABEL_KEY_INSTANCE]: 'unknown',
         [Constants.MONITORED_RES_LABEL_KEY_INSTANCE_CONFIG]: 'unknown',
       });
+      void resource.waitForAsyncAttributes?.();
       this._meterProvider = new MeterProvider({
         resource: resource,
         readers: readers,

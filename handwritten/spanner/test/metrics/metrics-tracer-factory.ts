@@ -552,10 +552,19 @@ describe('MetricsTracerFactory exported location', () => {
     resolveLocation('us-central1');
     await locationPromise;
     await Promise.resolve();
+    await Promise.resolve();
     assert.strictEqual(factory.location, 'us-central1');
+    assert.strictEqual(factory['_locationPromise'], null);
 
     // Collect directly via MetricReader.collect() (which does NOT invoke waitForAsyncAttributes)
     const {resourceMetrics} = await reader.collect();
+    assert.strictEqual(resourceMetrics.resource.asyncAttributesPending, false);
+    assert.strictEqual(
+      resourceMetrics.resource.attributes[
+        Constants.MONITORED_RES_LABEL_KEY_LOCATION
+      ],
+      'us-central1',
+    );
     const timeSeries = transformResourceMetricToTimeSeriesArray(
       resourceMetrics,
       'test-project',
