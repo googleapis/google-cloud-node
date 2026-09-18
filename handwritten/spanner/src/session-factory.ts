@@ -59,6 +59,13 @@ export interface SessionFactoryInterface {
   getSession(callback: GetSessionCallback): void;
 
   /**
+   * When called returns a cached multiplexed session synchronously if available.
+   *
+   * @name SessionFactoryInterface#getSessionSync
+   */
+  getSessionSync(): Session | null;
+
+  /**
    * When called returns a session for paritioned dml.
    *
    * @name SessionFactoryInterface#getSessionForPartitionedOps
@@ -169,6 +176,18 @@ export class SessionFactory
   }
 
   /**
+   * Synchronously returns a cached multiplexed session if multiplexed sessions
+   * are enabled and one is available, otherwise null.
+   *
+   * @returns {Session|null} The cached multiplexed session or null.
+   */
+  getSessionSync(): Session | null {
+    return this.isMultiplexed
+      ? (this.multiplexedSession_?.getSessionSync?.() ?? null)
+      : null;
+  }
+
+  /**
    * Retrieves a session, either a regular session or a multiplexed session, based on the environment variable configuration.
    *
    * If the environment variable `GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS` is set to `false`, the method will attempt to
@@ -176,15 +195,12 @@ export class SessionFactory
    *
    * @param {GetSessionCallback} callback The callback function.
    */
-
   getSession(callback: GetSessionCallback): void {
     const sessionHandler = this.isMultiplexed
       ? this.multiplexedSession_
       : this.pool_;
 
-    sessionHandler!.getSession((err, session, transaction) =>
-      callback(err, session, transaction),
-    );
+    sessionHandler!.getSession(callback);
   }
 
   /**
