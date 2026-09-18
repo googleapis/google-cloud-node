@@ -848,23 +848,27 @@ describe('Transfer Manager', () => {
     });
 
     it('should call abortUpload when a failure occurs after an uploadID is established', async () => {
+      const fakeId = '123';
+      const fakePartsMap = new Map<number, string>([[1, 'abc']]);
       const expectedErr = new MultiPartUploadError(
         'Hello World',
-        '',
-        new Map<number, string>()
+        fakeId,
+        new Map<number, string>(fakePartsMap)
       );
-      const fakeId = '123';
 
       mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
         fakeHelper = sandbox.createStubInstance(FakeXMLHelper);
         fakeHelper.uploadId = uploadId || '';
         fakeHelper.partsMap = partsMap || new Map<number, string>();
-        fakeHelper.initiateUpload.resolves();
-        fakeHelper.uploadPart.callsFake(() => {
+        fakeHelper.initiateUpload.callsFake(() => {
           fakeHelper.uploadId = fakeId;
-          return Promise.reject(expectedErr);
+          return Promise.resolve();
         });
-        fakeHelper.completeUpload.resolves();
+        fakeHelper.uploadPart.callsFake(() => {
+          fakeHelper.partsMap = fakePartsMap;
+          return Promise.resolve();
+        });
+        fakeHelper.completeUpload.rejects(new Error('Hello World'));
         fakeHelper.abortUpload.callsFake(() => {
           assert.strictEqual(fakeHelper.uploadId, fakeId);
           return Promise.resolve();
@@ -872,9 +876,49 @@ describe('Transfer Manager', () => {
         return fakeHelper;
       };
 
-      assert.doesNotThrow(() =>
-        transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction)
+      await assert.rejects(
+        transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction),
+        (err: unknown) => {
+          assert(err instanceof MultiPartUploadError);
+          assert.deepStrictEqual(err, expectedErr);
+          return true;
+        }
       );
+      assert.strictEqual(fakeHelper.abortUpload.calledOnce, true);
+    });
+
+    it('should reject with the abort error when abortUpload also fails', async () => {
+      const fakeId = '123';
+      const abortErr = new Error('abort failed');
+      const expectedErr = new MultiPartUploadError(
+        abortErr.message,
+        fakeId,
+        new Map<number, string>()
+      );
+
+      mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
+        fakeHelper = sandbox.createStubInstance(FakeXMLHelper);
+        fakeHelper.uploadId = uploadId || '';
+        fakeHelper.partsMap = partsMap || new Map<number, string>();
+        fakeHelper.initiateUpload.callsFake(() => {
+          fakeHelper.uploadId = fakeId;
+          return Promise.resolve();
+        });
+        fakeHelper.uploadPart.resolves();
+        fakeHelper.completeUpload.rejects(new Error('Hello World'));
+        fakeHelper.abortUpload.rejects(abortErr);
+        return fakeHelper;
+      };
+
+      await assert.rejects(
+        transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction),
+        (err: unknown) => {
+          assert(err instanceof MultiPartUploadError);
+          assert.deepStrictEqual(err, expectedErr);
+          return true;
+        }
+      );
+      assert.strictEqual(fakeHelper.abortUpload.calledOnce, true);
     });
 
     it('should set the appropriate `GCCL_GCS_CMD_KEY`', async () => {
