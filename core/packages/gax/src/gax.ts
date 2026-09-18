@@ -19,6 +19,7 @@
  */
 
 import type {Message} from 'protobufjs';
+import type {ResumableUploadContext} from './resumableUpload';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
@@ -172,6 +173,11 @@ export interface CallOptions {
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
   enableTelemetryTracing?: boolean;
+  /**
+   * Internal context used by resumable upload methods. Populated by
+   * GAPIC-generated client libraries; do not set manually.
+   */
+  resumableUpload?: ResumableUploadContext;
 }
 
 export class CallSettings {
@@ -189,6 +195,7 @@ export class CallSettings {
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
   enableTelemetryTracing?: boolean;
+  resumableUpload?: ResumableUploadContext;
 
   /**
    * @param {Object} settings - An object containing parameters of this settings.
@@ -223,6 +230,8 @@ export class CallSettings {
     this.apiName = settings.apiName ?? undefined;
     this.retryRequestOptions = settings.retryRequestOptions;
     this.enableTelemetryTracing = settings.enableTelemetryTracing;
+    this.resumableUpload =
+      'resumableUpload' in settings ? settings.resumableUpload : undefined;
   }
 
   /**
@@ -247,6 +256,7 @@ export class CallSettings {
     let apiName = this.apiName;
     let retryRequestOptions = this.retryRequestOptions;
     let enableTelemetryTracing = this.enableTelemetryTracing;
+    let resumableUpload = this.resumableUpload;
 
     // If the user provides a timeout to the method, that timeout value will be used
     // to override the backoff settings.
@@ -305,6 +315,9 @@ export class CallSettings {
     if ('enableTelemetryTracing' in options) {
       enableTelemetryTracing = options.enableTelemetryTracing;
     }
+    if ('resumableUpload' in options) {
+      resumableUpload = options.resumableUpload;
+    }
 
     return new CallSettings({
       timeout,
@@ -318,6 +331,7 @@ export class CallSettings {
       apiName,
       retryRequestOptions,
       enableTelemetryTracing,
+      resumableUpload,
     });
   }
 }
