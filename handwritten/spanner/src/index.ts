@@ -16,7 +16,7 @@
 
 import {GrpcService, GrpcServiceConfig} from './common-grpc/service';
 import {PreciseDate} from '@google-cloud/precise-date';
-import {replaceProjectIdToken} from './helper';
+import {hasProjectIdToken, replaceProjectIdToken} from './helper';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
@@ -339,6 +339,9 @@ class Spanner extends GrpcService {
   private _metricsEnabled = false;
   private static _isAFEServerTimingEnabled: boolean | undefined;
   readonly _nthClientId: number;
+  private _pendingProjectIdCallbacks?: Array<
+    (error: Error | null, projectId?: string) => void
+  >;
 
   /**
    * Placeholder used to auto populate a column with the commit timestamp.
@@ -1738,54 +1741,138 @@ class Spanner extends GrpcService {
    * @param {object} config Request config
    * @param {function} callback Callback function
    */
-  prepareGapicRequest_(config, callback) {
-    this.auth.getProjectId((err, projectId) => {
-      if (err) {
-        callback(err);
+  prepareGapicRequest_(
+    config: RequestConfig,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    callback: (err: Error | null, requestFn?: any) => void,
+  ): void {
+    if (this.projectId && this.projectIdReplaced_) {
+      this._prepareGapicRequestWithProjectId(config, this.projectId, callback);
+      return;
+    }
+    if (this._pendingProjectIdCallbacks) {
+      this._pendingProjectIdCallbacks.push((error, projectId) => {
+        if (error) {
+          callback(error);
+          return;
+        }
+        this._prepareGapicRequestWithProjectId(config, projectId!, callback);
+      });
+      return;
+    }
+    this._pendingProjectIdCallbacks = [];
+    this.auth.getProjectId((error, projectId) => {
+      const pendingCallbacks = this._pendingProjectIdCallbacks || [];
+      this._pendingProjectIdCallbacks = undefined;
+      if (error) {
+        try {
+          callback(error);
+        } finally {
+          for (const pendingCallback of pendingCallbacks) {
+            try {
+              pendingCallback(error);
+            } catch {
+              // Prevent one failing user callback from stranding subsequent pending callers.
+            }
+          }
+        }
         return;
       }
-      const clientName = config.client;
       try {
-        if (!this.clients_.has(clientName)) {
-          this.clients_.set(
-            clientName,
-            new (v1 as Record<string, any>)[clientName](this.options),
-          );
+        this._prepareGapicRequestWithProjectId(config, projectId!, callback);
+      } finally {
+        for (const pendingCallback of pendingCallbacks) {
+          try {
+            pendingCallback(null, projectId!);
+          } catch {
+            // Prevent one failing user callback from stranding subsequent pending callers.
+          }
         }
-      } catch (err) {
-        callback(err, null);
+      }
+    });
+  }
+
+  private _prepareGapicRequestWithProjectId(
+    config: RequestConfig,
+    projectId: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    callback: (err: Error | null, requestFn?: any) => void,
+  ): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let wrappedRequestFn: any;
+    try {
+      const clientName = config.client;
+      if (!this.clients_.has(clientName)) {
+        this.clients_.set(
+          clientName,
+          new (v1 as Record<string, any>)[clientName](this.options),
+        );
       }
       const gaxClient = this.clients_.get(clientName)!;
-      let reqOpts = extend(true, {}, config.reqOpts);
-      reqOpts = replaceProjectIdToken(reqOpts, projectId!);
-      // It would have been preferable to replace the projectId already in the
-      // constructor of Spanner, but that is not possible as auth.getProjectId
-      // is an async method. This is therefore the first place where we have
-      // access to the value that should be used instead of the placeholder.
+      let reqOpts = config.reqOpts;
+      if (!this.projectIdReplaced_ || hasProjectIdToken(reqOpts)) {
+        reqOpts = extend(true, {}, config.reqOpts);
+        reqOpts = replaceProjectIdToken(reqOpts, projectId);
+      }
       if (!this.projectIdReplaced_) {
-        this.projectId = replaceProjectIdToken(this.projectId, projectId!);
+        this.projectId = replaceProjectIdToken(this.projectId, projectId);
         this.projectFormattedName_ = replaceProjectIdToken(
           this.projectFormattedName_,
-          projectId!,
+          projectId,
         );
+        if (
+          this.commonHeaders_[CLOUD_RESOURCE_HEADER]?.includes('{{projectId}}')
+        ) {
+          this.commonHeaders_[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+            this.commonHeaders_[CLOUD_RESOURCE_HEADER],
+            projectId,
+          );
+        }
         this.instances_.forEach(instance => {
           instance.formattedName_ = replaceProjectIdToken(
             instance.formattedName_,
-            projectId!,
+            projectId,
           );
+          if (
+            instance.commonHeaders_?.[CLOUD_RESOURCE_HEADER]?.includes(
+              '{{projectId}}',
+            )
+          ) {
+            instance.commonHeaders_[CLOUD_RESOURCE_HEADER] =
+              replaceProjectIdToken(
+                instance.commonHeaders_[CLOUD_RESOURCE_HEADER],
+                projectId,
+              );
+          }
           instance.databases_.forEach(database => {
             database.formattedName_ = replaceProjectIdToken(
               database.formattedName_,
-              projectId!,
+              projectId,
             );
+            if (
+              database.commonHeaders_?.[CLOUD_RESOURCE_HEADER]?.includes(
+                '{{projectId}}',
+              )
+            ) {
+              database.commonHeaders_[CLOUD_RESOURCE_HEADER] =
+                replaceProjectIdToken(
+                  database.commonHeaders_[CLOUD_RESOURCE_HEADER],
+                  projectId,
+                );
+            }
           });
         });
         this.projectIdReplaced_ = true;
       }
-      config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
-        config.headers[CLOUD_RESOURCE_HEADER],
-        projectId!,
-      );
+      if (!config.headers) {
+        config.headers = {};
+      }
+      if (config.headers[CLOUD_RESOURCE_HEADER]?.includes('{{projectId}}')) {
+        config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+          config.headers[CLOUD_RESOURCE_HEADER],
+          projectId,
+        );
+      }
       if (isTracingEnabled(this._observabilityOptions)) {
         // Do context propagation
         propagation.inject(context.active(), config.headers, {
@@ -1796,22 +1883,39 @@ class Spanner extends GrpcService {
         // Attach the x-goog-spanner-request-id to the currently active span.
         attributeXGoogSpannerRequestIdToActiveSpan(config);
       }
-      const interceptors: any[] = [];
-      if (this._metricsEnabled) {
-        interceptors.push(MetricInterceptor);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const customInterceptors: any[] =
+        config.gaxOpts?.otherArgs?.options?.interceptors ?? [];
+      const interceptors = this._metricsEnabled
+        ? [...customInterceptors, MetricInterceptor]
+        : customInterceptors;
+      const headers = Object.assign(
+        {},
+        config.gaxOpts?.otherArgs?.headers,
+        config.headers,
+      );
+      const options = Object.assign({}, config.gaxOpts?.otherArgs?.options, {
+        interceptors,
+      });
+      // Deep clone caller-owned properties to prevent downstream mutations
+      // (e.g. gax mutating `retry.backoffSettings`), while attaching our
+      // freshly merged otherArgs without redundantly deep-cloning them.
+      let gaxOpts: CallOptions;
+      if (config.gaxOpts) {
+        const {otherArgs: callerOtherArgs, ...restGaxOpts} = config.gaxOpts;
+        gaxOpts = extend(true, {}, restGaxOpts);
+        gaxOpts.otherArgs = Object.assign({}, callerOtherArgs, {
+          headers,
+          options,
+        });
+      } else {
+        gaxOpts = {otherArgs: {headers, options}};
       }
+
       const requestFn = gaxClient[config.method].bind(
         gaxClient,
         reqOpts,
-        // Add headers to `gaxOpts`
-        extend(true, {}, config.gaxOpts, {
-          otherArgs: {
-            headers: config.headers,
-            options: {
-              interceptors: interceptors,
-            },
-          },
-        }),
+        gaxOpts,
       );
 
       // Extract a lightweight config reference containing only headers so error
@@ -1824,7 +1928,7 @@ class Spanner extends GrpcService {
       //
       // Because reqOpts and gaxOpts are already pre-bound to requestFn, wrappedRequestFn
       // receives at most one argument: an optional callback.
-      const wrappedRequestFn = (callback?: Function) => {
+      wrappedRequestFn = (callback?: Function) => {
         // Callback mode: invoke requestFn with an intercepted callback to enrich
         // the error parameter before delegating to the caller's callback.
         if (typeof callback === 'function') {
@@ -1879,9 +1983,12 @@ class Spanner extends GrpcService {
 
         return res;
       };
+    } catch (error) {
+      callback(error as Error, null);
+      return;
+    }
 
-      callback(null, wrappedRequestFn);
-    });
+    callback(null, wrappedRequestFn);
   }
 
   /**
@@ -1908,7 +2015,7 @@ class Spanner extends GrpcService {
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
           config.method,
           config.reqOpts.database ?? config.reqOpts.session,
-          config.headers['x-goog-spanner-request-id'],
+          config.headers?.['x-goog-spanner-request-id'],
         ) ?? null;
     }
     metricsTracer?.recordOperationStart();
@@ -1978,7 +2085,7 @@ class Spanner extends GrpcService {
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
           config.method,
           config.reqOpts.session ?? config.reqOpts.database,
-          config.headers['x-goog-spanner-request-id'],
+          config.headers?.['x-goog-spanner-request-id'],
         ) ?? null;
     }
     metricsTracer?.recordOperationStart();
