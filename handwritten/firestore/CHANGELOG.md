@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.1.0...firestore-v9.2.0) (2026-09-16)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+
+### Bug Fixes
+
+* **firestore:** Allow uninitialized client references in pipeline sources ([#9318](https://github.com/googleapis/google-cloud-node/issues/9318)) ([435bcae](https://github.com/googleapis/google-cloud-node/commit/435bcae6aa20c9fd50da0c8b67fe443c946e44cc))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.0.1...firestore-v9.1.0) (2026-09-09)
 
 
