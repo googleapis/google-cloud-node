@@ -1475,6 +1475,8 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      extra_protoc_parameters:
+        - enable_telemetry_tracing=true
       package_name: '@google-cloud/secret-manager'
   - name: google-cloud-securesourcemanager
     version: 0.14.0
