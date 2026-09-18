@@ -34,14 +34,12 @@ jobs:
       with:
         node-version: 24.x
 
-    - name: Install dependencies
+    - name: Install and build generator
+      working-directory: core/generator/gapic-generator-typescript
       run: |
         corepack enable pnpm
-        pnpm install --frozen-lockfile --ignore-scripts
-
-    - name: Run compile
-      working-directory: core/generator/gapic-generator-typescript
-      run: pnpm run compile
+        pnpm install --frozen-lockfile --config.auto-install-peers=true
+        pnpm run compile
 
     - name: Run test
       working-directory: core/generator/gapic-generator-typescript
