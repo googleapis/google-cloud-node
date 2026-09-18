@@ -352,6 +352,12 @@ export class Snapshot extends EventEmitter {
     | null;
   id?: Uint8Array | string;
   protected _affinityKey?: string;
+  /**
+   * True once a request has actually gone out over the JS gRPC channel and
+   * bound it to `_affinityKey`. Requests served by the Go shared core never
+   * touch that channel, so `end()` uses this to skip the unbind teardown.
+   */
+  protected _affinityBound = false;
   protected _bindGaxOpts?: CallOptions;
   protected _unbindGaxOpts?: CallOptions;
   multiplexedSessionPreviousTransactionId?: Uint8Array | string;
@@ -459,6 +465,9 @@ export class Snapshot extends EventEmitter {
           );
         }
         config = Object.assign({}, config, {gaxOpts});
+        // This request binds the channel to our affinity key, so end() must
+        // release it.
+        this._affinityBound = true;
         return session.request(config, callback);
       };
 
@@ -474,6 +483,7 @@ export class Snapshot extends EventEmitter {
           );
         }
         config = Object.assign({}, config, {gaxOpts});
+        this._affinityBound = true;
         return session.requestStream(config);
       };
     } else {
@@ -1165,7 +1175,12 @@ export class Snapshot extends EventEmitter {
     this._releaseWaitingRequests(new Error('Transaction has ended.'));
     process.nextTick(() => this.emit('end'));
 
-    if (this._affinityKey) {
+    // Only tear down channel affinity if a request actually established it.
+    // On the Go shared core path every RPC is routed natively (the core keys on
+    // `_affinityKey` itself), so nothing is ever bound to the JS gRPC channel
+    // and this block would otherwise allocate a promise chain -- and possibly
+    // force lazy construction of the GAPIC stub -- on every transaction.
+    if (this._affinityKey && this._affinityBound) {
       const database = this.session?.parent as Database;
       const spanner = database?.parent?.parent as Spanner;
       const client = spanner?.clients_?.get('SpannerClient') as any;

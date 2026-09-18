@@ -44,6 +44,28 @@ const DIGITS_REGEX = /^\d+$/;
 
 const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+const CHAR_CODE_ZERO = 48; // '0'
+
+/**
+ * Parses the fixed-width decimal run `[start, end)` of `str` without
+ * allocating a substring.
+ *
+ * @returns the parsed value, or -1 if any character is not a digit. Callers
+ *     treat -1 as "not a fast-path timestamp" and fall back to the general
+ *     `PreciseDate` string constructor.
+ */
+function readDigits(str: string, start: number, end: number): number {
+  let value = 0;
+  for (let i = start; i < end; i++) {
+    const digit = str.charCodeAt(i) - CHAR_CODE_ZERO;
+    if (digit < 0 || digit > 9) {
+      return -1;
+    }
+    value = value * 10 + digit;
+  }
+  return value;
+}
+
 function isValidDate(year: number, month: number, date: number): boolean {
   if (month < 0 || month > 11) {
     return false;
@@ -1228,21 +1250,20 @@ function parsePreciseDate(isoString: string): PreciseDate {
     isoString[13] === ':' &&
     isoString[16] === ':'
   ) {
-    const year = Number(isoString.substring(0, 4));
-    const month = Number(isoString.substring(5, 7)) - 1;
-    const day = Number(isoString.substring(8, 10));
-    const hours = Number(isoString.substring(11, 13));
-    const minutes = Number(isoString.substring(14, 16));
-    const seconds = Number(isoString.substring(17, 19));
+    const year = readDigits(isoString, 0, 4);
+    const month = readDigits(isoString, 5, 7) - 1;
+    const day = readDigits(isoString, 8, 10);
+    const hours = readDigits(isoString, 11, 13);
+    const minutes = readDigits(isoString, 14, 16);
+    const seconds = readDigits(isoString, 17, 19);
 
     if (
-      Number.isNaN(year) ||
       year < 1970 ||
-      Number.isNaN(month) ||
-      Number.isNaN(day) ||
-      Number.isNaN(hours) ||
-      Number.isNaN(minutes) ||
-      Number.isNaN(seconds)
+      month < 0 ||
+      day < 0 ||
+      hours < 0 ||
+      minutes < 0 ||
+      seconds < 0
     ) {
       return new PreciseDate(isoString);
     }
@@ -1256,17 +1277,32 @@ function parsePreciseDate(isoString: string): PreciseDate {
       if (dotIndex !== 19) {
         return new PreciseDate(isoString);
       }
-      const subSecondsStr = isoString.substring(
-        dotIndex + 1,
-        isoString.length - 1,
-      );
-      if (!DIGITS_REGEX.test(subSecondsStr)) {
+      // Accumulate the fractional seconds directly as a 9-digit (nanosecond)
+      // integer. Digits beyond the 9th are validated but discarded, matching
+      // the previous padEnd(9)/substring behaviour.
+      const subStart = dotIndex + 1;
+      const subEnd = isoString.length - 1;
+      let frac = 0;
+      let taken = 0;
+      for (let i = subStart; i < subEnd; i++) {
+        const digit = isoString.charCodeAt(i) - CHAR_CODE_ZERO;
+        if (digit < 0 || digit > 9) {
+          return new PreciseDate(isoString);
+        }
+        if (taken < 9) {
+          frac = frac * 10 + digit;
+          taken++;
+        }
+      }
+      if (taken === 0) {
         return new PreciseDate(isoString);
       }
-      const padded = subSecondsStr.padEnd(9, '0');
-      milliseconds = Number(padded.substring(0, 3));
-      microseconds = Number(padded.substring(3, 6));
-      nanoseconds = Number(padded.substring(6, 9));
+      for (let i = taken; i < 9; i++) {
+        frac *= 10;
+      }
+      milliseconds = Math.floor(frac / 1e6);
+      microseconds = Math.floor(frac / 1e3) % 1000;
+      nanoseconds = frac % 1000;
     } else if (isoString.length !== 20) {
       return new PreciseDate(isoString);
     }

@@ -195,27 +195,60 @@ function loadAddon(): NativeAddon | null {
 let coreHandle: CoreHandle | null | undefined;
 let coreHandleEndpoint: string | undefined;
 
+/**
+ * Memoised endpoint per long-lived owner (a Database or Spanner instance).
+ *
+ * `getCoreHandle()` runs on every RPC, i.e. three times per read/write
+ * transaction. Re-walking the `_getSpanner()` chain and rebuilding the endpoint
+ * string each time showed up as ~1.2% of client CPU in the select-update
+ * profile, so the resolved value is cached against the owning object. Sessions
+ * and transactions are short-lived, so the cache is deliberately keyed on their
+ * stable parent rather than on the target itself.
+ */
+const endpointByOwner = new WeakMap<object, string>();
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function resolveCustomEndpoint(target?: any): string {
+  // Read every call: tests and embedders may point the client at an emulator
+  // part-way through a process, and this lookup is cheap relative to the walk.
   if (process.env.SPANNER_EMULATOR_HOST) {
     return process.env.SPANNER_EMULATOR_HOST;
   }
-  const spanner = target?._getSpanner
-    ? target._getSpanner()
-    : target?.session?.parent?._getSpanner
-      ? target.session.parent._getSpanner()
-      : target?.parent?._getSpanner
-        ? target.parent._getSpanner()
-        : target;
-  const opts = spanner?.options;
-  if (opts && opts.apiEndpoint) {
-    const ep = String(opts.apiEndpoint);
-    if (opts.port && !ep.includes(':')) {
-      return `${ep}:${opts.port}`;
-    }
-    return ep;
+
+  // Resolve to the longest-lived object we can safely memoise against.
+  let owner: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  if (target?._getSpanner) {
+    owner = target;
+  } else if (target?.session?.parent?._getSpanner) {
+    owner = target.session.parent;
+  } else if (target?.parent?._getSpanner) {
+    owner = target.parent;
+  } else {
+    owner = target;
   }
-  return '';
+
+  const memoisable = Boolean(owner) && typeof owner === 'object';
+  if (memoisable) {
+    const hit = endpointByOwner.get(owner);
+    if (hit !== undefined) {
+      return hit;
+    }
+  }
+
+  const spanner = owner?._getSpanner ? owner._getSpanner() : owner;
+  const opts = spanner?.options;
+  let endpoint = '';
+  if (opts && opts.apiEndpoint) {
+    endpoint = String(opts.apiEndpoint);
+    if (opts.port && !endpoint.includes(':')) {
+      endpoint = `${endpoint}:${opts.port}`;
+    }
+  }
+
+  if (memoisable) {
+    endpointByOwner.set(owner, endpoint);
+  }
+  return endpoint;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
