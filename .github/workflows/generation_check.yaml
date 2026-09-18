@@ -33,6 +33,7 @@ jobs:
           filters: |
             librarian:
               - 'librarian.yaml'
+              - '.github/workflows/generation_check.yaml'
       # Version of librarian is pulled from librarian.yaml,
       # action is pinned to commit SHA to satisfy blanket security policy.
       - uses: googleapis/librarian@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
@@ -42,11 +43,9 @@ jobs:
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 22
-      - name: Setup pnpm
+      - name: Setup pnpm 7
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
-        with:
-          version: ^7.0.0
+        run: npm install -g pnpm@7
       - name: Install tools
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         run: librarian install

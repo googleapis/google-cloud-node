@@ -28,32 +28,36 @@ export const GCE_LINUX_BIOS_PATHS = {
 const GCE_MAC_ADDRESS_REGEX = /^42:01/;
 
 /**
- * Determines if the process is running on a Google Cloud Serverless environment (Cloud Run or Cloud Functions instance).
+ * Environment variables used to detect Google Cloud Serverless environments
+ * (Cloud Run Services, Cloud Run Jobs, Cloud Run Worker Pools, and Cloud Functions).
+ */
+const SERVERLESS_ENV_VARS = [
+  'CLOUD_RUN_JOB',
+  'FUNCTION_NAME',
+  'K_SERVICE',
+  'CLOUD_RUN_WORKER_POOL',
+] as const;
+
+/**
+ * Determines if the process is running on a Google Cloud Serverless environment
+ * (Cloud Run Services/Jobs/Worker Pools or Cloud Functions).
  *
- * Uses the:
- * - {@link https://cloud.google.com/run/docs/container-contract#env-vars Cloud Run environment variables}.
- * - {@link https://cloud.google.com/functions/docs/env-var Cloud Functions environment variables}.
+ * Environment variables checked:
+ * - `CLOUD_RUN_JOB` is used for Cloud Run Jobs:
+ *   {@link https://cloud.google.com/run/docs/container-contract#env-vars Cloud Run environment variables}.
+ * - `FUNCTION_NAME` is used in older Cloud Functions environments:
+ *   {@link https://cloud.google.com/functions/docs/env-var Python 3.7 and Go 1.11}.
+ * - `K_SERVICE` is used in Cloud Run and newer Cloud Functions environments:
+ *   {@link https://cloud.google.com/run/docs/container-contract#env-vars Cloud Run environment variables},
+ *   {@link https://cloud.google.com/functions/docs/env-var Cloud Functions newer runtimes}.
+ * - `CLOUD_RUN_WORKER_POOL` is used in Cloud Run Worker Pools:
+ *   {@link https://cloud.google.com/run/docs/container-contract#env-vars Cloud Run environment variables},
+ *   {@link https://cloud.google.com/run/docs/deploy-worker-pools Deploy Worker Pools to Cloud Run}.
  *
  * @returns {boolean} `true` if the process is running on GCP serverless, `false` otherwise.
  */
 export function isGoogleCloudServerless(): boolean {
-  /**
-   * `CLOUD_RUN_JOB` is used for Cloud Run Jobs
-   * - See {@link https://cloud.google.com/run/docs/container-contract#env-vars Cloud Run environment variables}.
-   *
-   * `FUNCTION_NAME` is used in older Cloud Functions environments:
-   * - See {@link https://cloud.google.com/functions/docs/env-var Python 3.7 and Go 1.11}.
-   *
-   * `K_SERVICE` is used in Cloud Run and newer Cloud Functions environments:
-   * - See {@link https://cloud.google.com/run/docs/container-contract#env-vars Cloud Run environment variables}.
-   * - See {@link https://cloud.google.com/functions/docs/env-var Cloud Functions newer runtimes}.
-   */
-  const isGFEnvironment =
-    process.env.CLOUD_RUN_JOB ||
-    process.env.FUNCTION_NAME ||
-    process.env.K_SERVICE;
-
-  return !!isGFEnvironment;
+  return SERVERLESS_ENV_VARS.some(key => Boolean(process.env[key]));
 }
 
 /**
