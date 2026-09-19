@@ -785,6 +785,7 @@ describe('unit test', () => {
     it('should match gcp residency results by default', () => {
       // Set as GCP
       residency.setGCENetworkInterface(true);
+      residency.setGCEPlatform('linux');
       gcp.setGCPResidency();
       assert.equal(gcp.gcpResidencyCache, true);
 

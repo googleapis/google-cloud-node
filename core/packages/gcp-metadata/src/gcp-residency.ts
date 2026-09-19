@@ -85,9 +85,15 @@ export function isGoogleComputeEngineLinux(): boolean {
  * Determines if the process is running on a Google Compute Engine instance with a known
  * MAC address.
  *
+ * Always `false` on macOS: Compute Engine does not run macOS, and macOS assigns
+ * random, locally administered MAC addresses (which can begin with `42:01`) to
+ * interfaces such as `awdl0` and `llw0`.
+ *
  * @returns {boolean} `true` if the process is running on GCE (as determined by MAC address), `false` otherwise.
  */
 export function isGoogleComputeEngineMACAddress(): boolean {
+  if (platform() === 'darwin') return false;
+
   const interfaces = networkInterfaces();
 
   for (const item of Object.values(interfaces)) {
