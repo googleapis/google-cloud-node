@@ -16,23 +16,10 @@
  */
 
 import assert from 'assert';
-import {describe, it, afterEach} from 'mocha';
-import * as http from 'http';
-import * as https from 'https';
+import {describe, it, afterEach, beforeEach} from 'mocha';
 import * as sinon from 'sinon';
-import {getAgent, pool} from '../src/agents';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-let HttpProxyAgent = require('http-proxy-agent');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-let HttpsProxyAgent = require('https-proxy-agent');
-
-if (HttpProxyAgent.HttpProxyAgent) {
-  HttpProxyAgent = HttpProxyAgent.HttpProxyAgent;
-}
-if (HttpsProxyAgent.HttpsProxyAgent) {
-  HttpsProxyAgent = HttpsProxyAgent.HttpsProxyAgent;
-}
+import {Agent, ProxyAgent} from 'undici';
+import {getDispatcher, pool} from '../src/agents';
 
 describe('agents', () => {
   const httpUri = 'http://example.com';
@@ -44,105 +31,72 @@ describe('agents', () => {
     pool.clear();
   });
 
-  describe('getAgent', () => {
+  function pooledProxyAgent(): ProxyAgent | undefined {
+    return [...pool.values()].find(
+      dispatcher => dispatcher instanceof ProxyAgent
+    ) as ProxyAgent | undefined;
+  }
+
+  describe('getDispatcher', () => {
     const defaultOptions = {uri: httpUri};
 
-    it('should return undefined by default', () => {
-      const agent = getAgent(httpUri, defaultOptions);
-      assert.strictEqual(agent, undefined);
+    it('should use the global dispatcher by default', () => {
+      const dispatcher = getDispatcher(httpUri, defaultOptions);
+      assert.ok(dispatcher);
+      assert.strictEqual(pool.size, 0);
+    });
+
+    it('should return the same dispatcher for repeated default requests', () => {
+      const dispatcher1 = getDispatcher(httpUri, defaultOptions);
+      const dispatcher2 = getDispatcher(httpsUri, defaultOptions);
+      assert.strictEqual(dispatcher1, dispatcher2);
     });
 
     describe('proxy', () => {
-      const envVars = [
-        'http_proxy',
-        'https_proxy',
-        'HTTP_PROXY',
-        'HTTPS_PROXY',
-      ];
+      const envVars = ['http_proxy', 'https_proxy', 'HTTP_PROXY', 'HTTPS_PROXY'];
 
       const noProxyEnvVars = ['no_proxy', 'NO_PROXY'];
+      const proxy = 'https://hello.there:8080';
 
-      describe('http', () => {
-        const uri = httpUri;
-        const proxy = 'http://hello.there:8080';
-        const proxyExpected = {
-          hostname: 'hello.there',
-          port: '8080',
-          protocol: 'http:',
-        };
-
-        it('should respect the proxy option', () => {
-          const options = Object.assign({proxy}, defaultOptions);
-          const agent = getAgent(uri, options);
-          assert(agent instanceof HttpProxyAgent);
-
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const {proxy: proxyActual}: any = agent!;
-          assert.strictEqual(proxyActual.protocol, proxyExpected.protocol);
-          assert.strictEqual(proxyActual.hostname, proxyExpected.hostname);
-          assert.strictEqual(proxyActual.port, proxyExpected.port);
-        });
-
-        envVars.forEach(envVar => {
-          it(`should respect the ${envVar} env var`, () => {
-            process.env[envVar] = proxy;
-            const agent = getAgent(uri, defaultOptions);
-            assert(agent instanceof HttpProxyAgent);
-            delete process.env[envVar];
-          });
-        });
+      it('should respect the proxy option', () => {
+        const options = Object.assign({proxy}, defaultOptions);
+        const dispatcher = getDispatcher(httpsUri, options);
+        assert.ok(dispatcher);
+        assert.ok(pooledProxyAgent());
       });
 
-      describe('https', () => {
-        const uri = httpsUri;
-        const proxy = 'https://hello.there:8080';
-        const proxyExpected = {
-          hostname: 'hello.there',
-          port: '8080',
-          protocol: 'https:',
-        };
+      it('should cache the proxy dispatcher', () => {
+        const options = Object.assign({proxy}, defaultOptions);
+        const dispatcher1 = getDispatcher(httpsUri, options);
+        const dispatcher2 = getDispatcher(httpsUri, options);
+        assert.strictEqual(dispatcher1, dispatcher2);
+        assert.strictEqual(pool.size, 1);
+      });
 
-        it('should respect the proxy option', () => {
-          const options = Object.assign({proxy}, defaultOptions);
-          const agent = getAgent(uri, options);
-          assert(agent instanceof HttpsProxyAgent);
-
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const {proxy: proxyActual}: any = agent!;
-          assert.strictEqual(proxyActual.protocol, proxyExpected.protocol);
-          assert.strictEqual(proxyActual.hostname, proxyExpected.hostname);
-          assert.strictEqual(proxyActual.port, proxyExpected.port);
-        });
-
-        envVars.forEach(envVar => {
-          it(`should respect the ${envVar} env var`, () => {
-            process.env[envVar] = proxy;
-            const agent = getAgent(uri, defaultOptions);
-            assert(agent instanceof HttpsProxyAgent);
-            delete process.env[envVar];
-          });
+      envVars.forEach(envVar => {
+        it(`should respect the ${envVar} env var`, () => {
+          sandbox.stub(process, 'env').value({[envVar]: proxy});
+          getDispatcher(httpsUri, defaultOptions);
+          assert.ok(pooledProxyAgent());
         });
       });
 
       describe('no_proxy', () => {
-        const uri = httpsUri;
-        const proxy = 'https://hello.there:8080';
-
         beforeEach(() => {
           sandbox.stub(process, 'env').value({});
         });
 
-        noProxyEnvVars.forEach(noProxEnvVar => {
-          it(`should respect the proxy option, even if is in ${noProxEnvVar} env var`, () => {
-            process.env[noProxEnvVar] = new URL(uri).hostname;
+        noProxyEnvVars.forEach(noProxyEnvVar => {
+          it(`should respect the proxy option, even if in ${noProxyEnvVar} env var`, () => {
+            process.env[noProxyEnvVar] = new URL(httpsUri).hostname;
 
             const options = Object.assign({proxy}, defaultOptions);
-            const agent = getAgent(uri, options);
-            assert(agent instanceof HttpsProxyAgent);
+            getDispatcher(httpsUri, options);
+            assert.ok(pooledProxyAgent());
           });
         });
 
-        noProxyEnvVars.forEach(noProxEnvVar => {
+        noProxyEnvVars.forEach(noProxyEnvVar => {
           envVars.forEach(envVar => {
             const root = 'example.com';
             const subDomain = 'abc.' + root;
@@ -158,13 +112,12 @@ describe('agents', () => {
             ];
 
             for (const {name, value} of cases) {
-              it(`should respect the ${noProxEnvVar} env var > ${envVar}': ${name}`, () => {
+              it(`should respect the ${noProxyEnvVar} env var > ${envVar}': ${name}`, () => {
                 process.env[envVar] = proxy;
 
-                process.env[noProxEnvVar] = value;
-                const agent = getAgent(uri.toString(), defaultOptions);
-                assert(!(agent instanceof HttpProxyAgent));
-                assert(!(agent instanceof HttpsProxyAgent));
+                process.env[noProxyEnvVar] = value;
+                getDispatcher(uri.toString(), defaultOptions);
+                assert.strictEqual(pooledProxyAgent(), undefined);
               });
             }
           });
@@ -173,102 +126,70 @@ describe('agents', () => {
     });
 
     describe('forever', () => {
-      describe('http', () => {
-        const uri = httpUri;
+      it('should use the global dispatcher, which keeps connections alive', () => {
         const options = Object.assign({forever: true}, defaultOptions);
-
-        it('should return an http Agent', () => {
-          const agent = getAgent(uri, options)!;
-          assert(agent instanceof http.Agent);
-        });
-
-        it('should cache the agent', () => {
-          const agent1 = getAgent(uri, options);
-          const agent2 = getAgent(uri, options);
-          assert.strictEqual(agent1, agent2);
-        });
-      });
-
-      describe('https', () => {
-        const uri = httpsUri;
-        const options = Object.assign({forever: true}, defaultOptions);
-
-        it('should return an http Agent', () => {
-          const agent = getAgent(uri, options)!;
-          assert(agent instanceof https.Agent);
-        });
-
-        it('should cache the agent', () => {
-          const agent1 = getAgent(uri, options);
-          const agent2 = getAgent(uri, options);
-          assert.strictEqual(agent1, agent2);
-        });
+        const dispatcher = getDispatcher(httpUri, options);
+        assert.ok(dispatcher);
+        assert.strictEqual(pool.size, 0);
       });
     });
 
     describe('pool', () => {
-      describe('http', () => {
-        const uri = httpUri;
-
-        it('should pass AgentOptions from pool config when providing agent', () => {
-          const options = Object.assign(
-            {
-              forever: true,
-              pool: {
-                maxSockets: 1000,
-              },
+      it('should create a dedicated dispatcher for a socket limit', () => {
+        const options = Object.assign(
+          {
+            forever: true,
+            pool: {
+              maxSockets: 1000,
             },
-            defaultOptions,
-          );
-          const agent = getAgent(uri, options);
-          assert.strictEqual(agent!.maxSockets, 1000);
-        });
-
-        it('should not set global AgentOptions from only pool config', () => {
-          const options = Object.assign(
-            {
-              pool: {
-                maxSockets: 1000,
-              },
-            },
-            defaultOptions,
-          );
-          const agent = getAgent(uri, options);
-          assert.strictEqual(agent, undefined);
-          assert.notStrictEqual(http.globalAgent.maxSockets, 1000);
-        });
+          },
+          defaultOptions
+        );
+        getDispatcher(httpUri, options);
+        assert.ok([...pool.values()].some(d => d instanceof Agent));
       });
 
-      describe('https', () => {
-        const uri = httpsUri;
-
-        it('should pass AgentOptions from pool config when providing agent', () => {
-          const options = Object.assign(
-            {
-              forever: true,
-              pool: {
-                maxSockets: 1000,
-              },
+      it('should cache the dispatcher for a socket limit', () => {
+        const options = Object.assign(
+          {
+            forever: true,
+            pool: {
+              maxSockets: 1000,
             },
-            defaultOptions,
-          );
-          const agent = getAgent(uri, options);
-          assert.strictEqual(agent!.maxSockets, 1000);
-        });
+          },
+          defaultOptions
+        );
+        const dispatcher1 = getDispatcher(httpUri, options);
+        const dispatcher2 = getDispatcher(httpUri, options);
+        assert.strictEqual(dispatcher1, dispatcher2);
+        assert.strictEqual(pool.size, 1);
+      });
 
-        it('should not set global AgentOptions from only pool config', () => {
-          const options = Object.assign(
-            {
-              pool: {
-                maxSockets: 1000,
-              },
+      it('should ignore pool config without forever or proxy', () => {
+        const options = Object.assign(
+          {
+            pool: {
+              maxSockets: 1000,
             },
-            defaultOptions,
-          );
-          const agent = getAgent(uri, options);
-          assert.strictEqual(agent, undefined);
-          assert.notStrictEqual(https.globalAgent.maxSockets, 1000);
-        });
+          },
+          defaultOptions
+        );
+        getDispatcher(httpUri, options);
+        assert.strictEqual(pool.size, 0);
+      });
+
+      it('should ignore an unlimited socket limit', () => {
+        const options = Object.assign(
+          {
+            forever: true,
+            pool: {
+              maxSockets: Infinity,
+            },
+          },
+          defaultOptions
+        );
+        getDispatcher(httpUri, options);
+        assert.strictEqual(pool.size, 0);
       });
     });
   });
