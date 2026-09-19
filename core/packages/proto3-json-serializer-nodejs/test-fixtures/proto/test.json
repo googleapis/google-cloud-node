@@ -91,6 +91,11 @@
               "keyType": "string",
               "type": "Enum",
               "id": 6
+            },
+            "bytesMapField": {
+              "keyType": "string",
+              "type": "bytes",
+              "id": 7
             }
           }
         },
@@ -128,6 +133,11 @@
               "rule": "repeated",
               "type": "Enum",
               "id": 7
+            },
+            "repeatedBytes": {
+              "rule": "repeated",
+              "type": "bytes",
+              "id": 8
             }
           }
         },
