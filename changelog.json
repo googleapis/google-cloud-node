@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "07ae774a8e52185a3598c878513377e7a019f127",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9293"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "c651c783-f539-45bd-845e-e8b7cee255c9",
+      "createTime": "2026-09-19T00:34:58.774Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ecd5bfd0e8ad8d2cf3b9fe003f7e35f2bbd592f5",
           "message": "Update cloud-spanner to minimum Node version of 22",
           "issues": [
@@ -95131,5 +95148,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-18T13:12:38.821Z"
+  "updateTime": "2026-09-19T00:34:58.774Z"
 }
