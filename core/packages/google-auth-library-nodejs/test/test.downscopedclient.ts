@@ -17,7 +17,7 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as nock from 'nock';
 import * as sinon from 'sinon';
 
-import {GaxiosError, GaxiosPromise} from 'gaxios';
+import {Gaxios, GaxiosError, GaxiosPromise} from 'gaxios';
 import {Credentials} from '../src/auth/credentials';
 import {StsSuccessfulResponse} from '../src/auth/stscredentials';
 import {
@@ -115,6 +115,21 @@ describe('DownscopedClient', () => {
     if (clock) {
       clock.restore();
     }
+  });
+
+  it('should pass the configured transporter to STS credentials', () => {
+    const transporter = new Gaxios();
+    const downscopedClient = new DownscopedClient({
+      authClient: client,
+      credentialAccessBoundary: testClientAccessBoundary,
+      transporter,
+    });
+
+    assert.strictEqual(
+      (downscopedClient as unknown as {stsCredential: {transporter: Gaxios}})
+        .stsCredential.transporter,
+      transporter,
+    );
   });
 
   describe('Constructor', () => {
