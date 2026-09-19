@@ -706,15 +706,6 @@ export class Snapshot extends EventEmitter {
       reqOpts.requestOptions = this.requestOptions;
     }
 
-    const headers = this.commonHeaders_;
-    if (
-      this._getSpanner().routeToLeaderEnabled &&
-      (this._options.readWrite !== undefined ||
-        this._options.partitionedDml !== undefined)
-    ) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     return startTrace(
       'Snapshot.begin',
       {
@@ -730,7 +721,10 @@ export class Snapshot extends EventEmitter {
             method: 'beginTransaction',
             reqOpts,
             gaxOpts,
-            headers: injectRequestIDIntoHeaders(headers, this.session),
+            headers: injectRequestIDIntoHeaders(
+              this.commonHeaders_,
+              this.session,
+            ),
           },
           (
             err: null | grpc.ServiceError,
@@ -983,15 +977,6 @@ export class Snapshot extends EventEmitter {
       },
     );
 
-    const headers = this.commonHeaders_;
-    if (
-      this._getSpanner().routeToLeaderEnabled &&
-      (this._options.readWrite !== undefined ||
-        this._options.partitionedDml !== undefined)
-    ) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     const traceConfig: traceConfig = {
       ...this._traceConfig,
       tableName: table,
@@ -1030,7 +1015,7 @@ export class Snapshot extends EventEmitter {
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
           gaxOpts: gaxOptions,
           headers: injectRequestIDIntoHeaders(
-            headers,
+            this.commonHeaders_,
             this.session,
             nthRequest,
             attempt,
@@ -1534,15 +1519,6 @@ export class Snapshot extends EventEmitter {
       });
     };
 
-    const headers = Object.assign({}, this.commonHeaders_);
-    if (
-      this._getSpanner().routeToLeaderEnabled &&
-      (this._options.readWrite !== undefined ||
-        this._options.partitionedDml !== undefined)
-    ) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     const traceConfig = {
       transactionTag: this.requestOptions?.transactionTag,
       requestTag: requestOptions?.requestTag,
@@ -1632,7 +1608,7 @@ export class Snapshot extends EventEmitter {
         }
 
         const injectedHeaders = injectRequestIDIntoHeaders(
-          headers,
+          this.commonHeaders_,
           this.session,
           nthRequest,
           attempt,
@@ -1992,15 +1968,6 @@ export class Snapshot extends EventEmitter {
       });
     };
 
-    const headers = this.commonHeaders_;
-    if (
-      this._getSpanner().routeToLeaderEnabled &&
-      (this._options.readWrite !== undefined ||
-        this._options.partitionedDml !== undefined)
-    ) {
-      addLeaderAwareRoutingHeader(headers);
-    }
-
     const traceConfig: traceConfig = {
       transactionTag: this.requestOptions?.transactionTag,
       requestTag: requestOptions?.requestTag,
@@ -2045,7 +2012,7 @@ export class Snapshot extends EventEmitter {
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
           gaxOpts: gaxOptions,
           headers: injectRequestIDIntoHeaders(
-            headers,
+            this.commonHeaders_,
             this.session,
             nthRequest,
             attempt,
@@ -2363,7 +2330,7 @@ export class Snapshot extends EventEmitter {
    * @returns {Spanner}
    */
   protected _getSpanner(): Spanner {
-    return this.session.parent.parent.parent as Spanner;
+    return (this.session?.parent as Database)?.parent?.parent as Spanner;
   }
 }
 
@@ -2567,6 +2534,9 @@ export class Transaction extends Dml {
     this._options.isolationLevel = IsolationLevel.ISOLATION_LEVEL_UNSPECIFIED;
     this.requestOptions = requestOptions;
     this._retryCommit = false;
+    if (this._getSpanner()?.routeToLeaderEnabled) {
+      addLeaderAwareRoutingHeader(this.commonHeaders_);
+    }
   }
 
   /**
@@ -2721,9 +2691,6 @@ export class Transaction extends Dml {
       nextNthRequest(database),
       1,
     );
-    if (this._getSpanner().routeToLeaderEnabled) {
-      addLeaderAwareRoutingHeader(headers);
-    }
 
     const traceConfig: traceConfig = {
       ...this._traceConfig,
@@ -2960,11 +2927,6 @@ export class Transaction extends Dml {
           this.requestOptions,
         );
 
-        const headers = this.commonHeaders_;
-        if (this._getSpanner().routeToLeaderEnabled) {
-          addLeaderAwareRoutingHeader(headers);
-        }
-
         span.addEvent('Starting Commit');
 
         const database = this.session.parent as Database;
@@ -2983,7 +2945,7 @@ export class Transaction extends Dml {
             reqOpts,
             gaxOpts,
             headers: injectRequestIDIntoHeaders(
-              headers,
+              this.commonHeaders_,
               this.session,
               nextNthRequest(database),
               1,
@@ -3355,11 +3317,6 @@ export class Transaction extends Dml {
         transactionId,
       };
 
-      const headers = this.commonHeaders_;
-      if (this._getSpanner().routeToLeaderEnabled) {
-        addLeaderAwareRoutingHeader(headers);
-      }
-
       if (this._affinityKey) {
         if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
           gaxOpts = this._unbindGaxOpts as any;
@@ -3374,7 +3331,7 @@ export class Transaction extends Dml {
           method: 'rollback',
           reqOpts,
           gaxOpts,
-          headers: headers,
+          headers: {...this.commonHeaders_},
         },
         (err: null | ServiceError) => {
           if (err) {
@@ -3908,6 +3865,9 @@ export class PartitionedDml extends Dml {
   ) {
     super(session);
     this._options = {partitionedDml: options};
+    if (this._getSpanner()?.routeToLeaderEnabled) {
+      addLeaderAwareRoutingHeader(this.commonHeaders_);
+    }
   }
   /**
    * Use option excludeTxnFromChangeStreams to exclude partitionedDml
