@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/parametermanager-v0.7.0...parametermanager-v0.8.0) (2026-09-19)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/parametermanager-v0.6.0...parametermanager-v0.7.0) (2026-09-08)
 
 

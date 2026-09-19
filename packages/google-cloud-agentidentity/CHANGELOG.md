@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/agentidentity-v0.2.0...agentidentity-v0.2.1) (2026-09-19)
+
+
+### Performance Improvements
+
+* **spanner:** Remove rest-parameter allocations in wrappedRequestFn ([#9365](https://github.com/googleapis/google-cloud-node/issues/9365)) ([7085e03](https://github.com/googleapis/google-cloud-node/commit/7085e03eb009a93b4368f5649472c0ac330d5a51))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/agentidentity-v0.1.1...agentidentity-v0.2.0) (2026-09-08)
 
 

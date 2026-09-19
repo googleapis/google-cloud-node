@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v5.2.0...api-gateway-v5.3.0) (2026-09-19)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v5.1.0...api-gateway-v5.2.0) (2026-09-15)
 
 

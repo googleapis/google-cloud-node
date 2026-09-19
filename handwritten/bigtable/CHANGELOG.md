@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigtable?activeTab=versions
 
+## [7.3.1](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.3.0...bigtable-v7.3.1) (2026-09-19)
+
+
+### Performance Improvements
+
+* **spanner:** Remove rest-parameter allocations in wrappedRequestFn ([#9365](https://github.com/googleapis/google-cloud-node/issues/9365)) ([7085e03](https://github.com/googleapis/google-cloud-node/commit/7085e03eb009a93b4368f5649472c0ac330d5a51))
+
 ## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.2.0...bigtable-v7.3.0) (2026-09-15)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.13.0...admanager-v0.14.0) (2026-09-19)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
 ## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.12.0...admanager-v0.13.0) (2026-09-15)
 
 
