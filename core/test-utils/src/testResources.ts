@@ -1,4 +1,4 @@
-// Copyright 2022-2026 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,15 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// I don't like that these two files (this plus ".test") are duplicated
-// across the two test structures, but because of the tangle of rootDirs
-// and package.json "files", it's hard to avoid it.
-
 import * as crypto from 'node:crypto';
 
 // Returns a shortened UUID that can be used to identify a
 // specific run of a specific test.
-function shortUUID() {
+function shortUUID(): string {
   return crypto.randomUUID().split('-').shift()!;
 }
 
@@ -29,7 +25,7 @@ export interface TokenMaker {
   timestamp(): number;
 }
 
-export const defaultMaker = {
+export const defaultMaker: TokenMaker = {
   uuid: shortUUID,
   timestamp: () => Date.now(),
 };
@@ -45,7 +41,7 @@ function normalizeId(id: string): string {
 
 /**
  * Manages the names of testing resources during a test run. It's
- * easily to accidentally leak resources, and it's easy to accidentally
+ * easy to accidentally leak resources, and it's easy to accidentally
  * have conflicts with tests running concurrently, so this class helps
  * you manage them.
  *
@@ -65,6 +61,7 @@ export class TestResources {
   /**
    * @param testSuiteId [string] A unique ID for a test suite (e.g.
    *   pubsub-topics).
+   * @param tokenMaker [TokenMaker] Optional token generator for IDs and timestamps.
    */
   constructor(testSuiteId: string, tokenMaker: TokenMaker = defaultMaker) {
     this.testSuiteId = normalizeId(testSuiteId);
@@ -170,7 +167,7 @@ export class TestResources {
       if (name.startsWith(this.testSuiteId)) {
         const parts = name.split('-');
         const createdAt = Number(parts[1]);
-        const timeDiff = (this.tokenMaker.timestamp() - createdAt) / (1000 * 60 * 60);
+        const timeDiff = (Date.now() - createdAt) / (1000 * 60 * 60);
         if (timeDiff >= 2) {
           return true;
         }
