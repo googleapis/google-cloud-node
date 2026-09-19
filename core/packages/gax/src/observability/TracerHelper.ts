@@ -139,6 +139,25 @@ function resolveHttpStatusCode(e: unknown): number | undefined {
 }
 
 /**
+ * Resolves the human-readable description for a failure that is not an Error.
+ *
+ * `code` and `httpStatusCode` above are read off whatever was thrown rather
+ * than off an `Error`, because being handed an error-shaped non-Error is a
+ * real occurrence: a value crossing a realm boundary fails `instanceof` (the
+ * same hazard `isPromiseLike` documents below), and so does a plain object
+ * built by a custom transport. `message` is read the same way and for the same
+ * reason — `String()` on such an object yields '[object Object]', discarding a
+ * description that was right there.
+ *
+ * Anything without a string `message` falls back to `String(e)`, which is all
+ * a bare string, number, `null` or `undefined` can offer.
+ */
+function resolveErrorMessage(e: unknown): string {
+  const message = (e as {message?: unknown} | null)?.message;
+  return typeof message === 'string' ? message : String(e);
+}
+
+/**
  * Checks if a value behaves like a Promise or Thenable.
  *
  * Note: It is not sufficient to check `result instanceof Promise` because:
@@ -376,6 +395,11 @@ export function traceCall(
     // Marks the span failed. Kept separate from recordError so paths that are
     // failures but not exceptions can set the status without emitting a
     // misleading exception event.
+    //
+    // The human-readable message is reported here and nowhere else. There is
+    // deliberately no `error.message` attribute: semconv deprecated it and
+    // calls it NOT RECOMMENDED on spans, because it has unbounded cardinality
+    // and restates the status description that already carries it.
     const setErrorStatus = (message: string) => {
       errorRecorded = true;
       span.setStatus({code: SpanStatusCode.ERROR, message});
@@ -400,8 +424,14 @@ export function traceCall(
       span.setAttributes(attributes);
     };
 
-    // Every path ends here, so the status is resolved in one place: ERROR if
-    // anything reported a failure, OK otherwise.
+    // Every path ends here, so the outcome is resolved in one place: ERROR if
+    // anything reported a failure, and left unset otherwise.
+    //
+    // A successful call deliberately does not set OK. Per OTel semconv the
+    // span status "MUST be left unset if the instrumented operation has ended
+    // without any errors"; `OK` is reserved for an application explicitly
+    // overriding the instrumentation's judgement, and a library must never
+    // claim it on the application's behalf. Unset already reads as success.
     const endSpan = () => {
       if (!spanEnded) {
         spanEnded = true;
@@ -411,7 +441,6 @@ export function traceCall(
           // call, and success means a 2xx, so 200 is the only value available.
           // A legacy Apiary 204 is therefore also reported as 200.
           httpStatusCode = 200;
-          span.setStatus({code: SpanStatusCode.OK});
         }
         setStatusAttributes();
         span.end();
@@ -426,7 +455,6 @@ export function traceCall(
       httpStatusCode = resolveHttpStatusCode(e);
       if (e instanceof Error) {
         span.setAttributes({
-          'error.message': e.message,
           'error.type': resolveErrorType(e),
         });
         // recordException emits the `exception` event, which carries
@@ -436,12 +464,23 @@ export function traceCall(
         span.recordException(e);
         setErrorStatus(e.message);
       } else {
-        const message = String(e);
+        // A non-Error throw has no class worth reporting, so error.type falls
+        // back to `_OTHER`, the value semconv defines for exactly this.
+        // Reporting something matters: error.type is the dimension error-rate
+        // queries group on, so a failure missing it is invisible to them.
+        //
+        // The description is still resolved from a `message` property when one
+        // is there, so an error-shaped object is not reduced to
+        // '[object Object]'.
+        //
+        // No exception event is emitted here. recordException on a value that
+        // is not an Error yields an event with no exception.type and no
+        // stacktrace, which adds nothing the status description does not
+        // already carry.
         span.setAttributes({
-          'error.message': message,
+          'error.type': '_OTHER',
         });
-        span.recordException(message);
-        setErrorStatus(message);
+        setErrorStatus(resolveErrorMessage(e));
       }
     };
 

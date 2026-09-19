@@ -311,14 +311,26 @@ export function generateServiceStub(
       // difference is bookkeeping: both a deadline expiry and a `cancel()`
       // abort the same request and surface the same error, so unless we record
       // which one fired, the handlers below cannot tell them apart.
+      //
+      // The request is always made with `cancelSignal`; every other signal is
+      // forwarded onto `cancelController` by hand. `AbortSignal.any` would
+      // express this more directly, but it is a recent addition to browsers
+      // (Chrome 116, Safari 17.4) and this module is also the browser entry
+      // point, so the composition is done by hand instead.
       let timedOut = false;
-      const requestSignals: AbortSignal[] = [cancelSignal];
       if (timeoutMs !== undefined) {
         const timeoutSignal = AbortSignal.timeout(timeoutMs);
-        timeoutSignal.addEventListener('abort', () => (timedOut = true), {
-          once: true,
-        });
-        requestSignals.push(timeoutSignal);
+        timeoutSignal.addEventListener(
+          'abort',
+          () => {
+            // Set before aborting: the abort synchronously unwinds into the
+            // handlers below, which read this flag to tell a deadline expiry
+            // apart from a `cancel()`.
+            timedOut = true;
+            cancelController.abort();
+          },
+          {once: true},
+        );
       }
 
       // A server-streaming call is handed the parser itself rather than a
@@ -327,22 +339,19 @@ export function generateServiceStub(
       // nothing ever listened to it — the request was made with `cancelSignal`
       // above — so a cancel ended the local stream and left the request in
       // flight, and the pipeline then reported the resulting teardown as a
-      // spurious 'Premature close' error. Compose the two signals, and record
-      // the cancel the way the unary canceller does so that the handlers below
-      // recognise it as one.
+      // spurious 'Premature close' error. Forward that cancel onto the request,
+      // and record it the way the unary canceller does so that the handlers
+      // below recognise it as one.
       if (rpc.responseStream) {
         streamArrayParser.cancelSignal.addEventListener(
           'abort',
-          () => (cancelRequested = true),
+          () => {
+            cancelRequested = true;
+            cancelController.abort();
+          },
           {once: true},
         );
-        requestSignals.push(streamArrayParser.cancelSignal);
       }
-
-      const requestSignal =
-        requestSignals.length === 1
-          ? cancelSignal
-          : AbortSignal.any(requestSignals);
 
       const url = fetchParameters.url;
       const headers = new Headers(fetchParameters.headers);
@@ -371,7 +380,7 @@ export function generateServiceStub(
             ? fetchParameters.body
             : Buffer.from(fetchParameters.body),
         method: fetchParameters.method,
-        signal: requestSignal,
+        signal: cancelSignal,
         responseType: 'stream', // ensure gaxios returns the data directly so that it handle data/streams itself
         // Error responses must resolve so that they are decoded below into a
         // GoogleError carrying a gRPC status code. 401 and 403 keep rejecting
