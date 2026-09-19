@@ -298,6 +298,25 @@ describe('teeny', () => {
     });
   });
 
+  it('should not pipe if request stream is destroyed early', done => {
+    const scope = mockJson();
+
+    const stream = teenyRequest({uri});
+    stream.on('error', done);
+
+    stream.once('response', response => {
+      response.body.once('close', () => {
+        scope.done();
+        done();
+      });
+
+      // Destroy the stream before piping can be fully set up
+      stream.destroy();
+    });
+
+    stream.resume();
+  });
+
   it('should expose TeenyStatistics instance', () => {
     assert.ok(teenyRequest.stats instanceof TeenyStatistics);
   });
