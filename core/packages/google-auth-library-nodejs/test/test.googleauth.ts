@@ -46,7 +46,6 @@ import {
   GdchClient,
 } from '../src';
 import {CredentialBody} from '../src/auth/credentials';
-import * as envDetect from '../src/auth/envDetect';
 import {Compute} from '../src/auth/computeclient';
 import {
   getServiceAccountImpersonationUrl,
@@ -1423,81 +1422,6 @@ describe('googleauth', () => {
         opts.headers,
         new Headers({authorization: 'Bearer abc123'}),
       );
-    });
-
-    it('should get the current environment if GCE', async () => {
-      envDetect.clear();
-      const {auth} = mockGCE();
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.COMPUTE_ENGINE);
-    });
-
-    it('should get the current environment if GKE', async () => {
-      envDetect.clear();
-      const {auth} = mockGCE();
-      const scope = nock(host)
-        .get(`${instancePath}/attributes/cluster-name`)
-        .reply(200, {}, HEADERS);
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.KUBERNETES_ENGINE);
-      scope.done();
-    });
-
-    it('should cache prior call to getEnv(), when GCE', async () => {
-      envDetect.clear();
-      const {auth} = mockGCE();
-      auth.getEnv().catch(console.error);
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.COMPUTE_ENGINE);
-    });
-
-    it('should cache prior call to getEnv(), when GKE', async () => {
-      envDetect.clear();
-      const {auth} = mockGCE();
-      const scope = nock(host)
-        .get(`${instancePath}/attributes/cluster-name`)
-        .reply(200, {}, HEADERS);
-      auth.getEnv().catch(console.error);
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.KUBERNETES_ENGINE);
-      scope.done();
-    });
-
-    it('should get the current environment if GCF 8 and below', async () => {
-      envDetect.clear();
-      mockEnvVar('FUNCTION_NAME', 'DOGGY');
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.CLOUD_FUNCTIONS);
-    });
-
-    it('should get the current environment if GCF 10 and up', async () => {
-      envDetect.clear();
-      mockEnvVar('FUNCTION_TARGET', 'KITTY');
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.CLOUD_FUNCTIONS);
-    });
-
-    it('should get the current environment if GAE', async () => {
-      envDetect.clear();
-      mockEnvVar('GAE_SERVICE', 'KITTY');
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.APP_ENGINE);
-    });
-
-    it('should get the current environment if Cloud Run', async () => {
-      envDetect.clear();
-      mockEnvVar('K_CONFIGURATION', 'KITTY');
-      const {auth} = mockGCE();
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.CLOUD_RUN);
-    });
-
-    it('should get the current environment if Cloud Run Jobs', async () => {
-      envDetect.clear();
-      mockEnvVar('CLOUD_RUN_JOB', 'KITTY');
-      const {auth} = mockGCE();
-      const env = await auth.getEnv();
-      assert.strictEqual(env, envDetect.GCPEnv.CLOUD_RUN_JOBS);
     });
 
     it('should make the request via `#fetch`', async () => {

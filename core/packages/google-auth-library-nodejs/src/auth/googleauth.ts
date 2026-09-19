@@ -24,7 +24,6 @@ import {Crypto, createCrypto} from '../crypto/crypto';
 import {Compute, ComputeOptions} from './computeclient';
 import {CredentialBody, ImpersonatedJWTInput, JWTInput} from './credentials';
 import {IdTokenClient} from './idtokenclient';
-import {GCPEnv, getEnv} from './envDetect';
 import {JWT, JWTOptions} from './jwtclient';
 import {UserRefreshClient, USER_REFRESH_ACCOUNT_TYPE} from './refreshclient';
 import {Impersonated, IMPERSONATED_ACCOUNT_TYPE} from './impersonated';
@@ -1274,13 +1273,6 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
   async request<T>(opts: GaxiosOptions): Promise<GaxiosResponse<T>> {
     const client = await this.getClient();
     return client.request<T>(opts);
-  }
-
-  /**
-   * Determine the compute environment in which the code is running.
-   */
-  getEnv(): Promise<GCPEnv> {
-    return getEnv();
   }
 
   /**
