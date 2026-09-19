@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/google-cloud-bigquery-storage-api-v0.5.0...google-cloud-bigquery-storage-api-v0.5.1) (2026-09-19)
+
+
+### Performance Improvements
+
+* **spanner:** Remove rest-parameter allocations in wrappedRequestFn ([#9365](https://github.com/googleapis/google-cloud-node/issues/9365)) ([7085e03](https://github.com/googleapis/google-cloud-node/commit/7085e03eb009a93b4368f5649472c0ac330d5a51))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-bigquery-storage-api-v0.4.0...google-cloud-bigquery-storage-api-v0.5.0) (2026-09-08)
 
 

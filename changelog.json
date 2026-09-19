@@ -4,6 +4,645 @@
     {
       "changes": [
         {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.17.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "4f7fda11-283f-4161-86d1-7226ceb643ec",
+      "createTime": "2026-09-19T00:34:15.142Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "885cc0c1-6bf9-4f18-bea5-63451e1fa260",
+      "createTime": "2026-09-19T00:34:15.113Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.14.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "a103aa43-3d29-4579-8dfb-101cda9eee20",
+      "createTime": "2026-09-19T00:34:15.082Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "5ec374e7-c79b-4e0f-a331-2eac3afa33ba",
+      "createTime": "2026-09-19T00:34:15.054Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-maps/isochrones",
+      "id": "13c628db-8f3a-4714-a29a-20fc1314b7db",
+      "createTime": "2026-09-19T00:34:15.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "da9ea12d-133d-4a26-b6a9-4a881bbdf10a",
+      "createTime": "2026-09-19T00:34:14.986Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadidentity",
+      "id": "ed9a2f6e-8ada-4c37-ae9c-a56627397b04",
+      "createTime": "2026-09-19T00:34:14.949Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "7.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "72d47c96-0455-49c2-aca0-ac889fa456db",
+      "createTime": "2026-09-19T00:34:14.921Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "5e3fbbb9-f72e-4233-9511-6a7242c37055",
+      "createTime": "2026-09-19T00:34:14.888Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-api",
+      "id": "48591193-226a-4517-9c7e-c56233e4def0",
+      "createTime": "2026-09-19T00:34:14.823Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "1690d9bd-177d-4198-b6a6-83be429c9937",
+      "createTime": "2026-09-19T00:34:14.775Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/productregistry",
+      "id": "2aec3102-722a-4f2c-a271-d094cd26fc8e",
+      "createTime": "2026-09-19T00:34:14.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "9cd0359b-8d59-404d-b5c8-0e24815d59fb",
+      "createTime": "2026-09-19T00:34:14.691Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "c0c1b1d3-dffe-4fca-939c-baa891eb9006",
+      "createTime": "2026-09-19T00:34:14.651Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-api",
+      "id": "a980bc3e-9fcf-49a5-84e5-2bba8e40f13a",
+      "createTime": "2026-09-19T00:34:14.615Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ftp",
+      "id": "e8e5a91c-1f22-4c77-803b-21bfaa189bf8",
+      "createTime": "2026-09-19T00:34:14.586Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore-api",
+      "id": "db48ba7a-490d-4f38-b5e0-d02afc96166e",
+      "createTime": "2026-09-19T00:34:14.555Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "1365694a-cfdf-46a9-8d04-37c914fb25b1",
+      "createTime": "2026-09-19T00:34:14.526Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/devicestreaming",
+      "id": "deb80d7c-ed0b-4916-b8b9-b20693d7583c",
+      "createTime": "2026-09-19T00:34:14.495Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore-api",
+      "id": "1f90e387-e550-4274-8896-ea6951fe5ce2",
+      "createTime": "2026-09-19T00:34:14.465Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "7.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "a3709b60-cf3c-4225-a13c-882f610f5924",
+      "createTime": "2026-09-19T00:34:14.433Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/commerceproducer",
+      "id": "cf0e6c88-00bb-4730-b7f2-9551f2c6c2ed",
+      "createTime": "2026-09-19T00:34:14.399Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "f2103e66-c149-4e98-81cb-cdce51ab6e92",
+      "createTime": "2026-09-19T00:34:14.366Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage-api",
+      "id": "8acd64a6-5d67-42e5-9f57-cd2e313804f1",
+      "createTime": "2026-09-19T00:34:14.338Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apptopology",
+      "id": "52fa6c5b-563a-40f9-91a2-32308665c728",
+      "createTime": "2026-09-19T00:34:14.307Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "fb8d1876-c183-4f5d-badd-afb9783f567f",
+      "createTime": "2026-09-19T00:34:14.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentregistry",
+      "id": "fadef07e-194c-4972-8c0d-1442bca34c38",
+      "createTime": "2026-09-19T00:34:14.246Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentidentity",
+      "id": "b1b77387-4827-4a89-af2e-211dc6d2a029",
+      "createTime": "2026-09-19T00:34:14.217Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.32.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "30c8717d-7649-4766-b444-2b4435ec2e68",
+      "createTime": "2026-09-19T00:34:14.185Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "f47c7ba2-955a-42bf-975c-1362f2f089a7",
+      "createTime": "2026-09-19T00:34:14.157Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57d0cfd84827933a5da83c370b38942d0c2eadd8",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9368"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "4be4941a-0ff8-4f86-be6f-15bd5ebaec6a",
+      "createTime": "2026-09-19T00:34:14.126Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "7.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "538b2210-3a1f-4f61-84b2-6b61f73c9516",
+      "createTime": "2026-09-19T00:34:14.083Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "653de605e5954a0e378962e3f859f99f607dc6cd",
+          "message": "Pass through fallback parameter for HTTP calls",
+          "issues": [
+            "9277"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ff39233da87eca175d3104467fc756010e9af0a3",
+          "message": "Add o11y gRPC tracing",
+          "issues": [
+            "9267"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "ddafe50c2487a7527eb57f7194dc63028fa22975",
+          "message": "Enforce the call deadline on the REST transport",
+          "issues": [
+            "9334"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "db76247673d12026348ab3ddd9a1e487a9e6468a",
+          "message": "Report transport failures as UNAVAILABLE, as gRPC does",
+          "issues": [],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "6ce394b9c15301f12150af1123905f8918688c16",
+          "message": "Detect aborts and timeouts by error name",
+          "issues": [],
+          "scope": "gax"
+        },
+        {
+          "type": "fix",
+          "sha": "be36fd984f07656c83902e46869db605a3ec259a",
+          "message": "Map REST fallback transport errors to gRPC status codes",
+          "issues": [],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "ca6e1eaa-f2c9-4502-90b7-62887d61d108",
+      "createTime": "2026-09-19T00:34:14.040Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "353315572a16fb6bf34bfec4b96acea5917e1bf8",
+          "message": "Wire enable_telemetry_tracing through the generator CLI",
+          "issues": [
+            "9373"
+          ],
+          "scope": "o11y"
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "de00087a-1237-4e13-89ad-329a75ddd23d",
+      "createTime": "2026-09-19T00:34:14.012Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "ecd5bfd0e8ad8d2cf3b9fe003f7e35f2bbd592f5",
           "message": "Update cloud-spanner to minimum Node version of 22",
@@ -95131,5 +95770,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-18T13:12:38.821Z"
+  "updateTime": "2026-09-19T00:34:15.142Z"
 }
