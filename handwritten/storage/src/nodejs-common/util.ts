@@ -195,7 +195,7 @@ export interface MakeAuthenticatedRequestFactoryConfig extends Omit<
    * A pre-instantiated `AuthClient` or `GoogleAuth` client that should be used.
    * A new client will be created if this is not set.
    */
-  authClient?: AuthClient | GoogleAuth;
+  authClient?: AuthClient | GoogleAuth<AuthClient>;
 
   /**
    * Determines if a projectId is required for authenticated requests. Defaults to `true`.
@@ -1094,7 +1094,12 @@ export function decorateHeaders(
   headers?: CoreOptions['headers'],
   options?: DecorateHeadersOptions
 ): DecorateHeadersResult {
-  const sanitizedHeaders: Headers = {...headers};
+  const sanitizedHeaders: Headers =
+    headers instanceof globalThis.Headers
+      ? Object.assign(Object.fromEntries(headers.entries()), headers)
+      : Array.isArray(headers)
+        ? Object.fromEntries(headers)
+        : {...headers};
   const userTokenKey = Object.keys(sanitizedHeaders).find(
     key => key.toLowerCase() === 'x-goog-gcs-idempotency-token'
   );
