@@ -1,0 +1,38 @@
+{
+  "name": "nodejs-docs-samples-spanner",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "repository": "googleapis/nodejs-spanner",
+  "files": [
+    "*.js"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test-with-archived": "mocha system-test --timeout 1600000",
+    "test": "mocha system-test/spanner.test.js --timeout 1600000"
+  },
+  "dependencies": {
+    "@google-cloud/kms": "^5.0.0",
+    "@google-cloud/precise-date": "^5.0.0",
+    "@google-cloud/spanner": "^8.0.0",
+    "protobufjs": "^7.0.0",
+    "yargs": "^17.0.0"
+  },
+  "devDependencies": {
+    "@google-cloud/opentelemetry-cloud-trace-exporter": "^2.4.1",
+    "@opentelemetry/exporter-trace-otlp-grpc": "^0.57.0",
+    "@opentelemetry/instrumentation": "^0.57.0",
+    "@opentelemetry/instrumentation-grpc": "^0.57.0",
+    "@opentelemetry/resources": "1.30.1",
+    "@opentelemetry/sdk-trace-base": "~1.30.1",
+    "@opentelemetry/sdk-trace-node": "^1.30.1",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/core": "^1.30.1",
+    "chai": "^4.2.0",
+    "mocha": "^9.0.0",
+    "p-limit": "^3.0.1"
+  }
+}
