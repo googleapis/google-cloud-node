@@ -21,7 +21,7 @@
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/system-test --timeout 600000",
-    "test": "c8 mocha --timeout=5000 build/test",
+    "test": "node ../../../bin/run-test.cjs --timeout=5000 build/test",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm install",
