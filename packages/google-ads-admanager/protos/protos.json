@@ -15224,6 +15224,1444 @@
                         }
                       }
                     },
+                    "StitchingTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "StitchingType": {
+                          "values": {
+                            "STITCHING_TYPE_UNSPECIFIED": 0,
+                            "STITCHED": 1,
+                            "POD_SERVING": 2
+                          }
+                        }
+                      }
+                    },
+                    "ReportingTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "ReportingType": {
+                          "values": {
+                            "REPORTING_TYPE_UNSPECIFIED": 0,
+                            "CLIENT": 1,
+                            "SERVER": 2,
+                            "CLIENT_INITIATED_SERVER_TRIGGERED": 3
+                          }
+                        }
+                      }
+                    },
+                    "AdResponseTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "AdResponseType": {
+                          "values": {
+                            "AD_RESPONSE_TYPE_UNSPECIFIED": 0,
+                            "VAST": 1,
+                            "VMAP": 2
+                          }
+                        }
+                      }
+                    },
+                    "BreakTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "BreakType": {
+                          "values": {
+                            "BREAK_TYPE_UNSPECIFIED": 0,
+                            "PREROLL": 1,
+                            "MIDROLL": 2,
+                            "POSTROLL": 3,
+                            "AUXILIARY": 4
+                          }
+                        }
+                      }
+                    },
+                    "PrefetchStageTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "PrefetchStageType": {
+                          "values": {
+                            "PREFETCH_STAGE_TYPE_UNSPECIFIED": 0,
+                            "ONE": 1,
+                            "TWO": 2,
+                            "DISABLED": 3
+                          }
+                        }
+                      }
+                    },
+                    "CreativeIdTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "CreativeIdType": {
+                          "values": {
+                            "CREATIVE_ID_TYPE_UNSPECIFIED": 0,
+                            "AD_ID": 1,
+                            "CREATIVE_ID": 2,
+                            "CREATIVE_AD_ID": 3,
+                            "MEDIA_URI_HASH": 4,
+                            "UNIVERSAL_AD_ID": 5,
+                            "MEDIA_URI_PATH": 6,
+                            "CREATIVE_AD_ID_WITH_FALLBACK": 8,
+                            "MEDIA_URI": 9,
+                            "CANONICALIZED_MEDIA_URI": 11,
+                            "GOOGLE_VIDEO_REGISTRY_ID": 10
+                          }
+                        }
+                      }
+                    },
+                    "SessionFindingSeverityEnum": {
+                      "fields": {},
+                      "nested": {
+                        "SessionFindingSeverity": {
+                          "values": {
+                            "SESSION_FINDING_SEVERITY_UNSPECIFIED": 0,
+                            "INFO": 1,
+                            "WARNING": 2,
+                            "ERROR": 3
+                          }
+                        }
+                      }
+                    },
+                    "PodFindingTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "PodFindingType": {
+                          "values": {
+                            "POD_FINDING_TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_ERROR": 1,
+                            "AD_POD_DROPPED_EMPTY_ADS": 2,
+                            "AD_POD_DROPPED_INCOMPATIBLE_TIMEOFFSET": 3,
+                            "AD_POD_DROPPED_UNSUPPORTED_TYPE": 4
+                          }
+                        }
+                      }
+                    },
+                    "SlateFindingTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "SlateFindingType": {
+                          "values": {
+                            "SLATE_FINDING_TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_ERROR": 1,
+                            "SLATE_STATUS_SKIPPED": 2,
+                            "SLATE_STATUS_DROPPED_UNKNOWN": 3,
+                            "SLATE_STATUS_MINIMUM_INSERTED": 4
+                          }
+                        }
+                      }
+                    },
+                    "AdBreakFindingTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "AdBreakFindingType": {
+                          "values": {
+                            "AD_BREAK_FINDING_TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_ERROR": 1,
+                            "AD_POD_DROPPED_TOO_MANY_AD_PODS": 2,
+                            "EXCEEDS_MAX_FILLER": 3,
+                            "ADS_STATUS_DROPPED_FOR_PREROLL": 4,
+                            "ADS_STATUS_ALL_ADS_MISSING_ASSETS": 5,
+                            "ADS_STATUS_OUT_OF_WINDOW": 6,
+                            "ADS_STATUS_DISABLED": 7,
+                            "ADS_STATUS_STORAGE_ERROR": 8,
+                            "ADS_STATUS_EXPIRED": 9,
+                            "ADS_STATUS_HOLIDAY": 10,
+                            "ADS_STATUS_DROPPED_SLATE_UNAVAILABLE": 11,
+                            "ADS_STATUS_NO_ADS_AVAILABLE_BEFORE_DEADLINE": 12,
+                            "ADS_STATUS_INVALID_POD_REQUEST": 13,
+                            "ADS_STATUS_DROPPED_FOR_MIDROLL": 14,
+                            "ADS_STATUS_DROPPED_BREAK_DURATION_TOO_SHORT": 15,
+                            "ADS_STATUS_DROPPED_STREAM_CREATED_AFTER_BREAK": 16,
+                            "ADS_STATUS_DROPPED_MEDIA_ANALYSIS_UNAVAILABLE": 17,
+                            "ADS_STATUS_UNKNOWN": 18,
+                            "UNSERVED_BREAK": 19,
+                            "PREROLL_AUDIO_VIDEO_MISALIGNMENT": 20
+                          }
+                        }
+                      }
+                    },
+                    "TrackingPingFindingTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "TrackingPingFindingType": {
+                          "values": {
+                            "TRACKING_PING_FINDING_TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_ERROR": 1,
+                            "FAILED_PING": 2
+                          }
+                        }
+                      }
+                    },
+                    "CreativeFindingTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "CreativeFindingType": {
+                          "values": {
+                            "CREATIVE_FINDING_TYPE_UNSPECIFIED": 0,
+                            "UNIDENTIFIED_AD_CREATIVE": 1,
+                            "UNKNOWN_AD_CREATIVE": 2,
+                            "AD_CREATIVE_LOOKUP_FAILED": 3,
+                            "DISABLED_AD_CREATIVE": 4,
+                            "FAILED_AD_CREATIVE": 5,
+                            "AD_CREATIVE_ENCODING_MATCH_FAILURE": 6,
+                            "MISMATCHED_FRAME_COUNT": 7,
+                            "MISSING_TRANSCODES": 8,
+                            "AD_DROPPED_TO_FIT_BREAK": 9
+                          }
+                        }
+                      }
+                    },
+                    "AdRequestFindingTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "AdRequestFindingType": {
+                          "values": {
+                            "AD_REQUEST_FINDING_TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_ERROR": 1,
+                            "AD_REQUEST_ERROR": 2,
+                            "VAST_PARSE_ERROR": 3,
+                            "UNSUPPORTED_AD_SYSTEM": 4,
+                            "CANNOT_FIND_UNIQUE_TRANSCODE_ID": 5,
+                            "MISSING_INLINE_ELEMENTS": 7,
+                            "MAX_WRAPPER_DEPTH_REACHED": 8,
+                            "AD_TAG_PARSE_ERROR": 9,
+                            "VMAP_PARSE_ERROR": 10,
+                            "INVALID_VMAP_RESPONSE": 11,
+                            "NO_AD_BREAKS_IN_VMAP": 12,
+                            "CUSTOM_AD_SOURCE_IN_VMAP": 13,
+                            "AD_BREAK_TYPE_NOT_SUPPORTED": 14,
+                            "NEITHER_AD_SOURCE_NOR_TRACKING": 15,
+                            "SKIPPABLE_AD_NOT_SUPPORTED": 16,
+                            "AD_REQUEST_TIMEOUT": 17,
+                            "DUPLICATE_AD_TAG": 18,
+                            "FOLLOW_REDIRECTS_IS_FALSE": 19,
+                            "UNSUPPORTED_VAST_VERSION": 20,
+                            "NO_VALID_MEDIAFILES_FOUND": 21
+                          }
+                        }
+                      }
+                    },
+                    "DaiSession": {
+                      "options": {
+                        "(google.api.resource).type": "admanager.googleapis.com/DaiSession",
+                        "(google.api.resource).pattern": "networks/{network_code}/daiSessions/{dai_session}",
+                        "(google.api.resource).plural": "daiSessions",
+                        "(google.api.resource).singular": "daiSession"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "creationContext": {
+                          "type": "CreationContext",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "slate": {
+                          "type": "Creative",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "adSelections": {
+                          "keyType": "int64",
+                          "type": "AdSelection",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "adPods": {
+                          "keyType": "int64",
+                          "type": "AdPod",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "adBreaks": {
+                          "keyType": "int64",
+                          "type": "AdBreak",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "findings": {
+                          "rule": "repeated",
+                          "type": "Finding",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sessionDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CreationContext": {
+                          "oneofs": {
+                            "contentInfo": {
+                              "oneof": [
+                                "linearInfo",
+                                "vodInfo"
+                              ]
+                            },
+                            "_debugKey": {
+                              "oneof": [
+                                "debugKey"
+                              ]
+                            },
+                            "_contentTitle": {
+                              "oneof": [
+                                "contentTitle"
+                              ]
+                            },
+                            "_sessionTitle": {
+                              "oneof": [
+                                "sessionTitle"
+                              ]
+                            },
+                            "_stitchingType": {
+                              "oneof": [
+                                "stitchingType"
+                              ]
+                            },
+                            "_reportingType": {
+                              "oneof": [
+                                "reportingType"
+                              ]
+                            },
+                            "_interstitialEnabled": {
+                              "oneof": [
+                                "interstitialEnabled"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "linearInfo": {
+                              "type": "LinearInfo",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "vodInfo": {
+                              "type": "VodInfo",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "debugKey": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "contentTitle": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "sessionTitle": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "streamCreateRequest": {
+                              "type": "HttpRequest",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "stitchingType": {
+                              "type": "StitchingTypeEnum.StitchingType",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportingType": {
+                              "type": "ReportingTypeEnum.ReportingType",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "interstitialEnabled": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "VodInfo": {
+                              "oneofs": {
+                                "_content": {
+                                  "oneof": [
+                                    "content"
+                                  ]
+                                },
+                                "_cmsId": {
+                                  "oneof": [
+                                    "cmsId"
+                                  ]
+                                },
+                                "_vid": {
+                                  "oneof": [
+                                    "vid"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "content": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "(google.api.resource_reference).type": "admanager.googleapis.com/Content",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "cmsId": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "vid": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "cuePoints": {
+                                  "rule": "repeated",
+                                  "type": "int64",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "contentDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "LinearInfo": {
+                              "oneofs": {
+                                "_liveStream": {
+                                  "oneof": [
+                                    "liveStream"
+                                  ]
+                                },
+                                "_assetKey": {
+                                  "oneof": [
+                                    "assetKey"
+                                  ]
+                                },
+                                "_customAssetKey": {
+                                  "oneof": [
+                                    "customAssetKey"
+                                  ]
+                                },
+                                "_prefetchEnabled": {
+                                  "oneof": [
+                                    "prefetchEnabled"
+                                  ]
+                                },
+                                "_podTrimmingEnabled": {
+                                  "oneof": [
+                                    "podTrimmingEnabled"
+                                  ]
+                                },
+                                "_podTrimTolerance": {
+                                  "oneof": [
+                                    "podTrimTolerance"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "liveStream": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "(google.api.resource_reference).type": "admanager.googleapis.com/LiveStream",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "assetKey": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "customAssetKey": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "prefetchEnabled": {
+                                  "type": "bool",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "podTrimmingEnabled": {
+                                  "type": "bool",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "podTrimTolerance": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "eventStartTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 6
+                                },
+                                "eventEndTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AdSelection": {
+                          "oneofs": {
+                            "_type": {
+                              "oneof": [
+                                "type"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "type": {
+                              "type": "AdResponseTypeEnum.AdResponseType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "adRequest": {
+                              "type": "AdRequest",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "AdRequest": {
+                              "oneofs": {
+                                "_adRequestKey": {
+                                  "oneof": [
+                                    "adRequestKey"
+                                  ]
+                                },
+                                "_adTag": {
+                                  "oneof": [
+                                    "adTag"
+                                  ]
+                                },
+                                "_effectiveAdRequestUrl": {
+                                  "oneof": [
+                                    "effectiveAdRequestUrl"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "adRequestKey": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "httpRequest": {
+                                  "type": "HttpRequest",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "childRequests": {
+                                  "rule": "repeated",
+                                  "type": "AdRequest",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "adTag": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "effectiveAdRequestUrl": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AdPod": {
+                          "oneofs": {
+                            "_requestedBreakType": {
+                              "oneof": [
+                                "requestedBreakType"
+                              ]
+                            },
+                            "_adRequestKey": {
+                              "oneof": [
+                                "adRequestKey"
+                              ]
+                            },
+                            "_prefetchStage": {
+                              "oneof": [
+                                "prefetchStage"
+                              ]
+                            },
+                            "_adBreakId": {
+                              "oneof": [
+                                "adBreakId"
+                              ]
+                            },
+                            "_label": {
+                              "oneof": [
+                                "label"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "requestedBreakType": {
+                              "type": "BreakTypeEnum.BreakType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "adRequestKey": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "creatives": {
+                              "keyType": "int64",
+                              "type": "Creative",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "prefetchStage": {
+                              "type": "PrefetchStageTypeEnum.PrefetchStageType",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "adBreakId": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "label": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "AdBreak": {
+                          "oneofs": {
+                            "streamTypeInfo": {
+                              "oneof": [
+                                "linear",
+                                "vod"
+                              ]
+                            },
+                            "_adBreakId": {
+                              "oneof": [
+                                "adBreakId"
+                              ]
+                            },
+                            "_breakType": {
+                              "oneof": [
+                                "breakType"
+                              ]
+                            },
+                            "_breakSequence": {
+                              "oneof": [
+                                "breakSequence"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "linear": {
+                              "type": "LinearBreak",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "vod": {
+                              "type": "VodBreak",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "podKeys": {
+                              "rule": "repeated",
+                              "type": "int64",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "adBreakId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "breakType": {
+                              "type": "BreakTypeEnum.BreakType",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "breakSequence": {
+                              "type": "int64",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "servedAdsDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "executedBreakDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackingPings": {
+                              "keyType": "int64",
+                              "type": "TrackingPing",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "VodBreak": {
+                              "fields": {
+                                "timeOffset": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "LinearBreak": {
+                              "fields": {
+                                "breakStartTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "expectedBreakDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "slateDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "underlyingDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "TrackingPing": {
+                              "oneofs": {
+                                "_originalTrackingEventId": {
+                                  "oneof": [
+                                    "originalTrackingEventId"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "originalTrackingEventId": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "request": {
+                                  "type": "HttpRequest",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "HttpRequest": {
+                          "oneofs": {
+                            "_url": {
+                              "oneof": [
+                                "url"
+                              ]
+                            },
+                            "_userAgent": {
+                              "oneof": [
+                                "userAgent"
+                              ]
+                            },
+                            "_responseCode": {
+                              "oneof": [
+                                "responseCode"
+                              ]
+                            },
+                            "_responseBody": {
+                              "oneof": [
+                                "responseBody"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "requestTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "latency": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "url": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "userAgent": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "responseCode": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "responseBody": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "Creative": {
+                          "oneofs": {
+                            "_idType": {
+                              "oneof": [
+                                "idType"
+                              ]
+                            },
+                            "_idValue": {
+                              "oneof": [
+                                "idValue"
+                              ]
+                            },
+                            "_adSystem": {
+                              "oneof": [
+                                "adSystem"
+                              ]
+                            },
+                            "_podSequence": {
+                              "oneof": [
+                                "podSequence"
+                              ]
+                            },
+                            "_adBuffet": {
+                              "oneof": [
+                                "adBuffet"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "idType": {
+                              "type": "CreativeIdTypeEnum.CreativeIdType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "idValue": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "adSystem": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "duration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "podSequence": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "vastInfos": {
+                              "rule": "repeated",
+                              "type": "VastInfo",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "adBuffet": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "VastInfo": {
+                              "oneofs": {
+                                "_adSystem": {
+                                  "oneof": [
+                                    "adSystem"
+                                  ]
+                                },
+                                "_adSystemVersion": {
+                                  "oneof": [
+                                    "adSystemVersion"
+                                  ]
+                                },
+                                "_adTitle": {
+                                  "oneof": [
+                                    "adTitle"
+                                  ]
+                                },
+                                "_description": {
+                                  "oneof": [
+                                    "description"
+                                  ]
+                                },
+                                "_creativeId": {
+                                  "oneof": [
+                                    "creativeId"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "adSystem": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "adSystemVersion": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "adTitle": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "creativeId": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Finding": {
+                          "oneofs": {
+                            "type": {
+                              "oneof": [
+                                "podFinding",
+                                "slateFinding",
+                                "adBreakFinding",
+                                "trackingFinding",
+                                "creativeFinding",
+                                "adRequestFinding"
+                              ]
+                            },
+                            "_severity": {
+                              "oneof": [
+                                "severity"
+                              ]
+                            },
+                            "_description": {
+                              "oneof": [
+                                "description"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "podFinding": {
+                              "type": "PodFinding",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "slateFinding": {
+                              "type": "SlateFinding",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "adBreakFinding": {
+                              "type": "AdBreakFinding",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackingFinding": {
+                              "type": "TrackingPingFinding",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "creativeFinding": {
+                              "type": "CreativeFinding",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "adRequestFinding": {
+                              "type": "AdRequestFinding",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "severity": {
+                              "type": "SessionFindingSeverityEnum.SessionFindingSeverity",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PodFinding": {
+                              "oneofs": {
+                                "_type": {
+                                  "oneof": [
+                                    "type"
+                                  ]
+                                },
+                                "_podKey": {
+                                  "oneof": [
+                                    "podKey"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "type": {
+                                  "type": "PodFindingTypeEnum.PodFindingType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "podKey": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "SlateFinding": {
+                              "oneofs": {
+                                "_type": {
+                                  "oneof": [
+                                    "type"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "type": {
+                                  "type": "SlateFindingTypeEnum.SlateFindingType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "AdBreakFinding": {
+                              "oneofs": {
+                                "_type": {
+                                  "oneof": [
+                                    "type"
+                                  ]
+                                },
+                                "_breakKey": {
+                                  "oneof": [
+                                    "breakKey"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "type": {
+                                  "type": "AdBreakFindingTypeEnum.AdBreakFindingType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "breakKey": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "TrackingPingFinding": {
+                              "oneofs": {
+                                "_type": {
+                                  "oneof": [
+                                    "type"
+                                  ]
+                                },
+                                "_trackingPingKey": {
+                                  "oneof": [
+                                    "trackingPingKey"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "type": {
+                                  "type": "TrackingPingFindingTypeEnum.TrackingPingFindingType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "trackingPingKey": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "CreativeFinding": {
+                              "oneofs": {
+                                "_type": {
+                                  "oneof": [
+                                    "type"
+                                  ]
+                                },
+                                "_creativeKey": {
+                                  "oneof": [
+                                    "creativeKey"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "type": {
+                                  "type": "CreativeFindingTypeEnum.CreativeFindingType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "creativeKey": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "AdRequestFinding": {
+                              "oneofs": {
+                                "_type": {
+                                  "oneof": [
+                                    "type"
+                                  ]
+                                },
+                                "_adSelectionKey": {
+                                  "oneof": [
+                                    "adSelectionKey"
+                                  ]
+                                },
+                                "_adRequestKey": {
+                                  "oneof": [
+                                    "adRequestKey"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "type": {
+                                  "type": "AdRequestFindingTypeEnum.AdRequestFindingType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "adSelectionKey": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "adRequestKey": {
+                                  "type": "int64",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DaiSessionService": {
+                      "options": {
+                        "(google.api.default_host)": "admanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
+                      },
+                      "methods": {
+                        "GetDaiSession": {
+                          "requestType": "GetDaiSessionRequest",
+                          "responseType": "DaiSession",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=networks/*/daiSessions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=networks/*/daiSessions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetDaiSessionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/DaiSession"
+                          }
+                        }
+                      }
+                    },
                     "DealBuyerPermissionTypeEnum": {
                       "fields": {},
                       "nested": {
@@ -24214,6 +25652,11 @@
                             "targeting"
                           ]
                         },
+                        "_startTime": {
+                          "oneof": [
+                            "startTime"
+                          ]
+                        },
                         "_endTime": {
                           "oneof": [
                             "endTime"
@@ -24239,6 +25682,11 @@
                             "blockOverrideEnabled"
                           ]
                         },
+                        "_publisherFloorExempt": {
+                          "oneof": [
+                            "publisherFloorExempt"
+                          ]
+                        },
                         "_buyerPermissionType": {
                           "oneof": [
                             "buyerPermissionType"
@@ -24252,6 +25700,11 @@
                         "_dealPriority": {
                           "oneof": [
                             "dealPriority"
+                          ]
+                        },
+                        "_archived": {
+                          "oneof": [
+                            "archived"
                           ]
                         },
                         "_createTime": {
@@ -24322,6 +25775,14 @@
                             "proto3_optional": true
                           }
                         },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "NON_EMPTY_DEFAULT",
+                            "proto3_optional": true
+                          }
+                        },
                         "endTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 8,
@@ -24370,6 +25831,14 @@
                             "proto3_optional": true
                           }
                         },
+                        "publisherFloorExempt": {
+                          "type": "bool",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "buyerPermissionType": {
                           "type": "DealBuyerPermissionTypeEnum.DealBuyerPermissionType",
                           "id": 13,
@@ -24391,6 +25860,14 @@
                           "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "archived": {
+                          "type": "bool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
                         },

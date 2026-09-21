@@ -43,6 +43,9 @@ export interface ClientOptions
   universe_domain?: string;
   /**
    * Whether to enable telemetry tracing for the client.
+   *
+   * The `GOOGLE_SDK_NODE_ENABLE_TRACING` environment variable overrides this
+   * option whenever it is set.
    */
   enableTelemetryTracing?: boolean;
 }

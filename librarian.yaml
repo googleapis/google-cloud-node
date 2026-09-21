@@ -16,16 +16,16 @@ version: v0.44.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 0fad50179076be3c908551df3c7cd388e0928df1
-    sha256: 077e42e858aa0b2ad7e67cb90f6d1d1b1381ce47593f6c7361e6ad299d1cab94
+    commit: bba4c646b1f85a4cd499207926865205caad0384
+    sha256: a9b811170e891939d022f7463bb9ab03f56ef3ef40fbd6d93771eefa7ccf4750
 tools:
   pnpm:
     - name: gapic-generator-typescript
-      version: gapic-generator-v5.2.0
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.2.0.tar.gz
-      checksum: a2afaa498c7938837e65a1eecb2041bda5b0bda232e6bdbd5117e012cdc7e75b
+      version: gapic-generator-v5.3.0
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.3.0.tar.gz
+      checksum: 4bc54d399b22c845fd4555f9435b7971153a2e3fafca32402658390711828f63
       build:
-        - pnpm install --frozen-lockfile --config.auto-install-peers=true
+        - pnpm install --ignore-workspace --frozen-lockfile --config.auto-install-peers=true
         - pnpm run compile
         - pnpm add -g "$PWD"
       src_dir: core/generator/gapic-generator-typescript
@@ -39,7 +39,9 @@ tools:
       version: 1.2.0
   protoc:
     version: "33.2"
-    sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
+    sha256_by_platform:
+      linux-x86_64: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
+      osx-aarch_64: 5be1427127788c9f7dd7d606c3e69843dd3587327dea993917ffcb77e7234b44
 default:
   keep:
     - librarian.js
@@ -74,6 +76,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      package_name: '@google-ads/admanager'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
     version: 0.6.0
@@ -82,6 +85,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      package_name: '@google-ads/datamanager'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/datamanager/latest
   - name: google-ai-generativelanguage
     version: 4.1.0
@@ -94,6 +98,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
+      package_name: '@google-ai/generativelanguage'
       client_documentation_override: https://developers.generativeai.google/guide/palm_api_overview
   - name: google-analytics-admin
     version: 10.1.0
@@ -106,6 +111,7 @@ libraries:
       dependencies:
         google-auth-library: ^10.0.0-rc.1
         server-destroy: ^1.0.1
+      package_name: '@google-analytics/admin'
       client_documentation_override: https://googleapis.dev/nodejs/analytics-admin/latest/
   - name: google-analytics-data
     version: 7.1.0
@@ -115,6 +121,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
+      package_name: '@google-analytics/data'
       client_documentation_override: https://googleapis.dev/nodejs/analytics-data/latest/
   - name: google-api-apikeys
     version: 3.1.0
@@ -190,6 +197,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v2
+      package_name: '@google-apps/meet'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/meet/latest
   - name: google-area120-tables
     version: 5.1.0
@@ -321,7 +329,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-apptopology
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/apptopology/v1
     copyright_year: "2026"
@@ -365,6 +373,7 @@ libraries:
     version: 0.11.0
     apis:
       - path: google/cloud/backupdr/v1
+      - path: google/cloud/backupdr/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -931,7 +940,7 @@ libraries:
       metadata_name_override: firestore-api
       name_pretty_override: Firestore API
   - name: google-cloud-ftp
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/ftp/v1
     copyright_year: "2026"
@@ -1475,6 +1484,8 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      extra_protoc_parameters:
+        - enable_telemetry_tracing=true
       package_name: '@google-cloud/secret-manager'
   - name: google-cloud-securesourcemanager
     version: 0.14.0
@@ -1623,7 +1634,7 @@ libraries:
       default_version: v4
       main_service: talent
   - name: google-cloud-tasks
-    version: 7.1.0
+    version: 7.1.1
     apis:
       - path: google/cloud/tasks/v2
       - path: google/cloud/tasks/v2beta3
@@ -1813,7 +1824,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-workloadidentity
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/workloadidentity/v1
     copyright_year: "2026"
@@ -1989,6 +2000,8 @@ libraries:
     apis:
       - path: google/maps/isochrones/v1
     copyright_year: "2026"
+    nodejs:
+      package_name: '@google-maps/isochrones'
   - name: google-maps-mapmanagement
     version: 0.3.0
     apis:
@@ -2086,6 +2099,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      package_name: '@google-shopping/css'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/css/latest
   - name: google-shopping-merchant-accounts
     version: 4.0.0
@@ -2148,7 +2162,7 @@ libraries:
       package_name: '@google-shopping/lfp'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-loyaltycustomers
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/shopping/merchant/loyaltycustomers/v1
     copyright_year: "2026"

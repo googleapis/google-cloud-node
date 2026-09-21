@@ -19,6 +19,7 @@ import {status as Status} from '@grpc/grpc-js';
 import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
 import {MetricsTracer} from '../../src/metrics/metrics-tracer';
 import {MetricInterceptor} from '../../src/metrics/interceptor';
+import {Spanner} from '../../src/index';
 
 describe('MetricInterceptor', () => {
   let sandbox: sinon.SinonSandbox;
@@ -61,10 +62,18 @@ describe('MetricInterceptor', () => {
         return null;
       }) as sinon.SinonStub<[string], number | null>;
     mockMetricsTracer.recordGfeLatency = sandbox.stub<
-      [latency: number],
+      [statusCode: number],
       void
     >();
     mockMetricsTracer.recordGfeConnectivityErrorCount = sandbox.stub<
+      [statusCode: number],
+      void
+    >();
+    mockMetricsTracer.recordAfeLatency = sandbox.stub<
+      [statusCode: number],
+      void
+    >();
+    mockMetricsTracer.recordAfeConnectivityErrorCount = sandbox.stub<
       [statusCode: number],
       void
     >();
@@ -125,9 +134,97 @@ describe('MetricInterceptor', () => {
 
   afterEach(() => {
     sandbox.restore();
+    Spanner._resetAFEServerTimingForTest();
+    delete process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'];
   });
 
   describe('Metrics recorded from interceptor', () => {
+    it('does not define redundant requester hooks and passes a direct InterceptingListener to next()', () => {
+      const originalInterceptingCall = grpc.InterceptingCall;
+      let capturedRequester: grpc.Requester | undefined;
+
+      Object.defineProperty(grpc, 'InterceptingCall', {
+        value: class extends originalInterceptingCall {
+          constructor(nextCall: Function, requester: grpc.Requester) {
+            super(nextCall as unknown as grpc.InterceptingCall, requester);
+            capturedRequester = requester;
+          }
+        },
+        configurable: true,
+        writable: true,
+      });
+
+      try {
+        const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+
+        // Verify that custom sendMessage, halfClose, or cancel hooks are NOT defined on the requester
+        assert.strictEqual(capturedRequester?.sendMessage, undefined);
+        assert.strictEqual(capturedRequester?.halfClose, undefined);
+        assert.strictEqual(capturedRequester?.cancel, undefined);
+        assert.strictEqual(typeof capturedRequester?.start, 'function');
+
+        // Verify that the listener passed to next() conforms to InterceptingListener (methods take 1 argument)
+        interceptingCall.start(testMetadata, mockListener);
+
+        // capturedListener is what nextCall.start received; since it is an InterceptingListener,
+        // @grpc/grpc-js bypasses InterceptingListenerImpl and forwards it directly
+        assert.strictEqual(capturedListener.onReceiveMetadata.length, 1);
+        assert.strictEqual(capturedListener.onReceiveMessage.length, 1);
+        assert.strictEqual(capturedListener.onReceiveStatus.length, 1);
+
+        // Verify that incoming messages forward directly to mockListener
+        const message = {test: 'row-data'};
+        capturedListener.onReceiveMessage(message);
+        assert.strictEqual(mockListener.onReceiveMessage.callCount, 1);
+        assert.strictEqual(
+          mockListener.onReceiveMessage.firstCall.args[0],
+          message,
+        );
+      } finally {
+        Object.defineProperty(grpc, 'InterceptingCall', {
+          value: originalInterceptingCall,
+          configurable: true,
+          writable: true,
+        });
+      }
+    });
+
+    it('transparently passes through messages, halfClose, and cancelWithStatus to the underlying call', () => {
+      const mockUnderlyingCall = {
+        start: sandbox.stub(),
+        sendMessageWithContext: sandbox.stub(),
+        halfClose: sandbox.stub(),
+        cancelWithStatus: sandbox.stub(),
+      };
+      const mockNextCallFn = sandbox.stub().returns(mockUnderlyingCall);
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCallFn);
+
+      const message = {values: ['test-row']};
+      interceptingCall.sendMessage(message);
+      assert.strictEqual(
+        mockUnderlyingCall.sendMessageWithContext.callCount,
+        1,
+      );
+      assert.strictEqual(
+        mockUnderlyingCall.sendMessageWithContext.firstCall.args[1],
+        message,
+      );
+
+      interceptingCall.halfClose();
+      assert.strictEqual(mockUnderlyingCall.halfClose.callCount, 1);
+
+      interceptingCall.cancelWithStatus(Status.CANCELLED, 'cancelled');
+      assert.strictEqual(mockUnderlyingCall.cancelWithStatus.callCount, 1);
+      assert.strictEqual(
+        mockUnderlyingCall.cancelWithStatus.firstCall.args[0],
+        Status.CANCELLED,
+      );
+      assert.strictEqual(
+        mockUnderlyingCall.cancelWithStatus.firstCall.args[1],
+        'cancelled',
+      );
+    });
+
     it('AttemptMetrics', () => {
       const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
 
@@ -226,6 +323,81 @@ describe('MetricInterceptor', () => {
       assert.strictEqual(getMapSpy.callCount, 0);
       assert.strictEqual(getSpy.calledWith('server-timing'), true);
       assert.strictEqual(mockMetricsTracer.extractGfeLatency.calledOnce, true);
+    });
+
+    it('AFE Metrics - Disabled when AFE server timing is disabled', () => {
+      Spanner._resetAFEServerTimingForTest();
+      process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'true';
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(serverTimingMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockMetricsTracer.extractGfeLatency.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.extractAfeLatency.callCount, 0);
+      assert.strictEqual(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 0);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
+      );
+    });
+
+    it('AFE Metrics - Case-insensitive disabled when set to TRUE', () => {
+      Spanner._resetAFEServerTimingForTest();
+      process.env['SPANNER_DISABLE_AFE_SERVER_TIMING'] = 'TRUE';
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(serverTimingMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockMetricsTracer.extractGfeLatency.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.extractAfeLatency.callCount, 0);
+      assert.strictEqual(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 0);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
+      );
+    });
+
+    it('GFE and AFE Metrics - Records 0ms latency without incrementing error count', () => {
+      mockMetricsTracer.extractGfeLatency = sandbox
+        .stub<[string], number | null>()
+        .returns(0);
+      mockMetricsTracer.extractAfeLatency = sandbox
+        .stub<[string], number | null>()
+        .returns(0);
+
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      capturedListener.onReceiveMetadata(emptyMetadata);
+      capturedListener.onReceiveStatus(mockStatus);
+
+      assert.strictEqual(mockMetricsTracer.recordGfeLatency.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordGfeConnectivityErrorCount.callCount,
+        0,
+      );
+      assert.strictEqual(mockMetricsTracer.recordAfeLatency.callCount, 1);
+      assert.strictEqual(
+        mockMetricsTracer.recordAfeConnectivityErrorCount.callCount,
+        0,
+      );
+    });
+
+    it('does not throw or record when metricsTracer is null', () => {
+      mockFactory.getCurrentTracer.returns(null);
+      const interceptingCall = MetricInterceptor(mockOptions, mockNextCall);
+      interceptingCall.start(testMetadata, mockListener);
+
+      assert.doesNotThrow(() => {
+        capturedListener.onReceiveMetadata(serverTimingMetadata);
+        capturedListener.onReceiveStatus(mockStatus);
+      });
     });
   });
 });
