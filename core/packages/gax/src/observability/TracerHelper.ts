@@ -382,12 +382,26 @@ export function traceCall(
     // retried" and "not instrumented" the same observation at query time.
     //
     // Reported on the call span rather than per attempt because gax opens one
-    // span for the whole call, retries included, so the final count is what
-    // that span can describe.
+    // span for the whole call, retries included. OpenTelemetry's HTTP
+    // convention instead expects one span per attempt, each carrying the
+    // ordinal of that attempt. The two agree on the value that matters: the
+    // ordinal on the last attempt's span equals the total number of resends,
+    // and gax's single span is the one that ends the call.
     let resendCount = 0;
     const recordResend: ResendRecorder = () => {
       resendCount++;
     };
+
+    // Named per transport, the same way the status attributes below are.
+    // `http.request.resend_count` is the stable OpenTelemetry attribute for
+    // exactly this quantity, so the fallback uses it rather than inventing a
+    // parallel name. gRPC has no standard equivalent, so it takes the gcp.*
+    // name instead of borrowing the http.* one, which would claim a protocol
+    // the call never spoke.
+    const resendCountAttribute =
+      dynamicArgs.rpcType === 'grpc'
+        ? 'gcp.grpc.resend_count'
+        : 'http.request.resend_count';
 
     // Marks the span failed. Kept separate from recordError so paths that are
     // failures but not exceptions can set the status without emitting a
@@ -418,7 +432,7 @@ export function traceCall(
           httpStatusCode = 200;
         }
         setStatusAttributes();
-        span.setAttribute('resend_count', resendCount);
+        span.setAttribute(resendCountAttribute, resendCount);
         span.end();
       }
     };

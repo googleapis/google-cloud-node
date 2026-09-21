@@ -34,6 +34,12 @@ export function hrTimeToMs(time: HrTime): number {
   return time[0] * 1000 + time[1] / 1e6;
 }
 
+/** The resend count attribute on a gRPC span. */
+const GRPC_RESEND_COUNT = 'gcp.grpc.resend_count';
+
+/** The resend count attribute on a fallback span. */
+const HTTP_RESEND_COUNT = 'http.request.resend_count';
+
 export class OtelHarness {
   readonly exporter: InMemorySpanExporter;
   readonly provider: BasicTracerProvider;
@@ -302,6 +308,55 @@ export class OtelHarness {
             `${expected.httpStatus}, got ${JSON.stringify(actual.http)}. ` +
             'This is the status the transport received, which is not ' +
             'recoverable from the gRPC status it was mapped to.',
+    );
+  }
+
+  /**
+   * Asserts the resend count reported on a span, under the attribute name its
+   * transport should be using.
+   *
+   * The count is named per transport: `gcp.grpc.resend_count` on a gRPC span
+   * and `http.request.resend_count` on a fallback span. The name that does not
+   * apply is asserted absent, so a span that reports the count under the wrong
+   * one fails here instead of passing quietly.
+   *
+   * @param {number} expected - Expected number of resends; 0 if never retried.
+   * @param {object} [options] - Span selection.
+   * @param {string} [options.tracerName] - Restrict the lookup to one instrumentation scope.
+   * @param {ReadableSpan} [options.span] - Span to check; defaults to the only exported span.
+   */
+  assertResendCount(
+    expected: number,
+    options: {tracerName?: string; span?: ReadableSpan} = {},
+  ): void {
+    const target = options.span ?? this.requireSingleSpan(options.tracerName);
+    const transport = target.attributes['gcp.method.type'];
+    const where = `span '${target.name}'`;
+
+    assert.ok(
+      transport === 'grpc' || transport === 'http',
+      `${where} has gcp.method.type ${JSON.stringify(transport)}; the ` +
+        'transport-specific resend count cannot be checked without it. ' +
+        'Was this span produced by traceCall?',
+    );
+
+    const isGrpc = transport === 'grpc';
+    const expectedKey = isGrpc ? GRPC_RESEND_COUNT : HTTP_RESEND_COUNT;
+    const otherKey = isGrpc ? HTTP_RESEND_COUNT : GRPC_RESEND_COUNT;
+
+    assert.strictEqual(
+      target.attributes[expectedKey],
+      expected,
+      `expected ${where} to report ${expectedKey} ${expected}, got ` +
+        `${JSON.stringify(target.attributes[expectedKey])}. The count is ` +
+        'reported on every call, including 0 when nothing was retried.',
+    );
+    assert.strictEqual(
+      target.attributes[otherKey],
+      undefined,
+      `${where} is a ${transport} span but reported ${otherKey} ` +
+        `${JSON.stringify(target.attributes[otherKey])}. The resend count ` +
+        `belongs under ${expectedKey} there.`,
     );
   }
 }

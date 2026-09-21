@@ -1238,12 +1238,12 @@ describe('createApiCall', () => {
       });
     });
 
-    describe('resend_count', () => {
+    describe('resend count', () => {
       // The unary retry loop is shared by both transports, and the only thing
-      // that distinguishes them on the span is `gcp.method.type`. Running the
-      // same cases through both entry points is what stops someone from
-      // gating the attribute on transport, the way the status attributes
-      // legitimately are.
+      // that distinguishes them on the span is `gcp.method.type` and the name
+      // the count is reported under. Running the same cases through both entry
+      // points is what stops the count from being reported on one transport
+      // only, or from being reported under the other transport's name.
       const transports = [
         {
           name: 'gRPC',
@@ -1297,7 +1297,7 @@ describe('createApiCall', () => {
               span.attributes['gcp.method.type'],
               transport.rpcType,
             );
-            assert.strictEqual(span.attributes['resend_count'], 0);
+            harness.assertResendCount(0, {span});
           });
 
           it('reports one resend per retry', async () => {
@@ -1334,7 +1334,7 @@ describe('createApiCall', () => {
             // observed attempt count rather than a bare literal, because the
             // off-by-one between the two is exactly what the attribute
             // defines.
-            assert.strictEqual(span.attributes['resend_count'], attempts - 1);
+            harness.assertResendCount(attempts - 1, {span});
             harness.assertResponseStatus({
               rpcStatus: 'OK',
               ...(transport.rpcType === 'http' ? {httpStatus: 200} : {}),
@@ -1402,7 +1402,7 @@ describe('createApiCall', () => {
             assert.strictEqual(attempts, 3);
             const span = harness.requireSingleSpan('google-gax');
             assert.strictEqual(span.attributes['gcp.method.type'], 'grpc');
-            assert.strictEqual(span.attributes['resend_count'], 2);
+            harness.assertResendCount(2, {span});
             done();
           } catch (e) {
             done(e);

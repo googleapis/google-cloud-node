@@ -889,15 +889,18 @@ describe('TracerHelper', () => {
     });
 
     describe('resend count', () => {
-      const resendCount = (): unknown =>
-        harness.requireSingleSpan('google-gax').attributes['resend_count'];
+      // The harness picks the attribute name off the span's own transport and
+      // checks the other transport's name is absent, so these tests cover the
+      // naming as well as the count.
+      const assertResendCount = (expected: number): void =>
+        harness.assertResendCount(expected, {tracerName: 'google-gax'});
 
       it('reports 0 when the call is never resent', async () => {
         await traceCall(dynamicArgs, staticArgs, async () => 'ok');
 
         // Present on every span, not just retried ones: an absent attribute
         // would be indistinguishable from an uninstrumented call.
-        assert.strictEqual(resendCount(), 0);
+        assertResendCount(0);
       });
 
       it('reports 1 for the first resend', async () => {
@@ -906,7 +909,7 @@ describe('TracerHelper', () => {
           return 'ok';
         });
 
-        assert.strictEqual(resendCount(), 1);
+        assertResendCount(1);
       });
 
       it('counts resends rather than attempts', async () => {
@@ -918,7 +921,7 @@ describe('TracerHelper', () => {
           return 'ok';
         });
 
-        assert.strictEqual(resendCount(), 3);
+        assertResendCount(3);
       });
 
       it('reports the resends of a call that ultimately failed', async () => {
@@ -939,7 +942,7 @@ describe('TracerHelper', () => {
 
         // The count is the reason the call is interesting, so it has to
         // survive the failure path and not just the success one.
-        assert.strictEqual(resendCount(), 2);
+        assertResendCount(2);
         harness.assertResponseStatus({rpcStatus: 'UNAVAILABLE'});
       });
 
@@ -963,10 +966,12 @@ describe('TracerHelper', () => {
         recorder!();
         emitter.emit('end');
 
-        assert.strictEqual(resendCount(), 2);
+        assertResendCount(2);
       });
 
       it('reports resends on a fallback span', async () => {
+        // Reported under http.request.resend_count here rather than the gcp.*
+        // name the gRPC spans above use; the harness enforces the difference.
         const httpArgs: DynamicTraceContext = {...dynamicArgs, rpcType: 'http'};
 
         await traceCall(httpArgs, staticArgs, async (_cb, recordResend) => {
@@ -974,7 +979,7 @@ describe('TracerHelper', () => {
           return 'ok';
         });
 
-        assert.strictEqual(resendCount(), 1);
+        assertResendCount(1);
       });
     });
 
