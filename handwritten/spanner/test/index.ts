@@ -38,6 +38,7 @@ import {
   GetInstancesOptions,
 } from '../src';
 import {Duplex} from 'stream';
+import {EventEmitter} from 'events';
 import {CLOUD_RESOURCE_HEADER, AFE_SERVER_TIMING_HEADER} from '../src/common';
 import {MetricsTracerFactory} from '../src/metrics/metrics-tracer-factory';
 import IsolationLevel = protos.google.spanner.v1.TransactionOptions.IsolationLevel;
@@ -230,6 +231,7 @@ describe('Spanner', () => {
       scopes: [],
       grpc,
       'grpc.keepalive_time_ms': 120000,
+      'grpc.enable_channelz': 0,
       'grpc.callInvocationTransformer':
         fakeGrpcGcp().gcpCallInvocationTransformer,
       'grpc.channelFactoryOverride': fakeGrpcGcp().gcpChannelFactoryOverride,
@@ -292,6 +294,22 @@ describe('Spanner', () => {
       assert.deepStrictEqual(
         getFake(spanner.auth).calledWith_[0],
         expectedOptions,
+      );
+    });
+
+    it('should disable channelz by default and allow overriding it', () => {
+      const spannerDefault = new Spanner(OPTIONS);
+      assert.strictEqual(
+        (spannerDefault.options as any)['grpc.enable_channelz'],
+        0,
+      );
+
+      const spannerEnabled = new Spanner(
+        Object.assign({}, OPTIONS, {'grpc.enable_channelz': 1}),
+      );
+      assert.strictEqual(
+        (spannerEnabled.options as any)['grpc.enable_channelz'],
+        1,
       );
     });
 
@@ -2223,6 +2241,256 @@ describe('Spanner', () => {
         requestFn(done); // (FAKE_GAPIC_CLIENT[CONFIG.method])
       });
     });
+
+    it('should invoke gapic method with exact arguments and attach requestID on callback error', done => {
+      replaceProjectIdTokenOverride = reqOpts => reqOpts;
+      const apiError = new Error('Callback failure') as Error & {
+        requestID?: string;
+      };
+      const expectedResponse = {result: 'ok'};
+      const expectedApiResponse = {metadata: 'meta'};
+
+      const configWithRequestId = Object.assign({}, CONFIG, {
+        headers: Object.assign({}, CONFIG.headers, {
+          'x-goog-spanner-request-id': 'req-callback-123',
+        }),
+      });
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function (
+        reqOpts: unknown,
+        gaxOpts: unknown,
+        callback: Function,
+      ) {
+        assert.strictEqual(arguments.length, 3);
+        assert.strictEqual(typeof callback, 'function');
+        callback(apiError, expectedResponse, expectedApiResponse);
+      };
+
+      spanner.prepareGapicRequest_(configWithRequestId, (err, requestFn) => {
+        assert.ifError(err);
+        requestFn(
+          (
+            error: Error & {requestID?: string},
+            response: unknown,
+            apiResponse: unknown,
+          ) => {
+            assert.strictEqual(error, apiError);
+            assert.strictEqual(error.requestID, 'req-callback-123');
+            assert.strictEqual(response, expectedResponse);
+            assert.strictEqual(apiResponse, expectedApiResponse);
+            done();
+          },
+        );
+      });
+    });
+
+    it('should invoke gapic method once with exact arguments and attach requestID on rejected promise', async () => {
+      replaceProjectIdTokenOverride = reqOpts => reqOpts;
+      const promiseError = new Error('Promise failure') as Error & {
+        requestID?: string;
+      };
+      let invocationCount = 0;
+
+      const configWithRequestId = Object.assign({}, CONFIG, {
+        headers: Object.assign({}, CONFIG.headers, {
+          'x-goog-spanner-request-id': 'req-promise-456',
+        }),
+      });
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function () {
+        invocationCount++;
+        assert.strictEqual(arguments.length, 2);
+        return Promise.reject(promiseError);
+      };
+
+      const requestFn = await new Promise<Function>((resolve, reject) => {
+        spanner.prepareGapicRequest_(configWithRequestId, (err, fn) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(fn);
+          }
+        });
+      });
+
+      await assert.rejects(
+        async () => {
+          await requestFn();
+        },
+        (error: Error & {requestID?: string}) => {
+          assert.strictEqual(invocationCount, 1);
+          assert.strictEqual(error, promiseError);
+          assert.strictEqual(error.requestID, 'req-promise-456');
+          return true;
+        },
+      );
+    });
+
+    it('should attach requestID to error when gapic method throws synchronously', done => {
+      replaceProjectIdTokenOverride = reqOpts => reqOpts;
+      const syncError = new Error('Sync failure') as Error & {
+        requestID?: string;
+      };
+
+      const configWithRequestId = Object.assign({}, CONFIG, {
+        headers: Object.assign({}, CONFIG.headers, {
+          'x-goog-spanner-request-id': 'req-sync-789',
+        }),
+      });
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function () {
+        assert.strictEqual(arguments.length, 2);
+        throw syncError;
+      };
+
+      spanner.prepareGapicRequest_(configWithRequestId, (err, requestFn) => {
+        assert.ifError(err);
+        assert.throws(
+          () => {
+            requestFn();
+          },
+          (error: Error & {requestID?: string}) => {
+            assert.strictEqual(error, syncError);
+            assert.strictEqual(error.requestID, 'req-sync-789');
+            return true;
+          },
+        );
+        done();
+      });
+    });
+
+    it('should attach requestID to stream error events', done => {
+      replaceProjectIdTokenOverride = reqOpts => reqOpts;
+      const streamError = new Error('Stream failure') as Error & {
+        requestID?: string;
+      };
+      const fakeStream = new EventEmitter();
+
+      const configWithRequestId = Object.assign({}, CONFIG, {
+        headers: Object.assign({}, CONFIG.headers, {
+          'x-goog-spanner-request-id': 'req-stream-012',
+        }),
+      });
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function () {
+        assert.strictEqual(arguments.length, 2);
+        return fakeStream;
+      };
+
+      spanner.prepareGapicRequest_(configWithRequestId, (err, requestFn) => {
+        assert.ifError(err);
+        const stream = requestFn();
+        stream.on('error', (error: Error & {requestID?: string}) => {
+          assert.strictEqual(error, streamError);
+          assert.strictEqual(error.requestID, 'req-stream-012');
+          done();
+        });
+        fakeStream.emit('error', streamError);
+      });
+    });
+
+    it('should attach requestID to error when gapic method throws synchronously in callback mode', done => {
+      replaceProjectIdTokenOverride = reqOpts => reqOpts;
+      const syncError = new Error('Sync callback failure') as Error & {
+        requestID?: string;
+      };
+
+      const configWithRequestId = Object.assign({}, CONFIG, {
+        headers: Object.assign({}, CONFIG.headers, {
+          'x-goog-spanner-request-id': 'req-sync-callback-123',
+        }),
+      });
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function () {
+        assert.strictEqual(arguments.length, 3);
+        throw syncError;
+      };
+
+      spanner.prepareGapicRequest_(configWithRequestId, (err, requestFn) => {
+        assert.ifError(err);
+        assert.throws(
+          () => {
+            requestFn(assert.ifError);
+          },
+          (error: Error & {requestID?: string}) => {
+            assert.strictEqual(error, syncError);
+            assert.strictEqual(error.requestID, 'req-sync-callback-123');
+            return true;
+          },
+        );
+        done();
+      });
+    });
+
+    it('should preserve and forward cancel method on cancellable promises', done => {
+      replaceProjectIdTokenOverride = reqOpts => reqOpts;
+      let cancelInvoked = false;
+      const cancellablePromise = Promise.resolve('ok') as Promise<string> & {
+        cancel: () => void;
+      };
+      cancellablePromise.cancel = () => {
+        cancelInvoked = true;
+      };
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function () {
+        return cancellablePromise;
+      };
+
+      spanner.prepareGapicRequest_(CONFIG, (err, requestFn) => {
+        assert.ifError(err);
+        const result = requestFn();
+        assert.strictEqual(typeof result.cancel, 'function');
+        result.cancel();
+        assert.strictEqual(cancelInvoked, true);
+        done();
+      });
+    });
+
+    it('should recognize duck-typed thenable and attach requestID on rejection', async () => {
+      replaceProjectIdTokenOverride = reqOpts => reqOpts;
+      const thenableError = new Error('Thenable error') as Error & {
+        requestID?: string;
+      };
+      const customThenable = {
+        then: (
+          _onFulfilled?: Function | null,
+          onRejected?: (error: unknown) => unknown,
+        ) => {
+          return Promise.reject(thenableError).then(null, onRejected);
+        },
+      };
+
+      const configWithRequestId = Object.assign({}, CONFIG, {
+        headers: Object.assign({}, CONFIG.headers, {
+          'x-goog-spanner-request-id': 'req-thenable-789',
+        }),
+      });
+
+      FAKE_GAPIC_CLIENT[CONFIG.method] = function () {
+        return customThenable;
+      };
+
+      const requestFn = await new Promise<Function>((resolve, reject) => {
+        spanner.prepareGapicRequest_(configWithRequestId, (err, fn) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(fn);
+          }
+        });
+      });
+
+      await assert.rejects(
+        async () => {
+          await requestFn();
+        },
+        (error: Error & {requestID?: string}) => {
+          assert.strictEqual(error, thenableError);
+          assert.strictEqual(error.requestID, 'req-thenable-789');
+          return true;
+        },
+      );
+    });
   });
 
   describe('request', () => {
@@ -2301,7 +2569,7 @@ describe('Spanner', () => {
         });
       });
 
-      it('should resolve the promise with the request fn', () => {
+      it('should resolve the promise with the request fn', async () => {
         const gapicRequestFnResult = {};
 
         function gapicRequestFn() {
@@ -2312,9 +2580,8 @@ describe('Spanner', () => {
           callback(null, gapicRequestFn);
         };
 
-        return spanner.request(CONFIG).then(result => {
-          assert.strictEqual(result, gapicRequestFnResult);
-        });
+        const result = await spanner.request(CONFIG);
+        assert.strictEqual(result, gapicRequestFnResult);
       });
     });
   });

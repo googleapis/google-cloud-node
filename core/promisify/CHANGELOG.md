@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/promisify-v6.0.1...promisify-v6.1.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/promisify-v6.0.0...promisify-v6.0.1) (2026-08-10)
 
 

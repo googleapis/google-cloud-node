@@ -334,7 +334,7 @@ type PrecommitTokenProvider =
 export class Snapshot extends EventEmitter {
   protected _options!: spannerClient.spanner.v1.ITransactionOptions;
   protected _seqno = 1;
-  protected _waitingRequests: Array<() => void>;
+  protected _waitingRequests: Array<(err?: Error) => void>;
   protected _inlineBeginStarted;
   protected _useInRunner = false;
   protected _latestPreCommitToken:
@@ -438,35 +438,12 @@ export class Snapshot extends EventEmitter {
           },
         },
       };
-      this.request = (config: any, callback?: Function) => {
-        let gaxOpts;
-        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
-          gaxOpts = this._bindGaxOpts as any;
-        } else {
-          gaxOpts = injectGaxOpt(
-            config.gaxOpts,
-            'affinityKey',
-            this._affinityKey,
-          );
-        }
-        config = Object.assign({}, config, {gaxOpts});
-        return session.request(config, callback);
-      };
-
-      this.requestStream = (config: any) => {
-        let gaxOpts;
-        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
-          gaxOpts = this._bindGaxOpts as any;
-        } else {
-          gaxOpts = injectGaxOpt(
-            config.gaxOpts,
-            'affinityKey',
-            this._affinityKey,
-          );
-        }
-        config = Object.assign({}, config, {gaxOpts});
-        return session.requestStream(config);
-      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.request = (config: any, callback?: Function) =>
+        session.request(this._applyAffinityGaxOpts(config), callback);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.requestStream = (config: any) =>
+        session.requestStream(this._applyAffinityGaxOpts(config));
     } else {
       this.request = session.request.bind(session);
       this.requestStream = session.requestStream.bind(session);
@@ -485,6 +462,38 @@ export class Snapshot extends EventEmitter {
     };
     this._latestPreCommitToken = null;
     this._mutationKey = null;
+  }
+
+  /**
+   * Binds the multiplexed session affinity key to the gax options of an
+   * outgoing request, so that all requests of this transaction are routed to
+   * the same gRPC channel.
+   *
+   * `config` is always a request descriptor that was freshly constructed by the
+   * caller for this one RPC (and {@link Spanner#prepareGapicRequest_} already
+   * modifies `config.headers` in place), so the affinity key is assigned
+   * directly instead of allocating a copy of the descriptor per request.
+   *
+   * @private
+   *
+   * @param {object} config The request configuration.
+   * @returns {object} The same request configuration.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _applyAffinityGaxOpts(config: any): any {
+    if (!config) {
+      return config;
+    }
+    if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
+      config.gaxOpts = this._bindGaxOpts;
+    } else {
+      config.gaxOpts = injectGaxOpt(
+        config.gaxOpts,
+        'affinityKey',
+        this._affinityKey,
+      );
+    }
+    return config;
   }
 
   protected _updatePrecommitToken(resp: PrecommitTokenProvider): void {
@@ -1116,7 +1125,7 @@ export class Snapshot extends EventEmitter {
     }
 
     this.ended = true;
-    this._releaseWaitingRequests();
+    this._releaseWaitingRequests(new Error('Transaction has ended.'));
     process.nextTick(() => this.emit('end'));
 
     if (this._affinityKey) {
@@ -2175,6 +2184,7 @@ export class Snapshot extends EventEmitter {
    * @returns {object}
    */
   static encodeParams(request: ExecuteSqlRequest) {
+    const isUuidUntyped = codec.isUuidUntypedEnv();
     const typeMap = request.types || {};
 
     const params: p.IStruct = {fields: request.params?.fields || {}};
@@ -2188,7 +2198,7 @@ export class Snapshot extends EventEmitter {
         const value = request.params![param];
 
         if (!typeMap[param]) {
-          typeMap[param] = codec.getType(value);
+          typeMap[param] = codec.getType(value, isUuidUntyped);
         }
         fields[param] = codec.encode(value);
       });
@@ -2199,7 +2209,7 @@ export class Snapshot extends EventEmitter {
     if (!isEmpty(typeMap)) {
       Object.keys(typeMap).forEach(param => {
         const type = typeMap[param];
-        if (process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] === 'true') {
+        if (isUuidUntyped) {
           const typeObject = codec.createTypeObject(type);
           if (
             (type.child &&
@@ -2290,7 +2300,11 @@ export class Snapshot extends EventEmitter {
         read() {},
       });
 
-      this._waitingRequests.push(() => {
+      this._waitingRequests.push((err?: Error) => {
+        if (err) {
+          streamProxy.destroy(err);
+          return;
+        }
         makeRequest(resumeToken)
           .on('data', chunk => streamProxy.emit('data', chunk))
           .on('error', err => streamProxy.emit('error', err))
@@ -2301,10 +2315,10 @@ export class Snapshot extends EventEmitter {
     };
   }
 
-  _releaseWaitingRequests() {
+  _releaseWaitingRequests(err?: Error) {
     while (this._waitingRequests.length > 0) {
       const request = this._waitingRequests.shift();
-      request?.();
+      request?.(err);
     }
   }
 

@@ -17,8 +17,11 @@ import * as os from 'os';
 import * as process from 'process';
 import {MeterProvider, MetricReader} from '@opentelemetry/sdk-metrics';
 import {Counter, Histogram, context, ROOT_CONTEXT} from '@opentelemetry/api';
-import {detectResources, Resource} from '@opentelemetry/resources';
-import {GcpDetectorSync} from '@google-cloud/opentelemetry-resource-util';
+import {
+  detectResources,
+  resourceFromAttributes,
+} from '@opentelemetry/resources';
+import {gcpDetector} from '@opentelemetry/resource-detector-gcp';
 import * as Constants from './constants';
 import {MetricsTracer} from './metrics-tracer';
 const version = require('../../../package.json').version;
@@ -51,9 +54,13 @@ export class MetricsTracerFactory {
   private _clientName: string;
   private _clientUid: string;
   private _location = 'global';
+  private _locationPromise: Promise<string> | null = null;
+  private _metricReaders: MetricReader[] = [];
   private _projectId: string;
   private _currentOperationTracers = new Map();
   private _currentOperationLastUpdatedMs = new Map();
+  private _attributesCache: Map<string, Map<string, Record<string, string>>> =
+    new Map();
   private _intervalTracerCleanup: NodeJS.Timeout;
   public static enabled = true;
 
@@ -70,12 +77,18 @@ export class MetricsTracerFactory {
 
     // Only perform async call to retrieve location is metrics are enabled.
     if (MetricsTracerFactory.enabled) {
-      (async () => {
-        const location = await MetricsTracerFactory._detectClientLocation();
-        this._location = location.length > 0 ? location : 'global';
-      })().catch(error => {
-        throw error;
-      });
+      this._locationPromise = MetricsTracerFactory._detectClientLocation()
+        .then(location => {
+          this._location = location.length > 0 ? location : 'global';
+          return this._location;
+        })
+        .catch(error => {
+          console.warn('Unable to detect location.', error);
+          return this._location;
+        })
+        .finally(() => {
+          this._locationPromise = null;
+        });
     }
 
     this._clientHash = MetricsTracerFactory._generateClientHash(
@@ -111,29 +124,54 @@ export class MetricsTracerFactory {
       MetricsTracerFactory._instance = new MetricsTracerFactory(projectId);
     }
 
-    return MetricsTracerFactory!._instance;
+    return MetricsTracerFactory._instance;
   }
 
   /**
    * Returns the MeterProvider, creating it and metric instruments if not already initialized.
    * Client-wide attributes that are known at this time are cached to be provided to all MetricsTracers.
+   *
+   * If called again with readers when the existing MeterProvider has none, the provider is
+   * recreated with those readers. If readers are already attached, additional readers are ignored.
+   *
    * @param readers Optional array of MetricReader instances to attach to the MeterProvider.
    * @returns The OTEL MeterProvider instance.
    */
   public getMeterProvider(readers: MetricReader[] = []): MeterProvider {
+    if (this._meterProvider !== null && readers.length > 0) {
+      if (this._metricReaders.length === 0) {
+        const staleMeterProvider = this._meterProvider;
+        this._meterProvider = null;
+        staleMeterProvider.shutdown().catch(error => {
+          console.warn(
+            'Unable to shut down the previous MeterProvider.',
+            error,
+          );
+        });
+      } else {
+        console.warn(
+          'MeterProvider is already initialized with metric readers. The ' +
+            'additional readers passed to getMeterProvider() are ignored.',
+        );
+      }
+    }
+
     if (this._meterProvider === null) {
-      const resource = new Resource({
+      const resource = resourceFromAttributes({
         [Constants.MONITORED_RES_LABEL_KEY_PROJECT]: this._projectId,
         [Constants.MONITORED_RES_LABEL_KEY_CLIENT_HASH]: this._clientHash,
-        [Constants.MONITORED_RES_LABEL_KEY_LOCATION]: this._location,
+        [Constants.MONITORED_RES_LABEL_KEY_LOCATION]:
+          this._locationPromise ?? this._location,
         [Constants.MONITORED_RES_LABEL_KEY_INSTANCE]: 'unknown',
         [Constants.MONITORED_RES_LABEL_KEY_INSTANCE_CONFIG]: 'unknown',
       });
+      void resource.waitForAsyncAttributes?.();
       this._meterProvider = new MeterProvider({
         resource: resource,
         readers: readers,
         views: Constants.METRIC_VIEWS,
       });
+      this._metricReaders = readers;
       this._createMetricInstruments();
     }
     return this._meterProvider;
@@ -153,11 +191,13 @@ export class MetricsTracerFactory {
    */
   public async resetMeterProvider() {
     if (this._meterProvider !== null) {
-      await this._meterProvider!.shutdown();
+      await this._meterProvider.shutdown();
     }
     this._meterProvider = null;
+    this._metricReaders = [];
     this._currentOperationTracers = new Map();
     this._currentOperationLastUpdatedMs = new Map();
+    this._attributesCache = new Map();
   }
 
   /**
@@ -217,6 +257,20 @@ export class MetricsTracerFactory {
   }
 
   /**
+   * Returns the detected client location.
+   */
+  get location(): string {
+    return this._location;
+  }
+
+  /**
+   * Returns true if the MeterProvider is initialized with at least one MetricReader.
+   */
+  public hasMetricReaders(): boolean {
+    return this._metricReaders.length > 0;
+  }
+
+  /**
    * Creates a new MetricsTracer for a given resource name and method, and stores it for later retrieval.
    * Returns null if metrics are disabled.
    * @param formattedName The formatted resource name (e.g., full database path).
@@ -238,6 +292,12 @@ export class MetricsTracerFactory {
     }
 
     const {instance, database} = this.getInstanceAttributes(formattedName);
+    const cacheKey = `${instance}/${database}/${method}`;
+    let attributesCache = this._attributesCache.get(cacheKey);
+    if (!attributesCache) {
+      attributesCache = new Map<string, Record<string, string>>();
+      this._attributesCache.set(cacheKey, attributesCache);
+    }
     const tracer = new MetricsTracer(
       this._instrumentAttemptCounter,
       this._instrumentAttemptLatency,
@@ -253,6 +313,7 @@ export class MetricsTracerFactory {
       this._projectId,
       method,
       operationRequest,
+      attributesCache,
     );
     this._currentOperationTracers.set(operationRequest, tracer);
     this._currentOperationLastUpdatedMs.set(operationRequest, Date.now());
@@ -453,22 +514,26 @@ export class MetricsTracerFactory {
   }
 
   /**
-   * Gets the location (region) of the client, otherwise returns to the "global" region.
-   * Uses GcpDetectorSync to detect the region from the environment.
-   * @returns The detected region string, or "global" if not found.
+   * Gets the location (region or zone) of the client, or defaults to "global".
+   * Uses the GCP resource detector to detect the location from the environment.
+   * Checks `cloud.region` first and falls back to `cloud.availability_zone`
+   * for zonal GKE clusters where `cloud.region` is not set.
+   * @returns The detected location string, or "global" if not found.
    */
   private static async _detectClientLocation(): Promise<string> {
     const defaultRegion = 'global';
     try {
       const resource = await detectResources({
-        detectors: [new GcpDetectorSync()],
+        detectors: [gcpDetector],
       });
 
       await resource?.waitForAsyncAttributes?.();
 
-      const region = resource.attributes[Constants.ATTR_CLOUD_REGION];
-      if (typeof region === 'string' && region) {
-        return region;
+      const location =
+        resource.attributes[Constants.ATTR_CLOUD_REGION] ??
+        resource.attributes[Constants.ATTR_CLOUD_AVAILABILITY_ZONE];
+      if (typeof location === 'string' && location) {
+        return location;
       }
     } catch (err) {
       console.warn('Unable to detect location.', err);
