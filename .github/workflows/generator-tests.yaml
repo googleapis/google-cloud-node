@@ -87,6 +87,7 @@ jobs:
         set -ex
         npm install -g pnpm@10.0.0 --silent
         cp ../../../.mocharc.cjs .
+        cp -r ../../../bin .
         unzip ~/artifacts/outputs.zip -d library
         FAIL=0
         PIDS=()
@@ -122,6 +123,7 @@ jobs:
       run: |
         set -ex
         cp ../../../.mocharc.cjs .
+        cp -r ../../../bin .
         FAIL=0
         PIDS=()
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
