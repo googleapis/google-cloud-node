@@ -128,6 +128,12 @@ export class MetricsTracer {
    */
   private _clientAttributes: {[key: string]: string} = {};
 
+  /**
+   * Cached OTel attribute objects keyed by status name, avoiding repeated
+   * object allocations on every metric recording call.
+   */
+  private _attributesByStatus: Map<string, Record<string, string>>;
+
   /*
    * The current GFE latency associated with this tracer.
    */
@@ -166,10 +172,13 @@ export class MetricsTracer {
     private _projectId: string,
     private _methodName: string,
     private _request: string,
+    attributesCache?: Map<string, Record<string, string>>,
   ) {
     this._clientAttributes[METRIC_LABEL_KEY_DATABASE] = _database;
     this._clientAttributes[METRIC_LABEL_KEY_METHOD] = _methodName;
     this._clientAttributes[MONITORED_RES_LABEL_KEY_INSTANCE] = _instance;
+    this._attributesByStatus =
+      attributesCache ?? new Map<string, Record<string, string>>();
   }
 
   /**
@@ -222,8 +231,8 @@ export class MetricsTracer {
    * Increments the attempt count and creates a new MetricAttemptTracer.
    */
   public recordAttemptStart() {
-    if (!this.enabled) return;
-    this.currentOperation!.createNewAttempt();
+    if (!this.enabled || !this.currentOperation) return;
+    this.currentOperation.createNewAttempt();
   }
 
   /**
@@ -232,12 +241,13 @@ export class MetricsTracer {
    * @param status The status code of the attempt (default: Status.OK).
    */
   public recordAttemptCompletion(statusCode: Status = Status.OK) {
-    if (!this.enabled) return;
-    this.currentOperation!.currentAttempt!.status = Status[statusCode];
+    if (!this.enabled || !this.currentOperation?.currentAttempt) return;
+    const currentAttempt = this.currentOperation.currentAttempt;
+    currentAttempt.status = Status[statusCode] ?? Status[Status.UNKNOWN];
     const attemptAttributes = this._createAttemptOtelAttributes();
     const endTime = performance.now();
     const attemptLatencyMilliseconds = this._getMillisecondTimeDifference(
-      this.currentOperation!.currentAttempt!.startTime,
+      currentAttempt.startTime,
       endTime,
     );
     this.instrumentAttemptLatency?.record(
@@ -268,7 +278,7 @@ export class MetricsTracer {
     const endTime = performance.now();
     const operationAttributes = this._createOperationOtelAttributes();
     const operationLatencyMilliseconds = this._getMillisecondTimeDifference(
-      this.currentOperation!.startTime,
+      this.currentOperation.startTime,
       endTime,
     );
 
@@ -277,7 +287,7 @@ export class MetricsTracer {
       operationLatencyMilliseconds,
       operationAttributes,
     );
-    MetricsTracerFactory.getInstance(this._projectId)!.clearCurrentTracer(
+    MetricsTracerFactory.getInstance(this._projectId)?.clearCurrentTracer(
       this._request,
     );
   }
@@ -314,6 +324,35 @@ export class MetricsTracer {
   }
 
   /**
+   * Returns a cached set of OTEL attributes for the given status, avoiding
+   * repeated object cloning on every metric record/add call.
+   *
+   * @param status Optional status code (as numeric Status enum or status name string).
+   * @returns The cached attributes object.
+   */
+  private _getAttributesForStatus(
+    status?: Status | string,
+  ): Record<string, string> {
+    const statusString =
+      typeof status === 'number'
+        ? (Status[status] ?? Status[Status.UNKNOWN])
+        : typeof status === 'string'
+          ? status
+          : undefined;
+    const cacheKey = statusString ?? '';
+    let attributes = this._attributesByStatus.get(cacheKey);
+    if (!attributes) {
+      const newAttributes: Record<string, string> = {...this._clientAttributes};
+      if (statusString !== undefined) {
+        newAttributes[METRIC_LABEL_KEY_STATUS] = statusString;
+      }
+      attributes = Object.freeze(newAttributes);
+      this._attributesByStatus.set(cacheKey, attributes);
+    }
+    return attributes;
+  }
+
+  /**
    * Records the provided GFE latency.
    * @param latency The GFE latency in milliseconds.
    */
@@ -326,8 +365,7 @@ export class MetricsTracer {
       return;
     }
 
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    const attributes = this._getAttributesForStatus(statusCode);
 
     this._instrumentGfeLatency?.record(this.gfeLatency, attributes);
     this.gfeLatency = null; // Reset latency value
@@ -338,8 +376,7 @@ export class MetricsTracer {
    */
   public recordGfeConnectivityErrorCount(statusCode: Status) {
     if (!this.enabled) return;
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    const attributes = this._getAttributesForStatus(statusCode);
     this._instrumentGfeConnectivityErrorCount?.add(1, attributes);
   }
 
@@ -348,8 +385,7 @@ export class MetricsTracer {
    */
   public recordAfeConnectivityErrorCount(statusCode: Status) {
     if (!this.enabled || !Spanner.isAFEServerTimingEnabled()) return;
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    const attributes = this._getAttributesForStatus(statusCode);
     this._instrumentAfeConnectivityErrorCount?.add(1, attributes);
   }
 
@@ -366,8 +402,7 @@ export class MetricsTracer {
       return;
     }
 
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] = Status[statusCode];
+    const attributes = this._getAttributesForStatus(statusCode);
 
     this._instrumentAfeLatency?.record(this.afeLatency, attributes);
     this.afeLatency = null; // Reset latency value
@@ -379,10 +414,9 @@ export class MetricsTracer {
    */
   private _createOperationOtelAttributes() {
     if (!this.enabled) return {};
-    const attributes = {...this._clientAttributes};
-    attributes[METRIC_LABEL_KEY_STATUS] =
-      this.currentOperation!.currentAttempt?.status ?? Status[Status.UNKNOWN];
-    return attributes;
+    const status =
+      this.currentOperation?.currentAttempt?.status ?? Status[Status.UNKNOWN];
+    return this._getAttributesForStatus(status);
   }
 
   /**
@@ -393,11 +427,11 @@ export class MetricsTracer {
    */
   private _createAttemptOtelAttributes() {
     if (!this.enabled) return {};
-    const attributes = {...this._clientAttributes};
-    if (this.currentOperation?.currentAttempt === null) return attributes;
-    attributes[METRIC_LABEL_KEY_STATUS] =
-      this.currentOperation!.currentAttempt.status;
-
-    return attributes;
+    if (!this.currentOperation?.currentAttempt) {
+      return this._getAttributesForStatus();
+    }
+    return this._getAttributesForStatus(
+      this.currentOperation.currentAttempt.status,
+    );
   }
 }
