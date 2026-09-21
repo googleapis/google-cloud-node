@@ -398,3 +398,125 @@ describe('FieldValue.serverTimestamp()', () => {
     FieldValue.serverTimestamp(),
   );
 });
+
+describe('FieldValue sentinel type guards', () => {
+  const serverTimestampSentinel = FieldValue.serverTimestamp();
+  const positiveIncrement = FieldValue.increment(5);
+  const negativeIncrement = FieldValue.increment(-5);
+  const zeroIncrement = FieldValue.increment(0);
+  const arrayUnionSentinel = FieldValue.arrayUnion('foo');
+  const arrayRemoveSentinel = FieldValue.arrayRemove('foo');
+  const deleteSentinel = FieldValue.delete();
+
+  describe('isServerTimestamp()', () => {
+    it('matches only server-timestamp sentinels', () => {
+      expect(FieldValue.isServerTimestamp(serverTimestampSentinel)).to.be.true;
+      expect(FieldValue.isServerTimestamp(positiveIncrement)).to.be.false;
+      expect(FieldValue.isServerTimestamp(arrayUnionSentinel)).to.be.false;
+      expect(FieldValue.isServerTimestamp(arrayRemoveSentinel)).to.be.false;
+      expect(FieldValue.isServerTimestamp(deleteSentinel)).to.be.false;
+    });
+
+    it('returns false for non-sentinel values', () => {
+      expect(FieldValue.isServerTimestamp(undefined)).to.be.false;
+      expect(FieldValue.isServerTimestamp(null)).to.be.false;
+      expect(FieldValue.isServerTimestamp(0)).to.be.false;
+      expect(FieldValue.isServerTimestamp('serverTimestamp')).to.be.false;
+      expect(FieldValue.isServerTimestamp({})).to.be.false;
+      expect(FieldValue.isServerTimestamp(new Date())).to.be.false;
+    });
+  });
+
+  describe('isIncrement()', () => {
+    it('matches any increment sentinel regardless of sign', () => {
+      expect(FieldValue.isIncrement(positiveIncrement)).to.be.true;
+      expect(FieldValue.isIncrement(negativeIncrement)).to.be.true;
+      expect(FieldValue.isIncrement(zeroIncrement)).to.be.true;
+    });
+
+    it('does not match other sentinels or primitives', () => {
+      expect(FieldValue.isIncrement(serverTimestampSentinel)).to.be.false;
+      expect(FieldValue.isIncrement(arrayUnionSentinel)).to.be.false;
+      expect(FieldValue.isIncrement(arrayRemoveSentinel)).to.be.false;
+      expect(FieldValue.isIncrement(deleteSentinel)).to.be.false;
+      expect(FieldValue.isIncrement(5)).to.be.false;
+      expect(FieldValue.isIncrement(null)).to.be.false;
+      expect(FieldValue.isIncrement(undefined)).to.be.false;
+      expect(FieldValue.isIncrement({})).to.be.false;
+    });
+  });
+
+  describe('isDecrement()', () => {
+    it('matches only increment sentinels with a negative operand', () => {
+      expect(FieldValue.isDecrement(negativeIncrement)).to.be.true;
+      expect(FieldValue.isDecrement(positiveIncrement)).to.be.false;
+      expect(FieldValue.isDecrement(zeroIncrement)).to.be.false;
+    });
+
+    it('is a subset of isIncrement()', () => {
+      expect(FieldValue.isDecrement(negativeIncrement)).to.be.true;
+      expect(FieldValue.isIncrement(negativeIncrement)).to.be.true;
+    });
+
+    it('does not match other sentinels or primitives', () => {
+      expect(FieldValue.isDecrement(serverTimestampSentinel)).to.be.false;
+      expect(FieldValue.isDecrement(arrayUnionSentinel)).to.be.false;
+      expect(FieldValue.isDecrement(arrayRemoveSentinel)).to.be.false;
+      expect(FieldValue.isDecrement(deleteSentinel)).to.be.false;
+      expect(FieldValue.isDecrement(-5)).to.be.false;
+      expect(FieldValue.isDecrement(null)).to.be.false;
+      expect(FieldValue.isDecrement(undefined)).to.be.false;
+    });
+  });
+
+  describe('isArrayUnion()', () => {
+    it('matches only array-union sentinels', () => {
+      expect(FieldValue.isArrayUnion(arrayUnionSentinel)).to.be.true;
+      expect(FieldValue.isArrayUnion(arrayRemoveSentinel)).to.be.false;
+      expect(FieldValue.isArrayUnion(positiveIncrement)).to.be.false;
+      expect(FieldValue.isArrayUnion(serverTimestampSentinel)).to.be.false;
+      expect(FieldValue.isArrayUnion(deleteSentinel)).to.be.false;
+    });
+
+    it('returns false for non-sentinel values', () => {
+      expect(FieldValue.isArrayUnion(['foo'])).to.be.false;
+      expect(FieldValue.isArrayUnion(null)).to.be.false;
+      expect(FieldValue.isArrayUnion(undefined)).to.be.false;
+      expect(FieldValue.isArrayUnion({})).to.be.false;
+    });
+  });
+
+  describe('isArrayRemove()', () => {
+    it('matches only array-remove sentinels', () => {
+      expect(FieldValue.isArrayRemove(arrayRemoveSentinel)).to.be.true;
+      expect(FieldValue.isArrayRemove(arrayUnionSentinel)).to.be.false;
+      expect(FieldValue.isArrayRemove(positiveIncrement)).to.be.false;
+      expect(FieldValue.isArrayRemove(serverTimestampSentinel)).to.be.false;
+      expect(FieldValue.isArrayRemove(deleteSentinel)).to.be.false;
+    });
+
+    it('returns false for non-sentinel values', () => {
+      expect(FieldValue.isArrayRemove(['foo'])).to.be.false;
+      expect(FieldValue.isArrayRemove(null)).to.be.false;
+      expect(FieldValue.isArrayRemove(undefined)).to.be.false;
+      expect(FieldValue.isArrayRemove({})).to.be.false;
+    });
+  });
+
+  describe('isDelete()', () => {
+    it('matches only delete sentinels', () => {
+      expect(FieldValue.isDelete(deleteSentinel)).to.be.true;
+      expect(FieldValue.isDelete(serverTimestampSentinel)).to.be.false;
+      expect(FieldValue.isDelete(positiveIncrement)).to.be.false;
+      expect(FieldValue.isDelete(arrayUnionSentinel)).to.be.false;
+      expect(FieldValue.isDelete(arrayRemoveSentinel)).to.be.false;
+    });
+
+    it('returns false for non-sentinel values', () => {
+      expect(FieldValue.isDelete(null)).to.be.false;
+      expect(FieldValue.isDelete(undefined)).to.be.false;
+      expect(FieldValue.isDelete('delete')).to.be.false;
+      expect(FieldValue.isDelete({})).to.be.false;
+    });
+  });
+});
