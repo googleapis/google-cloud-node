@@ -79,6 +79,7 @@
     "protobufjs": "^8.6.6"
   },
   "pnpm": {
+    "onlyBuiltDependencies": [],
     "overrides": {
       "protobufjs": "^8.6.6"
     }
