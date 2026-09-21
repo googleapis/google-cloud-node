@@ -430,6 +430,45 @@ describe('Spanner with mock server', () => {
       }
     });
 
+    it('should invoke promise-based GAPIC request exactly once against mock server', async () => {
+      const databaseName =
+        'projects/test-project/instances/instance/databases/gapic-test-db';
+      await new Promise<void>((resolve, reject) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (spanner as any).prepareGapicRequest_(
+          {
+            client: 'SpannerClient',
+            method: 'createSession',
+            reqOpts: {
+              database: databaseName,
+            },
+            headers: {
+              'x-goog-spanner-request-id': `1.${randIdForProcess}.1.1.1.1`,
+            },
+          },
+          async (err: Error | null, requestFn: Function) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            try {
+              const session = await requestFn();
+              assert.ok(session);
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+      const createSessionRequests = spannerMock
+        .getRequests()
+        .filter(
+          req => (req as v1.CreateSessionRequest).database === databaseName,
+        );
+      assert.strictEqual(createSessionRequests.length, 1);
+    });
+
     it('should execute query', async () => {
       // The query to execute
       const query = {
