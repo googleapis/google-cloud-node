@@ -1407,5 +1407,123 @@ describe('grpc-fallback', () => {
       assert.strictEqual(err.code, Status.INTERNAL);
       assert.strictEqual(err.httpStatusCode, 500);
     });
+
+    it('should record the http status of a rejected 401', async () => {
+      // 401 and 403 are rejected on purpose so the auth client can refresh
+      // credentials, so they never reach the decoder. The status has to be
+      // recorded off the rejection instead, or telemetry reports none at all
+      // for precisely the two statuses an auth problem produces.
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({
+            error: {code: 401, message: 'Invalid authentication credentials'},
+          }),
+          {status: 401},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.UNAUTHENTICATED);
+      assert.strictEqual(err.httpStatusCode, 401);
+    });
+
+    it('should record the http status of a rejected 403', async () => {
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          JSON.stringify({error: {code: 403, message: 'Permission denied'}}),
+          {status: 403},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.PERMISSION_DENIED);
+      assert.strictEqual(err.httpStatusCode, 403);
+    });
+
+    it('should classify an HTML error response by its http status', async () => {
+      // A 404 from a GFE or a proxy, rather than from the API, comes back as an
+      // HTML page. Parsing it threw a SyntaxError before any status was
+      // recorded, so the error reported no HTTP status and was classified as an
+      // UNAVAILABLE transport failure instead of NOT_FOUND.
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(
+          '<!DOCTYPE html><html><title>Error 404 (Not Found)</title></html>',
+          {status: 404, headers: {'Content-Type': 'text/html'}},
+        ),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.NOT_FOUND);
+      assert.strictEqual(err.httpStatusCode, 404);
+      assert.notStrictEqual(err.code, Status.UNAVAILABLE);
+      // The body identifies who answered, so it is kept for diagnosis.
+      assert.match(err.message, /Error 404 \(Not Found\)/);
+      assert(err.cause instanceof SyntaxError);
+    });
+
+    it('should classify an HTML 502 as INTERNAL rather than a transport failure', async () => {
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response('<html><title>502 Bad Gateway</title></html>', {
+          status: 502,
+          headers: {'Content-Type': 'text/html'},
+        }),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.INTERNAL);
+      assert.strictEqual(err.httpStatusCode, 502);
+    });
+
+    it('should truncate a long undecodable error body', async () => {
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(`<html>${'x'.repeat(5000)}</html>`, {status: 502}),
+      );
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.httpStatusCode, 502);
+      assert.match(err.message, /truncated/);
+      // The page must not be pasted into the message in full.
+      assert(
+        err.message.length < 2000,
+        `message was ${err.message.length} characters long`,
+      );
+    });
+
+    it('should record the http status of an empty error response', async () => {
+      setMockFallbackHttpResponse(gaxGrpc, new Response(null, {status: 502}));
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.INTERNAL);
+      assert.strictEqual(err.httpStatusCode, 502);
+    });
+
+    it('should record the http status when the error body is not a JSON object', async () => {
+      // `null` parses, so it gets past JSON.parse and fails where the body is
+      // indexed instead. The status must survive that too.
+      setMockFallbackHttpResponse(gaxGrpc, new Response('null', {status: 500}));
+
+      const err = await callEcho();
+
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, Status.INTERNAL);
+      assert.strictEqual(err.httpStatusCode, 500);
+    });
   });
 });

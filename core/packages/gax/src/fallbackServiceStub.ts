@@ -150,13 +150,17 @@ function _toGoogleError(err: unknown, outcome: CallOutcome): unknown {
 
   // Errors that carry an HTTP status map through the standard HTTP-to-gRPC
   // table. Checked first: a response arrived, so it outranks the abort
-  // bookkeeping below.
+  // bookkeeping below. The received status is also kept as-is, because the
+  // table is lossy — it collapses whole ranges — and this is the only place it
+  // can be recorded for a 401 or a 403, which `validateStatus` rejects on
+  // purpose (see below) and which therefore never reach the decoder.
   const httpStatus =
     typeof fetchError.status === 'number'
       ? fetchError.status
       : fetchError.response?.status;
   if (typeof httpStatus === 'number') {
     error.code = rpcCodeFromHttpStatusCode(httpStatus);
+    error.httpStatusCode = httpStatus;
     return error;
   }
 
