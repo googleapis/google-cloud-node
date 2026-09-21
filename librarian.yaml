@@ -76,6 +76,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      package_name: '@google-ads/admanager'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
     version: 0.6.0
@@ -84,6 +85,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      package_name: '@google-ads/datamanager'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/datamanager/latest
   - name: google-ai-generativelanguage
     version: 4.1.0
@@ -96,6 +98,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
+      package_name: '@google-ai/generativelanguage'
       client_documentation_override: https://developers.generativeai.google/guide/palm_api_overview
   - name: google-analytics-admin
     version: 10.1.0
@@ -108,6 +111,7 @@ libraries:
       dependencies:
         google-auth-library: ^10.0.0-rc.1
         server-destroy: ^1.0.1
+      package_name: '@google-analytics/admin'
       client_documentation_override: https://googleapis.dev/nodejs/analytics-admin/latest/
   - name: google-analytics-data
     version: 7.1.0
@@ -117,6 +121,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
+      package_name: '@google-analytics/data'
       client_documentation_override: https://googleapis.dev/nodejs/analytics-data/latest/
   - name: google-api-apikeys
     version: 3.1.0
@@ -192,6 +197,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v2
+      package_name: '@google-apps/meet'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/meet/latest
   - name: google-area120-tables
     version: 5.1.0
@@ -1994,6 +2000,8 @@ libraries:
     apis:
       - path: google/maps/isochrones/v1
     copyright_year: "2026"
+    nodejs:
+      package_name: '@google-maps/isochrones'
   - name: google-maps-mapmanagement
     version: 0.3.0
     apis:
@@ -2091,6 +2099,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      package_name: '@google-shopping/css'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/css/latest
   - name: google-shopping-merchant-accounts
     version: 4.0.0
