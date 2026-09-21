@@ -208,7 +208,7 @@ for subdir in ${subdirs[@]}; do
         # Internal codegen/JSDoc CLI tools in core/packages rely on Node-internal
         # Module.prototype.load (via jsdoc/requizzle) and are not runtime SDKs.
         if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
-            if [[ "${d}" == "core/packages/gapic-node-processing/" || "${d}" == "core/packages/tools/" ]]; then
+            if [[ "${d%/}" == "core/packages/gapic-node-processing" || "${d%/}" == "core/packages/tools" ]]; then
                 echo "Skipping internal CLI tool ${d} on Bun runtime"
                 continue
             fi
@@ -236,7 +236,7 @@ for subdir in ${subdirs[@]}; do
                         echo "run samples tests for core/packages in ${d}"
                         should_test=true
                     fi
-                elif ([[ "${d}" == core/packages/* ]] && [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]] && [[ "${TEST_TYPE}" == "units" ]]); then
+                elif [[ "${d}" == core/packages/* ]] && [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]] && [[ "${TEST_TYPE}" == "units" ]]; then
                     echo "change detected in core package ${d} for Bun ${TEST_TYPE} test"
                     should_test=true
                 elif [[ "${d}" == core/packages/* ]] || [[ "${d}" == core/dev-packages/* ]]; then
