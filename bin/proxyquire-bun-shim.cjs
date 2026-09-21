@@ -110,6 +110,9 @@ if (
     };
   }
 
+  // Override Bun's native AbortSignal.timeout so its abort reason DOMException
+  // uses the exact V8 message string ('The operation was aborted due to timeout')
+  // asserted by core/packages/gcp-metadata unit tests.
   if (
     typeof AbortSignal !== 'undefined' &&
     typeof AbortSignal.timeout === 'function' &&
@@ -197,7 +200,12 @@ if (
     if (typeof origDeepEqual === 'function' && typeof Headers !== 'undefined') {
       assert.deepEqual = function (actual, expected, message) {
         if (actual instanceof Headers && expected instanceof Headers) {
-          return;
+          return origDeepEqual.call(
+            this,
+            Object.fromEntries(actual.entries()),
+            Object.fromEntries(expected.entries()),
+            message,
+          );
         }
         return origDeepEqual.call(this, actual, expected, message);
       };
