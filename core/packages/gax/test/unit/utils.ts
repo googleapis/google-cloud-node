@@ -143,3 +143,80 @@ export function setMockFallbackResponse(
   const authClient = new MockedResponseAuthClient();
   gaxGrpc.auth = new GoogleAuth({authClient});
 }
+
+/**
+ * Makes a Fallback request fail the way the real transport does: by rejecting
+ * from the auth client rather than resolving with a failed response. This is
+ * what gaxios does for network-level failures, and for HTTP statuses that do
+ * not pass `validateStatus`.
+ *
+ * @param gaxGrpc The gRPC Client to use
+ * @param error The error the transport should reject with
+ * @returns The request options the transport was called with
+ */
+export function setMockFallbackError(gaxGrpc: GrpcClient, error: Error) {
+  const requestOptions: gaxios.GaxiosOptions[] = [];
+
+  class MockedErrorAuthClient extends PassThroughClient {
+    async request<T>(
+      opts: gaxios.GaxiosOptions,
+    ): Promise<gaxios.GaxiosResponse<T>> {
+      requestOptions.push(opts);
+      throw error;
+    }
+  }
+
+  const authClient = new MockedErrorAuthClient();
+  gaxGrpc.auth = new GoogleAuth({authClient});
+
+  return requestOptions;
+}
+
+/**
+ * Sets a response for a Fallback request, reproducing how gaxios decides
+ * between resolving and rejecting.
+ *
+ * Unlike {@link setMockFallbackResponse}, which always resolves, this applies
+ * the request's `validateStatus` predicate (defaulting to gaxios' own 2xx-only
+ * rule when the caller does not supply one) and rejects with a GaxiosError-shaped
+ * error when it fails. Transports that do not opt in to receiving error
+ * responses therefore see a rejection here, exactly as they would in production.
+ *
+ * @param gaxGrpc The gRPC Client to use
+ * @param response The Response object to use
+ */
+export function setMockFallbackHttpResponse(
+  gaxGrpc: GrpcClient,
+  response: Response,
+) {
+  class MockedHttpAuthClient extends PassThroughClient {
+    async request<T>(
+      opts: gaxios.GaxiosOptions,
+    ): Promise<gaxios.GaxiosResponse<T>> {
+      const validateStatus =
+        opts.validateStatus ??
+        ((status: number) => status >= 200 && status < 300);
+
+      if (!validateStatus(response.status)) {
+        throw Object.assign(
+          new Error(`Request failed with status code ${response.status}`),
+          {
+            status: response.status,
+            response: {status: response.status},
+          },
+        );
+      }
+
+      return Object.assign(response, {
+        config: {
+          headers: response.headers,
+          url: new URL(opts.url || 'https://example.com'),
+        },
+        data: response.body as T,
+      });
+    }
+  }
+
+  const authClient = new MockedHttpAuthClient();
+  gaxGrpc.auth = new GoogleAuth({authClient});
+}

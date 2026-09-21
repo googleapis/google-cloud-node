@@ -5,6 +5,238 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ecd5bfd0e8ad8d2cf3b9fe003f7e35f2bbd592f5",
+          "message": "Update cloud-spanner to minimum Node version of 22",
+          "issues": [
+            "9291"
+          ],
+          "scope": "Spanner",
+          "breakingChangeNote": "Update cloud-spanner to minimum Node version of 22 ([#9291](https://github.com/googleapis/google-cloud-node/issues/9291))"
+        },
+        {
+          "type": "perf",
+          "sha": "7085e03eb009a93b4368f5649472c0ac330d5a51",
+          "message": "Remove rest-parameter allocations in wrappedRequestFn",
+          "issues": [
+            "9365"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "1b1b411769fc0847e23a52cadaf3c6225ae281ea",
+          "message": "Optimize codec.getType and reuse type singletons",
+          "issues": [
+            "9366"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "dbbc55c508cf886863dff00e12ce362026515661",
+          "message": "Synchronous multiplexed session hand-off for non-stream callers",
+          "issues": [
+            "9362"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "11c257b5a64b0d360f2c9d47c412e59e9fd5a756",
+          "message": "Disable gRPC channelz by default",
+          "issues": [
+            "9320"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "a44180d659ff8734fcacd8e294fc9c8c0a181071",
+          "message": "Bypass gRPC message interception in metrics interceptor",
+          "issues": [
+            "9306"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "ed3a44e7f396b1f71aa29c8291a740aaab4fef0b",
+          "message": "Upgrade OpenTelemetry to v2",
+          "issues": [
+            "9329"
+          ],
+          "scope": "Spanner",
+          "breakingChangeNote": "upgrade OpenTelemetry to v2 ([#9329](https://github.com/googleapis/google-cloud-node/issues/9329))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "e205caa0-2f3d-4787-a0d1-e65c87dc6727",
+      "createTime": "2026-09-18T13:12:38.821Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "fe5ed0f2-7d0f-42df-822a-cd7e14a16432",
+      "createTime": "2026-09-17T14:33:17.947Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "435bcae6aa20c9fd50da0c8b67fe443c946e44cc",
+          "message": "Allow uninitialized client references in pipeline sources",
+          "issues": [
+            "9318"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "9cb091ce-93be-4b49-b3a2-10dc77c2d075",
+      "createTime": "2026-09-16T08:41:22.919Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "91ed9971-9c27-4a47-877b-91d005c6344f",
+      "createTime": "2026-09-16T21:15:48.434Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadidentity",
+      "id": "1bd7aaf0-35bb-4e49-943d-06135cd15c3c",
+      "createTime": "2026-09-16T21:15:48.409Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "99f6657d912f8fd44b96ae5199624f11f77ced09",
+          "message": "Remove unintentionally added file",
+          "issues": [
+            "9356"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "e65ad494-3267-4587-ba09-f2d381c7633a",
+      "createTime": "2026-09-16T21:15:48.368Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ftp",
+      "id": "75e7586e-5c2c-41fd-aac7-fc0f87a3b860",
+      "createTime": "2026-09-16T21:15:48.344Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2e6a231ce9440a9db56243e8eddcbe4f2377868",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9357"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9357](https://github.com/googleapis/google-cloud-node/issues/9357))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apptopology",
+      "id": "91d83216-7d84-4bd5-ab8f-d6a3e93e2c66",
+      "createTime": "2026-09-16T21:15:48.318Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "10b654f12f0d3355845d4cb0833f493d43368222",
+          "message": "Support CLOUD_RUN_WORKER_POOL residency detection and harden isAvailable error unwrapping",
+          "issues": [
+            "9349"
+          ],
+          "scope": "gcp-metadata"
+        },
+        {
+          "type": "fix",
+          "sha": "e0ff8c5ac1ca2be2f78ef2977cb2b16b43367639",
+          "message": "Update IsGoogleCloudServerless function to check for Cloud Run Worker Pools",
+          "issues": [
+            "9226"
+          ]
+        }
+      ],
+      "version": "9.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "576eda8c-e34d-47aa-9abc-8d41c83e55ba",
+      "createTime": "2026-09-16T21:15:48.282Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
           "message": "PNPM workspace",
           "issues": [
@@ -94899,5 +95131,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-09-15T17:49:40.964Z"
+  "updateTime": "2026-09-18T13:12:38.821Z"
 }

@@ -142,6 +142,11 @@ async function main(processArgv: string[]) {
     )
     .string('resumable_upload_methods')
     .alias('resumable_upload_methods', 'resumable-upload-methods')
+      'enable_telemetry_tracing',
+      'Set to true to generate a library instrumented with telemetry tracing.',
+    )
+    .boolean('enable-telemetry-tracing')
+    .alias('enable-telemetry-tracing', 'enable_telemetry_tracing')
     .describe('protoc', 'Path to protoc binary')
     .usage('Usage: $0 -I /path/to/googleapis')
     .usage('  --output_dir /path/to/output_directory')
@@ -166,6 +171,8 @@ async function main(processArgv: string[]) {
   const mixins = argv.mixins as string | undefined;
   const resumableUploadMethods = argv.resumableUploadMethods as
     string | undefined;
+  const enableTelemetryTracing = argv.enableTelemetryTracing as
+    boolean | undefined;
 
   // --protoc can be taken from environment or from the command line
   let protocParameter = argv.protoc as string | string[] | undefined;
@@ -251,6 +258,9 @@ async function main(processArgv: string[]) {
   }
   if (restNumericEnums) {
     protocCommand.push('--typescript_gapic_opt="rest-numeric-enums"');
+  }
+  if (enableTelemetryTracing) {
+    protocCommand.push('--typescript_gapic_opt="enable-telemetry-tracing"');
   }
   if (mixins) {
     protocCommand.push(`--typescript_gapic_opt="mixins=${mixins}"`);
