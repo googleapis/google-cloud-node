@@ -86,7 +86,7 @@ export function getGaxTracer(): Tracer {
  */
 function resolveErrorType(e: Error, rpcType: 'grpc' | 'http'): string {
   if (rpcType === 'grpc') {
-    const statusName = grpcStatusName(e);
+    const statusName = resolveRpcStatusName(e);
     if (statusName !== undefined) {
       return statusName;
     }
@@ -117,10 +117,10 @@ function resolveExceptionType(e: Error): string {
 }
 
 /**
- * Maps a failure's numeric gRPC status code to its canonical name. Status 0 (OK)
+ * Resolves the canonical gRPC status name for a failed call. Status 0 (OK)
  * and codes outside the `Status` enum are treated as absent for failed calls.
  */
-function grpcStatusName(e: unknown): string | undefined {
+function resolveRpcStatusName(e: unknown): string | undefined {
   const code = (e as {code?: unknown} | null)?.code;
   if (
     typeof code === 'number' &&
@@ -130,13 +130,6 @@ function grpcStatusName(e: unknown): string | undefined {
     return Status[code];
   }
   return undefined;
-}
-
-/**
- * Resolves the canonical gRPC status name for a failed call, defaulting to `UNKNOWN`.
- */
-function resolveRpcStatusName(e: unknown): string {
-  return grpcStatusName(e) ?? Status[Status.UNKNOWN];
 }
 
 /**
@@ -388,7 +381,7 @@ export function traceCall(
     };
 
     const recordError = (e: unknown) => {
-      rpcStatusName = resolveRpcStatusName(e);
+      rpcStatusName = resolveRpcStatusName(e) ?? Status[Status.UNKNOWN];
       httpStatusCode = resolveHttpStatusCode(e);
       if (e instanceof Error) {
         span.setAttributes({
