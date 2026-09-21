@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  protobufjs: ^8.6.6
   yargs: ^17.7.2
 
 importers:
@@ -415,8 +416,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.2
       protobufjs:
-        specifier: ^7.5.4
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
       retry-request:
         specifier: ^9.0.0
         version: 9.0.1
@@ -1062,8 +1063,8 @@ importers:
   core/packages/nodejs-proto-files:
     dependencies:
       protobufjs:
-        specifier: ^7.5.4
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
       walkdir:
         specifier: ^0.4.1
         version: 0.4.1
@@ -1120,8 +1121,8 @@ importers:
   core/packages/proto3-json-serializer-nodejs:
     dependencies:
       protobufjs:
-        specifier: ^7.5.4
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.10
@@ -1155,7 +1156,7 @@ importers:
         version: 5.1.0
       protobufjs-cli:
         specifier: ^1.2.0
-        version: 1.3.3(protobufjs@7.5.9)
+        version: 1.3.3(protobufjs@8.8.0)
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -1274,7 +1275,7 @@ importers:
         version: 6.0.1
       protobufjs-cli:
         specifier: ^1.2.0
-        version: 1.3.3(protobufjs@7.5.9)
+        version: 1.3.3(protobufjs@8.8.0)
       uglify-js:
         specifier: ^3.19.3
         version: 3.19.3
@@ -1322,8 +1323,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       protobufjs:
-        specifier: ^7.5.3
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -1694,8 +1695,8 @@ importers:
         specifier: ^5.2.0
         version: 5.3.2
       protobufjs:
-        specifier: ^7.5.5
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
     devDependencies:
       '@google-cloud/bigquery':
         specifier: ^9.0.1
@@ -1720,7 +1721,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^2.0.0
-        version: 2.0.1(protobufjs@7.5.9)
+        version: 2.0.1(protobufjs@8.8.0)
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -1981,8 +1982,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.1
       protobufjs:
-        specifier: ~7.5.5
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
       semver:
         specifier: ^7.0.0
         version: 7.8.5
@@ -2090,8 +2091,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.2
       protobufjs:
-        specifier: ^7.5.5
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
       split-array-stream:
         specifier: ^2.0.0
         version: 2.0.0
@@ -2131,7 +2132,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^2.0.0
-        version: 2.0.1(protobufjs@7.5.9)
+        version: 2.0.1(protobufjs@8.8.0)
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2287,8 +2288,8 @@ importers:
         specifier: ^6.0.1
         version: 6.1.0
       protobufjs:
-        specifier: ^7.5.3
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
     devDependencies:
       '@google-cloud/cloud-rad':
         specifier: ^0.4.10
@@ -2373,7 +2374,7 @@ importers:
         version: 11.4.0
       gapic-tools:
         specifier: ^2.0.1
-        version: 2.0.1(protobufjs@7.5.9)
+        version: 2.0.1(protobufjs@8.8.0)
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2406,7 +2407,7 @@ importers:
         version: 8.4.2
       protobufjs-cli:
         specifier: ^1.1.3
-        version: 1.3.3(protobufjs@7.5.9)
+        version: 1.3.3(protobufjs@8.8.0)
       proxyquire:
         specifier: ^2.1.3
         version: 2.1.3
@@ -2924,7 +2925,7 @@ importers:
         version: 5.1.1
       gapic-tools:
         specifier: ^2.0.0
-        version: 2.0.1(protobufjs@7.5.9)
+        version: 2.0.1(protobufjs@8.8.0)
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -2956,8 +2957,8 @@ importers:
         specifier: ^8.2.0
         version: 8.4.2
       protobufjs:
-        specifier: ~7.5.0
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
       proxyquire:
         specifier: ^2.1.3
         version: 2.1.3
@@ -3070,8 +3071,8 @@ importers:
         specifier: ^6.0.2
         version: 6.6.2
       protobufjs:
-        specifier: ^7.4.0
-        version: 7.5.9
+        specifier: ^8.6.6
+        version: 8.8.0
       retry-request:
         specifier: ^9.0.0
         version: 9.0.1
@@ -3159,7 +3160,7 @@ importers:
         version: 5.1.1
       gapic-tools:
         specifier: ^2.0.0
-        version: 2.0.1(protobufjs@7.5.9)
+        version: 2.0.1(protobufjs@8.8.0)
       grpc-health-check:
         specifier: ^2.1.0
         version: 2.1.0
@@ -17304,36 +17305,6 @@ packages:
     resolution: {integrity: sha512-SEeaJLb3qBNF/OaXnaR1NmmBbFYk1zC0ZH/52fATcRPLFg/p791YrcyFFy44Bo9sLaGuSuLp5Q6axbb/O+v/RA==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  '@protobufjs/aspromise@1.1.2':
-    resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
-
-  '@protobufjs/base64@1.1.2':
-    resolution: {integrity: sha512-AZkcAA5vnN/v4PDqKyMR5lx7hZttPDgClv83E//FMNhR2TMcLUhfRUBHCmSl0oi9zMgDDqRUJkSxO3wm85+XLg==}
-
-  '@protobufjs/codegen@2.0.5':
-    resolution: {integrity: sha512-zgXFLzW3Ap33e6d0Wlj4MGIm6Ce8O89n/apUaGNB/jx+hw+ruWEp7EwGUshdLKVRCxZW12fp9r40E1mQrf/34g==}
-
-  '@protobufjs/eventemitter@1.1.1':
-    resolution: {integrity: sha512-vW1GmwMZNnL+gMRaovlh9yZX74kc+TTU3FObkkurpMaRtBfLP3ldjS9KQWlwZgraRE0+dheEEoAxdzcJQ8eXZg==}
-
-  '@protobufjs/fetch@1.1.1':
-    resolution: {integrity: sha512-GpptLrs57adMSuHi3VNj0mAF8dwh36LMaYF6XyJ6JMWlVsc+t42tm1HSEDmOs3A8fC9yyeisgLhsTVQokOZ0zw==}
-
-  '@protobufjs/float@1.0.2':
-    resolution: {integrity: sha512-Ddb+kVXlXst9d+R9PfTIxh1EdNkgoRe5tOX6t01f1lYWOvJnSPDBlG241QLzcyPdoNTsblLUdujGSE4RzrTZGQ==}
-
-  '@protobufjs/inquire@1.1.2':
-    resolution: {integrity: sha512-pa0vFRuws4wkvaXKK1uXZMAwAX4/t8ANaJo45iw/oQHNQ9q5xUzwgFmVJGXiga2BeN+zpX7Vf9vmsiIa2J+MUw==}
-
-  '@protobufjs/path@1.1.2':
-    resolution: {integrity: sha512-6JOcJ5Tm08dOHAbdR3GrvP+yUUfkjG5ePsHYczMFLq3ZmMkAD98cDgcT2iA1lJ9NVwFd4tH/iSSoe44YWkltEA==}
-
-  '@protobufjs/pool@1.1.0':
-    resolution: {integrity: sha512-0kELaGSIDBKvcgS4zkjz1PeddatrjYcmMWOlAuAPwAeccUrPHdUqo/J6LiymHHEiJT5NrF1UVwxY14f+fy4WQw==}
-
-  '@protobufjs/utf8@1.1.2':
-    resolution: {integrity: sha512-b1UQwcEZ4yCnMCD8DAL1VlbvBJE9/IX4FTIp7BG1xYpf29SLazLSrqUkj4w7Y5y7cCVP6E5tcqqcI0xemPkHug==}
-
   '@puppeteer/browsers@2.13.2':
     resolution: {integrity: sha512-5EUZSUIc37H6aIXyWO0Z4y8NlF8NnjgmqeQgOGiswAU7pY0HOo16ho4+alIWmSfdZnjqBRawMsP3I5YqLSn6kw==}
     engines: {node: '>=18'}
@@ -23088,22 +23059,14 @@ packages:
     engines: {node: '>=12.0.0'}
     hasBin: true
     peerDependencies:
-      protobufjs: ^7.6.2
+      protobufjs: ^8.6.6
 
   protobufjs-cli@2.7.0:
     resolution: {integrity: sha512-wjrZPibf/U73dDJMh9jCqjyeDH7t6+OMD16vKp/Z1CY7yyVE/pX5a9EvCq89p3ADHo+KyaLknA5lxyaaM252KA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     peerDependencies:
-      protobufjs: ^8.8.0
-
-  protobufjs@7.5.9:
-    resolution: {integrity: sha512-Od4muIm3HW1AouyHF5lONOf1FWo3hY1NbFDoy191X9GzhpgW1clCoaFjfVs2rKJNFYpTNJbje4cbAIDBZJ63ZA==}
-    engines: {node: '>=12.0.0'}
-
-  protobufjs@7.6.5:
-    resolution: {integrity: sha512-/FPD0nUc9jH6rfFjji9IBqOz4pcSE3CsT1m7Ep6Mdb0LxSUMj8hgl6GomOvZzpNpAqqGaXA0P3VSrZLFzIhQrw==}
-    engines: {node: '>=12.0.0'}
+      protobufjs: ^8.6.6
 
   protobufjs@8.8.0:
     resolution: {integrity: sha512-N3xhQ5yyBx3vQq4gubBfASzYhJGNzeDbjqBpu61g7UVylsN/qyffU96TKWD3GbbLOKF82VGNRNvv1+BFgE31Eg==}
@@ -26283,7 +26246,7 @@ snapshots:
       lodash.snakecase: 4.1.1
       merge-stream: 2.0.0
       p-queue: 6.6.2
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
       retry-request: 8.0.3
       split-array-stream: 2.0.0
       stack-trace: 0.0.10
@@ -26397,21 +26360,21 @@ snapshots:
     dependencies:
       lodash.camelcase: 4.3.0
       long: 5.3.2
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
       yargs: 17.7.3
 
   '@grpc/proto-loader@0.8.1':
     dependencies:
       lodash.camelcase: 4.3.0
       long: 5.3.2
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
       yargs: 17.7.3
 
   '@grpc/reflection@1.0.4(@grpc/grpc-js@1.14.4)':
     dependencies:
       '@grpc/grpc-js': 1.14.4
       '@grpc/proto-loader': 0.7.15
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
 
   '@hapi/accept@6.0.3':
     dependencies:
@@ -27264,7 +27227,7 @@ snapshots:
       '@opentelemetry/sdk-logs': 0.52.1(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-metrics': 1.25.1(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-trace-base': 1.25.1(@opentelemetry/api@1.9.1)
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
 
   '@opentelemetry/propagator-b3@1.25.1(@opentelemetry/api@1.9.1)':
     dependencies:
@@ -27455,28 +27418,6 @@ snapshots:
   '@pkgr/core@0.1.2': {}
 
   '@pkgr/core@0.3.6': {}
-
-  '@protobufjs/aspromise@1.1.2': {}
-
-  '@protobufjs/base64@1.1.2': {}
-
-  '@protobufjs/codegen@2.0.5': {}
-
-  '@protobufjs/eventemitter@1.1.1': {}
-
-  '@protobufjs/fetch@1.1.1':
-    dependencies:
-      '@protobufjs/aspromise': 1.1.2
-
-  '@protobufjs/float@1.0.2': {}
-
-  '@protobufjs/inquire@1.1.2': {}
-
-  '@protobufjs/path@1.1.2': {}
-
-  '@protobufjs/pool@1.1.0': {}
-
-  '@protobufjs/utf8@1.1.2': {}
 
   '@puppeteer/browsers@2.13.2':
     dependencies:
@@ -31502,21 +31443,6 @@ snapshots:
       - encoding
       - supports-color
 
-  gapic-tools@2.0.1(protobufjs@7.5.9):
-    dependencies:
-      '@babel/core': 7.27.7
-      '@babel/template': 7.29.7
-      '@babel/traverse': 7.27.7
-      google-gax: 6.1.0
-      google-proto-files: 6.0.1
-      protobufjs-cli: 1.3.3(protobufjs@7.5.9)
-      uglify-js: 3.19.3
-      walk-up-path: 3.0.1
-      walkdir: 0.4.1
-    transitivePeerDependencies:
-      - protobufjs
-      - supports-color
-
   gapic-tools@2.0.1(protobufjs@8.8.0):
     dependencies:
       '@babel/core': 7.27.7
@@ -31862,7 +31788,7 @@ snapshots:
       node-fetch: 2.7.0(encoding@0.1.13)
       object-hash: 3.0.0
       proto3-json-serializer: 2.0.2
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
       retry-request: 7.0.2(encoding@0.1.13)
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -31879,7 +31805,7 @@ snapshots:
       node-fetch: 3.3.2
       object-hash: 3.0.0
       proto3-json-serializer: 3.0.6
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
       retry-request: 8.0.3
       rimraf: 5.0.10
     transitivePeerDependencies:
@@ -31896,7 +31822,7 @@ snapshots:
       node-fetch: 3.3.2
       object-hash: 3.0.0
       proto3-json-serializer: 4.0.2
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
       retry-request: 9.0.1
     transitivePeerDependencies:
       - supports-color
@@ -31913,7 +31839,7 @@ snapshots:
 
   google-proto-files@6.0.1:
     dependencies:
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
       walkdir: 0.4.1
 
   googleapis-common@4.4.3(encoding@0.1.13):
@@ -32008,7 +31934,7 @@ snapshots:
   grpc-gcp@1.1.1:
     dependencies:
       '@grpc/grpc-js': 1.14.4
-      protobufjs: 7.6.5
+      protobufjs: 8.8.0
 
   grpc-health-check@2.1.0:
     dependencies:
@@ -34764,7 +34690,7 @@ snapshots:
       findit2: 2.2.3
       nan: 2.28.0
       p-limit: 3.1.0
-      protobufjs: 7.6.5
+      protobufjs: 8.8.0
       source-map: 0.8.0
       split: 1.0.1
 
@@ -34838,29 +34764,15 @@ snapshots:
 
   proto3-json-serializer@2.0.2:
     dependencies:
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
 
   proto3-json-serializer@3.0.6:
     dependencies:
-      protobufjs: 7.5.9
+      protobufjs: 8.8.0
 
   proto3-json-serializer@4.0.2:
     dependencies:
-      protobufjs: 7.5.9
-
-  protobufjs-cli@1.3.3(protobufjs@7.5.9):
-    dependencies:
-      chalk: 4.1.2
-      escodegen: 1.14.3
-      espree: 9.6.1
-      estraverse: 5.3.0
-      glob: 8.1.0
-      jsdoc: 4.0.5
-      minimist: 1.2.8
-      protobufjs: 7.5.9
-      semver: 7.8.5
-      tmp: 0.2.7
-      uglify-js: 3.19.3
+      protobufjs: 8.8.0
 
   protobufjs-cli@1.3.3(protobufjs@8.8.0):
     dependencies:
@@ -34886,35 +34798,6 @@ snapshots:
       minimist: 1.2.8
       protobufjs: 8.8.0
       tmp: 0.2.7
-
-  protobufjs@7.5.9:
-    dependencies:
-      '@protobufjs/aspromise': 1.1.2
-      '@protobufjs/base64': 1.1.2
-      '@protobufjs/codegen': 2.0.5
-      '@protobufjs/eventemitter': 1.1.1
-      '@protobufjs/fetch': 1.1.1
-      '@protobufjs/float': 1.0.2
-      '@protobufjs/inquire': 1.1.2
-      '@protobufjs/path': 1.1.2
-      '@protobufjs/pool': 1.1.0
-      '@protobufjs/utf8': 1.1.2
-      '@types/node': 22.20.1
-      long: 5.3.2
-
-  protobufjs@7.6.5:
-    dependencies:
-      '@protobufjs/aspromise': 1.1.2
-      '@protobufjs/base64': 1.1.2
-      '@protobufjs/codegen': 2.0.5
-      '@protobufjs/eventemitter': 1.1.1
-      '@protobufjs/fetch': 1.1.1
-      '@protobufjs/float': 1.0.2
-      '@protobufjs/path': 1.1.2
-      '@protobufjs/pool': 1.1.0
-      '@protobufjs/utf8': 1.1.2
-      '@types/node': 22.20.1
-      long: 5.3.2
 
   protobufjs@8.8.0:
     dependencies:

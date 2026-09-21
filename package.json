@@ -61,6 +61,7 @@
   },
   "pnpm": {
     "overrides": {
+      "protobufjs": "^8.6.6",
       "yargs": "^17.7.2"
     }
   }
